@@ -1,7 +1,7 @@
  name: 'Auto Assign Reviewer'
   on:
    pull_request:
-     types: [opened, ready_for_review]
+     types: ready_for_review
 
 jobs:
    add-reviews:
@@ -9,5 +9,5 @@ jobs:
      steps:
        - uses: kentaro-m/auto-assign-action@v1.2.1
          with:
-           configuration-path: '.github/some_name_for_configs.yml' 
+           configuration-path: .github/auto_assign.yml
            
