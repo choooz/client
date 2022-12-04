@@ -18,12 +18,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "client",\
         "reference": "workspace:package/client"\
+      },\
+      {\
+        "name": "common",\
+        "reference": "workspace:package/common"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["client", ["workspace:package/client"]],\
+      ["common", ["workspace:package/common"]],\
       ["gola", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -709,6 +714,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:18.11.9"],\
             ["@types/react", "npm:18.0.25"],\
             ["@types/react-dom", "npm:18.0.9"],\
+            ["common", "workspace:package/common"],\
             ["eslint", "npm:8.28.0"],\
             ["eslint-config-next", "virtual:7990a682de4af31c18f40d0a279e8d632cb06b0f51d1da610da015e5a1065d4fdc68a497386a39553f409b179dd80678579dad5433967472dfbd9bcb4aa9dee7#npm:13.0.5"],\
             ["next", "virtual:7990a682de4af31c18f40d0a279e8d632cb06b0f51d1da610da015e5a1065d4fdc68a497386a39553f409b179dd80678579dad5433967472dfbd9bcb4aa9dee7#npm:13.0.5"],\
@@ -745,6 +751,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["color-name", "npm:1.1.4"]\
           ],\
           "linkType": "HARD"\
+        }]\
+      ]],\
+      ["common", [\
+        ["workspace:package/common", {\
+          "packageLocation": "./package/common/",\
+          "packageDependencies": [\
+            ["common", "workspace:package/common"]\
+          ],\
+          "linkType": "SOFT"\
         }]\
       ]],\
       ["concat-map", [\

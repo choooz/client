@@ -555,6 +555,7 @@ __metadata:
     "@types/node": 18.11.9
     "@types/react": 18.0.25
     "@types/react-dom": 18.0.9
+    common: "*"
     eslint: 8.28.0
     eslint-config-next: 13.0.5
     next: 13.0.5
@@ -579,6 +580,12 @@ __metadata:
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
   languageName: node
   linkType: hard
+
+"common@*, common@workspace:package/common":
+  version: 0.0.0-use.local
+  resolution: "common@workspace:package/common"
+  languageName: unknown
+  linkType: soft
 
 "concat-map@npm:0.0.1":
   version: 0.0.1

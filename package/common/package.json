@@ -1,0 +1,9 @@
+{
+  "name": "common",
+  "packageManager": "yarn@3.3.0",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.ts",
+  "author": "",
+  "license": "ISC"
+}
