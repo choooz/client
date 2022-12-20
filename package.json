@@ -1,9 +1,10 @@
 {
-  "name": "gola",
+  "name": "chooz",
   "private": true,
   "workspaces": {
     "packages": [
-      "package/*"
+      "package/*",
+      "apps/*"
     ]
   },
   "packageManager": "yarn@3.3.0",
