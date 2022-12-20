@@ -10,6 +10,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       <GlobalStyle />
+      <div id="stars" />
+      <div id="stars2" />
+      <div id="stars3" />
       <Applayout>
         <Component {...pageProps} />
       </Applayout>
