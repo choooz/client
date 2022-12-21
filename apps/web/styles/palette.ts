@@ -2,7 +2,7 @@
 export const palette = {
   ink: {
     lighter: "#72777A",
-    light: "#6C7072",
+    light: "#767676",
     base: "#404446",
     dark: "#303437",
     darker: "#202325",
@@ -49,5 +49,12 @@ export const palette = {
     light: "#6EC2FB",
     base: "#48A7F8",
     darkest: "#0065D0",
+  },
+  border: {
+    lightest: "#E5E5EC",
+    lighter: "#F7F7FB",
+    light: "#979C9E",
+    base: "#505050",
+    darkest: "#090A0A",
   },
 };

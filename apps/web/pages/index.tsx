@@ -1,6 +1,7 @@
 import { Button } from "@common/ui";
 import Link from "next/link";
 import styled from "styled-components";
+import { palette } from "../styles/palette";
 
 export default function Home() {
   return (
@@ -14,4 +15,5 @@ const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: ${palette.sky.lightest};
 `;
