@@ -2,12 +2,15 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@src/*": ["src/*"]
+    }
   },
   "exclude": ["**/node_modules", "**/.*/"],
   "include": [
