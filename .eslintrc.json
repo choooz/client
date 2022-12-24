@@ -17,14 +17,13 @@
     "next",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:storybook/recommended",
-    "plugin:import/recommended",
+    // "plugin:storybook/recommended",
     "plugin:@tanstack/query/recommended",
     "plugin:import/typescript",
     "plugin:jsx-a11y/recommended",
     "plugin:prettier/recommended"
   ],
-  "plugins": ["simple-import-sort", "@tanstack/query"],
+  "plugins": ["simple-import-sort", "@tanstack/query", "import"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -36,6 +35,10 @@
     }
   },
   "rules": {
+    "import/named": 2,
+    "import/namespace": "error",
+    "import/default": 2,
+    "import/export": 2,
     "eqeqeq": [
       "error",
       "always",
@@ -49,7 +52,7 @@
     "react/function-component-definition": [
       "error",
       {
-        "namedComponents": "arrow-function"
+        "namedComponents": "function-declaration"
       }
     ],
     "react/jsx-curly-brace-presence": [
@@ -96,12 +99,6 @@
     ],
     "@typescript-eslint/no-empty-function": "warn",
     "import/no-duplicates": "error",
-    "import/namespace": [
-      "error",
-      {
-        "allowComputed": true
-      }
-    ],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
   },
@@ -109,9 +106,7 @@
     {
       "files": ["*.tsx", "*.ts"],
       "excludedFiles": ["*.stories.tsx", "*.d.ts", "src/pages/**/*.tsx"],
-      "rules": {
-        "import/no-default-export": "error"
-      }
+      "rules": {}
     }
   ]
 }
