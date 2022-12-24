@@ -1,6 +1,7 @@
 import GenderSelection from "components/register/GenderSelection";
 import MBTISelection from "components/register/MBTISelection";
-import React, { MouseEvent, useState } from "react";
+import type { MouseEvent } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 export interface MBTIType {
@@ -46,16 +47,16 @@ function LoginPage() {
       {register.progress === 1 && (
         <GenderSelection
           gender={register.gender}
-          onChangeSelectMale={onChangeSelectMale}
-          onChangeSelectFemale={onChangeSelectFemale}
           onAddProgress={onAddProgress}
+          onChangeSelectFemale={onChangeSelectFemale}
+          onChangeSelectMale={onChangeSelectMale}
         />
       )}
       {register.progress === 2 && (
         <MBTISelection
           MBTI={register.MBTI}
-          onChangeMBTI={onChangeMBTI}
           onAddProgress={onAddProgress}
+          onChangeMBTI={onChangeMBTI}
         />
       )}
     </PageWrapper>
