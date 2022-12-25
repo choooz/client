@@ -1,6 +1,7 @@
-import { Button } from "@common/ui";
+import { Button } from "@chooz/ui";
 import Link from "next/link";
 import styled from "styled-components";
+
 import { palette } from "../styles/palette";
 
 export default function Home() {
