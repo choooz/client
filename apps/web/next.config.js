@@ -1,4 +1,4 @@
-const withTM = require("next-transpile-modules")(["@common/ui"]);
+const withTM = require("next-transpile-modules")(["@chooz/ui"]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
