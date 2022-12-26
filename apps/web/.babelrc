@@ -1,4 +1,15 @@
 {
   "presets": ["next/babel"],
-  "plugins": [["styled-components", { "ssr": true }]]
+  "plugins": [
+    [
+      "styled-components",
+      {
+        "ssr": true, // SSR
+        // @Note 어떤 효과가 있는지는 모르겠지만 일단 가져와봤음
+        "fileName": true, // 파일 명
+        "displayName": true, // 클래스 명, 스타일 정보에 추가
+        "pure": true // 사용하지 않는 속성 제거
+      }
+    ]
+  ]
 }
