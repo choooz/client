@@ -39,6 +39,9 @@ const palette = {
     kakao: "#FEE500",
     naver: "#03C75A",
   },
+  ui_color: {
+    progressBar: "#c4befd",
+  },
 };
 
 const fontSize = {
