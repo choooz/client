@@ -1,8 +1,6 @@
-import { transitions } from "@chooz/ui";
-import React from "react";
 import styled from "styled-components";
-import { media } from "styles/media";
-import { palette } from "styles/palette";
+import { theme, transitions } from "../styles";
+import { media } from "../styles/media";
 
 interface Props {
   welcomeText: React.ReactNode;
@@ -29,7 +27,7 @@ const WelcomeText = styled.div`
   display: flex;
   font-size: 18px;
   font-weight: 700;
-  color: ${palette.ink.light};
+  color: ${theme.palette.ink.light};
   gap: 6px;
   line-height: 26px;
   padding-bottom: 24px;

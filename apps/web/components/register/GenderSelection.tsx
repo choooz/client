@@ -1,9 +1,8 @@
-import { transitions } from "@chooz/ui";
+import { RegisterTemplate, transitions } from "@chooz/ui";
 import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { palette } from "styles/palette";
-import RegisterTemplate from "components/RegisterTemplate";
 
 interface Props {
   gender: "female" | "male" | "";
@@ -30,57 +29,55 @@ function GenderSelection({
   // };
 
   return (
-    <>
-      <RegisterTemplate
-        welcomeText={
-          <>
-            <Image src={PurpleMonster} alt="캐릭터" width={30} />
-            반가워요!
-          </>
-        }
-        questionText={
-          <>
-            Lv.1 당신의&nbsp;<strong>성별</strong>은?
-          </>
-        }
-        buttonBox={
-          <Button
-            onClick={() => onAddProgress(1)}
-            disabled={gender.length < 1}
-            effect={gender.length > 1}
-          >
-            다음
-          </Button>
-        }
-      >
-        <LeftVote selected={gender === "male"} onClick={onChangeSelectMale}>
-          <ImageWrapper>
-            <Image alt="남성" height={100} src={Male} />
-          </ImageWrapper>
-          {gender === "male" ? (
-            <VoteText>
-              <Image alt="선택" src={CheckRound} width={16} />
-              남성으로 Chooz!
-            </VoteText>
-          ) : (
-            "남성"
-          )}
-        </LeftVote>
-        <RightVote selected={gender === "female"} onClick={onChangeSelectFemale}>
-          <ImageWrapper>
-            <Image alt="여성" height={100} src={Female} />
-          </ImageWrapper>
-          {gender === "female" ? (
-            <VoteText>
-              <Image alt="선택" src={CheckRound} width={16} />
-              여성으로 Chooz!
-            </VoteText>
-          ) : (
-            "여성"
-          )}
-        </RightVote>
-      </RegisterTemplate>
-    </>
+    <RegisterTemplate
+      welcomeText={
+        <>
+          <Image src={PurpleMonster} alt="캐릭터" width={30} />
+          반가워요!
+        </>
+      }
+      questionText={
+        <>
+          Lv.1 당신의&nbsp;<strong>성별</strong>은?
+        </>
+      }
+      buttonBox={
+        <Button
+          onClick={() => onAddProgress(1)}
+          disabled={gender.length < 1}
+          effect={gender.length > 1}
+        >
+          다음
+        </Button>
+      }
+    >
+      <LeftVote selected={gender === "male"} onClick={onChangeSelectMale}>
+        <ImageWrapper>
+          <Image alt="남성" height={100} src={Male} />
+        </ImageWrapper>
+        {gender === "male" ? (
+          <VoteText>
+            <Image alt="선택" src={CheckRound} width={16} />
+            남성으로 Chooz!
+          </VoteText>
+        ) : (
+          "남성"
+        )}
+      </LeftVote>
+      <RightVote selected={gender === "female"} onClick={onChangeSelectFemale}>
+        <ImageWrapper>
+          <Image alt="여성" height={100} src={Female} />
+        </ImageWrapper>
+        {gender === "female" ? (
+          <VoteText>
+            <Image alt="선택" src={CheckRound} width={16} />
+            여성으로 Chooz!
+          </VoteText>
+        ) : (
+          "여성"
+        )}
+      </RightVote>
+    </RegisterTemplate>
   );
 }
 

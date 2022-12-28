@@ -1,6 +1,5 @@
-import { transitions } from "@chooz/ui";
+import { RegisterTemplate, transitions } from "@chooz/ui";
 import { Eyes } from "assets/images";
-import RegisterTemplate from "components/RegisterTemplate";
 import Image from "next/image";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";

@@ -9,6 +9,7 @@ export default function Home() {
     <PageLayout>
       <Link href="/login">로그인 하러가기</Link>
       <Link href="/register">회원가입 하러가기</Link>
+      <Link href="/register/interest">관심사 보러가기</Link>
     </PageLayout>
   );
 }
