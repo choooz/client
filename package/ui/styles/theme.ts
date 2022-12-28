@@ -39,6 +39,10 @@ const palette = {
     kakao: "#FEE500",
     naver: "#03C75A",
   },
+  ui_color: {
+    progressBar: "#c4befd",
+    test: "#f5f3f1", // 지울것
+  },
 };
 
 const fontSize = {
