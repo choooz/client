@@ -1,8 +1,9 @@
 import { Eyes } from "assets";
 import Image from "next/image";
 import { MBTIType } from "pages/login";
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
+import { media } from "styles/media";
 import { palette } from "styles/palette";
 import transitions from "styles/transitions";
 
@@ -99,6 +100,10 @@ const VoteBox = styled.div`
   animation: ${transitions.delaypopInFromBottom} 1.3s normal ease-in-out;
   height: 56px;
   margin: 7px 0;
+  ${media.medium} {
+    height: 74px;
+    margin: 17px 0;
+  }
 `;
 
 const LeftVote = styled.button<{ selected: boolean }>`
@@ -117,7 +122,7 @@ const LeftVote = styled.button<{ selected: boolean }>`
   ${({ selected }) =>
     selected
       ? css`
-          width: 265px;
+          width: 91%;
           border: 1px solid #863dff;
           background-color: rgba(140, 130, 255, 50%);
           font-size: 20px;

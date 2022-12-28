@@ -3,6 +3,7 @@ import MBTISelection from "components/register/MBTISelection";
 import type { MouseEvent } from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import { media } from "styles/media";
 
 export interface MBTIType {
   M: "E" | "I" | "";
@@ -44,32 +45,42 @@ function LoginPage() {
 
   return (
     <PageWrapper>
-      {register.progress === 1 && (
-        <GenderSelection
-          gender={register.gender}
-          onAddProgress={onAddProgress}
-          onChangeSelectFemale={onChangeSelectFemale}
-          onChangeSelectMale={onChangeSelectMale}
-        />
-      )}
-      {register.progress === 2 && (
-        <MBTISelection
-          MBTI={register.MBTI}
-          onAddProgress={onAddProgress}
-          onChangeMBTI={onChangeMBTI}
-        />
-      )}
+      <PageInner>
+        {register.progress === 1 && (
+          <GenderSelection
+            gender={register.gender}
+            onAddProgress={onAddProgress}
+            onChangeSelectFemale={onChangeSelectFemale}
+            onChangeSelectMale={onChangeSelectMale}
+          />
+        )}
+        {register.progress === 2 && (
+          <MBTISelection
+            MBTI={register.MBTI}
+            onAddProgress={onAddProgress}
+            onChangeMBTI={onChangeMBTI}
+          />
+        )}
+      </PageInner>
     </PageWrapper>
   );
 }
 
 const PageWrapper = styled.div`
   width: 100%;
-  border-radius: 4px;
-  background-color: white;
-  height: 558px;
-  padding: 30px;
-  position: relative;
 `;
 
+const PageInner = styled.div`
+  margin: 0 auto;
+  border-radius: 4px;
+  height: 558px;
+  background-color: white;
+  max-width: 640px;
+  position: relative;
+  padding: 30px;
+  ${media.medium} {
+    height: 717px;
+    padding: 80px;
+  }
+`;
 export default LoginPage;

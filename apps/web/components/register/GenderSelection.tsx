@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CheckRound, Female, Male, PurpleMonster } from "assets";
 import { palette } from "styles/palette";
 import transitions from "styles/transitions";
+import { media } from "styles/media";
 
 interface Props {
   gender: "female" | "male" | "";
@@ -88,6 +89,9 @@ const VoteBox = styled.div`
   width: 100%;
   animation: ${transitions.delaypopInFromBottom} 1.3s normal ease-in-out;
   height: 265px;
+  ${media.medium} {
+    height: 348px;
+  }
 `;
 const LeftVote = styled.div<{ selected: boolean }>`
   position: absolute;
@@ -105,7 +109,7 @@ const LeftVote = styled.div<{ selected: boolean }>`
   ${({ selected }) =>
     selected
       ? css`
-          width: 265px;
+          width: 91%;
           border: 1px solid #863dff;
           background-color: rgba(140, 130, 255, 50%);
           font-size: 16px;
