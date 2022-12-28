@@ -1,12 +1,18 @@
-import { Eyes } from "assets";
+import { transitions } from "@chooz/ui";
+import { Eyes } from "assets/images";
 import RegisterTemplate from "components/RegisterTemplate";
 import Image from "next/image";
-import { MBTIType } from "pages/login";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { palette } from "styles/palette";
-import transitions from "styles/transitions";
+
+export interface MBTIType {
+  M: "E" | "I" | "";
+  B: "S" | "N" | "";
+  T: "T" | "F" | "";
+  I: "J" | "P" | "";
+}
 
 interface Props {
   MBTI: MBTIType;
@@ -38,41 +44,41 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
       }
     >
       <VoteBox>
-        <LeftVote selected={MBTI.M === "E"} onClick={onChangeMBTI} name="M" value="E">
+        <LeftVote name="M" selected={MBTI.M === "E"} value="E" onClick={onChangeMBTI}>
           <div>E</div>
           <VoteText>외향형</VoteText>
         </LeftVote>
-        <RightVote selected={MBTI.M === "I"} onClick={onChangeMBTI} name="M" value="I">
+        <RightVote name="M" selected={MBTI.M === "I"} value="I" onClick={onChangeMBTI}>
           <div>I</div>
           <VoteText>내향형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
-        <LeftVote selected={MBTI.B === "S"} onClick={onChangeMBTI} name="B" value="S">
+        <LeftVote name="B" selected={MBTI.B === "S"} value="S" onClick={onChangeMBTI}>
           <div>S</div>
           <VoteText>감정형</VoteText>
         </LeftVote>
-        <RightVote selected={MBTI.B === "N"} onClick={onChangeMBTI} name="B" value="N">
+        <RightVote name="B" selected={MBTI.B === "N"} value="N" onClick={onChangeMBTI}>
           <div>N</div>
           <VoteText>직관형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
-        <LeftVote selected={MBTI.T === "T"} onClick={onChangeMBTI} name="T" value="T">
+        <LeftVote name="T" selected={MBTI.T === "T"} value="T" onClick={onChangeMBTI}>
           <div>T</div>
           <VoteText>사고형</VoteText>
         </LeftVote>
-        <RightVote selected={MBTI.T === "F"} onClick={onChangeMBTI} name="T" value="F">
+        <RightVote name="T" selected={MBTI.T === "F"} value="F" onClick={onChangeMBTI}>
           <div>F</div>
           <VoteText>감정형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
-        <LeftVote selected={MBTI.I === "J"} onClick={onChangeMBTI} name="I" value="J">
+        <LeftVote name="I" selected={MBTI.I === "J"} value="J" onClick={onChangeMBTI}>
           <div>J</div>
           <VoteText>판단형</VoteText>
         </LeftVote>
-        <RightVote selected={MBTI.I === "P"} onClick={onChangeMBTI} name="I" value="P">
+        <RightVote name="I" selected={MBTI.I === "P"} value="P" onClick={onChangeMBTI}>
           <div>P</div>
           <VoteText> 인식형</VoteText>
         </RightVote>

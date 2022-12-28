@@ -1,4 +1,5 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext } from "next/document";
+import type { DocumentContext } from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -33,14 +34,14 @@ export default class MyDocument extends Document {
       <Html lang="kr">
         <Head>
           <link
-            rel="stylesheet"
             as="style"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css"
+            rel="stylesheet"
           />
           <link
-            rel="stylesheet"
             as="style"
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendardstatic.css"
+            rel="stylesheet"
           />
         </Head>
         <body>

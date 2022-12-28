@@ -1,7 +1,8 @@
+import { theme } from "@chooz/ui";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "styles/globalStyles";
 
 import Header from "../components/header/Header";
@@ -11,14 +12,16 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
-      <GlobalStyles />
-      <div id="stars" />
-      <div id="stars2" />
-      <div id="stars3" />
-      <Applayout>
-        <Header />
-        <Component {...pageProps} />
-      </Applayout>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <div id="stars" />
+        <div id="stars2" />
+        <div id="stars3" />
+        <Applayout>
+          <Header />
+          <Component {...pageProps} />
+        </Applayout>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

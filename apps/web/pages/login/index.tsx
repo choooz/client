@@ -1,67 +1,44 @@
-import GenderSelection from "components/register/GenderSelection";
-import MBTISelection from "components/register/MBTISelection";
-import type { MouseEvent } from "react";
-import { useState } from "react";
+import { transitions } from "@chooz/ui";
+import { LogoBlack } from "assets/images";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { media } from "styles/media";
 
-export interface MBTIType {
-  M: "E" | "I" | "";
-  B: "S" | "N" | "";
-  T: "T" | "F" | "";
-  I: "J" | "P" | "";
-}
-
-interface RegisterType {
-  progress: number;
-  gender: "male" | "female" | "";
-  MBTI: MBTIType;
-}
-
 function LoginPage() {
-  const [register, setRegister] = useState<RegisterType>({
-    progress: 1,
-    gender: "",
-    MBTI: {
-      M: "",
-      B: "",
-      T: "",
-      I: "",
-    },
-  });
-  const onChangeSelectMale = () => {
-    setRegister((prev) => ({ ...prev, gender: "male" }));
-  };
-  const onChangeSelectFemale = () => {
-    setRegister((prev) => ({ ...prev, gender: "female" }));
-  };
-  const onAddProgress = (number: number) => {
-    setRegister((prev) => ({ ...prev, progress: prev.progress + number }));
-  };
-  const onChangeMBTI = (e: MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = e.currentTarget;
-    setRegister((prev) => ({ ...prev, MBTI: { ...prev.MBTI, [name]: value } }));
-  };
+  const router = useRouter();
+  const code = router.query.code;
+  const redirectUrl = "http://localhost:3000/login";
+
+  useEffect(() => {
+    if (code) {
+      console.log(code);
+      const temp = axios.post(
+        "http://ec2-15-165-134-97.ap-northeast-2.compute.amazonaws.com:8080/api/oauth/kakao",
+        { code, redirectUrl },
+      );
+      console.log(temp);
+    }
+  }, [code]);
 
   return (
     <PageWrapper>
-      <PageInner>
-        {register.progress === 1 && (
-          <GenderSelection
-            gender={register.gender}
-            onAddProgress={onAddProgress}
-            onChangeSelectFemale={onChangeSelectFemale}
-            onChangeSelectMale={onChangeSelectMale}
-          />
-        )}
-        {register.progress === 2 && (
-          <MBTISelection
-            MBTI={register.MBTI}
-            onAddProgress={onAddProgress}
-            onChangeMBTI={onChangeMBTI}
-          />
-        )}
-      </PageInner>
+      <Image alt="로고" src={LogoBlack} />
+      <WelcomeText>
+        고민되는 것들, <br />
+        눈치보지 말고 Chooz에서 물어봐!
+      </WelcomeText>
+      <Emoji />
+      <Link href="https://kauth.kakao.com/oauth/authorize?client_id=be0a6d22a5fcd591b8fc3f6a8f446afe&redirect_uri=http://localhost:3000/login&response_type=code">
+        <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
+      </Link>
+      <Link href="dsafa">
+        <NaverLoginButton>네이버 로그인</NaverLoginButton>
+      </Link>
+      <AlreadyAccountText>이미 계정이 있으신가요? 로그인</AlreadyAccountText>
     </PageWrapper>
   );
 }
@@ -83,4 +60,46 @@ const PageInner = styled.div`
     padding: 80px;
   }
 `;
+
+const WelcomeText = styled.div`
+  margin-top: 16px;
+  font-size: 14px;
+  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue";
+  line-height: 18px;
+  animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
+`;
+
+const Emoji = styled.div`
+  margin-top: 24px;
+  width: 283px;
+  height: 226px;
+  background-color: #bebebe;
+`;
+
+const KakaoLoginButton = styled.button`
+  width: 100%;
+  height: 48px;
+  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: ${({ theme }) => theme.palette.social_color.kakao};
+`;
+
+const NaverLoginButton = styled.button`
+  width: 100%;
+  height: 48px;
+  color: white;
+  background-color: ${({ theme }) => theme.palette.social_color.naver};
+  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
+  transition: all 0.3s ease-in-out;
+`;
+
+const AlreadyAccountText = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 27px;
+  font-weight: 700;
+  animation: ${transitions.delaypopInFromBottom} 2.1s normal ease-in-out;
+`;
+
 export default LoginPage;

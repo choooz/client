@@ -1,9 +1,8 @@
-import styled, { css } from "styled-components";
-import React from "react";
+import { transitions } from "@chooz/ui";
+import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
-import { CheckRound, Female, Male, PurpleMonster } from "assets";
+import styled, { css } from "styled-components";
 import { palette } from "styles/palette";
-import transitions from "styles/transitions";
 import RegisterTemplate from "components/RegisterTemplate";
 
 interface Props {
@@ -13,12 +12,12 @@ interface Props {
   onAddProgress(number: number): void;
 }
 
-const GenderSelection = ({
+function GenderSelection({
   gender,
   onChangeSelectMale,
   onChangeSelectFemale,
   onAddProgress,
-}: Props) => {
+}: Props) {
   // const animateButton = (e: any) => {
   //   e.preventDefault();
   //   //reset animation
@@ -56,11 +55,11 @@ const GenderSelection = ({
       >
         <LeftVote selected={gender === "male"} onClick={onChangeSelectMale}>
           <ImageWrapper>
-            <Image src={Male} alt="남성" height={100} />
+            <Image alt="남성" height={100} src={Male} />
           </ImageWrapper>
           {gender === "male" ? (
             <VoteText>
-              <Image src={CheckRound} alt="선택" width={16} />
+              <Image alt="선택" src={CheckRound} width={16} />
               남성으로 Chooz!
             </VoteText>
           ) : (
@@ -69,11 +68,11 @@ const GenderSelection = ({
         </LeftVote>
         <RightVote selected={gender === "female"} onClick={onChangeSelectFemale}>
           <ImageWrapper>
-            <Image src={Female} alt="여성" height={100} />
+            <Image alt="여성" height={100} src={Female} />
           </ImageWrapper>
           {gender === "female" ? (
             <VoteText>
-              <Image src={CheckRound} alt="선택" width={16} />
+              <Image alt="선택" src={CheckRound} width={16} />
               여성으로 Chooz!
             </VoteText>
           ) : (
@@ -83,7 +82,7 @@ const GenderSelection = ({
       </RegisterTemplate>
     </>
   );
-};
+}
 
 const LeftVote = styled.div<{ selected: boolean }>`
   position: absolute;
