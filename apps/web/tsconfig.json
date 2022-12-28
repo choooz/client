@@ -22,6 +22,8 @@
     "**/*.cjs",
     "**/*.mjs",
     "**/*.jsx",
-    "**/*.json"
+    "**/*.json",
+    "../../package/ui/styles/theme.ts",
+    "../../package/ui/styles/transitions.ts"
   ]
 }
