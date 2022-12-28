@@ -41,6 +41,7 @@ const palette = {
   },
   ui_color: {
     progressBar: "#c4befd",
+    test: "#f5f3f1", // 지울것
   },
 };
 
