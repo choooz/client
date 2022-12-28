@@ -5,6 +5,10 @@ const withTM = require("next-transpile-modules")(["@chooz/ui"]);
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  typescript: {
+    ignoreDuringBuilds: true,
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = withTM(nextConfig);

@@ -1,9 +1,8 @@
-import styled, { css } from "styled-components";
-import React from "react";
+import { transitions } from "@chooz/ui";
+import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
-import { CheckRound, Female, Male, PurpleMonster } from "assets";
+import styled, { css } from "styled-components";
 import { palette } from "styles/palette";
-import transitions from "styles/transitions";
 
 interface Props {
   gender: "female" | "male" | "";
@@ -12,27 +11,27 @@ interface Props {
   onAddProgress(number: number): void;
 }
 
-const GenderSelection = ({
+function GenderSelection({
   gender,
   onChangeSelectMale,
   onChangeSelectFemale,
   onAddProgress,
-}: Props) => {
+}: Props) {
   return (
     <>
       <WelcomeText>
-        <Image src={PurpleMonster} alt="캐릭터" width={30} />
+        <Image alt="캐릭터" src={PurpleMonster} width={30} />
         반가워요!
       </WelcomeText>
       <QuestionText>Lv.1 당신의 성별은?_</QuestionText>
       <VoteBox>
         <LeftVote selected={gender === "male"} onClick={onChangeSelectMale}>
           <ImageWrapper>
-            <Image src={Male} alt="남성" height={100} />
+            <Image alt="남성" height={100} src={Male} />
           </ImageWrapper>
           {gender === "male" ? (
             <VoteText>
-              <Image src={CheckRound} alt="선택" width={16} />
+              <Image alt="선택" src={CheckRound} width={16} />
               남성으로 Chooz!
             </VoteText>
           ) : (
@@ -41,11 +40,11 @@ const GenderSelection = ({
         </LeftVote>
         <RightVote selected={gender === "female"} onClick={onChangeSelectFemale}>
           <ImageWrapper>
-            <Image src={Female} alt="여성" height={100} />
+            <Image alt="여성" height={100} src={Female} />
           </ImageWrapper>
           {gender === "female" ? (
             <VoteText>
-              <Image src={CheckRound} alt="선택" width={16} />
+              <Image alt="선택" src={CheckRound} width={16} />
               여성으로 Chooz!
             </VoteText>
           ) : (
@@ -55,13 +54,13 @@ const GenderSelection = ({
       </VoteBox>
       선택된 값: {gender}
       <ButtonWrapper>
-        <Button onClick={() => onAddProgress(1)} disabled={gender.length < 1}>
+        <Button disabled={gender.length < 1} onClick={() => onAddProgress(1)}>
           다음
         </Button>
       </ButtonWrapper>
     </>
   );
-};
+}
 
 const WelcomeText = styled.div`
   display: flex;
