@@ -82,6 +82,18 @@ const slideDown = keyframes`
   };
 `;
 
+const blink = keyframes`
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const transitions = {
   fadeIn,
   fadeOut,
@@ -91,6 +103,7 @@ const transitions = {
   popIn,
   slideUp,
   slideDown,
+  blink,
 };
 
 export default transitions;
