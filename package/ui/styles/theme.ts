@@ -1,24 +1,23 @@
-import type { DefaultTheme } from "styled-components";
-import { css } from "styled-components";
+import { css, DefaultTheme } from "styled-components";
 
 const palette = {
   point_color: {
     point_color_1: "#ffbd3e",
     point_color_2: "#ff7549",
-    point_color_3: "#874ce4",
+    point_color_3: "#863DFF",
   },
   // @note 필요시 코드 설정할 것
   ink: {
     lighter: "#72777A",
-    light: "#767676",
+    light: "#505050",
     base: "#404446",
     dark: "#303437",
     darker: "#202325",
     darkest: "#090A0A",
   },
   background_color: {
-    light: "#fbf8f7",
-    base: "white",
+    light: "white",
+    base: "#F7F7FB",
     dark: "#f5f3f1",
   },
   system_color: {
@@ -29,7 +28,7 @@ const palette = {
   },
   border_color: {
     light: "#f6f3f0",
-    base: "#ece8e5",
+    base: "#E5E5EC",
     dark: "#111111",
   },
   social_color: {
