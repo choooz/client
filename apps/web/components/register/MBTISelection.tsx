@@ -1,4 +1,5 @@
 import { Eyes } from "assets";
+import RegisterTemplate from "components/RegisterTemplate";
 import Image from "next/image";
 import { MBTIType } from "pages/login";
 import React, { MouseEvent } from "react";
@@ -15,14 +16,27 @@ interface Props {
 
 function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
   return (
-    <>
-      <WelcomeText>
-        <Image src={Eyes} alt="캐릭터" width={30} />
-        반가워요!
-      </WelcomeText>
-      <QuestionText>
-        Lv.1 당신의 <StrongText>MBTI</StrongText>는?_
-      </QuestionText>
+    <RegisterTemplate
+      welcomeText={
+        <>
+          <Image src={Eyes} alt="캐릭터" width={30} />
+          반가워요!
+        </>
+      }
+      questionText={
+        <>
+          Lv.1 당신의&nbsp;<StrongText>MBTI</StrongText>는?
+        </>
+      }
+      buttonBox={
+        <>
+          <Back onClick={() => onAddProgress(-1)}>이전</Back>
+          <Button onClick={() => onAddProgress(1)} disabled={Object.values(MBTI).includes("")}>
+            다음
+          </Button>
+        </>
+      }
+    >
       <VoteBox>
         <LeftVote selected={MBTI.M === "E"} onClick={onChangeMBTI} name="M" value="E">
           <div>E</div>
@@ -63,41 +77,13 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
           <VoteText> 인식형</VoteText>
         </RightVote>
       </VoteBox>
-      <ButtonWrapper>
-        {/* MBTI에 빈값이 있으면 disabled */}
-        <Back onClick={() => onAddProgress(-1)}>이전</Back>
-        <Button onClick={() => onAddProgress(1)} disabled={Object.values(MBTI).includes("")}>
-          다음
-        </Button>
-      </ButtonWrapper>
-    </>
+    </RegisterTemplate>
   );
 }
-
-const WelcomeText = styled.div`
-  display: flex;
-  font-size: 18px;
-  font-weight: 700;
-  color: ${palette.ink.light};
-  gap: 6px;
-  line-height: 26px;
-  padding-bottom: 24px;
-  animation: ${transitions.popInFromBottom} 0.7s ease-in-out;
-`;
-
-const QuestionText = styled.div`
-  font-size: 28px;
-  font-weight: 400;
-  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue";
-  padding-bottom: 40px;
-  animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-`;
 
 const VoteBox = styled.div`
   position: relative;
   width: 100%;
-  animation: ${transitions.delaypopInFromBottom} 1.3s normal ease-in-out;
   height: 56px;
   margin: 7px 0;
   ${media.medium} {
@@ -119,9 +105,13 @@ const LeftVote = styled.button<{ selected: boolean }>`
   flex-direction: column;
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: rgba(140, 130, 255, 50%);
+  }
   ${({ selected }) =>
     selected
       ? css`
+          animation: ${transitions.blink} 0.7s 0.3s ease-in-out;
           width: 91%;
           border: 1px solid #863dff;
           background-color: rgba(140, 130, 255, 50%);
@@ -141,16 +131,6 @@ const RightVote = styled(LeftVote)`
 
 const VoteText = styled.div`
   font-size: 12px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  padding: 0 30px;
-  left: 50%;
-  transform: translateX(-50%);
 `;
 
 const Button = styled.button`
