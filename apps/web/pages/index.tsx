@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <PageLayout>
       <Link href="/login">로그인 하러가기</Link>
+      <Link href="/register">회원가입 하러가기</Link>
     </PageLayout>
   );
 }

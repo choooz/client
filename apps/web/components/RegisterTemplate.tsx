@@ -1,8 +1,8 @@
+import { transitions } from "@chooz/ui";
 import React from "react";
 import styled from "styled-components";
 import { media } from "styles/media";
 import { palette } from "styles/palette";
-import transitions from "styles/transitions";
 
 interface Props {
   welcomeText: React.ReactNode;

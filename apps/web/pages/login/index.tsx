@@ -26,19 +26,21 @@ function LoginPage() {
 
   return (
     <PageWrapper>
-      <Image alt="로고" src={LogoBlack} />
-      <WelcomeText>
-        고민되는 것들, <br />
-        눈치보지 말고 Chooz에서 물어봐!
-      </WelcomeText>
-      <Emoji />
-      <Link href="https://kauth.kakao.com/oauth/authorize?client_id=be0a6d22a5fcd591b8fc3f6a8f446afe&redirect_uri=http://localhost:3000/login&response_type=code">
-        <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
-      </Link>
-      <Link href="dsafa">
-        <NaverLoginButton>네이버 로그인</NaverLoginButton>
-      </Link>
-      <AlreadyAccountText>이미 계정이 있으신가요? 로그인</AlreadyAccountText>
+      <PageInner>
+        <Image alt="로고" src={LogoBlack} />
+        <WelcomeText>
+          고민되는 것들, <br />
+          눈치보지 말고 Chooz에서 물어봐!
+        </WelcomeText>
+        <Emoji />
+        <Link href="https://kauth.kakao.com/oauth/authorize?client_id=be0a6d22a5fcd591b8fc3f6a8f446afe&redirect_uri=http://localhost:3000/login&response_type=code">
+          <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
+        </Link>
+        <Link href="dsafa">
+          <NaverLoginButton>네이버 로그인</NaverLoginButton>
+        </Link>
+        <AlreadyAccountText>이미 계정이 있으신가요? 로그인</AlreadyAccountText>
+      </PageInner>
     </PageWrapper>
   );
 }
@@ -67,14 +69,16 @@ const WelcomeText = styled.div`
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
   line-height: 18px;
+  padding-bottom: 20px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
 `;
 
 const Emoji = styled.div`
   margin-top: 24px;
-  width: 283px;
+  width: 100%;
   height: 226px;
   background-color: #bebebe;
+  margin: 20px auto;
 `;
 
 const KakaoLoginButton = styled.button`
@@ -83,6 +87,8 @@ const KakaoLoginButton = styled.button`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   transition: all 0.3s ease-in-out;
   background-color: ${({ theme }) => theme.palette.social_color.kakao};
+  border-radius: 4px;
+  margin-bottom: 8px;
 `;
 
 const NaverLoginButton = styled.button`
@@ -92,6 +98,7 @@ const NaverLoginButton = styled.button`
   background-color: ${({ theme }) => theme.palette.social_color.naver};
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   transition: all 0.3s ease-in-out;
+  border-radius: 4px;
 `;
 
 const AlreadyAccountText = styled.div`
