@@ -1,3 +1,4 @@
+import AgeSelection from "components/register/AgeSelection";
 import GenderSelection from "components/register/GenderSelection";
 import MBTISelection from "components/register/MBTISelection";
 import ProgressBar from "components/register/ProgressBar";
@@ -64,6 +65,7 @@ function RegisterPage() {
               onChangeMBTI={onChangeMBTI}
             />
           )}
+          {register.progress === 3 && <AgeSelection onAddProgress={onAddProgress} />}
         </PageInner>
       </PageWrapper>
     </>
