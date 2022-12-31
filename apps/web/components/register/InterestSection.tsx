@@ -1,53 +1,71 @@
 import { transitions } from "@chooz/ui";
 import { CheckRound, Chick } from "assets/images";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 
+type CategoryNameType =
+  | "category1"
+  | "category2"
+  | "category3"
+  | "category4"
+  | "category5"
+  | "category6";
+
 function InterestSection() {
+  // @Note 카테고리 상수화해서 쓰고 싶은데 가능한가?
+  const CATEGORY_NAMES: CategoryNameType[] = [
+    "category1",
+    "category2",
+    "category3",
+    "category4",
+    "category5",
+    "category6",
+  ];
+
+  const [categorys, setCategorys] = useState({
+    category1: false,
+    category2: false,
+    category3: false,
+    category4: false,
+    category5: false,
+    category6: false,
+  });
+
+  // @Todo 타입 지정해주기
+  const onClickCategory = (e: any) => {
+    const categoryName: CategoryNameType = e.target.dataset.name;
+    setCategorys({
+      ...categorys,
+      [categoryName]: !categorys[categoryName],
+    });
+  };
+
   return (
     <>
-      <QuestionText>
-        파인애플짱 님,
-        <br />
-        Chooz에 오신 것을 환영합니다!
-      </QuestionText>
+      <WelcomeText>Chooz에 오신 것을 환영합니다!</WelcomeText>
       <DescriptionText>
         좋아하는 관심사를 선택해주세요.
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        <Vote>
-          <Image alt="항목" src={Chick} height={32} />
-          항목1
-        </Vote>
-        <Vote selected={true}>
-          <Image alt="항목" src={Chick} height={32} />
-          <VoteText>
-            <Image alt="선택" src={CheckRound} width={16} />
-            항목 1
-          </VoteText>
-        </Vote>
-        <Vote selected={true}>
-          <Image alt="항목" src={Chick} height={32} />
-          <VoteText>
-            <Image alt="선택" src={CheckRound} width={16} />
-            항목 1
-          </VoteText>
-        </Vote>
-        <Vote>
-          <Image alt="항목" src={Chick} height={32} />
-          항목1
-        </Vote>
-        <Vote>
-          <Image alt="항목" src={Chick} height={32} />
-          항목1
-        </Vote>
-        <Vote>
-          <Image alt="항목" src={Chick} height={32} />
-          항목1
-        </Vote>
+        {CATEGORY_NAMES.map((categoryName: CategoryNameType) => {
+          return (
+            <Vote
+              key={categoryName}
+              selected={categorys[categoryName]}
+              onClick={onClickCategory}
+              data-name={categoryName}
+            >
+              <Image alt="항목" src={Chick} height={32} />
+              <VoteText>
+                {categorys[categoryName] && <Image alt="선택" src={CheckRound} width={16} />}
+                {categoryName}
+              </VoteText>
+            </Vote>
+          );
+        })}
       </VoteBox>
       <ButtonWrapper>
         <Button>완료</Button>
@@ -56,22 +74,20 @@ function InterestSection() {
   );
 }
 
-const QuestionText = styled.div`
+const WelcomeText = styled.div`
   display: flex;
-  font-size: 28px;
-  font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
   padding-bottom: 16px;
   animation: ${transitions.delaypopInFromBottom} 0.7s ease-in-out;
+  ${({ theme }) => theme.textStyle.regular.Title_Medium};
 `;
 
 const DescriptionText = styled.div`
-  line-height: 24px;
-  font-size: 18px;
-  color: ${({ theme }) => theme.palette.ink.light};
-  animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
   padding-bottom: 32px;
+  animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
+  color: ${({ theme }) => theme.palette.ink.light};
+  ${({ theme }) => theme.textStyle.regular.Font_Regular};
 `;
 
 const VoteBox = styled.div`
