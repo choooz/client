@@ -1,6 +1,8 @@
+import AgeSelection from "components/register/AgeSelection";
 import GenderSelection from "components/register/GenderSelection";
 import MBTISelection from "components/register/MBTISelection";
 import ProgressBar from "components/register/ProgressBar";
+import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
 import { useState } from "react";
 import styled from "styled-components";
@@ -20,6 +22,10 @@ interface RegisterType {
 }
 
 function RegisterPage() {
+  const route = useRouter();
+  const routeInterest = () => {
+    route.push("/register/interest");
+  };
   const [register, setRegister] = useState<RegisterType>({
     progress: 1,
     gender: "",
@@ -63,6 +69,9 @@ function RegisterPage() {
               onAddProgress={onAddProgress}
               onChangeMBTI={onChangeMBTI}
             />
+          )}
+          {register.progress === 3 && (
+            <AgeSelection onAddProgress={onAddProgress} navigater={routeInterest} />
           )}
         </PageInner>
       </PageWrapper>
