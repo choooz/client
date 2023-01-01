@@ -59,7 +59,7 @@ const AgeSelection = ({ onAddProgress, navigater }: Props) => {
 };
 
 const StrongText = styled.strong`
-  color: #6f4ef5;
+  color: ${({ theme }) => theme.palette.point_color.point_color_3};
 `;
 
 const Back = styled.button`
@@ -77,14 +77,14 @@ const Back = styled.button`
 const Button = styled.button`
   width: 76%;
   height: 56px;
-  background-color: #863dff;
+  background-color: ${({ theme }) => theme.palette.point_color.point_color_3};
   color: white;
   border-radius: 4px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   font-weight: 700;
   transition: all 0.3s ease-in-out;
   :disabled {
-    background-color: #e5e5ec;
+    background-color: ${({ theme }) => theme.palette.border_color.base};
     color: #999999;
   }
 `;
