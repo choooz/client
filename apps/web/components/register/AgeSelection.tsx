@@ -6,11 +6,12 @@ import styled from "styled-components";
 
 interface Props {
   onAddProgress(number: number): void;
+  navigater(): void;
 }
 
 const Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-const AgeSelection = ({ onAddProgress }: Props) => {
+const AgeSelection = ({ onAddProgress, navigater }: Props) => {
   const [age, setAge] = useState("");
 
   const onChangeAge = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -36,7 +37,7 @@ const AgeSelection = ({ onAddProgress }: Props) => {
       buttonBox={
         <>
           <Back onClick={() => onAddProgress(-1)}>이전</Back>
-          <Button onClick={() => onAddProgress(1)}>다음</Button>
+          <Button onClick={navigater}>다음</Button>
         </>
       }
     >
