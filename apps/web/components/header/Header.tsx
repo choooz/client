@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
-import { palette } from "../../styles/palette";
-
 function Header() {
   return (
     <Container>
@@ -20,7 +18,7 @@ const Container = styled.header`
   justify-content: center;
   align-items: center;
   height: 55px;
-  border-bottom: 1px solid ${palette.border.base};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.border_color.dark};
 `;
 
 export default Header;
