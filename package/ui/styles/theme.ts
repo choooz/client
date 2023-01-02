@@ -25,7 +25,8 @@ const palette = {
     darkest: "#090A0A",
   },
   background: {
-    light: "#ffffff",
+    lightest: "#ffffff",
+    light: "#fdfdfd",
     base: "#F7F7FB",
     dark: "#f5f3f1",
   },
@@ -38,6 +39,7 @@ const palette = {
   border: {
     light: "#f6f3f0",
     base: "#E5E5EC",
+    darker: "#505050",
     dark: "#111111",
   },
   social_color: {

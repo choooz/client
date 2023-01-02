@@ -4,7 +4,6 @@ import Image from "next/image";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
-import { palette } from "styles/palette";
 
 export interface MBTIType {
   M: "E" | "I" | "";
@@ -102,7 +101,7 @@ const LeftVote = styled.button<{ selected: boolean }>`
   width: 48%;
   height: 100%;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.background.light};
+  background-color: ${({ theme }) => theme.palette.background.lightest};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   display: flex;
   justify-content: center;

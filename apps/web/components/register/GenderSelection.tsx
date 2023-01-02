@@ -2,7 +2,6 @@ import { RegisterTemplate, transitions } from "@chooz/ui";
 import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
 import styled, { css } from "styled-components";
-import { palette } from "styles/palette";
 
 interface Props {
   gender: "female" | "male" | "";
@@ -86,7 +85,7 @@ const LeftVote = styled.div<{ selected: boolean }>`
   width: 48%;
   height: 100%;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.background.light};
+  background-color: ${({ theme }) => theme.palette.background.lightest};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   display: flex;
   justify-content: center;

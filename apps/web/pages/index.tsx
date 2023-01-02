@@ -1,8 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-import { palette } from "../styles/palette";
-
 export default function Home() {
   return (
     <PageLayout>
@@ -17,5 +15,5 @@ const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${palette.sky.lightest};
+  color: ${({ theme }) => theme.palette.background.light};
 `;
