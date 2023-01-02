@@ -1,10 +1,10 @@
 import { css, DefaultTheme } from "styled-components";
 
 const palette = {
-  point_color: {
-    point_color_1: "#ffbd3e",
-    point_color_2: "#ff7549",
-    point_color_3: "#863DFF",
+  point: {
+    yellow: "#ffbd3e",
+    orange: "#ff7549",
+    purple: "#863DFF",
   },
   // @note 필요시 코드 설정할 것
   ink: {
@@ -15,18 +15,18 @@ const palette = {
     darker: "#202325",
     darkest: "#090A0A",
   },
-  background_color: {
+  background: {
     light: "white",
     base: "#F7F7FB",
     dark: "#f5f3f1",
   },
-  system_color: {
+  system: {
     // @note 금지, 실패, 위험 등
-    red: "#dc0035",
+    danger: "#dc0035",
     // @note 성공, 진행, 안전 등
-    blue: "#114b9a",
+    success: "#114b9a",
   },
-  border_color: {
+  border: {
     light: "#f6f3f0",
     base: "#E5E5EC",
     dark: "#111111",

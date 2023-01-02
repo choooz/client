@@ -106,8 +106,8 @@ const Vote = styled.div<{ selected?: boolean }>`
   width: 48%;
   height: 100%;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.palette.background_color.dark};
-  border: 1px solid ${({ theme }) => theme.palette.border_color.base};
+  background-color: ${({ theme }) => theme.palette.background.dark};
+  border: 1px solid ${({ theme }) => theme.palette.border.base};
   margin-bottom: 14px;
   display: flex;
   justify-content: center;
@@ -123,7 +123,7 @@ const Vote = styled.div<{ selected?: boolean }>`
       animation: ${transitions.blink} 0.7s ease-in-out;
       background-color: rgba(140, 130, 255, 50%);
       font-weight: 700;
-      border: 1px solid ${({ theme }) => theme.palette.point_color.point_color_3};
+      border: 1px solid ${({ theme }) => theme.palette.point.purple};
     `}
 `;
 

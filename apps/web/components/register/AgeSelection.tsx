@@ -59,7 +59,7 @@ const AgeSelection = ({ onAddProgress, navigater }: Props) => {
 };
 
 const StrongText = styled.strong`
-  color: ${({ theme }) => theme.palette.point_color.point_color_3};
+  color: ${({ theme }) => theme.palette.point.purple};
 `;
 
 const Back = styled.button`
@@ -77,14 +77,14 @@ const Back = styled.button`
 const Button = styled.button`
   width: 76%;
   height: 56px;
-  background-color: ${({ theme }) => theme.palette.point_color.point_color_3};
+  background-color: ${({ theme }) => theme.palette.point.purple};
   color: white;
   border-radius: 4px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   font-weight: 700;
   transition: all 0.3s ease-in-out;
   :disabled {
-    background-color: ${({ theme }) => theme.palette.border_color.base};
+    background-color: ${({ theme }) => theme.palette.border.base};
     color: #999999;
   }
 `;
@@ -102,7 +102,7 @@ const Input = styled.input`
   padding: 10px;
   width: 152px;
   height: 80px;
-  border: 1px solid ${({ theme }) => theme.palette.border_color.base};
+  border: 1px solid ${({ theme }) => theme.palette.border.base};
   border-radius: 4px;
   animation: ${transitions.fadeIn} 1.5s normal ease-in-out;
   color: #863dff;
@@ -132,8 +132,8 @@ const NumberDiv = styled.div`
   width: 70px;
   height: 70px;
   border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.palette.border_color.base};
-  background: ${({ theme }) => theme.palette.background_color.base};
+  border: 1px solid ${({ theme }) => theme.palette.border.base};
+  background: ${({ theme }) => theme.palette.background.base};
 `;
 
 const DeleteNumver = styled(NumberDiv)`
