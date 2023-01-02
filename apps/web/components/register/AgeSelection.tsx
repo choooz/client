@@ -65,7 +65,7 @@ const StrongText = styled.strong`
 const Back = styled.button`
   font-size: 16px;
   font-weight: 700;
-  color: #999999;
+  color: ${({ theme }) => theme.palette.ink.lightest};
   height: 56px;
   width: 24%;
   display: flex;
@@ -85,7 +85,7 @@ const Button = styled.button`
   transition: all 0.3s ease-in-out;
   :disabled {
     background-color: ${({ theme }) => theme.palette.border.base};
-    color: #999999;
+    color: ${({ theme }) => theme.palette.ink.lightest};
   }
 `;
 
@@ -107,7 +107,7 @@ const Input = styled.input`
   animation: ${transitions.fadeIn} 1.5s normal ease-in-out;
   color: #863dff;
   ::placeholder {
-    color: #999999;
+    color: ${({ theme }) => theme.palette.ink.lightest};
   }
 `;
 

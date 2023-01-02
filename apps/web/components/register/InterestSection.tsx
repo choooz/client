@@ -121,7 +121,7 @@ const Vote = styled.div<{ selected?: boolean }>`
     selected &&
     css`
       animation: ${transitions.blink} 0.7s ease-in-out;
-      background-color: rgba(140, 130, 255, 50%);
+      background-color: ${({ theme }) => theme.palette.main.light};
       font-weight: 700;
       border: 1px solid ${({ theme }) => theme.palette.point.purple};
     `}
@@ -154,7 +154,7 @@ const Button = styled.button`
   transition: all 0.3s ease-in-out;
   :disabled {
     background-color: #e5e5ec;
-    color: #999999;
+    color: ${({ theme }) => theme.palette.ink.lightest};
   }
 `;
 export default InterestSection;

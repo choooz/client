@@ -1,6 +1,14 @@
 import { css, DefaultTheme } from "styled-components";
 
 const palette = {
+  main: {
+    // @note 메인 색상
+    lightest: "#E7E7FF",
+    lighter: "#C6C4FF",
+    light: "rgba(140, 130, 255, 50%)",
+    base: "#6B4EFF",
+    darkest: "#190665",
+  },
   point: {
     yellow: "#ffbd3e",
     orange: "#ff7549",
@@ -8,6 +16,7 @@ const palette = {
   },
   // @note 필요시 코드 설정할 것
   ink: {
+    lightest: "#999999",
     lighter: "#72777A",
     light: "#505050",
     base: "#404446",
@@ -16,7 +25,7 @@ const palette = {
     darkest: "#090A0A",
   },
   background: {
-    light: "white",
+    light: "#ffffff",
     base: "#F7F7FB",
     dark: "#f5f3f1",
   },

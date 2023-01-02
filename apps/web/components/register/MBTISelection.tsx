@@ -102,8 +102,8 @@ const LeftVote = styled.button<{ selected: boolean }>`
   width: 48%;
   height: 100%;
   border-radius: 4px;
-  background-color: ${palette.border.lighter};
-  border: 1px solid ${palette.border.lightest};
+  background-color: ${({ theme }) => theme.palette.background.light};
+  border: 1px solid ${({ theme }) => theme.palette.border.base};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,15 +111,15 @@ const LeftVote = styled.button<{ selected: boolean }>`
   font-size: 20px;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: rgba(140, 130, 255, 50%);
+    background-color: ${({ theme }) => theme.palette.main.light};
   }
   ${({ selected }) =>
     selected
       ? css`
           animation: ${transitions.blink} 0.7s 0.3s ease-in-out;
           width: 91%;
-          border: 1px solid #863dff;
-          background-color: rgba(140, 130, 255, 50%);
+          border: 1px solid ${({ theme }) => theme.palette.point.purple};
+          background-color: ${({ theme }) => theme.palette.main.light};
           font-size: 20px;
           font-weight: 700;
           color: #190665;
@@ -141,15 +141,15 @@ const VoteText = styled.div`
 const Button = styled.button`
   width: 76%;
   height: 56px;
-  background-color: #863dff;
+  background-color: ${({ theme }) => theme.palette.point.purple};
   color: white;
   border-radius: 4px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   font-weight: 700;
   transition: all 0.3s ease-in-out;
   :disabled {
-    background-color: #e5e5ec;
-    color: #999999;
+    background-color: ${({ theme }) => theme.palette.border.light};
+    color: ${({ theme }) => theme.palette.ink.lightest};
   }
 `;
 
@@ -160,7 +160,7 @@ const StrongText = styled.strong`
 const Back = styled.button`
   font-size: 16px;
   font-weight: 700;
-  color: #999999;
+  color: ${({ theme }) => theme.palette.ink.lightest};
   height: 56px;
   width: 24%;
   display: flex;

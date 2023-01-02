@@ -86,8 +86,8 @@ const LeftVote = styled.div<{ selected: boolean }>`
   width: 48%;
   height: 100%;
   border-radius: 4px;
-  background-color: ${palette.border.lighter};
-  border: 1px solid ${palette.border.lightest};
+  background-color: ${({ theme }) => theme.palette.background.light};
+  border: 1px solid ${({ theme }) => theme.palette.border.base};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,18 +95,18 @@ const LeftVote = styled.div<{ selected: boolean }>`
   font-size: 18px;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: rgba(140, 130, 255, 50%);
+    background-color: ${({ theme }) => theme.palette.main.light};
   }
   ${({ selected }) =>
     selected
       ? css`
           animation: ${transitions.blink} 0.7s ease-in-out;
           width: 91%;
-          border: 1px solid #863dff;
-          background-color: rgba(140, 130, 255, 50%);
+          border: 1px solid ${({ theme }) => theme.palette.point.purple};
+          background-color: ${({ theme }) => theme.palette.main.light};
           font-size: 16px;
           font-weight: 700;
-          color: #190665;
+          color: ${({ theme }) => theme.palette.main.darkest};
           z-index: 999;
         `
       : css`
@@ -132,7 +132,7 @@ const ImageWrapper = styled.div`
 const Button = styled.button<{ effect: boolean }>`
   width: 100%;
   height: 56px;
-  background-color: #863dff;
+  background-color: ${({ theme }) => theme.palette.point.purple};
   color: white;
   border-radius: 4px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
@@ -140,7 +140,7 @@ const Button = styled.button<{ effect: boolean }>`
   transition: all 0.3s ease-in-out;
   :disabled {
     background-color: #e5e5ec;
-    color: #999999;
+    color: ${({ theme }) => theme.palette.ink.lightest};
   }
 
   /* &:focus {
