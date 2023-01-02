@@ -1,13 +1,22 @@
 import { css, DefaultTheme } from "styled-components";
 
 const palette = {
-  point_color: {
-    point_color_1: "#ffbd3e",
-    point_color_2: "#ff7549",
-    point_color_3: "#863DFF",
+  main: {
+    // @note 메인 색상
+    lightest: "#E7E7FF",
+    lighter: "#C6C4FF",
+    light: "rgba(140, 130, 255, 50%)",
+    base: "#6B4EFF",
+    darkest: "#190665",
+  },
+  point: {
+    yellow: "#ffbd3e",
+    orange: "#ff7549",
+    purple: "#863DFF",
   },
   // @note 필요시 코드 설정할 것
   ink: {
+    lightest: "#999999",
     lighter: "#72777A",
     light: "#505050",
     base: "#404446",
@@ -15,20 +24,22 @@ const palette = {
     darker: "#202325",
     darkest: "#090A0A",
   },
-  background_color: {
-    light: "white",
+  background: {
+    lightest: "#ffffff",
+    light: "#fdfdfd",
     base: "#F7F7FB",
     dark: "#f5f3f1",
   },
-  system_color: {
+  system: {
     // @note 금지, 실패, 위험 등
-    red: "#dc0035",
+    danger: "#dc0035",
     // @note 성공, 진행, 안전 등
-    blue: "#114b9a",
+    success: "#114b9a",
   },
-  border_color: {
+  border: {
     light: "#f6f3f0",
     base: "#E5E5EC",
+    darker: "#505050",
     dark: "#111111",
   },
   social_color: {
