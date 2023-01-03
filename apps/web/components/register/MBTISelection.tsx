@@ -17,10 +17,8 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
   type Direction = "left" | "right";
 
   const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
-    // return direction === "left" ? "female" : "male";
-    if (direction === "left") {
+    if (direction === "left")
       return MBTIKey === "M" ? "E" : MBTIKey === "B" ? "S" : MBTIKey === "T" ? "T" : "J";
-    }
     return MBTIKey === "M" ? "I" : MBTIKey === "B" ? "N" : MBTIKey === "T" ? "F" : "P";
   };
 
@@ -203,4 +201,4 @@ const Back = styled.button`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
 `;
 
-export default MBTISelection;
+export default React.memo(MBTISelection);
