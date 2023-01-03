@@ -110,11 +110,11 @@ const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
     width: 74%;
-    border: 1px solid #863dff;
-    background-color: rgba(140, 130, 255, 50%);
+    border: 1px solid ${({ theme }) => theme.palette.point.purple};
+    background-color: ${({ theme }) => theme.palette.main.light};
     font-size: 16px;
     font-weight: 700;
-    color: #190665;
+    color: ${({ theme }) => theme.palette.main.darkest};
   `,
   inactive: css`
     width: 23%;
