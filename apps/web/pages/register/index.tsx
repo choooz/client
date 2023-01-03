@@ -1,7 +1,4 @@
-import AgeSelection from "components/register/AgeSelection";
-import GenderSelection from "components/register/GenderSelection";
-import MBTISelection from "components/register/MBTISelection";
-import ProgressBar from "components/register/ProgressBar";
+import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
 import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
 import { useState } from "react";
