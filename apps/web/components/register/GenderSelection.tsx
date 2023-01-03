@@ -1,4 +1,5 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
+import { media } from "@chooz/ui/styles/media";
 import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
 import { Gender } from "pages/register";
@@ -83,17 +84,22 @@ function GenderSelection({ gender, onAddProgress, onChangeGender }: Props) {
 const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
-    width: 91%;
+    width: 64%;
     border: 1px solid ${({ theme }) => theme.palette.point.purple};
     background-color: ${({ theme }) => theme.palette.main.light};
     font-size: 16px;
     font-weight: 700;
     color: ${({ theme }) => theme.palette.main.darkest};
-    z-index: 999;
+    ${media.medium} {
+      width: 74%;
+    }
   `,
   inactive: css`
-    width: 23%;
+    width: 36%;
     opacity: 0.5;
+    ${media.medium} {
+      width: 23%;
+    }
   `,
 };
 
