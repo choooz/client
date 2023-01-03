@@ -15,9 +15,14 @@ export interface MBTIType {
   I: "J" | "P" | "";
 }
 
+export enum Gender {
+  MALE = "male",
+  FEMALE = "female",
+}
+
 interface RegisterType {
   progress: number;
-  gender: "male" | "female" | "";
+  gender: "male" | "female" | null;
   MBTI: MBTIType;
 }
 
@@ -28,7 +33,7 @@ function RegisterPage() {
   };
   const [register, setRegister] = useState<RegisterType>({
     progress: 1,
-    gender: "",
+    gender: null,
     MBTI: {
       M: "",
       B: "",
@@ -36,11 +41,9 @@ function RegisterPage() {
       I: "",
     },
   });
-  const onChangeSelectMale = () => {
-    setRegister((prev) => ({ ...prev, gender: "male" }));
-  };
-  const onChangeSelectFemale = () => {
-    setRegister((prev) => ({ ...prev, gender: "female" }));
+
+  const onChangeGender = (select: Gender) => {
+    setRegister((prev) => ({ ...prev, gender: select }));
   };
   const onAddProgress = (number: number) => {
     setRegister((prev) => ({ ...prev, progress: prev.progress + number }));
@@ -59,8 +62,7 @@ function RegisterPage() {
             <GenderSelection
               gender={register.gender}
               onAddProgress={onAddProgress}
-              onChangeSelectFemale={onChangeSelectFemale}
-              onChangeSelectMale={onChangeSelectMale}
+              onChangeGender={onChangeGender}
             />
           )}
           {register.progress === 2 && (

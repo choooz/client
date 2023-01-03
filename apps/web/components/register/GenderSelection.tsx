@@ -1,22 +1,17 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
 import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
+import { Gender } from "pages/register";
 import styled, { css } from "styled-components";
 import { palette } from "styles/palette";
 
 interface Props {
-  gender: "female" | "male" | "";
-  onChangeSelectMale(): void;
-  onChangeSelectFemale(): void;
+  gender: "female" | "male" | null;
   onAddProgress(number: number): void;
+  onChangeGender(gender: Gender): void;
 }
 
-function GenderSelection({
-  gender,
-  onChangeSelectMale,
-  onChangeSelectFemale,
-  onAddProgress,
-}: Props) {
+function GenderSelection({ gender, onAddProgress, onChangeGender }: Props) {
   // const animateButton = (e: any) => {
   //   e.preventDefault();
   //   //reset animation
@@ -27,13 +22,22 @@ function GenderSelection({
   //     e.target.classList.remove("animate");
   //   }, 500);
   // };
+  type Direction = "left" | "right";
+
+  const getGender = (direction: Direction) => {
+    return direction === "left" ? "female" : "male";
+  };
+
+  const activeValue = (direction: Direction): "active" | "inactive" | null => {
+    if (!gender) return null;
+    return `${gender === getGender(direction) ? "in" : ""}active`;
+  };
 
   return (
     <RegisterTemplate
       welcomeText={
         <>
-          <Image src={PurpleMonster} alt="캐릭터" width={30} />
-          반가워요!
+          반가워요! <Image src={PurpleMonster} alt="캐릭터" width={30} />
         </>
       }
       questionText={
@@ -42,16 +46,12 @@ function GenderSelection({
         </>
       }
       buttonBox={
-        <Button
-          onClick={() => onAddProgress(1)}
-          disabled={gender.length < 1}
-          effect={gender.length > 1}
-        >
+        <Button onClick={() => onAddProgress(1)} disabled={!gender}>
           다음
         </Button>
       }
     >
-      <LeftVote selected={gender === "male"} onClick={onChangeSelectMale}>
+      <LeftVote selected={activeValue("left")} onClick={() => onChangeGender(Gender.MALE)}>
         <ImageWrapper>
           <Image alt="남성" height={100} src={Male} />
         </ImageWrapper>
@@ -64,7 +64,7 @@ function GenderSelection({
           "남성"
         )}
       </LeftVote>
-      <RightVote selected={gender === "female"} onClick={onChangeSelectFemale}>
+      <RightVote selected={activeValue("right")} onClick={() => onChangeGender(Gender.FEMALE)}>
         <ImageWrapper>
           <Image alt="여성" height={100} src={Female} />
         </ImageWrapper>
@@ -81,7 +81,28 @@ function GenderSelection({
   );
 }
 
-const LeftVote = styled.div<{ selected: boolean }>`
+const variantStyles = {
+  active: css`
+    animation: ${transitions.blink} 0.7s ease-in-out;
+    width: 74%;
+    border: 1px solid #863dff;
+    background-color: rgba(140, 130, 255, 50%);
+    font-size: 16px;
+    font-weight: 700;
+    color: #190665;
+  `,
+  inactive: css`
+    width: 23%;
+    opacity: 0.5;
+  `,
+};
+
+const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
+  if (!selected) return null;
+  return variantStyles[selected];
+};
+
+const LeftVote = styled.div<{ selected: "active" | "inactive" | null }>`
   position: absolute;
   width: 48%;
   height: 100%;
@@ -97,21 +118,7 @@ const LeftVote = styled.div<{ selected: boolean }>`
   &:hover {
     background-color: rgba(140, 130, 255, 50%);
   }
-  ${({ selected }) =>
-    selected
-      ? css`
-          animation: ${transitions.blink} 0.7s ease-in-out;
-          width: 91%;
-          border: 1px solid #863dff;
-          background-color: rgba(140, 130, 255, 50%);
-          font-size: 16px;
-          font-weight: 700;
-          color: #190665;
-          z-index: 999;
-        `
-      : css`
-          z-index: 1;
-        `}
+  ${({ selected }) => typeGuardVariantStyle(selected)}
 `;
 
 const RightVote = styled(LeftVote)`
@@ -129,7 +136,7 @@ const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-const Button = styled.button<{ effect: boolean }>`
+const Button = styled.button`
   width: 100%;
   height: 56px;
   background-color: #863dff;
