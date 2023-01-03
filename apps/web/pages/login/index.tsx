@@ -1,28 +1,14 @@
 import { transitions } from "@chooz/ui";
 import { LogoBlack } from "assets/images";
-import axios from "axios";
+import { KAKAO_CLIENT_ID, NAVER_CLIENT_ID } from "lib/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import useLoginService from "services/useLoginService";
 import styled from "styled-components";
 import { media } from "styles/media";
 
 function LoginPage() {
-  const router = useRouter();
-  const code = router.query.code;
-  const redirectUrl = "http://localhost:3000/login";
-
-  useEffect(() => {
-    if (code) {
-      console.log(code);
-      const temp = axios.post(
-        "http://ec2-15-165-134-97.ap-northeast-2.compute.amazonaws.com:8080/api/oauth/kakao",
-        { code, redirectUrl },
-      );
-      console.log(temp);
-    }
-  }, [code]);
+  const { redirectUrl } = useLoginService();
 
   return (
     <PageWrapper>
@@ -33,10 +19,14 @@ function LoginPage() {
           눈치보지 말고 Chooz에서 물어봐!
         </WelcomeText>
         <Emoji />
-        <Link href="https://kauth.kakao.com/oauth/authorize?client_id=be0a6d22a5fcd591b8fc3f6a8f446afe&redirect_uri=http://localhost:3000/login&response_type=code">
+        <Link
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${redirectUrl}&response_type=code`}
+        >
           <KakaoLoginButton>카카오 로그인</KakaoLoginButton>
         </Link>
-        <Link href="dsafa">
+        <Link
+          href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${redirectUrl}&state=test`}
+        >
           <NaverLoginButton>네이버 로그인</NaverLoginButton>
         </Link>
         <AlreadyAccountText>이미 계정이 있으신가요? 로그인</AlreadyAccountText>
@@ -65,12 +55,10 @@ const PageInner = styled.div`
 
 const WelcomeText = styled.div`
   margin-top: 16px;
-  font-size: 14px;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
-  line-height: 18px;
-  padding-bottom: 20px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
+  ${({ theme }) => theme.textStyle.regular.Font_Regular};
 `;
 
 const Emoji = styled.div`
