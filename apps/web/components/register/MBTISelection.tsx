@@ -1,17 +1,11 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
 import { Eyes } from "assets/images";
 import Image from "next/image";
+import { MBTIType } from "pages/register";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { palette } from "styles/palette";
-
-export interface MBTIType {
-  M: "E" | "I" | "";
-  B: "S" | "N" | "";
-  T: "T" | "F" | "";
-  I: "J" | "P" | "";
-}
 
 interface Props {
   MBTI: MBTIType;
@@ -20,6 +14,24 @@ interface Props {
 }
 
 function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
+  type Direction = "left" | "right";
+
+  const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
+    // return direction === "left" ? "female" : "male";
+    if (direction === "left") {
+      return MBTIKey === "M" ? "E" : MBTIKey === "B" ? "S" : MBTIKey === "T" ? "T" : "J";
+    }
+    return MBTIKey === "M" ? "I" : MBTIKey === "B" ? "N" : MBTIKey === "T" ? "F" : "P";
+  };
+
+  const activeValue = (
+    direction: Direction,
+    MBTIKey: "M" | "B" | "T" | "I",
+  ): "active" | "inactive" | null => {
+    if (!MBTI[MBTIKey]) return null;
+    return `${MBTI[MBTIKey] === getMBTI(direction, MBTIKey) ? "" : "in"}active`;
+  };
+
   return (
     <RegisterTemplate
       welcomeText={
@@ -36,48 +48,48 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
       buttonBox={
         <>
           <Back onClick={() => onAddProgress(-1)}>이전</Back>
-          <Button onClick={() => onAddProgress(1)} disabled={Object.values(MBTI).includes("")}>
+          <Button onClick={() => onAddProgress(1)} disabled={Object.values(MBTI).includes(null)}>
             다음
           </Button>
         </>
       }
     >
       <VoteBox>
-        <LeftVote name="M" selected={MBTI.M === "E"} value="E" onClick={onChangeMBTI}>
+        <LeftVote name="M" selected={activeValue("left", "M")} value="E" onClick={onChangeMBTI}>
           <div>E</div>
           <VoteText>외향형</VoteText>
         </LeftVote>
-        <RightVote name="M" selected={MBTI.M === "I"} value="I" onClick={onChangeMBTI}>
+        <RightVote name="M" selected={activeValue("right", "M")} value="I" onClick={onChangeMBTI}>
           <div>I</div>
           <VoteText>내향형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
-        <LeftVote name="B" selected={MBTI.B === "S"} value="S" onClick={onChangeMBTI}>
+        <LeftVote name="B" selected={activeValue("left", "B")} value="S" onClick={onChangeMBTI}>
           <div>S</div>
           <VoteText>감정형</VoteText>
         </LeftVote>
-        <RightVote name="B" selected={MBTI.B === "N"} value="N" onClick={onChangeMBTI}>
+        <RightVote name="B" selected={activeValue("right", "B")} value="N" onClick={onChangeMBTI}>
           <div>N</div>
           <VoteText>직관형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
-        <LeftVote name="T" selected={MBTI.T === "T"} value="T" onClick={onChangeMBTI}>
+        <LeftVote name="T" selected={activeValue("left", "T")} value="T" onClick={onChangeMBTI}>
           <div>T</div>
           <VoteText>사고형</VoteText>
         </LeftVote>
-        <RightVote name="T" selected={MBTI.T === "F"} value="F" onClick={onChangeMBTI}>
+        <RightVote name="T" selected={activeValue("right", "T")} value="F" onClick={onChangeMBTI}>
           <div>F</div>
           <VoteText>감정형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
-        <LeftVote name="I" selected={MBTI.I === "J"} value="J" onClick={onChangeMBTI}>
+        <LeftVote name="I" selected={activeValue("left", "I")} value="J" onClick={onChangeMBTI}>
           <div>J</div>
           <VoteText>판단형</VoteText>
         </LeftVote>
-        <RightVote name="I" selected={MBTI.I === "P"} value="P" onClick={onChangeMBTI}>
+        <RightVote name="I" selected={activeValue("right", "I")} value="P" onClick={onChangeMBTI}>
           <div>P</div>
           <VoteText> 인식형</VoteText>
         </RightVote>
@@ -97,7 +109,28 @@ const VoteBox = styled.div`
   }
 `;
 
-const LeftVote = styled.button<{ selected: boolean }>`
+const variantStyles = {
+  active: css`
+    animation: ${transitions.blink} 0.7s ease-in-out;
+    width: 74%;
+    border: 1px solid #863dff;
+    background-color: rgba(140, 130, 255, 50%);
+    font-size: 16px;
+    font-weight: 700;
+    color: #190665;
+  `,
+  inactive: css`
+    width: 23%;
+    opacity: 0.5;
+  `,
+};
+
+const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
+  if (!selected) return null;
+  return variantStyles[selected];
+};
+
+const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
   position: absolute;
   width: 48%;
   height: 100%;
@@ -110,10 +143,11 @@ const LeftVote = styled.button<{ selected: boolean }>`
   flex-direction: column;
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+  ${({ selected }) => typeGuardVariantStyle(selected)}
   &:hover {
     background-color: rgba(140, 130, 255, 50%);
   }
-  ${({ selected }) =>
+  /* ${({ selected }) =>
     selected
       ? css`
           animation: ${transitions.blink} 0.7s 0.3s ease-in-out;
@@ -127,7 +161,7 @@ const LeftVote = styled.button<{ selected: boolean }>`
         `
       : css`
           z-index: 1;
-        `}
+        `} */
 `;
 
 const RightVote = styled(LeftVote)`

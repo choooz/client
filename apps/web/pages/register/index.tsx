@@ -9,10 +9,10 @@ import styled from "styled-components";
 import { media } from "styles/media";
 
 export interface MBTIType {
-  M: "E" | "I" | "";
-  B: "S" | "N" | "";
-  T: "T" | "F" | "";
-  I: "J" | "P" | "";
+  M: "E" | "I" | null;
+  B: "S" | "N" | null;
+  T: "T" | "F" | null;
+  I: "J" | "P" | null;
 }
 
 export enum Gender {
@@ -35,10 +35,10 @@ function RegisterPage() {
     progress: 1,
     gender: null,
     MBTI: {
-      M: "",
-      B: "",
-      T: "",
-      I: "",
+      M: null,
+      B: null,
+      T: null,
+      I: null,
     },
   });
 

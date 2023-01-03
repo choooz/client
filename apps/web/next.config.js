@@ -9,6 +9,17 @@ const nextConfig = {
     ignoreDuringBuilds: true,
     ignoreBuildErrors: true,
   },
+  // images: {
+  //   domains: ["https://i.ibb.co/"],
+  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "i.ibb.co",
+      },
+    ],
+  },
 };
 
 module.exports = withTM(nextConfig);
