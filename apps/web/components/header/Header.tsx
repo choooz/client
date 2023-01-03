@@ -18,7 +18,7 @@ const Container = styled.header`
   justify-content: center;
   align-items: center;
   height: 55px;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.border.darker};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.border.dark};
 `;
 
 export default Header;
