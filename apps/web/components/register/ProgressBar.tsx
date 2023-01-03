@@ -1,3 +1,4 @@
+import { media } from "@chooz/ui/styles/media";
 import { ProgressImage } from "assets/images";
 import Image from "next/image";
 import styled from "styled-components";
@@ -11,7 +12,7 @@ function ProgressBar({ progress }: ProgressBarType) {
     <Container>
       <Progress $progress={progress}>
         <div>
-          <Image alt="ProgressImage" src={ProgressImage} width={60} height={25} />
+          <Image alt="ProgressImage" src={ProgressImage} object-fit="contain" sizes="100%" />
         </div>
       </Progress>
     </Container>
@@ -32,9 +33,11 @@ const Progress = styled.div<{ $progress: number }>`
   transition: all 0.5s ease-in-out;
   background-color: ${({ theme }) => theme.palette.ui_color.progressBar};
   > div {
+    width: 48px;
+    height: 24px;
     position: absolute;
     bottom: -10px;
-    right: -25px;
+    right: -35px;
     z-index: 99;
   }
 `;
