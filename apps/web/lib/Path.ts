@@ -10,7 +10,6 @@ const Path = {
   // common
   // @Note 더 적절한 페이지명 있으면 수정 바람
   LIST_PAGE: "/",
-  NOTFOUND: "/*",
 } as const;
 
 export default Path;
