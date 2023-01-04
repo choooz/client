@@ -16,9 +16,11 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
   type Direction = "left" | "right";
 
   const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
-    if (direction === "left")
-      return MBTIKey === "M" ? "E" : MBTIKey === "B" ? "S" : MBTIKey === "T" ? "T" : "J";
-    return MBTIKey === "M" ? "I" : MBTIKey === "B" ? "N" : MBTIKey === "T" ? "F" : "P";
+    const lookupTable: Record<Direction, Record<"M" | "B" | "T" | "I", string>> = {
+      left: { M: "E", B: "S", T: "T", I: "J" },
+      right: { M: "I", B: "N", T: "F", I: "P" },
+    };
+    return lookupTable[direction][MBTIKey];
   };
 
   const activeValue = (
