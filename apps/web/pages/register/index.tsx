@@ -1,7 +1,4 @@
-import AgeSelection from "components/register/AgeSelection";
-import GenderSelection from "components/register/GenderSelection";
-import MBTISelection from "components/register/MBTISelection";
-import ProgressBar from "components/register/ProgressBar";
+import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
 import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
 import { useState } from "react";
@@ -9,15 +6,20 @@ import styled from "styled-components";
 import { media } from "styles/media";
 
 export interface MBTIType {
-  M: "E" | "I" | "";
-  B: "S" | "N" | "";
-  T: "T" | "F" | "";
-  I: "J" | "P" | "";
+  M: "E" | "I" | null;
+  B: "S" | "N" | null;
+  T: "T" | "F" | null;
+  I: "J" | "P" | null;
+}
+
+export enum Gender {
+  MALE = "male",
+  FEMALE = "female",
 }
 
 interface RegisterType {
   progress: number;
-  gender: "male" | "female" | "";
+  gender: "male" | "female" | null;
   MBTI: MBTIType;
 }
 
@@ -28,19 +30,17 @@ function RegisterPage() {
   };
   const [register, setRegister] = useState<RegisterType>({
     progress: 1,
-    gender: "",
+    gender: null,
     MBTI: {
-      M: "",
-      B: "",
-      T: "",
-      I: "",
+      M: null,
+      B: null,
+      T: null,
+      I: null,
     },
   });
-  const onChangeSelectMale = () => {
-    setRegister((prev) => ({ ...prev, gender: "male" }));
-  };
-  const onChangeSelectFemale = () => {
-    setRegister((prev) => ({ ...prev, gender: "female" }));
+
+  const onChangeGender = (select: Gender) => {
+    setRegister((prev) => ({ ...prev, gender: select }));
   };
   const onAddProgress = (number: number) => {
     setRegister((prev) => ({ ...prev, progress: prev.progress + number }));
@@ -59,8 +59,7 @@ function RegisterPage() {
             <GenderSelection
               gender={register.gender}
               onAddProgress={onAddProgress}
-              onChangeSelectFemale={onChangeSelectFemale}
-              onChangeSelectMale={onChangeSelectMale}
+              onChangeGender={onChangeGender}
             />
           )}
           {register.progress === 2 && (
