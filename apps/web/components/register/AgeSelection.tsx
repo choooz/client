@@ -12,19 +12,15 @@ interface Props {
 
 const Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-const AgeSelection = ({ onAddProgress, navigater }: Props) => {
+function AgeSelection({ onAddProgress, navigater }: Props) {
   const [age, setAge] = useState("");
 
   const onChangeAge = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { innerText } = e.currentTarget;
-    if (innerText === "전체 지움") {
-      setAge("");
-      return;
-    }
-    if (age.length > 2) return;
+    if (age.length >= 2) return;
     setAge(age + innerText);
   };
-  
+
   return (
     <RegisterTemplate
       welcomeText={
@@ -32,19 +28,17 @@ const AgeSelection = ({ onAddProgress, navigater }: Props) => {
           <Image src={Arm} alt="캐릭터" width={30} />몇 살인가요?
         </>
       }
-      questionText={
-        <>
-          Lv.3 당신의&nbsp;<StrongText>나이</StrongText>는?
-        </>
-      }
-      buttonBox={
-        <>
-          <Back onClick={() => onAddProgress(-1)}>이전</Back>
-          <Button onClick={navigater} disabled={age.length < 1}>
-            다음
-          </Button>
-        </>
-      }
+      question="Lv.3 당신의&nbsp나이는?"
+      search="나이"
+      nextButtonText="다음"
+      nextButtonProps={{
+        onClick: navigater,
+        disabled: age.length < 1,
+      }}
+      prevButtonText="이전"
+      prevButtonProps={{
+        onClick: () => onAddProgress(-1),
+      }}
     >
       <Container>
         <InputBox>
@@ -56,12 +50,12 @@ const AgeSelection = ({ onAddProgress, navigater }: Props) => {
               {number}
             </NumberDiv>
           ))}
-          <DeleteNumver onClick={onChangeAge}>전체 지움</DeleteNumver>
+          <DeleteNumver onClick={() => setAge("")}>전체 지움</DeleteNumver>
         </NumberBox>
       </Container>
     </RegisterTemplate>
   );
-};
+}
 
 const Container = styled.div`
   display: flex;
@@ -77,33 +71,6 @@ const Container = styled.div`
 
 const StrongText = styled.strong`
   color: ${({ theme }) => theme.palette.point.purple};
-`;
-
-const Back = styled.button`
-  font-size: 16px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  height: 56px;
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-`;
-
-const Button = styled.button`
-  width: 76%;
-  height: 56px;
-  background-color: ${({ theme }) => theme.palette.point.purple};
-  color: white;
-  border-radius: 4px;
-  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-  font-weight: 700;
-  transition: all 0.3s ease-in-out;
-  :disabled {
-    background-color: ${({ theme }) => theme.palette.border.base};
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
 `;
 
 const InputBox = styled.div`

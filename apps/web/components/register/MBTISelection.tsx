@@ -39,19 +39,17 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
           반가워요!
         </>
       }
-      questionText={
-        <>
-          Lv.1 당신의&nbsp;<StrongText>MBTI</StrongText>는?
-        </>
-      }
-      buttonBox={
-        <>
-          <Back onClick={() => onAddProgress(-1)}>이전</Back>
-          <Button onClick={() => onAddProgress(1)} disabled={Object.values(MBTI).includes(null)}>
-            다음
-          </Button>
-        </>
-      }
+      question="Lv.1 당신의&nbsp MBTI는?"
+      search="MBTI"
+      nextButtonText="다음"
+      nextButtonProps={{
+        onClick: () => onAddProgress(1),
+        disabled: Object.values(MBTI).includes(null),
+      }}
+      prevButtonText="이전"
+      prevButtonProps={{
+        onClick: () => onAddProgress(-1),
+      }}
     >
       <VoteBox>
         <LeftVote name="M" selected={activeValue("left", "M")} value="E" onClick={onChangeMBTI}>
@@ -146,21 +144,6 @@ const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
   &:hover {
     background-color: ${({ theme }) => theme.palette.main.light};
   }
-  /* ${({ selected }) =>
-    selected
-      ? css`
-          animation: ${transitions.blink} 0.7s 0.3s ease-in-out;
-          width: 91%;
-          border: 1px solid ${({ theme }) => theme.palette.point.purple};
-          background-color: ${({ theme }) => theme.palette.main.light};
-          font-size: 20px;
-          font-weight: 700;
-          color: #190665;
-          z-index: 999;
-        `
-      : css`
-          z-index: 1;
-        `} */
 `;
 
 const RightVote = styled(LeftVote)`
@@ -169,37 +152,6 @@ const RightVote = styled(LeftVote)`
 
 const VoteText = styled.div`
   font-size: 12px;
-`;
-
-const Button = styled.button`
-  width: 76%;
-  height: 56px;
-  background-color: ${({ theme }) => theme.palette.point.purple};
-  color: white;
-  border-radius: 4px;
-  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-  font-weight: 700;
-  transition: all 0.3s ease-in-out;
-  :disabled {
-    background-color: ${({ theme }) => theme.palette.border.light};
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
-`;
-
-const StrongText = styled.strong`
-  color: #6f4ef5;
-`;
-
-const Back = styled.button`
-  font-size: 16px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  height: 56px;
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
 `;
 
 export default React.memo(MBTISelection);
