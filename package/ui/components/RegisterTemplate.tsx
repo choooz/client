@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme, transitions } from "../styles";
 import { media } from "../styles/media";
+import Template from "./Template";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -33,18 +34,19 @@ const RegisterTemplate = ({
   }
 
   return (
-    <>
+    <Template
+      nextButtonProps={nextButtonProps}
+      nextButtonText={nextButtonText}
+      prevButtonProps={prevButtonProps}
+      prevButtonText={prevButtonText}
+    >
       <WelcomeText>{welcomeText}</WelcomeText>
       <QuestionText>
         <StyleText dangerouslySetInnerHTML={{ __html: result }} />
         <BlinkText>_</BlinkText>
       </QuestionText>
       <VoteBox>{children}</VoteBox>
-      <ButtonWrapper>
-        {prevButtonText && <Back {...prevButtonProps}>{prevButtonText}</Back>}
-        {nextButtonText && <Button {...nextButtonProps}>{nextButtonText}</Button>}
-      </ButtonWrapper>
-    </>
+    </Template>
   );
 };
 
@@ -82,19 +84,6 @@ const VoteBox = styled.div`
   }
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 30px;
-  width: 100%;
-  padding: 0 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  button:first-child:nth-last-child(1) {
-    width: 100%;
-  }
-`;
-
 const BlinkText = styled.div`
   animation: ${transitions.blink} 1s step-end infinite;
 `;
@@ -112,33 +101,6 @@ const StyleText = styled.div`
   }
   mark {
     color: #6f4ef5;
-  }
-`;
-
-const Back = styled.button`
-  font-size: 16px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  height: 56px;
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-`;
-
-const Button = styled.button`
-  width: 76%;
-  height: 56px;
-  background-color: ${({ theme }) => theme.palette.point.purple};
-  color: white;
-  border-radius: 4px;
-  animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-  font-weight: 700;
-  transition: all 0.3s ease-in-out;
-  :disabled {
-    background-color: ${({ theme }) => theme.palette.border.base};
-    color: ${({ theme }) => theme.palette.ink.lightest};
   }
 `;
 
