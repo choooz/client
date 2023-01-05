@@ -1,6 +1,6 @@
 import { transitions } from "@chooz/ui";
-import { CheckRound, Chick } from "assets/images";
 import Image from "next/image";
+import { CheckRound, Chick } from "public/images";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";

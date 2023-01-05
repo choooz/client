@@ -1,5 +1,5 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
-import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
+import { CheckRound, Female, Male, PurpleMonster } from "public/images";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 

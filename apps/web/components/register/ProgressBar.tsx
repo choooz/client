@@ -1,4 +1,4 @@
-import { ProgressImage } from "assets/images";
+import { ProgressImage } from "public/images";
 import Image from "next/image";
 import styled from "styled-components";
 

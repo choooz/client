@@ -1,5 +1,5 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
-import { Arm } from "assets/images";
+import { Arm } from "public/images";
 import Image from "next/image";
 import React, { useState } from "react";
 import styled from "styled-components";
