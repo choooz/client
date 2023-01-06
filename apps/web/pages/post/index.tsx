@@ -1,20 +1,27 @@
 import { media } from "@chooz/ui/styles/media";
-import { ImageABDetailSection } from "components";
-import React from "react";
+import { ImageTitleSection, TargetSection } from "components";
+import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
 
 function PostPage() {
   const { onChangeVote, onChangeVoteByParameter, vote, onUploadImage } = usePostVoteService();
-
+  const [postStep, setPostStep] = useState<number>(2);
+  const onChangePostStep = (step: number) => {
+    setPostStep(step);
+  };
   return (
     <PageWrapper>
       <PageInner>
-        <ImageABDetailSection
-          onChangeVote={onChangeVote}
-          onUploadImage={onUploadImage}
-          vote={vote}
-        />
+        {postStep === 1 && (
+          <ImageTitleSection
+            onChangeVote={onChangeVote}
+            onUploadImage={onUploadImage}
+            onChangePostStep={onChangePostStep}
+            vote={vote}
+          />
+        )}
+        {postStep === 2 && <TargetSection />}
       </PageInner>
     </PageWrapper>
   );
