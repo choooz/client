@@ -18,6 +18,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "i.ibb.co",
       },
+      {
+        protocol: "https",
+        hostname: "picksel-bucket.s3.ap-northeast-2.amazonaws.com",
+      },
     ],
   },
 };
