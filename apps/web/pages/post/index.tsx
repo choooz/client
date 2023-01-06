@@ -1,13 +1,20 @@
 import { media } from "@chooz/ui/styles/media";
-import { ImageUploadContainer } from "components";
+import { ImageABDetailSection } from "components";
 import React from "react";
+import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
 
 function PostPage() {
+  const { onChangeVote, onChangeVoteByParameter, vote, onUploadImage } = usePostVoteService();
+
   return (
     <PageWrapper>
       <PageInner>
-        <ImageUploadContainer />
+        <ImageABDetailSection
+          onChangeVote={onChangeVote}
+          onUploadImage={onUploadImage}
+          vote={vote}
+        />
       </PageInner>
     </PageWrapper>
   );
@@ -22,7 +29,7 @@ const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
   height: 717px;
-  background-color: white;  
+  background-color: white;
   max-width: 640px;
   position: relative;
   padding: 30px;
