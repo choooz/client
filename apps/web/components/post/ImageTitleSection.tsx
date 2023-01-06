@@ -10,18 +10,19 @@ interface Props {
   vote: postVoteRequest;
   onChangeVote(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
   onUploadImage(e: React.ChangeEvent<HTMLInputElement>): void;
+  onChangePostStep(step: number): void;
 }
 
-function ImageUploadContainer({ onChangeVote, onUploadImage, vote }: Props) {
+function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep }: Props) {
   const [step, setStep] = useState(1);
-  console.log(vote);
 
   const onNextStep = () => {
     if (step === 1) setStep((prev) => prev + 1);
+    if (step === 2) onChangePostStep(2);
     return;
   };
 
-  const { detail, titleA, titleB, imageA, imageB } = vote;
+  const { title, titleA, titleB, imageA, imageB } = vote;
   return (
     <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep }}>
       <Container>
@@ -31,8 +32,8 @@ function ImageUploadContainer({ onChangeVote, onUploadImage, vote }: Props) {
             <DetailInput
               placeholder="질문을 입력해주세요"
               onChange={onChangeVote}
-              name="detail"
-              value={detail}
+              name="title"
+              value={title}
             />
           </DetailBox>
         )}
@@ -173,4 +174,4 @@ const DetailInput = styled.textarea`
 const DetailBox = styled.div`
   animation: ${transitions.popInFromBottom} 0.7s ease-in-out;
 `;
-export default React.memo(ImageUploadContainer);
+export default React.memo(ImageTitleSection);
