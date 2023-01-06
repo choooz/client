@@ -10,6 +10,25 @@ const AGE_LIST = [
   { id: "50", name: "50대" },
 ];
 
+const MBTI_LIST = [
+  { id: "ESTP", name: "ESTP" },
+  { id: "ESFP", name: "ESFP" },
+  { id: "ENFP", name: "ENFP" },
+  { id: "ENTP", name: "ENTP" },
+  { id: "ESTJ", name: "ESTJ" },
+  { id: "ESFJ", name: "ESFJ" },
+  { id: "ENFJ", name: "ENFJ" },
+  { id: "ENTJ", name: "ENTJ" },
+  { id: "ISTJ", name: "ISTJ" },
+  { id: "ISFJ", name: "ISFJ" },
+  { id: "INFJ", name: "INFJ" },
+  { id: "INTJ", name: "INTJ" },
+  { id: "ISTP", name: "ISTP" },
+  { id: "ISFP", name: "ISFP" },
+  { id: "INFP", name: "INFP" },
+  { id: "INTP", name: "INTP" },
+];
+
 function TargetSection() {
   const [value1, setValue1] = useState("");
   const [value2, setValue2] = useState("");
@@ -66,22 +85,9 @@ function TargetSection() {
         <option value="" hidden>
           MBTI를 선택해주세요
         </option>
-        <option value="ISTJ">ISTJ</option>
-        <option value="ISFJ">ISFJ</option>
-        <option value="INFJ">INFJ</option>
-        <option value="INTJ">INTJ</option>
-        <option value="ISTP">ISTP</option>
-        <option value="ISFP">ISFP</option>
-        <option value="INFP">INFP</option>
-        <option value="INTP">INTP</option>
-        <option value="ESTP">ESTP</option>
-        <option value="ESFP">ESFP</option>
-        <option value="ENFP">ENFP</option>
-        <option value="ENTP">ENTP</option>
-        <option value="ESTJ">ESTJ</option>
-        <option value="ESFJ">ESFJ</option>
-        <option value="ENFJ">ENFJ</option>
-        <option value="ENTJ">ENTJ</option>
+        {MBTI_LIST.map(({ id, name }) => (
+          <option value={id}>{name}</option>
+        ))}
       </Select>
     </Template>
   );
