@@ -4,7 +4,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "styles/globalStyles";
-
 import Header from "../components/header/Header";
 
 function App({ Component, pageProps }: AppProps) {

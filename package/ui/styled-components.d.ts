@@ -1,5 +1,11 @@
-import { Colors, FontSizes, Media } from "libs/style/theme/defaultTheme";
 import "styled-components";
+import {
+  FontSizeTypes,
+  FontWeightTypes,
+  LineHeightTypes,
+  PaletteTypes,
+  TextStyleTypes,
+} from "./styles/theme";
 
 declare module "styled-components" {
   export interface DefaultTheme {
