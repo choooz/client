@@ -1,35 +1,12 @@
 import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
-import { useRouter } from "next/router";
 import type { MouseEvent } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { media } from "styles/media";
-
-export interface MBTIType {
-  M: "E" | "I" | null;
-  B: "S" | "N" | null;
-  T: "T" | "F" | null;
-  I: "J" | "P" | null;
-}
-
-export enum Gender {
-  MALE = "male",
-  FEMALE = "female",
-}
-
-interface RegisterType {
-  progress: number;
-  gender: "male" | "female" | null;
-  MBTI: MBTIType;
-}
+import { Gender, UserModel } from "types/auth";
 
 function RegisterPage() {
-  const route = useRouter();
-  const routeInterest = () => {
-    route.push("/register/interest");
-  };
-  const [register, setRegister] = useState<RegisterType>({
-    progress: 1,
+  const [userInfo, setUserInfo] = useState<UserModel>({
     gender: null,
     MBTI: {
       M: null,
@@ -37,40 +14,49 @@ function RegisterPage() {
       T: null,
       I: null,
     },
+    age: null,
   });
 
+  const [progress, setProgress] = useState(1);
+
   const onChangeGender = (select: Gender) => {
-    setRegister((prev) => ({ ...prev, gender: select }));
+    setUserInfo((prev) => ({ ...prev, gender: select }));
   };
-  const onAddProgress = (number: number) => {
-    setRegister((prev) => ({ ...prev, progress: prev.progress + number }));
+  const onChangeProgress = (number: number) => {
+    setProgress((prev) => prev + number);
   };
   const onChangeMBTI = (e: MouseEvent<HTMLButtonElement>) => {
     const { name, value } = e.currentTarget;
-    setRegister((prev) => ({ ...prev, MBTI: { ...prev.MBTI, [name]: value } }));
+    setUserInfo((prev) => ({ ...prev, MBTI: { ...prev.MBTI, [name]: value } }));
   };
+
+  console.log(userInfo);
 
   return (
     <>
-      <ProgressBar progress={register.progress} />
+      <ProgressBar progress={progress} />
       <PageWrapper>
         <PageInner>
-          {register.progress === 1 && (
+          {progress === 1 && (
             <GenderSelection
-              gender={register.gender}
-              onAddProgress={onAddProgress}
+              gender={userInfo.gender}
+              onChangeProgress={onChangeProgress}
               onChangeGender={onChangeGender}
             />
           )}
-          {register.progress === 2 && (
+          {progress === 2 && (
             <MBTISelection
-              MBTI={register.MBTI}
-              onAddProgress={onAddProgress}
+              MBTI={userInfo.MBTI}
+              onChangeProgress={onChangeProgress}
               onChangeMBTI={onChangeMBTI}
             />
           )}
-          {register.progress === 3 && (
-            <AgeSelection onAddProgress={onAddProgress} navigater={routeInterest} />
+          {progress === 3 && (
+            <AgeSelection
+              userInfo={userInfo}
+              setUserInfo={setUserInfo}
+              onChangeProgress={onChangeProgress}
+            />
           )}
         </PageInner>
       </PageWrapper>
