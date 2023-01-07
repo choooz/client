@@ -6,7 +6,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   typescript: {
-    ignoreDuringBuilds: true,
     ignoreBuildErrors: true,
   },
   // images: {
@@ -19,6 +18,14 @@ const nextConfig = {
         hostname: "i.ibb.co",
       },
     ],
+  },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ["@svgr/webpack"],
+    });
+    return config;
   },
 };
 

@@ -15,7 +15,7 @@ interface Props {
   prevButtonProps?: ButtonProps;
 }
 
-const RegisterTemplate = ({
+function RegisterTemplate({
   welcomeText,
   children,
   search,
@@ -24,7 +24,7 @@ const RegisterTemplate = ({
   prevButtonProps,
   nextButtonText,
   prevButtonText,
-}: Props) => {
+}: Props) {
   let result = question;
   if (search) {
     result = question.replace(new RegExp(search, "gi"), (match) => {
@@ -46,7 +46,7 @@ const RegisterTemplate = ({
       </ButtonWrapper>
     </>
   );
-};
+}
 
 const WelcomeText = styled.div`
   display: flex;

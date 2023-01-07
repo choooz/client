@@ -1,25 +1,32 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
+import { Arm } from "public/images";
 import { media } from "@chooz/ui/styles/media";
-import { Arm } from "assets/images";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
+import { UserModel } from "types/auth";
+import useToggle from "hooks/useToggle";
+import WarningSmallModal from "./WarningSmallModal";
 
 interface Props {
-  onAddProgress(number: number): void;
-  navigater(): void;
+  userInfo: UserModel;
+  setUserInfo: Dispatch<SetStateAction<UserModel>>;
+  onChangeProgress(number: number): void;
 }
 
 const Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-function AgeSelection({ onAddProgress, navigater }: Props) {
+function AgeSelection({ userInfo, setUserInfo, onChangeProgress }: Props) {
   const [age, setAge] = useState("");
 
   const onChangeAge = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { innerText } = e.currentTarget;
     if (age.length >= 2) return;
     setAge(age + innerText);
+    setUserInfo((prev) => ({ ...prev, age: Number(age) }));
   };
+
+  const [isWarningModal, onToggleWarningModal] = useToggle();
 
   return (
     <RegisterTemplate
@@ -32,14 +39,18 @@ function AgeSelection({ onAddProgress, navigater }: Props) {
       search="나이"
       nextButtonText="다음"
       nextButtonProps={{
-        onClick: navigater,
+        onClick: onToggleWarningModal,
         disabled: age.length < 1,
       }}
       prevButtonText="이전"
       prevButtonProps={{
-        onClick: () => onAddProgress(-1),
+        onClick: () => onChangeProgress(-1),
       }}
     >
+      {isWarningModal && (
+        <WarningSmallModal userInfo={userInfo} onToggleModal={onToggleWarningModal} />
+      )}
+
       <Container>
         <InputBox>
           <Input type="text" inputMode="none" placeholder="0" defaultValue={age} />세

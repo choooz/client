@@ -1,5 +1,5 @@
 import { transitions } from "@chooz/ui";
-import { LogoBlack } from "assets/images";
+import { LogoBlack } from "public/images";
 import { KAKAO_CLIENT_ID, NAVER_CLIENT_ID } from "lib/constants";
 import Image from "next/image";
 import Link from "next/link";

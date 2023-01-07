@@ -1,5 +1,5 @@
+import { ProgressImage } from "public/images";
 import { media } from "@chooz/ui/styles/media";
-import { ProgressImage } from "assets/images";
 import Image from "next/image";
 import styled from "styled-components";
 
