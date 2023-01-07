@@ -1,4 +1,4 @@
-import { LogoWhite } from "assets/images";
+import { LogoWhite } from "public/images";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
