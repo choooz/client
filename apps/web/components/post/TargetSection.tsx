@@ -1,19 +1,17 @@
 import { Template } from "@chooz/ui";
+import { postVoteRequest } from "lib/api/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-function TargetSection() {
-  const [value1, setValue1] = useState("");
-  const [value2, setValue2] = useState("");
+interface Props {
+  vote: postVoteRequest;
+  onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
+  onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
+}
 
-  const onClickChip = useCallback((e: React.MouseEvent<HTMLLabelElement>) => {
-    setValue1(e.currentTarget.htmlFor);
-  }, []);
-
-  const onClickChip2 = useCallback((e: React.MouseEvent<HTMLLabelElement>) => {
-    setValue2(e.currentTarget.htmlFor);
-  }, []);
+function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote }: Props) {
+  const { filteredGender, filteredAge } = vote;
 
   return (
     <Template prevButtonText="이전" nextButtonText="다음">
@@ -23,39 +21,43 @@ function TargetSection() {
       <ChipWrapper>
         <InvisibleInput
           type="radio"
-          name="gender"
+          name="filteredGender"
           id="MALE"
           value="MALE"
-          defaultChecked={value1 === "MALE"}
+          checked={filteredGender === "MALE"}
+          onChange={onChangeVoteByClick}
         />
-        <Chip htmlFor="MALE" onClick={onClickChip}>
-          남성
-        </Chip>
+        <Chip htmlFor="MALE">남성</Chip>
         <InvisibleInput
           type="radio"
-          name="gender"
+          name="filteredGender"
           id="FEMALE"
-          defaultChecked={value1 === "FEMALE"}
+          value="FEMALE"
+          checked={filteredGender === "FEMALE"}
+          onChange={onChangeVoteByClick}
         />
-        <Chip htmlFor="FEMALE" onClick={onClickChip}>
-          여성
-        </Chip>
+        <Chip htmlFor="FEMALE">여성</Chip>
       </ChipWrapper>
       <QuestionText>나이</QuestionText>
       <ChipWrapper>
         {AGE_LIST.map(({ id, name }) => (
           <div key={id}>
-            <InvisibleInput type="radio" name="age" id={id} defaultChecked={value2 === id} />
-            <Chip htmlFor={id} onClick={onClickChip2}>
-              {name}
-            </Chip>
+            <InvisibleInput
+              type="radio"
+              name="filteredAge"
+              id={id}
+              value={id}
+              checked={filteredAge === id}
+              onChange={onChangeVoteByClick}
+            />
+            <Chip htmlFor={id}>{name}</Chip>
           </div>
         ))}
       </ChipWrapper>
       <QuestionText>MBTI</QuestionText>
 
       {/* 추가적으로 나중에 밑쪽 화살표 추가하기 */}
-      <Select>
+      <Select name="filteredMbti" onChange={onChangeVoteBySelect}>
         <option value="" hidden>
           MBTI를 선택해주세요
         </option>

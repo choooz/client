@@ -5,12 +5,13 @@ import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
 
 function PostPage() {
-  const { onChangeVote, onChangeVoteByParameter, vote, onUploadImage } = usePostVoteService();
+  const { onChangeVote, vote, onUploadImage, onChangeVoteByClick, onChangeVoteBySelect } =
+    usePostVoteService();
   const [postStep, setPostStep] = useState<number>(1);
   const onChangePostStep = (step: number) => {
     setPostStep(step);
   };
-  // const 
+  console.log(vote.filteredGender, vote.filteredAge, vote.filteredMbti);
   return (
     <PageWrapper>
       <PageInner>
@@ -22,7 +23,13 @@ function PostPage() {
             vote={vote}
           />
         )}
-        {postStep === 2 && <TargetSection />}
+        {postStep === 2 && (
+          <TargetSection
+            onChangeVoteByClick={onChangeVoteByClick}
+            vote={vote}
+            onChangeVoteBySelect={onChangeVoteBySelect}
+          />
+        )}
       </PageInner>
     </PageWrapper>
   );

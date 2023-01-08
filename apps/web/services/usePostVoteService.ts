@@ -32,6 +32,22 @@ export default function usePostVoteService() {
     });
   };
 
+  const onChangeVoteByClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setVote({
+      ...vote,
+      [name]: value,
+    });
+  };
+
+  const onChangeVoteBySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setVote({
+      ...vote,
+      [name]: value,
+    });
+  };
+
   const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
     // if (e.target.files[0].size > 10000000 || e.target.files[1].size > 10000000) {
@@ -56,5 +72,5 @@ export default function usePostVoteService() {
     }
   }, []);
 
-  return { vote, onChangeVote, onChangeVoteByParameter, onUploadImage };
+  return { vote, onChangeVote, onChangeVoteByParameter, onUploadImage, onChangeVoteByClick,onChangeVoteBySelect };
 }
