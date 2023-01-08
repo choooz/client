@@ -8,13 +8,20 @@ interface Props {
   vote: postVoteRequest;
   onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
+  mutateVote(): void;
 }
 
-function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote }: Props) {
+function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote, mutateVote }: Props) {
   const { filteredGender, filteredAge } = vote;
 
   return (
-    <Template prevButtonText="이전" nextButtonText="다음">
+    <Template
+      prevButtonText="이전"
+      nextButtonText="다음"
+      nextButtonProps={{
+        onClick: mutateVote,
+      }}
+    >
       <QuestionText>선택지를 입력해주세요.</QuestionText>
       <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>
       <QuestionText>성별</QuestionText>
