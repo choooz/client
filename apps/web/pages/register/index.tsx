@@ -30,8 +30,6 @@ function RegisterPage() {
     setUserInfo((prev) => ({ ...prev, MBTI: { ...prev.MBTI, [name]: value } }));
   };
 
-  console.log(userInfo);
-
   return (
     <>
       <ProgressBar progress={progress} />
