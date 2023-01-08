@@ -33,7 +33,6 @@ export default function usePostVoteService() {
   };
 
   const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
     if (e.target.files === null) return;
     // if (e.target.files[0].size > 10000000 || e.target.files[1].size > 10000000) {
     //   alert("파일 용량이 10MB를 초과하였습니다.");
