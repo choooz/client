@@ -50,6 +50,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
           ) : (
             <VoteImageWrapper>
               {imageA && <Image src={imageA} alt="A이미지" width={272} height={290} />}
+              <VSIcon>VS</VSIcon>
               {imageA && <Image src={imageB} alt="B이미지" width={272} height={290} />}
             </VoteImageWrapper>
           )}
@@ -113,6 +114,7 @@ const ImageWrapper = styled.div`
 `;
 
 const VoteImageWrapper = styled(ImageWrapper)`
+  position: relative;
   background: ${({ theme }) => theme.palette.background.lightest};
   justify-content: space-between;
 `;
@@ -173,5 +175,22 @@ const DetailInput = styled.textarea`
 
 const DetailBox = styled.div`
   animation: ${transitions.popInFromBottom} 0.7s ease-in-out;
+`;
+
+const VSIcon = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 700;
 `;
 export default React.memo(ImageTitleSection);
