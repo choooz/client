@@ -1,10 +1,10 @@
-import { Camera } from "assets/images";
 import Template from "@chooz/ui/components/Template";
 import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { transitions } from "@chooz/ui";
 import { postVoteRequest } from "lib/api/vote";
+import { Camera } from "public/images";
 
 interface Props {
   vote: postVoteRequest;
