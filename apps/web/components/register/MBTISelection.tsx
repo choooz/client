@@ -1,5 +1,5 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
-import { Eyes } from "assets/images";
+import { Eyes } from "public/images";
 import Image from "next/image";
 import { MBTIType } from "pages/register";
 import React, { MouseEvent } from "react";
@@ -9,10 +9,10 @@ import { media } from "styles/media";
 interface Props {
   MBTI: MBTIType;
   onChangeMBTI(e: MouseEvent<HTMLButtonElement>): void;
-  onAddProgress(number: number): void;
+  onChangeProgress(number: number): void;
 }
 
-function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
+function MBTISelection({ MBTI, onChangeMBTI, onChangeProgress }: Props) {
   type Direction = "left" | "right";
 
   const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
@@ -43,12 +43,12 @@ function MBTISelection({ MBTI, onChangeMBTI, onAddProgress }: Props) {
       search="MBTI"
       nextButtonText="다음"
       nextButtonProps={{
-        onClick: () => onAddProgress(1),
+        onClick: () => onChangeProgress(1),
         disabled: Object.values(MBTI).includes(null),
       }}
       prevButtonText="이전"
       prevButtonProps={{
-        onClick: () => onAddProgress(-1),
+        onClick: () => onChangeProgress(-1),
       }}
     >
       <VoteBox>

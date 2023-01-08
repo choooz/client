@@ -1,9 +1,10 @@
 import { transitions } from "@chooz/ui";
-import { CheckRound, Chick } from "assets/images";
 import Image from "next/image";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
+
+import { CheckRound, Chick } from "public/images";
 
 type CategoryNameType =
   | "category1"
@@ -78,16 +79,17 @@ const WelcomeText = styled.div`
   display: flex;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
+  letter-spacing: -0.5px;
   padding-bottom: 16px;
   animation: ${transitions.delaypopInFromBottom} 0.7s ease-in-out;
-  ${({ theme }) => theme.textStyle.regular.Title_Medium};
+  ${({ theme }) => theme.textStyle.regular.Title_Large};
 `;
 
 const DescriptionText = styled.div`
   padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
   color: ${({ theme }) => theme.palette.ink.light};
-  ${({ theme }) => theme.textStyle.regular.Font_Regular};
+  ${({ theme }) => theme.textStyle.regular.Title_Small};
 `;
 
 const VoteBox = styled.div`

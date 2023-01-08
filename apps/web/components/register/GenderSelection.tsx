@@ -1,17 +1,17 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
+import { CheckRound, Female, Male, PurpleMonster } from "public/images";
 import { media } from "@chooz/ui/styles/media";
-import { CheckRound, Female, Male, PurpleMonster } from "assets/images";
 import Image from "next/image";
-import { Gender } from "pages/register";
 import styled, { css } from "styled-components";
+import { Gender } from "types/auth";
 
 interface Props {
   gender: "female" | "male" | null;
-  onAddProgress(number: number): void;
+  onChangeProgress(number: number): void;
   onChangeGender(gender: Gender): void;
 }
 
-function GenderSelection({ gender, onAddProgress, onChangeGender }: Props) {
+function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
   type Direction = "left" | "right";
 
   const getGender = (direction: Direction) => {
@@ -34,7 +34,7 @@ function GenderSelection({ gender, onAddProgress, onChangeGender }: Props) {
       search="성별"
       nextButtonText="다음"
       nextButtonProps={{
-        onClick: () => onAddProgress(1),
+        onClick: () => onChangeProgress(1),
         disabled: !gender,
       }}
     >
