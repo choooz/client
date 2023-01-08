@@ -6,10 +6,11 @@ import styled from "styled-components";
 
 function PostPage() {
   const { onChangeVote, onChangeVoteByParameter, vote, onUploadImage } = usePostVoteService();
-  const [postStep, setPostStep] = useState<number>(2);
+  const [postStep, setPostStep] = useState<number>(1);
   const onChangePostStep = (step: number) => {
     setPostStep(step);
   };
+  // const 
   return (
     <PageWrapper>
       <PageInner>
