@@ -1,33 +1,7 @@
 import { Template } from "@chooz/ui";
+import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-
-const AGE_LIST = [
-  { id: "10", name: "10대" },
-  { id: "20", name: "20대" },
-  { id: "30", name: "30대" },
-  { id: "40", name: "40대" },
-  { id: "50", name: "50대" },
-];
-
-const MBTI_LIST = [
-  { id: "ESTP", name: "ESTP" },
-  { id: "ESFP", name: "ESFP" },
-  { id: "ENFP", name: "ENFP" },
-  { id: "ENTP", name: "ENTP" },
-  { id: "ESTJ", name: "ESTJ" },
-  { id: "ESFJ", name: "ESFJ" },
-  { id: "ENFJ", name: "ENFJ" },
-  { id: "ENTJ", name: "ENTJ" },
-  { id: "ISTJ", name: "ISTJ" },
-  { id: "ISFJ", name: "ISFJ" },
-  { id: "INFJ", name: "INFJ" },
-  { id: "INTJ", name: "INTJ" },
-  { id: "ISTP", name: "ISTP" },
-  { id: "ISFP", name: "ISFP" },
-  { id: "INFP", name: "INFP" },
-  { id: "INTP", name: "INTP" },
-];
 
 function TargetSection() {
   const [value1, setValue1] = useState("");
