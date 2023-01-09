@@ -67,8 +67,7 @@ export default function usePostVoteService() {
         imageB: dataB.imageUrl,
       });
     } catch (error) {
-      console.log(error);
-      alert("이미지 업로드에 실패했습니다.");
+      alert("이미지 업로드에 실패했습니다." + error);
     }
   }, []);
 

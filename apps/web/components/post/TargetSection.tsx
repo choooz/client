@@ -9,14 +9,24 @@ interface Props {
   onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
   mutateVote(): void;
+  onChangePostStep(step: number): void;
 }
 
-function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote, mutateVote }: Props) {
+function TargetSection({
+  onChangePostStep,
+  onChangeVoteBySelect,
+  onChangeVoteByClick,
+  vote,
+  mutateVote,
+}: Props) {
   const { gender, age } = vote;
 
   return (
     <Template
       prevButtonText="이전"
+      prevButtonProps={{
+        onClick: () => onChangePostStep(-1),
+      }}
       nextButtonText="다음"
       nextButtonProps={{
         onClick: mutateVote,

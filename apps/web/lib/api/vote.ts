@@ -28,7 +28,6 @@ export const postVoteAPI = async (body: postVoteRequest) => {
     age: body.age || "NULL",
     mbti: body.mbti || "NULL",
   };
-  console.log(requestBody);
   const response = await apiClient.post("api/vote/createVote", requestBody);
   return response.data;
 };

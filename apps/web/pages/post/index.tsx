@@ -39,6 +39,7 @@ function PostPage() {
             vote={vote}
             onChangeVoteBySelect={onChangeVoteBySelect}
             mutateVote={mutateVote}
+            onChangePostStep={onChangePostStep}
           />
         )}
       </PageInner>
