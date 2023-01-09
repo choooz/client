@@ -12,7 +12,7 @@ interface Props {
 }
 
 function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote, mutateVote }: Props) {
-  const { filteredGender, filteredAge } = vote;
+  const { gender, age } = vote;
 
   return (
     <Template
@@ -28,19 +28,19 @@ function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote, mutate
       <ChipWrapper>
         <InvisibleInput
           type="radio"
-          name="filteredGender"
+          name="gender"
           id="MALE"
           value="MALE"
-          checked={filteredGender === "MALE"}
+          checked={gender === "MALE"}
           onChange={onChangeVoteByClick}
         />
         <Chip htmlFor="MALE">남성</Chip>
         <InvisibleInput
           type="radio"
-          name="filteredGender"
+          name="gender"
           id="FEMALE"
           value="FEMALE"
-          checked={filteredGender === "FEMALE"}
+          checked={gender === "FEMALE"}
           onChange={onChangeVoteByClick}
         />
         <Chip htmlFor="FEMALE">여성</Chip>
@@ -51,10 +51,10 @@ function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote, mutate
           <div key={id}>
             <InvisibleInput
               type="radio"
-              name="filteredAge"
+              name="age"
               id={id}
               value={id}
-              checked={filteredAge === id}
+              checked={age === id}
               onChange={onChangeVoteByClick}
             />
             <Chip htmlFor={id}>{name}</Chip>
@@ -64,12 +64,14 @@ function TargetSection({ onChangeVoteBySelect, onChangeVoteByClick, vote, mutate
       <QuestionText>MBTI</QuestionText>
 
       {/* 추가적으로 나중에 밑쪽 화살표 추가하기 */}
-      <Select name="filteredMbti" onChange={onChangeVoteBySelect}>
+      <Select name="mbti" onChange={onChangeVoteBySelect}>
         <option value="" hidden>
           MBTI를 선택해주세요
         </option>
         {MBTI_LIST.map(({ id, name }) => (
-          <option value={id}>{name}</option>
+          <option key={id} value={id}>
+            {name}
+          </option>
         ))}
       </Select>
     </Template>

@@ -21,6 +21,7 @@ function PostPage() {
       router.push("/");
     },
   });
+
   return (
     <PageWrapper>
       <PageInner>

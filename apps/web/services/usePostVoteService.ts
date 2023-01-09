@@ -12,9 +12,9 @@ export default function usePostVoteService() {
     titleB: "",
     imageA: "",
     imageB: "",
-    filteredGender: "",
-    filteredAge: "",
-    filteredMbti: "",
+    gender: "",
+    age: "",
+    mbti: "",
   });
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -72,5 +72,12 @@ export default function usePostVoteService() {
     }
   }, []);
 
-  return { vote, onChangeVote, onChangeVoteByParameter, onUploadImage, onChangeVoteByClick,onChangeVoteBySelect };
+  return {
+    vote,
+    onChangeVote,
+    onChangeVoteByParameter,
+    onUploadImage,
+    onChangeVoteByClick,
+    onChangeVoteBySelect,
+  };
 }
