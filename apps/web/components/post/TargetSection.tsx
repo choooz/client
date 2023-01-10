@@ -1,22 +1,37 @@
 import { Template } from "@chooz/ui";
+import { postVoteRequest } from "lib/api/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-function TargetSection() {
-  const [value1, setValue1] = useState("");
-  const [value2, setValue2] = useState("");
+interface Props {
+  vote: postVoteRequest;
+  onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
+  onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
+  mutateVote(): void;
+  onChangePostStep(step: number): void;
+}
 
-  const onClickChip = useCallback((e: React.MouseEvent<HTMLLabelElement>) => {
-    setValue1(e.currentTarget.htmlFor);
-  }, []);
-
-  const onClickChip2 = useCallback((e: React.MouseEvent<HTMLLabelElement>) => {
-    setValue2(e.currentTarget.htmlFor);
-  }, []);
+function TargetSection({
+  onChangePostStep,
+  onChangeVoteBySelect,
+  onChangeVoteByClick,
+  vote,
+  mutateVote,
+}: Props) {
+  const { gender, age } = vote;
 
   return (
-    <Template prevButtonText="이전" nextButtonText="다음">
+    <Template
+      prevButtonText="이전"
+      prevButtonProps={{
+        onClick: () => onChangePostStep(-1),
+      }}
+      nextButtonText="다음"
+      nextButtonProps={{
+        onClick: mutateVote,
+      }}
+    >
       <QuestionText>선택지를 입력해주세요.</QuestionText>
       <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>
       <QuestionText>성별</QuestionText>
@@ -26,41 +41,47 @@ function TargetSection() {
           name="gender"
           id="MALE"
           value="MALE"
-          defaultChecked={value1 === "MALE"}
+          checked={gender === "MALE"}
+          onChange={onChangeVoteByClick}
         />
-        <Chip htmlFor="MALE" onClick={onClickChip}>
-          남성
-        </Chip>
+        <Chip htmlFor="MALE">남성</Chip>
         <InvisibleInput
           type="radio"
           name="gender"
           id="FEMALE"
-          defaultChecked={value1 === "FEMALE"}
+          value="FEMALE"
+          checked={gender === "FEMALE"}
+          onChange={onChangeVoteByClick}
         />
-        <Chip htmlFor="FEMALE" onClick={onClickChip}>
-          여성
-        </Chip>
+        <Chip htmlFor="FEMALE">여성</Chip>
       </ChipWrapper>
       <QuestionText>나이</QuestionText>
       <ChipWrapper>
         {AGE_LIST.map(({ id, name }) => (
           <div key={id}>
-            <InvisibleInput type="radio" name="age" id={id} defaultChecked={value2 === id} />
-            <Chip htmlFor={id} onClick={onClickChip2}>
-              {name}
-            </Chip>
+            <InvisibleInput
+              type="radio"
+              name="age"
+              id={id}
+              value={id}
+              checked={age === id}
+              onChange={onChangeVoteByClick}
+            />
+            <Chip htmlFor={id}>{name}</Chip>
           </div>
         ))}
       </ChipWrapper>
       <QuestionText>MBTI</QuestionText>
 
       {/* 추가적으로 나중에 밑쪽 화살표 추가하기 */}
-      <Select>
+      <Select name="mbti" onChange={onChangeVoteBySelect}>
         <option value="" hidden>
           MBTI를 선택해주세요
         </option>
         {MBTI_LIST.map(({ id, name }) => (
-          <option value={id}>{name}</option>
+          <option key={id} value={id}>
+            {name}
+          </option>
         ))}
       </Select>
     </Template>
