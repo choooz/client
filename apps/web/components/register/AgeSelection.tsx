@@ -2,7 +2,6 @@ import { RegisterTemplate, transitions } from "@chooz/ui";
 import { Arm } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
-import React, { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { UserModel } from "types/auth";
 import useToggle from "hooks/useToggle";
@@ -10,22 +9,14 @@ import WarningSmallModal from "./WarningSmallModal";
 
 interface Props {
   userInfo: UserModel;
-  setUserInfo: Dispatch<SetStateAction<UserModel>>;
   onChangeProgress(number: number): void;
+  onChangeAge: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onDeleteAge: () => void;
 }
 
-const Array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const NuberPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-function AgeSelection({ userInfo, setUserInfo, onChangeProgress }: Props) {
-  const [age, setAge] = useState("");
-
-  const onChangeAge = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { innerText } = e.currentTarget;
-    if (age.length >= 2) return;
-    setAge(age + innerText);
-    setUserInfo((prev) => ({ ...prev, age: Number(age) }));
-  };
-
+function AgeSelection({ userInfo, onChangeProgress, onChangeAge, onDeleteAge }: Props) {
   const [isWarningModal, onToggleWarningModal] = useToggle();
 
   return (
@@ -40,7 +31,7 @@ function AgeSelection({ userInfo, setUserInfo, onChangeProgress }: Props) {
       nextButtonText="다음"
       nextButtonProps={{
         onClick: onToggleWarningModal,
-        disabled: age.length < 1,
+        disabled: !userInfo.age,
       }}
       prevButtonText="이전"
       prevButtonProps={{
@@ -53,15 +44,15 @@ function AgeSelection({ userInfo, setUserInfo, onChangeProgress }: Props) {
 
       <Container>
         <InputBox>
-          <Input type="text" inputMode="none" placeholder="0" defaultValue={age} />세
+          <Input type="text" inputMode="none" placeholder="0" defaultValue={userInfo.age ?? ""} />세
         </InputBox>
         <NumberBox>
-          {Array.map((number) => (
+          {NuberPad.map((number) => (
             <NumberDiv key={number} onClick={onChangeAge}>
               {number}
             </NumberDiv>
           ))}
-          <DeleteNumver onClick={() => setAge("")}>전체 지움</DeleteNumver>
+          <DeleteNumver onClick={onDeleteAge}>전체 지움</DeleteNumver>
         </NumberBox>
       </Container>
     </RegisterTemplate>
@@ -78,10 +69,6 @@ const Container = styled.div`
     flex-direction: row;
     align-items: unset;
   }
-`;
-
-const StrongText = styled.strong`
-  color: ${({ theme }) => theme.palette.point.purple};
 `;
 
 const InputBox = styled.div`
@@ -144,7 +131,7 @@ const NumberDiv = styled.button`
     height: 70px;
     font-size: 28px;
   }
-  :active {
+  \ :active {
     border: 1px solid ${({ theme }) => theme.palette.point.purple};
     background-color: ${({ theme }) => theme.palette.main.light};
   }

@@ -13,5 +13,5 @@ export enum Gender {
 export interface UserModel {
   gender: "male" | "female" | null;
   MBTI: MBTIType;
-  age: number | null;
+  age: string | null;
 }
