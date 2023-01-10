@@ -12,9 +12,9 @@ export default function usePostVoteService() {
     titleB: "",
     imageA: "",
     imageB: "",
-    filteredGender: "",
-    filteredAge: "",
-    filteredMbti: "",
+    gender: "",
+    age: "",
+    mbti: "",
   });
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,6 +26,22 @@ export default function usePostVoteService() {
   };
 
   const onChangeVoteByParameter = (name: string, value: string) => {
+    setVote({
+      ...vote,
+      [name]: value,
+    });
+  };
+
+  const onChangeVoteByClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setVote({
+      ...vote,
+      [name]: value,
+    });
+  };
+
+  const onChangeVoteBySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setVote({
       ...vote,
       [name]: value,
@@ -51,10 +67,16 @@ export default function usePostVoteService() {
         imageB: dataB.imageUrl,
       });
     } catch (error) {
-      console.log(error);
-      alert("이미지 업로드에 실패했습니다.");
+      alert("이미지 업로드에 실패했습니다." + error);
     }
   }, []);
 
-  return { vote, onChangeVote, onChangeVoteByParameter, onUploadImage };
+  return {
+    vote,
+    onChangeVote,
+    onChangeVoteByParameter,
+    onUploadImage,
+    onChangeVoteByClick,
+    onChangeVoteBySelect,
+  };
 }
