@@ -8,3 +8,4 @@ export { default as ProgressImage } from "./progress-image.png";
 export { default as PurpleMonster } from "./purple-monster.png";
 export { default as Chick } from "./chick.png";
 export { default as Arm } from "./arm.png";
+export { default as Camera } from "./camera.png";

@@ -13,6 +13,7 @@ function RegisterPage() {
     onChangeAge,
     onDeleteAge,
   } = useRegisterService();
+
   return (
     <>
       <ProgressBar progress={progress} />
