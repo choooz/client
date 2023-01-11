@@ -10,8 +10,10 @@ export default function usePostVoteService() {
     category: "",
     titleA: "",
     titleB: "",
-    imageA: "",
-    imageB: "",
+    imageA:
+      "https://picksel-bucket.s3.ap-northeast-2.amazonaws.com/static/9c8bc8b8-9f3e-4468-83e7-4f6f320dac1aeyes.png",
+    imageB:
+      "https://picksel-bucket.s3.ap-northeast-2.amazonaws.com/static/9c8bc8b8-9f3e-4468-83e7-4f6f320dac1aeyes.png",
     gender: "",
     age: "",
     mbti: "",
