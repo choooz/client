@@ -1,34 +1,18 @@
 import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
-import type { MouseEvent } from "react";
-import { useState } from "react";
+import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
 import { media } from "styles/media";
-import { Gender, UserModel } from "types/auth";
 
 function RegisterPage() {
-  const [userInfo, setUserInfo] = useState<UserModel>({
-    gender: null,
-    MBTI: {
-      M: null,
-      B: null,
-      T: null,
-      I: null,
-    },
-    age: null,
-  });
-
-  const [progress, setProgress] = useState(1);
-
-  const onChangeGender = (select: Gender) => {
-    setUserInfo((prev) => ({ ...prev, gender: select }));
-  };
-  const onChangeProgress = (number: number) => {
-    setProgress((prev) => prev + number);
-  };
-  const onChangeMBTI = (e: MouseEvent<HTMLButtonElement>) => {
-    const { name, value } = e.currentTarget;
-    setUserInfo((prev) => ({ ...prev, MBTI: { ...prev.MBTI, [name]: value } }));
-  };
+  const {
+    userInfo,
+    progress,
+    onChangeProgress,
+    onChangeGender,
+    onChangeMBTI,
+    onChangeAge,
+    onDeleteAge,
+  } = useRegisterService();
 
   return (
     <>
@@ -52,8 +36,9 @@ function RegisterPage() {
           {progress === 3 && (
             <AgeSelection
               userInfo={userInfo}
-              setUserInfo={setUserInfo}
               onChangeProgress={onChangeProgress}
+              onChangeAge={onChangeAge}
+              onDeleteAge={onDeleteAge}
             />
           )}
         </PageInner>
