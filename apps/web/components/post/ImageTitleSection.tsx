@@ -50,38 +50,35 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
             </ImageWrapper>
           ) : (
             <VoteImageWrapper>
-              <AAA>
-                {imageA && (
-                  <Image
-                    src={imageA}
-                    alt="A이미지"
-                    width={272}
-                    height={272}
-                    style={{
-                      objectFit: "cover",
-                      width: "272px",
-                      height: "auto",
-                    }}
-                  />
-                )}
-              </AAA>
+              {imageA && (
+                <Image
+                  src={imageA}
+                  alt="A이미지"
+                  width={272}
+                  height={272}
+                  style={{
+                    objectFit: "cover",
+                    width: "272px",
+                    height: "auto",
+                  }}
+                />
+              )}
 
               <VSIcon>VS</VSIcon>
-              <AAA>
-                {imageA && (
-                  <Image
-                    src={imageB}
-                    alt="B이미지"
-                    width={272}
-                    height={272}
-                    style={{
-                      objectFit: "cover",
-                      width: "272px",
-                      height: "auto",
-                    }}
-                  />
-                )}
-              </AAA>
+
+              {imageA && (
+                <Image
+                  src={imageB}
+                  alt="B이미지"
+                  width={272}
+                  height={272}
+                  style={{
+                    objectFit: "cover",
+                    width: "272px",
+                    height: "auto",
+                  }}
+                />
+              )}
             </VoteImageWrapper>
           )}
 
@@ -110,13 +107,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
   );
 }
 
-const AAA = styled.div`
-  position: relative;
-  cursor: pointer;
-  ${media.medium} {
-    height: 290px;
-  }
-`;
+const AAA = styled.div``;
 
 const Container = styled.div`
   animation: ${transitions.fadeIn} 0.9s ease-in-out;
@@ -147,12 +138,18 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 290px;
+  ${media.medium} {
+    height: 290px;
+  }
 `;
 
 const VoteImageWrapper = styled(ImageWrapper)`
   position: relative;
   background: ${({ theme }) => theme.palette.background.lightest};
   justify-content: space-between;
+  position: relative;
+  cursor: pointer;
 `;
 
 const ImageCircle = styled.div`
@@ -173,12 +170,14 @@ const VoteWrapper = styled.div`
   gap: 16px;
 `;
 
-const VoteInput = styled.textarea`
+const VoteInput = styled.input`
   padding: 4px;
   width: 100%;
   border: none;
   border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
   resize: none;
+  overflow-wrap: break-word;
+  word-break: break-all;
   ::placeholder {
     color: ${({ theme }) => theme.palette.ink.lightest};
   }

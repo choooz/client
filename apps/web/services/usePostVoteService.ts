@@ -10,10 +10,8 @@ export default function usePostVoteService() {
     category: "",
     titleA: "",
     titleB: "",
-    imageA:
-      "https://picksel-bucket.s3.ap-northeast-2.amazonaws.com/static/9c8bc8b8-9f3e-4468-83e7-4f6f320dac1aeyes.png",
-    imageB:
-      "https://picksel-bucket.s3.ap-northeast-2.amazonaws.com/static/9c8bc8b8-9f3e-4468-83e7-4f6f320dac1aeyes.png",
+    imageA: "",
+    imageB: "",
     gender: "",
     age: "",
     mbti: "",
@@ -63,6 +61,7 @@ export default function usePostVoteService() {
     try {
       const dataA = await uploadProfileImageAPI(formDataA);
       const dataB = await uploadProfileImageAPI(formDataB);
+
       setVote({
         ...vote,
         imageA: dataA.imageUrl,
@@ -70,6 +69,7 @@ export default function usePostVoteService() {
       });
     } catch (error) {
       alert("이미지 업로드에 실패했습니다." + error);
+      console.log(error);
     }
   }, []);
 
