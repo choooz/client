@@ -25,7 +25,7 @@ export default function useLoginService() {
       if (code.length === 18) {
         const response = await naverLoginAPI({ code, state: "test" });
       } else if (code.length === 86) {
-        const response = await kakaoLoginAPI({ code, redirectUrl: "http://localhost:3000/login" });
+        const response = await kakaoLoginAPI({ code, redirectUrl });
       }
       router.push(Path.LIST_PAGE);
     } catch (error) {

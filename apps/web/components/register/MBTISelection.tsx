@@ -1,10 +1,10 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
 import { Eyes } from "public/images";
 import Image from "next/image";
-import { MBTIType } from "pages/register";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
+import { MBTIType } from "types/auth";
 
 interface Props {
   MBTI: MBTIType;
