@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { theme, transitions } from "../styles";
-import { media } from "../styles/media";
+import { theme, transitions } from "../../styles";
+import { media } from "../../styles/media";
 import Template from "./Template";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}

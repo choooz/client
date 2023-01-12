@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { transitions } from "../styles";
+import { transitions } from "../../styles";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
