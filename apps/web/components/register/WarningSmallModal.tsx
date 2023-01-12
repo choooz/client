@@ -72,7 +72,7 @@ const WarningIconStyled = styled(WarningIcon)`
 const GuideText = styled.div`
   text-align: center;
   margin-top: 20px;
-  ${({ theme }) => theme.textStyle.regular.Title_Medium};
+  ${({ theme }) => theme.textStyle.Title_Medium};
   font-weight: bold;
 `;
 
@@ -88,7 +88,7 @@ const InfoList = styled.ul`
 const ListItem = styled.li`
   display: flex;
   align-items: center;
-  ${({ theme }) => theme.textStyle.regular.Font_Regular};
+  ${({ theme }) => theme.textStyle.Font_Regular};
 `;
 
 const Key = styled.span`
@@ -127,7 +127,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const CancelButton = styled(Button)`
-  background-color: ${({ theme }) => theme.palette.background.light};
+  background-color: ${({ theme }) => theme.palette.background.white};
 `;
 
 const ConfirmButton = styled(Button)`

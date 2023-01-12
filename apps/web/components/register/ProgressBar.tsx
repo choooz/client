@@ -31,7 +31,7 @@ const Progress = styled.div<{ $progress: number }>`
   height: 100%;
   border-radius: 50px;
   transition: all 0.5s ease-in-out;
-  background-color: ${({ theme }) => theme.palette.ui_color.progressBar};
+  background-color: ${({ theme }) => theme.palette.background.hard};
   > div {
     width: 48px;
     height: 24px;

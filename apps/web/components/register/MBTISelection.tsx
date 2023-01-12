@@ -1,10 +1,10 @@
 import { RegisterTemplate, transitions } from "@chooz/ui";
 import { Eyes } from "public/images";
 import Image from "next/image";
-import { MBTIType } from "pages/register";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
+import { MBTIType } from "types/auth";
 
 interface Props {
   MBTI: MBTIType;
@@ -110,11 +110,11 @@ const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
     width: 74%;
-    border: 1px solid ${({ theme }) => theme.palette.point.purple};
-    background-color: ${({ theme }) => theme.palette.main.light};
+    border: 1px solid ${({ theme }) => theme.palette.main.point};
+    background-color: ${({ theme }) => theme.palette.background.selected};
     font-size: 16px;
     font-weight: 700;
-    color: ${({ theme }) => theme.palette.main.darkest};
+    color: ${({ theme }) => theme.palette.main.sub};
   `,
   inactive: css`
     width: 23%;
@@ -132,7 +132,7 @@ const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
   width: 48%;
   height: 100%;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.background.lightest};
+  background-color: ${({ theme }) => theme.palette.background.white};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   display: flex;
   justify-content: center;
@@ -142,7 +142,7 @@ const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
   transition: all 0.3s ease-in-out;
   ${({ selected }) => typeGuardVariantStyle(selected)}
   &:hover {
-    background-color: ${({ theme }) => theme.palette.main.light};
+    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
   }
 `;
 

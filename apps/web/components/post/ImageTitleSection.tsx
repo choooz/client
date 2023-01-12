@@ -1,11 +1,10 @@
-import Template from "@chooz/ui/components/Template";
-import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import { transitions } from "@chooz/ui";
+import { Template, transitions } from "@chooz/ui";
 import { postVoteRequest } from "lib/api/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
+import React, { useState } from "react";
 
 interface Props {
   vote: postVoteRequest;
@@ -131,7 +130,7 @@ const ImageWrapper = styled.div`
   overflow: hidden;
   margin-top: 32px;
   width: 100%;
-  background: ${({ theme }) => theme.palette.background.dark};
+  background: ${({ theme }) => theme.palette.background.hard};
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -141,7 +140,7 @@ const ImageWrapper = styled.div`
 
 const VoteImageWrapper = styled(ImageWrapper)`
   position: relative;
-  background: ${({ theme }) => theme.palette.background.lightest};
+  background: ${({ theme }) => theme.palette.background.white};
   justify-content: space-between;
   cursor: pointer;
 `;
@@ -150,7 +149,7 @@ const ImageCircle = styled.div`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.background.lightest};
+  background-color: ${({ theme }) => theme.palette.background.white};
   display: flex;
   justify-content: center;
   align-items: center;

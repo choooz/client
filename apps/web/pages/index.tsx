@@ -1,3 +1,4 @@
+import { Button } from "@chooz/ui";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -16,5 +17,5 @@ const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${({ theme }) => theme.palette.background.light};
+  color: ${({ theme }) => theme.palette.background.white};
 `;

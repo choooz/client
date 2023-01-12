@@ -1,59 +1,41 @@
 import { css, DefaultTheme } from "styled-components";
 
 const palette = {
-  main: {
-    // @note 메인 색상
-    lightest: "#E7E7FF",
-    lighter: "#C6C4FF",
-    light: "rgba(140, 130, 255, 50%)",
-    base: "#6B4EFF",
-    darkest: "#190665",
-  },
-  point: {
-    yellow: "#ffbd3e",
-    orange: "#ff7549",
-    purple: "#863DFF",
-  },
-  // @note 필요시 코드 설정할 것
   ink: {
     lightest: "#999999",
-    lighter: "#72777A",
-    light: "#505050",
-    base: "#404446",
-    dark: "#303437",
-    darker: "#202325",
-    darkest: "#090A0A",
+    lighter: "#767676",
+    base: "#505050",
+    dark: "#111111",
   },
-  background: {
-    lightest: "#ffffff",
-    light: "#fdfdfd",
-    base: "#F7F7FB",
-    dark: "#f5f3f1",
-  },
-  system: {
-    // @note 금지, 실패, 위험 등
-    danger: "#dc0035",
-    // @note 성공, 진행, 안전 등
-    success: "#114b9a",
+  main: {
+    point: "#874CE4",
+    sub: "#190665",
   },
   border: {
-    light: "#f6f3f0",
+    light: "#F6F3F0",
     base: "#E5E5EC",
-    dark: "#505050",
-    darker: "#111111",
+    dark: "#111111",
   },
-  social_color: {
+  background: {
+    white: "#ffffff",
+    soft: "#F7F7FB",
+    hard: "#F1F1F5",
+    selected: "#C5C0FF",
+    selectedSoft: "#DCD9FF",
+    inactive: "#E5E5EC",
+  },
+  system: {
+    danger: "#dc0035",
+    success: "#114b9a",
+  },
+  social: {
     facebook: "#3b5998",
     twitter: "#1da1f2",
     google: "#db4437",
     kakao: "#FEE500",
     naver: "#03C75A",
   },
-  ui_color: {
-    progressBar: "#c4befd",
-    test: "#f5f3f1", // 지울것
-  },
-};
+} as const;
 
 const fontSize = {
   xxSmall: "12px",
@@ -87,41 +69,38 @@ const lineHeight = {
 
 // @Note font-weight, bold가 어떻게 사용될 지 몰라 일단 안 넣었음 많이 사용될 것 같으면 코드에 추가하여 사용할 것
 const textStyle = {
-  regular: {
-    Title_1: css`
-      font-size: ${fontSize.xxxLarge};
-      line-height: ${lineHeight.xxxLarge};
-    `,
-    Title_2: css`
-      font-size: ${fontSize.xxLarge};
-      line-height: ${lineHeight.xxLarge};
-    `,
-    Title_3: css`
-      font-size: ${fontSize.xLarge};
-      line-height: ${lineHeight.xLarge};
-    `,
-    Title_Large: css`
-      font-size: ${fontSize.large};
-      line-height: ${lineHeight.large};
-    `,
-    Title_Medium: css`
-      font-size: ${fontSize.medium};
-      line-height: ${lineHeight.medium};
-    `,
-    Title_Small: css`
-      font-size: ${fontSize.small};
-      line-height: ${lineHeight.small};
-    `,
-    Font_Regular: css`
-      font-size: ${fontSize.xSmall};
-      line-height: ${lineHeight.xSmall};
-    `,
-    Font_Minimum: css`
-      font-size: ${fontSize.xxSmall};
-      line-height: ${lineHeight.xxSmall};
-    `,
-  },
-  bold: {},
+  Title_1: css`
+    font-size: ${fontSize.xxxLarge};
+    line-height: ${lineHeight.xxxLarge};
+  `,
+  Title_2: css`
+    font-size: ${fontSize.xxLarge};
+    line-height: ${lineHeight.xxLarge};
+  `,
+  Title_3: css`
+    font-size: ${fontSize.xLarge};
+    line-height: ${lineHeight.xLarge};
+  `,
+  Title_Large: css`
+    font-size: ${fontSize.large};
+    line-height: ${lineHeight.large};
+  `,
+  Title_Medium: css`
+    font-size: ${fontSize.medium};
+    line-height: ${lineHeight.medium};
+  `,
+  Title_Small: css`
+    font-size: ${fontSize.small};
+    line-height: ${lineHeight.small};
+  `,
+  Font_Regular: css`
+    font-size: ${fontSize.xSmall};
+    line-height: ${lineHeight.xSmall};
+  `,
+  Font_Minimum: css`
+    font-size: ${fontSize.xxSmall};
+    line-height: ${lineHeight.xxSmall};
+  `,
 } as const;
 
 export type PaletteTypes = typeof palette;
