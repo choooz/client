@@ -9,7 +9,6 @@ export default function Home() {
       <Link href="/register">회원가입 하러가기</Link>
       <Link href="/register/interest">관심사 보러가기</Link>
       <Link href="/post">투표 글쓰기 보러가기</Link>
-      <Button>asd</Button>
     </PageLayout>
   );
 }

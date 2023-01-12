@@ -54,7 +54,7 @@ const WelcomeText = styled.div`
   display: flex;
   font-size: 18px;
   font-weight: 700;
-  color: ${theme.palette.ink.light};
+  color: ${theme.palette.ink.lighter};
   gap: 6px;
   line-height: 26px;
   padding-bottom: 24px;

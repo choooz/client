@@ -45,7 +45,8 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};
-  ${({ theme }) => theme.textStyle.regular.Font_Regular};
+  font-weight: 700;
+  ${({ theme }) => theme.textStyle.Title_Medium};
 `;
 
 export default Button;

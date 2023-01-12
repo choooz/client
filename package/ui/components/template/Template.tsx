@@ -33,7 +33,7 @@ function Template({
 const Button = styled.button`
   width: 76%;
   height: 56px;
-  background-color: ${({ theme }) => theme.palette.point.purple};
+  background-color: ${({ theme }) => theme.palette.main.point};
   color: white;
   border-radius: 4px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
