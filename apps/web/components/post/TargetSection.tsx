@@ -106,7 +106,7 @@ const Chip = styled.label`
   width: 128px;
   height: 54px;
   color: ${({ theme }) => theme.palette.border.dark};
-  background: ${({ theme }) => theme.palette.background.base};
+  background: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   border-radius: 100px;
   font-size: 16px;
@@ -115,8 +115,8 @@ const Chip = styled.label`
   align-items: center;
   cursor: pointer;
   :hover {
-    background: ${({ theme }) => theme.palette.main.light};
-    color: ${({ theme }) => theme.palette.main.darkest};
+    background: ${({ theme }) => theme.palette.background.selected};
+    color: ${({ theme }) => theme.palette.main.sub};
   }
 `;
 
@@ -127,9 +127,9 @@ const InvisibleInput = styled.input`
   left: -9999px;
 
   &[type="radio"]:checked + label {
-    background: ${({ theme }) => theme.palette.main.light};
-    color: ${({ theme }) => theme.palette.main.darkest};
-    border: 1px solid ${({ theme }) => theme.palette.point.purple};
+    background: ${({ theme }) => theme.palette.background.selected};
+    color: ${({ theme }) => theme.palette.main.sub};
+    border: 1px solid ${({ theme }) => theme.palette.main.point};
     font-weight: 700;
   }
 `;
@@ -146,6 +146,7 @@ const Select = styled.select`
   border-radius: 4px;
   width: 100%;
   height: 54px;
+  border: 1px solid ${({ theme }) => theme.palette.border.base};
 `;
 
 export default TargetSection;
