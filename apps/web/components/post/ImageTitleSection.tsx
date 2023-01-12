@@ -107,8 +107,6 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
   );
 }
 
-const AAA = styled.div``;
-
 const Container = styled.div`
   animation: ${transitions.fadeIn} 0.9s ease-in-out;
 `;
@@ -139,16 +137,12 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 290px;
-  ${media.medium} {
-    height: 290px;
-  }
 `;
 
 const VoteImageWrapper = styled(ImageWrapper)`
   position: relative;
   background: ${({ theme }) => theme.palette.background.lightest};
   justify-content: space-between;
-  position: relative;
   cursor: pointer;
 `;
 

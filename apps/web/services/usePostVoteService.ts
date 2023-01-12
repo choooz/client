@@ -69,7 +69,6 @@ export default function usePostVoteService() {
       });
     } catch (error) {
       alert("이미지 업로드에 실패했습니다." + error);
-      console.log(error);
     }
   }, []);
 
