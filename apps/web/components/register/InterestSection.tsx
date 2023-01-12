@@ -82,14 +82,14 @@ const WelcomeText = styled.div`
   letter-spacing: -0.5px;
   padding-bottom: 16px;
   animation: ${transitions.delaypopInFromBottom} 0.7s ease-in-out;
-  ${({ theme }) => theme.textStyle.regular.Title_Large};
+  ${({ theme }) => theme.textStyle.Title_Large};
 `;
 
 const DescriptionText = styled.div`
   padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  color: ${({ theme }) => theme.palette.ink.light};
-  ${({ theme }) => theme.textStyle.regular.Title_Small};
+  color: ${({ theme }) => theme.palette.ink.lighter};
+  ${({ theme }) => theme.textStyle.Title_Small};
 `;
 
 const VoteBox = styled.div`
@@ -108,7 +108,7 @@ const Vote = styled.div<{ selected?: boolean }>`
   width: 48%;
   height: 100%;
   border-radius: 10px;
-  background-color: ${({ theme }) => theme.palette.background.dark};
+  background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   margin-bottom: 14px;
   display: flex;
@@ -123,9 +123,9 @@ const Vote = styled.div<{ selected?: boolean }>`
     selected &&
     css`
       animation: ${transitions.blink} 0.7s ease-in-out;
-      background-color: ${({ theme }) => theme.palette.main.light};
+      background-color: ${({ theme }) => theme.palette.background.selected};
+      border: 1px solid ${({ theme }) => theme.palette.main.point};
       font-weight: 700;
-      border: 1px solid ${({ theme }) => theme.palette.point.purple};
     `}
 `;
 
