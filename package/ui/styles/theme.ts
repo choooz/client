@@ -18,7 +18,8 @@ const palette = {
   },
   background: {
     white: "#ffffff",
-    soft: "#FBF8F7",
+    soft: "#F7F7FB",
+    hard: "#F1F1F5",
     selected: "#C5C0FF",
     selectedSoft: "#DCD9FF",
     inactive: "#E5E5EC",

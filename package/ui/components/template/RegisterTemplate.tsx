@@ -67,11 +67,7 @@ const QuestionText = styled.div`
   font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
-  padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  ${media.medium} {
-    padding-bottom: 40px;
-  }
 `;
 
 const VoteBox = styled.div`
