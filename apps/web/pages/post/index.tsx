@@ -49,7 +49,10 @@ function PostPage() {
 
 const PageWrapper = styled.div`
   width: 100%;
-  padding-top: 72px;
+  padding-top: 12px;
+  ${media.medium} {
+    padding-top: 72px;
+  }
 `;
 
 const PageInner = styled.div`
