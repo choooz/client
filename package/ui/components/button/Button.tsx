@@ -5,7 +5,7 @@ interface ButtonStyledProps {
   /**
    * 버튼 타입
    */
-  // variant: "primary" | "secondary" | "tertiary" | "quaternary";
+  variant: "primary" | "inactive" | "outline" | "warning";
   /**
    * 버튼 가로 길이
    */
@@ -24,10 +24,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, But
   children: React.ReactNode;
 }
 
-function Button({ width, height, borderRadius = "4px", children, ...rest }: ButtonProps) {
+function Button({ width, height, variant, borderRadius = "4px", children, ...rest }: ButtonProps) {
   return (
     <ButtonStyled
-      // variant={variant}
+      variant={variant}
       width={width}
       height={height}
       borderRadius={borderRadius}
@@ -38,6 +38,32 @@ function Button({ width, height, borderRadius = "4px", children, ...rest }: Butt
   );
 }
 
+const variantStyles = {
+  primary: css`
+    background-color: ${({ theme }) => theme.palette.main.point};
+    :disabled {
+      background-color: ${({ theme }) => theme.palette.background.inactive};
+      color: ${({ theme }) => theme.palette.ink.lightest};
+    }
+  `,
+  inactive: css`
+    background-color: ${({ theme }) => theme.palette.background.inactive};
+    color: ${({ theme }) => theme.palette.ink.lightest};
+  `,
+  outline: css`
+    background-color: ${({ theme }) => theme.palette.background.white};
+    border: 1px solid ${({ theme }) => theme.palette.ink.lightest};
+    color: ${({ theme }) => theme.palette.ink.lightest};
+  `,
+  warning: css`
+    background-color: ${({ theme }) => theme.palette.system.danger};
+    :disabled {
+      background-color: ${({ theme }) => theme.palette.background.inactive};
+      color: ${({ theme }) => theme.palette.ink.lightest};
+    }
+  `,
+};
+
 const ButtonStyled = styled.button<ButtonStyledProps>`
   display: inline-flex;
   justify-content: center;
@@ -46,7 +72,8 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};
   font-weight: 700;
-  ${({ theme }) => theme.textStyle.Title_Medium};
+  font-size: 16px;
+  ${({ variant }) => variantStyles[variant]};
 `;
 
 export default Button;
