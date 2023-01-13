@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
-import { Template, transitions } from "@chooz/ui";
+import { Input, Template, transitions } from "@chooz/ui";
 import { postVoteRequest } from "lib/api/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
@@ -85,7 +85,9 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
         </label>
         <VoteWrapper>
           <InputBox>
-            <VoteInput
+            <Input
+              width="100%"
+              variant="standard"
               placeholder="선택지1을 입력"
               onChange={onChangeVote}
               name="titleA"
@@ -93,7 +95,9 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
             />
           </InputBox>
           <InputBox>
-            <VoteInput
+            <Input
+              width="100%"
+              variant="standard"
               placeholder="선택지2를 입력"
               onChange={onChangeVote}
               name="titleB"
@@ -166,11 +170,8 @@ const VoteWrapper = styled.div`
 const VoteInput = styled.input`
   padding: 4px;
   width: 100%;
-  border: none;
   border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
-  resize: none;
   overflow-wrap: break-word;
-  word-break: break-all;
   ::placeholder {
     color: ${({ theme }) => theme.palette.ink.lightest};
   }

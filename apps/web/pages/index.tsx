@@ -1,4 +1,3 @@
-import { Button } from "@chooz/ui";
 import Link from "next/link";
 import styled from "styled-components";
 

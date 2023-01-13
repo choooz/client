@@ -1,4 +1,4 @@
-import { transitions } from "@chooz/ui";
+import { Button, Input, transitions } from "@chooz/ui";
 import { LogoBlack } from "public/images";
 import { KAKAO_CLIENT_ID, NAVER_CLIENT_ID } from "lib/constants";
 import Image from "next/image";
