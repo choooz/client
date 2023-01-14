@@ -1,4 +1,4 @@
-import { transitions } from "@chooz/ui";
+import { Button, Input, transitions } from "@chooz/ui";
 import { LogoBlack } from "public/images";
 import { KAKAO_CLIENT_ID, NAVER_CLIENT_ID } from "lib/constants";
 import Image from "next/image";
@@ -58,7 +58,7 @@ const WelcomeText = styled.div`
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  ${({ theme }) => theme.textStyle.regular.Font_Regular};
+  ${({ theme }) => theme.textStyle.Font_Regular};
 `;
 
 const Emoji = styled.div`
@@ -74,7 +74,7 @@ const KakaoLoginButton = styled.button`
   height: 48px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   transition: all 0.3s ease-in-out;
-  background-color: ${({ theme }) => theme.palette.social_color.kakao};
+  background-color: ${({ theme }) => theme.palette.social.kakao};
   border-radius: 4px;
   margin-bottom: 8px;
 `;
@@ -83,7 +83,7 @@ const NaverLoginButton = styled.button`
   width: 100%;
   height: 48px;
   color: white;
-  background-color: ${({ theme }) => theme.palette.social_color.naver};
+  background-color: ${({ theme }) => theme.palette.social.naver};
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   transition: all 0.3s ease-in-out;
   border-radius: 4px;
