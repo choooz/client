@@ -3,6 +3,8 @@
 const Path = {
   // no Logged In
   LOGIN_PAGE: "/login",
+  KAKAO_LOGIN_PROCESS: "/login/kakaoLoginProcess",
+  NAVER_LOGIN_PROCESS: "/login/naverLoginProcess",
   REGISTER_PAGE: "/register",
 
   // logged In
