@@ -6,6 +6,7 @@ const Path = {
   KAKAO_LOGIN_PROCESS: "/login/kakaoLoginProcess",
   NAVER_LOGIN_PROCESS: "/login/naverLoginProcess",
   REGISTER_PAGE: "/register",
+  REGISTER_INTERSTER_PAGE: "/register/interest",
 
   // logged In
 
