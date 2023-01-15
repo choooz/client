@@ -4,11 +4,11 @@ export const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || "";
 export const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || "";
 
 export const AGE_LIST = [
-  { id: "10", name: "10대" },
-  { id: "20", name: "20대" },
-  { id: "30", name: "30대" },
-  { id: "40", name: "40대" },
-  { id: "50", name: "50대" },
+  { id: "teenager", name: "10대" },
+  { id: "twenties", name: "20대" },
+  { id: "thirties", name: "30대" },
+  { id: "tourties", name: "40대" },
+  { id: "fifties", name: "50대+" },
 ];
 
 export const MBTI_LIST = [

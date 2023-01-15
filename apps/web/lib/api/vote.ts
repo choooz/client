@@ -9,24 +9,24 @@ export interface postVoteRequest {
   titleB: string;
   imageA: string;
   imageB: string;
-  gender: string;
-  age: string;
-  mbti: string;
+  filteredGender: string;
+  filteredAge: string;
+  filteredMbti: string;
 }
 
 export const postVoteAPI = async (body: postVoteRequest) => {
   const requestBody = {
     userId: 1,
     title: body.title,
-    detail: body.detail,
+    detail: "NULL",
     category: body.category || "NULL",
     imageA: body.imageA,
     imageB: body.imageB,
     titleA: body.titleA,
     titleB: body.titleB,
-    gender: body.gender || "NULL",
-    age: body.age || "NULL",
-    mbti: body.mbti || "NULL",
+    filteredGender: body.filteredGender || "NULL",
+    filteredAge: body.filteredAge || "NULL",
+    filteredMbti: body.filteredMbti || "NULL",
   };
   const response = await apiClient.post("api/vote/createVote", requestBody);
   return response.data;
