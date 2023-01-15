@@ -1,21 +1,23 @@
-import { ModalTemplate } from "@chooz/ui";
+import { FloatModal } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import GuideTextModal from "components/select/GuideTextModal";
+import AddDetailModal from "components/select/AddDetailModal";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
-import { Eximg1, Eximg2 } from "public/images";
-import React, { useState } from "react";
+import { Eximg1, Eximg2, Success } from "public/images";
+import React from "react";
 import styled from "styled-components";
 
 function SelectPage() {
-  const [toggle, onChangeToggle] = useToggle(true);
+  const [toggleDetail, onChangeToggleDetail] = useToggle(true);
+  const [toggleFirst, onChangeToggleFirst] = useToggle(true);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
   return (
     <PageWrapper>
       <PageInner>
+        <button onClick={onChangeToggleDetail}>asdasd</button>
         <TagRow>
           <FlexRow>
             <div>3645명 해결중!</div>
@@ -56,7 +58,13 @@ function SelectPage() {
         </ImageWrapper>
         <AddDescriptionButton>﹢</AddDescriptionButton>
       </PageInner>
-      {toggle && <GuideTextModal onToggleModal={onChangeToggle} />}
+      {toggleFirst && (
+        <FloatModal onToggleModal={onChangeToggleFirst}>
+          <Image alt="체크" src={Success} width={56} height={56} />
+          <GuideText>선택결정이 등록되었어요.</GuideText>
+        </FloatModal>
+      )}
+      {toggleDetail && <AddDetailModal onToggleModal={onChangeToggleDetail} />}
     </PageWrapper>
   );
 }
@@ -161,6 +169,12 @@ const MenuText = styled.div`
   :hover {
     text-decoration: underline;
   }
+`;
+
+const GuideText = styled.div`
+  color: ${({ theme }) => theme.palette.background.white};
+  ${({ theme }) => theme.textStyle.Title_Large}
+  font-weight: 700;
 `;
 
 export default SelectPage;

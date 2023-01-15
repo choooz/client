@@ -1,32 +1,28 @@
 import { Portal, transitions } from "@chooz/ui";
-import Image from "next/image";
-import { Success } from "public/images";
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * @description
+ * 검은 배경에 특정 컴포넌트만 띄워주는 모달
+ *
+ */
+
 interface Props {
   onToggleModal: () => void;
+  children: React.ReactNode;
 }
 
-const GuideTextModal = ({ onToggleModal }: Props) => {
+const FloatModal = ({ onToggleModal, children }: Props) => {
   return (
     <Portal selector="#portal">
       <ModalTemplateBlock onMouseDown={onToggleModal}>
-        <Inner>
-          <Image alt="체크" src={Success} width={56} height={56} />
-          <GuideText>선택결정이 등록되었어요.</GuideText>
-        </Inner>
+        <Inner>{children}</Inner>
         <ModalBackground />
       </ModalTemplateBlock>
     </Portal>
   );
 };
-
-const GuideText = styled.div`
-  color: ${({ theme }) => theme.palette.background.white};
-  ${({ theme }) => theme.textStyle.Title_Large}
-  font-weight: 700;
-`;
 
 const Inner = styled.div`
   position: absolute;
@@ -63,4 +59,4 @@ const ModalBackground = styled.div`
   z-index: 1100;
 `;
 
-export default GuideTextModal;
+export default FloatModal;
