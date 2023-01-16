@@ -4,21 +4,24 @@ import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled from "styled-components";
 import { UserModel } from "types/auth";
-import useToggle from "hooks/useToggle";
-import WarningSmallModal from "./WarningSmallModal";
 
 interface Props {
   userInfo: UserModel;
   onChangeProgress(number: number): void;
   onChangeAge: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDeleteAge: () => void;
+  onToggleWarningModal: () => void;
 }
 
 const NuberPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-function AgeSelection({ userInfo, onChangeProgress, onChangeAge, onDeleteAge }: Props) {
-  const [isWarningModal, onToggleWarningModal] = useToggle();
-
+function AgeSelection({
+  userInfo,
+  onChangeProgress,
+  onChangeAge,
+  onDeleteAge,
+  onToggleWarningModal,
+}: Props) {
   return (
     <RegisterTemplate
       welcomeText={
@@ -38,10 +41,6 @@ function AgeSelection({ userInfo, onChangeProgress, onChangeAge, onDeleteAge }: 
         onClick: () => onChangeProgress(-1),
       }}
     >
-      {isWarningModal && (
-        <WarningSmallModal userInfo={userInfo} onToggleModal={onToggleWarningModal} />
-      )}
-
       <Container>
         <InputBox>
           <Input type="text" inputMode="none" placeholder="0" defaultValue={userInfo.age ?? ""} />세
