@@ -5,14 +5,14 @@ const userStorage = {
     const user = localStorage.getItem(USER_STORAGE_KEY);
     try {
       if (!user) return null;
-      const parsedUser = JSON.parse(user);
+      const parsedUser = JSON.parse(user) as string;
       return parsedUser;
     } catch (e) {
       localStorage.removeItem(USER_STORAGE_KEY);
       return null;
     }
   },
-  set(user: any) {
+  set(user: string) {
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
   },
   remove() {
