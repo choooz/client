@@ -24,6 +24,12 @@ const palette = {
     darker: "#202325",
     darkest: "#090A0A",
   },
+  font_color: {
+    up_text: "#111111",
+    medium_text: "#505050",
+    down_text: "#767676",
+    inactive_text: "#999999",
+  },
   background: {
     lightest: "#ffffff",
     light: "#fdfdfd",
