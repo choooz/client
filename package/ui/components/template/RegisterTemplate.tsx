@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { theme, transitions } from "../styles";
-import { media } from "../styles/media";
+import { theme, transitions } from "../../styles";
+import { media } from "../../styles/media";
 import Template from "./Template";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -54,7 +54,7 @@ const WelcomeText = styled.div`
   display: flex;
   font-size: 18px;
   font-weight: 700;
-  color: ${theme.palette.ink.light};
+  color: ${theme.palette.ink.lighter};
   gap: 6px;
   line-height: 26px;
   padding-bottom: 24px;
@@ -67,11 +67,7 @@ const QuestionText = styled.div`
   font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
-  padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  ${media.medium} {
-    padding-bottom: 40px;
-  }
 `;
 
 const VoteBox = styled.div`

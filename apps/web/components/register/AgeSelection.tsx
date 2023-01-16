@@ -124,15 +124,15 @@ const NumberDiv = styled.button`
   height: 48px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => theme.palette.border.base};
-  background: ${({ theme }) => theme.palette.background.base};
+  background: ${({ theme }) => theme.palette.background.soft};
   ${media.medium} {
     width: 70px;
     height: 70px;
     font-size: 28px;
   }
-  \ :active {
-    border: 1px solid ${({ theme }) => theme.palette.point.purple};
-    background-color: ${({ theme }) => theme.palette.main.light};
+  :active {
+    border: 1px solid ${({ theme }) => theme.palette.main.point};
+    background-color: ${({ theme }) => theme.palette.background.selected};
   }
 `;
 

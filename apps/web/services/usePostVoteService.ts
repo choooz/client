@@ -61,6 +61,7 @@ export default function usePostVoteService() {
     try {
       const dataA = await uploadProfileImageAPI(formDataA);
       const dataB = await uploadProfileImageAPI(formDataB);
+
       setVote({
         ...vote,
         imageA: dataA.imageUrl,

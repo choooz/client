@@ -1,10 +1,10 @@
-import Template from "@chooz/ui/components/Template";
-import React, { useState } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import { transitions } from "@chooz/ui";
+import { Input, Template, transitions } from "@chooz/ui";
 import { postVoteRequest } from "lib/api/vote";
 import { Camera } from "public/images";
+import { media } from "@chooz/ui/styles/media";
+import React, { useState } from "react";
 
 interface Props {
   vote: postVoteRequest;
@@ -44,14 +44,40 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
           {!imageA && !imageB ? (
             <ImageWrapper>
               <ImageCircle>
-                <Image src={Camera} alt="이미지 공간" width={32} />
+                <Image src={Camera} alt="이미지 공간" width={32} height={32} />
               </ImageCircle>
             </ImageWrapper>
           ) : (
             <VoteImageWrapper>
-              {imageA && <Image src={imageA} alt="A이미지" width={272} height={290} />}
+              {imageA && (
+                <Image
+                  src={imageA}
+                  alt="A이미지"
+                  width={272}
+                  height={272}
+                  style={{
+                    objectFit: "cover",
+                    width: "272px",
+                    height: "auto",
+                  }}
+                />
+              )}
+
               <VSIcon>VS</VSIcon>
-              {imageA && <Image src={imageB} alt="B이미지" width={272} height={290} />}
+
+              {imageA && (
+                <Image
+                  src={imageB}
+                  alt="B이미지"
+                  width={272}
+                  height={272}
+                  style={{
+                    objectFit: "cover",
+                    width: "272px",
+                    height: "auto",
+                  }}
+                />
+              )}
             </VoteImageWrapper>
           )}
 
@@ -59,18 +85,20 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
         </label>
         <VoteWrapper>
           <InputBox>
-            <VoteCircle>A</VoteCircle>
-            <VoteInput
-              placeholder="A선택지를 입력해주세요"
+            <Input
+              width="100%"
+              variant="standard"
+              placeholder="선택지1을 입력"
               onChange={onChangeVote}
               name="titleA"
               value={titleA}
             />
           </InputBox>
           <InputBox>
-            <VoteCircle>B</VoteCircle>
-            <VoteInput
-              placeholder="B선택지를 입력해주세요"
+            <Input
+              width="100%"
+              variant="standard"
+              placeholder="선택지2를 입력"
               onChange={onChangeVote}
               name="titleB"
               value={titleB}
@@ -102,28 +130,30 @@ const InvisibleInput = styled.input`
 `;
 
 const ImageWrapper = styled.div`
+  gap: 12px;
+  overflow: hidden;
   margin-top: 32px;
   width: 100%;
-  height: 290px;
-  background: ${({ theme }) => theme.palette.background.dark};
+  background: ${({ theme }) => theme.palette.background.hard};
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  height: 290px;
 `;
 
 const VoteImageWrapper = styled(ImageWrapper)`
   position: relative;
-  background: ${({ theme }) => theme.palette.background.lightest};
+  background: ${({ theme }) => theme.palette.background.white};
   justify-content: space-between;
+  cursor: pointer;
 `;
 
 const ImageCircle = styled.div`
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.background.lightest};
+  background-color: ${({ theme }) => theme.palette.background.white};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,22 +167,11 @@ const VoteWrapper = styled.div`
   gap: 16px;
 `;
 
-const VoteCircle = styled.div`
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.border.darker};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${({ theme }) => theme.palette.background.lightest};
-  font-size: 16px;
-  font-weight: 700;
-`;
-
 const VoteInput = styled.input`
   padding: 4px;
+  width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
+  overflow-wrap: break-word;
   ::placeholder {
     color: ${({ theme }) => theme.palette.ink.lightest};
   }
@@ -161,6 +180,7 @@ const VoteInput = styled.input`
 const InputBox = styled.div`
   display: flex;
   gap: 12px;
+  flex: 0.5;
 `;
 
 const DetailInput = styled.textarea`
@@ -182,8 +202,6 @@ const VSIcon = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 32px;
-  height: 32px;
   background: black;
   color: white;
   display: flex;
@@ -192,5 +210,12 @@ const VSIcon = styled.div`
   border-radius: 50%;
   font-size: 14px;
   font-weight: 700;
+  z-index: 9999;
+  width: 32px;
+  height: 32px;
+  ${media.medium} {
+    width: 40px;
+    height: 40px;
+  }
 `;
 export default React.memo(ImageTitleSection);

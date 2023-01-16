@@ -57,7 +57,7 @@ const WelcomeText = styled.div`
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  ${({ theme }) => theme.textStyle.regular.Font_Regular};
+  ${({ theme }) => theme.textStyle.Font_Regular};
 `;
 
 const Emoji = styled.div`
@@ -71,7 +71,7 @@ const KakaoLoginButton = styled.button`
   width: 100%;
   height: 48px;
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-  background-color: ${({ theme }) => theme.palette.social_color.kakao};
+  background-color: ${({ theme }) => theme.palette.social.kakao};
   border-radius: 4px;
   margin-top: 16px;
 `;
@@ -80,7 +80,7 @@ const NaverLoginButton = styled.button`
   width: 100%;
   height: 48px;
   color: white;
-  background-color: ${({ theme }) => theme.palette.social_color.naver};
+  background-color: ${({ theme }) => theme.palette.social.naver};
   animation: ${transitions.delaypopInFromBottom} 2.1s normal ease-in-out;
   border-radius: 4px;
   margin-top: 8px;
@@ -89,13 +89,12 @@ const NaverLoginButton = styled.button`
 const TermsOfUse = styled.p`
   margin-top: 26px;
   text-align: center;
-  ${({ theme }) => theme.textStyle.regular.Font_Minimum};
+  ${({ theme }) => theme.textStyle.Font_Minimum};
   color: ${({ theme }) => theme.palette.font_color.down_text};
   animation: ${transitions.delaypopInFromBottom} 2.8s normal ease-in-out;
 `;
 
 const ClickText = styled.span`
-  color: ${({ theme }) => theme.palette.font_color.main};
   font-weight: bold;
   text-decoration: underline;
 `;

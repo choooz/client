@@ -75,11 +75,11 @@ const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
     width: 64%;
-    border: 1px solid ${({ theme }) => theme.palette.point.purple};
-    background-color: ${({ theme }) => theme.palette.main.light};
+    border: 1px solid ${({ theme }) => theme.palette.main.point};
+    background-color: ${({ theme }) => theme.palette.background.selected};
     font-size: 16px;
     font-weight: 700;
-    color: ${({ theme }) => theme.palette.main.darkest};
+    color: ${({ theme }) => theme.palette.main.sub};
     ${media.medium} {
       width: 74%;
     }
@@ -103,7 +103,7 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
   width: 48%;
   height: 100%;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.background.lightest};
+  background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   display: flex;
   justify-content: center;
@@ -112,7 +112,7 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
   font-size: 18px;
   transition: all 0.3s ease-in-out;
   &:hover {
-    background-color: ${({ theme }) => theme.palette.main.light};
+    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
 `;

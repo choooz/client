@@ -43,17 +43,24 @@ function WarningSmallModal({ userInfo, onToggleModal, onCompleteRegister }: Prop
         MBTI는 선택 후 2개월마다 수정하실 수 있습니다.
       </DetailText>
       <ButtonWrapper>
-        <CancelButton width="156px" height="48px" borderRadius="0 0 0 4px" onClick={onToggleModal}>
+        <Button
+          variant="inactive"
+          width="156px"
+          height="48px"
+          borderRadius="0 0 0 4px"
+          onClick={onToggleModal}
+        >
           취소
-        </CancelButton>
-        <ConfirmButton
+        </Button>
+        <Button
+          variant="warning"
           width="156px"
           height="48px"
           borderRadius="0 0 4px 0"
           onClick={() => onCompleteRegister(userInfo)}
         >
           확인
-        </ConfirmButton>
+        </Button>
       </ButtonWrapper>
     </ModalTemplate>
   );
@@ -69,7 +76,7 @@ const WarningIconStyled = styled(WarningIcon)`
 const GuideText = styled.div`
   text-align: center;
   margin-top: 20px;
-  ${({ theme }) => theme.textStyle.regular.Title_Medium};
+  ${({ theme }) => theme.textStyle.Title_Medium};
   font-weight: bold;
 `;
 
@@ -85,7 +92,7 @@ const InfoList = styled.ul`
 const ListItem = styled.li`
   display: flex;
   align-items: center;
-  ${({ theme }) => theme.textStyle.regular.Font_Regular};
+  ${({ theme }) => theme.textStyle.Font_Regular};
 `;
 
 const Key = styled.span`
@@ -119,15 +126,5 @@ const DetailText = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-
   margin-top: 40px;
-`;
-
-const CancelButton = styled(Button)`
-  background-color: ${({ theme }) => theme.palette.background.light};
-`;
-
-const ConfirmButton = styled(Button)`
-  background-color: ${({ theme }) => theme.palette.system.danger};
-  color: white;
 `;
