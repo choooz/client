@@ -6,12 +6,14 @@ export interface MBTIType {
 }
 
 export enum Gender {
-  MALE = "male",
-  FEMALE = "female",
+  MALE = "MALE",
+  FEMALE = "FEMALE",
 }
 
 export interface UserModel {
-  gender: "male" | "female" | null;
+  gender: "MALE" | "FEMALE" | null;
   MBTI: MBTIType;
   age: string | null;
 }
+
+export type SocialType = "NAVER" | "KAKAO";
