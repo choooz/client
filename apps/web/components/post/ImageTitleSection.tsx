@@ -27,15 +27,15 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
     <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep }}>
       <Container>
         {step === 2 && (
-          <DetailBox>
+          <TitleBox>
             <QuestionText> 질문을 입력해주세요.(선택)</QuestionText>
-            <DetailInput
+            <TitleInput
               placeholder="질문을 입력해주세요"
               onChange={onChangeVote}
               name="title"
               value={title}
             />
-          </DetailBox>
+          </TitleBox>
         )}
         <QuestionText>선택지를 입력해주세요.</QuestionText>
         {!imageA && !imageB && <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>}
@@ -167,23 +167,13 @@ const VoteWrapper = styled.div`
   gap: 16px;
 `;
 
-const VoteInput = styled.input`
-  padding: 4px;
-  width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
-  overflow-wrap: break-word;
-  ::placeholder {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
-`;
-
 const InputBox = styled.div`
   display: flex;
   gap: 12px;
   flex: 0.5;
 `;
 
-const DetailInput = styled.textarea`
+const TitleInput = styled.textarea`
   padding: 14px 16px;
   width: 100%;
   height: 72px;
@@ -193,7 +183,7 @@ const DetailInput = styled.textarea`
   margin: 24px 0 30px 0;
 `;
 
-const DetailBox = styled.div`
+const TitleBox = styled.div`
   animation: ${transitions.popInFromBottom} 0.7s ease-in-out;
 `;
 
