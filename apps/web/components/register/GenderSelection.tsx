@@ -83,7 +83,7 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
 const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
-    width: 64%;
+    width: 63%;
     font-weight: 700;
     border: 1px solid ${({ theme }) => theme.palette.main.point};
     background-color: ${({ theme }) => theme.palette.background.selected};
@@ -94,7 +94,7 @@ const variantStyles = {
     }
   `,
   inactive: css`
-    width: 36%;
+    width: 35%;
     opacity: 0.5;
     ${media.medium} {
       width: 23%;
