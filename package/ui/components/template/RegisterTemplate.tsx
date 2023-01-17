@@ -52,6 +52,7 @@ function RegisterTemplate({
 
 const WelcomeText = styled.div`
   display: flex;
+  align-items: center;
   font-size: 18px;
   font-weight: 700;
   color: ${theme.palette.ink.lighter};
