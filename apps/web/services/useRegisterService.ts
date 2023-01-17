@@ -1,3 +1,6 @@
+import { addInfoAPI } from "lib/api/auth";
+import Path from "lib/Path";
+import { useRouter } from "next/router";
 import { MouseEvent, useState } from "react";
 import { Gender, UserModel } from "types/auth";
 
@@ -40,6 +43,21 @@ export default function useRegisterService() {
     setUserInfo((prev) => ({ ...prev, age: null }));
   };
 
+  const router = useRouter();
+
+  const onCompleteRegister = async ({ MBTI, age, gender }: UserModel) => {
+    const stringMBTI = `${MBTI.M}${MBTI.B}${MBTI.T}${MBTI.I}`;
+    try {
+      await addInfoAPI({
+        mbti: stringMBTI,
+        age: Number(age),
+        gender,
+      });
+      router.push(Path.REGISTER_INTERSTER_PAGE);
+    } catch (error) {
+      alert(error);
+    }
+  };
   return {
     userInfo,
     progress,
@@ -48,5 +66,6 @@ export default function useRegisterService() {
     onChangeMBTI,
     onChangeAge,
     onDeleteAge,
+    onCompleteRegister,
   };
 }
