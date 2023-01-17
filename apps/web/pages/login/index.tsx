@@ -2,8 +2,9 @@ import { transitions } from "@chooz/ui";
 import { LogoBlack } from "public/images";
 import Image from "next/image";
 import useLoginService from "services/useLoginService";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { media } from "styles/media";
+import { KakaoIcon, NaverIcon } from "public/icons";
 
 function LoginPage() {
   const { onChangeSocialType } = useLoginService();
@@ -17,12 +18,17 @@ function LoginPage() {
           눈치보지 말고 Chooz에서 물어봐!
         </WelcomeText>
         <Emoji />
-        <KakaoLoginButton onClick={() => onChangeSocialType("KAKAO")}>
-          카카오 로그인
-        </KakaoLoginButton>
-        <NaverLoginButton onClick={() => onChangeSocialType("NAVER")}>
-          네이버 로그인
-        </NaverLoginButton>
+
+        <KakaoButton onClick={() => onChangeSocialType("KAKAO")}>
+          <KakaoIconStyled />
+          <Divider />
+          <LoginText>카카오 계정으로 로그인</LoginText>
+        </KakaoButton>
+        <NaverButton onClick={() => onChangeSocialType("NAVER")}>
+          <NaverIconStyled />
+          <Divider />
+          <LoginText>네이버 계정으로 로그인</LoginText>
+        </NaverButton>
         <TermsOfUse>
           계속하면 당사의 <ClickText>서비스 약관</ClickText>에 동의하고, <MobileNextLine />
           <ClickText>개인정보 보호정책</ClickText>
@@ -66,24 +72,53 @@ const Emoji = styled.div`
   height: 226px;
   background-color: #bebebe;
 `;
-
-const KakaoLoginButton = styled.button`
+// @note 공통 Button 컴포넌트로 묶을 수 있는 방법?
+const SocialLoginButton = css`
+  display: flex;
+  align-items: center;
+  text-align: center;
   width: 100%;
   height: 48px;
+  margin: 0 auto;
+  max-width: 480px;
+  border-radius: 4px;
+`;
+
+const KakaoButton = styled.button`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   background-color: ${({ theme }) => theme.palette.social.kakao};
-  border-radius: 4px;
+  ${SocialLoginButton}
+  margin-bottom: 8px;
   margin-top: 16px;
 `;
 
-const NaverLoginButton = styled.button`
-  width: 100%;
-  height: 48px;
+const NaverButton = styled.button`
   color: white;
   background-color: ${({ theme }) => theme.palette.social.naver};
   animation: ${transitions.delaypopInFromBottom} 2.1s normal ease-in-out;
-  border-radius: 4px;
-  margin-top: 8px;
+  ${SocialLoginButton}
+`;
+
+const Divider = styled.div`
+  width: 1px;
+  height: 28px;
+  margin-left: 18px;
+  background-color: ${({ theme }) => theme.palette.background.white};
+  opacity: 0.5;
+`;
+
+const KakaoIconStyled = styled(KakaoIcon)`
+  display: flex;
+  margin-left: 18px;
+`;
+
+const NaverIconStyled = styled(NaverIcon)`
+  display: flex;
+  margin-left: 18px;
+`;
+
+const LoginText = styled.span`
+  margin: 0 auto;
 `;
 
 const TermsOfUse = styled.p`
