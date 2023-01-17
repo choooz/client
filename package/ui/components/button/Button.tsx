@@ -41,6 +41,7 @@ function Button({ width, height, variant, borderRadius = "4px", children, ...res
 const variantStyles = {
   primary: css`
     background-color: ${({ theme }) => theme.palette.main.point};
+    color: ${({ theme }) => theme.palette.background.white};
     :disabled {
       background-color: ${({ theme }) => theme.palette.background.inactive};
       color: ${({ theme }) => theme.palette.ink.lightest};
