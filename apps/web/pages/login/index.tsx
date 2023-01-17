@@ -1,15 +1,13 @@
 import { transitions } from "@chooz/ui";
 import { LogoBlack } from "public/images";
-import { KAKAO_CLIENT_ID, NAVER_CLIENT_ID } from "lib/constants";
 import Image from "next/image";
-import Link from "next/link";
 import useLoginService from "services/useLoginService";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { KakaoIcon, NaverIcon } from "public/icons";
 
 function LoginPage() {
-  const { redirectUrl } = useLoginService();
+  const { onChangeSocialType } = useLoginService();
 
   return (
     <PageWrapper>
@@ -20,25 +18,23 @@ function LoginPage() {
           눈치보지 말고 Chooz에서 물어봐!
         </WelcomeText>
         <Emoji />
-        <Link
-          href={`https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${redirectUrl}&response_type=code`}
-        >
-          <KakaoButton>
-            <KakaoIconStyled />
-            <Divider />
-            <LoginText>카카오 계정으로 로그인</LoginText>
-          </KakaoButton>
-        </Link>
-        <Link
-          href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${redirectUrl}&state=test`}
-        >
-          <NaverButton>
-            <NaverIconStyled />
-            <Divider />
-            <LoginText>네이버 계정으로 로그인</LoginText>
-          </NaverButton>
-        </Link>
-        <AlreadyAccountText>이미 계정이 있으신가요? 로그인</AlreadyAccountText>
+
+        <KakaoButton onClick={() => onChangeSocialType("KAKAO")}>
+          <KakaoIconStyled />
+          <Divider />
+          <LoginText>카카오 계정으로 로그인</LoginText>
+        </KakaoButton>
+        <NaverButton onClick={() => onChangeSocialType("NAVER")}>
+          <NaverIconStyled />
+          <Divider />
+          <LoginText>네이버 계정으로 로그인</LoginText>
+        </NaverButton>
+        <TermsOfUse>
+          계속하면 당사의 <ClickText>서비스 약관</ClickText>에 동의하고, <MobileNextLine />
+          <ClickText>개인정보 보호정책</ClickText>
+          을(를) 읽어 <DesktopNextLine /> 당사의 데이터 수집, <MobileNextLine /> 사용, 공유 방법을
+          확인했음을 인정하는 것입니다.
+        </TermsOfUse>
       </PageInner>
     </PageWrapper>
   );
@@ -51,7 +47,7 @@ const PageWrapper = styled.div`
 const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
-  height: 558px;
+  height: 587px;
   background-color: white;
   max-width: 640px;
   position: relative;
@@ -75,7 +71,6 @@ const Emoji = styled.div`
   width: 100%;
   height: 226px;
   background-color: #bebebe;
-  margin: 20px auto;
 `;
 // @note 공통 Button 컴포넌트로 묶을 수 있는 방법?
 const SocialLoginButton = css`
@@ -94,6 +89,7 @@ const KakaoButton = styled.button`
   background-color: ${({ theme }) => theme.palette.social.kakao};
   ${SocialLoginButton}
   margin-bottom: 8px;
+  margin-top: 16px;
 `;
 
 const NaverButton = styled.button`
@@ -103,19 +99,10 @@ const NaverButton = styled.button`
   ${SocialLoginButton}
 `;
 
-const AlreadyAccountText = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 27px;
-  font-weight: 700;
-  animation: ${transitions.delaypopInFromBottom} 2.7s normal ease-in-out;
-`;
-
 const Divider = styled.div`
   width: 1px;
   height: 28px;
   margin-left: 18px;
-
   background-color: ${({ theme }) => theme.palette.background.white};
   opacity: 0.5;
 `;
@@ -134,4 +121,29 @@ const LoginText = styled.span`
   margin: 0 auto;
 `;
 
+const TermsOfUse = styled.p`
+  margin-top: 26px;
+  text-align: center;
+  ${({ theme }) => theme.textStyle.Font_Minimum};
+  color: ${({ theme }) => theme.palette.ink.lighter};
+  animation: ${transitions.delaypopInFromBottom} 2.8s normal ease-in-out;
+`;
+
+const ClickText = styled.span`
+  font-weight: bold;
+  text-decoration: underline;
+`;
+
+const MobileNextLine = styled.br`
+  ${media.medium} {
+    display: none;
+  }
+`;
+
+const DesktopNextLine = styled.br`
+  display: none;
+  ${media.medium} {
+    display: block;
+  }
+`;
 export default LoginPage;
