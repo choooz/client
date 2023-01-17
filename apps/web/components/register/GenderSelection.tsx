@@ -1,4 +1,4 @@
-import { RegisterTemplate, transitions } from "@chooz/ui";
+import { Button, RegisterTemplate, transitions } from "@chooz/ui";
 import { CheckRound, Female, Male, PurpleMonster } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
@@ -38,7 +38,13 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
         disabled: !gender,
       }}
     >
-      <LeftVote selected={activeValue("left")} onClick={() => onChangeGender(Gender.MALE)}>
+      <LeftVote
+        variant="inactive"
+        width="48%"
+        height="100%"
+        selected={activeValue("left")}
+        onClick={() => onChangeGender(Gender.MALE)}
+      >
         <ImageWrapper>
           <Image alt="남성" height={100} src={Male} />
         </ImageWrapper>
@@ -51,7 +57,13 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
           "남성"
         )}
       </LeftVote>
-      <RightVote selected={activeValue("right")} onClick={() => onChangeGender(Gender.FEMALE)}>
+      <RightVote
+        variant="inactive"
+        width="48%"
+        height="100%"
+        selected={activeValue("right")}
+        onClick={() => onChangeGender(Gender.FEMALE)}
+      >
         <ImageWrapper>
           <Image alt="여성" height={100} src={Female} />
         </ImageWrapper>
@@ -72,10 +84,10 @@ const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
     width: 64%;
+    font-weight: 700;
     border: 1px solid ${({ theme }) => theme.palette.main.point};
     background-color: ${({ theme }) => theme.palette.background.selected};
-    font-size: 16px;
-    font-weight: 700;
+    ${({ theme }) => theme.textStyle.Title_Small}
     color: ${({ theme }) => theme.palette.main.sub};
     ${media.medium} {
       width: 74%;
@@ -95,21 +107,17 @@ const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
   return variantStyles[selected];
 };
 
-const LeftVote = styled.div<{ selected: "active" | "inactive" | null }>`
+const LeftVote = styled(Button)<{ selected: "active" | "inactive" | null }>`
   position: absolute;
-  width: 48%;
-  height: 100%;
-  border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  font-size: 18px;
+  ${({ theme }) => theme.textStyle.Title_Medium}
   transition: all 0.3s ease-in-out;
+  font-weight: 500;
   &:hover {
-    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
+    border-color: ${({ theme }) => theme.palette.main.point};
+    color: ${({ theme, selected }) => selected === "inactive" && theme.palette.main.point};
+    font-weight: 700;
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
 `;

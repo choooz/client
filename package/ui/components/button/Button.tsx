@@ -5,7 +5,7 @@ interface ButtonStyledProps {
   /**
    * 버튼 타입
    */
-  variant: "primary" | "inactive" | "outline" | "warning";
+  variant?: "primary" | "inactive" | "outline" | "warning";
   /**
    * 버튼 가로 길이
    */
@@ -75,7 +75,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   border-radius: ${({ borderRadius }) => borderRadius};
   font-weight: 700;
   font-size: 16px;
-  ${({ variant }) => variantStyles[variant]};
+  ${({ variant }) => variant && variantStyles[variant]};
 `;
 
 export default Button;
