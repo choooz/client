@@ -28,7 +28,7 @@ function kakaoLoginProcess() {
     }
   };
 
-  return <div>스피너</div>;
+  return <></>;
 }
 
 export default kakaoLoginProcess;
