@@ -4,3 +4,5 @@ export { default as RegisterTemplate } from "./template/RegisterTemplate";
 export { default as Portal } from "./modal/Portal";
 export { default as ModalTemplate } from "./modal/ModalTemplate";
 export { default as Input } from "./input/Input";
+export { default as FloatModal } from "./modal/FloatModal";
+export { default as DivideLine } from "./divide/DivideLine";
