@@ -1,4 +1,6 @@
 import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
+import WarningSmallModal from "components/register/WarningSmallModal";
+import useToggle from "hooks/useToggle";
 import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
 import { media } from "styles/media";
@@ -12,10 +14,20 @@ function RegisterPage() {
     onChangeMBTI,
     onChangeAge,
     onDeleteAge,
+    onCompleteRegister,
   } = useRegisterService();
+
+  const [isWarningModal, onToggleWarningModal] = useToggle();
 
   return (
     <>
+      {isWarningModal && (
+        <WarningSmallModal
+          userInfo={userInfo}
+          onToggleModal={onToggleWarningModal}
+          onCompleteRegister={onCompleteRegister}
+        />
+      )}
       <ProgressBar progress={progress} />
       <PageWrapper>
         <PageInner>
@@ -39,6 +51,7 @@ function RegisterPage() {
               onChangeProgress={onChangeProgress}
               onChangeAge={onChangeAge}
               onDeleteAge={onDeleteAge}
+              onToggleWarningModal={onToggleWarningModal}
             />
           )}
         </PageInner>

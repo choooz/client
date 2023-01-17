@@ -1,36 +1,24 @@
-import { CodeType, kakaoLoginAPI, naverLoginAPI } from "lib/api/auth";
-import { CLIENT_URL } from "lib/constants";
-import Path from "lib/Path";
+import {
+  KAKAO_CLIENT_ID,
+  KAKAO_LOGIN_REDIRECT_URL,
+  NAVER_CLIENT_ID,
+  NAVER_LOGIN_REDIRECT_URL,
+} from "lib/constants";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { SocialType } from "types/auth";
 
+// @note 소셜 로그인이라는 하나의 관심사가 흩뿌려진 느낌
 export default function useLoginService() {
-  const redirectUrl =
-    process.env.NODE_ENV === "development"
-      ? `http://localhost:3000/${Path.LOGIN_PAGE}`
-      : `${CLIENT_URL}${Path.LOGIN_PAGE}`;
-
   const router = useRouter();
-  const code = router.query.code;
 
-  useEffect(() => {
-    if (code) {
-      Login(code);
-    }
-  }, [code]);
-
-  // @note 소셜 로그인 후 받은 authorization code값의 length가 8이면 네이버, 그 이상이면 카카오로 판단
-  const Login = async (code: CodeType) => {
-    try {
-      if (code.length === 18) {
-        const response = await naverLoginAPI({ code, state: "test" });
-      } else if (code.length === 86) {
-        const response = await kakaoLoginAPI({ code, redirectUrl: "http://localhost:3000/login" });
-      }
-      router.push(Path.LIST_PAGE);
-    } catch (error) {
-      alert("에러가 발생하였습니다.");
-    }
+  const onChangeSocialType = (type: SocialType) => {
+    router.push(socialLink[type]);
   };
-  return { redirectUrl };
+
+  const socialLink = {
+    KAKAO: `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_LOGIN_REDIRECT_URL}&response_type=code`,
+    NAVER: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${NAVER_LOGIN_REDIRECT_URL}&state=test`,
+  };
+
+  return { onChangeSocialType };
 }
