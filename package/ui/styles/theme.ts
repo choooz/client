@@ -16,6 +16,12 @@ const palette = {
     base: "#E5E5EC",
     dark: "#111111",
   },
+  font_color: {
+    up_text: "#111111",
+    medium_text: "#505050",
+    down_text: "#767676",
+    inactive_text: "#999999",
+  },
   background: {
     white: "#ffffff",
     soft: "#F7F7FB",

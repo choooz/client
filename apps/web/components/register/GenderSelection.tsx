@@ -5,20 +5,23 @@ import Image from "next/image";
 import styled, { css } from "styled-components";
 import { Gender } from "types/auth";
 
+type GenderType = "FEMALE" | "MALE" | null;
+
 interface Props {
-  gender: "female" | "male" | null;
+  gender: GenderType;
   onChangeProgress(number: number): void;
   onChangeGender(gender: Gender): void;
 }
 
-function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
-  type Direction = "left" | "right";
+type Direction = "left" | "right";
+type ActiveType = "active" | "inactive" | null;
 
+function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
   const getGender = (direction: Direction) => {
-    return direction === "left" ? "female" : "male";
+    return direction === "left" ? "FEMALE" : "MALE";
   };
 
-  const activeValue = (direction: Direction): "active" | "inactive" | null => {
+  const activeValue = (direction: Direction): ActiveType => {
     if (!gender) return null;
     return `${gender === getGender(direction) ? "in" : ""}active`;
   };
@@ -48,7 +51,7 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
         <ImageWrapper>
           <Image alt="남성" height={100} src={Male} />
         </ImageWrapper>
-        {gender === "male" ? (
+        {gender === "MALE" ? (
           <VoteText>
             <Image alt="선택" src={CheckRound} width={16} />
             남성으로 Chooz!
@@ -67,7 +70,7 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
         <ImageWrapper>
           <Image alt="여성" height={100} src={Female} />
         </ImageWrapper>
-        {gender === "female" ? (
+        {gender === "FEMALE" ? (
           <VoteText>
             <Image alt="선택" src={CheckRound} width={16} />
             여성으로 Chooz!
@@ -102,12 +105,12 @@ const variantStyles = {
   `,
 };
 
-const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
+const typeGuardVariantStyle = (selected: ActiveType) => {
   if (!selected) return null;
   return variantStyles[selected];
 };
 
-const LeftVote = styled(Button)<{ selected: "active" | "inactive" | null }>`
+const LeftVote = styled(Button)<{ selected: ActiveType }>`
   position: absolute;
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   flex-direction: column;
