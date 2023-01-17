@@ -53,18 +53,17 @@ function RegisterTemplate({
 const WelcomeText = styled.div`
   display: flex;
   align-items: center;
-  font-size: 18px;
+  ${({ theme }) => theme.textStyle.Title_Medium}
   font-weight: 700;
   color: ${theme.palette.ink.lighter};
   gap: 6px;
   line-height: 26px;
-  padding-bottom: 24px;
   animation: ${transitions.popInFromBottom} 0.7s ease-in-out;
 `;
 
 const QuestionText = styled.div`
   display: flex;
-  font-size: 28px;
+  ${({ theme }) => theme.textStyle.Title_2}
   font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
@@ -82,22 +81,21 @@ const VoteBox = styled.div`
 `;
 
 const BlinkText = styled.div`
+  top: 24px;
+  position: relative;
   animation: ${transitions.blink} 1s step-end infinite;
 `;
 
 const StyleText = styled.div`
   display: flex;
-  font-size: 28px;
+  ${({ theme }) => theme.textStyle.Title_2}
   font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
-  padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  ${media.medium} {
-    padding-bottom: 40px;
-  }
+  margin: 24px 0 40px 0;
   mark {
-    color: #6f4ef5;
+    color: ${theme.palette.main.point};
   }
 `;
 
