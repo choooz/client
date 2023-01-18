@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { transitions } from "../../styles";
+import Button from "../button/Button";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -23,37 +24,27 @@ function Template({
     <>
       {children}
       <ButtonWrapper>
-        {prevButtonText && <Back {...prevButtonProps}>{prevButtonText}</Back>}
-        {nextButtonText && <Button {...nextButtonProps}>{nextButtonText}</Button>}
+        {prevButtonText && (
+          <BackButton variant="inactive" width="24%" height="56px" {...prevButtonProps}>
+            {prevButtonText}
+          </BackButton>
+        )}
+        {nextButtonText && (
+          <NextButton variant="primary" width="76%" height="56px" {...nextButtonProps}>
+            {nextButtonText}
+          </NextButton>
+        )}
       </ButtonWrapper>
     </>
   );
 }
 
-const Button = styled.button`
-  width: 76%;
-  height: 56px;
-  background-color: ${({ theme }) => theme.palette.main.point};
-  color: white;
-  border-radius: 4px;
+const BackButton = styled(Button)`
+  background-color: ${({ theme }) => theme.palette.background.white};
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-  font-weight: 700;
-  transition: all 0.3s ease-in-out;
-  :disabled {
-    background-color: ${({ theme }) => theme.palette.border.base};
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
 `;
 
-const Back = styled.button`
-  font-size: 16px;
-  font-weight: 700;
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  height: 56px;
-  width: 24%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const NextButton = styled(Button)`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
 `;
 
