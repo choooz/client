@@ -73,9 +73,9 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};
+  font-weight: 700;
   ${({ theme }) => theme.textStyle.Title_Small};
   ${({ variant }) => variant && variantStyles[variant]};
-  font-weight: 700;
 `;
 
 export default Button;

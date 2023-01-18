@@ -1,13 +1,12 @@
 import { ProgressImage } from "public/images";
-import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled from "styled-components";
 
-interface ProgressBarType {
+interface Props {
   progress: number;
 }
 
-function ProgressBar({ progress }: ProgressBarType) {
+function ProgressBar({ progress }: Props) {
   return (
     <Container>
       <Progress $progress={progress}>
