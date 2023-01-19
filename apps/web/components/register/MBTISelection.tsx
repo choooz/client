@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { MouseEvent } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
-import { MBTIType } from "types/auth";
+import { MBTIType } from "types/user";
 
 interface Props {
   MBTI: MBTIType;

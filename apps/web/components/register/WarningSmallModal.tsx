@@ -1,12 +1,12 @@
 import { Button, ModalTemplate } from "@chooz/ui";
 import { WarningIcon } from "public/icons";
 import styled from "styled-components";
-import { UserModel } from "types/auth";
+import { UserInfo } from "types/user";
 
 interface Props {
-  userInfo: UserModel;
+  userInfo: UserInfo;
   onToggleModal: () => void;
-  onCompleteRegister: (userInfo: UserModel) => void;
+  onCompleteRegister: (userInfo: UserInfo) => void;
 }
 
 function WarningSmallModal({ userInfo, onToggleModal, onCompleteRegister }: Props) {
