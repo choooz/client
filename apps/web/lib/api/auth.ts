@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
-import apiClient from "./apiClient";
 
 export type CodeType = string | string[];
 
@@ -21,16 +20,5 @@ interface NaverLoginRequest {
 
 export const naverLoginAPI = async (naverLoginRequest: NaverLoginRequest) => {
   const response = await axios.post(`${SERVER_URL}api/oauth/naver`, naverLoginRequest);
-  return response.data;
-};
-
-interface AddInfoRequest {
-  mbti: string;
-  age: number;
-  gender: string | null;
-}
-
-export const addInfoAPI = async (addInfoRequest: AddInfoRequest) => {
-  const response = await apiClient.patch(`${SERVER_URL}api/user/addInfo`, addInfoRequest);
   return response.data;
 };
