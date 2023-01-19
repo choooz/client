@@ -1,35 +1,18 @@
 import { Button, transitions } from "@chooz/ui";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
-
 import { CheckRound, Chick } from "public/images";
 import { CATEGORY_NAMES } from "lib/constants";
 
-type CategoryType = {
-  [key: string]: boolean;
-};
+interface Props {
+  categorys: { [key: string]: boolean };
+  onClickCategory: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickComplete: () => void;
+}
 
-function InterestSection() {
-  const [categorys, setCategorys] = useState<CategoryType>({
-    FOODS: false,
-    CARRIER: false,
-    LOVE: false,
-    FASHION: false,
-    INTEREST: false,
-    NULL: false,
-  });
-
-  // @Todo 타입 지정해주기
-  const onClickCategory = (e: any) => {
-    const category = e.currentTarget.name;
-    setCategorys({
-      ...categorys,
-      [category]: !categorys[category],
-    });
-  };
-
+function InterestSection({ categorys, onClickCategory, onClickComplete }: Props) {
   return (
     <>
       <WelcomeText>Chooz에 오신 것을 환영합니다!</WelcomeText>
@@ -61,7 +44,7 @@ function InterestSection() {
         })}
       </VoteBox>
       <ButtonWrapper>
-        <CompleteButton variant="primary" width="100%" height="56px">
+        <CompleteButton variant="primary" width="100%" height="56px" onClick={onClickComplete}>
           완료
         </CompleteButton>
       </ButtonWrapper>
@@ -98,7 +81,7 @@ const VoteBox = styled.div`
   }
 `;
 
-const Vote = styled(Button)<{ selected?: boolean }>`
+const Vote = styled(Button)<{ selected: boolean }>`
   background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   margin-bottom: 14px;
