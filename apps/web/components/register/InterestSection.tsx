@@ -1,45 +1,32 @@
-import { transitions } from "@chooz/ui";
+import { Button, transitions } from "@chooz/ui";
 import Image from "next/image";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 
 import { CheckRound, Chick } from "public/images";
+import { CATEGORY_NAMES } from "lib/constants";
 
-type CategoryNameType =
-  | "category1"
-  | "category2"
-  | "category3"
-  | "category4"
-  | "category5"
-  | "category6";
+type CategoryType = {
+  [key: string]: boolean;
+};
 
 function InterestSection() {
-  // @Note 카테고리 상수화해서 쓰고 싶은데 가능한가?
-  const CATEGORY_NAMES: CategoryNameType[] = [
-    "category1",
-    "category2",
-    "category3",
-    "category4",
-    "category5",
-    "category6",
-  ];
-
-  const [categorys, setCategorys] = useState({
-    category1: false,
-    category2: false,
-    category3: false,
-    category4: false,
-    category5: false,
-    category6: false,
+  const [categorys, setCategorys] = useState<CategoryType>({
+    FOODS: false,
+    CARRIER: false,
+    LOVE: false,
+    FASHION: false,
+    INTEREST: false,
+    NULL: false,
   });
 
   // @Todo 타입 지정해주기
   const onClickCategory = (e: any) => {
-    const categoryName: CategoryNameType = e.target.dataset.name;
+    const category = e.currentTarget.name;
     setCategorys({
       ...categorys,
-      [categoryName]: !categorys[categoryName],
+      [category]: !categorys[category],
     });
   };
 
@@ -51,25 +38,32 @@ function InterestSection() {
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        {CATEGORY_NAMES.map((categoryName: CategoryNameType) => {
+        {Object.keys(categorys).map((categoryName, index) => {
           return (
-            <Vote
-              key={categoryName}
-              selected={categorys[categoryName]}
-              onClick={onClickCategory}
-              data-name={categoryName}
-            >
-              <Image alt="항목" src={Chick} height={32} />
-              <VoteText>
-                {categorys[categoryName] && <Image alt="선택" src={CheckRound} width={16} />}
-                {categoryName}
-              </VoteText>
-            </Vote>
+            <>
+              <Vote
+                width="48%"
+                height="100%"
+                borderRadius="10px"
+                key={categoryName}
+                selected={categorys[categoryName]}
+                onClick={onClickCategory}
+                name={categoryName}
+              >
+                <Image alt="항목" src={Chick} height={32} />
+                <VoteText>
+                  {categorys[categoryName] && <Image alt="선택" src={CheckRound} width={16} />}
+                  {CATEGORY_NAMES[index]}
+                </VoteText>
+              </Vote>
+            </>
           );
         })}
       </VoteBox>
       <ButtonWrapper>
-        <Button>완료</Button>
+        <CompleteButton variant="primary" width="100%" height="56px">
+          완료
+        </CompleteButton>
       </ButtonWrapper>
     </>
   );
@@ -104,21 +98,14 @@ const VoteBox = styled.div`
   }
 `;
 
-const Vote = styled.div<{ selected?: boolean }>`
-  width: 48%;
-  height: 100%;
-  border-radius: 10px;
+const Vote = styled(Button)<{ selected?: boolean }>`
   background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   margin-bottom: 14px;
-  display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
-  cursor: pointer;
-  font-size: 16px;
   font-weight: 400;
+  ${({ theme }) => theme.textStyle.Title_Small};
   ${({ selected }) =>
     selected &&
     css`
@@ -145,18 +132,7 @@ const ButtonWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const Button = styled.button`
-  width: 100%;
-  height: 56px;
-  background-color: #863dff;
-  color: white;
-  border-radius: 4px;
+const CompleteButton = styled(Button)`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
-  font-weight: 700;
-  transition: all 0.3s ease-in-out;
-  :disabled {
-    background-color: #e5e5ec;
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
 `;
 export default InterestSection;
