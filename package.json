@@ -1,27 +1,15 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "chooz",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  "workspaces": {
+    "packages": [
+      "package/*",
+      "apps/*"
+    ]
   },
-  "dependencies": {
-    "axios": "^1.1.3",
-    "next": "13.0.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
-  },
+  "packageManager": "yarn@3.3.0",
   "devDependencies": {
-    "@types/node": "18.11.7",
-    "@types/react": "18.0.24",
-    "@types/react-dom": "18.0.8",
-    "@yarnpkg/sdks": "^3.0.0-rc.27",
-    "eslint": "8.26.0",
-    "eslint-config-next": "13.0.0",
-    "typescript": "4.8.4"
-  },
-  "packageManager": "yarn@3.2.4"
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.3"
+  }
 }
