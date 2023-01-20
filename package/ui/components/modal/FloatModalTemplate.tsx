@@ -13,7 +13,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const FloatModal = ({ onToggleModal, children }: Props) => {
+function FloatModalTemplate({ onToggleModal, children }: Props) {
   return (
     <Portal selector="#portal">
       <ModalTemplateBlock onMouseDown={onToggleModal}>
@@ -22,7 +22,7 @@ const FloatModal = ({ onToggleModal, children }: Props) => {
       </ModalTemplateBlock>
     </Portal>
   );
-};
+}
 
 const Inner = styled.div`
   position: absolute;
@@ -59,4 +59,4 @@ const ModalBackground = styled.div`
   z-index: 1100;
 `;
 
-export default FloatModal;
+export default FloatModalTemplate;

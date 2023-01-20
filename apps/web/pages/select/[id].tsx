@@ -1,4 +1,4 @@
-import { FloatModal } from "@chooz/ui";
+import { FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModal from "components/select/AddDetailModal";
 import useOutSideClick from "hooks/useOutsideClick";
@@ -63,10 +63,10 @@ function SelectPage() {
         <AddDescriptionButton>﹢</AddDescriptionButton>
       </PageInner>
       {toggleFirst && (
-        <FloatModal onToggleModal={onChangeToggleFirst}>
+        <FloatModalTemplate onToggleModal={onChangeToggleFirst}>
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
-        </FloatModal>
+        </FloatModalTemplate>
       )}
       {toggleDetail && (
         <AddDetailModal
