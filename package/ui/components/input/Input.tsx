@@ -9,7 +9,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Input 가로 길이
    */
-  width: string;
+  width: `${number}px` | `${number}%` | "auto";
   /**
    * 포커스 여뿌
    * 기본 값 : false

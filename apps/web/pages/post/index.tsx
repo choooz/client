@@ -39,7 +39,7 @@ function PostPage() {
             vote={vote}
             onChangeVoteBySelect={onChangeVoteBySelect}
             mutateVote={mutateVote}
-            onChangePostStep={onChangePostStep}
+            onChangePostStep={() => router.push("/select/1")}
           />
         )}
       </PageInner>

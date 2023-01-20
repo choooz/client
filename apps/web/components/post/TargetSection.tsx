@@ -1,11 +1,11 @@
 import { Template } from "@chooz/ui";
-import { postVoteRequest } from "lib/api/vote";
+import { PostVoteRequest } from "lib/api/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  vote: postVoteRequest;
+  vote: PostVoteRequest;
   onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
   mutateVote(): void;
@@ -19,7 +19,7 @@ function TargetSection({
   vote,
   mutateVote,
 }: Props) {
-  const { gender, age } = vote;
+  const { filteredAge, filteredGender } = vote;
 
   return (
     <Template
@@ -38,19 +38,19 @@ function TargetSection({
       <ChipWrapper>
         <InvisibleInput
           type="radio"
-          name="gender"
+          name="filteredGender"
           id="MALE"
           value="MALE"
-          checked={gender === "MALE"}
+          checked={filteredGender === "MALE"}
           onChange={onChangeVoteByClick}
         />
         <Chip htmlFor="MALE">남성</Chip>
         <InvisibleInput
           type="radio"
-          name="gender"
+          name="filteredGender"
           id="FEMALE"
           value="FEMALE"
-          checked={gender === "FEMALE"}
+          checked={filteredGender === "FEMALE"}
           onChange={onChangeVoteByClick}
         />
         <Chip htmlFor="FEMALE">여성</Chip>
@@ -61,10 +61,10 @@ function TargetSection({
           <div key={id}>
             <InvisibleInput
               type="radio"
-              name="age"
+              name="filteredAge"
               id={id}
               value={id}
-              checked={age === id}
+              checked={filteredAge === id}
               onChange={onChangeVoteByClick}
             />
             <Chip htmlFor={id}>{name}</Chip>
