@@ -1,19 +1,16 @@
 import { Button, ModalTemplate } from "@chooz/ui";
-import { useRouter } from "next/router";
 import { WarningIcon } from "public/icons";
 import styled from "styled-components";
-import { UserModel } from "types/auth";
+import { UserInfo } from "types/user";
 
 interface Props {
-  userInfo: UserModel;
+  userInfo: UserInfo;
   onToggleModal: () => void;
+  onCompleteRegister: (userInfo: UserInfo) => void;
 }
 
-function WarningSmallModal({ userInfo, onToggleModal }: Props) {
-  const route = useRouter();
-  const onCompleteRegister = () => {
-    route.push("/register/interest");
-  };
+function WarningSmallModal({ userInfo, onToggleModal, onCompleteRegister }: Props) {
+  const { gender, MBTI, age } = userInfo;
 
   return (
     <ModalTemplate width="311px" height="357px" onToggleModal={onToggleModal}>
@@ -23,22 +20,22 @@ function WarningSmallModal({ userInfo, onToggleModal }: Props) {
         <ListItem>
           <Key>성별</Key>
           <Divider />
-          <Value>{userInfo.gender}</Value>
+          <Value>{gender}</Value>
         </ListItem>
         <ListItem>
           <Key>MBTI</Key>
           <Divider />
           <Value>
-            {userInfo.MBTI.M}
-            {userInfo.MBTI.B}
-            {userInfo.MBTI.T}
-            {userInfo.MBTI.I}
+            {MBTI.M}
+            {MBTI.B}
+            {MBTI.T}
+            {MBTI.I}
           </Value>
         </ListItem>
         <ListItem>
           <Key>나이</Key>
           <Divider />
-          <Value>{userInfo.age}</Value>
+          <Value>{age}</Value>
         </ListItem>
       </InfoList>
       <DetailText>
@@ -60,7 +57,7 @@ function WarningSmallModal({ userInfo, onToggleModal }: Props) {
           width="156px"
           height="48px"
           borderRadius="0 0 4px 0"
-          onClick={onCompleteRegister}
+          onClick={() => onCompleteRegister(userInfo)}
         >
           확인
         </Button>

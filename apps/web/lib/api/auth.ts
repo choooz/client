@@ -8,17 +8,17 @@ interface KakaoLoginRequest {
   redirectUrl: string;
 }
 
+export const kakaoLoginAPI = async (kakaoLoginRequest: KakaoLoginRequest) => {
+  const response = await axios.post(`${SERVER_URL}api/oauth/kakao`, kakaoLoginRequest);
+  return response.data;
+};
+
 interface NaverLoginRequest {
   code: CodeType;
   state: string;
 }
 
-export const kakaoLoginAPI = async (loginRequest: KakaoLoginRequest) => {
-  const response = await axios.post(`${SERVER_URL}api/oauth/kakao`, loginRequest);
-  return response.data;
-};
-
-export const naverLoginAPI = async (loginRequest: NaverLoginRequest) => {
-  const response = await axios.post(`${SERVER_URL}api/oauth/naver`, loginRequest);
+export const naverLoginAPI = async (naverLoginRequest: NaverLoginRequest) => {
+  const response = await axios.post(`${SERVER_URL}api/oauth/naver`, naverLoginRequest);
   return response.data;
 };

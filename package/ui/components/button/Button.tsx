@@ -5,7 +5,7 @@ interface ButtonStyledProps {
   /**
    * 버튼 타입
    */
-  variant: "primary" | "inactive" | "outline" | "warning";
+  variant?: "primary" | "inactive" | "outline" | "warning";
   /**
    * 버튼 가로 길이
    */
@@ -41,6 +41,7 @@ function Button({ width, height, variant, borderRadius = "4px", children, ...res
 const variantStyles = {
   primary: css`
     background-color: ${({ theme }) => theme.palette.main.point};
+    color: ${({ theme }) => theme.palette.background.white};
     :disabled {
       background-color: ${({ theme }) => theme.palette.background.inactive};
       color: ${({ theme }) => theme.palette.ink.lightest};
@@ -73,8 +74,8 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};
   font-weight: 700;
-  font-size: 16px;
-  ${({ variant }) => variantStyles[variant]};
+  ${({ theme }) => theme.textStyle.Title_Small};
+  ${({ variant }) => variant && variantStyles[variant]};
 `;
 
 export default Button;

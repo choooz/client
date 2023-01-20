@@ -1,24 +1,27 @@
-import { RegisterTemplate, transitions } from "@chooz/ui";
+import { Button, RegisterTemplate, transitions } from "@chooz/ui";
 import { CheckRound, Female, Male, PurpleMonster } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled, { css } from "styled-components";
-import { Gender } from "types/auth";
+import { Gender } from "types/user";
+
+type GenderType = "FEMALE" | "MALE" | null;
 
 interface Props {
-  gender: "female" | "male" | null;
+  gender: GenderType;
   onChangeProgress(number: number): void;
   onChangeGender(gender: Gender): void;
 }
 
-function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
-  type Direction = "left" | "right";
+type Direction = "left" | "right";
+type ActiveType = "active" | "inactive" | null;
 
+function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
   const getGender = (direction: Direction) => {
-    return direction === "left" ? "female" : "male";
+    return direction === "left" ? "FEMALE" : "MALE";
   };
 
-  const activeValue = (direction: Direction): "active" | "inactive" | null => {
+  const activeValue = (direction: Direction): ActiveType => {
     if (!gender) return null;
     return `${gender === getGender(direction) ? "in" : ""}active`;
   };
@@ -38,11 +41,17 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
         disabled: !gender,
       }}
     >
-      <LeftVote selected={activeValue("left")} onClick={() => onChangeGender(Gender.MALE)}>
+      <LeftVote
+        variant="inactive"
+        width="48%"
+        height="100%"
+        selected={activeValue("left")}
+        onClick={() => onChangeGender(Gender.MALE)}
+      >
         <ImageWrapper>
           <Image alt="남성" height={100} src={Male} />
         </ImageWrapper>
-        {gender === "male" ? (
+        {gender === "MALE" ? (
           <VoteText>
             <Image alt="선택" src={CheckRound} width={16} />
             남성으로 Chooz!
@@ -51,11 +60,17 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
           "남성"
         )}
       </LeftVote>
-      <RightVote selected={activeValue("right")} onClick={() => onChangeGender(Gender.FEMALE)}>
+      <RightVote
+        variant="inactive"
+        width="48%"
+        height="100%"
+        selected={activeValue("right")}
+        onClick={() => onChangeGender(Gender.FEMALE)}
+      >
         <ImageWrapper>
           <Image alt="여성" height={100} src={Female} />
         </ImageWrapper>
-        {gender === "female" ? (
+        {gender === "FEMALE" ? (
           <VoteText>
             <Image alt="선택" src={CheckRound} width={16} />
             여성으로 Chooz!
@@ -71,18 +86,18 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
 const variantStyles = {
   active: css`
     animation: ${transitions.blink} 0.7s ease-in-out;
-    width: 64%;
+    width: 63%;
+    font-weight: 700;
     border: 1px solid ${({ theme }) => theme.palette.main.point};
     background-color: ${({ theme }) => theme.palette.background.selected};
-    font-size: 16px;
-    font-weight: 700;
+    ${({ theme }) => theme.textStyle.Title_Small}
     color: ${({ theme }) => theme.palette.main.sub};
     ${media.medium} {
       width: 74%;
     }
   `,
   inactive: css`
-    width: 36%;
+    width: 35%;
     opacity: 0.5;
     ${media.medium} {
       width: 23%;
@@ -90,26 +105,22 @@ const variantStyles = {
   `,
 };
 
-const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
+const typeGuardVariantStyle = (selected: ActiveType) => {
   if (!selected) return null;
   return variantStyles[selected];
 };
 
-const LeftVote = styled.div<{ selected: "active" | "inactive" | null }>`
+const LeftVote = styled(Button)<{ selected: ActiveType }>`
   position: absolute;
-  width: 48%;
-  height: 100%;
-  border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
-  display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  font-size: 18px;
+  ${({ theme }) => theme.textStyle.Title_Medium}
   transition: all 0.3s ease-in-out;
+  font-weight: 500;
   &:hover {
-    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
+    border-color: ${({ theme }) => theme.palette.main.point};
+    color: ${({ theme, selected }) => selected === "inactive" && theme.palette.main.point};
+    font-weight: 700;
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
 `;

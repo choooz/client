@@ -1,13 +1,19 @@
 import InterestSection from "components/register/InterestSection";
 import React from "react";
+import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
 import { media } from "styles/media";
 
 function Interest() {
+  const { categoryLists, onClickCategory, onClickComplete } = useRegisterService();
   return (
     <PageWrapper>
       <PageInner>
-        <InterestSection />
+        <InterestSection
+          categoryLists={categoryLists}
+          onClickCategory={onClickCategory}
+          onClickComplete={onClickComplete}
+        />
       </PageInner>
     </PageWrapper>
   );
