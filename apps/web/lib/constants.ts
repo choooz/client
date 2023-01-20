@@ -1,6 +1,6 @@
 import Path from "./Path";
 
-export const CLIENT_URL = "https://client-qm8u5r52v-fashion-teacher.vercel.app/";
+export const CLIENT_URL = "https://client-web-chooz.vercel.app";
 export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || "";
 
 export const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || "";
