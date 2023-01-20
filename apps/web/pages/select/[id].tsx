@@ -7,12 +7,14 @@ import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
 import React from "react";
+import useModifyVoteService from "services/useModifyVoteService";
 import styled from "styled-components";
 
 function SelectPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(true);
   const [toggleFirst, onChangeToggleFirst] = useToggle(true);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
+  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
   return (
     <PageWrapper>
@@ -41,7 +43,9 @@ function SelectPage() {
           </FlexRow>
           {toggleMenu && (
             <MenuBox>
-              <MenuText className="modify">수정하기</MenuText>
+              <MenuText className="modify" onClick={onChangeToggleDetail}>
+                수정하기
+              </MenuText>
               <MenuText className="delete">삭제하기</MenuText>
             </MenuBox>
           )}
@@ -64,7 +68,15 @@ function SelectPage() {
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModal>
       )}
-      {toggleDetail && <AddDetailModal onToggleModal={onChangeToggleDetail} />}
+      {toggleDetail && (
+        <AddDetailModal
+          onToggleModal={onChangeToggleDetail}
+          mutateVote={mutateVote}
+          vote={vote}
+          onChangeVote={onChangeVote}
+          onChangeVoteByClick={onChangeVoteByClick}
+        />
+      )}
     </PageWrapper>
   );
 }

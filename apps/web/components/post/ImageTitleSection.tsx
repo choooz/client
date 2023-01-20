@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { Input, Template, transitions } from "@chooz/ui";
-import { postVoteRequest } from "lib/api/vote";
+import { PostVoteRequest } from "lib/api/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import React, { useState } from "react";
 
 interface Props {
-  vote: postVoteRequest;
+  vote: PostVoteRequest;
   onChangeVote(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void;
   onUploadImage(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangePostStep(step: number): void;

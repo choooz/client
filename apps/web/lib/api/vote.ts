@@ -1,7 +1,6 @@
 import apiClient from "./apiClient";
 
-export interface postVoteRequest {
-  userId: number;
+export interface PostVoteRequest {
   title: string;
   detail: string;
   category: string;
@@ -14,9 +13,8 @@ export interface postVoteRequest {
   filteredMbti: string;
 }
 
-export const postVoteAPI = async (body: postVoteRequest) => {
+export const postVoteAPI = async (body: PostVoteRequest) => {
   const requestBody = {
-    userId: 1,
     title: body.title,
     detail: "NULL",
     category: body.category || "NULL",
@@ -29,5 +27,19 @@ export const postVoteAPI = async (body: postVoteRequest) => {
     filteredMbti: body.filteredMbti || "NULL",
   };
   const response = await apiClient.post("api/vote/createVote", requestBody);
+  return response.data;
+};
+
+export type modifyVoteRequest = Partial<PostVoteRequest>;
+
+export const modifyVoteAPI = async (body: modifyVoteRequest) => {
+  const requestBody = {
+    title: body.title || "NULL",
+    detail: body.detail,
+    category: body.category || "NULL",
+    titleA: body.titleA,
+    titleB: body.titleB,
+  };
+  const response = await apiClient.post("api/vote/updateVote", requestBody);
   return response.data;
 };

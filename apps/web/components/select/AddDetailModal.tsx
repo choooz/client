@@ -1,5 +1,6 @@
 import { DivideLine, Input, ModalTemplate, Template } from "@chooz/ui";
-import { AGE_LIST } from "lib/constants";
+import { UseMutateFunction } from "@tanstack/react-query";
+import { modifyVoteRequest } from "lib/api/vote";
 import React from "react";
 import styled from "styled-components";
 
@@ -14,38 +15,66 @@ const CATEGIORY_LIST = [
 ];
 
 interface Props {
+  vote: modifyVoteRequest;
   onToggleModal(): void;
+  onChangeVote: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  mutateVote(): void;
+  onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
-function AddDetailModal({ onToggleModal }: Props) {
+function AddDetailModal({
+  onToggleModal,
+  mutateVote,
+  onChangeVote,
+  onChangeVoteByClick,
+  vote,
+}: Props) {
+  const { title, detail, titleA, titleB, category } = vote;
   return (
     <ModalTemplate width="480px" height="698px" onToggleModal={onToggleModal}>
-      <Template nextButtonProps={{}} nextButtonText="작성 완료">
+      <Template nextButtonProps={{ onClick: mutateVote }} nextButtonText="작성 완료">
         <ModalWrapper>
           <TitleRow>
             <div>수정하기</div>
             <div>x</div>
           </TitleRow>
           <QuestionText> 질문을 입력해주세요.(선택)</QuestionText>
-          <TitleInput placeholder="질문을 입력해주세요" />
+          <TitleInput
+            placeholder="질문을 입력해주세요"
+            onChange={onChangeVote}
+            name="title"
+            value={title}
+          />
           <QuestionText>선택지를 입력해주세요.</QuestionText>
           <FlexRow>
-            <Input width="auto" />
+            <Input width="auto" onChange={onChangeVote} name="titleA" value={titleA} />
             <VSText>VS</VSText>
-            <Input width="auto" />
+            <Input width="auto" onChange={onChangeVote} name="titleB" value={titleB} />
           </FlexRow>
           <DivideLine />
           <QuestionText>나이</QuestionText>
           <ChipWrapper>
             {CATEGIORY_LIST.map(({ id, name }) => (
               <div key={id}>
-                <InvisibleInput type="radio" />
+                <InvisibleInput
+                  type="radio"
+                  name="category"
+                  id={id}
+                  value={id}
+                  checked={category === id}
+                  onChange={onChangeVoteByClick}
+                />
                 <Chip htmlFor={id}>{name}</Chip>
               </div>
             ))}
           </ChipWrapper>
           <QuestionText>상세사항 </QuestionText>
-          <TitleInput placeholder="상세사항을 입력해주세요" />
+          <TitleInput
+            placeholder="상세사항을 입력해주세요"
+            onChange={onChangeVote}
+            name="detail"
+            value={detail}
+          />
         </ModalWrapper>
       </Template>
     </ModalTemplate>

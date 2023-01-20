@@ -1,10 +1,9 @@
 import React, { useCallback, useState } from "react";
-import { postVoteRequest } from "lib/api/vote";
+import { PostVoteRequest } from "lib/api/vote";
 import { uploadProfileImageAPI } from "lib/api/upload";
 
 export default function usePostVoteService() {
-  const [vote, setVote] = useState<postVoteRequest>({
-    userId: 1,
+  const [vote, setVote] = useState<PostVoteRequest>({
     title: "",
     detail: "",
     category: "",
