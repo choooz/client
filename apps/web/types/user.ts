@@ -9,6 +9,7 @@ export enum Gender {
   MALE = "MALE",
   FEMALE = "FEMALE",
 }
+
 export type SocialType = "NAVER" | "KAKAO";
 
 export interface UserInfo {
@@ -24,7 +25,7 @@ export interface GetUserInfoResponse {
   username: string;
   email: string;
   imageUrl: string;
-  age: string | null;
-  gender: "MALE" | "FEMALE" | null;
+  age: string;
+  gender: "MALE" | "FEMALE";
   MBTI: MBTIType;
 }
