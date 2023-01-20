@@ -4,15 +4,16 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { CheckRound, Chick } from "public/images";
-import { CATEGORY_NAMES } from "lib/constants";
+import { CATEGORY_LIST } from "lib/constants";
+import { CategoryNameType } from "types/vote";
 
 interface Props {
-  categorys: { [key: string]: boolean };
+  categoryLists: CategoryNameType[];
   onClickCategory: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickComplete: () => void;
 }
 
-function InterestSection({ categorys, onClickCategory, onClickComplete }: Props) {
+function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Props) {
   return (
     <>
       <WelcomeText>Chooz에 오신 것을 환영합니다!</WelcomeText>
@@ -21,22 +22,24 @@ function InterestSection({ categorys, onClickCategory, onClickComplete }: Props)
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        {Object.keys(categorys).map((categoryName, index) => {
+        {CATEGORY_LIST.map(({ id, name }) => {
           return (
             <>
               <Vote
                 width="48%"
                 height="100%"
                 borderRadius="10px"
-                key={categoryName}
-                selected={categorys[categoryName]}
+                key={id}
+                selected={categoryLists.includes(id as CategoryNameType)}
                 onClick={onClickCategory}
-                name={categoryName}
+                name={id}
               >
                 <Image alt="항목" src={Chick} height={32} />
                 <VoteText>
-                  {categorys[categoryName] && <Image alt="선택" src={CheckRound} width={16} />}
-                  {CATEGORY_NAMES[index]}
+                  {categoryLists.includes(id as CategoryNameType) && (
+                    <Image alt="선택" src={CheckRound} width={16} />
+                  )}
+                  {name}
                 </VoteText>
               </Vote>
             </>

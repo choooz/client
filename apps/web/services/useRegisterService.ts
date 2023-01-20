@@ -5,8 +5,12 @@ import { reactQueryKeys } from "lib/queryKeys";
 import { useRouter } from "next/router";
 import { MouseEvent, useState } from "react";
 import { Gender, UserInfo } from "types/user";
+import { CategoryNameType } from "types/vote";
 
 export default function useRegisterService() {
+  const router = useRouter();
+  const queryClient = new QueryClient();
+
   const [userInfo, setUserInfo] = useState<UserInfo>({
     gender: null,
     MBTI: {
@@ -45,8 +49,6 @@ export default function useRegisterService() {
     setUserInfo((prev) => ({ ...prev, age: null }));
   };
 
-  const router = useRouter();
-
   const onCompleteRegister = async ({ MBTI, age, gender }: UserInfo) => {
     const stringMBTI = `${MBTI.M}${MBTI.B}${MBTI.T}${MBTI.I}`;
     try {
@@ -63,40 +65,22 @@ export default function useRegisterService() {
 
   // @note interest page
 
-  // @note string대신 category 타입 지정 못해주나?
-  type CategorysType = {
-    [key: string]: boolean;
-  };
+  const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
 
-  const [categorys, setCategorys] = useState<CategorysType>({
-    FOODS: false,
-    CARRIER: false,
-    LOVE: false,
-    FASHION: false,
-    INTEREST: false,
-    NULL: false,
-  });
-
-  // @Todo 타입 지정해주기
   const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const category = e.currentTarget.name;
-    setCategorys({
-      ...categorys,
-      [category]: !categorys[category],
-    });
+    const category = e.currentTarget.name as CategoryNameType;
+    categoryLists.includes(category)
+      ? setCategoryLists((prev) => prev.filter((item) => item !== category))
+      : setCategoryLists((prev) => [...prev.concat(category)]);
+    console.log(categoryLists);
   };
-
-  const queryClient = new QueryClient();
 
   const onClickComplete = async () => {
+    // @todo getServerSideProps로 변경
     const userInfo = await queryClient.fetchQuery(reactQueryKeys.userInfo(), getUserInfo, {
       cacheTime: 5 * 1000 * 60,
       staleTime: 5 * 1000 * 60,
     });
-    const categoryLists = [];
-    for (const [key, value] of Object.entries(categorys)) {
-      value && categoryLists.push(key);
-    }
     try {
       await addInterestCategoryAPI({
         userId: userInfo.userId,
@@ -117,7 +101,7 @@ export default function useRegisterService() {
     onChangeAge,
     onDeleteAge,
     onCompleteRegister,
-    categorys,
+    categoryLists,
     onClickCategory,
     onClickComplete,
   };

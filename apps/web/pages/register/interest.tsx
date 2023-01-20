@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { media } from "styles/media";
 
 function Interest() {
-  const { categorys, onClickCategory, onClickComplete } = useRegisterService();
+  const { categoryLists, onClickCategory, onClickComplete } = useRegisterService();
   return (
     <PageWrapper>
       <PageInner>
         <InterestSection
-          categorys={categorys}
+          categoryLists={categoryLists}
           onClickCategory={onClickCategory}
           onClickComplete={onClickComplete}
         />
