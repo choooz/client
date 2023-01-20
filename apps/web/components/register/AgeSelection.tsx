@@ -3,10 +3,10 @@ import { Arm } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled from "styled-components";
-import { UserModel } from "types/auth";
+import { UserInfo } from "types/user";
 
 interface Props {
-  userInfo: UserModel;
+  userInfo: UserInfo;
   onChangeProgress(number: number): void;
   onChangeAge: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onDeleteAge: () => void;

@@ -5,7 +5,7 @@ import {
   NAVER_LOGIN_REDIRECT_URL,
 } from "lib/constants";
 import { useRouter } from "next/router";
-import { SocialType } from "types/auth";
+import { SocialType } from "types/user";
 
 // @note 소셜 로그인이라는 하나의 관심사가 흩뿌려진 느낌
 export default function useLoginService() {

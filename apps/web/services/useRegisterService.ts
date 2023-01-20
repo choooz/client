@@ -1,11 +1,17 @@
-import { addInfoAPI } from "lib/api/auth";
+import { QueryClient } from "@tanstack/react-query";
+import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/api/user";
 import Path from "lib/Path";
+import { reactQueryKeys } from "lib/queryKeys";
 import { useRouter } from "next/router";
 import { MouseEvent, useState } from "react";
-import { Gender, UserModel } from "types/auth";
+import { Gender, UserInfo } from "types/user";
+import { CategoryNameType } from "types/vote";
 
 export default function useRegisterService() {
-  const [userInfo, setUserInfo] = useState<UserModel>({
+  const router = useRouter();
+  const queryClient = new QueryClient();
+
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     gender: null,
     MBTI: {
       M: null,
@@ -43,9 +49,7 @@ export default function useRegisterService() {
     setUserInfo((prev) => ({ ...prev, age: null }));
   };
 
-  const router = useRouter();
-
-  const onCompleteRegister = async ({ MBTI, age, gender }: UserModel) => {
+  const onCompleteRegister = async ({ MBTI, age, gender }: UserInfo) => {
     const stringMBTI = `${MBTI.M}${MBTI.B}${MBTI.T}${MBTI.I}`;
     try {
       await addInfoAPI({
@@ -58,6 +62,36 @@ export default function useRegisterService() {
       alert(error);
     }
   };
+
+  // @note interest page
+
+  const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
+
+  const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const category = e.currentTarget.name as CategoryNameType;
+    categoryLists.includes(category)
+      ? setCategoryLists((prev) => prev.filter((item) => item !== category))
+      : setCategoryLists((prev) => [...prev.concat(category)]);
+    console.log(categoryLists);
+  };
+
+  const onClickComplete = async () => {
+    // @todo getServerSideProps로 변경
+    const userInfo = await queryClient.fetchQuery(reactQueryKeys.userInfo(), getUserInfo, {
+      cacheTime: 5 * 1000 * 60,
+      staleTime: 5 * 1000 * 60,
+    });
+    try {
+      await addInterestCategoryAPI({
+        userId: userInfo.userId,
+        categoryLists,
+      });
+      router.push(Path.LIST_PAGE);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return {
     userInfo,
     progress,
@@ -67,5 +101,8 @@ export default function useRegisterService() {
     onChangeAge,
     onDeleteAge,
     onCompleteRegister,
+    categoryLists,
+    onClickCategory,
+    onClickComplete,
   };
 }

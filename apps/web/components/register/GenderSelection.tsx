@@ -3,7 +3,7 @@ import { CheckRound, Female, Male, PurpleMonster } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled, { css } from "styled-components";
-import { Gender } from "types/auth";
+import { Gender } from "types/user";
 
 type GenderType = "FEMALE" | "MALE" | null;
 

@@ -14,6 +14,16 @@ export const NAVER_LOGIN_REDIRECT_URL =
     ? `http://localhost:3000/${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
+// export const CATEGORY_NAMES = ["음식", "직업", "연애", "패션", "재미", "기타"];
+export const CATEGORY_LIST = [
+  { id: "FOODS", name: "음식" },
+  { id: "CAREER", name: "직업" },
+  { id: "LOVE", name: "연애" },
+  { id: "FASHION", name: "패션" },
+  { id: "INTEREST", name: "재미" },
+  { id: "NULL", name: "기타" },
+];
+
 export const AGE_LIST = [
   { id: "10", name: "10대" },
   { id: "20", name: "20대" },
