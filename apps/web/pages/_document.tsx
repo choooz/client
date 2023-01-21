@@ -43,6 +43,7 @@ export default class MyDocument extends Document {
             href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendardstatic.css"
             rel="stylesheet"
           />
+          <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         </Head>
         <body>
           <div id="portal" />
