@@ -11,10 +11,10 @@ interface Props {
   onChangeMBTI(e: MouseEvent<HTMLButtonElement>): void;
   onChangeProgress(number: number): void;
 }
+type Direction = "left" | "right";
+type ActiveType = "active" | "inactive" | null;
 
 function MBTISelection({ MBTI, onChangeMBTI, onChangeProgress }: Props) {
-  type Direction = "left" | "right";
-
   const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
     const lookupTable: Record<Direction, Record<"M" | "B" | "T" | "I", string>> = {
       left: { M: "E", B: "S", T: "T", I: "J" },
@@ -53,42 +53,42 @@ function MBTISelection({ MBTI, onChangeMBTI, onChangeProgress }: Props) {
     >
       <VoteBox>
         <LeftVote name="M" selected={activeValue("left", "M")} value="E" onClick={onChangeMBTI}>
-          <div>E</div>
-          <VoteText>외향형</VoteText>
+          <MbtiType>E</MbtiType>
+          <MbtiText>외향형</MbtiText>
         </LeftVote>
         <RightVote name="M" selected={activeValue("right", "M")} value="I" onClick={onChangeMBTI}>
-          <div>I</div>
-          <VoteText>내향형</VoteText>
+          <MbtiType>I</MbtiType>
+          <MbtiText>내향형</MbtiText>
         </RightVote>
       </VoteBox>
       <VoteBox>
         <LeftVote name="B" selected={activeValue("left", "B")} value="S" onClick={onChangeMBTI}>
-          <div>S</div>
-          <VoteText>감정형</VoteText>
+          <MbtiType>S</MbtiType>
+          <MbtiText>감정형</MbtiText>
         </LeftVote>
         <RightVote name="B" selected={activeValue("right", "B")} value="N" onClick={onChangeMBTI}>
-          <div>N</div>
-          <VoteText>직관형</VoteText>
+          <MbtiType>N</MbtiType>
+          <MbtiText>직관형</MbtiText>
         </RightVote>
       </VoteBox>
       <VoteBox>
         <LeftVote name="T" selected={activeValue("left", "T")} value="T" onClick={onChangeMBTI}>
-          <div>T</div>
-          <VoteText>사고형</VoteText>
+          <MbtiType>T</MbtiType>
+          <MbtiText>사고형</MbtiText>
         </LeftVote>
         <RightVote name="T" selected={activeValue("right", "T")} value="F" onClick={onChangeMBTI}>
-          <div>F</div>
-          <VoteText>감정형</VoteText>
+          <MbtiType>F</MbtiType>
+          <MbtiText>감정형</MbtiText>
         </RightVote>
       </VoteBox>
       <VoteBox>
         <LeftVote name="I" selected={activeValue("left", "I")} value="J" onClick={onChangeMBTI}>
-          <div>J</div>
-          <VoteText>판단형</VoteText>
+          <MbtiType>J</MbtiType>
+          <MbtiText>판단형</MbtiText>
         </LeftVote>
         <RightVote name="I" selected={activeValue("right", "I")} value="P" onClick={onChangeMBTI}>
-          <div>P</div>
-          <VoteText> 인식형</VoteText>
+          <MbtiType>P</MbtiType>
+          <MbtiText> 인식형</MbtiText>
         </RightVote>
       </VoteBox>
     </RegisterTemplate>
@@ -122,12 +122,12 @@ const variantStyles = {
   `,
 };
 
-const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
+const typeGuardVariantStyle = (selected: ActiveType) => {
   if (!selected) return null;
   return variantStyles[selected];
 };
 
-const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
+const LeftVote = styled.button<{ selected: ActiveType }>`
   position: absolute;
   width: 48%;
   height: 100%;
@@ -138,11 +138,12 @@ const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 20px;
   transition: all 0.3s ease-in-out;
   ${({ selected }) => typeGuardVariantStyle(selected)}
   &:hover {
-    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
+    border-color: ${({ theme }) => theme.palette.main.point};
+    color: ${({ theme }) => theme.palette.main.point};
+    font-weight: 800;
   }
 `;
 
@@ -150,8 +151,13 @@ const RightVote = styled(LeftVote)`
   right: 0;
 `;
 
-const VoteText = styled.div`
-  font-size: 12px;
+const MbtiType = styled.div`
+  ${({ theme }) => theme.textStyle.Title_Large}
+  font-weight: 800;
+`;
+
+const MbtiText = styled.div`
+  ${({ theme }) => theme.textStyle.Font_Minimum}
 `;
 
 export default React.memo(MBTISelection);

@@ -119,7 +119,7 @@ const LeftVote = styled(Button)<{ selected: ActiveType }>`
   font-weight: 500;
   &:hover {
     border-color: ${({ theme }) => theme.palette.main.point};
-    color: ${({ theme, selected }) => selected === "inactive" && theme.palette.main.point};
+    color: ${({ theme }) => theme.palette.main.point};
     font-weight: 700;
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
