@@ -5,9 +5,11 @@ import { postVoteAPI } from "lib/api/vote";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
+import { useSubmitState } from "store/submitState";
 import styled from "styled-components";
 
 function PostPage() {
+  const { setIsSubmit } = useSubmitState();
   const router = useRouter();
   const { onChangeVote, vote, onUploadImage, onChangeVoteByClick, onChangeVoteBySelect } =
     usePostVoteService();
@@ -19,6 +21,7 @@ function PostPage() {
   const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
     onSuccess: () => {
       router.push("/");
+      setIsSubmit(true);
     },
   });
 
