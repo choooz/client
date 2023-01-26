@@ -2,8 +2,9 @@ import { css, DefaultTheme } from "styled-components";
 
 const palette = {
   ink: {
-    lightest: "#999999",
-    lighter: "#767676",
+    lightest: "#ffffff",
+    lighter: "#999999",
+    light: "#767676",
     base: "#505050",
     dark: "#111111",
   },
@@ -29,6 +30,7 @@ const palette = {
     selected: "#C5C0FF",
     selectedSoft: "#DCD9FF",
     inactive: "#E5E5EC",
+    black: "#111111",
   },
   system: {
     danger: "#dc0035",
