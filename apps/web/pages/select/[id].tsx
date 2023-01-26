@@ -8,11 +8,12 @@ import { HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
 import React from "react";
 import useModifyVoteService from "services/useModifyVoteService";
+import { useSubmitState } from "store/submitState";
 import styled from "styled-components";
 
 function SelectPage() {
+  const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(true);
-  const [toggleFirst, onChangeToggleFirst] = useToggle(true);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
@@ -62,8 +63,8 @@ function SelectPage() {
         </ImageWrapper>
         <AddDescriptionButton>﹢</AddDescriptionButton>
       </PageInner>
-      {toggleFirst && (
-        <FloatModalTemplate onToggleModal={onChangeToggleFirst}>
+      {isSubmit && (
+        <FloatModalTemplate onToggleModal={onToggleisSubmit}>
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
