@@ -1,5 +1,7 @@
 import { FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
+import NumberOfSolver from "components/common/NumberOfSolver";
+import TargetMessage from "components/common/TargetMessage";
 import AddDetailModal from "components/select/AddDetailModal";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
@@ -8,27 +10,23 @@ import { HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
 import React from "react";
 import useModifyVoteService from "services/useModifyVoteService";
+import { useSubmitState } from "store/submitState";
 import styled from "styled-components";
 
 function SelectPage() {
+  const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(true);
-  const [toggleFirst, onChangeToggleFirst] = useToggle(true);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
   return (
     <PageWrapper>
       <PageInner>
-        <button onClick={onChangeToggleDetail}>asdasd</button>
         <TagRow>
           <FlexRow>
-            <div>3645명 해결중!</div>
-            <div>당신을 기다렸어요</div>
+            <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
+            <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
           </FlexRow>
-          <div>22.02.03</div>
-        </TagRow>
-        <TitleRow>
-          <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
           <FlexRow>
             <Image src={SaveIcon} alt="저장하기" width={32} height={32} />
             <div ref={targetEl}>
@@ -41,6 +39,12 @@ function SelectPage() {
               />
             </div>
           </FlexRow>
+        </TagRow>
+        <TitleRow>
+          <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
+          <FlexRow>
+            <div>22.02.03</div>
+          </FlexRow>
           {toggleMenu && (
             <MenuBox>
               <MenuText className="modify" onClick={onChangeToggleDetail}>
@@ -52,18 +56,39 @@ function SelectPage() {
         </TitleRow>
         <ImageWrapper>
           <div>
-            <Image src={Eximg1} width={272} height={340} alt="A 이미지" />
+            <Image
+              src={Eximg1}
+              width={272}
+              height={340}
+              alt="A 이미지"
+              style={{
+                objectFit: "cover",
+                width: "272px",
+                height: "auto",
+              }}
+            />
             <SmallTitle>아이보리 트위드</SmallTitle>
           </div>
           <div>
-            <Image src={Eximg2} width={272} height={340} alt="B 이미지" />
+            <Image
+              src={Eximg2}
+              width={272}
+              height={340}
+              alt="B 이미지"
+              style={{
+                objectFit: "cover",
+                width: "272px",
+                height: "auto",
+              }}
+            />
             <SmallTitle>핑크 원피스</SmallTitle>
           </div>
         </ImageWrapper>
         <AddDescriptionButton>﹢</AddDescriptionButton>
+        {/* 자세히 보기 */}
       </PageInner>
-      {toggleFirst && (
-        <FloatModalTemplate onToggleModal={onChangeToggleFirst}>
+      {isSubmit && (
+        <FloatModalTemplate onToggleModal={onToggleisSubmit}>
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
@@ -89,13 +114,13 @@ const PageInner = styled.div`
   position: relative;
   margin: 0 auto;
   border-radius: 4px;
-  height: 558px;
+  height: 525px;
   background-color: white;
   max-width: 640px;
   position: relative;
   padding: 30px;
   ${media.medium} {
-    height: 717px;
+    height: 600px;
     padding: 40px;
   }
 `;
@@ -142,8 +167,8 @@ const AddDescriptionButton = styled.div`
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.background.white};
-  color: ${({ theme }) => theme.palette.ink.dark};
+  background-color: ${({ theme }) => theme.palette.ink.dark};
+  color: ${({ theme }) => theme.palette.background.white};
   font-size: 45px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
@@ -157,7 +182,7 @@ const FlexRow = styled.div`
 
 const MenuBox = styled.div`
   position: absolute;
-  top: 106px;
+  top: 70px;
   right: 41px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.palette.background.white};
