@@ -1,4 +1,6 @@
 import { media } from "@chooz/ui/styles/media";
+import SolversMessage from "components/common/SolversMessage";
+import TargetMessage from "components/common/TargetMessage";
 import Image from "next/image";
 import { BookmarkIcon } from "public/icons";
 import { Eximg1, Eximg2 } from "public/images";
@@ -14,7 +16,7 @@ function VoteItem() {
       <VoteInfo>
         <MessageContainer>
           <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
-          <NumberOfVote>🔥3,645명 해결중!</NumberOfVote>
+          <SolversMessage>🔥3,645명 해결중!</SolversMessage>
         </MessageContainer>
         <BookmarkIconStyled />
       </VoteInfo>
@@ -79,37 +81,6 @@ const VoteInfo = styled.div`
 
 const MessageContainer = styled.div`
   display: flex;
-`;
-
-const TargetMessage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 149px;
-  height: 24px;
-  border-radius: 4px;
-  background-color: ${({ theme }) => theme.palette.main.point};
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  ${media.medium} {
-    width: 154px;
-    height: 28px;
-  }
-`;
-
-const NumberOfVote = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 106px;
-  height: 24px;
-  border-radius: 4px;
-  margin-left: 4px;
-  background-color: ${({ theme }) => theme.palette.background.black};
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  ${media.medium} {
-    width: 110px;
-    height: 28px;
-  }
 `;
 
 const BookmarkIconStyled = styled(BookmarkIcon)`
