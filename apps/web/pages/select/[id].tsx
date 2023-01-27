@@ -15,7 +15,7 @@ import styled from "styled-components";
 
 function SelectPage() {
   const { isSubmit, onToggleisSubmit } = useSubmitState();
-  const [toggleDetail, onChangeToggleDetail] = useToggle(true);
+  const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
@@ -87,6 +87,8 @@ function SelectPage() {
         <AddDescriptionButton>﹢</AddDescriptionButton>
         {/* 자세히 보기 */}
       </PageInner>
+      <FirstPageBase />
+      <SecondPageBase />
       {isSubmit && (
         <FloatModalTemplate onToggleModal={onToggleisSubmit}>
           <Image alt="체크" src={Success} width={56} height={56} />
@@ -107,7 +109,10 @@ function SelectPage() {
 }
 
 const PageWrapper = styled.div`
+  position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const PageInner = styled.div`
@@ -119,9 +124,35 @@ const PageInner = styled.div`
   max-width: 640px;
   position: relative;
   padding: 30px;
+  z-index: 1000;
   ${media.medium} {
     height: 600px;
     padding: 40px;
+  }
+`;
+
+const FirstPageBase = styled.div`
+  position: absolute;
+  background-color: white;
+  border-radius: 4px;
+  width: 90%;
+  max-width: 576px;
+  height: 560px;
+  opacity: 0.6;
+  z-index: 500;
+  ${media.medium} {
+    height: 640px;
+  }
+`;
+
+const SecondPageBase = styled(FirstPageBase)`
+  width: 78%;
+  max-width: 496px;
+  height: 589px;
+  opacity: 0.3;
+  z-index: 500;
+  ${media.medium} {
+    height: 670px;
   }
 `;
 
