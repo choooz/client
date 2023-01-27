@@ -1,5 +1,5 @@
 import { media } from "@chooz/ui/styles/media";
-import SolversMessage from "components/common/SolversMessage";
+import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import Image from "next/image";
 import { BookmarkIcon } from "public/icons";
@@ -16,7 +16,7 @@ function VoteItem() {
       <VoteInfo>
         <MessageContainer>
           <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
-          <SolversMessage>🔥3,645명 해결중!</SolversMessage>
+          <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
         </MessageContainer>
         <BookmarkIconStyled />
       </VoteInfo>

@@ -1,6 +1,6 @@
 import { FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import SolversMessage from "components/common/SolversMessage";
+import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import AddDetailModal from "components/select/AddDetailModal";
 import useOutSideClick from "hooks/useOutsideClick";
@@ -24,7 +24,7 @@ function SelectPage() {
       <PageInner>
         <TagRow>
           <FlexRow>
-            <SolversMessage>🔥3,645명 해결중!</SolversMessage>
+            <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
             <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
           </FlexRow>
           <FlexRow>

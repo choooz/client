@@ -6,7 +6,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-function SolversMessage({ children }: Props) {
+function NumberOfSolver({ children }: Props) {
   return <Message>{children}</Message>;
 }
 
@@ -26,4 +26,4 @@ const Message = styled.div`
   }
 `;
 
-export default SolversMessage;
+export default NumberOfSolver;
