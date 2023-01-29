@@ -1,4 +1,4 @@
-import { FloatModalTemplate } from "@chooz/ui";
+import { Button, FloatModalTemplate, transitions } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
@@ -8,20 +8,56 @@ import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
-import React from "react";
+import React, { useEffect } from "react";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled from "styled-components";
 
+let timer: any;
+
 function SelectPage() {
+
   const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
+
+  const onScrollFunction = (e: React.WheelEvent<HTMLDivElement>) => {
+    // 휠을 올리면 className을 up로 변경하고, 1초뒤 다시 원래대로 변경
+    if (e.deltaY < 0) {
+      document.querySelector(".animate")?.classList.add("up");
+      document.querySelector(".animate2")?.classList.add("up2");
+      document.querySelector(".animate3")?.classList.add("up3");
+
+      timer = setTimeout(() => {
+        document.querySelector(".animate")?.classList.remove("up");
+        document.querySelector(".animate2")?.classList.remove("up2");
+        document.querySelector(".animate3")?.classList.remove("up3");
+      }, 1500);
+    }
+
+    //  휠을 아래로 내리면 className을 prev로 변경하고, 1초뒤 다시 원래대로 변경
+    if (e.deltaY > 0) {
+      document.querySelector(".animate")?.classList.add("down");
+      document.querySelector(".animate2")?.classList.add("down2");
+
+      timer = setTimeout(() => {
+        document.querySelector(".animate")?.classList.remove("down");
+        document.querySelector(".animate2")?.classList.remove("down2");
+      }, 1500);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <PageWrapper>
-      <PageInner>
+      <PageInner className="animate" onWheel={onScrollFunction}>
         <TagRow>
           <FlexRow>
             <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
@@ -85,16 +121,20 @@ function SelectPage() {
           </div>
         </ImageWrapper>
         <AddDescriptionButton>﹢</AddDescriptionButton>
+        <Button width="127px" height="48px" variant="primary" borderRadius="100px">
+          자세히 보기
+        </Button>
         {/* 자세히 보기 */}
       </PageInner>
-      <FirstPageBase />
-      <SecondPageBase />
+
       {isSubmit && (
         <FloatModalTemplate onToggleModal={onToggleisSubmit}>
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
       )}
+      <FirstPageBase className="animate2" />
+      <SecondPageBase className="animate3" />
       {toggleDetail && (
         <AddDetailModal
           onToggleModal={onChangeToggleDetail}
@@ -113,6 +153,41 @@ const PageWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  scrollbar-width: none;
+  .up {
+    transform-origin: 50% 0;
+    perspective: 600px;
+    transform: rotateX(-90deg) scale(0.9, 1.032);
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+  }
+  .up2 {
+    transition: all 0.5s ease-in-out;
+    perspective: 600px;
+    transform-origin: 50% 0;
+    transform: scale(1.11, 0.97);
+    opacity: 1;
+  }
+  .up3 {
+    transition: all 0.5s ease-in-out;
+    perspective: 600px;
+    transform-origin: 50% 0;
+    transform: scale(1.11, 0.97);
+    opacity: 0.6;
+  }
+  .down {
+    transition: all 0.5s ease-in-out;
+    transform: rotateX(90deg) scale(0.9, 1.032);
+    transform-origin: 50% 100%;
+    perspective: 600px;
+    opacity: 0.5;
+  }
+  .down2 {
+    transition: all 0.5s ease-in-out;
+    perspective: 600px;
+    transform-origin: 50% 0;
+    opacity: 1;
+  }
 `;
 
 const PageInner = styled.div`
@@ -137,22 +212,22 @@ const FirstPageBase = styled.div`
   border-radius: 4px;
   width: 90%;
   max-width: 576px;
-  height: 560px;
+  height: 550px;
   opacity: 0.6;
   z-index: 500;
   ${media.medium} {
-    height: 640px;
+    height: 620px;
   }
 `;
 
 const SecondPageBase = styled(FirstPageBase)`
   width: 78%;
   max-width: 496px;
-  height: 589px;
+  height: 570px;
   opacity: 0.3;
   z-index: 500;
   ${media.medium} {
-    height: 670px;
+    height: 640px;
   }
 `;
 
