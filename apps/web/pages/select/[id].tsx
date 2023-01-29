@@ -3,57 +3,26 @@ import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import AddDetailModal from "components/select/AddDetailModal";
+import useFlipAnimation from "components/select/hooks/useFlipAnimation";
+import MenuBox from "components/select/MenuBox";
+import SelectAB from "components/select/SelectAB";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
-import React, { useEffect } from "react";
+import React from "react";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled from "styled-components";
 
-let timer: any;
-
 function SelectPage() {
-
   const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
-
-  const onScrollFunction = (e: React.WheelEvent<HTMLDivElement>) => {
-    // 휠을 올리면 className을 up로 변경하고, 1초뒤 다시 원래대로 변경
-    if (e.deltaY < 0) {
-      document.querySelector(".animate")?.classList.add("up");
-      document.querySelector(".animate2")?.classList.add("up2");
-      document.querySelector(".animate3")?.classList.add("up3");
-
-      timer = setTimeout(() => {
-        document.querySelector(".animate")?.classList.remove("up");
-        document.querySelector(".animate2")?.classList.remove("up2");
-        document.querySelector(".animate3")?.classList.remove("up3");
-      }, 1500);
-    }
-
-    //  휠을 아래로 내리면 className을 prev로 변경하고, 1초뒤 다시 원래대로 변경
-    if (e.deltaY > 0) {
-      document.querySelector(".animate")?.classList.add("down");
-      document.querySelector(".animate2")?.classList.add("down2");
-
-      timer = setTimeout(() => {
-        document.querySelector(".animate")?.classList.remove("down");
-        document.querySelector(".animate2")?.classList.remove("down2");
-      }, 1500);
-    }
-  };
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  const { onScrollFunction } = useFlipAnimation();
 
   return (
     <PageWrapper>
@@ -81,45 +50,9 @@ function SelectPage() {
           <FlexRow>
             <div>22.02.03</div>
           </FlexRow>
-          {toggleMenu && (
-            <MenuBox>
-              <MenuText className="modify" onClick={onChangeToggleDetail}>
-                수정하기
-              </MenuText>
-              <MenuText className="delete">삭제하기</MenuText>
-            </MenuBox>
-          )}
+          {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
         </TitleRow>
-        <ImageWrapper>
-          <div>
-            <Image
-              src={Eximg1}
-              width={272}
-              height={340}
-              alt="A 이미지"
-              style={{
-                objectFit: "cover",
-                width: "272px",
-                height: "auto",
-              }}
-            />
-            <SmallTitle>아이보리 트위드</SmallTitle>
-          </div>
-          <div>
-            <Image
-              src={Eximg2}
-              width={272}
-              height={340}
-              alt="B 이미지"
-              style={{
-                objectFit: "cover",
-                width: "272px",
-                height: "auto",
-              }}
-            />
-            <SmallTitle>핑크 원피스</SmallTitle>
-          </div>
-        </ImageWrapper>
+        <SelectAB imageA={Eximg1} titleA="아이보리 트위드2" imageB={Eximg2} titleB="핑크 원피스" />
         <AddDescriptionButton>﹢</AddDescriptionButton>
         <Button width="127px" height="48px" variant="primary" borderRadius="100px">
           자세히 보기
@@ -250,19 +183,6 @@ const TitleRow = styled.div`
   font-weight: 700;
 `;
 
-const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  gap: 16px;
-`;
-
-const SmallTitle = styled.div`
-  margin-top: 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
-  padding: 4px;
-`;
-
 const AddDescriptionButton = styled.div`
   position: absolute;
   bottom: 30px;
@@ -284,34 +204,6 @@ const FlexRow = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-`;
-
-const MenuBox = styled.div`
-  position: absolute;
-  top: 70px;
-  right: 41px;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.palette.background.white};
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  cursor: pointer;
-  .modify {
-    border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
-  }
-  .delete {
-    color: ${({ theme }) => theme.palette.system.danger};
-  }
-`;
-
-const MenuText = styled.div`
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 48px;
-  z-index: 999;
-  :hover {
-    text-decoration: underline;
-  }
 `;
 
 const GuideText = styled.div`
