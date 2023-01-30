@@ -22,11 +22,11 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
-  const { onScrollFunction } = useFlipAnimation();
+  const { onAniamteFlip } = useFlipAnimation();
 
   return (
     <PageWrapper>
-      <PageInner className="animate" onWheel={onScrollFunction}>
+      <PageInner className="animate" onWheel={onAniamteFlip}>
         <TagRow>
           <FlexRow>
             <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
@@ -128,7 +128,7 @@ const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
   height: 525px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.white};
   max-width: 640px;
   position: relative;
   padding: 30px;
@@ -141,7 +141,7 @@ const PageInner = styled.div`
 
 const FirstPageBase = styled.div`
   position: absolute;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.white};
   border-radius: 4px;
   width: 90%;
   max-width: 576px;

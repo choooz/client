@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 
-let timer: any;
-
 function useFlipAnimation() {
-  const onScrollFunction = (e: React.WheelEvent<HTMLDivElement>) => {
+  let timer: NodeJS.Timeout;
+  const onAniamteFlip = (e: React.WheelEvent<HTMLDivElement>) => {
     // 휠을 올리면 className을 up로 변경하고, 1초뒤 다시 원래대로 변경
     if (e.deltaY < 0) {
       document.querySelector(".animate")?.classList.add("up");
@@ -35,7 +34,7 @@ function useFlipAnimation() {
     };
   }, []);
 
-  return { onScrollFunction };
+  return { onAniamteFlip };
 }
 
 export default useFlipAnimation;
