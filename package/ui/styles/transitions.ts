@@ -66,7 +66,7 @@ const popIn = keyframes`
 
 const slideUp = keyframes`
   0% {
-    transform: translateY(100%);
+    transform: translateY(40%);
   }
   100% {
     transform: translateY(0%);
@@ -78,7 +78,7 @@ const slideDown = keyframes`
     transform: translateY(0%);
   }
   100% {
-    transform: translateY(100%);
+    transform: translateY(40%);
   };
 `;
 
