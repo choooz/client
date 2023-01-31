@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GlobalStyles } from "styles/globalStyles";
 import Header from "components/common/Header";
+import StyledComponentsRegistry from "../lib/registry";
 
 function RootLayout({
   // Layouts must accept a children prop.
@@ -37,7 +38,7 @@ function RootLayout({
             <Applayout>
               {/* // @todo header 넣는 다른 방법이 있을 것 layout? */}
               <Header />
-              {children}
+              <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
             </Applayout>
           </ThemeProvider>
         </QueryClientProvider>
