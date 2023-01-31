@@ -56,10 +56,10 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
           <div className="overlay">핑크 원피스 50% 340명</div>
         </RightVote>
       </ImageWrapper>
-      <ImageWrapper>
+      <FlexRow>
         <SmallTitle>{titleA}</SmallTitle>
         <SmallTitle>{titleB}</SmallTitle>
-      </ImageWrapper>
+      </FlexRow>
     </Container>
   );
 }
@@ -82,6 +82,13 @@ const SmallTitle = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
   padding: 4px;
   width: 100%;
+`;
+
+const FlexRow = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 `;
 
 const variantStyles = {

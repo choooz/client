@@ -9,7 +9,7 @@ import SelectAB from "components/select/SelectAB";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
 import Image from "next/image";
-import { HambergerIcon, SaveIcon } from "public/icons";
+import { AmplifyIcon, HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
 import React, { useState } from "react";
 import useModifyVoteService from "services/useModifyVoteService";
@@ -66,9 +66,11 @@ function SelectPage() {
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
-          <Button width="127px" height="48px" variant="primary" borderRadius="100px">
-            자세히 보기
-          </Button>
+          <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
+            <DetailButtonInner>
+              <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
+            </DetailButtonInner>
+          </DetailButton>
           {/* 자세히 보기 */}
         </PageInner>
         <FirstPageBase className="animate2" />
@@ -224,6 +226,23 @@ const GuideText = styled.div`
   color: ${({ theme }) => theme.palette.background.white};
   ${({ theme }) => theme.textStyle.Title_Large}
   font-weight: 700;
+`;
+
+const DetailButton = styled(Button)`
+  position: absolute;
+  bottom: -24px;
+  right: 50%;
+  transform: translateX(50%);
+`;
+
+const DetailButtonInner = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding-right: 4px;
+  font-size: 14px;
 `;
 
 export default SelectPage;
