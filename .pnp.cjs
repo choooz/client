@@ -3923,7 +3923,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@chooz/web", "workspace:apps/web"],\
             ["@chooz/ui", "workspace:package/ui"],\
-            ["@next/font", "npm:13.0.7"],\
+            ["@next/font", "npm:13.1.6"],\
             ["@svgr/webpack", "npm:6.5.1"],\
             ["@tanstack/react-query", "virtual:3b35f13cd85e54150adb716a320c9e7fac21d3e832e9f84e1ba4e5caff624f9a39f891453e832192085fc3c3d0959304dbe515f0512a057755bb8be5d918eb64#npm:4.20.4"],\
             ["@tanstack/react-query-devtools", "virtual:3b35f13cd85e54150adb716a320c9e7fac21d3e832e9f84e1ba4e5caff624f9a39f891453e832192085fc3c3d0959304dbe515f0512a057755bb8be5d918eb64#npm:4.20.4"],\
@@ -4112,10 +4112,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@next/font", [\
-        ["npm:13.0.7", {\
-          "packageLocation": "./.yarn/cache/@next-font-npm-13.0.7-4fd9ea2591-88324e4835.zip/node_modules/@next/font/",\
+        ["npm:13.1.6", {\
+          "packageLocation": "./.yarn/cache/@next-font-npm-13.1.6-8de77ea8e0-06499c9361.zip/node_modules/@next/font/",\
           "packageDependencies": [\
-            ["@next/font", "npm:13.0.7"]\
+            ["@next/font", "npm:13.1.6"]\
           ],\
           "linkType": "HARD"\
         }]\
