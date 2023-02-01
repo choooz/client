@@ -9,9 +9,9 @@ import SelectAB from "components/select/SelectAB";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
 import Image from "next/image";
-import { HambergerIcon, SaveIcon } from "public/icons";
+import { AmplifyIcon, HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
-import React from "react";
+import React, { useState } from "react";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled from "styled-components";
@@ -22,43 +22,58 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
-  const { onScrollFunction } = useFlipAnimation();
+  const { onAniamteFlip } = useFlipAnimation();
 
+  const [select, setSelect] = useState<"A" | "B" | null>(null);
+  const onChangeSelect = (select: "A" | "B") => {
+    setSelect(select);
+  };
   return (
-    <PageWrapper>
-      <PageInner className="animate" onWheel={onScrollFunction}>
-        <TagRow>
-          <FlexRow>
-            <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
-            <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
-          </FlexRow>
-          <FlexRow>
-            <Image src={SaveIcon} alt="저장하기" width={32} height={32} />
-            <div ref={targetEl}>
-              <Image
-                src={HambergerIcon}
-                alt="매뉴"
-                width={32}
-                height={32}
-                onClick={onChangeToggleMenu}
-              />
-            </div>
-          </FlexRow>
-        </TagRow>
-        <TitleRow>
-          <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
-          <FlexRow>
-            <div>22.02.03</div>
-          </FlexRow>
-          {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
-        </TitleRow>
-        <SelectAB imageA={Eximg1} titleA="아이보리 트위드2" imageB={Eximg2} titleB="핑크 원피스" />
-        <AddDescriptionButton>﹢</AddDescriptionButton>
-        <Button width="127px" height="48px" variant="primary" borderRadius="100px">
-          자세히 보기
-        </Button>
-        {/* 자세히 보기 */}
-      </PageInner>
+    <>
+      <PageWrapper>
+        <PageInner className="animate" onWheel={onAniamteFlip}>
+          <TagRow>
+            <FlexRow>
+              <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
+              <TargetMessage>당신을 기다렸어요</TargetMessage>
+            </FlexRow>
+            <FlexRow>
+              <Image src={SaveIcon} alt="저장하기" width={32} height={32} />
+              <div ref={targetEl}>
+                <Image
+                  src={HambergerIcon}
+                  alt="매뉴"
+                  width={32}
+                  height={32}
+                  onClick={onChangeToggleMenu}
+                />
+              </div>
+            </FlexRow>
+          </TagRow>
+          <TitleRow>
+            <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
+            <DateText>22.02.03</DateText>
+            {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
+          </TitleRow>
+          <SelectAB
+            imageA={Eximg1}
+            titleA="아이보리 트위드2"
+            imageB={Eximg2}
+            titleB="핑크 원피스"
+            select={select}
+            onChangeSelect={onChangeSelect}
+          />
+          <AddDescriptionButton>﹢</AddDescriptionButton>
+          <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
+            <DetailButtonInner>
+              <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
+            </DetailButtonInner>
+          </DetailButton>
+          {/* 자세히 보기 */}
+        </PageInner>
+        <FirstPageBase className="animate2" />
+        <SecondPageBase className="animate3" />
+      </PageWrapper>
 
       {isSubmit && (
         <FloatModalTemplate onToggleModal={onToggleisSubmit}>
@@ -77,7 +92,7 @@ function SelectPage() {
           onChangeVoteByClick={onChangeVoteByClick}
         />
       )}
-    </PageWrapper>
+    </>
   );
 }
 
@@ -128,7 +143,7 @@ const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
   height: 525px;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.white};
   max-width: 640px;
   position: relative;
   padding: 30px;
@@ -141,7 +156,7 @@ const PageInner = styled.div`
 
 const FirstPageBase = styled.div`
   position: absolute;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.white};
   border-radius: 4px;
   width: 90%;
   max-width: 576px;
@@ -164,6 +179,14 @@ const SecondPageBase = styled(FirstPageBase)`
   }
 `;
 
+const DateText = styled.div`
+  ${({ theme }) => theme.textStyle.Title_Small}
+  color: ${({ theme }) => theme.palette.ink.light};
+  font-weight: 400;
+  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue";
+`;
+
 const TagRow = styled.div`
   width: 100%;
   display: flex;
@@ -179,7 +202,6 @@ const TitleRow = styled.div`
   justify-content: space-between;
   margin: 8px 0 11px 0;
   ${({ theme }) => theme.textStyle.Title_Small}
-  color: ${({ theme }) => theme.palette.ink.dark};
   font-weight: 700;
 `;
 
@@ -204,12 +226,30 @@ const FlexRow = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  gap: 4px;
 `;
 
 const GuideText = styled.div`
   color: ${({ theme }) => theme.palette.background.white};
   ${({ theme }) => theme.textStyle.Title_Large}
   font-weight: 700;
+`;
+
+const DetailButton = styled(Button)`
+  position: absolute;
+  bottom: -24px;
+  right: 50%;
+  transform: translateX(50%);
+`;
+
+const DetailButtonInner = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding-right: 4px;
+  font-size: 14px;
 `;
 
 export default SelectPage;
