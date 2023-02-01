@@ -52,9 +52,7 @@ function SelectPage() {
           </TagRow>
           <TitleRow>
             <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
-            <FlexRow>
-              <div>22.02.03</div>
-            </FlexRow>
+            <DateText>22.02.03</DateText>
             {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
           </TitleRow>
           <SelectAB
@@ -179,6 +177,14 @@ const SecondPageBase = styled(FirstPageBase)`
   }
 `;
 
+const DateText = styled.div`
+  ${({ theme }) => theme.textStyle.Title_Small}
+  color: ${({ theme }) => theme.palette.ink.light};
+  font-weight: 400;
+  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue";
+`;
+
 const TagRow = styled.div`
   width: 100%;
   display: flex;
@@ -194,7 +200,6 @@ const TitleRow = styled.div`
   justify-content: space-between;
   margin: 8px 0 11px 0;
   ${({ theme }) => theme.textStyle.Title_Small}
-  color: ${({ theme }) => theme.palette.ink.dark};
   font-weight: 700;
 `;
 
