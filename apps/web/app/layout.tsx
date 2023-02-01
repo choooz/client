@@ -7,6 +7,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GlobalStyles } from "styles/globalStyles";
 import Header from "components/common/Header";
 import StyledComponentsRegistry from "../lib/registry";
+import { Inter } from "@next/font/google";
+
+// const myFont = localFont({ src: "public/fonts/neodgm.woff2" });
+const inter = Inter();
 
 function RootLayout({
   // Layouts must accept a children prop.

@@ -3,7 +3,7 @@ import { postVoteAPI, PostVoteRequest } from "lib/api/vote";
 import { uploadProfileImageAPI } from "lib/api/upload";
 import { useSubmitState } from "store/submitState";
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function usePostVoteService() {
   const { setIsSubmit } = useSubmitState();
