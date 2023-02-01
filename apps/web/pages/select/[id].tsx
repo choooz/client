@@ -81,6 +81,8 @@ function SelectPage() {
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
       )}
+      <FirstPageBase className="animate2" />
+      <SecondPageBase className="animate3" />
       {toggleDetail && (
         <AddDetailModal
           onToggleModal={onChangeToggleDetail}
