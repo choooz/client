@@ -44,24 +44,24 @@ const variantStyles = {
     color: ${({ theme }) => theme.palette.background.white};
     :disabled {
       background-color: ${({ theme }) => theme.palette.background.inactive};
-      color: ${({ theme }) => theme.palette.ink.lighter};
+      color: ${({ theme }) => theme.palette.ink.lightest};
     }
   `,
   inactive: css`
     background-color: ${({ theme }) => theme.palette.background.soft};
-    color: ${({ theme }) => theme.palette.ink.lighter};
+    color: ${({ theme }) => theme.palette.ink.lightest};
   `,
   outline: css`
     background-color: ${({ theme }) => theme.palette.background.white};
-    border: 1px solid ${({ theme }) => theme.palette.ink.lighter};
-    color: ${({ theme }) => theme.palette.ink.lighter};
+    border: 1px solid ${({ theme }) => theme.palette.ink.lightest};
+    color: ${({ theme }) => theme.palette.ink.lightest};
   `,
   warning: css`
     background-color: ${({ theme }) => theme.palette.system.danger};
     color: ${({ theme }) => theme.palette.background.white};
     :disabled {
       background-color: ${({ theme }) => theme.palette.background.inactive};
-      color: ${({ theme }) => theme.palette.ink.lighter};
+      color: ${({ theme }) => theme.palette.ink.lightest};
     }
   `,
 };

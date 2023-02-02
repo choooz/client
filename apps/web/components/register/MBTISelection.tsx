@@ -11,10 +11,10 @@ interface Props {
   onChangeMBTI(e: MouseEvent<HTMLButtonElement>): void;
   onChangeProgress(number: number): void;
 }
-type Direction = "left" | "right";
-type ActiveType = "active" | "inactive" | null;
 
 function MBTISelection({ MBTI, onChangeMBTI, onChangeProgress }: Props) {
+  type Direction = "left" | "right";
+
   const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
     const lookupTable: Record<Direction, Record<"M" | "B" | "T" | "I", string>> = {
       left: { M: "E", B: "S", T: "T", I: "J" },
@@ -53,42 +53,42 @@ function MBTISelection({ MBTI, onChangeMBTI, onChangeProgress }: Props) {
     >
       <VoteBox>
         <LeftVote name="M" selected={activeValue("left", "M")} value="E" onClick={onChangeMBTI}>
-          <MbtiType>E</MbtiType>
-          <MbtiText>외향형</MbtiText>
+          <div>E</div>
+          <VoteText>외향형</VoteText>
         </LeftVote>
         <RightVote name="M" selected={activeValue("right", "M")} value="I" onClick={onChangeMBTI}>
-          <MbtiType>I</MbtiType>
-          <MbtiText>내향형</MbtiText>
+          <div>I</div>
+          <VoteText>내향형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
         <LeftVote name="B" selected={activeValue("left", "B")} value="S" onClick={onChangeMBTI}>
-          <MbtiType>S</MbtiType>
-          <MbtiText>감정형</MbtiText>
+          <div>S</div>
+          <VoteText>감정형</VoteText>
         </LeftVote>
         <RightVote name="B" selected={activeValue("right", "B")} value="N" onClick={onChangeMBTI}>
-          <MbtiType>N</MbtiType>
-          <MbtiText>직관형</MbtiText>
+          <div>N</div>
+          <VoteText>직관형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
         <LeftVote name="T" selected={activeValue("left", "T")} value="T" onClick={onChangeMBTI}>
-          <MbtiType>T</MbtiType>
-          <MbtiText>사고형</MbtiText>
+          <div>T</div>
+          <VoteText>사고형</VoteText>
         </LeftVote>
         <RightVote name="T" selected={activeValue("right", "T")} value="F" onClick={onChangeMBTI}>
-          <MbtiType>F</MbtiType>
-          <MbtiText>감정형</MbtiText>
+          <div>F</div>
+          <VoteText>감정형</VoteText>
         </RightVote>
       </VoteBox>
       <VoteBox>
         <LeftVote name="I" selected={activeValue("left", "I")} value="J" onClick={onChangeMBTI}>
-          <MbtiType>J</MbtiType>
-          <MbtiText>판단형</MbtiText>
+          <div>J</div>
+          <VoteText>판단형</VoteText>
         </LeftVote>
         <RightVote name="I" selected={activeValue("right", "I")} value="P" onClick={onChangeMBTI}>
-          <MbtiType>P</MbtiType>
-          <MbtiText> 인식형</MbtiText>
+          <div>P</div>
+          <VoteText> 인식형</VoteText>
         </RightVote>
       </VoteBox>
     </RegisterTemplate>
@@ -122,12 +122,12 @@ const variantStyles = {
   `,
 };
 
-const typeGuardVariantStyle = (selected: ActiveType) => {
+const typeGuardVariantStyle = (selected: "active" | "inactive" | null) => {
   if (!selected) return null;
   return variantStyles[selected];
 };
 
-const LeftVote = styled.button<{ selected: ActiveType }>`
+const LeftVote = styled.button<{ selected: "active" | "inactive" | null }>`
   position: absolute;
   width: 48%;
   height: 100%;
@@ -138,12 +138,11 @@ const LeftVote = styled.button<{ selected: ActiveType }>`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  font-size: 20px;
   transition: all 0.3s ease-in-out;
   ${({ selected }) => typeGuardVariantStyle(selected)}
   &:hover {
-    border-color: ${({ theme }) => theme.palette.main.point};
-    color: ${({ theme }) => theme.palette.main.point};
-    font-weight: 800;
+    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
   }
 `;
 
@@ -151,13 +150,8 @@ const RightVote = styled(LeftVote)`
   right: 0;
 `;
 
-const MbtiType = styled.div`
-  ${({ theme }) => theme.textStyle.Title_Large}
-  font-weight: 800;
-`;
-
-const MbtiText = styled.div`
-  ${({ theme }) => theme.textStyle.Font_Minimum}
+const VoteText = styled.div`
+  font-size: 12px;
 `;
 
 export default React.memo(MBTISelection);

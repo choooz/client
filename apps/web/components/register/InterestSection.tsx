@@ -68,7 +68,7 @@ const WelcomeText = styled.div`
 const DescriptionText = styled.div`
   padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.lighter};
   ${({ theme }) => theme.textStyle.Title_Small};
 `;
 

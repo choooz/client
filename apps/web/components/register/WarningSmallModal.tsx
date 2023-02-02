@@ -99,7 +99,7 @@ const Key = styled.span`
   display: flex;
   flex-basis: 50%;
   justify-content: flex-end;
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.lighter};
   padding-right: 8px;
 `;
 

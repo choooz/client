@@ -55,7 +55,7 @@ const WelcomeText = styled.div`
   align-items: center;
   ${({ theme }) => theme.textStyle.Title_Medium}
   font-weight: 700;
-  color: ${theme.palette.ink.light};
+  color: ${theme.palette.ink.lighter};
   gap: 6px;
   line-height: 26px;
   animation: ${transitions.popInFromBottom} 0.7s ease-in-out;

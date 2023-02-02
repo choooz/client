@@ -26,7 +26,7 @@ const variantStyles = {
     border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
     padding: 4px;
     ::placeholder {
-      color: ${({ theme }) => theme.palette.ink.lighter};
+      color: ${({ theme }) => theme.palette.ink.lightest};
     }
   `,
   outlined: css`

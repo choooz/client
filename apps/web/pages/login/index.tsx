@@ -125,7 +125,7 @@ const TermsOfUse = styled.p`
   margin-top: 26px;
   text-align: center;
   ${({ theme }) => theme.textStyle.Font_Minimum};
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.lighter};
   animation: ${transitions.delaypopInFromBottom} 2.8s normal ease-in-out;
 `;
 
