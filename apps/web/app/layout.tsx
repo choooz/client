@@ -25,7 +25,6 @@ function RootLayout({
 
   return (
     <html lang="kr">
-      {/* Head font */}
       <body>
         <div id="portal" />
         <QueryClientProvider client={queryClient}>
