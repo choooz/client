@@ -94,7 +94,7 @@ const Input = styled.input`
   animation: ${transitions.fadeIn} 1.5s normal ease-in-out;
   color: #863dff;
   ::placeholder {
-    color: ${({ theme }) => theme.palette.ink.lightest};
+    color: ${({ theme }) => theme.palette.ink.lighter};
   }
   ${media.medium} {
     width: 152px;

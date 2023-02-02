@@ -1,26 +1,23 @@
 import { media } from "@chooz/ui/styles/media";
-import { useMutation } from "@tanstack/react-query";
 import { ImageTitleSection, TargetSection } from "components";
-import { postVoteAPI } from "lib/api/vote";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
 
 function PostPage() {
-  const router = useRouter();
-  const { onChangeVote, vote, onUploadImage, onChangeVoteByClick, onChangeVoteBySelect } =
-    usePostVoteService();
+  const {
+    onChangeVote,
+    vote,
+    onUploadImage,
+    onChangeVoteByClick,
+    onChangeVoteBySelect,
+    mutateVote,
+    onPushSelectPage,
+  } = usePostVoteService();
   const [postStep, setPostStep] = useState<number>(1);
   const onChangePostStep = (step: number) => {
     setPostStep(step);
   };
-
-  const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
-    onSuccess: () => {
-      router.push("/");
-    },
-  });
 
   return (
     <PageWrapper>
@@ -39,7 +36,7 @@ function PostPage() {
             vote={vote}
             onChangeVoteBySelect={onChangeVoteBySelect}
             mutateVote={mutateVote}
-            onChangePostStep={() => router.push("/select/1")}
+            onChangePostStep={onPushSelectPage}
           />
         )}
       </PageInner>
