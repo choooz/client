@@ -14,13 +14,12 @@ const Message = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 149px;
+  padding: 6px 10px;
   height: 24px;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.palette.main.point};
   color: ${({ theme }) => theme.palette.ink.lightest};
   ${media.medium} {
-    width: 154px;
     height: 28px;
   }
 `;

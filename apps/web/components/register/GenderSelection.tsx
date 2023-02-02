@@ -4,6 +4,7 @@ import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";
+import { ActiveType, Direction } from "types/vote";
 
 type GenderType = "FEMALE" | "MALE" | null;
 
@@ -12,9 +13,6 @@ interface Props {
   onChangeProgress(number: number): void;
   onChangeGender(gender: Gender): void;
 }
-
-type Direction = "left" | "right";
-type ActiveType = "active" | "inactive" | null;
 
 function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
   const getGender = (direction: Direction) => {
