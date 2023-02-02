@@ -11,6 +11,7 @@ const palette = {
   main: {
     point: "#874CE4",
     sub: "#190665",
+    opacitySub: "rgba(25, 6, 101, 0.6)",
   },
   border: {
     light: "#F6F3F0",
