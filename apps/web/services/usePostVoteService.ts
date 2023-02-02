@@ -1,8 +1,14 @@
 import React, { useCallback, useState } from "react";
-import { PostVoteRequest } from "lib/api/vote";
+import { postVoteAPI, PostVoteRequest } from "lib/api/vote";
 import { uploadProfileImageAPI } from "lib/api/upload";
+import { useSubmitState } from "store/submitState";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 
 export default function usePostVoteService() {
+  const { setIsSubmit } = useSubmitState();
+  const router = useRouter();
+
   const [vote, setVote] = useState<PostVoteRequest>({
     title: "",
     detail: "",
@@ -71,6 +77,18 @@ export default function usePostVoteService() {
     }
   }, []);
 
+  const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
+    onSuccess: () => {
+      router.push("/");
+      setIsSubmit(true);
+    },
+  });
+
+  // 선택 페이지로 이동하는 함수
+  const onPushSelectPage = () => {
+    router.push("/select/1");
+  };
+
   return {
     vote,
     onChangeVote,
@@ -78,5 +96,7 @@ export default function usePostVoteService() {
     onUploadImage,
     onChangeVoteByClick,
     onChangeVoteBySelect,
+    mutateVote,
+    onPushSelectPage,
   };
 }
