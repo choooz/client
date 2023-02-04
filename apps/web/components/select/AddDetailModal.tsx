@@ -1,21 +1,12 @@
 import { DivideLine, Input, ModalTemplate, Template } from "@chooz/ui";
 import { UseMutateFunction } from "@tanstack/react-query";
-import { modifyVoteRequest } from "lib/api/vote";
+import { ModifyVote } from "lib/api/vote";
 import React from "react";
 import styled from "styled-components";
-
-// 임시용 카테고리
-const CATEGIORY_LIST = [
-  { id: "1", name: "영화" },
-  { id: "2", name: "음악" },
-  { id: "3", name: "책" },
-  { id: "4", name: "게임" },
-  { id: "5", name: "스포츠" },
-  { id: "6", name: "음식" },
-];
+import { CATEGORY_LIST } from "lib/constants";
 
 interface Props {
-  vote: modifyVoteRequest;
+  vote: ModifyVote;
   onToggleModal(): void;
   onChangeVote: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   mutateVote(): void;
@@ -54,7 +45,7 @@ function AddDetailModal({
           <DivideLine />
           <QuestionText>나이</QuestionText>
           <ChipWrapper>
-            {CATEGIORY_LIST.map(({ id, name }) => (
+            {CATEGORY_LIST.map(({ id, name }) => (
               <div key={id}>
                 <InvisibleInput
                   type="radio"

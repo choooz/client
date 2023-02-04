@@ -1,6 +1,6 @@
 import apiClient from "./apiClient";
 
-export interface PostVoteRequest {
+interface PostVoteRequest {
   title: string;
   titleA: string;
   titleB: string;
@@ -11,12 +11,14 @@ export interface PostVoteRequest {
   filteredMbti: string;
 }
 
+export type PostVote = PostVoteRequest;
+
 export const postVoteAPI = async (body: PostVoteRequest) => {
   const response = await apiClient.post("api/votes", body);
   return response.data;
 };
 
-export interface ModifyVoteRequest {
+interface ModifyVoteRequest {
   title: string;
   detail: string;
   category: string;
@@ -24,7 +26,9 @@ export interface ModifyVoteRequest {
   titleB: string;
 }
 
+export type ModifyVote = ModifyVoteRequest;
+
 export const modifyVoteAPI = async (body: ModifyVoteRequest) => {
-  const response = await apiClient.patch("api/votes", body);
+  const response = await apiClient.patch("api/votes/1", body);
   return response.data;
 };

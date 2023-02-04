@@ -1,11 +1,11 @@
 import { Template } from "@chooz/ui";
-import { PostVoteRequest } from "lib/api/vote";
+import { PostVote } from "lib/api/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  vote: PostVoteRequest;
+  vote: PostVote;
   onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
   mutateVote(): void;

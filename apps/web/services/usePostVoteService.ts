@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { postVoteAPI, PostVoteRequest } from "lib/api/vote";
+import { postVoteAPI, PostVote } from "lib/api/vote";
 import { uploadProfileImageAPI } from "lib/api/upload";
 import { useSubmitState } from "store/submitState";
 import { useMutation } from "@tanstack/react-query";
@@ -9,7 +9,7 @@ export default function usePostVoteService() {
   const { setIsSubmit } = useSubmitState();
   const router = useRouter();
 
-  const [vote, setVote] = useState<PostVoteRequest>({
+  const [vote, setVote] = useState<PostVote>({
     title: "",
     titleA: "",
     titleB: "",
