@@ -3,7 +3,7 @@ import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import AddDetailModal from "components/select/AddDetailModal";
-import useFlipAnimation from "components/select/hooks/useFlipAnimation";
+import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import MenuBox from "components/select/MenuBox";
 import SelectAB from "components/select/SelectAB";
 import useOutSideClick from "hooks/useOutsideClick";
@@ -14,7 +14,7 @@ import { Eximg1, Eximg2, Success } from "public/images";
 import React, { useState } from "react";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function SelectPage() {
   const { isSubmit, onToggleisSubmit } = useSubmitState();
@@ -22,7 +22,7 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
-  const { onAniamteFlip } = useFlipAnimation();
+  const { onAniamteFlip, drag } = useFlipAnimation();
 
   const [select, setSelect] = useState<"A" | "B" | null>(null);
   const onChangeSelect = (select: "A" | "B") => {
@@ -31,7 +31,7 @@ function SelectPage() {
   return (
     <>
       <PageWrapper>
-        <PageInner className="animate" onWheel={onAniamteFlip}>
+        <PageInner className="animate" onWheel={onAniamteFlip} drag={drag}>
           <TagRow>
             <FlexRow>
               <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
@@ -71,8 +71,8 @@ function SelectPage() {
           </DetailButton>
           {/* 자세히 보기 */}
         </PageInner>
-        <FirstPageBase className="animate2" />
-        <SecondPageBase className="animate3" />
+        <FirstPageBase className="animate2" drag={drag} />
+        <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
 
       {isSubmit && (
@@ -81,8 +81,6 @@ function SelectPage() {
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
       )}
-      <FirstPageBase className="animate2" />
-      <SecondPageBase className="animate3" />
       {toggleDetail && (
         <AddDetailModal
           onToggleModal={onChangeToggleDetail}
@@ -102,43 +100,9 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   scrollbar-width: none;
-  .up {
-    transform-origin: 50% 0;
-    perspective: 600px;
-    transform: rotateX(-90deg) scale(0.9, 1.032);
-    transition: all 0.5s ease-in-out;
-    opacity: 0;
-  }
-  .up2 {
-    transition: all 0.5s ease-in-out;
-    perspective: 600px;
-    transform-origin: 50% 0;
-    transform: scale(1.11, 0.97);
-    opacity: 1;
-  }
-  .up3 {
-    transition: all 0.5s ease-in-out;
-    perspective: 600px;
-    transform-origin: 50% 0;
-    transform: scale(1.11, 0.97);
-    opacity: 0.6;
-  }
-  .down {
-    transition: all 0.5s ease-in-out;
-    transform: rotateX(90deg) scale(0.9, 1.032);
-    transform-origin: 50% 100%;
-    perspective: 600px;
-    opacity: 0.5;
-  }
-  .down2 {
-    transition: all 0.5s ease-in-out;
-    perspective: 600px;
-    transform-origin: 50% 0;
-    opacity: 1;
-  }
 `;
 
-const PageInner = styled.div`
+const PageInner = styled.div<{ drag: Drag }>`
   position: relative;
   margin: 0 auto;
   border-radius: 4px;
@@ -152,9 +116,27 @@ const PageInner = styled.div`
     height: 600px;
     padding: 40px;
   }
+  ${({ drag }) =>
+    drag === "up" &&
+    css`
+      transition: all 0.5s ease-in-out;
+      transform-origin: 50% 0;
+      perspective: 600px;
+      transform: rotateX(-90deg) scale(0.9, 1.032);
+      opacity: 0;
+    `}
+  ${({ drag }) =>
+    drag === "down" &&
+    css`
+      transition: all 0.5s ease-in-out;
+      transform: rotateX(90deg) scale(0.9, 1.032);
+      transform-origin: 50% 100%;
+      perspective: 600px;
+      opacity: 0.5;
+    `}
 `;
 
-const FirstPageBase = styled.div`
+const FirstPageBase = styled.div<{ drag: Drag }>`
   position: absolute;
   background-color: ${({ theme }) => theme.palette.background.white};
   border-radius: 4px;
@@ -163,9 +145,23 @@ const FirstPageBase = styled.div`
   height: 550px;
   opacity: 0.6;
   z-index: 500;
+  transition: all 0.5s ease-in-out;
   ${media.medium} {
     height: 620px;
   }
+  ${({ drag }) =>
+    drag === "up" &&
+    css`
+      perspective: 600px;
+      transform-origin: 50% 0;
+      transform: scale(1.11, 0.97);
+      opacity: 1;
+    `}
+  ${({ drag }) =>
+    drag === "down" &&
+    css`
+      opacity: 1;
+    `}
 `;
 
 const SecondPageBase = styled(FirstPageBase)`
@@ -174,9 +170,20 @@ const SecondPageBase = styled(FirstPageBase)`
   height: 570px;
   opacity: 0.3;
   z-index: 500;
+  transition: all 0.5s ease-in-out;
   ${media.medium} {
     height: 640px;
   }
+  ${({ drag }) =>
+    drag === "up" &&
+    css`
+      opacity: 0.6;
+    `}
+  ${({ drag }) =>
+    drag === "down" &&
+    css`
+      opacity: 0.6;
+    `}
 `;
 
 const DateText = styled.div`
