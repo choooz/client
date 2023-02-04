@@ -14,7 +14,6 @@ export const addInfoAPI = async (addInfoRequest: AddInfoRequest) => {
   return response.data;
 };
 interface AddInterestCategoryRequest {
-  userId: number;
   categoryLists: CategoryNameType[];
 }
 
