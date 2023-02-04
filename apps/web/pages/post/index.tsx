@@ -12,7 +12,6 @@ function PostPage() {
     onChangeVoteByClick,
     onChangeVoteBySelect,
     mutateVote,
-    onPushSelectPage,
   } = usePostVoteService();
   const [postStep, setPostStep] = useState<number>(1);
   const onChangePostStep = (step: number) => {
@@ -36,7 +35,8 @@ function PostPage() {
             vote={vote}
             onChangeVoteBySelect={onChangeVoteBySelect}
             mutateVote={mutateVote}
-            onChangePostStep={onPushSelectPage}
+            onChangePostStep={onChangePostStep}
+            filteredMbti={vote.filteredMbti}
           />
         )}
       </PageInner>

@@ -1,15 +1,16 @@
 import { Template } from "@chooz/ui";
-import { PostVoteRequest } from "lib/api/vote";
+import { PostVote } from "lib/api/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  vote: PostVoteRequest;
+  vote: PostVote;
   onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
   onChangeVoteBySelect(e: React.ChangeEvent<HTMLSelectElement>): void;
   mutateVote(): void;
   onChangePostStep(step: number): void;
+  filteredMbti: string;
 }
 
 function TargetSection({
@@ -18,6 +19,7 @@ function TargetSection({
   onChangeVoteByClick,
   vote,
   mutateVote,
+  filteredMbti,
 }: Props) {
   const { filteredAge, filteredGender } = vote;
 
@@ -74,7 +76,7 @@ function TargetSection({
       <QuestionText>MBTI</QuestionText>
 
       {/* 추가적으로 나중에 밑쪽 화살표 추가하기 */}
-      <Select name="mbti" onChange={onChangeVoteBySelect}>
+      <Select name="filteredMbti" onChange={onChangeVoteBySelect} value={filteredMbti}>
         <option value="" hidden>
           MBTI를 선택해주세요
         </option>
