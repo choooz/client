@@ -11,8 +11,6 @@ export default function usePostVoteService() {
 
   const [vote, setVote] = useState<PostVoteRequest>({
     title: "",
-    detail: "",
-    category: "",
     titleA: "",
     titleB: "",
     imageA: "",
@@ -21,6 +19,8 @@ export default function usePostVoteService() {
     filteredAge: "",
     filteredMbti: "",
   });
+
+  console.log(vote);
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -79,15 +79,10 @@ export default function usePostVoteService() {
 
   const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
     onSuccess: () => {
-      router.push("/");
+      router.push("/select/1?isSuccess=true");
       setIsSubmit(true);
     },
   });
-
-  // 선택 페이지로 이동하는 함수
-  const onPushSelectPage = () => {
-    router.push("/select/1");
-  };
 
   return {
     vote,
@@ -97,6 +92,5 @@ export default function usePostVoteService() {
     onChangeVoteByClick,
     onChangeVoteBySelect,
     mutateVote,
-    onPushSelectPage,
   };
 }

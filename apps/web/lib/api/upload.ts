@@ -6,6 +6,6 @@ export interface postVoteResponse {
 }
 
 export const uploadProfileImageAPI = async (body: FormData) => {
-  const response = await apiClient.post<postVoteResponse>("api/image/upload", body);
+  const response = await apiClient.post<postVoteResponse>("api/image", body);
   return response.data;
 };
