@@ -83,7 +83,6 @@ export default function useRegisterService() {
     });
     try {
       await addInterestCategoryAPI({
-        userId: userInfo.userId,
         categoryLists,
       });
       router.push(Path.LIST_PAGE);
