@@ -37,13 +37,14 @@ export default function useRegisterService() {
   const onChangeAge = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { innerText } = e.currentTarget;
 
+    // @note switch문을 쓰는 게 나을려나
     if (!userInfo.age) {
       setUserInfo((prev) => ({ ...prev, age: innerText }));
-      return;
+    } else if (userInfo.age.length === 1) {
+      setUserInfo((prev) => ({ ...prev, age: prev.age + innerText }));
+    } else if (userInfo.age.length === 2) {
+      setUserInfo((prev) => ({ ...prev, age: prev.age?.substring(1) + innerText }));
     }
-    if (userInfo.age.length >= 2) return;
-
-    setUserInfo((prev) => ({ ...prev, age: prev.age + innerText }));
   };
   const onDeleteAge = () => {
     setUserInfo((prev) => ({ ...prev, age: null }));
