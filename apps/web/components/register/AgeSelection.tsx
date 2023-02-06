@@ -66,6 +66,7 @@ const Container = styled.div`
   width: 162px;
   gap: 16px;
   ${media.medium} {
+    margin: 0;
     justify-content: space-between;
     flex-direction: row;
     align-items: unset;
@@ -112,6 +113,7 @@ const NumberBox = styled.div`
   place-items: center;
   ${media.medium} {
     gap: 12px;
+    margin-left: 20px;
   }
 `;
 
