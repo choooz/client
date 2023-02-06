@@ -4,11 +4,12 @@ import { naverLoginAPI } from "lib/api/auth";
 import Path from "lib/Path";
 import userStorage from "lib/utils/userStorage";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function naverLoginProcess() {
   const router = useRouter();
-  const code = router.query.code ?? "";
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code") ?? "";
 
   useEffect(() => {
     if (code) {
