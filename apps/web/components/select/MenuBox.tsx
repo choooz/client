@@ -17,6 +17,7 @@ function MenuBox({ onChangeToggleDetail }: Props) {
 }
 
 const Container = styled.div`
+  z-index: 9999;
   position: absolute;
   top: 70px;
   right: 41px;

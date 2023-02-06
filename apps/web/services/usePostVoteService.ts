@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { postVoteAPI, PostVoteRequest } from "lib/api/vote";
+import { postVoteAPI, PostVote } from "lib/api/vote";
 import { uploadProfileImageAPI } from "lib/api/upload";
 import { useSubmitState } from "store/submitState";
 import { useMutation } from "@tanstack/react-query";
@@ -9,10 +9,8 @@ export default function usePostVoteService() {
   const { setIsSubmit } = useSubmitState();
   const router = useRouter();
 
-  const [vote, setVote] = useState<PostVoteRequest>({
+  const [vote, setVote] = useState<PostVote>({
     title: "",
-    detail: "",
-    category: "",
     titleA: "",
     titleB: "",
     imageA: "",
@@ -21,6 +19,8 @@ export default function usePostVoteService() {
     filteredAge: "",
     filteredMbti: "",
   });
+
+  console.log(vote);
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -79,15 +79,10 @@ export default function usePostVoteService() {
 
   const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
     onSuccess: () => {
-      router.push("/");
+      router.push("/select/1?isSuccess=true");
       setIsSubmit(true);
     },
   });
-
-  // 선택 페이지로 이동하는 함수
-  const onPushSelectPage = () => {
-    router.push("/select/1");
-  };
 
   return {
     vote,
@@ -97,6 +92,5 @@ export default function usePostVoteService() {
     onChangeVoteByClick,
     onChangeVoteBySelect,
     mutateVote,
-    onPushSelectPage,
   };
 }
