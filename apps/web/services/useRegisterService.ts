@@ -34,16 +34,17 @@ export default function useRegisterService() {
     const { name, value } = e.currentTarget;
     setUserInfo((prev) => ({ ...prev, MBTI: { ...prev.MBTI, [name]: value } }));
   };
+
+  const sliceAgeString = (age?: string | null) => {
+    if (!age) return "";
+    return age.length === 2 ? age.substring(1) : age;
+  };
   const onChangeAge = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { innerText } = e.currentTarget;
-
-    if (!userInfo.age) {
-      setUserInfo((prev) => ({ ...prev, age: innerText }));
-      return;
-    }
-    if (userInfo.age.length >= 2) return;
-
-    setUserInfo((prev) => ({ ...prev, age: prev.age + innerText }));
+    setUserInfo((prev) => ({
+      ...prev,
+      age: sliceAgeString(prev.age) + innerText,
+    }));
   };
   const onDeleteAge = () => {
     setUserInfo((prev) => ({ ...prev, age: null }));
