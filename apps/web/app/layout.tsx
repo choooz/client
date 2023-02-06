@@ -17,12 +17,6 @@ function RootLayout({
 }) {
   const queryClient = new QueryClient();
 
-  // Remove the server-side injected CSS.
-  // 추후 콘솔에서 Warning 발생 안할시 제거
-  if (document.body.getAttribute("style") === "") {
-    document.body.removeAttribute("style");
-  }
-
   return (
     <html lang="kr">
       <body>
