@@ -76,11 +76,6 @@ export default function useRegisterService() {
   };
 
   const onClickComplete = async () => {
-    // @todo getServerSideProps로 변경
-    const userInfo = await queryClient.fetchQuery(reactQueryKeys.userInfo(), getUserInfo, {
-      cacheTime: 5 * 1000 * 60,
-      staleTime: 5 * 1000 * 60,
-    });
     try {
       await addInterestCategoryAPI({
         categoryLists,

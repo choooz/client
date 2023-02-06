@@ -22,18 +22,19 @@ function RootLayout({
       <body>
         <div id="portal" />
         <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools />
-          <ThemeProvider theme={theme}>
-            <GlobalStyles />
-            <div id="stars" />
-            <div id="stars2" />
-            <div id="stars3" />
-            <Applayout>
-              {/* // @todo header 넣는 다른 방법이 있을 것 layout? */}
-              <Header />
-              <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
-            </Applayout>
-          </ThemeProvider>
+          <StyledComponentsRegistry>
+            <ReactQueryDevtools />
+            <ThemeProvider theme={theme}>
+              <GlobalStyles />
+              <div id="stars" />
+              <div id="stars2" />
+              <div id="stars3" />
+              <Applayout>
+                <Header />
+                {children}
+              </Applayout>
+            </ThemeProvider>
+          </StyledComponentsRegistry>
         </QueryClientProvider>
       </body>
     </html>
