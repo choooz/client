@@ -1,3 +1,5 @@
+"use client";
+
 import { media } from "@chooz/ui/styles/media";
 import { ImageTitleSection, TargetSection } from "components";
 import React, { useState } from "react";

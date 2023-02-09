@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/api/user";
 import Path from "lib/Path";
 import { reactQueryKeys } from "lib/queryKeys";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import { Gender, UserInfo } from "types/user";
 import { CategoryNameType } from "types/vote";
@@ -58,7 +58,7 @@ export default function useRegisterService() {
         age: Number(age),
         gender,
       });
-      router.push(Path.REGISTER_INTERSTER_PAGE);
+      router.replace(Path.REGISTER_INTERSTER_PAGE);
     } catch (error) {
       alert(error);
     }
@@ -73,15 +73,9 @@ export default function useRegisterService() {
     categoryLists.includes(category)
       ? setCategoryLists((prev) => prev.filter((item) => item !== category))
       : setCategoryLists((prev) => [...prev.concat(category)]);
-    console.log(categoryLists);
   };
 
   const onClickComplete = async () => {
-    // @todo getServerSideProps로 변경
-    const userInfo = await queryClient.fetchQuery(reactQueryKeys.userInfo(), getUserInfo, {
-      cacheTime: 5 * 1000 * 60,
-      staleTime: 5 * 1000 * 60,
-    });
     try {
       await addInterestCategoryAPI({
         categoryLists,

@@ -1,3 +1,5 @@
+"use client";
+
 import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
 import WarningSmallModal from "components/register/WarningSmallModal";
 import useToggle from "hooks/useToggle";

@@ -1,3 +1,5 @@
+"use client";
+
 import InterestSection from "components/register/InterestSection";
 import React from "react";
 import useRegisterService from "services/useRegisterService";

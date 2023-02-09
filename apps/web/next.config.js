@@ -8,6 +8,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  compiler: {
+    styledComponents: true,
+  },
   // images: {
   //   domains: ["https://i.ibb.co/"],
   // },
@@ -22,6 +25,9 @@ const nextConfig = {
         hostname: "picksel-bucket.s3.ap-northeast-2.amazonaws.com",
       },
     ],
+  },
+  experimental: {
+    appDir: true,
   },
   webpack: (config) => {
     config.module.rules.push({

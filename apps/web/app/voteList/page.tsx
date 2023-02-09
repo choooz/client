@@ -1,3 +1,5 @@
+"use client";
+
 import VoteItem from "components/voteList/VoteItem";
 import { CATEGORY_LIST } from "lib/constants";
 import { FilterIcon } from "public/icons";
