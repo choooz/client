@@ -1,5 +1,5 @@
 import { Template } from "@chooz/ui";
-import { PostVote } from "lib/api/vote";
+import { PostVote } from "lib/apis/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React from "react";
 import styled from "styled-components";

@@ -1,7 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
-import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/api/user";
+import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/apis/user";
 import Path from "lib/Path";
-import { reactQueryKeys } from "lib/queryKeys";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import { Gender, UserInfo } from "types/user";
@@ -80,7 +79,7 @@ export default function useRegisterService() {
       await addInterestCategoryAPI({
         categoryLists,
       });
-      router.push(Path.LIST_PAGE);
+      router.push(Path.MAIN_PAGE);
     } catch (error) {
       alert(error);
     }
