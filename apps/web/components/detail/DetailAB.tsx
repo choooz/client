@@ -17,7 +17,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select }: Props) {
     return direction === "left" ? "A" : "B";
   };
 
-  const activeValue = (direction: "left" | "right"): ActiveType => {
+  const activeValue = (direction: Direction): ActiveType => {
     if (!select) return null;
     return `${select === getAB(direction) ? "" : "in"}active`;
   };
