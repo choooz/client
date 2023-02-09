@@ -22,8 +22,8 @@ function RootLayout({
       <body>
         <div id="portal" />
         <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools />
           <StyledComponentsRegistry>
-            <ReactQueryDevtools />
             <ThemeProvider theme={theme}>
               <GlobalStyles />
               <div id="stars" />
