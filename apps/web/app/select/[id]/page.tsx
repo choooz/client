@@ -8,9 +8,11 @@ import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import MenuBox from "components/select/MenuBox";
 import SelectAB from "components/select/SelectAB";
+import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
 import Image from "next/image";
+import Link from "next/link";
 import { AmplifyIcon, HambergerIcon, SaveIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
 import React, { useState } from "react";
@@ -34,29 +36,13 @@ function SelectPage() {
     <>
       <PageWrapper>
         <PageInner className="animate" onWheel={onAniamteFlip} drag={drag}>
-          <TagRow>
-            <FlexRow>
-              <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
-              <TargetMessage>당신을 기다렸어요</TargetMessage>
-            </FlexRow>
-            <FlexRow>
-              <Image src={SaveIcon} alt="저장하기" width={32} height={32} />
-              <div ref={targetEl}>
-                <Image
-                  src={HambergerIcon}
-                  alt="매뉴"
-                  width={32}
-                  height={32}
-                  onClick={onChangeToggleMenu}
-                />
-              </div>
-            </FlexRow>
-          </TagRow>
-          <TitleRow>
-            <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
-            <DateText>22.02.03</DateText>
-            {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
-          </TitleRow>
+          <VoteToolbar
+            onChangeToggleDetail={onChangeToggleDetail}
+            onChangeToggleMenu={onChangeToggleMenu}
+            toggleMenu={toggleMenu}
+            targetEl={targetEl}
+          />
+
           <SelectAB
             imageA={Eximg1}
             titleA="아이보리 트위드2"
@@ -67,9 +53,11 @@ function SelectPage() {
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <DetailButtonInner>
-              <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
-            </DetailButtonInner>
+            <Link href="select/1/detail">
+              <DetailButtonInner>
+                <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
+              </DetailButtonInner>
+            </Link>
           </DetailButton>
           {/* 자세히 보기 */}
         </PageInner>
@@ -188,32 +176,6 @@ const SecondPageBase = styled(FirstPageBase)`
     `}
 `;
 
-const DateText = styled.div`
-  ${({ theme }) => theme.textStyle.Title_Small}
-  color: ${({ theme }) => theme.palette.ink.light};
-  font-weight: 400;
-  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue";
-`;
-
-const TagRow = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-`;
-
-const TitleRow = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 8px 0 11px 0;
-  ${({ theme }) => theme.textStyle.Title_Small}
-  font-weight: 700;
-`;
-
 const AddDescriptionButton = styled.div`
   position: absolute;
   bottom: 30px;
@@ -229,13 +191,6 @@ const AddDescriptionButton = styled.div`
   font-size: 45px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
-`;
-
-const FlexRow = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 4px;
 `;
 
 const GuideText = styled.div`
