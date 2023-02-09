@@ -38,7 +38,11 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
               height: "340px",
             }}
           />
-          <div className="overlay">핑크 원피스 50% 340명</div>
+          <div className="overlay">
+            <OverLayTitle>{titleA}</OverLayTitle>
+            <OverlayPercent>50%</OverlayPercent>
+            <OverlayCount> 340명</OverlayCount>
+          </div>
         </LeftVote>
 
         <RightVote selected={activeValue("right")} onClick={() => onChangeSelect("B")}>
@@ -53,7 +57,11 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
               height: "340px",
             }}
           />
-          <div className="overlay">핑크 원피스 50% 340명</div>
+          <div className="overlay">
+            <OverLayTitle>{titleB}</OverLayTitle>
+            <OverlayPercent>50%</OverlayPercent>
+            <OverlayCount> 340명</OverlayCount>
+          </div>
         </RightVote>
       </ImageWrapper>
       <FlexRow>
@@ -123,8 +131,10 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     height: 100%;
     background-color: ${({ theme }) => theme.palette.main.opacitySub};
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 30px;
     color: white;
     border: 2px solid ${({ theme }) => theme.palette.main.sub};
     ${({ selected }) =>
@@ -139,9 +149,27 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
 
 const RightVote = styled(LeftVote)`
   .overlay {
+    align-items: flex-end;
     left: unset;
     right: 0;
   }
+`;
+
+const OverLayTitle = styled.div`
+  font-weight: 700;
+  ${({ theme }) => theme.textStyle.Title_Small}
+`;
+
+const OverlayPercent = styled.div`
+  font-weight: 700;
+  font-size: 60px;
+  line-height: 40px;
+  padding: 24px 0 12px 0;
+`;
+
+const OverlayCount = styled.div`
+  font-weight: 400;
+  ${({ theme }) => theme.textStyle.Title_2}
 `;
 
 export default SelectAB;
