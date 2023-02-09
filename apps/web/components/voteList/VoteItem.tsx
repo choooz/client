@@ -5,8 +5,13 @@ import Image from "next/image";
 import { BookmarkIcon } from "public/icons";
 import { Eximg1, Eximg2 } from "public/images";
 import styled from "styled-components";
+import { Vote } from "types/vote";
 
-function VoteItem() {
+interface Props {
+  vote: Vote;
+}
+
+function VoteItem({ vote }: Props) {
   return (
     <Container>
       <ImageContainer>
@@ -21,7 +26,7 @@ function VoteItem() {
         <BookmarkIconStyled />
       </VoteInfo>
       <TitleContainer>
-        <VoteTitle>무엇이 좋을까요? 공백포함 22자까지입니...</VoteTitle>
+        <VoteTitle>{vote.totalTitle}</VoteTitle>
         <Date>11h</Date>
       </TitleContainer>
     </Container>

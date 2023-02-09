@@ -1,12 +1,28 @@
 "use client";
 
 import VoteItem from "components/voteList/VoteItem";
+import { useInfiniteScroll } from "hooks/useInfiniteScroll";
 import { CATEGORY_LIST } from "lib/constants";
 import { FilterIcon } from "public/icons";
+import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
 import { media } from "styles/media";
+import { Vote } from "types/vote";
 
 function VoteListPage() {
+  const { data, fetchNextPage } = useInfiniteVoteListService({
+    page: 0,
+    size: 3,
+    sortBy: "ByTime",
+  });
+
+  // const voteList = data?.pages[0].content;
+  const voteList = data?.pages.flatMap((page) => page.content) ?? [];
+
+  // const voteList = data?.pages[0].content ?? [];
+
+  const [subscribe] = useInfiniteScroll(fetchNextPage);
+
   return (
     <PageWrapper>
       <PageInner>
@@ -21,9 +37,10 @@ function VoteListPage() {
             필터
           </FilterBox>
         </FilterContainer>
-        <VoteItem />
-        <VoteItem />
-        <VoteItem />
+        {voteList?.map((vote: Vote, index: number) => (
+          <VoteItem key={`voteList_${index}`} vote={vote} />
+        ))}
+        <div ref={subscribe} />
       </PageInner>
     </PageWrapper>
   );
