@@ -8,6 +8,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  compiler: {
+    styledComponents: true,
+  },
   // images: {
   //   domains: ["https://i.ibb.co/"],
   // },
