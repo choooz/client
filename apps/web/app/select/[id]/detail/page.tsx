@@ -1,7 +1,7 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
-import Commtent from "components/detail/Commtent";
+import CommentContainer from "components/detail/CommentContainer";
 import DetailAB from "components/detail/DetailAB";
 import FilterBar from "components/detail/FilterBar";
 import VoteAnalyzeBar from "components/detail/VoteAnalyzeBar";
@@ -45,7 +45,7 @@ function DetailPage() {
           <br />
           근데 왼쪽이 5만원 더 비싸긴 합니다...
         </VoteDetail>
-        <Commtent />
+        <CommentContainer />
       </PageInner>
     </PageWrapper>
   );
