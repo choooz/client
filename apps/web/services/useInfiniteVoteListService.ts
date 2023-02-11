@@ -34,7 +34,6 @@ export default function useInfiniteVoteListService(params: Params) {
 
   const [subscribe] = useInfiniteScroll(fetchNextPage);
 
-  // @Note flatMap을 안쓰면 무한 스크롤이 동작하지 않는데 그 이유를 모르겠다.
   const voteList = data?.pages.flatMap((page) => page.content) ?? [];
 
   return { voteList, subscribe };
