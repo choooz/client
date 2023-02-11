@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
-import { postVoteAPI, PostVote } from "lib/api/vote";
-import { uploadProfileImageAPI } from "lib/api/upload";
+import { postVoteAPI, PostVote } from "lib/apis/vote";
+import { uploadProfileImageAPI } from "lib/apis/upload";
 import { useSubmitState } from "store/submitState";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";

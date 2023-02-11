@@ -1,3 +1,5 @@
+"use client";
+
 import axios from "axios";
 import { getToken } from "lib/utils/auth";
 import { SERVER_URL } from "../constants";
