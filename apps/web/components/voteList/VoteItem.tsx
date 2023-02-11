@@ -18,13 +18,13 @@ function VoteItem({ vote }: Props) {
         <Image alt="left image" src={Eximg1} style={LeftImageCss} />
         <Image alt="right image" src={Eximg2} style={RightImageCss} />
       </ImageContainer>
-      <VoteInfo>
-        <MessageContainer>
+      <VoteContainer>
+        <MessageBox>
           <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
           <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
-        </MessageContainer>
+        </MessageBox>
         <BookmarkIconStyled />
-      </VoteInfo>
+      </VoteContainer>
       <TitleContainer>
         <VoteTitle>{vote.totalTitle}</VoteTitle>
         <Date>11h</Date>
@@ -72,10 +72,12 @@ const RightImageCss = {
   marginLeft: 1,
 };
 
-const VoteInfo = styled.div`
+const VoteContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 8px;
+  max-width: 560px;
+  margin: 8px auto 0;
   ${media.medium} {
     width: 521px;
     margin: 0 auto;
@@ -84,7 +86,7 @@ const VoteInfo = styled.div`
   }
 `;
 
-const MessageContainer = styled.div`
+const MessageBox = styled.div`
   display: flex;
 `;
 
@@ -98,6 +100,8 @@ const BookmarkIconStyled = styled(BookmarkIcon)`
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  max-width: 560px;
+  margin: 0 auto;
   ${media.medium} {
     width: 528px;
     margin: 0 auto;
@@ -108,6 +112,9 @@ const TitleContainer = styled.div`
 
 const VoteTitle = styled.h3`
   font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   ${({ theme }) => theme.textStyle.Font_Regular}
   ${media.medium} {
     color: ${({ theme }) => theme.palette.ink.lightest};
