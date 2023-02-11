@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-type Result<T> = [(node: T | null) => void, () => void, () => void];
+type Result<T> = [(node: T | null) => void];
 
 export function useIntersectionObserver<T extends HTMLElement>(
   callback: IntersectionObserverCallback,
@@ -19,22 +19,6 @@ export function useIntersectionObserver<T extends HTMLElement>(
     [observer.current],
   );
 
-  const unsubscribe = useCallback(() => {
-    if (observer.current) {
-      observer.current.disconnect();
-      observer.current = null;
-      setTarget(null);
-    }
-  }, []);
-
-  const toggleObserve = () => {
-    if (target) {
-      observer.current?.unobserve(target);
-    } else {
-      observer.current?.observe(target as unknown as HTMLElement);
-    }
-  };
-
   useEffect(() => {
     observer.current = new IntersectionObserver(callback, options);
     subscribe(target);
@@ -45,5 +29,5 @@ export function useIntersectionObserver<T extends HTMLElement>(
     };
   }, [callback, options]);
 
-  return [subscribe, unsubscribe, toggleObserve];
+  return [subscribe];
 }
