@@ -4,18 +4,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@src/*": [
-        "src/*"
-      ]
+      "@src/*": ["src/*"]
     },
     "plugins": [
       {
@@ -23,10 +17,7 @@
       }
     ]
   },
-  "exclude": [
-    "**/node_modules",
-    "**/.*/"
-  ],
+  "exclude": ["**/node_modules", "**/.*/"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
