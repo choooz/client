@@ -1,12 +1,18 @@
 "use client";
 
-import VoteItem from "components/voteList/VoteItem";
+import { VoteList } from "components/voteList";
 import { CATEGORY_LIST } from "lib/constants";
 import { FilterIcon } from "public/icons";
+import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
 import { media } from "styles/media";
 
 function VoteListPage() {
+  const { voteList, subscribe } = useInfiniteVoteListService({
+    size: 3,
+    sortBy: "ByTime",
+  });
+
   return (
     <PageWrapper>
       <PageInner>
@@ -21,9 +27,8 @@ function VoteListPage() {
             필터
           </FilterBox>
         </FilterContainer>
-        <VoteItem />
-        <VoteItem />
-        <VoteItem />
+        <VoteList voteList={voteList} />
+        <div ref={subscribe} />
       </PageInner>
     </PageWrapper>
   );

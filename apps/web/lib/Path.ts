@@ -5,14 +5,15 @@ const Path = {
   LOGIN_PAGE: "/login",
   KAKAO_LOGIN_PROCESS: "/login/kakaoLoginProcess",
   NAVER_LOGIN_PROCESS: "/login/naverLoginProcess",
-  REGISTER_PAGE: "/register",
-  REGISTER_INTERSTER_PAGE: "/register/interest",
 
   // logged In
+  REGISTER_PAGE: "/register",
+  REGISTER_INTERSTER_PAGE: "/register/interest",
+  POST_PAGE: "/post",
 
   // common
-  // @Note 더 적절한 페이지명 있으면 수정 바람
-  LIST_PAGE: "/",
+  MAIN_PAGE: "/",
+  VOTE_LIST_PAGE: "/voteList",
 } as const;
 
 export default Path;

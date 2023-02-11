@@ -1,6 +1,6 @@
 "use client";
 
-import { naverLoginAPI } from "lib/api/auth";
+import { naverLoginAPI } from "lib/apis/auth";
 import Path from "lib/Path";
 import userStorage from "lib/utils/userStorage";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ function naverLoginProcess() {
     try {
       const { accessToken, newUser } = await naverLoginAPI({ code, state: "test" });
       userStorage.set(accessToken);
-      newUser ? router.push(Path.REGISTER_PAGE) : router.push(Path.LIST_PAGE);
+      newUser ? router.push(Path.REGISTER_PAGE) : router.push(Path.MAIN_PAGE);
     } catch (error) {
       alert("에러가 발생하였습니다.");
     }

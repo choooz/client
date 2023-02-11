@@ -1,6 +1,6 @@
 import { DivideLine, Input, ModalTemplate, Template } from "@chooz/ui";
 import { UseMutateFunction } from "@tanstack/react-query";
-import { ModifyVote } from "lib/api/vote";
+import { ModifyVote } from "lib/apis/vote";
 import React from "react";
 import styled from "styled-components";
 import { CATEGORY_LIST } from "lib/constants";
