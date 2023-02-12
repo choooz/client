@@ -1,3 +1,5 @@
+import axios from "axios";
+import { SERVER_URL } from "lib/constants";
 import apiClient from "./apiClient";
 
 interface GetVoteListRequest {
@@ -48,5 +50,33 @@ export type ModifyVote = ModifyVoteRequest;
 
 export const modifyVoteAPI = async (body: ModifyVoteRequest) => {
   const response = await apiClient.patch("api/votes/1", body);
+  return response.data;
+};
+
+interface TempVote {}
+
+interface GetVoteByIdResponst {
+  user: {
+    userImage: string;
+    userGender: string;
+    userAge: number;
+    userMbti: string;
+    nickName: null;
+  };
+  nickName: null;
+  voteCreatedDate: Date;
+  category: null;
+  title: string;
+  imageA: string;
+  imageB: string;
+  filteredGender: string;
+  filteredAge: string;
+  filteredMbti: string;
+  titleA: string;
+  titleB: string;
+  description: null;
+}
+export const getVoteByIdAPI = async (id: number) => {
+  const response = await axios.get<GetVoteByIdResponst>(`${SERVER_URL}api/votes/${id}`);
   return response.data;
 };

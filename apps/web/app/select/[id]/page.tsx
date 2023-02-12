@@ -2,12 +2,14 @@
 
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
+import { useQuery } from "@tanstack/react-query";
 import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
+import { getVoteByIdAPI } from "lib/apis/vote";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
@@ -17,7 +19,7 @@ import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
 
-function SelectPage() {
+function SelectPage({ params }: { params: { id: number } }) {
   const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
@@ -29,6 +31,20 @@ function SelectPage() {
   const onChangeSelect = (select: "A" | "B") => {
     setSelect(select);
   };
+
+  const { data, isLoading, isError } = useQuery(
+    ["vote", params.id],
+    () => getVoteByIdAPI(params.id),
+    {
+      cacheTime: 0,
+    },
+  );
+
+  if (isLoading) return <div>로딩중</div>;
+  if (isError) return <div>에러</div>;
+  if (!data) return <div>데이터 없음</div>;
+
+  const { imageA, imageB, title, titleA, titleB } = data;
   return (
     <>
       <PageWrapper>
@@ -38,19 +54,20 @@ function SelectPage() {
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
             targetEl={targetEl}
+            title={title}
           />
 
           <SelectAB
-            imageA={Eximg1}
-            titleA="아이보리 트위드2"
-            imageB={Eximg2}
-            titleB="핑크 원피스"
+            imageA={imageA}
+            titleA={titleA}
+            imageB={imageB}
+            titleB={titleB}
             select={select}
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href="select/1/detail">
+            <Link href={`select/${params.id}/detail`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>

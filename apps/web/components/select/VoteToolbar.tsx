@@ -11,9 +11,16 @@ interface Props {
   onChangeToggleMenu(): void;
   toggleMenu: boolean;
   targetEl: React.RefObject<HTMLImageElement>;
+  title: string;
 }
 
-function VoteToolbar({ onChangeToggleDetail, onChangeToggleMenu, toggleMenu, targetEl }: Props) {
+function VoteToolbar({
+  onChangeToggleDetail,
+  onChangeToggleMenu,
+  title,
+  toggleMenu,
+  targetEl,
+}: Props) {
   return (
     <>
       <TagRow>
@@ -34,7 +41,7 @@ function VoteToolbar({ onChangeToggleDetail, onChangeToggleMenu, toggleMenu, tar
         </FlexRow>
       </TagRow>
       <TitleRow>
-        무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요
+        {title}
         <DateText>22.02.03</DateText>
       </TitleRow>
       {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
