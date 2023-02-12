@@ -117,7 +117,7 @@ const Container = styled.div`
 const QuestionText = styled.div`
   font-size: 20px;
   font-weight: 700;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
 `;
 
 const SubText = styled.div`
