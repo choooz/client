@@ -3,20 +3,20 @@ import React from "react";
 import styled from "styled-components";
 import CommentForm from "./CommentForm";
 import CommentToolBar from "./CommentToolBar";
-import Commtent from "./Commtent";
+import Comment from "./Comment";
 import Image from "next/image";
 import Link from "next/link";
-import { AmplifyIcon, Reduction } from "public/icons";
+import { Reduction } from "public/icons";
 
 function CommentContainer() {
   return (
     <Container>
       <CommentToolBar />
       <CommentForm />
-      <Commtent />
-      <Commtent /> <Commtent />
-      <Commtent /> <Commtent />
-      <Commtent />
+      <Comment />
+      <Comment /> <Comment />
+      <Comment /> <Comment />
+      <Comment />
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
         <Link href="select/1/detail">
           <DetailButtonInner>

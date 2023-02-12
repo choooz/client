@@ -38,7 +38,7 @@ import styled, { css } from "styled-components";
 //   },
 // ];
 
-function Commtent() {
+function Comment() {
   return (
     <Container>
       <Image
@@ -158,4 +158,4 @@ const Comma = styled.div`
   `}
 `;
 
-export default Commtent;
+export default Comment;
