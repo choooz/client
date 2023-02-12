@@ -2,18 +2,15 @@
 
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import NumberOfSolver from "components/common/NumberOfSolver";
-import TargetMessage from "components/common/TargetMessage";
 import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
-import MenuBox from "components/select/MenuBox";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
 import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import Link from "next/link";
-import { AmplifyIcon, HambergerIcon, SaveIcon } from "public/icons";
+import { AmplifyIcon } from "public/icons";
 import { Eximg1, Eximg2, Success } from "public/images";
 import React, { useState } from "react";
 import useModifyVoteService from "services/useModifyVoteService";
@@ -25,7 +22,7 @@ function SelectPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
-  const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
+  const { targetEl } = useOutSideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onAniamteFlip, drag } = useFlipAnimation();
 
   const [select, setSelect] = useState<"A" | "B" | null>(null);

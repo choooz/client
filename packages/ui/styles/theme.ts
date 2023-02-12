@@ -78,35 +78,35 @@ const lineHeight = {
 
 // @Note font-weight, bold가 어떻게 사용될 지 몰라 일단 안 넣었음 많이 사용될 것 같으면 코드에 추가하여 사용할 것
 const textStyle = {
-  Title_1: css`
+  Title_1: `
     font-size: ${fontSize.xxxLarge};
     line-height: ${lineHeight.xxxLarge};
   `,
-  Title_2: css`
+  Title_2: `
     font-size: ${fontSize.xxLarge};
     line-height: ${lineHeight.xxLarge};
   `,
-  Title_3: css`
+  Title_3: `
     font-size: ${fontSize.xLarge};
     line-height: ${lineHeight.xLarge};
   `,
-  Title_Large: css`
+  Title_Large: `
     font-size: ${fontSize.large};
     line-height: ${lineHeight.large};
   `,
-  Title_Medium: css`
+  Title_Medium: `
     font-size: ${fontSize.medium};
     line-height: ${lineHeight.medium};
   `,
-  Title_Small: css`
+  Title_Small: `
     font-size: ${fontSize.small};
     line-height: ${lineHeight.small};
   `,
-  Font_Regular: css`
+  Font_Regular: `
     font-size: ${fontSize.xSmall};
     line-height: ${lineHeight.xSmall};
   `,
-  Font_Minimum: css`
+  Font_Minimum: `
     font-size: ${fontSize.xxSmall};
     line-height: ${lineHeight.xxSmall};
   `,

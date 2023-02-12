@@ -7,3 +7,4 @@ export { default as SelectBoxIcon } from "./SelectBoxIcon.svg";
 export { default as AmplifyIcon } from "./amplifyIcon.png";
 export { default as AddIcon } from "./addIcon.png";
 export { default as SaveIcon } from "./saveIcon.png";
+export { default as Reduction } from "./Reduction.png";

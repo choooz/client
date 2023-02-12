@@ -10,14 +10,14 @@ interface Props {
 function VoteAnalyzeBar({ A, B, select }: Props) {
   return (
     <AnalyzeBar>
-      <ShareA selected share={A}>
+      <Share share={A}>
         {A}% &nbsp;
         <div className="number">(340명)</div>
-      </ShareA>
-      <ShareB selected={false} share={B}>
+      </Share>
+      <Share selected share={B}>
         {B}% &nbsp;
-        <div className="number">(340명)</div>
-      </ShareB>
+        <div className="number">(345명)</div>
+      </Share>
     </AnalyzeBar>
   );
 }
@@ -32,27 +32,23 @@ const AnalyzeBar = styled.div`
   align-items: center;
 `;
 
-const ShareA = styled.div<{ share: number; selected: boolean }>`
+const Share = styled.div<{ share: number; selected?: boolean }>`
   border-radius: 4px;
-  width: ${({ share }) => share}%;
-  background-color: ${({ theme }) => theme.palette.main.sub};
-  color: ${({ theme }) => theme.palette.ink.lightest};
-  font-size: ${({ theme }) => theme.fontSize.xSmall};
   font-weight: 700;
   height: 40px;
   display: flex;
   align-items: center;
   padding: 0 10px;
+  ${({ theme, share, selected }) => css`
+    background: ${theme.palette.main.sub};
+    color: ${theme.palette.ink.lightest};
+    ${theme.textStyle.Font_Regular};
+    width: ${share}%;
+    ${!selected && `visibility: hidden`};
+  `}
   .number {
     font-weight: 500;
   }
-  ${({ selected }) =>
-    !selected &&
-    css`
-      display: none;
-    `}
 `;
-
-const ShareB = styled(ShareA)``;
 
 export default VoteAnalyzeBar;
