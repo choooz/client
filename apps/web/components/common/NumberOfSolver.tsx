@@ -10,7 +10,7 @@ function NumberOfSolver({ children }: Props) {
   return <Message>{children}</Message>;
 }
 
-const Message = styled.div`
+const Message = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;

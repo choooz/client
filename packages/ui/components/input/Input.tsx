@@ -31,8 +31,12 @@ const variantStyles = {
   `,
   outlined: css`
     height: 46px;
-    border: 1px solid ${({ theme }) => theme.palette.border.base};
+    border: 1px solid ${({ theme }) => theme.palette.border.light};
     border-radius: 4px;
+    padding: 4px 8px;
+    ::placeholder {
+      color: ${({ theme }) => theme.palette.ink.lighter};
+    }
   `,
 };
 

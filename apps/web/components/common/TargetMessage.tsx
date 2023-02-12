@@ -10,7 +10,7 @@ function TargetMessage({ children }: Props) {
   return <Message>{children}</Message>;
 }
 
-const Message = styled.div`
+const Message = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
