@@ -1,5 +1,6 @@
 "use client";
 
+import { useToggle } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
@@ -10,7 +11,6 @@ import MenuBox from "components/select/MenuBox";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
-import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon, HambergerIcon, SaveIcon } from "public/icons";

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@chooz/ui";
+import { useToggle } from "@chooz/hooks";
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
@@ -9,7 +10,6 @@ import FilterBar from "components/detail/FilterBar";
 import VoteAnalyzeBar from "components/detail/VoteAnalyzeBar";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
-import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import { SaveIcon } from "public/icons";
 import { Eximg1, Eximg2 } from "public/images";
