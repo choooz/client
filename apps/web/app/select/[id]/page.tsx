@@ -1,5 +1,6 @@
 "use client";
 
+import { useToggle } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModal from "components/select/AddDetailModal";
@@ -7,7 +8,6 @@ import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
-import useToggle from "hooks/useToggle";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
