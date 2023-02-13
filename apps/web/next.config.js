@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const withTM = require("next-transpile-modules")(["@chooz/ui"]);
+const withTM = require("next-transpile-modules")(["@chooz/ui", "@chooz/hooks"]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
