@@ -1,25 +1,21 @@
 "use client";
 
-import { Button } from "@chooz/ui";
 import { useToggle } from "@chooz/hooks";
 import { media } from "@chooz/ui/styles/media";
-import NumberOfSolver from "components/common/NumberOfSolver";
-import TargetMessage from "components/common/TargetMessage";
+import CommentContainer from "components/detail/CommentContainer";
 import DetailAB from "components/detail/DetailAB";
 import FilterBar from "components/detail/FilterBar";
 import VoteAnalyzeBar from "components/detail/VoteAnalyzeBar";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
-import Image from "next/image";
-import { SaveIcon } from "public/icons";
 import { Eximg1, Eximg2 } from "public/images";
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 function DetailPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { targetEl } = useOutSideClick(toggleMenu, onChangeToggleMenu);
+  const { targetEl } = useOutSideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
 
   //데이터
   const [select, setSelect] = useState<"A" | "B">("A");
@@ -49,6 +45,7 @@ function DetailPage() {
           <br />
           근데 왼쪽이 5만원 더 비싸긴 합니다...
         </VoteDetail>
+        <CommentContainer />
       </PageInner>
     </PageWrapper>
   );

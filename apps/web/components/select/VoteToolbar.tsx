@@ -10,7 +10,7 @@ interface Props {
   onChangeToggleDetail(): void;
   onChangeToggleMenu(): void;
   toggleMenu: boolean;
-  targetEl: React.RefObject<HTMLDivElement>;
+  targetEl: React.RefObject<HTMLImageElement>;
 }
 
 function VoteToolbar({ onChangeToggleDetail, onChangeToggleMenu, toggleMenu, targetEl }: Props) {
@@ -23,33 +23,24 @@ function VoteToolbar({ onChangeToggleDetail, onChangeToggleMenu, toggleMenu, tar
         </FlexRow>
         <FlexRow>
           <Image src={SaveIcon} alt="저장하기" width={32} height={32} />
-          <div ref={targetEl}>
-            <Image
-              src={HambergerIcon}
-              alt="매뉴"
-              width={32}
-              height={32}
-              onClick={onChangeToggleMenu}
-            />
-          </div>
+          <Image
+            ref={targetEl}
+            src={HambergerIcon}
+            alt="매뉴"
+            width={32}
+            height={32}
+            onClick={onChangeToggleMenu}
+          />
         </FlexRow>
       </TagRow>
       <TitleRow>
-        <div>무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요</div>
+        무엇이 좋을까요? 공백포함 34자 정도까지네요 여기까지입니다요
         <DateText>22.02.03</DateText>
-        {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
       </TitleRow>
+      {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
     </>
   );
 }
-
-const DateText = styled.div`
-  ${({ theme }) => theme.textStyle.Title_Small}
-  color: ${({ theme }) => theme.palette.ink.light};
-  font-weight: 400;
-  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue";
-`;
 
 const TagRow = styled.div`
   width: 100%;
@@ -69,10 +60,15 @@ const TitleRow = styled.div`
   font-weight: 700;
 `;
 
+const DateText = styled.div`
+  color: ${({ theme }) => theme.palette.ink.light};
+  font-weight: 400;
+  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue";
+`;
+
 const FlexRow = styled.div`
-  position: relative;
   display: flex;
-  align-items: center;
   gap: 4px;
 `;
 

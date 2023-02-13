@@ -7,3 +7,4 @@ export { default as NaverIcon } from "./NaverIcon.svg";
 export { default as FilterIcon } from "./FilterIcon.svg";
 export { default as BookmarkIcon } from "./BookmarkIcon.svg";
 export { default as AmplifyIcon } from "./amplifyIcon.png";
+export { default as Reduction } from "./Reduction.png";
