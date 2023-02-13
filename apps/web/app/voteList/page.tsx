@@ -1,7 +1,6 @@
 "use client";
 
-import { CategorySelect } from "components/common/select";
-import { VoteList } from "components/voteList";
+import { CategorySelectBox, SortSelectBox, VoteList } from "components/voteList";
 import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
@@ -23,7 +22,14 @@ function VoteListPage() {
     <PageWrapper>
       <PageInner>
         <FilterSection>
-          <CategorySelect />
+          <CategorySelectBox />
+          <RightFilterContainer>
+            <SortSelectBox />
+            <div>
+              <input type="checkbox" />
+              선택만 보기
+            </div>
+          </RightFilterContainer>
         </FilterSection>
         <VoteList voteList={voteList} selectedCategory={selectedCategory} />
         <div ref={subscribe} />
@@ -47,9 +53,26 @@ const PageInner = styled.div`
   }
 `;
 
-const FilterSection = styled.section`
+const FilterSection = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const CategorySelect = styled.select``;
+const Option = styled.option``;
+const FilterBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const RightFilterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 183px;
+  justify-content: space-between;
 `;
 
 export default VoteListPage;

@@ -24,6 +24,11 @@ export const CATEGORY_LIST = [
   { id: "INTEREST", name: "재미" },
 ];
 
+export const SORT_LIST = [
+  { id: "new", name: "최신순" },
+  { id: "popular", name: "인기순" },
+];
+
 export const AGE_LIST = [
   { id: "teenager", name: "10대" },
   { id: "twenties", name: "20대" },
