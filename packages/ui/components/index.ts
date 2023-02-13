@@ -6,3 +6,4 @@ export { default as ModalTemplate } from "./modal/ModalTemplate";
 export { default as Input } from "./input/Input";
 export { default as FloatModalTemplate } from "./modal/FloatModalTemplate";
 export { default as DivideLine } from "./divide/DivideLine";
+export * from "./selectBox";
