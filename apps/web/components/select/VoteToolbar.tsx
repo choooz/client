@@ -12,6 +12,7 @@ interface Props {
   toggleMenu: boolean;
   targetEl: React.RefObject<HTMLImageElement>;
   title: string;
+  date: string;
 }
 
 function VoteToolbar({
@@ -20,6 +21,7 @@ function VoteToolbar({
   title,
   toggleMenu,
   targetEl,
+  date,
 }: Props) {
   return (
     <>
@@ -42,7 +44,7 @@ function VoteToolbar({
       </TagRow>
       <TitleRow>
         {title}
-        <DateText>22.02.03</DateText>
+        <DateText>{date.slice(0, 10)}</DateText>
       </TitleRow>
       {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
     </>

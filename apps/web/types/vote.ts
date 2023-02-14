@@ -18,7 +18,7 @@ export interface Vote {
   filteredAge: string | null;
   filteredGender: GenderType | null;
   filteredMbti: string | null;
-  modifiedDate: Date;
+  modifiedDate: string;
   countVoted: number;
   imageA: string | null;
   imageB: string | null;

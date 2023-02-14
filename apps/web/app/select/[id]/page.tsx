@@ -3,7 +3,6 @@
 import { useToggle } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import { useQuery } from "@tanstack/react-query";
 import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
@@ -12,67 +11,64 @@ import useOutSideClick from "hooks/useOutsideClick";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
-import { Eximg1, Eximg2, Success } from "public/images";
+import { Success } from "public/images";
 import React, { useState } from "react";
+import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
+import { Vote } from "types/vote";
 
-function SelectPage({ params }: { params: { id: number } }) {
+function SelectPage() {
+  const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
+    useInfiniteMainListService(10, "ByTime");
   const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
-  const { onAniamteFlip, drag } = useFlipAnimation();
+  const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
   const [select, setSelect] = useState<"A" | "B" | null>(null);
   const onChangeSelect = (select: "A" | "B") => {
     setSelect(select);
   };
 
-  const { data, isLoading, isError } = useQuery(
-    ["vote", params.id],
-    () => getVoteByIdAPI(params.id),
-    {
-      cacheTime: 0,
-    },
-  );
+  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
+  if (isError) return <PageInner drag={drag}>에러</PageInner>;
+  if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  if (isLoading) return <div>로딩중</div>;
-  if (isError) return <div>에러</div>;
-  if (!data) return <div>데이터 없음</div>;
-
-  const { imageA, imageB, title, titleA, titleB } = data;
+  const { category, countVoted, modifiedDate, totalTitle, imageA, imageB } =
+    mainVoteList[nowShowing];
   return (
     <>
       <PageWrapper>
-        <PageInner className="animate" onWheel={onAniamteFlip} drag={drag}>
+        <PageInner className="animate" onWheel={onActFlip} drag={drag}>
           <VoteToolbar
             onChangeToggleDetail={onChangeToggleDetail}
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
             targetEl={targetEl}
-            title={title}
+            title={totalTitle}
+            date={modifiedDate}
           />
 
           <SelectAB
-            imageA={imageA}
-            titleA={titleA}
-            imageB={imageB}
-            titleB={titleB}
+            imageA={imageA || ""}
+            titleA="화살표"
+            imageB={imageB || ""}
+            titleB="화살살표"
             select={select}
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`select/${params.id}/detail`}>
+            <Link href={`select/detail`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>
             </Link>
           </DetailButton>
-          {/* 자세히 보기 */}
         </PageInner>
         <FirstPageBase className="animate2" drag={drag} />
         <SecondPageBase className="animate3" drag={drag} />

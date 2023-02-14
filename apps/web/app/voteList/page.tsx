@@ -31,7 +31,7 @@ function VoteListPage() {
             </div>
           </RightFilterContainer>
         </FilterSection>
-        <VoteList voteList={voteList} selectedCategory={selectedCategory} />
+        <VoteList voteList={voteList} />
         <div ref={subscribe} />
       </PageInner>
     </PageWrapper>
