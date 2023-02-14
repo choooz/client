@@ -1,4 +1,3 @@
-import { SelectBoxIcon } from "public/icons";
 import styled from "styled-components";
 
 interface SelectProps {
@@ -18,19 +17,20 @@ function SelectButton({ children, onChangeOpen }: SelectProps) {
         onClick={onChangeOpen}
       >
         <span>{children}</span>
-        <SelectBoxIcon />
       </StyledButton>
     </>
   );
 }
 
 const StyledButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
+  width: 80px;
+  height: 40px;
   > span {
-    margin-right: 18px;
+    /* margin-right: 18px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
 `;
 

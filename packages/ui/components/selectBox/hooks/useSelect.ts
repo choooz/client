@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useToggle from "./useToggle";
+import { useToggle } from "@chooz/hooks";
 
 export default function useSelect(defaultOption: string) {
   const [isOpen, onChangeOpen] = useToggle();
