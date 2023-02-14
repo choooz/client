@@ -58,18 +58,8 @@ const FilterSection = styled.div`
   justify-content: space-between;
 `;
 
-const CategorySelect = styled.select``;
-const Option = styled.option``;
-const FilterBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
 const RightFilterContainer = styled.div`
   display: flex;
-  flex-direction: row;
   align-items: center;
   width: 183px;
   justify-content: space-between;
