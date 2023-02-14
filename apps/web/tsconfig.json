@@ -30,6 +30,7 @@
     "**/*.json",
     "../../package/ui/styles/theme.ts",
     "../../package/ui/styles/transitions.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "../../packages/ui/components/selectBox/hooks/useSelect.ts"
   ]
 }

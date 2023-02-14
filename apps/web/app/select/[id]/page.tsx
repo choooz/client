@@ -1,5 +1,6 @@
 "use client";
 
+import { useToggle } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import { useQuery } from "@tanstack/react-query";
@@ -8,8 +9,6 @@ import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
-import useToggle from "hooks/useToggle";
-import { getVoteByIdAPI } from "lib/apis/vote";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";

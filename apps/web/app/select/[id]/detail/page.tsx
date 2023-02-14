@@ -1,5 +1,6 @@
 "use client";
 
+import { useToggle } from "@chooz/hooks";
 import { media } from "@chooz/ui/styles/media";
 import CommentContainer from "components/detail/CommentContainer";
 import DetailAB from "components/detail/DetailAB";
@@ -7,7 +8,6 @@ import FilterBar from "components/detail/FilterBar";
 import VoteAnalyzeBar from "components/detail/VoteAnalyzeBar";
 import VoteToolbar from "components/select/VoteToolbar";
 import useOutSideClick from "hooks/useOutsideClick";
-import useToggle from "hooks/useToggle";
 import { Eximg1, Eximg2 } from "public/images";
 import React, { useState } from "react";
 import styled from "styled-components";

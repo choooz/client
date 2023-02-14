@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chooz/hooks": "workspace:*",
     "@chooz/ui": "workspace:*",
     "@next/font": "^13.1.6",
     "@tanstack/react-query": "^4.20.4",

@@ -20,6 +20,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:apps/web"\
       },\
       {\
+        "name": "@chooz/hooks",\
+        "reference": "workspace:packages/hooks"\
+      },\
+      {\
         "name": "@chooz/ui",\
         "reference": "workspace:packages/ui"\
       }\
@@ -27,6 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
+      ["@chooz/hooks", ["workspace:packages/hooks"]],\
       ["@chooz/ui", ["workspace:packages/ui"]],\
       ["@chooz/web", ["workspace:apps/web"]],\
       ["chooz", ["workspace:."]]\
@@ -3899,11 +3904,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@chooz/hooks", [\
+        ["workspace:packages/hooks", {\
+          "packageLocation": "./packages/hooks/",\
+          "packageDependencies": [\
+            ["@chooz/hooks", "workspace:packages/hooks"],\
+            ["@types/react", "npm:18.0.26"],\
+            ["react", "npm:18.2.0"],\
+            ["typescript", "patch:typescript@npm%3A4.9.4#~builtin<compat/typescript>::version=4.9.4&hash=d73830"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@chooz/ui", [\
         ["workspace:packages/ui", {\
           "packageLocation": "./packages/ui/",\
           "packageDependencies": [\
             ["@chooz/ui", "workspace:packages/ui"],\
+            ["@chooz/hooks", "workspace:packages/hooks"],\
             ["@types/node", "npm:18.11.17"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
@@ -3922,6 +3940,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/web/",\
           "packageDependencies": [\
             ["@chooz/web", "workspace:apps/web"],\
+            ["@chooz/hooks", "workspace:packages/hooks"],\
             ["@chooz/ui", "workspace:packages/ui"],\
             ["@next/font", "npm:13.1.6"],\
             ["@svgr/webpack", "npm:6.5.1"],\
