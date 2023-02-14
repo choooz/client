@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
+import { Vote } from "types/vote";
 import apiClient from "./apiClient";
 
 interface GetVoteListRequest {
@@ -7,16 +8,26 @@ interface GetVoteListRequest {
   size: number;
   sortBy: string;
 }
+interface GetVoteListResponse {
+  voteSlice: {
+    content: Vote[];
+    empty: boolean;
+    first: boolean;
+    last: boolean;
+    number: number;
+    numberOfElements: number;
+    size: number;
+  };
+}
 
 export const getVoteListAPI = async ({ page, size, sortBy }: GetVoteListRequest) => {
-  const response = await apiClient.get("api/votes", {
+  const response = await apiClient.get<GetVoteListResponse>("api/votes", {
     params: {
       page,
       size,
       sortBy,
     },
   });
-
   return response.data.voteSlice;
 };
 
