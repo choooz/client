@@ -4,6 +4,8 @@ export { default as KakaoIcon } from "./KakaoIcon.svg";
 export { default as NaverIcon } from "./NaverIcon.svg";
 export { default as BookmarkIcon } from "./BookmarkIcon.svg";
 export { default as SelectDropdownIndicator } from "./SelectDropdownIndicator.svg";
+export { default as AIcon } from "./AIcon.svg";
+export { default as BIcon } from "./BIcon.svg";
 export { default as AmplifyIcon } from "./amplifyIcon.png";
 export { default as AddIcon } from "./addIcon.png";
 export { default as SaveIcon } from "./saveIcon.png";
