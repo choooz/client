@@ -11,52 +11,66 @@ import useOutSideClick from "hooks/useOutsideClick";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
-import { Eximg1, Eximg2, Success } from "public/images";
+import { Success } from "public/images";
 import React, { useState } from "react";
+import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
+import { Vote } from "types/vote";
 
+/** 
+ * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
+ */
 function SelectPage() {
+  const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
+    useInfiniteMainListService(10, "ByTime");
   const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
   const { targetEl } = useOutSideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
-  const { onAniamteFlip, drag } = useFlipAnimation();
+  const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
   const [select, setSelect] = useState<"A" | "B" | null>(null);
   const onChangeSelect = (select: "A" | "B") => {
     setSelect(select);
   };
+
+  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
+  if (isError) return <PageInner drag={drag}>에러</PageInner>;
+  if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
+
+  const { modifiedDate, totalTitle, imageA, imageB } = mainVoteList[nowShowing];
   return (
     <>
       <PageWrapper>
-        <PageInner className="animate" onWheel={onAniamteFlip} drag={drag}>
+        <PageInner className="animate" onWheel={onActFlip} drag={drag}>
           <VoteToolbar
             onChangeToggleDetail={onChangeToggleDetail}
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
             targetEl={targetEl}
+            title={totalTitle}
+            date={modifiedDate}
           />
 
           <SelectAB
-            imageA={Eximg1}
-            titleA="아이보리 트위드2"
-            imageB={Eximg2}
-            titleB="핑크 원피스"
+            imageA={imageA || ""}
+            titleA="화살표"
+            imageB={imageB || ""}
+            titleB="화살살표"
             select={select}
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href="select/1/detail">
+            <Link href={`select/detail`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>
             </Link>
           </DetailButton>
-          {/* 자세히 보기 */}
         </PageInner>
         <FirstPageBase className="animate2" drag={drag} />
         <SecondPageBase className="animate3" drag={drag} />
