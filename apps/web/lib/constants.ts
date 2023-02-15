@@ -25,8 +25,8 @@ export const CATEGORY_LIST = [
 ];
 
 export const SORT_LIST = [
-  { id: "new", name: "최신순" },
-  { id: "popular", name: "인기순" },
+  { id: "ByTime", name: "최신순" },
+  { id: "ByPoular", name: "인기순" },
 ];
 
 export const AGE_LIST = [
