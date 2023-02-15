@@ -1,17 +1,20 @@
+import { CategoryNameType } from "types/vote";
 import apiClient from "./apiClient";
 
-interface GetVoteListRequest {
+export interface GetVoteListRequest {
   page: number;
   size: number;
   sortBy: string;
+  category?: CategoryNameType | null;
 }
 
-export const getVoteListAPI = async ({ page, size, sortBy }: GetVoteListRequest) => {
+export const getVoteListAPI = async ({ page, size, sortBy, category }: GetVoteListRequest) => {
   const response = await apiClient.get("api/votes", {
     params: {
       page,
       size,
       sortBy,
+      category,
     },
   });
 
