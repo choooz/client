@@ -27,6 +27,8 @@ function DetailPage() {
           onChangeToggleMenu={onChangeToggleMenu}
           toggleMenu={toggleMenu}
           targetEl={targetEl}
+          title="아이보리 트위드 vs 핑크 원피스"
+          date="2021.08.01"
         />
         <DetailAB
           imageA={Eximg1}

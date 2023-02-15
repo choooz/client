@@ -11,7 +11,6 @@ function useModifyVoteService() {
     titleB: "",
   });
 
-  console.log("vote", vote);
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;

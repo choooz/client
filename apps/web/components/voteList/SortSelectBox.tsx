@@ -21,7 +21,7 @@ function SortSelectBox() {
             ({ id, name }) =>
               option !== name && (
                 <Option
-                  key={`sort_list_${name}`}
+                  key={`sort_list_${id}`}
                   id={id}
                   name={name}
                   onChangeOption={onChangeOption}

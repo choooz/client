@@ -20,7 +20,6 @@ const Li = styled.li`
   align-items: center;
   padding: 14px 34px;
   ${({ theme }) => theme.textStyle.Title_Small};
-
   :hover {
     background-color: ${({ theme }) => theme.palette.background.selectedSoft};
   }
