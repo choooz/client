@@ -10,6 +10,10 @@ export interface Writer {
   userid: number;
 }
 export interface Vote {
+  imageA: string;
+  imageB: string;
+  titleA: string;
+  titleB: string;
   voteId: number;
   category: CategoryNameType;
   totalTitle: string;
@@ -17,4 +21,6 @@ export interface Vote {
   filteredAge: number;
   filteredGender: boolean;
   filteredMbti: string;
+  modifiedDate: string;
+  countVoted: number;
 }
