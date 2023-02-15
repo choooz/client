@@ -24,6 +24,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "picksel-bucket.s3.ap-northeast-2.amazonaws.com",
       },
+      // @todo 목 데이터에 해당 호스트 네임을 사용하는 이미지가 있어 임시로 추가해둠
+      // s3로 부터 데이터 받게될시 제거)
+      {
+        protocol: "https",
+        hostname: "mblogthumb-phinf.pstatic.net",
+      },
     ],
   },
   experimental: {
