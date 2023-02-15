@@ -21,6 +21,17 @@ interface GetVoteListResponse {
     size: number;
   };
 }
+interface GetVoteListResponse {
+  voteSlice: {
+    content: Vote[];
+    empty: boolean;
+    first: boolean;
+    last: boolean;
+    number: number;
+    numberOfElements: number;
+    size: number;
+  };
+}
 
 export const getVoteListAPI = async ({ page, size, sortBy, category }: GetVoteListRequest) => {
   const response = await apiClient.get<GetVoteListResponse>("api/votes", {
