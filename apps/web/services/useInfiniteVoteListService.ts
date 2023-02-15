@@ -1,17 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInfiniteScroll } from "hooks/useInfiniteScroll";
-import { getVoteListAPI } from "lib/apis/vote";
+import { getVoteListAPI, GetVoteListRequest } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 
 // type PageParam = Partial<{ page: number }>;
 
-interface Params {
-  page?: number;
-  size: number;
-  sortBy: string;
-}
-
-export default function useInfiniteVoteListService(params: Params) {
+export default function useInfiniteVoteListService(params: GetVoteListRequest) {
   const { data, fetchNextPage } = useInfiniteQuery(
     [reactQueryKeys.voteList()],
     ({ pageParam }) =>
