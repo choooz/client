@@ -9,5 +9,5 @@ export default function useSelect(defaultOption: string) {
     onChangeOpen();
   };
 
-  return { isOpen, onChangeOpen, option, onChangeOption };
+  return [isOpen, onChangeOpen, option, onChangeOption] as const;
 }

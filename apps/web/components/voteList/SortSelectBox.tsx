@@ -5,22 +5,27 @@ import { SelectDropdownIndicator } from "public/icons";
 import styled from "styled-components";
 
 function SortSelectBox() {
-  const { isOpen, onChangeOpen, option, onChangeOption } = useSelect("최신순");
+  const [isOpen, onChangeOpen, option, onChangeOption] = useSelect("ByTime");
   const { targetEl } = useOutSideClick<HTMLDivElement>(isOpen, onChangeOpen);
   return (
     <SelectBox ref={targetEl}>
       <SelectButton onChangeOpen={onChangeOpen}>
         <>
-          {option}
+          {SORT_LIST.find(({ id }) => id === option)?.name}
           <SelectDropdownIndicator />
         </>
       </SelectButton>
       {isOpen ? (
         <OptionList>
           {SORT_LIST.map(
-            ({ name }) =>
+            ({ id, name }) =>
               option !== name && (
-                <Option key={`sort_list_${name}`} name={name} onChangeOption={onChangeOption} />
+                <Option
+                  key={`sort_list_${name}`}
+                  id={id}
+                  name={name}
+                  onChangeOption={onChangeOption}
+                />
               ),
           )}
         </OptionList>
