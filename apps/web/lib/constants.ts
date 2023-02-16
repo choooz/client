@@ -16,7 +16,8 @@ export const NAVER_LOGIN_REDIRECT_URL =
 
 // export const CATEGORY_NAMES = ["음식", "직업", "연애", "패션", "재미", "기타"];
 export const CATEGORY_LIST = [
-  { id: "NULL", name: "전체" },
+  { id: "", name: "전체" },
+  { id: "NULL", name: "기타" },
   { id: "FOODS", name: "음식" },
   { id: "CAREER", name: "직업" },
   { id: "LOVE", name: "연애" },
