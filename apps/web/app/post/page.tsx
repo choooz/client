@@ -6,6 +6,9 @@ import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
 
+const FIRST_STEP = 1;
+const SECOND_STEP = 2;
+
 function PostPage() {
   const {
     onChangeVote,
@@ -15,7 +18,7 @@ function PostPage() {
     onChangeVoteBySelect,
     mutateVote,
   } = usePostVoteService();
-  const [postStep, setPostStep] = useState<number>(1);
+  const [postStep, setPostStep] = useState<number>(FIRST_STEP);
   const onChangePostStep = (step: number) => {
     setPostStep(step);
   };
@@ -23,7 +26,7 @@ function PostPage() {
   return (
     <PageWrapper>
       <PageInner>
-        {postStep === 1 && (
+        {postStep === FIRST_STEP && (
           <ImageTitleSection
             onChangeVote={onChangeVote}
             onUploadImage={onUploadImage}
@@ -31,7 +34,7 @@ function PostPage() {
             vote={vote}
           />
         )}
-        {postStep === 2 && (
+        {postStep === SECOND_STEP && (
           <TargetSection
             onChangeVoteByClick={onChangeVoteByClick}
             vote={vote}
