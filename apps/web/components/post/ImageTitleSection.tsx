@@ -4,7 +4,7 @@ import { Input, Template, transitions } from "@chooz/ui";
 import { PostVoteRequest } from "lib/apis/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 interface Props {
   vote: PostVoteRequest;
@@ -22,9 +22,13 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
     return;
   };
 
+  const IsDisabled = useMemo(() => {
+    return !vote.titleA || !vote.titleB;
+  }, [vote]);
+
   const { title, titleA, titleB, imageA, imageB } = vote;
   return (
-    <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep }}>
+    <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep, disabled: IsDisabled }}>
       <Container>
         {step === 2 && (
           <TitleBox>
@@ -38,7 +42,9 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
           </TitleBox>
         )}
         <QuestionText>선택지를 입력해주세요.</QuestionText>
-        {!imageA && !imageB && <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>}
+        {step === 1 && !imageA && !imageB && (
+          <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>
+        )}
 
         <label htmlFor="file">
           {!imageA && !imageB ? (
@@ -119,7 +125,6 @@ const Container = styled.div`
 const QuestionText = styled.div`
   font-size: 20px;
   font-weight: 700;
-  padding-bottom: 8px;
 `;
 
 const SubText = styled.div`
