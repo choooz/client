@@ -183,11 +183,11 @@ const InputBox = styled.div`
 const TitleInput = styled.textarea`
   padding: 14px 16px;
   width: 100%;
-  height: 72px;
+  height: 50px;
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   border-radius: 8px;
   resize: none;
-  margin: 24px 0 30px 0;
+  margin: 16px 0 30px 0;
 `;
 
 const TitleBox = styled.div`
