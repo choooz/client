@@ -27,7 +27,7 @@ function TargetSection({
     <Template
       prevButtonText="이전"
       prevButtonProps={{
-        onClick: () => onChangePostStep(-1),
+        onClick: () => onChangePostStep(1),
       }}
       nextButtonText="다음"
       nextButtonProps={{
