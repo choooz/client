@@ -11,6 +11,8 @@ export interface Writer {
   userid: number;
 }
 export interface Vote {
+  titleA: string;
+  titleB: string;
   voteId: number;
   category: CategoryNameType | null;
   totalTitle: string;
