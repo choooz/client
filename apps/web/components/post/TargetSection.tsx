@@ -2,7 +2,7 @@ import { Template } from "@chooz/ui";
 import { PostVote } from "lib/apis/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface Props {
   vote: PostVote;
@@ -104,12 +104,14 @@ const SubText = styled.div`
 `;
 
 const Chip = styled.label`
+  ${({ theme }) => css`
+    background: ${theme.palette.background.soft};
+    color: ${theme.palette.border.dark};
+    border: 1px solid ${theme.palette.border.base};
+  `}
   user-select: none;
   width: 128px;
   height: 54px;
-  color: ${({ theme }) => theme.palette.border.dark};
-  background: ${({ theme }) => theme.palette.background.soft};
-  border: 1px solid ${({ theme }) => theme.palette.border.base};
   border-radius: 100px;
   font-size: 16px;
   display: flex;
@@ -117,8 +119,10 @@ const Chip = styled.label`
   align-items: center;
   cursor: pointer;
   :hover {
-    background: ${({ theme }) => theme.palette.background.selected};
-    color: ${({ theme }) => theme.palette.main.sub};
+    ${({ theme }) => css`
+      background: ${theme.palette.background.selected};
+      color: ${theme.palette.main.sub};
+    `}
   }
 `;
 
@@ -129,10 +133,12 @@ const InvisibleInput = styled.input`
   left: -9999px;
 
   &[type="radio"]:checked + label {
-    background: ${({ theme }) => theme.palette.background.selected};
-    color: ${({ theme }) => theme.palette.main.sub};
-    border: 1px solid ${({ theme }) => theme.palette.main.point};
     font-weight: 700;
+    ${({ theme }) => css`
+      background: ${theme.palette.background.selected};
+      color: ${theme.palette.main.sub};
+      border: 1px solid ${theme.palette.main.point};
+    `}
   }
 `;
 
@@ -148,7 +154,10 @@ const Select = styled.select`
   border-radius: 4px;
   width: 100%;
   height: 54px;
-  border: 1px solid ${({ theme }) => theme.palette.border.base};
+  ${({ theme }) => css`
+    border: 1px solid ${theme.palette.border.base};
+    color: ${theme.palette.ink.lighter};
+  `};
 `;
 
 export default TargetSection;
