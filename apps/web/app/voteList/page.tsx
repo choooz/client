@@ -2,6 +2,7 @@
 
 import { useSelect } from "@chooz/ui";
 import { CategorySelectBox, SortSelectBox, VoteList } from "components/voteList";
+import { useEffect } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
 import { media } from "styles/media";
@@ -9,14 +10,18 @@ import { CategoryNameType } from "types/vote";
 
 function VoteListPage() {
   const [isCategoryOpen, onChangeCategoryOpen, categoryOption, onChangeCategoryOption] =
-    useSelect("NULL");
+    useSelect("");
 
-  const { voteList, subscribe } = useInfiniteVoteListService({
+  const { voteList, subscribe, refetch } = useInfiniteVoteListService({
     size: 3,
     page: 0,
     sortBy: "ByTime",
     category: categoryOption as CategoryNameType, // @Todo 강제 형변환하지 않고 useSelect에 제네릭으로 넘겨주게 하기
   });
+
+  useEffect(() => {
+    refetch();
+  }, [categoryOption]);
 
   return (
     <PageWrapper>

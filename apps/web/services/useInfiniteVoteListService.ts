@@ -3,10 +3,8 @@ import { useInfiniteScroll } from "hooks/useInfiniteScroll";
 import { getVoteListAPI, GetVoteListRequest } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 
-// type PageParam = Partial<{ page: number }>;
-
 export default function useInfiniteVoteListService(params: GetVoteListRequest) {
-  const { data, fetchNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage, refetch } = useInfiniteQuery(
     [reactQueryKeys.voteList()],
     ({ pageParam }) =>
       getVoteListAPI({
@@ -30,5 +28,5 @@ export default function useInfiniteVoteListService(params: GetVoteListRequest) {
 
   const voteList = data?.pages.flatMap((page) => page.content) ?? [];
 
-  return { voteList, subscribe };
+  return { voteList, subscribe, refetch };
 }
