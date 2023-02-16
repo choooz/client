@@ -6,6 +6,7 @@ export const queryKeys = {
 
 export const reactQueryKeys = {
   userInfo: () => [queryKeys.USER_INFO],
-  voteList: () => [queryKeys.VOTE_LIST],
+  // @note any말고 방법이 있나?
+  voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
   mainVoteList: () => [queryKeys.MAIN_VOTE_LIST] as const,
 };
