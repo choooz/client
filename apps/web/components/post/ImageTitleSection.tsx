@@ -92,6 +92,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               onChange={onChangeVote}
               name="titleA"
               value={titleA}
+              maxLength={22}
             />
           </InputBox>
           <InputBox>
@@ -102,6 +103,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               onChange={onChangeVote}
               name="titleB"
               value={titleB}
+              maxLength={22}
             />
           </InputBox>
         </VoteWrapper>
