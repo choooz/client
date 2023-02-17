@@ -29,17 +29,14 @@ function CategorySelectBox({
       </SelectButton>
       {isCategoryOpen ? (
         <OptionList>
-          {CATEGORY_LIST.map(
-            ({ id, name }) =>
-              categoryOption !== id && (
-                <Option
-                  key={`option_list_${id}`}
-                  id={id}
-                  name={name}
-                  onChangeOption={onChangeCategoryOption}
-                />
-              ),
-          )}
+          {CATEGORY_LIST.map(({ id, name }) => (
+            <Option
+              key={`option_list_${id}`}
+              id={id}
+              name={name}
+              onChangeOption={onChangeCategoryOption}
+            />
+          ))}
         </OptionList>
       ) : null}
     </SelectBox>

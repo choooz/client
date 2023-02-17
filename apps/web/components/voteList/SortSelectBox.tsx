@@ -17,17 +17,9 @@ function SortSelectBox() {
       </SelectButton>
       {isOpen ? (
         <OptionList>
-          {SORT_LIST.map(
-            ({ id, name }) =>
-              option !== name && (
-                <Option
-                  key={`sort_list_${id}`}
-                  id={id}
-                  name={name}
-                  onChangeOption={onChangeOption}
-                />
-              ),
-          )}
+          {SORT_LIST.map(({ id, name }) => (
+            <Option key={`sort_list_${id}`} id={id} name={name} onChangeOption={onChangeOption} />
+          ))}
         </OptionList>
       ) : null}
     </SelectBox>
