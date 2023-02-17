@@ -1,13 +1,12 @@
 "use client";
 
-import { useToggle } from "@chooz/hooks";
+import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
-import useOutSideClick from "hooks/useOutsideClick";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
@@ -19,7 +18,7 @@ import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
 import { Vote } from "types/vote";
 
-/** 
+/**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
  */
 function SelectPage() {

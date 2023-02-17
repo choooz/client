@@ -1,5 +1,5 @@
+import { useOutsideClick } from "@chooz/hooks";
 import { Option, OptionList, SelectButton } from "@chooz/ui";
-import useOutSideClick from "hooks/useOutsideClick";
 import { CATEGORY_LIST } from "lib/constants";
 import styled from "styled-components";
 
@@ -18,7 +18,7 @@ function CategorySelectBox({
   categoryOption,
   onChangeCategoryOption,
 }: Props) {
-  const { targetEl } = useOutSideClick<HTMLDivElement>(isCategoryOpen, onChangeCategoryOpen);
+  const { targetEl } = useOutsideClick<HTMLDivElement>(isCategoryOpen, onChangeCategoryOpen);
   return (
     <SelectBox ref={targetEl}>
       <SelectButton onChangeOpen={onChangeCategoryOpen}>

@@ -1,12 +1,12 @@
+import { useOutsideClick } from "@chooz/hooks";
 import { Option, OptionList, SelectButton, useSelect } from "@chooz/ui";
-import useOutSideClick from "hooks/useOutsideClick";
 import { SORT_LIST } from "lib/constants";
 import { SelectDropdownIndicator } from "public/icons";
 import styled from "styled-components";
 
 function SortSelectBox() {
   const [isOpen, onChangeOpen, option, onChangeSortOption] = useSelect("ByTime");
-  const { targetEl } = useOutSideClick<HTMLDivElement>(isOpen, onChangeOpen);
+  const { targetEl } = useOutsideClick<HTMLDivElement>(isOpen, onChangeOpen);
   return (
     <SelectBox ref={targetEl}>
       <SelectButton onChangeOpen={onChangeOpen}>
