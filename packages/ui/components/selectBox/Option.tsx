@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 interface OptionProps {
-  id: string;
   name: string;
-  onChangeOption: (value: string) => void;
+  onChangeOption: () => void;
 }
 
-function Option({ id, name, onChangeOption }: OptionProps) {
+function Option({ name, onChangeOption }: OptionProps) {
   return (
-    <Li role="option" onClick={() => onChangeOption(id)}>
+    <Li role="option" onClick={onChangeOption}>
       {name}
     </Li>
   );

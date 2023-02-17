@@ -5,7 +5,7 @@ import { SelectDropdownIndicator } from "public/icons";
 import styled from "styled-components";
 
 function SortSelectBox() {
-  const [isOpen, onChangeOpen, option, onChangeOption] = useSelect("ByTime");
+  const [isOpen, onChangeOpen, option, onChangeSortOption] = useSelect("ByTime");
   const { targetEl } = useOutSideClick<HTMLDivElement>(isOpen, onChangeOpen);
   return (
     <SelectBox ref={targetEl}>
@@ -18,7 +18,11 @@ function SortSelectBox() {
       {isOpen ? (
         <OptionList>
           {SORT_LIST.map(({ id, name }) => (
-            <Option key={`sort_list_${id}`} id={id} name={name} onChangeOption={onChangeOption} />
+            <Option
+              key={`sort_list_${id}`}
+              name={name}
+              onChangeOption={() => onChangeSortOption(id)}
+            />
           ))}
         </OptionList>
       ) : null}

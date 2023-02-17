@@ -7,7 +7,7 @@ interface Props {
   isCategoryOpen: boolean;
   onChangeCategoryOpen: () => void;
   categoryOption: string;
-  onChangeCategoryOption: (value: string) => void;
+  onChangeCategoryOption: (id: string) => void;
 }
 
 // @todo 추후 context api로 변경
@@ -32,9 +32,8 @@ function CategorySelectBox({
           {CATEGORY_LIST.map(({ id, name }) => (
             <Option
               key={`option_list_${id}`}
-              id={id}
               name={name}
-              onChangeOption={onChangeCategoryOption}
+              onChangeOption={() => onChangeCategoryOption(id)}
             />
           ))}
         </OptionList>
