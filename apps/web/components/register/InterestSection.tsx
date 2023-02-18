@@ -4,7 +4,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { CheckRound, Chick } from "public/images";
-import { CATEGORY_LIST } from "lib/constants";
+import { IMAGE_CATEGORY_LIST } from "lib/constants";
 import { CategoryNameType } from "types/vote";
 
 interface Props {
@@ -22,7 +22,7 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        {CATEGORY_LIST.map(({ value, label }) => {
+        {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => {
           return (
             <>
               <Vote
@@ -34,7 +34,7 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
                 onClick={onClickCategory}
                 name={value}
               >
-                <Image alt="항목" src={Chick} height={32} />
+                <Image alt="항목" src={image} height={32} />
                 <VoteText>
                   {categoryLists.includes(value as CategoryNameType) && (
                     <Image alt="선택" src={CheckRound} width={16} />

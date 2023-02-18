@@ -1,3 +1,4 @@
+import { Career, Etc, Fashion, Food, Interest, Love } from "public/icons";
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
@@ -23,6 +24,15 @@ export const CATEGORY_LIST = [
   { value: "LOVE", label: "연애" },
   { value: "FASHION", label: "패션" },
   { value: "INTEREST", label: "재미" },
+];
+
+export const IMAGE_CATEGORY_LIST = [
+  { image: Etc, value: "NULL", label: "기타" },
+  { image: Food, value: "FOODS", label: "음식" },
+  { image: Career, value: "CAREER", label: "직업" },
+  { image: Love, value: "LOVE", label: "연애" },
+  { image: Fashion, value: "FASHION", label: "패션" },
+  { image: Interest, value: "INTEREST", label: "재미" },
 ];
 
 export const SORT_LIST = [
