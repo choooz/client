@@ -28,7 +28,7 @@ function SelectPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
-  const { targetEl } = useOutSideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
   const [select, setSelect] = useState<"A" | "B" | null>(null);
