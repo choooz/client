@@ -22,24 +22,24 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        {CATEGORY_LIST.map(({ id, name }) => {
+        {CATEGORY_LIST.map(({ value, label }) => {
           return (
             <>
               <Vote
                 width="48%"
                 height="100%"
                 borderRadius="10px"
-                key={id}
-                selected={categoryLists.includes(id as CategoryNameType)}
+                key={value}
+                selected={categoryLists.includes(value as CategoryNameType)}
                 onClick={onClickCategory}
-                name={id}
+                name={value}
               >
                 <Image alt="항목" src={Chick} height={32} />
                 <VoteText>
-                  {categoryLists.includes(id as CategoryNameType) && (
+                  {categoryLists.includes(value as CategoryNameType) && (
                     <Image alt="선택" src={CheckRound} width={16} />
                   )}
-                  {name}
+                  {label}
                 </VoteText>
               </Vote>
             </>
