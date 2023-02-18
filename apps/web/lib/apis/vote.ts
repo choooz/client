@@ -34,7 +34,7 @@ interface GetVoteListResponse {
 }
 
 export const getVoteListAPI = async ({ page, size, sortBy, category }: GetVoteListRequest) => {
-  const response = await axios.get<GetVoteListResponse>("api/votes", {
+  const response = await apiClient.get<GetVoteListResponse>("api/votes", {
     params: {
       page,
       size,
