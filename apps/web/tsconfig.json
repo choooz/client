@@ -31,6 +31,7 @@
     "../../package/ui/styles/theme.ts",
     "../../package/ui/styles/transitions.ts",
     ".next/types/**/*.ts",
-    "../../packages/ui/components/selectBox/hooks/useSelect.ts"
+    "../../packages/ui/components/selectBox/hooks/useSelect.ts",
+    "../../packages/hooks/src/useOutsideClick.ts"
   ]
 }
