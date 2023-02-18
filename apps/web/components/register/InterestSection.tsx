@@ -37,7 +37,9 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
                 <Image alt="항목" src={image} height={32} />
                 <VoteText>
                   {categoryLists.includes(value as CategoryNameType) && (
-                    <Image alt="선택" src={CheckRound} width={16} />
+                    <CheckBoxWrapper>
+                      <Image alt="선택" src={CheckRound} width={16} />
+                    </CheckBoxWrapper>
                   )}
                   {label}
                 </VoteText>
@@ -85,6 +87,7 @@ const VoteBox = styled.div`
 `;
 
 const Vote = styled(Button)<{ selected: boolean }>`
+  position: relative;
   background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   margin-bottom: 14px;
@@ -120,5 +123,11 @@ const ButtonWrapper = styled.div`
 
 const CompleteButton = styled(Button)`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
+`;
+
+const CheckBoxWrapper = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `;
 export default InterestSection;
