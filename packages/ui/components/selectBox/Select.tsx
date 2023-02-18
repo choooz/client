@@ -17,12 +17,13 @@ interface SelectProps extends React.HTMLAttributes<HTMLDivElement> {
 function Select({ defaultValue, onChangeSelectedOption, options, children }: SelectProps) {
   const [isOpen, onToggleOpen] = useToggle();
   const { targetEl } = useOutsideClick<HTMLDivElement>(isOpen, onToggleOpen);
+
   return (
-    <SelectContainer ref={targetEl}>
+    <div ref={targetEl}>
       <SelectButton onChangeOpen={onToggleOpen}>
         <>
           {options.find(({ value }) => value === defaultValue)?.label}
-          <Indicator>{children}</Indicator>
+          <span id="indicator">{children}</span>
         </>
       </SelectButton>
       {isOpen ? (
@@ -32,13 +33,8 @@ function Select({ defaultValue, onChangeSelectedOption, options, children }: Sel
           onToggleOpen={onToggleOpen}
         ></OptionList>
       ) : null}
-    </SelectContainer>
+    </div>
   );
 }
 
-const SelectContainer = styled.div``;
-
-const Indicator = styled.span`
-  margin-left: 16px;
-`;
 export default Select;
