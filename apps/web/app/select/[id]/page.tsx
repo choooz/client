@@ -19,7 +19,7 @@ import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
 import { Vote } from "types/vote";
 
-/** 
+/**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
  */
 function SelectPage() {
@@ -41,7 +41,7 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, totalTitle, imageA, imageB } = mainVoteList[nowShowing];
+  const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
   return (
     <>
       <PageWrapper>
@@ -57,9 +57,9 @@ function SelectPage() {
 
           <SelectAB
             imageA={imageA || ""}
-            titleA="화살표"
+            titleA={titleA || ""}
             imageB={imageB || ""}
-            titleB="화살살표"
+            titleB={titleB || ""}
             select={select}
             onChangeSelect={onChangeSelect}
           />
