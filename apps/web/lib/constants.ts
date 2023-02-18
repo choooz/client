@@ -16,18 +16,18 @@ export const NAVER_LOGIN_REDIRECT_URL =
 
 // export const CATEGORY_NAMES = ["음식", "직업", "연애", "패션", "재미", "기타"];
 export const CATEGORY_LIST = [
-  { id: "", name: "전체" },
-  { id: "NULL", name: "기타" },
-  { id: "FOODS", name: "음식" },
-  { id: "CAREER", name: "직업" },
-  { id: "LOVE", name: "연애" },
-  { id: "FASHION", name: "패션" },
-  { id: "INTEREST", name: "재미" },
+  { value: "", label: "전체" },
+  { value: "NULL", label: "기타" },
+  { value: "FOODS", label: "음식" },
+  { value: "CAREER", label: "직업" },
+  { value: "LOVE", label: "연애" },
+  { value: "FASHION", label: "패션" },
+  { value: "INTEREST", label: "재미" },
 ];
 
 export const SORT_LIST = [
-  { id: "ByTime", name: "최신순" },
-  { id: "ByPoular", name: "인기순" },
+  { value: "ByTime", label: "최신순" },
+  { value: "ByPoular", label: "인기순" },
 ];
 
 export const AGE_LIST = [

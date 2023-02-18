@@ -3,7 +3,7 @@ export { default as HambergerIcon } from "./hambergerIcon.png";
 export { default as KakaoIcon } from "./KakaoIcon.svg";
 export { default as NaverIcon } from "./NaverIcon.svg";
 export { default as BookmarkIcon } from "./BookmarkIcon.svg";
-export { default as SelectDropdownIndicator } from "./SelectDropdownIndicator.svg";
+export { default as SelectIndicator } from "./SelectIndicator.svg";
 export { default as AIcon } from "./AIcon.svg";
 export { default as BIcon } from "./BIcon.svg";
 export { default as AmplifyIcon } from "./amplifyIcon.png";
