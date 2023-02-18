@@ -8,7 +8,6 @@ function SelectButton({ children, onChangeOpen }: SelectProps) {
     <>
       <button
         type="button"
-        id="select-box-1"
         aria-haspopup="true"
         aria-expanded="true"
         aria-controls="select-list"

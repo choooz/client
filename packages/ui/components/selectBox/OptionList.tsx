@@ -13,7 +13,7 @@ interface Props {
 
 function OptionList({ options, onChangeSelectedOption, onToggleOpen }: Props) {
   return (
-    <ul aria-labelledby="select-box-1" id="select-list" role="listbox">
+    <ul aria-labelledby="select-box-1" role="listbox">
       {options.map(({ value, label }) => (
         <Option
           key={`select_${value}`}
