@@ -20,7 +20,14 @@ export default function usePostVoteService() {
     filteredMbti: "",
   });
 
-  console.log(vote);
+  const onResetVoteFilter = () => {
+    setVote({
+      ...vote,
+      filteredGender: "",
+      filteredAge: "",
+      filteredMbti: "",
+    });
+  };
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -112,5 +119,6 @@ export default function usePostVoteService() {
     onChangeVoteByClick,
     onChangeVoteBySelect,
     mutateVote,
+    onResetVoteFilter,
   };
 }

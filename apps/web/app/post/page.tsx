@@ -17,6 +17,7 @@ function PostPage() {
     onChangeVoteByClick,
     onChangeVoteBySelect,
     mutateVote,
+    onResetVoteFilter,
   } = usePostVoteService();
   const [postStep, setPostStep] = useState<number>(FIRST_STEP);
   const onChangePostStep = (step: number) => {
@@ -42,6 +43,7 @@ function PostPage() {
             mutateVote={mutateVote}
             onChangePostStep={onChangePostStep}
             filteredMbti={vote.filteredMbti}
+            onResetVoteFilter={onResetVoteFilter}
           />
         )}
       </PageInner>

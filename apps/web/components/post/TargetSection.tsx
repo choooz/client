@@ -1,4 +1,4 @@
-import { Template } from "@chooz/ui";
+import { Button, Template } from "@chooz/ui";
 import { PostVote } from "lib/apis/vote";
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React from "react";
@@ -11,6 +11,7 @@ interface Props {
   mutateVote(): void;
   onChangePostStep(step: number): void;
   filteredMbti: string;
+  onResetVoteFilter(): void;
 }
 
 function TargetSection({
@@ -20,6 +21,7 @@ function TargetSection({
   vote,
   mutateVote,
   filteredMbti,
+  onResetVoteFilter,
 }: Props) {
   const { filteredAge, filteredGender } = vote;
 
@@ -86,6 +88,11 @@ function TargetSection({
           </option>
         ))}
       </Select>
+      <ResetButtonWrapper>
+        <Button width="100px" height="42px" variant="warning" onClick={onResetVoteFilter}>
+          초기화
+        </Button>
+      </ResetButtonWrapper>
     </Template>
   );
 }
@@ -158,6 +165,12 @@ const Select = styled.select`
     border: 1px solid ${theme.palette.border.base};
     color: ${theme.palette.ink.lighter};
   `};
+`;
+
+const ResetButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 32px;
 `;
 
 export default TargetSection;
