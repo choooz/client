@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 interface SelectProps {
   children: React.ReactNode;
   onChangeOpen: () => void;
@@ -8,7 +6,7 @@ interface SelectProps {
 function SelectButton({ children, onChangeOpen }: SelectProps) {
   return (
     <>
-      <StyledButton
+      <button
         type="button"
         id="select-box-1"
         aria-haspopup="true"
@@ -17,21 +15,9 @@ function SelectButton({ children, onChangeOpen }: SelectProps) {
         onClick={onChangeOpen}
       >
         <span>{children}</span>
-      </StyledButton>
+      </button>
     </>
   );
 }
-
-const StyledButton = styled.button`
-  width: 80px;
-  height: 40px;
-  > span {
-    /* margin-right: 18px; */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-`;
 
 export default SelectButton;
