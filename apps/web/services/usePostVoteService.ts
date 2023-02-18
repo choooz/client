@@ -59,21 +59,41 @@ export default function usePostVoteService() {
     //   alert("파일 용량이 10MB를 초과하였습니다.");
     //   return;
     // }
-    const formDataA = new FormData();
-    const formDataB = new FormData();
-    formDataA.append("images", e.target.files[0]);
-    formDataB.append("images", e.target.files[1]);
-    try {
-      const dataA = await uploadProfileImageAPI(formDataA);
-      const dataB = await uploadProfileImageAPI(formDataB);
+    if (e.target.files.length === 2) {
+      const formDataA = new FormData();
+      const formDataB = new FormData();
+      formDataA.append("images", e.target.files[0]);
+      formDataB.append("images", e.target.files[1]);
+      try {
+        const dataA = await uploadProfileImageAPI(formDataA);
+        const dataB = await uploadProfileImageAPI(formDataB);
 
-      setVote({
-        ...vote,
-        imageA: dataA.imageUrl,
-        imageB: dataB.imageUrl,
-      });
-    } catch (error) {
-      alert("이미지 업로드에 실패했습니다." + error);
+        setVote({
+          ...vote,
+          imageA: dataA.imageUrl,
+          imageB: dataB.imageUrl,
+        });
+      } catch (error) {
+        alert("이미지 업로드에 실패했습니다." + error);
+      }
+      return;
+    }
+
+    if (e.target.files.length === 1) {
+      const formDataA = new FormData();
+      formDataA.append("images", e.target.files[0]);
+      try {
+        const dataA = await uploadProfileImageAPI(formDataA);
+
+        setVote({
+          ...vote,
+          imageA: dataA.imageUrl,
+          imageB: "",
+        });
+      } catch (error) {
+        alert("이미지 업로드에 실패했습니다." + error);
+      }
+      return;
     }
   }, []);
 
