@@ -14,6 +14,7 @@ interface Props {
 
 function OptionList({ options, onChangeSelectedOption, onToggleOpen }: Props) {
   return (
+    // @todo 고유한 id를 만들어야함
     <Ul id="select-list" aria-labelledby="select-box-1" role="listbox">
       {options.map(({ value, label }) => (
         <Option

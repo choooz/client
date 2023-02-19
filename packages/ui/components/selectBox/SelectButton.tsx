@@ -10,6 +10,7 @@ function SelectButton({ children, onChangeOpen }: SelectProps) {
     <>
       <StyledButton
         type="button"
+        // @todo 고유한 id를 만들어야함
         id="select-box-1"
         aria-haspopup="true"
         aria-expanded="true"
