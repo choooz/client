@@ -24,6 +24,4 @@ export interface Vote {
   countVoted: number;
   imageA: string | null;
   imageB: string | null;
-  titleA: string | null;
-  titleB: string | null;
 }
