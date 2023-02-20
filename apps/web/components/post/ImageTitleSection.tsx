@@ -1,10 +1,11 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Image from "next/image";
 import { Input, Template, transitions } from "@chooz/ui";
 import { PostVoteRequest } from "lib/apis/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+import { AIcon, BIcon } from "public/icons";
 
 interface Props {
   vote: PostVoteRequest;
@@ -22,9 +23,13 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
     return;
   };
 
+  const IsDisabled = useMemo(() => {
+    return !vote.titleA || !vote.titleB;
+  }, [vote]);
+
   const { title, titleA, titleB, imageA, imageB } = vote;
   return (
-    <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep }}>
+    <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep, disabled: IsDisabled }}>
       <Container>
         {step === 2 && (
           <TitleBox>
@@ -38,7 +43,9 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
           </TitleBox>
         )}
         <QuestionText>선택지를 입력해주세요.</QuestionText>
-        {!imageA && !imageB && <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>}
+        {step === 1 && !imageA && !imageB && (
+          <SubText>사진은 필수는 아니지만 선택받을 확률이 높아져요!</SubText>
+        )}
 
         <label htmlFor="file">
           {!imageA && !imageB ? (
@@ -49,7 +56,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
             </ImageWrapper>
           ) : (
             <VoteImageWrapper>
-              {imageA && (
+              {imageA ? (
                 <Image
                   src={imageA}
                   alt="A이미지"
@@ -57,26 +64,24 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
                   height={272}
                   style={{
                     objectFit: "cover",
-                    width: "272px",
+                    width: "50%",
                     height: "auto",
                   }}
                 />
+              ) : (
+                <AItem>
+                  <AIcon />
+                </AItem>
               )}
 
               <VSIcon>VS</VSIcon>
 
-              {imageA && (
-                <Image
-                  src={imageB}
-                  alt="B이미지"
-                  width={272}
-                  height={272}
-                  style={{
-                    objectFit: "cover",
-                    width: "272px",
-                    height: "auto",
-                  }}
-                />
+              {imageB ? (
+                <Image src={imageB} alt="B이미지" width={272} height={272} fill />
+              ) : (
+                <BItem>
+                  <BIcon />
+                </BItem>
               )}
             </VoteImageWrapper>
           )}
@@ -92,6 +97,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               onChange={onChangeVote}
               name="titleA"
               value={titleA}
+              maxLength={22}
             />
           </InputBox>
           <InputBox>
@@ -102,6 +108,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               onChange={onChangeVote}
               name="titleB"
               value={titleB}
+              maxLength={22}
             />
           </InputBox>
         </VoteWrapper>
@@ -117,7 +124,6 @@ const Container = styled.div`
 const QuestionText = styled.div`
   font-size: 20px;
   font-weight: 700;
-  padding-bottom: 8px;
 `;
 
 const SubText = styled.div`
@@ -176,11 +182,11 @@ const InputBox = styled.div`
 const TitleInput = styled.textarea`
   padding: 14px 16px;
   width: 100%;
-  height: 72px;
+  height: 50px;
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   border-radius: 8px;
   resize: none;
-  margin: 24px 0 30px 0;
+  margin: 16px 0 30px 0;
 `;
 
 const TitleBox = styled.div`
@@ -208,4 +214,27 @@ const VSIcon = styled.div`
     height: 40px;
   }
 `;
+
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+  border-radius: 8px;
+  aspect-ratio: 1;
+  width: 50%;
+  ${media.medium} {
+    width: 272px;
+  }
+`;
+
+const AItem = styled(Item)`
+  background-image: linear-gradient(169deg, #9bb7ff -8%, #00dacd 114%);
+`;
+
+const BItem = styled(Item)`
+  background-image: linear-gradient(to bottom, #ffa4d5 0%, #8054ff 100%);
+`;
+
 export default React.memo(ImageTitleSection);
