@@ -21,6 +21,7 @@ function AddDetailModal({
   vote,
 }: Props) {
   const { title, detail, titleA, titleB, category } = vote;
+
   return (
     <ModalTemplate width="480px" height="698px" onToggleModal={onToggleModal}>
       <Template nextButtonProps={{ onClick: mutateVote }} nextButtonText="작성 완료">
@@ -45,17 +46,17 @@ function AddDetailModal({
           <DivideLine />
           <QuestionText>나이</QuestionText>
           <ChipWrapper>
-            {CATEGORY_LIST.map(({ id, name }) => (
-              <div key={id}>
+            {CATEGORY_LIST.map(({ label, value }) => (
+              <div key={value}>
                 <InvisibleInput
                   type="radio"
                   name="category"
-                  id={id}
-                  value={id}
-                  checked={category === id}
+                  id={value}
+                  value={value}
+                  checked={category === value}
                   onChange={onChangeVoteByClick}
                 />
-                <Chip htmlFor={id}>{name}</Chip>
+                <Chip htmlFor={value}>{label}</Chip>
               </div>
             ))}
           </ChipWrapper>
