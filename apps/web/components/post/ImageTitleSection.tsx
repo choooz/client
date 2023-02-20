@@ -4,6 +4,7 @@ import { Input, Template, transitions } from "@chooz/ui";
 import { PostVoteRequest } from "lib/apis/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
+import { FIRST_STEP, NEXT, SECOND_STEP } from "lib/constants";
 import React, { useMemo, useState } from "react";
 import { AIcon, BIcon } from "public/icons";
 
@@ -18,8 +19,8 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
   const [step, setStep] = useState(1);
 
   const onNextStep = () => {
-    if (step === 1) setStep((prev) => prev + 1);
-    if (step === 2) onChangePostStep(2);
+    if (step === FIRST_STEP) setStep((prev) => prev + NEXT);
+    if (step === SECOND_STEP) onChangePostStep(SECOND_STEP);
     return;
   };
 

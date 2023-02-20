@@ -1,3 +1,6 @@
+import { StaticImageData } from "next/image";
+import { Career, Etc, Fashion, Food, Interest, Love } from "public/icons";
+import { CategoryNameType } from "types/vote";
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
@@ -23,6 +26,19 @@ export const CATEGORY_LIST = [
   { value: "LOVE", label: "연애" },
   { value: "FASHION", label: "패션" },
   { value: "INTEREST", label: "재미" },
+];
+
+export const IMAGE_CATEGORY_LIST: {
+  image: StaticImageData;
+  value: CategoryNameType;
+  label: string;
+}[] = [
+  { image: Etc, value: "NULL", label: "기타" },
+  { image: Food, value: "FOODS", label: "음식" },
+  { image: Career, value: "CAREER", label: "직업" },
+  { image: Love, value: "LOVE", label: "연애" },
+  { image: Fashion, value: "FASHION", label: "패션" },
+  { image: Interest, value: "INTEREST", label: "재미" },
 ];
 
 export const SORT_LIST = [
@@ -56,3 +72,7 @@ export const MBTI_LIST = [
   { id: "INFP", name: "INFP" },
   { id: "INTP", name: "INTP" },
 ];
+export const PREV = -1;
+export const NEXT = 1;
+export const FIRST_STEP = 1;
+export const SECOND_STEP = 2;

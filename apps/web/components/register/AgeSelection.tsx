@@ -43,7 +43,7 @@ function AgeSelection({
     >
       <Container>
         <InputBox>
-          <Input type="text" inputMode="none" placeholder="0" defaultValue={userInfo.age ?? ""} />세
+          <Input type="text" inputMode="none" placeholder="0" value={userInfo.age ?? ""} />세
         </InputBox>
         <NumberBox>
           {NuberPad.map((number) => (
