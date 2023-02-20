@@ -1,4 +1,6 @@
+import { StaticImageData } from "next/image";
 import { Career, Etc, Fashion, Food, Interest, Love } from "public/icons";
+import { CategoryNameType } from "types/vote";
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
@@ -26,7 +28,11 @@ export const CATEGORY_LIST = [
   { value: "INTEREST", label: "재미" },
 ];
 
-export const IMAGE_CATEGORY_LIST = [
+export const IMAGE_CATEGORY_LIST: {
+  image: StaticImageData;
+  value: CategoryNameType;
+  label: string;
+}[] = [
   { image: Etc, value: "NULL", label: "기타" },
   { image: Food, value: "FOODS", label: "음식" },
   { image: Career, value: "CAREER", label: "직업" },

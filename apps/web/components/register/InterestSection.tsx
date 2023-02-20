@@ -30,13 +30,13 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
                 height="100%"
                 borderRadius="10px"
                 key={value}
-                selected={categoryLists.includes(value as CategoryNameType)}
+                selected={categoryLists.includes(value)}
                 onClick={onClickCategory}
                 name={value}
               >
                 <Image alt="항목" src={image} height={32} />
                 <VoteText>
-                  {categoryLists.includes(value as CategoryNameType) && (
+                  {categoryLists.includes(value) && (
                     <CheckBoxWrapper>
                       <Image alt="선택" src={CheckRound} width={16} />
                     </CheckBoxWrapper>
