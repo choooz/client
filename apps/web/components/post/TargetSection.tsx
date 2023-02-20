@@ -1,6 +1,6 @@
 import { Template } from "@chooz/ui";
 import { PostVote } from "lib/apis/vote";
-import { AGE_LIST, MBTI_LIST } from "lib/constants";
+import { AGE_LIST, MBTI_LIST, PREV } from "lib/constants";
 import React from "react";
 import styled from "styled-components";
 
@@ -27,7 +27,7 @@ function TargetSection({
     <Template
       prevButtonText="이전"
       prevButtonProps={{
-        onClick: () => onChangePostStep(-1),
+        onClick: () => onChangePostStep(PREV),
       }}
       nextButtonText="다음"
       nextButtonProps={{

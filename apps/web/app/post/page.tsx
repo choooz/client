@@ -2,6 +2,7 @@
 
 import { media } from "@chooz/ui/styles/media";
 import { ImageTitleSection, TargetSection } from "components";
+import { FIRST_STEP, SECOND_STEP } from "lib/constants";
 import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
@@ -23,7 +24,7 @@ function PostPage() {
   return (
     <PageWrapper>
       <PageInner>
-        {postStep === 1 && (
+        {postStep === FIRST_STEP && (
           <ImageTitleSection
             onChangeVote={onChangeVote}
             onUploadImage={onUploadImage}
@@ -31,7 +32,7 @@ function PostPage() {
             vote={vote}
           />
         )}
-        {postStep === 2 && (
+        {postStep === SECOND_STEP && (
           <TargetSection
             onChangeVoteByClick={onChangeVoteByClick}
             vote={vote}

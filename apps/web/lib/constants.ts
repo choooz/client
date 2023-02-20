@@ -66,3 +66,7 @@ export const MBTI_LIST = [
   { id: "INFP", name: "INFP" },
   { id: "INTP", name: "INTP" },
 ];
+export const PREV = -1;
+export const NEXT = 1;
+export const FIRST_STEP = 1;
+export const SECOND_STEP = 2;
