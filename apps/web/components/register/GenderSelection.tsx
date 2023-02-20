@@ -44,17 +44,15 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
         selected={activeValue("left")}
         onClick={() => onChangeGender(Gender.MALE)}
       >
+        {gender === "MALE" && (
+          <VoteCheck>
+            <Image alt="선택" src={CheckRound} width={16} />
+          </VoteCheck>
+        )}
         <ImageWrapper>
           <Image alt="남성" height={100} src={Male} />
         </ImageWrapper>
-        {gender === "MALE" ? (
-          <VoteText>
-            <Image alt="선택" src={CheckRound} width={16} />
-            남성으로 Chooz!
-          </VoteText>
-        ) : (
-          "남성"
-        )}
+        {gender === "MALE" ? <VoteText>남성</VoteText> : "남성"}
       </LeftVote>
       <RightVote
         variant="inactive"
@@ -63,17 +61,16 @@ function GenderSelection({ gender, onChangeProgress, onChangeGender }: Props) {
         selected={activeValue("right")}
         onClick={() => onChangeGender(Gender.FEMALE)}
       >
+        {gender === "FEMALE" && (
+          <VoteCheck>
+            <Image alt="선택" src={CheckRound} width={16} />
+          </VoteCheck>
+        )}
+
         <ImageWrapper>
           <Image alt="여성" height={100} src={Female} />
         </ImageWrapper>
-        {gender === "FEMALE" ? (
-          <VoteText>
-            <Image alt="선택" src={CheckRound} width={16} />
-            여성으로 Chooz!
-          </VoteText>
-        ) : (
-          "여성"
-        )}
+        {gender === "FEMALE" ? <VoteText>여성</VoteText> : "여성"}
       </RightVote>
     </RegisterTemplate>
   );
@@ -135,6 +132,12 @@ const ImageWrapper = styled.div`
   flex: 0.8;
   display: flex;
   align-items: center;
+`;
+
+const VoteCheck = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `;
 
 export default GenderSelection;

@@ -4,7 +4,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { CheckRound, Chick } from "public/images";
-import { CATEGORY_LIST } from "lib/constants";
+import { IMAGE_CATEGORY_LIST } from "lib/constants";
 import { CategoryNameType } from "types/vote";
 
 interface Props {
@@ -22,24 +22,26 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        {CATEGORY_LIST.map(({ id, name }) => {
+        {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => {
           return (
             <>
               <Vote
                 width="48%"
                 height="100%"
                 borderRadius="10px"
-                key={id}
-                selected={categoryLists.includes(id as CategoryNameType)}
+                key={value}
+                selected={categoryLists.includes(value)}
                 onClick={onClickCategory}
-                name={id}
+                name={value}
               >
-                <Image alt="항목" src={Chick} height={32} />
+                <Image alt="항목" src={image} height={32} />
                 <VoteText>
-                  {categoryLists.includes(id as CategoryNameType) && (
-                    <Image alt="선택" src={CheckRound} width={16} />
+                  {categoryLists.includes(value) && (
+                    <CheckBoxWrapper>
+                      <Image alt="선택" src={CheckRound} width={16} />
+                    </CheckBoxWrapper>
                   )}
-                  {name}
+                  {label}
                 </VoteText>
               </Vote>
             </>
@@ -85,6 +87,7 @@ const VoteBox = styled.div`
 `;
 
 const Vote = styled(Button)<{ selected: boolean }>`
+  position: relative;
   background-color: ${({ theme }) => theme.palette.background.soft};
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   margin-bottom: 14px;
@@ -120,5 +123,11 @@ const ButtonWrapper = styled.div`
 
 const CompleteButton = styled(Button)`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
+`;
+
+const CheckBoxWrapper = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `;
 export default InterestSection;

@@ -12,3 +12,4 @@ export { default as Camera } from "./camera.png";
 export { default as Success } from "./success.png";
 export { default as Eximg1 } from "./eximg1.png";
 export { default as Eximg2 } from "./eximg2.png";
+export { default as BigPurpleMonster } from "./big-purple-monster.png";

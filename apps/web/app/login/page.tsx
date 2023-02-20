@@ -1,7 +1,7 @@
 "use client";
 
 import { transitions } from "@chooz/ui";
-import { LogoBlack } from "public/images";
+import { BigPurpleMonster, LogoBlack } from "public/images";
 import Image from "next/image";
 import useLoginService from "services/useLoginService";
 import styled, { css } from "styled-components";
@@ -20,7 +20,9 @@ function LoginPage() {
           고민되는 것들, <br />
           눈치보지 말고 Chooz에서 물어봐!
         </WelcomeText>
-        <Emoji />
+        <Emoji>
+          <Image src={BigPurpleMonster} fill alt="로그인 대문 이미지" />
+        </Emoji>
         <Link href={socialLink.KAKAO}>
           <KakaoBox>
             <KakaoIconStyled />
@@ -73,10 +75,10 @@ const WelcomeText = styled.div`
 `;
 
 const Emoji = styled.div`
+  position: relative;
   margin-top: 24px;
   width: 100%;
   height: 226px;
-  background-color: #bebebe;
 `;
 // @note 공통 Button 컴포넌트로 묶을 수 있는 방법?
 const SocialLoginButton = css`
