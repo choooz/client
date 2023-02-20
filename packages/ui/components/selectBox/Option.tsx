@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 interface Props {
   label: string;
   onChangeSelectedOption: () => void;
@@ -5,10 +7,17 @@ interface Props {
 
 function Option({ label, onChangeSelectedOption }: Props) {
   return (
-    <li role="option" onClick={onChangeSelectedOption}>
+    <Li role="option" onClick={onChangeSelectedOption}>
       {label}
-    </li>
+    </Li>
   );
 }
+
+const Li = styled.li`
+  padding: 14px 34px;
+  :hover {
+    background-color: ${({ theme }) => theme.palette.background.selectedSoft};
+  }
+`;
 
 export default Option;

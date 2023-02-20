@@ -25,37 +25,14 @@ function SortSelectBox({ sortOption, onChangeSortOption }: Props) {
 
 const SelectStyled = styled.span`
   ${({ theme }) => css`
-    color: ${theme.palette.ink.dark};
-    ${theme.textStyle.Title_Small};
-
-    button {
-      width: 80px;
-      height: 40px;
+    color: ${theme.palette.ink.base};
+    ${({ theme }) => theme.textStyle.Font_Regular};
+    width: 80px;
+    height: 40px;
+    .selected-text-container {
       border: 1px solid ${theme.palette.border.base};
-      > span {
-        display: flex;
-        justify-content: space-around;
-        flex-direction: row;
-        align-items: center;
-      }
-    }
-    ul {
-      position: absolute;
-      margin-top: 8px;
-      border-radius: 8px;
-      box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.1);
-      z-index: 99;
-      border: solid 1px ${theme.palette.border.base};
-      background-color: ${theme.palette.background.white};
-    }
-    li {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 14px 34px;
-      :hover {
-        background-color: ${theme.palette.background.selectedSoft};
-      }
+      border-radius: 4px;
+      padding: 11px 13px;
     }
   `}
 `;
