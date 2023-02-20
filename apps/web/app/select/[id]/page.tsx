@@ -27,7 +27,10 @@ function SelectPage() {
   const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
+  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
+    mainVoteList[nowShowing],
+  );
+
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
@@ -112,6 +115,7 @@ const PageInner = styled.div<{ drag: Drag }>`
   position: relative;
   padding: 30px;
   z-index: 1000;
+  width: 100%;
   ${media.medium} {
     height: 600px;
     padding: 40px;
