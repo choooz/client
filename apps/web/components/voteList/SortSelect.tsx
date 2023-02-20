@@ -2,7 +2,7 @@ import { SORT_LIST } from "lib/constants";
 import styled, { css } from "styled-components";
 import { Select } from "@chooz/ui";
 import { SelectIndicator } from "public/icons";
-import { media } from "styles/media";
+import { useToggle } from "@chooz/hooks";
 
 interface Props {
   sortOption: string;
@@ -10,12 +10,16 @@ interface Props {
 }
 
 function SortSelectBox({ sortOption, onChangeSortOption }: Props) {
+  const [isOpen, onToggleOpen] = useToggle();
+
   return (
-    <SelectStyled>
+    <SelectStyled isOpen={isOpen}>
       <Select
         defaultValue={sortOption}
         onChangeSelectedOption={onChangeSortOption}
         options={SORT_LIST}
+        isOpen={isOpen}
+        onToggleOpen={onToggleOpen}
       >
         <SelectIndicator />
       </Select>
@@ -23,8 +27,8 @@ function SortSelectBox({ sortOption, onChangeSortOption }: Props) {
   );
 }
 
-const SelectStyled = styled.span`
-  ${({ theme }) => css`
+const SelectStyled = styled.span<{ isOpen: boolean }>`
+  ${({ theme, isOpen }) => css`
     color: ${theme.palette.ink.base};
     ${({ theme }) => theme.textStyle.Font_Regular};
     width: 80px;
@@ -33,6 +37,9 @@ const SelectStyled = styled.span`
       border: 1px solid ${theme.palette.border.base};
       border-radius: 4px;
       padding: 11px 13px;
+    }
+    svg {
+      ${isOpen && "transform: rotateX( 180deg )"}
     }
   `}
 `;
