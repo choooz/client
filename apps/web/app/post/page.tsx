@@ -7,9 +7,6 @@ import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
 
-const FIRST_STEP = 1;
-const SECOND_STEP = 2;
-
 function PostPage() {
   const {
     onChangeVote,
