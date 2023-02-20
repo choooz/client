@@ -23,7 +23,8 @@ function CategorySelect({ categoryOption, onChangeCategoryOption }: Props) {
 }
 
 const SelectStyled = styled.div`
-  width: 104px;
+  width: 68px;
+
   ${({ theme }) => `
     ${theme.textStyle.Title_Large};
     color: ${theme.palette.ink.dark};
@@ -32,6 +33,7 @@ const SelectStyled = styled.div`
       }
     ${media.medium} {
       ${theme.textStyle.Title_3};
+      width: 104px;
     }
   `}
 `;
