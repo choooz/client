@@ -1,4 +1,5 @@
 import Image, { StaticImageData } from "next/image";
+import { AIcon, BIcon } from "public/icons";
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
@@ -27,17 +28,25 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
     <Container>
       <ImageWrapper>
         <LeftVote selected={activeValue("left")} onClick={() => onChangeSelect("A")}>
-          <Image
-            src={imageA}
-            width={272}
-            height={340}
-            alt="A 이미지"
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "340px",
-            }}
-          />
+          {imageA ? (
+            <VoteImageWrapper>
+              <Image
+                src={imageA}
+                width={272}
+                height={340}
+                alt="A 이미지"
+                style={{
+                  objectFit: "cover",
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
+            </VoteImageWrapper>
+          ) : (
+            <AItem>
+              <AIcon />
+            </AItem>
+          )}
           <div className="overlay">
             <OverLayTitle>{titleA}</OverLayTitle>
             <OverlayPercent>50%</OverlayPercent>
@@ -46,17 +55,25 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
         </LeftVote>
 
         <RightVote selected={activeValue("right")} onClick={() => onChangeSelect("B")}>
-          <Image
-            src={imageB}
-            width={272}
-            height={340}
-            alt="B 이미지"
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "340px",
-            }}
-          />
+          {imageB ? (
+            <VoteImageWrapper>
+              <Image
+                src={imageB}
+                alt="B 이미지"
+                width={272}
+                height={340}
+                style={{
+                  objectFit: "cover",
+                  width: "100%",
+                  height: "auto",
+                }}
+              />
+            </VoteImageWrapper>
+          ) : (
+            <BItem>
+              <BIcon />
+            </BItem>
+          )}
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>
             <OverlayPercent>50%</OverlayPercent>
@@ -172,4 +189,30 @@ const OverlayCount = styled.div`
   ${({ theme }) => theme.textStyle.Title_2}
 `;
 
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-grow: 1;
+  border-radius: 8px;
+  aspect-ratio: 1;
+  width: 100%;
+  ${media.medium} {
+    width: 272px;
+  }
+`;
+
+const AItem = styled(Item)`
+  background-image: linear-gradient(169deg, #9bb7ff -8%, #00dacd 114%);
+`;
+
+const BItem = styled(Item)`
+  background-image: linear-gradient(to bottom, #ffa4d5 0%, #8054ff 100%);
+`;
+
+const VoteImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
 export default SelectAB;

@@ -73,8 +73,8 @@ interface ModifyVoteRequest {
 
 export type ModifyVote = ModifyVoteRequest;
 
-export const modifyVoteAPI = async (body: ModifyVoteRequest) => {
-  const response = await apiClient.patch("api/votes/1", body);
+export const modifyVoteAPI = async (body: ModifyVoteRequest, voteId: number) => {
+  const response = await apiClient.patch(`api/votes/${voteId}`, body);
   return response.data;
 };
 

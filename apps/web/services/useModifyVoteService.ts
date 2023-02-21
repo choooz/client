@@ -1,8 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { modifyVoteAPI, ModifyVote } from "lib/apis/vote";
 import React, { useState } from "react";
+import { Vote } from "types/vote";
 
-function useModifyVoteService() {
+function useModifyVoteService(initialValue: Vote) {
   const [vote, setVote] = useState<ModifyVote>({
     title: "",
     detail: "",
@@ -10,7 +11,6 @@ function useModifyVoteService() {
     titleA: "",
     titleB: "",
   });
-
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -35,7 +35,7 @@ function useModifyVoteService() {
     });
   };
 
-  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote), {
+  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, initialValue.voteId), {
     onSuccess: () => {
       alert("내용이 추가되었습니다. (여기까지 구현)");
     },
