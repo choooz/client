@@ -83,10 +83,10 @@ function SelectPage() {
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
 
-      {params.get("success") && (
+      {params.get("isSuccess") && (
         <FloatModalTemplate
           onToggleModal={() => {
-            router.push("/select/1?success=");
+            router.push("/select/1?isSuccess=");
             console.log("작동");
           }}
         >
