@@ -36,10 +36,10 @@ function VoteListPage() {
           />
           <RightFilterContainer>
             <SortSelect sortOption={sortOption} onChangeSortOption={onChangeSortOption} />
-            <RadioBox>
-              <RadioButton type="radio" />
-              선택만 보기
-            </RadioBox>
+            <CheckVoteForMe>
+              <CheckBox type="checkbox" id="checkbox" />
+              <label htmlFor="checkbox">선택만 보기</label>
+            </CheckVoteForMe>
           </RightFilterContainer>
         </FilterSection>
         <VoteList voteList={voteList} />
@@ -48,6 +48,7 @@ function VoteListPage() {
     </PageWrapper>
   );
 }
+
 const PageWrapper = styled.div`
   width: 100%;
 `;
@@ -78,13 +79,28 @@ const RightFilterContainer = styled.div`
   justify-content: space-between;
 `;
 
-const RadioBox = styled.div`
+const CheckVoteForMe = styled.div`
   display: flex;
   align-items: center;
+  color: ${({ theme }) => theme.palette.ink.base};
+  ${({ theme }) => theme.textStyle.Font_Regular};
+  > * {
+    cursor: pointer;
+  }
 `;
 
-const RadioButton = styled.input`
+const CheckBox = styled.input`
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  transition: background 0.2s;
+  border-radius: 100px;
+  border: solid 1px ${({ theme }) => theme.palette.border.base};
   margin-right: 6px;
+  :checked {
+    border: none;
+    background-image: url("/icons/CheckedIcon.svg");
+  }
 `;
 
 export default VoteListPage;
