@@ -77,17 +77,17 @@ const Item = styled.div`
   flex-direction: column;
   padding: 15% 0;
   flex-grow: 1;
-  border-radius: 8px;
-  margin-right: 1px;
   aspect-ratio: 1;
 `;
 
 const AItem = styled(Item)`
   background-image: linear-gradient(169deg, #9bb7ff -8%, #00dacd 114%);
+  border-radius: 8px 0 0 8px;
 `;
 
 const BItem = styled(Item)`
   background-image: linear-gradient(to bottom, #ffa4d5 0%, #8054ff 100%);
+  border-radius: 0 8px 8px 0;
 `;
 
 const ItemTitle = styled.span`
@@ -106,14 +106,14 @@ const ItemTitle = styled.span`
 const LeftImageCss = {
   width: "50%",
   height: "100%",
-  borderRadius: 8,
+  borderRadius: "8px 0 0 8px",
   marginRight: 1,
 };
 
 const RightImageCss = {
   width: "50%",
   height: "100%",
-  borderRadius: 8,
+  borderRadius: "0 8px 8px 0",
   marginLeft: 1,
 };
 
