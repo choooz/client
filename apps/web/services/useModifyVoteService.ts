@@ -37,10 +37,10 @@ function useModifyVoteService(onToggle: () => void, initialValue: Vote) {
     });
   };
 
-  const { totalTitle, titleA, titleB, category, voteId } = initialValue;
   // @TODO: detail값 추가되면 채워넣기
   useEffect(() => {
     if (!initialValue) return;
+    const { totalTitle, titleA, titleB, category, voteId } = initialValue;
     setVote({
       title: totalTitle,
       detail: "",
@@ -50,7 +50,7 @@ function useModifyVoteService(onToggle: () => void, initialValue: Vote) {
     });
   }, [initialValue]);
 
-  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, voteId || 0), {
+  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, initialValue?.voteId || 0), {
     onSuccess: () => {
       alert("내용이 추가하기 성공.");
       queryClient.invalidateQueries(reactQueryKeys.mainVoteList());
