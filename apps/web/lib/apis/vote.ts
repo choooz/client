@@ -1,4 +1,4 @@
-import { CategoryNameType } from "types/vote";
+import { AorB, CategoryNameType } from "types/vote";
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
 import { Vote } from "types/vote";
@@ -101,5 +101,12 @@ interface GetVoteByIdResponst {
 }
 export const getVoteByIdAPI = async (id: number) => {
   const response = await axios.get<GetVoteByIdResponst>(`${SERVER_URL}api/votes/${id}`);
+  return response.data;
+};
+export interface PostVotingRequest {
+  choice: AorB;
+}
+export const postVotingAPI = async (body: PostVotingRequest, voteId: number) => {
+  const response = await apiClient.post(`api/votes/${voteId}/voting`, body);
   return response.data;
 };
