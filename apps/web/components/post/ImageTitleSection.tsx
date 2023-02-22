@@ -78,7 +78,17 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               <VSIcon>VS</VSIcon>
 
               {imageB ? (
-                <Image src={imageB} alt="B이미지" width={272} height={272} fill />
+                <Image
+                  src={imageB}
+                  alt="B이미지"
+                  width={272}
+                  height={272}
+                  style={{
+                    objectFit: "cover",
+                    width: "50%",
+                    height: "auto",
+                  }}
+                />
               ) : (
                 <BItem>
                   <BIcon />

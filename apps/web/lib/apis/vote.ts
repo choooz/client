@@ -66,7 +66,7 @@ export const postVoteAPI = async (body: PostVoteRequest) => {
 interface ModifyVoteRequest {
   title: string;
   detail: string;
-  category: string;
+  category: CategoryNameType | null;
   titleA: string;
   titleB: string;
 }

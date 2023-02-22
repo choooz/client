@@ -7,8 +7,10 @@ import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
+import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AmplifyIcon } from "public/icons";
 import { Success } from "public/images";
 import React, { useState } from "react";
@@ -16,21 +18,18 @@ import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
 import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
-import { Vote } from "types/vote";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
  */
 function SelectPage() {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const router = useRouter();
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService(10, "ByTime");
-  const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
-    mainVoteList[nowShowing],
-  );
-
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
@@ -39,11 +38,17 @@ function SelectPage() {
     setSelect(select);
   };
 
+  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
+    onChangeToggleDetail,
+    mainVoteList[nowShowing],
+  );
+
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+
   return (
     <>
       <PageWrapper>
@@ -78,8 +83,13 @@ function SelectPage() {
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
 
-      {isSubmit && (
-        <FloatModalTemplate onToggleModal={onToggleisSubmit}>
+      {params.get("isSuccess") && (
+        <FloatModalTemplate
+          onToggleModal={() => {
+            router.push("/select/1?isSuccess=");
+            console.log("작동");
+          }}
+        >
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
