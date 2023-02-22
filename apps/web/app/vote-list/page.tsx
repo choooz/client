@@ -1,6 +1,6 @@
 "use client";
 
-import { CategorySelect, SortSelect, VoteList } from "components/voteList";
+import { CategorySelect, SortSelect, VoteList } from "components/vote-list";
 import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";

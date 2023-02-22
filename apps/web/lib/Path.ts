@@ -13,7 +13,7 @@ const Path = {
 
   // common
   MAIN_PAGE: "/",
-  VOTE_LIST_PAGE: "/voteList",
+  VOTE_LIST_PAGE: "/vote-list",
   VOTE_DETAIL_PAGE: "/detail",
 } as const;
 
