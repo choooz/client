@@ -34,7 +34,7 @@ interface GetVoteListResponse {
 }
 
 export const getVoteListAPI = async ({ page, size, sortBy, category }: GetVoteListRequest) => {
-  const response = await apiClient.get<GetVoteListResponse>("api/votes", {
+  const response = await axios.get<GetVoteListResponse>(`${SERVER_URL}api/votes`, {
     params: {
       page,
       size,
@@ -77,8 +77,6 @@ export const modifyVoteAPI = async (body: ModifyVoteRequest, voteId: number) => 
   const response = await apiClient.patch(`api/votes/${voteId}`, body);
   return response.data;
 };
-
-interface TempVote {}
 
 interface GetVoteByIdResponst {
   user: {
