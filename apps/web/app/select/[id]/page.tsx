@@ -16,7 +16,6 @@ import { Success } from "public/images";
 import React, { useState } from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
-import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
 
 /**
