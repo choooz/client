@@ -4,7 +4,7 @@ import { reactQueryKeys } from "lib/queryKeys";
 import React, { useEffect, useState } from "react";
 import { Vote } from "types/vote";
 
-function useModifyVoteService(onToggle: () => void, initialValue?: Vote) {
+function useModifyVoteService(onToggle: () => void, initialValue: Vote) {
   const queryClient = new QueryClient();
   const [vote, setVote] = useState<ModifyVote>({
     title: "",
@@ -37,19 +37,20 @@ function useModifyVoteService(onToggle: () => void, initialValue?: Vote) {
     });
   };
 
+  const { totalTitle, titleA, titleB, category, voteId } = initialValue;
   // @TODO: detail값 추가되면 채워넣기
   useEffect(() => {
     if (!initialValue) return;
     setVote({
-      title: initialValue.totalTitle,
+      title: totalTitle,
       detail: "",
-      category: initialValue.category,
-      titleA: initialValue.titleA,
-      titleB: initialValue.titleB,
+      category,
+      titleA,
+      titleB,
     });
   }, [initialValue]);
 
-  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, initialValue?.voteId || 0), {
+  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, voteId || 0), {
     onSuccess: () => {
       alert("내용이 추가하기 성공.");
       queryClient.invalidateQueries(reactQueryKeys.mainVoteList());
