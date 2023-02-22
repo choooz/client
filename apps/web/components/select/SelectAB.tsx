@@ -1,7 +1,6 @@
 import Image, { StaticImageData } from "next/image";
-import { AIcon, BIcon } from "public/icons";
-import { AImg, BImg } from "public/images";
-import React, { useState } from "react";
+import { EmptyAImg, EmptyBImg } from "public/images";
+import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { ActiveType, Direction } from "types/vote";
@@ -31,7 +30,7 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
         <LeftVote selected={activeValue("left")} onClick={() => onChangeSelect("A")}>
           <VoteImageWrapper>
             <Image
-              src={imageA || AImg}
+              src={imageA || EmptyAImg}
               width={272}
               height={340}
               alt="A 이미지"
@@ -53,7 +52,7 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
         <RightVote selected={activeValue("right")} onClick={() => onChangeSelect("B")}>
           <VoteImageWrapper>
             <Image
-              src={imageB || BImg}
+              src={imageB || EmptyBImg}
               alt="B 이미지"
               width={272}
               height={340}

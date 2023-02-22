@@ -2,11 +2,10 @@ import styled, { css } from "styled-components";
 import Image from "next/image";
 import { Input, Template, transitions } from "@chooz/ui";
 import { PostVoteRequest } from "lib/apis/vote";
-import { AImg, BImg, Camera } from "public/images";
+import { EmptyAImg, EmptyBImg, Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import { FIRST_STEP, NEXT, SECOND_STEP } from "lib/constants";
 import React, { useMemo, useState } from "react";
-import { AIcon, BIcon } from "public/icons";
 
 interface Props {
   vote: PostVoteRequest;
@@ -58,7 +57,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
           ) : (
             <VoteImageWrapper>
               <Image
-                src={imageA || AImg}
+                src={imageA || EmptyAImg}
                 alt="A이미지"
                 width={272}
                 height={272}
@@ -71,7 +70,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               <VSIcon>VS</VSIcon>
 
               <Image
-                src={imageB || BImg}
+                src={imageB || EmptyBImg}
                 alt="B이미지"
                 width={272}
                 height={272}
