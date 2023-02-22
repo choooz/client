@@ -17,6 +17,7 @@ import React, { useState } from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
 import styled, { css } from "styled-components";
+import { AorB } from "types/vote";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
@@ -32,8 +33,8 @@ function SelectPage() {
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
-  const [select, setSelect] = useState<"A" | "B" | null>(null);
-  const onChangeSelect = (select: "A" | "B") => {
+  const [select, setSelect] = useState<AorB | null>(null);
+  const onChangeSelect = (select: AorB) => {
     setSelect(select);
   };
 

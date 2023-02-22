@@ -10,6 +10,7 @@ import VoteToolbar from "components/select/VoteToolbar";
 import { Eximg1, Eximg2 } from "public/images";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { AorB } from "types/vote";
 
 function DetailPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
@@ -17,7 +18,7 @@ function DetailPage() {
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
 
   //데이터
-  const [select, setSelect] = useState<"A" | "B">("A");
+  const [select, setSelect] = useState<AorB>("A");
   return (
     <PageWrapper>
       <PageInner>

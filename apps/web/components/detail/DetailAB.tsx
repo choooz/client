@@ -1,15 +1,15 @@
 import Image, { StaticImageData } from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
-import { ActiveType, Direction } from "types/vote";
+import { ActiveType, AorB, Direction } from "types/vote";
 
 interface Props {
   titleA: string;
   titleB: string;
   imageA: string | StaticImageData;
   imageB: string | StaticImageData;
-  select: "A" | "B" | null;
+  select: AorB | null;
 }
 
 function DetailAB({ titleA, titleB, imageA, imageB, select }: Props) {
