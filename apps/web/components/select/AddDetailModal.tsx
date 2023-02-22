@@ -28,7 +28,7 @@ function AddDetailModal({
         <ModalWrapper>
           <TitleRow>
             <div>수정하기</div>
-            <div>x</div>
+            <div onClick={onToggleModal}>X</div>
           </TitleRow>
           <QuestionText> 질문을 입력해주세요.(선택)</QuestionText>
           <TitleInput
