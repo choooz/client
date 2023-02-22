@@ -123,7 +123,6 @@ const PageInner = styled.div<{ drag: Drag }>`
   height: 525px;
   background-color: ${({ theme }) => theme.palette.background.white};
   max-width: 640px;
-  position: relative;
   padding: 30px;
   z-index: 1000;
   width: 100%;
