@@ -14,6 +14,7 @@ const Path = {
   // common
   MAIN_PAGE: "/",
   VOTE_LIST_PAGE: "/voteList",
+  VOTE_DETAIL_PAGE: "/detail",
 } as const;
 
 export default Path;

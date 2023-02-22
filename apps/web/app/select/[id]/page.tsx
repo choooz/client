@@ -86,6 +86,7 @@ function SelectPage() {
       {params.get("isSuccess") && (
         <FloatModalTemplate
           onToggleModal={() => {
+            // 메인페이지 url 변경할때 같이 수정해야함
             router.push("/select/1?isSuccess=");
             console.log("작동");
           }}
