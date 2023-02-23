@@ -16,6 +16,7 @@ import { Success } from "public/images";
 import React, { useState } from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
+import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
 import { AorB } from "types/vote";
 
@@ -32,11 +33,7 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
-
-  const [select, setSelect] = useState<AorB | null>(null);
-  const onChangeSelect = (select: AorB) => {
-    setSelect(select);
-  };
+  const { select, onChangeSelect } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
     onChangeToggleDetail,
@@ -48,7 +45,7 @@ function SelectPage() {
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
-
+  console.log(mainVoteList[nowShowing]);
   return (
     <>
       <PageWrapper>
@@ -67,7 +64,7 @@ function SelectPage() {
             titleA={titleA || ""}
             imageB={imageB || ""}
             titleB={titleB || ""}
-            select={select}
+            select={select.choice}
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
