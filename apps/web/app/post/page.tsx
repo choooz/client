@@ -51,23 +51,23 @@ function PostPage() {
 
 const PageWrapper = styled.div`
   width: 100%;
-  padding-top: 12px;
+  padding-top: 16px;
   ${media.medium} {
-    padding-top: 72px;
+    padding-top: 40px;
   }
 `;
 
 const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
-  height: 717px;
   background-color: white;
   max-width: 640px;
   position: relative;
   padding: 30px;
+  height: calc(100vh - 30px - 55px);
   ${media.medium} {
-    height: 717px;
     padding: 40px;
+    height: calc(100vh - 60px - 55px);
   }
 `;
 

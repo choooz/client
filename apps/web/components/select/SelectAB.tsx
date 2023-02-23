@@ -3,15 +3,15 @@ import { EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
-import { ActiveType, Direction } from "types/vote";
+import { ActiveType, AorB, Direction } from "types/vote";
 
 interface Props {
   titleA: string;
   titleB: string;
   imageA: string | StaticImageData;
   imageB: string | StaticImageData;
-  select: "A" | "B" | null;
-  onChangeSelect(select: "A" | "B"): void;
+  select: AorB | null;
+  onChangeSelect(select: AorB): void;
 }
 
 function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Props) {

@@ -16,8 +16,9 @@ import { Success } from "public/images";
 import React, { useState } from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
-import { useSubmitState } from "store/submitState";
+import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
+import { AorB } from "types/vote";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
@@ -32,11 +33,7 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
-
-  const [select, setSelect] = useState<"A" | "B" | null>(null);
-  const onChangeSelect = (select: "A" | "B") => {
-    setSelect(select);
-  };
+  const { select, onChangeSelect } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
     onChangeToggleDetail,
@@ -48,7 +45,7 @@ function SelectPage() {
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
-
+  console.log(mainVoteList[nowShowing]);
   return (
     <>
       <PageWrapper>
@@ -67,7 +64,7 @@ function SelectPage() {
             titleA={titleA || ""}
             imageB={imageB || ""}
             titleB={titleB || ""}
-            select={select}
+            select={select.choice}
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
@@ -123,7 +120,6 @@ const PageInner = styled.div<{ drag: Drag }>`
   height: 525px;
   background-color: ${({ theme }) => theme.palette.background.white};
   max-width: 640px;
-  position: relative;
   padding: 30px;
   z-index: 1000;
   width: 100%;
