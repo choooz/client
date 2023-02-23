@@ -11,9 +11,8 @@ export default function Home() {
       <Link href={Path.REGISTER_PAGE}>회원가입 하러가기</Link>
       <Link href={Path.REGISTER_INTERSTER_PAGE}>관심사 보러가기</Link>
       <Link href={Path.POST_PAGE}>투표 글쓰기 보러가기</Link>
-      <Link href="/select/1">선택 페이지 보러가기</Link>
+      <Link href="/select">선택 페이지 보러가기</Link>
       <Link href={Path.VOTE_LIST_PAGE}>투표 리스트 보러가기</Link>
-      
     </PageLayout>
   );
 }
