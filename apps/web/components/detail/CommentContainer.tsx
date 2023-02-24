@@ -6,7 +6,7 @@ import CommentToolBar from "./CommentToolBar";
 import Comment from "./Comment";
 import Image from "next/image";
 import Link from "next/link";
-import { Reduction } from "public/icons";
+import { AmplifyIcon } from "public/icons";
 
 function CommentContainer() {
   return (
@@ -18,9 +18,9 @@ function CommentContainer() {
       <Comment /> <Comment />
       <Comment />
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-        <Link href="select/1/detail">
+        <Link href="select">
           <DetailButtonInner>
-            <Image alt="자세히 보기" src={Reduction} width={40} height={40} /> 간단히 보기
+            <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 간단히 보기
           </DetailButtonInner>
         </Link>
       </DetailButton>
