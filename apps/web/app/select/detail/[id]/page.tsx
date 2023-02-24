@@ -7,8 +7,9 @@ import DetailAB from "components/detail/DetailAB";
 import FilterBar from "components/detail/FilterBar";
 import VoteAnalyzeBar from "components/detail/VoteAnalyzeBar";
 import VoteToolbar from "components/select/VoteToolbar";
-import { Eximg1, Eximg2 } from "public/images";
+import { EmptyAImg, EmptyBImg, Eximg1, Eximg2 } from "public/images";
 import React, { useState } from "react";
+import useVoteLoadService from "services/useVoteLoadService";
 import styled from "styled-components";
 import { AorB } from "types/vote";
 
@@ -16,9 +17,16 @@ function DetailPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
+  const { data: VoteData, isLoading, isError } = useVoteLoadService(37);
 
   //데이터
-  const [select, setSelect] = useState<AorB>("A");
+  const [select, setSelect] = useState<AorB | null>(null);
+
+  if (isLoading) return <div>로딩중</div>;
+  if (isError) return <div>에러</div>;
+  if (!VoteData) return <div>데이터 없음</div>;
+
+  const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate } = VoteData;
   return (
     <PageWrapper>
       <PageInner>
@@ -27,26 +35,20 @@ function DetailPage() {
           onChangeToggleMenu={onChangeToggleMenu}
           toggleMenu={toggleMenu}
           targetEl={targetEl}
-          title="아이보리 트위드 vs 핑크 원피스"
-          date="2021.08.01"
+          title={title}
+          date={voteCreatedDate}
         />
         <DetailAB
-          imageA={Eximg1}
-          titleA="아이보리 트위드2"
-          imageB={Eximg2}
-          titleB="핑크 원피스"
+          imageA={imageA || EmptyAImg}
+          titleA={titleA}
+          imageB={imageB || EmptyBImg}
+          titleB={titleB}
           select={select}
+          setSelect={setSelect}
         />
         <FilterBar />
         <VoteAnalyzeBar A={50} B={50} select={select} />
-        <VoteDetail>
-          전남친이 오는 결혼식장에 하객으로 갑니다...
-          <br /> 여러분의 혜안이 필요해요
-          <br />
-          <br />
-          <br />
-          근데 왼쪽이 5만원 더 비싸긴 합니다...
-        </VoteDetail>
+        <VoteDetail>{description}</VoteDetail>
         <CommentContainer />
       </PageInner>
     </PageWrapper>
@@ -71,6 +73,12 @@ const PageInner = styled.div`
   position: relative;
   padding: 30px;
   z-index: 1000;
+  height: calc(100vh - 30px - 55px);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   ${media.medium} {
     padding: 40px;
   }
