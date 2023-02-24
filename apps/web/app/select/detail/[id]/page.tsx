@@ -13,11 +13,17 @@ import useVoteLoadService from "services/useVoteLoadService";
 import styled from "styled-components";
 import { AorB } from "types/vote";
 
-function DetailPage() {
+function DetailPage({
+  params,
+}: {
+  params: {
+    id: number;
+  };
+}) {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
-  const { data: VoteData, isLoading, isError } = useVoteLoadService(37);
+  const { data: VoteData, isLoading, isError } = useVoteLoadService(params.id);
 
   //데이터
   const [select, setSelect] = useState<AorB | null>(null);
