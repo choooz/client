@@ -3,42 +3,28 @@ import { HambergerIcon } from "public/icons";
 import { Eximg1 } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
+import { Comment } from "types/comments";
 
-// const Data = [
-//   {
-//     id: 3,
-//     userId: 1,
-//     parentId: null,
-//     content: "string",
-//     gender: "NULL",
-//     imageUrl: null,
-//     age: "NULL",
-//     mbti: "NULL",
-//     nickName: null,
-//     createdDate: "2023-02-11T22:34:54.102907",
-//     likeCount: 1,
-//     hateCount: 1,
-//     children: [
-//       {
-//         id: 14,
-//         userId: 1,
-//         parentId: 3,
-//         content: "글 수정",
-//         gender: "NULL",
-//         imageUrl: null,
-//         age: "NULL",
-//         mbti: "NULL",
-//         nickName: null,
-//         createdDate: "2023-02-11T22:37:48.439504",
-//         likeCount: null,
-//         hateCount: null,
-//         children: [],
-//       },
-//     ],
-//   },
-// ];
+interface Props {
+  comment: Comment;
+}
 
-function Comment() {
+function Comment({ comment }: Props) {
+  const {
+    id,
+    content,
+    age,
+    createdDate,
+    gender,
+    hateCount,
+    imageUrl,
+    likeCount,
+    mbti,
+    nickName,
+    parentId,
+    userId,
+  } = comment;
+
   return (
     <Container>
       <Image
@@ -54,18 +40,19 @@ function Comment() {
       <ContentsBox>
         <Flex>
           <TagBox>
-            여<DivideTag /> 20대
-            <DivideTag /> INTJ
+            {gender}
+            <DivideTag /> {age}
+            <DivideTag /> {mbti}
           </TagBox>
-          <NickName> 나는 은정이</NickName>
+          <NickName> {nickName}</NickName>
         </Flex>
 
-        <Contents>핑크 원피스가 결혼식에서 돋보이기에 가장 좋을 거 같은데요?</Contents>
+        <Contents>{content}</Contents>
         <CommentInfo>
-          <div>5h</div>
+          <div>{createdDate.slice(0, 10)}</div>
           <Comma />
-          <div>❤️ 좋아요 1</div> <Comma />
-          <div>🖤 싫어요 1</div> <Comma />
+          <div>❤️ 좋아요 {likeCount}</div> <Comma />
+          <div>🖤 싫어요 {hateCount}</div> <Comma />
           <div>답글쓰기</div>
         </CommentInfo>
       </ContentsBox>

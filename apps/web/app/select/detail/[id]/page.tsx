@@ -17,7 +17,7 @@ function DetailPage({
     <PageWrapper>
       <PageInner>
         <VoteContainer postId={params.id} />
-        <CommentContainer />
+        <CommentContainer postId={params.id} />
       </PageInner>
     </PageWrapper>
   );
