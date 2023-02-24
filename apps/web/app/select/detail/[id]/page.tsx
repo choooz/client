@@ -1,17 +1,10 @@
 "use client";
 
-import { useOutsideClick, useToggle } from "@chooz/hooks";
 import { media } from "@chooz/ui/styles/media";
 import CommentContainer from "components/detail/CommentContainer";
-import DetailAB from "components/detail/DetailAB";
-import FilterBar from "components/detail/FilterBar";
-import VoteAnalyzeBar from "components/detail/VoteAnalyzeBar";
-import VoteToolbar from "components/select/VoteToolbar";
-import { EmptyAImg, EmptyBImg, Eximg1, Eximg2 } from "public/images";
-import React, { useState } from "react";
-import useVoteLoadService from "services/useVoteLoadService";
+import VoteContainer from "components/detail/VoteContainer";
+import React from "react";
 import styled from "styled-components";
-import { AorB } from "types/vote";
 
 function DetailPage({
   params,
@@ -20,41 +13,10 @@ function DetailPage({
     id: number;
   };
 }) {
-  const [toggleDetail, onChangeToggleDetail] = useToggle(false);
-  const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
-  const { data: VoteData, isLoading, isError } = useVoteLoadService(params.id);
-
-  //데이터
-  const [select, setSelect] = useState<AorB | null>(null);
-
-  if (isLoading) return <div>로딩중</div>;
-  if (isError) return <div>에러</div>;
-  if (!VoteData) return <div>데이터 없음</div>;
-
-  const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate } = VoteData;
   return (
     <PageWrapper>
       <PageInner>
-        <VoteToolbar
-          onChangeToggleDetail={onChangeToggleDetail}
-          onChangeToggleMenu={onChangeToggleMenu}
-          toggleMenu={toggleMenu}
-          targetEl={targetEl}
-          title={title}
-          date={voteCreatedDate}
-        />
-        <DetailAB
-          imageA={imageA || EmptyAImg}
-          titleA={titleA}
-          imageB={imageB || EmptyBImg}
-          titleB={titleB}
-          select={select}
-          setSelect={setSelect}
-        />
-        <FilterBar />
-        <VoteAnalyzeBar A={50} B={50} select={select} />
-        <VoteDetail>{description}</VoteDetail>
+        <VoteContainer postId={params.id} />
         <CommentContainer />
       </PageInner>
     </PageWrapper>
@@ -88,11 +50,6 @@ const PageInner = styled.div`
   ${media.medium} {
     padding: 40px;
   }
-`;
-
-const VoteDetail = styled.div`
-  ${({ theme }) => theme.fontSize.xSmall};
-  padding-bottom: 36px;
 `;
 
 export default DetailPage;
