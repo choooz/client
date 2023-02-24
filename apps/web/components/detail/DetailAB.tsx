@@ -26,17 +26,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, setSelect }: Props) 
     <Container>
       <ImageWrapper>
         <LeftVote selected={activeValue("left")} onClick={() => setSelect("A")}>
-          <Image
-            src={imageA}
-            width={272}
-            height={340}
-            alt="A 이미지"
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "340px",
-            }}
-          />
+          <Image src={imageA} alt="A 이미지" fill />
           <div className="overlay">
             <OverLayTitle>{titleA}</OverLayTitle>
             <OverlayPercent>50%</OverlayPercent>
@@ -45,17 +35,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, setSelect }: Props) 
         </LeftVote>
 
         <RightVote selected={activeValue("right")} onClick={() => setSelect("B")}>
-          <Image
-            src={imageB}
-            width={272}
-            height={340}
-            alt="B 이미지"
-            style={{
-              objectFit: "cover",
-              width: "100%",
-              height: "340px",
-            }}
-          />
+          <Image src={imageB} fill alt="B 이미지" />
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>
             <OverlayPercent>50%</OverlayPercent>
@@ -74,6 +54,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, setSelect }: Props) 
 const Container = styled.div``;
 
 const ImageWrapper = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   width: 100%;
