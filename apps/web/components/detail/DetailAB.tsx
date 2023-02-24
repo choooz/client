@@ -10,9 +10,10 @@ interface Props {
   imageA: string | StaticImageData;
   imageB: string | StaticImageData;
   select: AorB | null;
+  setSelect: React.Dispatch<React.SetStateAction<AorB | null>>;
 }
 
-function DetailAB({ titleA, titleB, imageA, imageB, select }: Props) {
+function DetailAB({ titleA, titleB, imageA, imageB, select, setSelect }: Props) {
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
   };
@@ -24,7 +25,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select }: Props) {
   return (
     <Container>
       <ImageWrapper>
-        <LeftVote selected={activeValue("left")}>
+        <LeftVote selected={activeValue("left")} onClick={() => setSelect("A")}>
           <Image
             src={imageA}
             width={272}
@@ -43,7 +44,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select }: Props) {
           </div>
         </LeftVote>
 
-        <RightVote selected={activeValue("right")}>
+        <RightVote selected={activeValue("right")} onClick={() => setSelect("B")}>
           <Image
             src={imageB}
             width={272}
