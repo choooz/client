@@ -7,8 +7,10 @@ import Comment from "./Comment";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
-import { useQuery } from "@tanstack/react-query";
-import { getCommentById } from "lib/apis/comments";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCommentById, postComment } from "lib/apis/comments";
+import { reactQueryKeys } from "lib/queryKeys";
+import useMutateCommentService from "services/useMutateCommentService";
 
 interface Props {
   postId: number;
@@ -19,7 +21,12 @@ function CommentContainer({ postId }: Props) {
     data: commentDatas,
     isLoading,
     isError,
-  } = useQuery(["comments"], () => getCommentById(postId));
+  } = useQuery(reactQueryKeys.detailCommentList(postId), () => getCommentById(postId));
+  const {
+    mutate: onSubmitComment,
+    commentForm,
+    onChangeCommentForm,
+  } = useMutateCommentService(postId);
 
   if (isLoading) return <div>로딩중</div>;
   if (isError) return <div>에러</div>;
@@ -27,10 +34,14 @@ function CommentContainer({ postId }: Props) {
 
   return (
     <Container>
-      <CommentToolBar />
-      <CommentForm />
+      <CommentToolBar commentCount={commentDatas.length} />
+      <CommentForm
+        commentForm={commentForm}
+        onChangeCommentForm={onChangeCommentForm}
+        onSubmitComment={onSubmitComment}
+      />
       {commentDatas.map((commentData) => (
-        <Comment comment={commentData} />
+        <Comment comment={commentData} key={`comment_${commentData.id}`} />
       ))}
 
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
