@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { HambergerIcon } from "public/icons";
-import { Eximg1 } from "public/images";
+import { PurpleMonster } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Comment } from "types/comments";
@@ -28,7 +28,7 @@ function Comment({ comment }: Props) {
   return (
     <Container>
       <Image
-        src={Eximg1}
+        src={imageUrl || PurpleMonster}
         alt="댓글 프로필"
         style={{
           width: "40px",

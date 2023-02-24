@@ -2,7 +2,7 @@ import axios from "axios";
 import { SERVER_URL } from "lib/constants";
 import apiClient from "./apiClient";
 
-export interface CommentRequest {
+export interface GetCommentRequest {
   age: string;
   mbti: string;
   gender: string;
@@ -11,7 +11,7 @@ export interface CommentRequest {
   size: 0;
 }
 
-export interface CommentResponse {
+export interface GetCommentResponse {
   id: number;
   userId: number;
   parentId: number | null;
@@ -27,7 +27,7 @@ export interface CommentResponse {
 }
 
 export const getCommentById = async (voteId: number) => {
-  const response = await apiClient.get<CommentResponse[]>(
+  const response = await apiClient.get<GetCommentResponse[]>(
     `${SERVER_URL}api/votes/${voteId}/comments`,
     {
       params: {
@@ -40,5 +40,15 @@ export const getCommentById = async (voteId: number) => {
       },
     },
   );
+  return response.data;
+};
+
+export interface PostCommnetRequest {
+  content: string;
+  parentId?: number | null;
+}
+
+export const postComment = async (body: PostCommnetRequest, voteId: number) => {
+  const response = await apiClient.post(`${SERVER_URL}api/votes/${voteId}/comments`, body);
   return response.data;
 };
