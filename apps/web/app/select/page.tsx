@@ -43,7 +43,7 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+  const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
   console.log(mainVoteList[nowShowing]);
   return (
     <>
@@ -54,7 +54,7 @@ function SelectPage() {
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
             targetEl={targetEl}
-            title={totalTitle}
+            title={title}
             date={modifiedDate}
           />
 

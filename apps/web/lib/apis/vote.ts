@@ -80,14 +80,13 @@ export const modifyVoteAPI = async (body: ModifyVoteRequest, voteId: number) => 
 
 interface GetVoteByIdResponst {
   user: {
-    userImage: string;
+    userImage: string | null;
     userGender: string;
     userAge: number;
     userMbti: string;
     nickName: null;
   };
-  nickName: null;
-  voteCreatedDate: Date;
+  voteCreatedDate: string;
   category: null;
   title: string;
   imageA: string;
@@ -97,7 +96,7 @@ interface GetVoteByIdResponst {
   filteredMbti: string;
   titleA: string;
   titleB: string;
-  description: null;
+  description: string;
 }
 export const getVoteByIdAPI = async (id: number) => {
   const response = await axios.get<GetVoteByIdResponst>(`${SERVER_URL}api/votes/${id}`);

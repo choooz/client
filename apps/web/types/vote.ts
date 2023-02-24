@@ -17,7 +17,7 @@ export interface Vote {
   titleB: string;
   voteId: number;
   category: CategoryNameType | null;
-  totalTitle: string;
+  title: string;
   writer: Writer;
   filteredAge: string | null;
   filteredGender: GenderType | null;
