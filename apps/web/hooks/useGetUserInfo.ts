@@ -7,6 +7,5 @@ export function useGetUserInfo() {
     staleTime: Infinity,
     cacheTime: Infinity,
   });
-  console.log(data);
   return data;
 }
