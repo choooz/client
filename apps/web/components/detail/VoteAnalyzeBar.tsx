@@ -5,7 +5,7 @@ import { AorB } from "types/vote";
 interface Props {
   A: number;
   B: number;
-  select: AorB;
+  select: AorB | null;
 }
 
 function VoteAnalyzeBar({ A, B, select }: Props) {

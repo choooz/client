@@ -3,8 +3,22 @@ import Image from "next/image";
 import { Eximg1 } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
+import { CommentForm } from "types/comments";
 
-function CommentForm() {
+interface Props {
+  commentForm: CommentForm;
+  onSubmitComment: () => void;
+  onChangeCommentForm: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Props) {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmitComment();
+  };
+
+  console.log(commentForm);
+
   return (
     <Container>
       <Image
@@ -17,9 +31,16 @@ function CommentForm() {
           marginRight: "10px",
         }}
       />
-      <Form>
-        <Input width="100%" height="32px" variant="outlined" placeholder="댓글을 남겨보세요." />
-        <SubmitButton>등록</SubmitButton>
+      <Form onSubmit={onSubmit}>
+        <Input
+          width="100%"
+          height="32px"
+          variant="outlined"
+          placeholder="댓글을 남겨보세요."
+          value={commentForm.content}
+          onChange={onChangeCommentForm}
+        />
+        <SubmitButton type="submit">등록</SubmitButton>
       </Form>
     </Container>
   );

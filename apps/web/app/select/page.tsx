@@ -7,7 +7,6 @@ import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
-import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -44,7 +43,7 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+  const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
   console.log(mainVoteList[nowShowing]);
   return (
     <>
@@ -55,7 +54,7 @@ function SelectPage() {
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
             targetEl={targetEl}
-            title={totalTitle}
+            title={title}
             date={modifiedDate}
           />
 
@@ -69,7 +68,7 @@ function SelectPage() {
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`select/detail`}>
+            <Link href={`select/detail/${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>
