@@ -1,7 +1,6 @@
-import { QueryClient, useQuery } from "@tanstack/react-query";
-import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/apis/user";
+import { QueryClient } from "@tanstack/react-query";
+import { addInfoAPI, addInterestCategoryAPI } from "lib/apis/user";
 import Path from "lib/Path";
-import { reactQueryKeys } from "lib/queryKeys";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import { Gender, UserInfo } from "types/user";
@@ -49,8 +48,6 @@ export default function useRegisterService() {
     setUserInfo((prev) => ({ ...prev, age: null }));
   };
 
-  const queryClient = new QueryClient();
-
   const onCompleteRegister = async ({ MBTI, age, gender }: UserInfo) => {
     const stringMBTI = `${MBTI.M}${MBTI.B}${MBTI.T}${MBTI.I}`;
     try {
@@ -62,41 +59,42 @@ export default function useRegisterService() {
       router.replace(Path.REGISTER_INTERSTER_PAGE);
     } catch (error) {
       alert(error);
-  };
-
-  // @note interest page
-
-  const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
-
-  const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const category = e.currentTarget.name as CategoryNameType;
-    categoryLists.includes(category)
-      ? setCategoryLists((prev) => prev.filter((item) => item !== category))
-      : setCategoryLists((prev) => [...prev.concat(category)]);
-  };
-
-  const onClickComplete = async () => {
-    try {
-      await addInterestCategoryAPI({
-        categoryLists,
-      });
-      router.push(Path.MAIN_PAGE);
-    } catch (error) {
-      alert(error);
     }
-  };
 
-  return {
-    userInfo,
-    progress,
-    onChangeProgress,
-    onChangeGender,
-    onChangeMBTI,
-    onChangeAge,
-    onDeleteAge,
-    onCompleteRegister,
-    categoryLists,
-    onClickCategory,
-    onClickComplete,
+    // @note interest page
+
+    const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
+
+    const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
+      const category = e.currentTarget.name as CategoryNameType;
+      categoryLists.includes(category)
+        ? setCategoryLists((prev) => prev.filter((item) => item !== category))
+        : setCategoryLists((prev) => [...prev.concat(category)]);
+    };
+
+    const onClickComplete = async () => {
+      try {
+        await addInterestCategoryAPI({
+          categoryLists,
+        });
+        router.push(Path.MAIN_PAGE);
+      } catch (error) {
+        alert(error);
+      }
+    };
+
+    return {
+      userInfo,
+      progress,
+      onChangeProgress,
+      onChangeGender,
+      onChangeMBTI,
+      onChangeAge,
+      onDeleteAge,
+      onCompleteRegister,
+      categoryLists,
+      onClickCategory,
+      onClickComplete,
+    };
   };
 }

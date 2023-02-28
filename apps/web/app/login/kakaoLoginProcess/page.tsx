@@ -29,6 +29,7 @@ function kakaoLoginProcess() {
       newUser ? router.push(Path.REGISTER_PAGE) : router.push(Path.MAIN_PAGE);
     } catch (error) {
       alert("에러가 발생하였습니다.");
+    }
   };
 
   return <></>;
