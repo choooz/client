@@ -1,30 +1,44 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 interface Props {
-  onChangeToggleDetail: () => void;
+  isModify?: boolean;
+  onModify?: () => void;
+  isDelete?: boolean;
+  onDelete?: () => void;
+  top?: string;
+  right?: string;
 }
 
-function MenuBox({ onChangeToggleDetail }: Props) {
+function MenuBox({ isModify, onModify, isDelete, onDelete, top = "0", right = "0px" }: Props) {
   return (
-    <Container>
-      <MenuText className="modify" onClick={onChangeToggleDetail}>
-        수정하기
-      </MenuText>
-      <MenuText className="delete">삭제하기</MenuText>
+    <Container top={top} right={right}>
+      {isModify && (
+        <MenuText className="modify" onClick={onModify}>
+          수정하기
+        </MenuText>
+      )}
+      {isDelete && (
+        <MenuText className="delete" onClick={onDelete}>
+          삭제하기
+        </MenuText>
+      )}
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.div<{ top: string; right: string }>`
   z-index: 9999;
   position: absolute;
-  top: 70px;
-  right: 41px;
+
   border-radius: 8px;
   background-color: ${({ theme }) => theme.palette.background.white};
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
+  ${({ top, right }) => css`
+    top: ${top};
+    right: ${right};
+  `}
   .modify {
     border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
   }

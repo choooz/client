@@ -46,7 +46,16 @@ function VoteToolbar({
         {title}
         <DateText>{date.slice(0, 10)}</DateText>
       </TitleRow>
-      {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
+      {toggleMenu && (
+        <MenuBox
+          top="70px"
+          right="41px"
+          isDelete
+          isModify
+          onDelete={() => void 0}
+          onModify={onChangeToggleDetail}
+        />
+      )}
     </>
   );
 }
