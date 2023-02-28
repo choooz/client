@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCommentById } from "lib/apis/comments";
 import { reactQueryKeys } from "lib/queryKeys";
 import useMutateCommentService from "services/useMutateCommentService";
+import useUpdateCommnetService from "services/useUpdateCommnetService";
 
 interface Props {
   postId: number;
@@ -27,6 +28,7 @@ function CommentContainer({ postId }: Props) {
     commentForm,
     onChangeCommentForm,
   } = useMutateCommentService(postId);
+  const { mutateDeleteComment, mutateLike, mutateHate } = useUpdateCommnetService(postId);
 
   if (isLoading) return <div>로딩중</div>;
   if (isError) return <div>에러</div>;
@@ -41,7 +43,13 @@ function CommentContainer({ postId }: Props) {
         onSubmitComment={onSubmitComment}
       />
       {commentDatas.map((commentData) => (
-        <Comment comment={commentData} key={`comment_${commentData.id}`} />
+        <Comment
+          comment={commentData}
+          mutateDeleteComment={() => mutateDeleteComment(commentData.id)}
+          mutateLike={() => mutateLike(commentData.id)}
+          mutateHate={() => mutateHate(commentData.id)}
+          key={`comment_${commentData.id}`}
+        />
       ))}
 
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">

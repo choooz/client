@@ -4,9 +4,14 @@ import styled from "styled-components";
 
 interface Props {
   onToggleModal: () => void;
+  onSubmit: () => void;
 }
 
-function CommentDeleteModal({ onToggleModal }: Props) {
+function CommentDeleteModal({ onToggleModal, onSubmit }: Props) {
+  const onClickDelete = () => {
+    onToggleModal();
+    onSubmit();
+  };
   return (
     <ModalTemplate width="311px" height="250px" onToggleModal={onToggleModal}>
       <WarningIconStyled width="40px" height="40px" />
@@ -22,7 +27,13 @@ function CommentDeleteModal({ onToggleModal }: Props) {
         >
           취소
         </Button>
-        <Button variant="warning" width="156px" height="48px" borderRadius="0 0 4px 0">
+        <Button
+          variant="warning"
+          width="156px"
+          height="48px"
+          borderRadius="0 0 4px 0"
+          onClick={onClickDelete}
+        >
           확인
         </Button>
       </ButtonWrapper>
