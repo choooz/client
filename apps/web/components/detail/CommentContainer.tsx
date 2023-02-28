@@ -7,8 +7,8 @@ import Comment from "./Comment";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getCommentById, postComment } from "lib/apis/comments";
+import { useQuery } from "@tanstack/react-query";
+import { getCommentById } from "lib/apis/comments";
 import { reactQueryKeys } from "lib/queryKeys";
 import useMutateCommentService from "services/useMutateCommentService";
 
