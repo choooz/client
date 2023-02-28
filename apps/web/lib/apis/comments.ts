@@ -36,7 +36,7 @@ export const getCommentById = async (voteId: number) => {
         gender: "",
         sortBy: "ByTime",
         page: 0,
-        size: 5,
+        size: 20,
       },
     },
   );

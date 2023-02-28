@@ -1,9 +1,13 @@
+import { useOutsideClick, useToggle } from "@chooz/hooks";
+import WarningSmallModal from "components/register/WarningSmallModal";
+import MenuBox from "components/select/MenuBox";
 import Image from "next/image";
 import { HambergerIcon } from "public/icons";
 import { PurpleMonster } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
 import { Comment } from "types/comments";
+import CommentDeleteModal from "./CommentDeleteModal";
 
 interface Props {
   comment: Comment;
@@ -24,6 +28,10 @@ function Comment({ comment }: Props) {
     parentId,
     userId,
   } = comment;
+
+  const [toggleMenu, onToggleMenu] = useToggle(false);
+  const [toggleWarningModal, onToggleWarningModal] = useToggle(false);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onToggleMenu);
 
   return (
     <Container>
@@ -56,7 +64,7 @@ function Comment({ comment }: Props) {
           <div>답글쓰기</div>
         </CommentInfo>
       </ContentsBox>
-      <div>
+      <div onClick={onToggleMenu} ref={targetEl}>
         <Image
           src={HambergerIcon}
           alt="더보기"
@@ -66,6 +74,8 @@ function Comment({ comment }: Props) {
           }}
         />
       </div>
+      {toggleMenu && <MenuBox isDelete onDelete={onToggleWarningModal} right="20px" />}
+      {toggleWarningModal && <CommentDeleteModal onToggleModal={onToggleWarningModal} />}
     </Container>
   );
 }
@@ -74,6 +84,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  position: relative;
 `;
 
 const Flex = styled.div`
