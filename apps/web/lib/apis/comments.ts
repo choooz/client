@@ -27,7 +27,7 @@ export interface GetCommentResponse {
 }
 
 export const getCommentById = async (voteId: number) => {
-  const response = await apiClient.get<GetCommentResponse[]>(
+  const response = await axios.get<GetCommentResponse[]>(
     `${SERVER_URL}api/votes/${voteId}/comments`,
     {
       params: {
@@ -49,6 +49,21 @@ export interface PostCommnetRequest {
 }
 
 export const postComment = async (body: PostCommnetRequest, voteId: number) => {
-  const response = await apiClient.post(`${SERVER_URL}api/votes/${voteId}/comments`, body);
+  const response = await apiClient.post(`api/votes/${voteId}/comments`, body);
+  return response.data;
+};
+
+export const deleteComment = async (commentId: number, voteId: number) => {
+  const response = await apiClient.delete(`api/votes/${voteId}/comments/${commentId}`);
+  return response.data;
+};
+
+export const likeComment = async (commentId: number, voteId: number) => {
+  const response = await apiClient.post(`api/votes/${voteId}/comments/${commentId}/likers`);
+  return response.data;
+};
+
+export const hateComment = async (commentId: number, voteId: number) => {
+  const response = await apiClient.post(`api/votes/${voteId}/comments/${commentId}/haters`);
   return response.data;
 };
