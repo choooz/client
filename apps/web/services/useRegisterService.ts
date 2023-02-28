@@ -1,4 +1,3 @@
-import { QueryClient } from "@tanstack/react-query";
 import { addInfoAPI, addInterestCategoryAPI } from "lib/apis/user";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
@@ -60,41 +59,40 @@ export default function useRegisterService() {
     } catch (error) {
       alert(error);
     }
+  };
+  // @note interest page
 
-    // @note interest page
+  const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
 
-    const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
+  const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const category = e.currentTarget.name as CategoryNameType;
+    categoryLists.includes(category)
+      ? setCategoryLists((prev) => prev.filter((item) => item !== category))
+      : setCategoryLists((prev) => [...prev.concat(category)]);
+  };
 
-    const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
-      const category = e.currentTarget.name as CategoryNameType;
-      categoryLists.includes(category)
-        ? setCategoryLists((prev) => prev.filter((item) => item !== category))
-        : setCategoryLists((prev) => [...prev.concat(category)]);
-    };
+  const onClickComplete = async () => {
+    try {
+      await addInterestCategoryAPI({
+        categoryLists,
+      });
+      router.push(Path.MAIN_PAGE);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
-    const onClickComplete = async () => {
-      try {
-        await addInterestCategoryAPI({
-          categoryLists,
-        });
-        router.push(Path.MAIN_PAGE);
-      } catch (error) {
-        alert(error);
-      }
-    };
-
-    return {
-      userInfo,
-      progress,
-      onChangeProgress,
-      onChangeGender,
-      onChangeMBTI,
-      onChangeAge,
-      onDeleteAge,
-      onCompleteRegister,
-      categoryLists,
-      onClickCategory,
-      onClickComplete,
-    };
+  return {
+    userInfo,
+    progress,
+    onChangeProgress,
+    onChangeGender,
+    onChangeMBTI,
+    onChangeAge,
+    onDeleteAge,
+    onCompleteRegister,
+    categoryLists,
+    onClickCategory,
+    onClickComplete,
   };
 }
