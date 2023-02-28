@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/apis/user";
 import Path from "lib/Path";
 import { reactQueryKeys } from "lib/queryKeys";
@@ -62,12 +62,6 @@ export default function useRegisterService() {
       router.replace(Path.REGISTER_INTERSTER_PAGE);
     } catch (error) {
       alert(error);
-    } finally {
-      queryClient.prefetchQuery(reactQueryKeys.userInfo(), getUserInfo, {
-        staleTime: Infinity,
-        cacheTime: Infinity,
-      });
-    }
   };
 
   // @note interest page
@@ -89,11 +83,6 @@ export default function useRegisterService() {
       router.push(Path.MAIN_PAGE);
     } catch (error) {
       alert(error);
-    } finally {
-      queryClient.prefetchQuery(reactQueryKeys.userInfo(), getUserInfo, {
-        staleTime: Infinity,
-        cacheTime: Infinity,
-      });
     }
   };
 
