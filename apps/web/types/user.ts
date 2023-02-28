@@ -12,6 +12,8 @@ export enum Gender {
 
 export type SocialType = "NAVER" | "KAKAO";
 
+export type Agetype = "teenager" | "twenties" | "thirties" | "forties" | "fifties" | null;
+
 export interface UserInfo {
   gender: "MALE" | "FEMALE" | null;
   MBTI: MBTIType;

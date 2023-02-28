@@ -1,3 +1,6 @@
+import { Agetype } from "types/user";
+import { GenderType } from "types/vote";
+
 export const queryKeys = {
   USER_INFO: "userInfo" as const,
   VOTE_LIST: "voteList" as const,
@@ -12,5 +15,11 @@ export const reactQueryKeys = {
   voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
   mainVoteList: () => [queryKeys.MAIN_VOTE_LIST] as const,
   voteDetail: (id: number) => [queryKeys.VOTE_DETAIL, id] as const,
-  detailCommentList: (id: number) => [queryKeys.DETAIL_COMMENT_LIST, id] as const,
+  detailCommentList: (
+    id: number,
+    age?: Agetype,
+    mbti?: string | null,
+    gender?: GenderType,
+    sortBy?: string,
+  ) => [queryKeys.DETAIL_COMMENT_LIST, id, age, mbti, gender, sortBy] as const,
 };

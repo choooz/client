@@ -1,5 +1,6 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
+import { CommentFilter } from "types/comments";
 import apiClient from "./apiClient";
 
 export interface GetCommentRequest {
@@ -26,15 +27,17 @@ export interface GetCommentResponse {
   hateCount: number;
 }
 
-export const getCommentById = async (voteId: number) => {
+export const getCommentById = async (voteId: number, filter: CommentFilter) => {
+  const { age, gender, mbti, sortBy } = filter;
+
   const response = await axios.get<GetCommentResponse[]>(
     `${SERVER_URL}api/votes/${voteId}/comments`,
     {
       params: {
-        age: "",
-        mbti: "",
-        gender: "",
-        sortBy: "ByTime",
+        age,
+        mbti,
+        gender,
+        sortBy,
         page: 0,
         size: 20,
       },

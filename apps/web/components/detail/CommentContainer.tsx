@@ -12,17 +12,22 @@ import { getCommentById } from "lib/apis/comments";
 import { reactQueryKeys } from "lib/queryKeys";
 import useMutateCommentService from "services/useMutateCommentService";
 import useUpdateCommnetService from "services/useUpdateCommnetService";
+import useCommentFilter from "./hooks/useCommentFilter";
 
 interface Props {
   postId: number;
 }
 
 function CommentContainer({ postId }: Props) {
+  const { commentFilter, onChangeCommentFilter } = useCommentFilter();
+  const { age, gender, mbti, sortBy } = commentFilter;
   const {
     data: commentDatas,
     isLoading,
     isError,
-  } = useQuery(reactQueryKeys.detailCommentList(postId), () => getCommentById(postId));
+  } = useQuery(reactQueryKeys.detailCommentList(postId, age, mbti, gender, sortBy), () =>
+    getCommentById(postId, commentFilter),
+  );
   const {
     mutate: onSubmitComment,
     commentForm,
@@ -36,7 +41,11 @@ function CommentContainer({ postId }: Props) {
 
   return (
     <Container>
-      <CommentToolBar commentCount={commentDatas.length} />
+      <CommentToolBar
+        commentCount={commentDatas.length}
+        onChangeFilter={onChangeCommentFilter}
+        sortBy={sortBy}
+      />
       <CommentForm
         commentForm={commentForm}
         onChangeCommentForm={onChangeCommentForm}
