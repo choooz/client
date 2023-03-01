@@ -27,6 +27,7 @@ const palette = {
     selectedSoft: "#DCD9FF",
     inactive: "#E5E5EC",
     myPage: "#343434",
+    myPageInactve: "#767676",
     black: "#111111",
   },
   system: {
