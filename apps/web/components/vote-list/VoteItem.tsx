@@ -14,13 +14,21 @@ interface Props {
 }
 
 function VoteItem({ vote }: Props) {
-  const { imageA, imageB, titleA, titleB, totalTitle, modifiedDate, countVoted } = vote;
+  const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted } = vote;
 
+  // @Todo Image에 sizes와 priority 추가
   return (
     <Container>
       <ABImage>
         {imageA ? (
-          <Image alt="left image" width={510} height={200} src={imageA} style={LeftImageCss} />
+          <ImageWrapper>
+            <Image
+              alt="left image"
+              src={imageA}
+              fill
+              style={{ borderRadius: "8px 0 0 8px", objectFit: "cover" }}
+            />
+          </ImageWrapper>
         ) : (
           <AItem>
             <AIcon />
@@ -28,7 +36,14 @@ function VoteItem({ vote }: Props) {
           </AItem>
         )}
         {imageB ? (
-          <Image alt="right image" width={510} height={200} src={imageB} style={RightImageCss} />
+          <ImageWrapper>
+            <Image
+              alt="right image"
+              src={imageB}
+              fill
+              style={{ borderRadius: "0 8px 8px 0", objectFit: "cover" }}
+            />
+          </ImageWrapper>
         ) : (
           <BItem>
             <BIcon />
@@ -44,7 +59,7 @@ function VoteItem({ vote }: Props) {
         <BookmarkIconStyled />
       </VoteContainer>
       <TitleContainer>
-        <VoteTitle>{totalTitle}</VoteTitle>
+        <VoteTitle>{title}</VoteTitle>
         <VoteModifiedDate>{timeDataProcessing(modifiedDate)}</VoteModifiedDate>
       </TitleContainer>
     </Container>
@@ -57,6 +72,7 @@ const Container = styled.div`
 `;
 
 const ABImage = styled.div`
+  position: relative;
   display: flex;
   max-width: 560px;
   margin: 0 auto;
@@ -70,6 +86,12 @@ const ABImage = styled.div`
   } */
 `;
 
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 50%;
+  aspect-ratio: 1;
+`;
+
 const Item = styled.div`
   display: flex;
   align-items: center;
@@ -77,7 +99,6 @@ const Item = styled.div`
   flex-direction: column;
   padding: 15% 0;
   flex-grow: 1;
-  aspect-ratio: 1;
 `;
 
 const AItem = styled(Item)`
@@ -102,20 +123,6 @@ const ItemTitle = styled.span`
       }
     `};
 `;
-
-const LeftImageCss = {
-  width: "50%",
-  height: "100%",
-  borderRadius: "8px 0 0 8px",
-  marginRight: 1,
-};
-
-const RightImageCss = {
-  width: "50%",
-  height: "100%",
-  borderRadius: "0 8px 8px 0",
-  marginLeft: 1,
-};
 
 const VoteContainer = styled.div`
   display: flex;
