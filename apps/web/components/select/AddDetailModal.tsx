@@ -90,7 +90,7 @@ const QuestionText = styled.div`
   ${({ theme }) => theme.textStyle.Title_Small}
   font-weight: 700;
   padding-bottom: 8px;
-  color: ${({ theme }) => theme.palette.ink.base};
+  color: ${({ theme }) => theme.palette.ink.dark};
 `;
 
 const TitleInput = styled.textarea`

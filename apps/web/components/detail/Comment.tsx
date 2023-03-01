@@ -93,7 +93,7 @@ const Contents = styled.div`
   display: flex;
   align-items: center;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.dark};
+    color: ${theme.palette.ink.darker};
   `}
 `;
 
@@ -104,7 +104,7 @@ const TagBox = styled.div`
   width: auto;
   ${({ theme }) => css`
     background-color: ${theme.palette.background.soft};
-    color: ${theme.palette.ink.light};
+    color: ${theme.palette.ink.base};
     ${theme.textStyle.Font_Minimum}
   `}
 `;
@@ -121,7 +121,7 @@ const DivideTag = styled.div`
 const NickName = styled.div`
   font-weight: 700;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.dark};
+    color: ${theme.palette.ink.darker};
     ${theme.textStyle.Font_Regular}
   `}
 `;
@@ -131,7 +131,7 @@ const CommentInfo = styled.div`
   align-items: center;
   gap: 4px;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.light};
+    color: ${theme.palette.ink.base};
     ${theme.textStyle.Font_Minimum}
   `}
 `;

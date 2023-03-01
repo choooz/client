@@ -125,7 +125,7 @@ const QuestionText = styled.div`
 
 const SubText = styled.div`
   font-size: 16px;
-  color: ${({ theme }) => theme.palette.ink.base};
+  color: ${({ theme }) => theme.palette.ink.dark};
 `;
 
 const InvisibleInput = styled.input`

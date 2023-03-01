@@ -88,7 +88,7 @@ const RightFilterContainer = styled.div`
 const CheckVoteForMe = styled.div`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.palette.ink.base};
+  color: ${({ theme }) => theme.palette.ink.dark};
   ${({ theme }) => theme.textStyle.Font_Regular};
   > * {
     cursor: pointer;

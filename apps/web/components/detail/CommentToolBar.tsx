@@ -29,7 +29,7 @@ const Container = styled.div`
 const Title = styled.div`
   font-weight: 700;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.dark};
+    color: ${theme.palette.ink.darker};
     ${theme.textStyle.Font_Minimum}
   `}
   .point {
@@ -48,7 +48,7 @@ const Select = styled.select`
 
 const MoveButton = styled.div`
   ${({ theme }) => css`
-    color: ${theme.palette.ink.base};
+    color: ${theme.palette.ink.dark};
     ${theme.textStyle.Font_Minimum}
   `};
 `;

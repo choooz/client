@@ -168,7 +168,7 @@ const VoteTitle = styled.h3`
 `;
 
 const VoteModifiedDate = styled.span`
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.base};
   ${({ theme }) => theme.textStyle.Font_Regular}
   ${media.medium} {
     color: ${({ theme }) => theme.palette.ink.lightest};
