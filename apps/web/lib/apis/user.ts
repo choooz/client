@@ -1,4 +1,3 @@
-import { SERVER_URL } from "lib/constants";
 import { GetUserInfoResponse } from "types/user";
 import { CategoryNameType } from "types/vote";
 import apiClient from "./apiClient";
@@ -10,7 +9,7 @@ interface AddInfoRequest {
 }
 
 export const addInfoAPI = async (addInfoRequest: AddInfoRequest) => {
-  const response = await apiClient.patch(`${SERVER_URL}api/user/addInfo`, addInfoRequest);
+  const response = await apiClient.patch("api/user/addInfo", addInfoRequest);
   return response.data;
 };
 interface AddInterestCategoryRequest {
@@ -21,13 +20,13 @@ export const addInterestCategoryAPI = async (
   addInterestCategoryRequest: AddInterestCategoryRequest,
 ) => {
   const response = await apiClient.patch(
-    `${SERVER_URL}api/user/addInterestCategory`,
+    "api/user/addInterestCategory",
     addInterestCategoryRequest,
   );
   return response.data;
 };
 
 export const getUserInfo = async () => {
-  const response = await apiClient.get<GetUserInfoResponse>(`${SERVER_URL}api/oauth/login`);
+  const response = await apiClient.get<GetUserInfoResponse>("api/oauth/login");
   return response.data;
 };
