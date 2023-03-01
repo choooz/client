@@ -9,6 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 function naverLoginProcess() {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const code = searchParams.get("code") ?? "";
 
   useEffect(() => {
