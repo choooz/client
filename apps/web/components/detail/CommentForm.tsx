@@ -17,8 +17,6 @@ function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Prop
     onSubmitComment();
   };
 
-  console.log(commentForm);
-
   return (
     <Container>
       <Image

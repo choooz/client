@@ -40,9 +40,9 @@ function useModifyVoteService(onToggle: () => void, initialValue: Vote) {
   // @TODO: detail값 추가되면 채워넣기
   useEffect(() => {
     if (!initialValue) return;
-    const { totalTitle, titleA, titleB, category, voteId } = initialValue;
+    const { title, titleA, titleB, category, voteId } = initialValue;
     setVote({
-      title: totalTitle,
+      title: title,
       detail: "",
       category,
       titleA,

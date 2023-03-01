@@ -3,17 +3,18 @@ import styled, { css } from "styled-components";
 
 interface Props {
   commentCount: number;
+  sortBy: string;
+  onChangeFilter: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-function CommentToolBar({ commentCount }: Props) {
+function CommentToolBar({ commentCount, onChangeFilter, sortBy }: Props) {
   return (
     <Container>
       <Title>
         댓글 <span className="point">{commentCount}</span>
-        <Select name="" id="">
-          <option value="1">최신순</option>
-          <option value="2">추천순</option>
-          <option value="1">오래된순</option>
+        <Select name="sortBy" value={sortBy} onChange={onChangeFilter}>
+          <option value="ByTime">최신순</option>
+          <option value="ByPopularity">추천순</option>
         </Select>
       </Title>
       <MoveButton>↓ 마지막 댓글로 이동</MoveButton>
