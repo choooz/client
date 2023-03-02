@@ -13,6 +13,7 @@ interface Props {
   targetEl: React.RefObject<HTMLImageElement>;
   title: string;
   date: string;
+  totalVoteCount?: number;
 }
 
 function VoteToolbar({
@@ -22,12 +23,13 @@ function VoteToolbar({
   toggleMenu,
   targetEl,
   date,
+  totalVoteCount = 0,
 }: Props) {
   return (
     <>
       <TagRow>
         <FlexRow>
-          <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
+          <NumberOfSolver>🔥{totalVoteCount.toLocaleString()}명 해결중!</NumberOfSolver>
           <TargetMessage>당신을 기다렸어요</TargetMessage>
         </FlexRow>
         <FlexRow>
