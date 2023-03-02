@@ -59,3 +59,14 @@ export const getMyPageVoteList = async ({ page, size, voteType }: GetMyPageVoteL
   });
   return response.data;
 };
+
+interface GetVoteCountResponse {
+  countCreatedVote: number;
+  countParticipatedVote: number;
+  countBookmarkedVote: number;
+}
+
+export const getVoteCount = async () => {
+  const response = await apiClient.get<GetVoteCountResponse>("api/user/mypage/count");
+  return response.data;
+};

@@ -1,11 +1,13 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
+import { useQuery } from "@tanstack/react-query";
 import VoteList from "components/my/VoteList";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
-import { VoteListType } from "lib/apis/user";
+import { getVoteCount, VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import Path from "lib/Path";
+import { reactQueryKeys } from "lib/queryKeys";
 import Image from "next/image";
 import Link from "next/link";
 import { Camera } from "public/images";
@@ -17,8 +19,13 @@ import { Gender } from "types/user";
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState<VoteListType>("created");
 
-  const onClickSelectedTab = (e: any) => {
-    setSelectedTab(e.target.value);
+  const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setSelectedTab(e.currentTarget.value as VoteListType);
+  };
+
+  const loadVoteCount = () => {
+    const { data } = useQuery(reactQueryKeys.myPageVoteCount(), getVoteCount);
+    return { data };
   };
 
   const { voteList, subscribe } = useInfiniteMyPageVoteListService({
@@ -26,11 +33,14 @@ function MyPage() {
     voteType: selectedTab,
   });
 
-  const { data } = useGetUserInfo();
+  const { data: userInfo } = useGetUserInfo();
+  const { data: voteCount } = loadVoteCount();
 
-  if (!data) return <div>데이터 없음</div>;
+  if (!userInfo) return <div>데이터 없음</div>;
+  if (!voteCount) return <div>데이터 없음</div>;
 
-  const { gender, username, age, mbti } = data;
+  const { gender, username, age, mbti } = userInfo;
+  const { countCreatedVote, countParticipatedVote, countBookmarkedVote } = voteCount;
 
   return (
     <PageWrapper>
@@ -58,15 +68,15 @@ function MyPage() {
         {/* @TODO api 연결하면 map 사용 */}
         <NumberOfVoteSection>
           <NumberOfVoteContainer>
-            <NumberOfVote>134</NumberOfVote>
+            <NumberOfVote>{countCreatedVote}</NumberOfVote>
             <NumberOfVoteText>작성한 투표</NumberOfVoteText>
           </NumberOfVoteContainer>
           <NumberOfVoteContainer>
-            <NumberOfVote>243</NumberOfVote>
+            <NumberOfVote>{countParticipatedVote}</NumberOfVote>
             <NumberOfVoteText>참여한 투표</NumberOfVoteText>
           </NumberOfVoteContainer>
           <NumberOfVoteContainer>
-            <NumberOfVote>2134</NumberOfVote>
+            <NumberOfVote>{countBookmarkedVote}</NumberOfVote>
             <NumberOfVoteText>북마크 투표</NumberOfVoteText>
           </NumberOfVoteContainer>
         </NumberOfVoteSection>
