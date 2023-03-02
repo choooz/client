@@ -79,7 +79,7 @@ const TitleRow = styled.div`
 `;
 
 const DateText = styled.div`
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.base};
   font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";

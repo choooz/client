@@ -1,6 +1,6 @@
 "use client";
 
-import { CategorySelect, SortSelect, VoteList } from "components/voteList";
+import { CategorySelect, SortSelect, VoteList } from "components/vote-list";
 import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
@@ -88,7 +88,7 @@ const RightFilterContainer = styled.div`
 const CheckVoteForMe = styled.div`
   display: flex;
   align-items: center;
-  color: ${({ theme }) => theme.palette.ink.base};
+  color: ${({ theme }) => theme.palette.ink.dark};
   ${({ theme }) => theme.textStyle.Font_Regular};
   > * {
     cursor: pointer;

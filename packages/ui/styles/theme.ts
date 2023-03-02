@@ -3,10 +3,11 @@ import { DefaultTheme } from "styled-components";
 const palette = {
   ink: {
     lightest: "#ffffff",
-    lighter: "#999999",
-    light: "#767676",
-    base: "#505050",
-    dark: "#111111",
+    lighter: "#e5e5ec",
+    light: "#999999",
+    base: "#767676",
+    dark: "#505050",
+    darker: "#111111",
   },
   main: {
     point: "#874CE4",
@@ -18,12 +19,6 @@ const palette = {
     base: "#E5E5EC",
     dark: "#111111",
   },
-  font_color: {
-    up_text: "#111111",
-    medium_text: "#505050",
-    down_text: "#767676",
-    inactive_text: "#999999",
-  },
   background: {
     white: "#ffffff",
     soft: "#F7F7FB",
@@ -31,6 +26,8 @@ const palette = {
     selected: "#C5C0FF",
     selectedSoft: "#DCD9FF",
     inactive: "#E5E5EC",
+    myPage: "#343434",
+    myPageInactve: "#767676",
     black: "#111111",
   },
   system: {
