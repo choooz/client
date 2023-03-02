@@ -7,6 +7,8 @@ export const queryKeys = {
   MAIN_VOTE_LIST: "mainVoteList" as const,
   VOTE_DETAIL: "voteDetail" as const,
   DETAIL_COMMENT_LIST: "commentByVoteId" as const,
+  DETAIL_VOTE_COUNT: "voteCountByVoteId" as const,
+  DETAIL_ANALYSIS: "analysisByVoteId" as const,
 };
 
 export const reactQueryKeys = {
@@ -22,4 +24,6 @@ export const reactQueryKeys = {
     gender?: GenderType,
     sortBy?: string,
   ) => [queryKeys.DETAIL_COMMENT_LIST, id, age, mbti, gender, sortBy] as const,
+  detailVoteCount: (id: number) => [queryKeys.DETAIL_VOTE_COUNT, id] as const,
+  detailAnalysis: (id: number) => [queryKeys.DETAIL_ANALYSIS, id] as const,
 };

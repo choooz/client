@@ -44,7 +44,6 @@ function SelectPage() {
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
-  console.log(mainVoteList[nowShowing]);
   return (
     <>
       <PageWrapper>

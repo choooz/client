@@ -22,7 +22,7 @@ function CommentContainer({ postId }: Props) {
   const { commentFilter, onChangeCommentFilter } = useCommentFilter();
   const { age, gender, mbti, sortBy } = commentFilter;
   const {
-    data: commentDatas,
+    data: comments,
     isLoading,
     isError,
   } = useQuery(reactQueryKeys.detailCommentList(postId, age, mbti, gender, sortBy), () =>
@@ -37,8 +37,9 @@ function CommentContainer({ postId }: Props) {
 
   if (isLoading) return <div>로딩중</div>;
   if (isError) return <div>에러</div>;
-  if (!commentDatas) return <div>데이터 없음</div>;
+  if (!comments) return <div>데이터 없음</div>;
 
+  const commentDatas = comments.content;
   return (
     <Container>
       <CommentToolBar

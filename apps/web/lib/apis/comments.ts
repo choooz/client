@@ -13,24 +13,26 @@ export interface GetCommentRequest {
 }
 
 export interface GetCommentResponse {
-  id: number;
-  userId: number;
-  parentId: number | null;
-  content: string;
-  gender: string;
-  imageUrl: string;
-  age: string;
-  mbti: string;
-  nickName: string;
-  createdDate: string;
-  likeCount: number;
-  hateCount: number;
+  content: {
+    id: number;
+    userId: number;
+    parentId: number | null;
+    content: string;
+    gender: string;
+    imageUrl: string;
+    age: string;
+    mbti: string;
+    nickName: string;
+    createdDate: string;
+    likeCount: number;
+    hateCount: number;
+  }[];
 }
 
 export const getCommentById = async (voteId: number, filter: CommentFilter) => {
   const { age, gender, mbti, sortBy } = filter;
 
-  const response = await axios.get<GetCommentResponse[]>(
+  const response = await axios.get<GetCommentResponse>(
     `${SERVER_URL}api/votes/${voteId}/comments`,
     {
       params: {
