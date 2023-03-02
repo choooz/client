@@ -1,27 +1,46 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
+import { useQuery } from "@tanstack/react-query";
 import VoteList from "components/my/VoteList";
+import { useGetUserInfo } from "hooks/useGetUserInfo";
+import { getVoteCount, VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import Path from "lib/Path";
+import { reactQueryKeys } from "lib/queryKeys";
 import Image from "next/image";
 import Link from "next/link";
 import { Camera } from "public/images";
 import { useState } from "react";
-import useInfiniteVoteListService from "services/useInfiniteVoteListService";
+import useInfiniteMyPageVoteListService from "services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
+import { Gender } from "types/user";
 
 function MyPage() {
-  const [selectedTab, setSelectedTab] = useState("created");
+  const [selectedTab, setSelectedTab] = useState<VoteListType>("created");
 
-  const onClickSelectedTab = (e: any) => {
-    setSelectedTab(e.target.value);
+  const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setSelectedTab(e.currentTarget.value as VoteListType);
   };
 
-  const { voteList, subscribe } = useInfiniteVoteListService({
-    size: 3,
-    sortBy: "ByTime",
+  const loadVoteCount = () => {
+    const { data } = useQuery(reactQueryKeys.myPageVoteCount(), getVoteCount);
+    return { data };
+  };
+
+  const { voteList, subscribe } = useInfiniteMyPageVoteListService({
+    size: 7,
+    voteType: selectedTab,
   });
+
+  const { data: userInfo } = useGetUserInfo();
+  const { data: voteCount } = loadVoteCount();
+
+  if (!userInfo) return <div>데이터 없음</div>;
+  if (!voteCount) return <div>데이터 없음</div>;
+
+  const { gender, username, age, mbti } = userInfo;
+  const { countCreatedVote, countParticipatedVote, countBookmarkedVote } = voteCount;
 
   return (
     <PageWrapper>
@@ -33,13 +52,15 @@ function MyPage() {
         </ImageWrapper>
         <FlexColumn>
           <UserInfo>
-            여
-            <Divider />
-            20대
-            <Divider />
-            INTJ
+            <>
+              {gender === Gender.MALE ? "남" : "여"}
+              <Divider />
+              {age}
+              <Divider />
+              {mbti}
+            </>
           </UserInfo>
-          <Nickname>목욕하는 리트리버</Nickname>
+          <Nickname>{username}</Nickname>
           <ProfileModifyButton>
             <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
           </ProfileModifyButton>
@@ -47,15 +68,15 @@ function MyPage() {
         {/* @TODO api 연결하면 map 사용 */}
         <NumberOfVoteSection>
           <NumberOfVoteContainer>
-            <NumberOfVote>134</NumberOfVote>
+            <NumberOfVote>{countCreatedVote}</NumberOfVote>
             <NumberOfVoteText>작성한 투표</NumberOfVoteText>
           </NumberOfVoteContainer>
           <NumberOfVoteContainer>
-            <NumberOfVote>243</NumberOfVote>
+            <NumberOfVote>{countParticipatedVote}</NumberOfVote>
             <NumberOfVoteText>참여한 투표</NumberOfVoteText>
           </NumberOfVoteContainer>
           <NumberOfVoteContainer>
-            <NumberOfVote>2134</NumberOfVote>
+            <NumberOfVote>{countBookmarkedVote}</NumberOfVote>
             <NumberOfVoteText>북마크 투표</NumberOfVoteText>
           </NumberOfVoteContainer>
         </NumberOfVoteSection>
