@@ -7,6 +7,7 @@ export const queryKeys = {
   MAIN_VOTE_LIST: "mainVoteList" as const,
   VOTE_DETAIL: "voteDetail" as const,
   DETAIL_COMMENT_LIST: "commentByVoteId" as const,
+  MY_PAGE_VOTE_LIST: "myPageVoteList" as const,
 };
 
 export const reactQueryKeys = {
@@ -22,4 +23,6 @@ export const reactQueryKeys = {
     gender?: GenderType,
     sortBy?: string,
   ) => [queryKeys.DETAIL_COMMENT_LIST, id, age, mbti, gender, sortBy] as const,
+  // @note any말고 방법이 있나?
+  myPageVoteList: (params: any) => [queryKeys.MY_PAGE_VOTE_LIST, ...params],
 };
