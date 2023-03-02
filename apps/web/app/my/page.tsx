@@ -1,15 +1,15 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
-import VoteList from "components/my/VoteList";
+import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
 import { Camera } from "public/images";
 import { useState } from "react";
-import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled, { css } from "styled-components";
+import { Gender } from "types/user";
 
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState("created");
@@ -18,10 +18,11 @@ function MyPage() {
     setSelectedTab(e.target.value);
   };
 
-  const { voteList, subscribe } = useInfiniteVoteListService({
-    size: 3,
-    sortBy: "ByTime",
-  });
+  const { data } = useGetUserInfo();
+
+  if (!data) return <div>데이터 없음</div>;
+
+  const { gender, username, age, mbti } = data;
 
   return (
     <PageWrapper>
@@ -33,13 +34,15 @@ function MyPage() {
         </ImageWrapper>
         <FlexColumn>
           <UserInfo>
-            여
-            <Divider />
-            20대
-            <Divider />
-            INTJ
+            <>
+              {gender === Gender.MALE ? "남" : "여"}
+              <Divider />
+              {age}
+              <Divider />
+              {mbti}
+            </>
           </UserInfo>
-          <Nickname>목욕하는 리트리버</Nickname>
+          <Nickname>{username}</Nickname>
           <ProfileModifyButton>
             <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
           </ProfileModifyButton>
@@ -73,8 +76,8 @@ function MyPage() {
         ))}
       </TabList>
       <VoteListSection>
-        <VoteList voteList={voteList} />
-        <div ref={subscribe} />
+        {/* <VoteList voteList={voteList} />
+        <div ref={subscribe} /> */}
       </VoteListSection>
     </PageWrapper>
   );

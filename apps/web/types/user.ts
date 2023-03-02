@@ -29,5 +29,5 @@ export interface GetUserInfoResponse {
   imageUrl: string;
   age: string;
   gender: "MALE" | "FEMALE";
-  MBTI: MBTIType;
+  mbti: MBTIType;
 }
