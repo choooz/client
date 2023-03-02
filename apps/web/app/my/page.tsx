@@ -1,22 +1,30 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
+import VoteList from "components/my/VoteList";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
+import { VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
 import { Camera } from "public/images";
 import { useState } from "react";
+import useInfiniteMyPageVoteListService from "services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";
 
 function MyPage() {
-  const [selectedTab, setSelectedTab] = useState("created");
+  const [selectedTab, setSelectedTab] = useState<VoteListType>("created");
 
   const onClickSelectedTab = (e: any) => {
     setSelectedTab(e.target.value);
   };
+
+  const { voteList, subscribe } = useInfiniteMyPageVoteListService({
+    size: 7,
+    voteType: selectedTab,
+  });
 
   const { data } = useGetUserInfo();
 
@@ -76,8 +84,8 @@ function MyPage() {
         ))}
       </TabList>
       <VoteListSection>
-        {/* <VoteList voteList={voteList} />
-        <div ref={subscribe} /> */}
+        <VoteList voteList={voteList} />
+        <div ref={subscribe} />
       </VoteListSection>
     </PageWrapper>
   );
