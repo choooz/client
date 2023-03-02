@@ -3,23 +3,35 @@ import styled, { css } from "styled-components";
 import { AorB } from "types/vote";
 
 interface Props {
-  A: number;
-  B: number;
+  percentageA: number;
+  percentageB: number;
+  totalCountA: number;
+  totalCountB: number;
   select: AorB | null;
 }
 
-function VoteAnalyzeBar({ A, B, select }: Props) {
+function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB, select }: Props) {
   return (
-    <AnalyzeBar>
-      <Share share={A}>
-        {A}% &nbsp;
-        <div className="number">(340명)</div>
-      </Share>
-      <Share selected share={B}>
-        {B}% &nbsp;
-        <div className="number">(345명)</div>
-      </Share>
-    </AnalyzeBar>
+    <>
+      {totalCountA + totalCountB === 0 ? (
+        <AnalyzeBar>
+          <Share selected share={100}>
+            아직 투표가 없습니다.
+          </Share>
+        </AnalyzeBar>
+      ) : (
+        <AnalyzeBar>
+          <Share selected={select === "A"} share={percentageA}>
+            {percentageA}% &nbsp;
+            <div className="number">{totalCountA.toLocaleString()}명</div>
+          </Share>
+          <Share selected={select === "B"} share={percentageB}>
+            {percentageB}% &nbsp;
+            <div className="number">{totalCountB.toLocaleString()}명</div>
+          </Share>
+        </AnalyzeBar>
+      )}
+    </>
   );
 }
 

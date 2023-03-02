@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteComment, hateComment, likeComment } from "lib/apis/comments";
-import { reactQueryKeys } from "lib/queryKeys";
+import { queryKeys, reactQueryKeys } from "lib/queryKeys";
 import { Comment } from "types/comments";
 
 function useUpdateCommnetService(voteId: number) {
@@ -10,7 +10,7 @@ function useUpdateCommnetService(voteId: number) {
     (commentId: number) => deleteComment(commentId, voteId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(reactQueryKeys.detailCommentList(voteId));
+        queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
       },
     },
   );
@@ -19,7 +19,7 @@ function useUpdateCommnetService(voteId: number) {
     (commentId: number) => likeComment(commentId, voteId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(reactQueryKeys.detailCommentList(voteId));
+        queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
       },
     },
   );
@@ -28,7 +28,7 @@ function useUpdateCommnetService(voteId: number) {
     (commentId: number) => hateComment(commentId, voteId),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(reactQueryKeys.detailCommentList(voteId));
+        queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
       },
     },
   );
