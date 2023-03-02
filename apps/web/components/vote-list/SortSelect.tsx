@@ -29,7 +29,7 @@ function SortSelectBox({ sortOption, onChangeSortOption }: Props) {
 
 const SelectStyled = styled.span<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => css`
-    color: ${theme.palette.ink.base};
+    color: ${theme.palette.ink.dark};
     ${({ theme }) => theme.textStyle.Font_Regular};
     width: 80px;
     height: 40px;

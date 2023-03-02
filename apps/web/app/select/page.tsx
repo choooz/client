@@ -205,7 +205,7 @@ const AddDescriptionButton = styled.div`
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.ink.dark};
+  background-color: ${({ theme }) => theme.palette.ink.darker};
   color: ${({ theme }) => theme.palette.background.white};
   font-size: 45px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

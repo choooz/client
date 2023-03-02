@@ -41,7 +41,7 @@ const variantStyles = {
 };
 
 const InputStyled = styled.input<InputProps>`
-  color: ${({ theme }) => theme.palette.ink.dark};
+  color: ${({ theme }) => theme.palette.ink.darker};
   width: ${({ width }) => width};
   ${({ variant }) => variantStyles[variant || "standard"]}
 `;

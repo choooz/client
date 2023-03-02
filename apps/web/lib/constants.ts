@@ -76,3 +76,9 @@ export const PREV = -1;
 export const NEXT = 1;
 export const FIRST_STEP = 1;
 export const SECOND_STEP = 2;
+
+export const MY_PAGE_VOTE_TYPE = [
+  { id: "created", name: "✍ 작성한 투표" },
+  { id: "participated", name: "👍 참여한 투표" },
+  { id: "bookmarked", name: "📑 북마크 투표" },
+];
