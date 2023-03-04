@@ -2,6 +2,7 @@
 
 import { media } from "@chooz/ui/styles/media";
 import { useQuery } from "@tanstack/react-query";
+import TabContainer from "components/my/TabContainer";
 import VoteList from "components/my/VoteList";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { getVoteCount, VoteListType } from "lib/apis/user";
@@ -81,18 +82,11 @@ function MyPage() {
           </NumberOfVoteContainer>
         </NumberOfVoteSection>
       </PageInner>
-      <TabList>
-        {MY_PAGE_VOTE_TYPE.map(({ id, name }) => (
-          <SelectedButton
-            key={`my_page_tab_${id}`}
-            value={id}
-            onClick={onClickSelectedTab}
-            selected={id === selectedTab}
-          >
-            {name}
-          </SelectedButton>
-        ))}
-      </TabList>
+      <TabContainer
+        tabList={MY_PAGE_VOTE_TYPE}
+        selectedTab={selectedTab}
+        onClickSelectedTab={onClickSelectedTab}
+      />
       <VoteListSection>
         <VoteList voteList={voteList} />
         <div ref={subscribe} />
