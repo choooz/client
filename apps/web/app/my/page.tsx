@@ -2,6 +2,7 @@
 
 import { media } from "@chooz/ui/styles/media";
 import { useQuery } from "@tanstack/react-query";
+import ImageUploadButton from "components/common/ImageUploadButton";
 import TabContainer from "components/my/TabContainer";
 import VoteList from "components/my/VoteList";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
@@ -9,9 +10,7 @@ import { getVoteCount, VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import Path from "lib/Path";
 import { reactQueryKeys } from "lib/queryKeys";
-import Image from "next/image";
 import Link from "next/link";
-import { Camera } from "public/images";
 import { useState } from "react";
 import useInfiniteMyPageVoteListService from "services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
@@ -46,12 +45,10 @@ function MyPage() {
   return (
     <PageWrapper>
       <PageInner>
-        <ImageWrapper>
-          <ImageCircle>
-            <Image src={Camera} alt="이미지 공간" width={32} height={32} />
-          </ImageCircle>
-        </ImageWrapper>
-        <FlexColumn>
+        <AddImageButtonWrapper>
+          <ImageUploadButton width="107px" height="107px" />
+        </AddImageButtonWrapper>
+        <Profile>
           <UserInfo>
             <>
               {gender === Gender.MALE ? "남" : "여"}
@@ -65,7 +62,7 @@ function MyPage() {
           <ProfileModifyButton>
             <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
           </ProfileModifyButton>
-        </FlexColumn>
+        </Profile>
         {/* @TODO api 연결하면 map 사용 */}
         <NumberOfVoteSection>
           <NumberOfVoteContainer>
@@ -82,11 +79,13 @@ function MyPage() {
           </NumberOfVoteContainer>
         </NumberOfVoteSection>
       </PageInner>
-      <TabContainer
-        tabList={MY_PAGE_VOTE_TYPE}
-        selectedTab={selectedTab}
-        onClickSelectedTab={onClickSelectedTab}
-      />
+      <TabContainerWrapper>
+        <TabContainer
+          tabList={MY_PAGE_VOTE_TYPE}
+          selectedTab={selectedTab}
+          onClickSelectedTab={onClickSelectedTab}
+        />
+      </TabContainerWrapper>
       <VoteListSection>
         <VoteList voteList={voteList} />
         <div ref={subscribe} />
@@ -118,31 +117,18 @@ const PageInner = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  width: 107px;
-  height: 107px;
-  background: ${({ theme }) => theme.palette.background.hard};
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const AddImageButtonWrapper = styled.div`
   float: left;
-  margin-right: 17px;
 `;
 
-const ImageCircle = styled.div`
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.background.white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const FlexColumn = styled.div`
+const Profile = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 17px;
+
+  ${media.medium} {
+    padding-left: 28px;
+  }
 `;
 
 const UserInfo = styled.span`
@@ -201,6 +187,11 @@ const NumberOfVoteText = styled.span`
   color: ${({ theme }) => theme.palette.ink.light};
 `;
 
+const TabContainerWrapper = styled.div`
+  position: relative;
+  top: -8px;
+`;
+
 const VoteListSection = styled.section`
   position: relative;
   bottom: 9px;
@@ -208,37 +199,13 @@ const VoteListSection = styled.section`
   height: 100%;
   max-width: 640px;
   margin: 0 auto;
-  padding: 0 20px 20px;
   /* 55px은 헤더 높이이고 그 뒤의 값을 해당 섹션의 높이로 할려고 했는데, 해더의 높이가 작아져서 큰 값으로 설정  */
   height: calc(100vh - 55px - 280px);
   overflow-y: scroll;
-`;
-
-const TabList = styled.div`
-  display: flex;
-  position: relative;
-  bottom: 8px;
-  max-width: 640px;
-  margin: 0 auto;
-`;
-
-const SelectedButton = styled.button<{ selected: boolean }>`
-  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue";
-  width: 100%;
-  height: 50px;
-  border-radius: 10px 10px 0 0;
-  z-index: 9;
-  ${({ selected, theme }) =>
-    selected
-      ? css`
-          background-color: ${theme.palette.background.white};
-          color: ${theme.palette.ink.darker};
-        `
-      : css`
-          color: ${theme.palette.ink.light};
-          background-color: ${theme.palette.background.myPageInactve};
-        `};
+  padding: 0 20px 20px;
+  ${media.medium} {
+    padding: 20px 40px 40px;
+  }
 `;
 
 export default MyPage;
