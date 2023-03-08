@@ -52,7 +52,6 @@ function CommentContainer({ postId }: Props) {
   if (!comments) return <div>데이터 없음</div>;
 
   const commentDatas = comments.pages.flatMap((page) => page.content);
-
   return (
     <Container>
       <CommentToolBar
