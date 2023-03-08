@@ -1,0 +1,67 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "name": "packages",
+      "path": "packages"
+    },
+    {
+      "name": "apps",
+      "path": "apps"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "packages/": true,
+      "apps/": true
+    },
+    "search.exclude": {
+      "**/dist": true,
+      "**/out": true,
+      "**/_next": true,
+      "**/.history": true,
+      "**/.yarn": true,
+      "**/.pnp.*": true,
+      "**/.eslintcache": true,
+      "**/tsconfig.tsbuildinfo": true
+    },
+
+    "eslint.nodePath": ".yarn/sdks",
+    "prettier.prettierPath": ".yarn/sdks/prettier/index.js",
+    "typescript.tsdk": ".yarn/sdks/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "files.associations": {
+      "**/templates/*.tsx": "typescriptreact",
+      "**/templates/*.ts": "typescript"
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+      "source.fixAll.stylelint": true
+    },
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "cSpell.words": ["Unfollow"]
+  },
+  "extensions": {
+    "recommendations": [
+      "arcanis.vscode-zipfs",
+      "stylelint.vscode-stylelint",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "eliostruyf.vscode-typescript-exportallmodules",
+      "dsznajder.es7-react-js-snippets",
+      "rvest.vs-code-prettier-eslint",
+      "aaron-bond.better-comments",
+      "naumovs.color-highlight",
+      "eamodio.gitlens",
+      "dakshmiglani.hex-to-rgba",
+      "styled-components.vscode-styled-components",
+      "Gruntfuggly.todo-tree"
+    ]
+  }
+}

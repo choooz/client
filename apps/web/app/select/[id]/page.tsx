@@ -1,4 +1,6 @@
-import { Button, FloatModalTemplate, transitions } from "@chooz/ui";
+"use client";
+
+import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";

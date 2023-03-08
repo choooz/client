@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export type Drag = "up" | "down" | null;
 function useFlipAnimation() {

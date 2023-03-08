@@ -61,9 +61,12 @@ function AgeSelection({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: baseline;
+  margin: 0 auto;
+  width: 162px;
   gap: 16px;
-  align-items: center;
   ${media.medium} {
+    margin: 0;
     justify-content: space-between;
     flex-direction: row;
     align-items: unset;
@@ -76,8 +79,8 @@ const InputBox = styled.div`
   align-items: center;
   justify-content: center;
   gap: 9px;
-  font-size: 28px;
   font-weight: 700;
+  ${({ theme }) => theme.textStyle.Title_2}
   ${media.medium} {
     height: 80px;
     font-size: 50px;
@@ -92,7 +95,7 @@ const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.palette.border.base};
   border-radius: 4px;
   animation: ${transitions.fadeIn} 1.5s normal ease-in-out;
-  color: #863dff;
+  color: ${({ theme }) => theme.palette.main.point};
   ::placeholder {
     color: ${({ theme }) => theme.palette.ink.lighter};
   }
@@ -110,6 +113,7 @@ const NumberBox = styled.div`
   place-items: center;
   ${media.medium} {
     gap: 12px;
+    margin-left: 20px;
   }
 `;
 

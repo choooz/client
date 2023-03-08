@@ -1,3 +1,5 @@
+"use client";
+
 import { transitions } from "@chooz/ui";
 import { LogoBlack } from "public/images";
 import Image from "next/image";
@@ -5,9 +7,10 @@ import useLoginService from "services/useLoginService";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { KakaoIcon, NaverIcon } from "public/icons";
+import Link from "next/link";
 
 function LoginPage() {
-  const { onChangeSocialType } = useLoginService();
+  const { socialLink } = useLoginService();
 
   return (
     <PageWrapper>
@@ -18,17 +21,20 @@ function LoginPage() {
           눈치보지 말고 Chooz에서 물어봐!
         </WelcomeText>
         <Emoji />
-
-        <KakaoButton onClick={() => onChangeSocialType("KAKAO")}>
-          <KakaoIconStyled />
-          <Divider />
-          <LoginText>카카오 계정으로 로그인</LoginText>
-        </KakaoButton>
-        <NaverButton onClick={() => onChangeSocialType("NAVER")}>
-          <NaverIconStyled />
-          <Divider />
-          <LoginText>네이버 계정으로 로그인</LoginText>
-        </NaverButton>
+        <Link href={socialLink.KAKAO}>
+          <KakaoBox>
+            <KakaoIconStyled />
+            <Divider />
+            <LoginText>카카오 계정으로 로그인</LoginText>
+          </KakaoBox>
+        </Link>
+        <Link href={socialLink.NAVER}>
+          <NaverBox>
+            <NaverIconStyled />
+            <Divider />
+            <LoginText>네이버 계정으로 로그인</LoginText>
+          </NaverBox>
+        </Link>
         <TermsOfUse>
           계속하면 당사의 <ClickText>서비스 약관</ClickText>에 동의하고, <MobileNextLine />
           <ClickText>개인정보 보호정책</ClickText>
@@ -84,7 +90,7 @@ const SocialLoginButton = css`
   border-radius: 4px;
 `;
 
-const KakaoButton = styled.button`
+const KakaoBox = styled.div`
   animation: ${transitions.delaypopInFromBottom} 1.5s normal ease-in-out;
   background-color: ${({ theme }) => theme.palette.social.kakao};
   ${SocialLoginButton}
@@ -92,7 +98,7 @@ const KakaoButton = styled.button`
   margin-top: 16px;
 `;
 
-const NaverButton = styled.button`
+const NaverBox = styled.div`
   color: white;
   background-color: ${({ theme }) => theme.palette.social.naver};
   animation: ${transitions.delaypopInFromBottom} 2.1s normal ease-in-out;

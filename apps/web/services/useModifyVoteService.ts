@@ -1,15 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
-import { modifyVoteAPI, modifyVoteRequest } from "lib/api/vote";
+import { modifyVoteAPI, ModifyVote } from "lib/api/vote";
 import React, { useState } from "react";
 
 function useModifyVoteService() {
-  const [vote, setVote] = useState<modifyVoteRequest>({
+  const [vote, setVote] = useState<ModifyVote>({
     title: "",
     detail: "",
     category: "FOOD",
     titleA: "",
     titleB: "",
   });
+
+  console.log("vote", vote);
 
   const onChangeVote = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
