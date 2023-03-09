@@ -29,5 +29,6 @@ export interface GetUserInfoResponse {
   imageUrl: string;
   age: string;
   gender: "MALE" | "FEMALE";
-  mbti: MBTIType;
+  // @Todo mbti source 하나로 통일
+  mbti: string;
 }

@@ -70,3 +70,15 @@ export const getVoteCount = async () => {
   const response = await apiClient.get<GetVoteCountResponse>("api/user/mypage/count");
   return response.data;
 };
+
+interface UpdateUserInfoRequest {
+  nickname: string;
+  // image: string;
+  mbti: string;
+  categoryList: string[];
+}
+
+export const updateUserInfo = async (updateUserInfoRequest: UpdateUserInfoRequest) => {
+  const response = await apiClient.patch("api/user/mypage/edit", updateUserInfoRequest);
+  return response.data;
+};
