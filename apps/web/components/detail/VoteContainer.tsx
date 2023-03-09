@@ -2,6 +2,7 @@ import { useOutsideClick, useToggle } from "@chooz/hooks";
 import VoteToolbar from "components/select/VoteToolbar";
 import { EmptyAImg, EmptyBImg } from "public/images";
 import React, { useState } from "react";
+import useMutateVotingService from "services/useMutateVotingService";
 import useStatisticsService from "services/useStatisticsService";
 import useVoteLoadService from "services/useVoteLoadService";
 import styled from "styled-components";
@@ -21,10 +22,8 @@ function VoteContainer({ postId }: { postId: number }) {
     isError: isStatisticsError,
     isLoading: isStatisticsLoading,
   } = voteStatisticsQuery;
-  const [select, setSelect] = useState<AorB | null>(null);
-  const onChangeSelect = (select: AorB) => {
-    setSelect(select);
-  };
+
+  const { select, onMutateVoting } = useMutateVotingService(postId);
 
   if (isLoading || isStatisticsLoading) return <div>로딩중</div>;
   if (isError || isStatisticsError) return <div>에러</div>;
@@ -48,12 +47,12 @@ function VoteContainer({ postId }: { postId: number }) {
         titleA={titleA}
         imageB={imageB || EmptyBImg}
         titleB={titleB}
-        select={select}
-        onChangeSelect={onChangeSelect}
+        select={select.choice}
+        onMutateVoting={onMutateVoting}
       />
       <FilterBar />
       <VoteAnalyzeBar
-        select={select}
+        select={select.choice}
         totalCountA={totalCountA}
         totalCountB={totalCountB}
         percentageA={percentageA}
