@@ -27,9 +27,9 @@ function FilterBar() {
           <option value="" hidden>
             MBTI
           </option>
-          {MBTI_LIST.map(({ id, name }) => (
-            <option key={id} value={id}>
-              {name}
+          {MBTI_LIST.map(({ value, label }) => (
+            <option key={value} value={value}>
+              {label}
             </option>
           ))}
         </Filter>
