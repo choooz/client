@@ -21,6 +21,7 @@ export default function useMutateVotingService(voteId: number) {
         setSelect({ choice: data.userChoice });
       } else setSelect({ choice: null });
     },
+    // @note 캐시를 사용하지 않는다.
     cacheTime: 0,
     staleTime: 0,
   });
