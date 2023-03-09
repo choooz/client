@@ -12,12 +12,11 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AmplifyIcon } from "public/icons";
 import { Success } from "public/images";
-import React, { useState } from "react";
+import React from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
 import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
-import { AorB } from "types/vote";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
@@ -82,8 +81,7 @@ function SelectPage() {
         <FloatModalTemplate
           onToggleModal={() => {
             // 메인페이지 url 변경할때 같이 수정해야함
-            router.push("/select/1?isSuccess=");
-            console.log("작동");
+            router.push("/select?isSuccess=");
           }}
         >
           <Image alt="체크" src={Success} width={56} height={56} />
