@@ -114,6 +114,9 @@ const variantStyles = {
     font-weight: 700;
     padding: 0 1px;
     color: ${({ theme }) => theme.palette.main.sub};
+    &:hover {
+      width: 100%;
+    }
   `,
   inactive: css`
     width: 0%;
@@ -128,6 +131,10 @@ const typeGuardVariantStyle = (selected: ActiveType) => {
 const LeftVote = styled.div<{ selected: ActiveType }>`
   position: relative;
   width: 50%;
+  &:hover {
+    width: 90%;
+    transition: all 0.3s ease-in-out;
+  }
   .overlay {
     border-radius: 4px;
     position: absolute;
@@ -144,13 +151,14 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     padding: 30px;
     color: white;
     border: 2px solid ${({ theme }) => theme.palette.main.sub};
+
     ${({ selected }) =>
       selected === "active" &&
       css`
         width: 50%;
-        visibility: visible;
       `};
   }
+
   ${({ selected }) => typeGuardVariantStyle(selected)}
 `;
 
