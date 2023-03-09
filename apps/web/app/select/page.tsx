@@ -3,7 +3,7 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import AddDetailModal from "components/select/AddDetailModal";
+import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
@@ -32,11 +32,6 @@ function SelectPage() {
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
   const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
-
-  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
-    onChangeToggleDetail,
-    mainVoteList[nowShowing],
-  );
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
@@ -90,12 +85,9 @@ function SelectPage() {
         </FloatModalTemplate>
       )}
       {toggleDetail && (
-        <AddDetailModal
+        <AddDetailModalContainer
           onToggleModal={onChangeToggleDetail}
-          mutateVote={mutateVote}
-          vote={vote}
-          onChangeVote={onChangeVote}
-          onChangeVoteByClick={onChangeVoteByClick}
+          initialVoteValue={mainVoteList[nowShowing]}
         />
       )}
     </>

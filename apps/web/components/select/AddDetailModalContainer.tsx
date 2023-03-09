@@ -1,30 +1,26 @@
 import { DivideLine, Input, ModalTemplate, Template } from "@chooz/ui";
-import { UseMutateFunction } from "@tanstack/react-query";
-import { ModifyVote } from "lib/apis/vote";
 import React from "react";
 import styled from "styled-components";
 import { CATEGORY_LIST } from "lib/constants";
+import useModifyVoteService from "services/useModifyVoteService";
+import { Vote } from "types/vote";
 
 interface Props {
-  vote: ModifyVote;
   onToggleModal(): void;
-  onChangeVote: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  mutateVote(): void;
-  onChangeVoteByClick(e: React.ChangeEvent<HTMLInputElement>): void;
+  initialVoteValue: Vote;
 }
 
-function AddDetailModal({
-  onToggleModal,
-  mutateVote,
-  onChangeVote,
-  onChangeVoteByClick,
-  vote,
-}: Props) {
+function AddDetailModalContainer({ onToggleModal, initialVoteValue }: Props) {
+  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
+    onToggleModal,
+    initialVoteValue,
+  );
+
   const { title, detail, titleA, titleB, category } = vote;
 
   return (
     <ModalTemplate width="480px" height="698px" onToggleModal={onToggleModal}>
-      <Template nextButtonProps={{ onClick: mutateVote }} nextButtonText="작성 완료">
+      <Template nextButtonProps={{ onClick: () => mutateVote() }} nextButtonText="작성 완료">
         <ModalWrapper>
           <TitleRow>
             <div>수정하기</div>
@@ -155,4 +151,4 @@ const Chip = styled.label`
   }
 `;
 
-export default AddDetailModal;
+export default AddDetailModalContainer;
