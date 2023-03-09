@@ -14,7 +14,6 @@ import { AmplifyIcon } from "public/icons";
 import { Success } from "public/images";
 import React from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
-import useModifyVoteService from "services/useModifyVoteService";
 import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
 
@@ -37,7 +36,8 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+  const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category } =
+    mainVoteList[nowShowing];
 
   return (
     <>
@@ -87,7 +87,14 @@ function SelectPage() {
       {toggleDetail && (
         <AddDetailModalContainer
           onToggleModal={onChangeToggleDetail}
-          initialVoteValue={mainVoteList[nowShowing]}
+          initialVoteValue={{
+            title,
+            detail,
+            titleA,
+            titleB,
+            category,
+          }}
+          voteId={mainVoteList[nowShowing].voteId}
         />
       )}
     </>

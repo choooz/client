@@ -4,16 +4,19 @@ import styled from "styled-components";
 import { CATEGORY_LIST } from "lib/constants";
 import useModifyVoteService from "services/useModifyVoteService";
 import { Vote } from "types/vote";
+import { ModifyVote } from "lib/apis/vote";
 
 interface Props {
   onToggleModal(): void;
-  initialVoteValue: Vote;
+  voteId: number;
+  initialVoteValue: ModifyVote;
 }
 
-function AddDetailModalContainer({ onToggleModal, initialVoteValue }: Props) {
+function AddDetailModalContainer({ onToggleModal, voteId, initialVoteValue }: Props) {
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
     onToggleModal,
     initialVoteValue,
+    voteId,
   );
 
   const { title, detail, titleA, titleB, category } = vote;
