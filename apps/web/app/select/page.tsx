@@ -31,7 +31,7 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
-  const { select, onChangeSelect } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
+  const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
     onChangeToggleDetail,
@@ -43,6 +43,7 @@ function SelectPage() {
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+
   return (
     <>
       <PageWrapper>
@@ -62,7 +63,7 @@ function SelectPage() {
             imageB={imageB || ""}
             titleB={titleB || ""}
             select={select.choice}
-            onChangeSelect={onChangeSelect}
+            onMutateVoting={onMutateVoting}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">

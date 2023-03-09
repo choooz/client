@@ -10,3 +10,13 @@ export const postVotingById = async (voteId: number, body: PostVotingRequest) =>
   const response = await apiClient.post(`api/votes/${voteId}/vote`, body);
   return response.data;
 };
+
+interface GetVotingCheckResponse {
+  userChoice: AorB | null;
+  voted: boolean;
+}
+
+export const getVotingCheck = async (voteId: number) => {
+  const response = await apiClient.get<GetVotingCheckResponse>(`api/votes/${voteId}/voted`);
+  return response.data;
+};
