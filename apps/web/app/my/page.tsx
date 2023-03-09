@@ -33,7 +33,7 @@ function MyPage() {
     voteType: selectedTab,
   });
 
-  const { data: userInfo } = useGetUserInfo();
+  const { userInfo } = useGetUserInfo();
   const { data: voteCount } = loadVoteCount();
 
   if (!userInfo) return <div>데이터 없음</div>;
