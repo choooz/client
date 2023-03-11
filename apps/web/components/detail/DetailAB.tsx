@@ -22,10 +22,15 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Pr
     if (!select) return null;
     return `${select === getAB(direction) ? "" : "in"}active`;
   };
+
+  const onClickVote = (chooz: AorB) => {
+    if (!!select) return;
+    onMutateVoting(chooz);
+  };
   return (
     <Container>
       <ImageWrapper>
-        <LeftVote selected={activeValue("left")} onClick={() => onMutateVoting("A")}>
+        <LeftVote selected={activeValue("left")} onClick={() => onClickVote("A")}>
           <Image src={imageA} alt="A 이미지" fill />
           <div className="overlay">
             <OverLayTitle>{titleA}</OverLayTitle>
@@ -34,7 +39,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Pr
           </div>
         </LeftVote>
 
-        <RightVote selected={activeValue("right")} onClick={() => onMutateVoting("B")}>
+        <RightVote selected={activeValue("right")} onClick={() => onClickVote("B")}>
           <Image src={imageB} fill alt="B 이미지" />
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>
