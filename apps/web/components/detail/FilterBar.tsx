@@ -1,19 +1,41 @@
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 function FilterBar() {
+  const [filter, setFilter] = useState({
+    gender: "",
+    age: "",
+    mbti: "",
+  });
+
+  const onChangeFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    setFilter((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const onDeleteFilter = (name: string) => {
+    setFilter((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
   return (
     <Container>
       <FilterBox>
-        <Filter>
+        <Filter value={filter.gender} name="gender" onChange={onChangeFilter}>
           <option value="" hidden>
             성별
           </option>
           <option value="MALE">남성</option>
           <option value="FEMALE">여성</option>
         </Filter>
-        <Filter>
+        <Filter value={filter.age} name="age" onChange={onChangeFilter}>
           <option value="" hidden>
             나이
           </option>
@@ -23,26 +45,36 @@ function FilterBar() {
             </option>
           ))}
         </Filter>
-        <Filter>
+        <Filter value={filter.mbti} name="mbti" onChange={onChangeFilter}>
           <option value="" hidden>
             MBTI
           </option>
           {MBTI_LIST.map(({ value, label }) => (
-            <option key={value} value={value}>
+            <option key={`filter_mbti_${value}`} value={value}>
               {label}
             </option>
           ))}
         </Filter>
       </FilterBox>
       <FilterList>
-        <FilterChip>
-          <div>여성</div>
-          <div>X</div>
-        </FilterChip>
-        <FilterChip>
-          <div>20대</div>
-          <div>X</div>
-        </FilterChip>
+        {filter.gender && (
+          <FilterChip onClick={() => onDeleteFilter("gender")}>
+            <div>{filter.gender}</div>
+            <div>X</div>
+          </FilterChip>
+        )}
+        {filter.age && (
+          <FilterChip onClick={() => onDeleteFilter("age")}>
+            <div>{filter.age}</div>
+            <div>X</div>
+          </FilterChip>
+        )}
+        {filter.mbti && (
+          <FilterChip onClick={() => onDeleteFilter("mbti")}>
+            <div>{filter.mbti}</div>
+            <div>X</div>
+          </FilterChip>
+        )}
       </FilterList>
     </Container>
   );
