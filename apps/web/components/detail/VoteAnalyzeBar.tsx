@@ -7,10 +7,10 @@ interface Props {
   percentageB: number;
   totalCountA: number;
   totalCountB: number;
-  select: AorB | null;
 }
 
-function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB, select }: Props) {
+function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB }: Props) {
+  const isSelectedA = percentageA > percentageB ? true : false;
   return (
     <>
       {totalCountA + totalCountB === 0 ? (
@@ -21,11 +21,11 @@ function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB, se
         </AnalyzeBar>
       ) : (
         <AnalyzeBar>
-          <Share selected={select === "A"} share={percentageA}>
+          <Share selected={isSelectedA} share={percentageA}>
             {percentageA}% &nbsp;
             <div className="number">{totalCountA.toLocaleString()}명</div>
           </Share>
-          <Share selected={select === "B"} share={percentageB}>
+          <Share selected={!isSelectedA} share={percentageB}>
             {percentageB}% &nbsp;
             <div className="number">{totalCountB.toLocaleString()}명</div>
           </Share>

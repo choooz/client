@@ -11,7 +11,7 @@ const Path = {
   REGISTER_INTERSTER_PAGE: "/register/interest",
   POST_PAGE: "/post",
   MY_PAGE: "/my",
-  PROFILE_EDIT: "/my-page",
+  PROFILE_EDIT: "/my/edit",
 
   // common
   MAIN_PAGE: "/",

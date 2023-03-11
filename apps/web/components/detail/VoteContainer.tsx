@@ -54,7 +54,6 @@ function VoteContainer({ postId }: { postId: number }) {
       />
       <FilterBar />
       <VoteAnalyzeBar
-        select={select.choice}
         totalCountA={totalCountA}
         totalCountB={totalCountB}
         percentageA={percentageA}
