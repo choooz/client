@@ -51,6 +51,10 @@ function VoteContainer({ postId }: { postId: number }) {
         titleB={titleB}
         select={select.choice}
         onMutateVoting={onMutateVoting}
+        totalCountA={totalCountA}
+        totalCountB={totalCountB}
+        percentageA={percentageA}
+        percentageB={percentageB}
       />
       <FilterBar />
       <VoteAnalyzeBar

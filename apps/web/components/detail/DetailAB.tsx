@@ -11,9 +11,24 @@ interface Props {
   imageB: string | StaticImageData;
   select: AorB | null;
   onMutateVoting: (select: AorB) => void;
+  percentageA: number;
+  percentageB: number;
+  totalCountA: number;
+  totalCountB: number;
 }
 
-function DetailAB({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Props) {
+function DetailAB({
+  titleA,
+  titleB,
+  imageA,
+  imageB,
+  select,
+  onMutateVoting,
+  percentageA,
+  percentageB,
+  totalCountA,
+  totalCountB,
+}: Props) {
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
   };
@@ -30,21 +45,29 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Pr
   return (
     <Container>
       <ImageWrapper>
-        <LeftVote selected={activeValue("left")} onClick={() => onClickVote("A")}>
+        <LeftVote
+          selected={activeValue("left")}
+          onClick={() => onClickVote("A")}
+          percent={percentageA > 0 ? percentageA : 0}
+        >
           <Image src={imageA} alt="A 이미지" fill />
           <div className="overlay">
             <OverLayTitle>{titleA}</OverLayTitle>
-            <OverlayPercent>50%</OverlayPercent>
-            <OverlayCount> 340명</OverlayCount>
+            <OverlayPercent>{percentageA}%</OverlayPercent>
+            <OverlayCount> {totalCountA}명</OverlayCount>
           </div>
         </LeftVote>
 
-        <RightVote selected={activeValue("right")} onClick={() => onClickVote("B")}>
+        <RightVote
+          selected={activeValue("right")}
+          onClick={() => onClickVote("B")}
+          percent={percentageB > 0 ? percentageB : 0}
+        >
           <Image src={imageB} fill alt="B 이미지" />
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>
-            <OverlayPercent>50%</OverlayPercent>
-            <OverlayCount> 340명</OverlayCount>
+            <OverlayPercent>{percentageB}%</OverlayPercent>
+            <OverlayCount> {totalCountB}명</OverlayCount>
           </div>
         </RightVote>
       </ImageWrapper>
@@ -103,7 +126,7 @@ const typeGuardVariantStyle = (selected: ActiveType) => {
   return variantStyles[selected];
 };
 
-const LeftVote = styled.div<{ selected: ActiveType }>`
+const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
   position: relative;
   width: 50%;
   .overlay {
@@ -122,10 +145,10 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     padding: 30px;
     color: white;
     border: 2px solid ${({ theme }) => theme.palette.main.sub};
-    ${({ selected }) =>
+    ${({ selected, percent }) =>
       selected === "active" &&
       css`
-        width: 50%;
+        width: ${percent}%;
         visibility: visible;
       `};
   }
