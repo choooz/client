@@ -82,9 +82,9 @@ function TargetSection({
         <option value="" hidden>
           MBTI를 선택해주세요
         </option>
-        {MBTI_LIST.map(({ id, name }) => (
-          <option key={id} value={id}>
-            {name}
+        {MBTI_LIST.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
           </option>
         ))}
       </Select>

@@ -10,10 +10,10 @@ interface Props {
   imageA: string | StaticImageData;
   imageB: string | StaticImageData;
   select: AorB | null;
-  onChangeSelect: (select: AorB) => void;
+  onMutateVoting: (select: AorB) => void;
 }
 
-function DetailAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Props) {
+function DetailAB({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Props) {
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
   };
@@ -25,7 +25,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
   return (
     <Container>
       <ImageWrapper>
-        <LeftVote selected={activeValue("left")} onClick={() => onChangeSelect("A")}>
+        <LeftVote selected={activeValue("left")} onClick={() => onMutateVoting("A")}>
           <Image src={imageA} alt="A 이미지" fill />
           <div className="overlay">
             <OverLayTitle>{titleA}</OverLayTitle>
@@ -34,7 +34,7 @@ function DetailAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
           </div>
         </LeftVote>
 
-        <RightVote selected={activeValue("right")} onClick={() => onChangeSelect("B")}>
+        <RightVote selected={activeValue("right")} onClick={() => onMutateVoting("B")}>
           <Image src={imageB} fill alt="B 이미지" />
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>

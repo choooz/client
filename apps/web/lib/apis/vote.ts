@@ -94,10 +94,6 @@ export const getVoteByIdAPI = async (id: number) => {
 export interface PostVotingRequest {
   choice: AorB | null;
 }
-export const postVotingAPI = async (body: PostVotingRequest, voteId: number) => {
-  const response = await apiClient.post(`api/votes/${voteId}/voting`, body);
-  return response.data;
-};
 
 export const getVoteCountById = async (voteId: number) => {
   const response = await apiClient.get(`api/vote/${voteId}/total-statistics`);

@@ -1,11 +1,12 @@
 import { useOutsideClick, useToggle } from "@chooz/hooks";
+import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import VoteToolbar from "components/select/VoteToolbar";
 import { EmptyAImg, EmptyBImg } from "public/images";
-import React, { useState } from "react";
+import React from "react";
+import useMutateVotingService from "services/useMutateVotingService";
 import useStatisticsService from "services/useStatisticsService";
 import useVoteLoadService from "services/useVoteLoadService";
 import styled from "styled-components";
-import { AorB } from "types/vote";
 import DetailAB from "./DetailAB";
 import FilterBar from "./FilterBar";
 import VoteAnalyzeBar from "./VoteAnalyzeBar";
@@ -21,17 +22,17 @@ function VoteContainer({ postId }: { postId: number }) {
     isError: isStatisticsError,
     isLoading: isStatisticsLoading,
   } = voteStatisticsQuery;
-  const [select, setSelect] = useState<AorB | null>(null);
-  const onChangeSelect = (select: AorB) => {
-    setSelect(select);
-  };
+
+  const { select, onMutateVoting } = useMutateVotingService(postId);
 
   if (isLoading || isStatisticsLoading) return <div>로딩중</div>;
   if (isError || isStatisticsError) return <div>에러</div>;
   if (!VoteData || !statisticsData) return <div>데이터 없음</div>;
 
   const { percentageA, percentageB, totalCountA, totalCountB } = voteStatisticsQuery.data;
-  const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate } = VoteData;
+
+  const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate, category } =
+    VoteData;
   return (
     <>
       <VoteToolbar
@@ -48,18 +49,30 @@ function VoteContainer({ postId }: { postId: number }) {
         titleA={titleA}
         imageB={imageB || EmptyBImg}
         titleB={titleB}
-        select={select}
-        onChangeSelect={onChangeSelect}
+        select={select.choice}
+        onMutateVoting={onMutateVoting}
       />
       <FilterBar />
       <VoteAnalyzeBar
-        select={select}
         totalCountA={totalCountA}
         totalCountB={totalCountB}
         percentageA={percentageA}
         percentageB={percentageB}
       />
       <VoteDetail>{description}</VoteDetail>
+      {toggleDetail && (
+        <AddDetailModalContainer
+          onToggleModal={onChangeToggleDetail}
+          initialVoteValue={{
+            title,
+            detail: description,
+            titleA,
+            titleB,
+            category,
+          }}
+          voteId={postId}
+        />
+      )}
     </>
   );
 }

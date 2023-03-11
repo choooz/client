@@ -54,7 +54,8 @@ const variantStyles = {
   outline: css`
     background-color: ${({ theme }) => theme.palette.background.white};
     border: 1px solid ${({ theme }) => theme.palette.ink.lighter};
-    color: ${({ theme }) => theme.palette.ink.lighter};
+    color: ${({ theme }) => theme.palette.ink.base};
+    font-weight: 500;
   `,
   warning: css`
     background-color: ${({ theme }) => theme.palette.system.danger};

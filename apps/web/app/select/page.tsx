@@ -3,7 +3,7 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import AddDetailModal from "components/select/AddDetailModal";
+import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
@@ -12,12 +12,10 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AmplifyIcon } from "public/icons";
 import { Success } from "public/images";
-import React, { useState } from "react";
+import React from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
-import useModifyVoteService from "services/useModifyVoteService";
 import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
-import { AorB } from "types/vote";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
@@ -32,18 +30,15 @@ function SelectPage() {
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
-  const { select, onChangeSelect } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
-
-  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
-    onChangeToggleDetail,
-    mainVoteList[nowShowing],
-  );
+  const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+  const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category } =
+    mainVoteList[nowShowing];
+
   return (
     <>
       <PageWrapper>
@@ -63,7 +58,7 @@ function SelectPage() {
             imageB={imageB || ""}
             titleB={titleB || ""}
             select={select.choice}
-            onChangeSelect={onChangeSelect}
+            onMutateVoting={onMutateVoting}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
@@ -82,8 +77,7 @@ function SelectPage() {
         <FloatModalTemplate
           onToggleModal={() => {
             // 메인페이지 url 변경할때 같이 수정해야함
-            router.push("/select/1?isSuccess=");
-            console.log("작동");
+            router.push("/select?isSuccess=");
           }}
         >
           <Image alt="체크" src={Success} width={56} height={56} />
@@ -91,12 +85,16 @@ function SelectPage() {
         </FloatModalTemplate>
       )}
       {toggleDetail && (
-        <AddDetailModal
+        <AddDetailModalContainer
           onToggleModal={onChangeToggleDetail}
-          mutateVote={mutateVote}
-          vote={vote}
-          onChangeVote={onChangeVote}
-          onChangeVoteByClick={onChangeVoteByClick}
+          initialVoteValue={{
+            title,
+            detail,
+            titleA,
+            titleB,
+            category,
+          }}
+          voteId={mainVoteList[nowShowing].voteId}
         />
       )}
     </>
