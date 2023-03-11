@@ -16,6 +16,7 @@ export interface Vote {
   titleA: string;
   titleB: string;
   voteId: number;
+  detail: string;
   category: CategoryNameType | null;
   title: string;
   writer: Writer;
