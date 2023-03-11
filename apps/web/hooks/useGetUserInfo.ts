@@ -6,12 +6,11 @@ import { GetUserInfoResponse } from "types/user";
 
 export function useGetUserInfo() {
   const [userInfo, setUserInfo] = useState<GetUserInfoResponse>();
+
   const { data } = useQuery(reactQueryKeys.userInfo(), getUserInfo, {
-    staleTime: Infinity,
-    cacheTime: Infinity,
     onSuccess: (data) => {
       setUserInfo(data);
     },
   });
-  return { userInfo, setUserInfo };
+  return { data, userInfo, setUserInfo };
 }
