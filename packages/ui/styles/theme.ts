@@ -26,8 +26,9 @@ const palette = {
     selected: "#C5C0FF",
     selectedSoft: "#DCD9FF",
     inactive: "#E5E5EC",
-    myPage: "#343434",
-    myPageInactve: "#767676",
+    dark: "#767676",
+    darker: "#505050",
+    darkest: "#343434",
     black: "#111111",
   },
   system: {
