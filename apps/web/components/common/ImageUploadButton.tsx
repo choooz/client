@@ -7,7 +7,6 @@ interface Props {
   height: `${number}px` | `${number}%` | "auto";
 }
 
-// @Todo ImageTitleSection에서 사용하고 있는 컴포넌트 대체하기
 function ImageUploadButton({ width, height }: Props) {
   return (
     <ImageWrapper width={width} height={height}>
@@ -28,6 +27,7 @@ const ImageWrapper = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ImageCircle = styled.div`

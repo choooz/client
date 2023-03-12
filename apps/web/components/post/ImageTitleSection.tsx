@@ -1,11 +1,12 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Image from "next/image";
 import { Input, Template, transitions } from "@chooz/ui";
 import { PostVoteRequest } from "lib/apis/vote";
-import { EmptyAImg, EmptyBImg, Camera } from "public/images";
+import { EmptyAImg, EmptyBImg } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import { FIRST_STEP, NEXT, SECOND_STEP } from "lib/constants";
 import React, { useMemo, useState } from "react";
+import ImageUploadButton from "components/common/ImageUploadButton";
 
 interface Props {
   vote: PostVoteRequest;
@@ -49,11 +50,9 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
 
         <label htmlFor="file">
           {!imageA && !imageB ? (
-            <ImageWrapper>
-              <ImageCircle>
-                <Image src={Camera} alt="이미지 공간" width={32} height={32} />
-              </ImageCircle>
-            </ImageWrapper>
+            <ImageUploadButtonWrapper>
+              <ImageUploadButton width="100%" height="272px" />
+            </ImageUploadButtonWrapper>
           ) : (
             <VoteImageWrapper>
               <Image
@@ -68,7 +67,6 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
                 }}
               />
               <VSIcon>VS</VSIcon>
-
               <Image
                 src={imageB || EmptyBImg}
                 alt="B이미지"
@@ -82,8 +80,7 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
               />
             </VoteImageWrapper>
           )}
-
-          <InvisibleInput multiple type="file" id="file" onChange={onUploadImage} />
+          <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
         </label>
         <VoteWrapper>
           <InputBox>
@@ -124,15 +121,20 @@ const QuestionText = styled.div`
 `;
 
 const SubText = styled.div`
+  margin-top: 8px;
   font-size: 16px;
   color: ${({ theme }) => theme.palette.ink.dark};
 `;
 
-const InvisibleInput = styled.input`
+const ImageUploadInput = styled.input`
   display: none;
 `;
 
-const ImageWrapper = styled.div`
+const ImageUploadButtonWrapper = styled.div`
+  margin-top: 16px;
+`;
+
+const VoteImageWrapper = styled.div`
   gap: 12px;
   overflow: hidden;
   margin-top: 16px;
@@ -140,26 +142,12 @@ const ImageWrapper = styled.div`
   background: ${({ theme }) => theme.palette.background.hard};
   border-radius: 8px;
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 290px;
-`;
-
-const VoteImageWrapper = styled(ImageWrapper)`
   position: relative;
   background: ${({ theme }) => theme.palette.background.white};
   justify-content: space-between;
   cursor: pointer;
-`;
-
-const ImageCircle = styled.div`
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.palette.background.white};
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 const VoteWrapper = styled.div`
