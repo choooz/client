@@ -1,7 +1,7 @@
 import { LogoWhite } from "public/images";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { media } from "@chooz/ui/styles/media";
 import { useRouter } from "next/navigation";
 import { AlertIcon, Back, MoreIcon, MyPageIcon } from "public/icons";
@@ -34,10 +34,11 @@ function Header({ centerMenu, leftMenu, rightMenu }: Props) {
     }
   };
 
+  // @TODO : 적절한 링크나 이동로직 추가하기
   const printRightMenu = () => {
     switch (rightMenu) {
       case "logout":
-        return <Image alt="뒤로" src={Back} onClick={() => router.back()} width={40} height={40} />;
+        return <LogoutButton>로그아웃</LogoutButton>;
 
       case "menu":
         return (
@@ -130,6 +131,16 @@ const CenterMenu = styled.div`
   font-size: 18px;
   ${media.medium} {
     font-size: 28px;
+  }
+`;
+
+const LogoutButton = styled.button`
+  ${({ theme }) => css`
+    color: ${theme.palette.ink.light};
+    ${theme.textStyle.Title_Small}
+  `}
+  :hover {
+    text-decoration: underline;
   }
 `;
 export default Header;
