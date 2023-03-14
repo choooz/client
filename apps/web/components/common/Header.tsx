@@ -23,11 +23,11 @@ function Header({ centerMenu, leftMenu, rightMenu }: Props) {
 
       case "logo":
         return (
-          <div>
-            <Link href="/">
+          <Link href="/">
+            <LogoWrapper>
               <Image alt="chooz 로고" src={LogoWhite} fill />
-            </Link>
-          </div>
+            </LogoWrapper>
+          </Link>
         );
       default:
         return null;
@@ -45,8 +45,8 @@ function Header({ centerMenu, leftMenu, rightMenu }: Props) {
             <Image
               alt="마이페이지로"
               src={MyPageIcon}
-              width={40}
-              height={40}
+              width={28}
+              height={28}
               onClick={() => router.push(Path.MY_PAGE)}
             />
 
@@ -54,15 +54,15 @@ function Header({ centerMenu, leftMenu, rightMenu }: Props) {
               alt="알람으로"
               src={AlertIcon}
               onClick={() => router.push("/")}
-              width={40}
-              height={40}
+              width={28}
+              height={28}
             />
             <Image
               alt="매뉴로"
               src={MoreIcon}
               onClick={() => router.push("/")}
-              width={40}
-              height={40}
+              width={28}
+              height={28}
             />
           </RightMenu>
         );
@@ -102,15 +102,20 @@ const HeaderInner = styled.div`
 `;
 
 const LeftMenu = styled.div`
-  height: 33px;
-  position: relative;
-  width: 114px;
   align-items: center;
   display: flex;
   cursor: pointer;
+  width: 114px;
+  height: 33px;
+`;
+
+const LogoWrapper = styled.div`
+  position: relative;
+  width: 88px;
+  height: 25px;
   ${media.medium} {
-    width: 88px;
-    height: 25px;
+    width: 114px;
+    height: 33px;
   }
 `;
 
@@ -122,6 +127,9 @@ const RightMenu = styled(LeftMenu)`
 const CenterMenu = styled.div`
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";
-  font-size: 28px;
+  font-size: 18px;
+  ${media.medium} {
+    font-size: 28px;
+  }
 `;
 export default Header;
