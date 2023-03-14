@@ -44,7 +44,7 @@ const variantStyles = {
     color: ${({ theme }) => theme.palette.background.white};
     :disabled {
       background-color: ${({ theme }) => theme.palette.background.inactive};
-      color: ${({ theme }) => theme.palette.ink.lighter};
+      color: ${({ theme }) => theme.palette.ink.light};
     }
   `,
   inactive: css`
