@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { Input, Template, transitions } from "@chooz/ui";
-import { PostVoteRequest } from "lib/api/vote";
+import { PostVoteRequest } from "lib/apis/vote";
 import { Camera } from "public/images";
 import { media } from "@chooz/ui/styles/media";
 import React, { useState } from "react";

@@ -1,6 +1,6 @@
 "use client";
 
-import { kakaoLoginAPI } from "lib/api/auth";
+import { kakaoLoginAPI } from "lib/apis/auth";
 import { KAKAO_LOGIN_REDIRECT_URL } from "lib/constants";
 import Path from "lib/Path";
 import userStorage from "lib/utils/userStorage";
@@ -25,7 +25,7 @@ function kakaoLoginProcess() {
         redirectUrl: KAKAO_LOGIN_REDIRECT_URL,
       });
       userStorage.set(accessToken);
-      newUser ? router.push(Path.REGISTER_PAGE) : router.push(Path.LIST_PAGE);
+      newUser ? router.push(Path.REGISTER_PAGE) : router.push(Path.MAIN_PAGE);
     } catch (error) {
       alert("에러가 발생하였습니다.");
     }

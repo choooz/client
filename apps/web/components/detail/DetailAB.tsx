@@ -10,10 +10,9 @@ interface Props {
   imageA: string | StaticImageData;
   imageB: string | StaticImageData;
   select: "A" | "B" | null;
-  onChangeSelect(select: "A" | "B"): void;
 }
 
-function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Props) {
+function DetailAB({ titleA, titleB, imageA, imageB, select }: Props) {
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
   };
@@ -22,11 +21,10 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
     if (!select) return null;
     return `${select === getAB(direction) ? "" : "in"}active`;
   };
-
   return (
     <Container>
       <ImageWrapper>
-        <LeftVote selected={activeValue("left")} onClick={() => onChangeSelect("A")}>
+        <LeftVote selected={activeValue("left")}>
           <Image
             src={imageA}
             width={272}
@@ -45,7 +43,7 @@ function SelectAB({ titleA, titleB, imageA, imageB, select, onChangeSelect }: Pr
           </div>
         </LeftVote>
 
-        <RightVote selected={activeValue("right")} onClick={() => onChangeSelect("B")}>
+        <RightVote selected={activeValue("right")}>
           <Image
             src={imageB}
             width={272}
@@ -172,4 +170,4 @@ const OverlayCount = styled.div`
   ${({ theme }) => theme.textStyle.Title_2}
 `;
 
-export default SelectAB;
+export default DetailAB;

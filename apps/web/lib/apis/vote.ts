@@ -1,6 +1,24 @@
 import apiClient from "./apiClient";
 
-interface PostVoteRequest {
+interface GetVoteListRequest {
+  page: number;
+  size: number;
+  sortBy: string;
+}
+
+export const getVoteListAPI = async ({ page, size, sortBy }: GetVoteListRequest) => {
+  const response = await apiClient.get("api/votes", {
+    params: {
+      page,
+      size,
+      sortBy,
+    },
+  });
+
+  return response.data.voteSlice;
+};
+
+export interface PostVoteRequest {
   title: string;
   titleA: string;
   titleB: string;

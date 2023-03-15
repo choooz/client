@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 
 /** ref이외의 공간을 클릭할시 onClose함수를 실행시키는 함수 */
-export default function useOutSideClick(isOpen: boolean, onClose: () => void) {
-  const targetEl = useRef<HTMLDivElement>(null);
+export default function useOutSideClick<T extends HTMLElement>(
+  isOpen: boolean,
+  onClose: () => void,
+) {
+  const targetEl = useRef<T>(null);
 
   const onClickOutSide = useCallback(
     (e: MouseEvent) => {

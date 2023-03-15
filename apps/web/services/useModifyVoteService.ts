@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { modifyVoteAPI, ModifyVote } from "lib/api/vote";
+import { modifyVoteAPI, ModifyVote } from "lib/apis/vote";
 import React, { useState } from "react";
 
 function useModifyVoteService() {
