@@ -39,7 +39,6 @@ function RootLayout({
                 <div id="stars" />
                 <div id="stars2" />
                 <div id="stars3" />
-                <Header />
                 {children}
               </Applayout>
             </ThemeProvider>

@@ -15,3 +15,7 @@ export { default as Food } from "./Food.png";
 export { default as Fashion } from "./Fashion.png";
 export { default as Love } from "./Love.png";
 export { default as Interest } from "./Interest.png";
+export { default as AlertIcon } from "./AlertIcon.png";
+export { default as MoreIcon } from "./MoreIcon.png";
+export { default as MyPageIcon } from "./MyPageIcon.png";
+export { default as Back } from "./Back.png";

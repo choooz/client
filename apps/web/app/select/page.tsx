@@ -3,6 +3,7 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
+import Header from "components/common/Header";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
@@ -41,6 +42,7 @@ function SelectPage() {
 
   return (
     <>
+      <Header leftMenu="logo" rightMenu="menu" />
       <PageWrapper>
         <PageInner className="animate" onWheel={onActFlip} drag={drag}>
           <VoteToolbar

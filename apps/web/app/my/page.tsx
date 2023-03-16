@@ -2,6 +2,7 @@
 
 import { media } from "@chooz/ui/styles/media";
 import { useQuery } from "@tanstack/react-query";
+import Header from "components/common/Header";
 import ImageUploadButton from "components/common/ImageUploadButton";
 import TabContainer from "components/my/TabContainer";
 import VoteList from "components/my/VoteList";
@@ -43,54 +44,57 @@ function MyPage() {
   const { countCreatedVote, countParticipatedVote, countBookmarkedVote } = voteCount;
 
   return (
-    <PageWrapper>
-      <PageInner>
-        <AddImageButtonWrapper>
-          <ImageUploadButton width="107px" height="107px" />
-        </AddImageButtonWrapper>
-        <Profile>
-          <UserInfo>
-            <>
-              {gender === Gender.MALE ? "남" : "여"}
-              <Divider />
-              {age}
-              <Divider />
-              {mbti}
-            </>
-          </UserInfo>
-          <Nickname>{username}</Nickname>
-          <ProfileModifyButton>
-            <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
-          </ProfileModifyButton>
-        </Profile>
-        {/* @TODO api 연결하면 map 사용 */}
-        <NumberOfVoteSection>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countCreatedVote}</NumberOfVote>
-            <NumberOfVoteText>작성한 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countParticipatedVote}</NumberOfVote>
-            <NumberOfVoteText>참여한 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countBookmarkedVote}</NumberOfVote>
-            <NumberOfVoteText>북마크 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-        </NumberOfVoteSection>
-      </PageInner>
-      <TabContainerWrapper>
-        <TabContainer
-          tabList={MY_PAGE_VOTE_TYPE}
-          selectedTab={selectedTab}
-          onClickSelectedTab={onClickSelectedTab}
-        />
-      </TabContainerWrapper>
-      <VoteListSection>
-        <VoteList voteList={voteList} />
-        <div ref={subscribe} />
-      </VoteListSection>
-    </PageWrapper>
+    <>
+      <Header leftMenu="back" centerMenu="My page" rightMenu="logout" />;
+      <PageWrapper>
+        <PageInner>
+          <AddImageButtonWrapper>
+            <ImageUploadButton width="107px" height="107px" />
+          </AddImageButtonWrapper>
+          <Profile>
+            <UserInfo>
+              <>
+                {gender === Gender.MALE ? "남" : "여"}
+                <Divider />
+                {age}
+                <Divider />
+                {mbti}
+              </>
+            </UserInfo>
+            <Nickname>{username}</Nickname>
+            <ProfileModifyButton>
+              <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
+            </ProfileModifyButton>
+          </Profile>
+          {/* @TODO api 연결하면 map 사용 */}
+          <NumberOfVoteSection>
+            <NumberOfVoteContainer>
+              <NumberOfVote>{countCreatedVote}</NumberOfVote>
+              <NumberOfVoteText>작성한 투표</NumberOfVoteText>
+            </NumberOfVoteContainer>
+            <NumberOfVoteContainer>
+              <NumberOfVote>{countParticipatedVote}</NumberOfVote>
+              <NumberOfVoteText>참여한 투표</NumberOfVoteText>
+            </NumberOfVoteContainer>
+            <NumberOfVoteContainer>
+              <NumberOfVote>{countBookmarkedVote}</NumberOfVote>
+              <NumberOfVoteText>북마크 투표</NumberOfVoteText>
+            </NumberOfVoteContainer>
+          </NumberOfVoteSection>
+        </PageInner>
+        <TabContainerWrapper>
+          <TabContainer
+            tabList={MY_PAGE_VOTE_TYPE}
+            selectedTab={selectedTab}
+            onClickSelectedTab={onClickSelectedTab}
+          />
+        </TabContainerWrapper>
+        <VoteListSection>
+          <VoteList voteList={voteList} />
+          <div ref={subscribe} />
+        </VoteListSection>
+      </PageWrapper>
+    </>
   );
 }
 

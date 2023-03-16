@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <title>My Page Title</title>
+      <title>Chooz!</title>
       {/* <meta name="viewport" content="width=device-width, initial-scale=1" /> */}
       {/* @todo next/font로 migration */}
       <link
