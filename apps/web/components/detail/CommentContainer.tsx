@@ -13,6 +13,7 @@ import { reactQueryKeys } from "lib/queryKeys";
 import useMutateCommentService from "services/useMutateCommentService";
 import useUpdateCommnetService from "services/useUpdateCommnetService";
 import useCommentFilter from "./hooks/useCommentFilter";
+import { media } from "@chooz/ui/styles/media";
 
 interface Props {
   postId: number;
@@ -89,6 +90,7 @@ function CommentContainer({ postId }: Props) {
 }
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -96,7 +98,7 @@ const Container = styled.div`
 
 const DetailButton = styled(Button)`
   position: absolute;
-  bottom: -24px;
+  bottom: -50px;
   right: 50%;
   transform: translateX(50%);
 `;
