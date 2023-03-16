@@ -11,7 +11,8 @@ export default function useMutateVotingService(voteId: number) {
 
   const { mutate } = useMutation((choice: AorB) => postVotingById(voteId, { choice }), {
     onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.VOTING_CHECK]);
+      queryClient.invalidateQueries([queryKeys.DETAIL_ANALYSIS]);
+
     },
   });
 
