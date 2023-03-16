@@ -32,7 +32,7 @@ function CommentContainer({ postId }: Props) {
     {
       getNextPageParam: (lastPage, pages) => {
         // @NOTE 백엔드에서 last 작동이 안되어 주석
-        // if (lastPage.last) return undefined;
+        if (lastPage.last) return undefined;
         return pages.length + 1;
       },
       keepPreviousData: true,
