@@ -15,4 +15,3 @@ export { default as Eximg2 } from "./eximg2.png";
 export { default as BigPurpleMonster } from "./big-purple-monster.png";
 export { default as EmptyAImg } from "./AImg.png";
 export { default as EmptyBImg } from "./BImg.png";
-export { default as SearchRecommendationImage } from "./SearchRecommendationImage.png";
