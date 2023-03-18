@@ -113,7 +113,7 @@ const PageInner = styled.div`
 
   ${({ theme }) =>
     css`
-      background-color: ${theme.palette.background.myPage};
+      background-color: ${theme.palette.background.darkest};
       color: ${theme.palette.ink.lightest};
     `};
   ${media.medium} {

@@ -6,6 +6,8 @@ export { default as BookmarkIcon } from "./BookmarkIcon.svg";
 export { default as SelectIndicator } from "./SelectIndicator.svg";
 export { default as AIcon } from "./AIcon.svg";
 export { default as BIcon } from "./BIcon.svg";
+export { default as PreviousIcon } from "./PreviousIcon.svg";
+export { default as SearchIcon } from "./SearchIcon";
 export { default as AmplifyIcon } from "./amplifyIcon.png";
 export { default as AddIcon } from "./addIcon.png";
 export { default as SaveIcon } from "./saveIcon.png";

@@ -17,6 +17,7 @@ export default function Home() {
         <Link href="/select">선택 페이지 보러가기</Link>
         <Link href={Path.VOTE_LIST_PAGE}>투표 리스트 보러가기</Link>
         <Link href={Path.MY_PAGE}>마이 페이지 보러가기</Link>
+        <Link href={Path.SEARCH_PAGE}>검색 페이지 보러가기</Link>
       </PageLayout>
     </>
   );
