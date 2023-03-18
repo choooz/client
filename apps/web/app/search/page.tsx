@@ -6,7 +6,7 @@ import { media } from "@chooz/ui/styles/media";
 import { IMAGE_CATEGORY_LIST } from "lib/constants";
 import Image from "next/image";
 import { SearchIcon } from "public/icons";
-import { CheckRound, SearchRecommendationImage } from "public/images";
+import { CheckRound } from "public/images";
 import useRegisterService from "services/useRegisterService";
 import styled, { css } from "styled-components";
 
@@ -26,33 +26,27 @@ function SearchPage() {
             onBlur={onToggleSearchRecommendation}
           />
           <SearchButton isSearchRecommendation={isSearchRecommendation}>
-            <SearchIcon />
+            <SearchIcon variant="primary" />
           </SearchButton>
         </Search>
         {isSearchRecommendation && (
           <SearchRecommendationContainer>
             <SearchRecommendation>
-              <Image
-                alt="검색 추천"
-                src={SearchRecommendationImage}
-                style={{ margin: "0 8px 0 8px" }}
-              />
+              <SearchRecommendationIcon>
+                <SearchIcon variant="searchRecommendation" />
+              </SearchRecommendationIcon>
               dsads
             </SearchRecommendation>
             <SearchRecommendation>
-              <Image
-                alt="검색 추천"
-                src={SearchRecommendationImage}
-                style={{ margin: "0 8px 0 8px" }}
-              />
+              <SearchRecommendationIcon>
+                <SearchIcon variant="searchRecommendation" />
+              </SearchRecommendationIcon>
               dsads
             </SearchRecommendation>
             <SearchRecommendation>
-              <Image
-                alt="검색 추천"
-                src={SearchRecommendationImage}
-                style={{ margin: "0 8px 0 8px" }}
-              />
+              <SearchRecommendationIcon>
+                <SearchIcon variant="searchRecommendation" />
+              </SearchRecommendationIcon>
               dsads
             </SearchRecommendation>
           </SearchRecommendationContainer>
@@ -172,6 +166,17 @@ const SearchRecommendation = styled.li`
   display: flex;
   align-items: center;
   margin-top: 24px;
+`;
+
+const SearchRecommendationIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin: 0 8px 0 8px;
+  border-radius: 100px;
+  background-color: ${({ theme }) => theme.palette.background.dark};
 `;
 
 const CategorySection = styled.section`
