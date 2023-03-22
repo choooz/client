@@ -1,19 +1,41 @@
 "use client";
 
-import { useToggle } from "@chooz/hooks";
+import { useDebounce, useToggle } from "@chooz/hooks";
 import { Button, transitions } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
+import { getSearchRecommendation } from "lib/apis/vote";
 import { IMAGE_CATEGORY_LIST } from "lib/constants";
 import Image from "next/image";
 import { SearchIcon } from "public/icons";
 import { CheckRound } from "public/images";
-import useRegisterService from "services/useRegisterService";
+import { useState } from "react";
 import styled, { css } from "styled-components";
+import { CategoryNameType } from "types/vote";
 
 function SearchPage() {
-  const { categoryLists, onClickCategory } = useRegisterService();
+  const [selectedCategory, setSelectedCategory] = useState<CategoryNameType | null>(null);
+  const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const category = e.currentTarget.name as CategoryNameType;
+    selectedCategory === category ? setSelectedCategory(null) : setSelectedCategory(category);
+  };
 
   const [isSearchRecommendation, onToggleSearchRecommendation] = useToggle();
+  const [keyword, setKeyword] = useState("");
+  const [recommendationKeywordList, setRecommendationKeywordList] = useState<string[]>([]);
+
+  const onChangeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
+
+  useDebounce({ func: () => searchRecommendation(keyword), delay: 500, deps: [keyword] });
+
+  const searchRecommendation = async (keyword: string) => {
+    const { recommendKeywords } = await getSearchRecommendation({
+      keyword,
+      category: selectedCategory,
+    });
+    setRecommendationKeywordList(recommendKeywords);
+  };
 
   return (
     <PageWrapper>
@@ -24,6 +46,7 @@ function SearchPage() {
             isSearchRecommendation={isSearchRecommendation}
             onFocus={onToggleSearchRecommendation}
             onBlur={onToggleSearchRecommendation}
+            onChange={onChangeKeyword}
           />
           <SearchButton isSearchRecommendation={isSearchRecommendation}>
             <SearchIcon variant="primary" />
@@ -31,27 +54,16 @@ function SearchPage() {
         </Search>
         {isSearchRecommendation && (
           <SearchRecommendationContainer>
-            <SearchRecommendation>
-              <SearchRecommendationIcon>
-                <SearchIcon variant="searchRecommendation" />
-              </SearchRecommendationIcon>
-              dsads
-            </SearchRecommendation>
-            <SearchRecommendation>
-              <SearchRecommendationIcon>
-                <SearchIcon variant="searchRecommendation" />
-              </SearchRecommendationIcon>
-              dsads
-            </SearchRecommendation>
-            <SearchRecommendation>
-              <SearchRecommendationIcon>
-                <SearchIcon variant="searchRecommendation" />
-              </SearchRecommendationIcon>
-              dsads
-            </SearchRecommendation>
+            {recommendationKeywordList.map((recommendationKeyword, index) => (
+              <SearchRecommendation key={`search_recommendation_${index}`}>
+                <SearchRecommendationIcon>
+                  <SearchIcon variant="searchRecommendation" />
+                </SearchRecommendationIcon>
+                {recommendationKeyword}
+              </SearchRecommendation>
+            ))}
           </SearchRecommendationContainer>
         )}
-
         <CategorySection>
           {/* @Todo 컴포넌트화 하기 */}
           {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => (
@@ -60,13 +72,13 @@ function SearchPage() {
               height="104px"
               borderRadius="10px"
               key={`profile_edit_page_${value}`}
-              selected={categoryLists.includes(value)}
+              selected={selectedCategory === value}
               onClick={onClickCategory}
               name={value}
             >
               <Image alt="항목" src={image} height={32} />
               <CategoryText>
-                {categoryLists.includes(value) && (
+                {selectedCategory === value && (
                   <CheckBoxWrapper>
                     <Image alt="선택" src={CheckRound} width={16} />
                   </CheckBoxWrapper>
@@ -81,11 +93,7 @@ function SearchPage() {
   );
 }
 
-const PageWrapper = styled.div`
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
-`;
+const PageWrapper = styled.div``;
 
 const PageInner = styled.div`
   position: relative;

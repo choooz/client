@@ -115,3 +115,21 @@ export const getStatisticsById = async (voteId: number) => {
   );
   return response.data;
 };
+
+interface GetSearchRecommendationRequest {
+  keyword: string;
+  category?: CategoryNameType | null;
+}
+
+export const getSearchRecommendation = async ({
+  keyword,
+  category,
+}: GetSearchRecommendationRequest) => {
+  const response = await axios.get(`${SERVER_URL}api/votes/recommend`, {
+    params: {
+      keyword,
+      category,
+    },
+  });
+  return response.data;
+};

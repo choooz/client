@@ -25,7 +25,7 @@ function SearchIcon({ variant }: Props) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx="8.36131" cy="8.36131" r="7.36131" stroke={stroke} stroke-width="2" />
+      <circle cx="8.36131" cy="8.36131" r="7.36131" stroke={stroke} strokeWidth="2" />
       <rect
         x="13.3789"
         y="14.3203"
