@@ -1,33 +1,37 @@
 "use client";
 
-import { VoteList } from "components/voteList";
-import { CATEGORY_LIST } from "lib/constants";
-import { FilterIcon } from "public/icons";
+import { CategorySelectBox, SortSelectBox, VoteList } from "components/voteList";
+import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
 import { media } from "styles/media";
+import { CategoryNameType } from "types/vote";
 
 function VoteListPage() {
   const { voteList, subscribe } = useInfiniteVoteListService({
     size: 3,
     sortBy: "ByTime",
   });
+  const [selectedCategory, setSelectedCategory] = useState<CategoryNameType>();
+  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(e.target.value as CategoryNameType);
+  };
+  console.log(voteList);
 
   return (
     <PageWrapper>
       <PageInner>
-        <FilterContainer>
-          <CategorySelect>
-            {CATEGORY_LIST.map(({ id, name }) => (
-              <Option key={id}>{name}</Option>
-            ))}
-          </CategorySelect>
-          <FilterBox>
-            <FilterIcon />
-            필터
-          </FilterBox>
-        </FilterContainer>
-        <VoteList voteList={voteList} />
+        <FilterSection>
+          <CategorySelectBox />
+          <RightFilterContainer>
+            <SortSelectBox />
+            <div>
+              <input type="checkbox" />
+              선택만 보기
+            </div>
+          </RightFilterContainer>
+        </FilterSection>
+        <VoteList voteList={voteList} selectedCategory={selectedCategory} />
         <div ref={subscribe} />
       </PageInner>
     </PageWrapper>
@@ -49,15 +53,16 @@ const PageInner = styled.div`
   }
 `;
 
-const FilterContainer = styled.div`
+const FilterSection = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const CategorySelect = styled.select``;
-const Option = styled.option``;
-const FilterBox = styled.div`
+const RightFilterContainer = styled.div`
   display: flex;
+  align-items: center;
+  width: 183px;
+  justify-content: space-between;
 `;
 
 export default VoteListPage;

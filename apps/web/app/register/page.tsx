@@ -2,10 +2,10 @@
 
 import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
 import WarningSmallModal from "components/register/WarningSmallModal";
-import useToggle from "hooks/useToggle";
 import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
 import { media } from "styles/media";
+import { useToggle } from "@chooz/hooks";
 
 function RegisterPage() {
   const {

@@ -117,12 +117,12 @@ const Container = styled.div`
 const QuestionText = styled.div`
   font-size: 20px;
   font-weight: 700;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
 `;
 
 const SubText = styled.div`
   font-size: 16px;
-  color: ${({ theme }) => theme.palette.border.dark};
+  color: ${({ theme }) => theme.palette.ink.base};
 `;
 
 const InvisibleInput = styled.input`
@@ -132,7 +132,7 @@ const InvisibleInput = styled.input`
 const ImageWrapper = styled.div`
   gap: 12px;
   overflow: hidden;
-  margin-top: 32px;
+  margin-top: 16px;
   width: 100%;
   background: ${({ theme }) => theme.palette.background.hard};
   border-radius: 8px;

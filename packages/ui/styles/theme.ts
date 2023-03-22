@@ -1,4 +1,4 @@
-import { css, DefaultTheme } from "styled-components";
+import { DefaultTheme } from "styled-components";
 
 const palette = {
   ink: {
