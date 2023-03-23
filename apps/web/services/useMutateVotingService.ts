@@ -1,14 +1,20 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getVotingCheck, postVotingById } from "lib/apis/voting";
-import { reactQueryKeys } from "lib/queryKeys";
+import { queryKeys, reactQueryKeys } from "lib/queryKeys";
 
 import { useState } from "react";
 import { AorB, Voting } from "types/vote";
 
 export default function useMutateVotingService(voteId: number) {
+  const queryClient = useQueryClient();
   const [select, setSelect] = useState<Voting>({ choice: null });
 
-  const { mutate } = useMutation((choice: AorB) => postVotingById(voteId, { choice }));
+  const { mutate } = useMutation((choice: AorB) => postVotingById(voteId, { choice }), {
+    onSuccess: () => {
+      queryClient.invalidateQueries([queryKeys.DETAIL_ANALYSIS]);
+
+    },
+  });
 
   const onMutateVoting = (select: AorB) => {
     setSelect({ choice: select });
