@@ -3,9 +3,11 @@
 import { useDebounce, useToggle } from "@chooz/hooks";
 import { Button, transitions } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import { getSearchRecommendation } from "lib/apis/vote";
+import { getSearchRecommendationAPI } from "lib/apis/vote";
 import { IMAGE_CATEGORY_LIST } from "lib/constants";
+import Path from "lib/Path";
 import Image from "next/image";
+import Link from "next/link";
 import { SearchIcon } from "public/icons";
 import { CheckRound } from "public/images";
 import { useState } from "react";
@@ -30,7 +32,7 @@ function SearchPage() {
   useDebounce({ func: () => searchRecommendation(keyword), delay: 500, deps: [keyword] });
 
   const searchRecommendation = async (keyword: string) => {
-    const { recommendKeywords } = await getSearchRecommendation({
+    const { recommendKeywords } = await getSearchRecommendationAPI({
       keyword,
       category: selectedCategory,
     });
@@ -48,9 +50,11 @@ function SearchPage() {
             onBlur={onToggleSearchRecommendation}
             onChange={onChangeKeyword}
           />
-          <SearchButton isSearchRecommendation={isSearchRecommendation}>
-            <SearchIcon variant="primary" />
-          </SearchButton>
+          <Link href={`search/${keyword}`}>
+            <SearchButton isSearchRecommendation={isSearchRecommendation}>
+              <SearchIcon variant="primary" />
+            </SearchButton>
+          </Link>
         </Search>
         {isSearchRecommendation && (
           <SearchRecommendationContainer>
@@ -67,25 +71,27 @@ function SearchPage() {
         <CategorySection>
           {/* @Todo 컴포넌트화 하기 */}
           {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => (
-            <Category
-              width="100%"
-              height="104px"
-              borderRadius="10px"
-              key={`profile_edit_page_${value}`}
-              selected={selectedCategory === value}
-              onClick={onClickCategory}
-              name={value}
-            >
-              <Image alt="항목" src={image} height={32} />
-              <CategoryText>
-                {selectedCategory === value && (
-                  <CheckBoxWrapper>
-                    <Image alt="선택" src={CheckRound} width={16} />
-                  </CheckBoxWrapper>
-                )}
-                {label}
-              </CategoryText>
-            </Category>
+            <Link href={`${Path.CATEGORY_PAGE}${value}`}>
+              <Category
+                width="100%"
+                height="104px"
+                borderRadius="10px"
+                key={`profile_edit_page_${value}`}
+                selected={selectedCategory === value}
+                onClick={onClickCategory}
+                name={value}
+              >
+                <Image alt="항목" src={image} height={32} />
+                <CategoryText>
+                  {selectedCategory === value && (
+                    <CheckBoxWrapper>
+                      <Image alt="선택" src={CheckRound} width={16} />
+                    </CheckBoxWrapper>
+                  )}
+                  {label}
+                </CategoryText>
+              </Category>
+            </Link>
           ))}
         </CategorySection>
       </PageInner>
