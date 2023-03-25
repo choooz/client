@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { media } from "styles/media";
 import { CategoryNameType } from "types/vote";
 
-function CategoryPage({ params }: { params: { keyword: string } }) {
+function CategoryPage() {
   const [categoryOption, setCategoryOption] = useState("");
 
   const onChangeCategoryOption = (value: string) => {
