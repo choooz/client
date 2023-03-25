@@ -13,7 +13,7 @@ function TutorialPage() {
         <TutorialCarousel />
         <ButtonWrapper>
           <Button variant="primary" width={"100%"} height="56px">
-            asd
+            시작하기
           </Button>
         </ButtonWrapper>
       </PageInner>

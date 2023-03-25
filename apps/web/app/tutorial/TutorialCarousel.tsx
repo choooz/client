@@ -3,14 +3,15 @@ import styled, { css } from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Eximg1 } from "public/images";
 import Image from "next/image";
 import { media } from "@chooz/ui/styles/media";
+import { Choice, Detail, Increase, MChoice, MIncrease, Next } from "public/gifs";
+import { BrowserView, MobileView } from "react-device-detect";
 
 function TutorialCarousel() {
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -21,51 +22,139 @@ function TutorialCarousel() {
       <Slider {...settings}>
         <div>
           <Title>사진 확대</Title>
-          <SubTitle>이미지 위에 마우스를 올리거나 키보드←,→누르면 확대 돼요!</SubTitle>
-          <ImageWrapper>
-            <Image
-              src={Eximg1}
-              alt="튜토리얼 이미지"
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "8px",
-                marginRight: "10px",
-              }}
-            />
-          </ImageWrapper>
+          <BrowserView>
+            <SubTitle>이미지 위에 마우스를 올리거나 키보드←,→누르면 확대 돼요!</SubTitle>
+            <ImageWrapper>
+              <Image
+                src={Increase}
+                alt="확대 튜토리얼 이미지"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+              />
+            </ImageWrapper>
+          </BrowserView>
+          <MobileView>
+            <SubTitle>화면에 짧게 터치하거나 좌·우로 넘기면 사진 영역이 확대돼요!</SubTitle>
+            <MobileImageWrapper>
+              <Image
+                src={MIncrease}
+                alt="확대 튜토리얼 이미지"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+              />
+            </MobileImageWrapper>
+          </MobileView>
         </div>
         <div>
           <Title>선택하기</Title>
-          <SubTitle>A, B 중 클릭 시, 투표 선택이 돼요!</SubTitle>
-          <ImageWrapper>
-            <Image
-              src={Eximg1}
-              alt="튜토리얼 이미지"
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "8px",
-                marginRight: "10px",
-              }}
-            />
-          </ImageWrapper>
+          <BrowserView>
+            <SubTitle>A, B 중 클릭 시, 투표 선택이 돼요!</SubTitle>
+            <ImageWrapper>
+              <Image
+                src={Choice}
+                alt="튜토리얼 이미지"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+              />
+            </ImageWrapper>
+          </BrowserView>
+          <MobileView>
+            <SubTitle>
+              두 번, 짧게 터치하거나 사진이 확대 되었을 때, 짧게 터치하면 선택 돼요!
+            </SubTitle>
+            <MobileImageWrapper>
+              <Image
+                src={MChoice}
+                alt="튜토리얼 이미지"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+              />
+            </MobileImageWrapper>
+          </MobileView>
         </div>
         <div>
           <Title>다음 게시물</Title>
-          <SubTitle>키보드↑,↓이나 스크롤하면 다음 게시물로 이동돼요!</SubTitle>
-          <ImageWrapper>
-            <Image
-              src={Eximg1}
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "8px",
-                marginRight: "10px",
-              }}
-              alt="튜토리얼 이미지"
-            />
-          </ImageWrapper>
+          <BrowserView>
+            <SubTitle>키보드↑,↓이나 스크롤하면 다음 게시물로 이동돼요!</SubTitle>
+            <ImageWrapper>
+              <Image
+                src={Next}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+                alt="튜토리얼 이미지"
+              />
+            </ImageWrapper>
+          </BrowserView>
+          <MobileView>
+            <SubTitle>상·하로 짧게 터치하여 넘기면 다음 투표 게시물로 이동 돼요!</SubTitle>
+            <MobileImageWrapper>
+              <Image
+                src={Next}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+                alt="튜토리얼 이미지"
+              />
+            </MobileImageWrapper>
+          </MobileView>
+        </div>
+        <div>
+          <Title>상세페이지</Title>
+          <BrowserView>
+            <SubTitle>‘자세히' 클릭 시, 상세한 내용을 볼 수 있는 페이지로 이동해요.</SubTitle>
+            <ImageWrapper>
+              <Image
+                src={Detail}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+                alt="튜토리얼 이미지"
+              />
+            </ImageWrapper>
+          </BrowserView>
+          <MobileView>
+            <SubTitle>
+              ‘자세히 보기' 클릭하거나 줌인 시, 상세한 내용을 볼 수 있는 페이지로 이동해요.
+            </SubTitle>
+            <MobileImageWrapper>
+              <Image
+                src={Detail}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "8px",
+                  marginRight: "10px",
+                }}
+                alt="튜토리얼 이미지"
+              />
+            </MobileImageWrapper>
+          </MobileView>
         </div>
       </Slider>
     </SliderWrapper>
@@ -83,10 +172,11 @@ const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 356px;
-  ${media.medium} {
-    height: 411px;
-  }
+  aspect-ratio: 1.16;
+`;
+
+const MobileImageWrapper = styled(ImageWrapper)`
+  aspect-ratio: 0.79;
 `;
 
 const Title = styled.h1`
