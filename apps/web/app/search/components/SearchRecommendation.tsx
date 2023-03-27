@@ -10,7 +10,7 @@ interface Props {
 
 function SearchRecommendation({ recommendationKeywordList }: Props) {
   return (
-    <SearchRecommendationContainer>
+    <Container>
       {recommendationKeywordList.map((recommendationKeyword, index) => (
         <Link
           key={`search_recommendation_${index}`}
@@ -24,11 +24,11 @@ function SearchRecommendation({ recommendationKeywordList }: Props) {
           </SearchRecommendationItem>
         </Link>
       ))}
-    </SearchRecommendationContainer>
+    </Container>
   );
 }
 
-const SearchRecommendationContainer = styled.ul`
+const Container = styled.ul`
   width: 100%;
   height: 100%;
   position: absolute;
