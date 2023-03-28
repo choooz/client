@@ -116,12 +116,39 @@ export const getStatisticsById = async (voteId: number) => {
   return response.data;
 };
 
+export interface GetSearchVoteListRequest {
+  keyword: string;
+  page: number;
+  size: number;
+  sortBy: string;
+  category?: CategoryNameType | null;
+}
+
+export const getSearchVoteListAPI = async ({
+  keyword,
+  page,
+  size,
+  sortBy,
+  category,
+}: GetSearchVoteListRequest) => {
+  const response = await axios.get(`${SERVER_URL}api/votes/search`, {
+    params: {
+      keyword,
+      sortBy,
+      page,
+      size,
+      category,
+    },
+  });
+  return response.data.voteSlice;
+};
+
 interface GetSearchRecommendationRequest {
   keyword: string;
   category?: CategoryNameType | null;
 }
 
-export const getSearchRecommendation = async ({
+export const getSearchRecommendationAPI = async ({
   keyword,
   category,
 }: GetSearchRecommendationRequest) => {
