@@ -10,6 +10,7 @@ export const queryKeys = {
   DETAIL_COMMENT_LIST: "commentByVoteId" as const,
   DETAIL_VOTE_COUNT: "voteCountByVoteId" as const,
   DETAIL_ANALYSIS: "analysisByVoteId" as const,
+  DETAIL_FILTERED_ANALYSIS: "filteredAnalysisByVoteId" as const,
   VOTING_CHECK: "votingCheck" as const,
   MY_PAGE_VOTE_LIST: "myPageVoteList" as const,
   MY_PAGE_VOTE_COUNT: "myPageVoteCount" as const,
@@ -30,6 +31,8 @@ export const reactQueryKeys = {
   ) => [queryKeys.DETAIL_COMMENT_LIST, id, age, mbti, gender, sortBy] as const,
   detailVoteCount: (id: number) => [queryKeys.DETAIL_VOTE_COUNT, id] as const,
   detailAnalysis: (id: number) => [queryKeys.DETAIL_ANALYSIS, id] as const,
+  detailFilterdAnalysis: (id: number, mbti: string, gender: string, age: string) =>
+    [queryKeys.DETAIL_FILTERED_ANALYSIS, id, mbti, gender, age] as const,
   votingCheck: (id: number) => [queryKeys.VOTING_CHECK, id] as const,
   myPageVoteList: (params: VoteListType) => [queryKeys.MY_PAGE_VOTE_LIST, ...params] as const,
   myPageVoteCount: () => [queryKeys.MY_PAGE_VOTE_COUNT] as const,

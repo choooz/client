@@ -3,12 +3,14 @@ import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import VoteToolbar from "components/select/VoteToolbar";
 import { EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
+import useFilteredStatisticsService from "services/useFilteredStatisticsService";
 import useMutateVotingService from "services/useMutateVotingService";
 import useStatisticsService from "services/useStatisticsService";
 import useVoteLoadService from "services/useVoteLoadService";
 import styled from "styled-components";
 import DetailAB from "./DetailAB";
 import FilterBar from "./FilterBar";
+import useFilterStatistics from "./hooks/useFilterStatistics";
 import VoteAnalyzeBar from "./VoteAnalyzeBar";
 
 function VoteContainer({ postId }: { postId: number }) {
@@ -18,19 +20,36 @@ function VoteContainer({ postId }: { postId: number }) {
   const { data: VoteData, isLoading, isError } = useVoteLoadService(postId);
   const { voteCountQuery, voteStatisticsQuery } = useStatisticsService(postId);
   const {
+    filter,
+    onChangeFilter,
+    onDeleteFilter,
+    voteStatisticsQuery: voteFilteredStatisticsQuery,
+  } = useFilterStatistics(postId);
+  const {
     data: statisticsData,
     isError: isStatisticsError,
     isLoading: isStatisticsLoading,
   } = voteStatisticsQuery;
 
+  const {
+    data: filteredStatisticsData,
+    isError: isFilteredStatisticsError,
+    isLoading: isFilteredStatisticsLoading,
+  } = voteFilteredStatisticsQuery;
+
   const { select, onMutateVoting } = useMutateVotingService(postId);
 
-  if (isLoading || isStatisticsLoading) return <div>로딩중</div>;
-  if (isError || isStatisticsError) return <div>에러</div>;
-  if (!VoteData || !statisticsData) return <div>데이터 없음</div>;
+  if (isLoading || isStatisticsLoading || isFilteredStatisticsLoading) return <div>로딩중</div>;
+  if (isError || isStatisticsError || isFilteredStatisticsError) return <div>에러</div>;
+  if (!VoteData || !statisticsData || !filteredStatisticsData) return <div>데이터 없음</div>;
 
   const { percentageA, percentageB, totalCountA, totalCountB } = voteStatisticsQuery.data;
-
+  const {
+    percentageA: filteredPercentageA,
+    percentageB: filteredPercentageB,
+    totalCountA: filteredTotalCountA,
+    totalCountB: filteredTotalCountB,
+  } = voteFilteredStatisticsQuery.data;
   const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate, category } =
     VoteData;
   return (
@@ -51,12 +70,12 @@ function VoteContainer({ postId }: { postId: number }) {
         titleB={titleB}
         select={select.choice}
         onMutateVoting={onMutateVoting}
-        totalCountA={totalCountA}
-        totalCountB={totalCountB}
-        percentageA={percentageA}
-        percentageB={percentageB}
+        totalCountA={filteredTotalCountA}
+        totalCountB={filteredTotalCountB}
+        percentageA={filteredPercentageA}
+        percentageB={filteredPercentageB}
       />
-      <FilterBar />
+      <FilterBar filter={filter} onChangeFilter={onChangeFilter} onDeleteFilter={onDeleteFilter} />
       <VoteAnalyzeBar
         totalCountA={totalCountA}
         totalCountB={totalCountB}
