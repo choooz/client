@@ -11,15 +11,17 @@ function SearchResultPage({ params }: { params: { keyword: string } }) {
     size: 3,
     sortBy: "ByTime",
     category: null,
-    keyword: params.keyword,
+    keyword: decodeURI(params.keyword),
   });
   return (
     <PageWrapper>
       <PageInner>
         <FilterSection>
-          <ResultText>"{params.keyword}"에 대한 검색 결과</ResultText>
+          {/* @Note 쿼리 스트링에 한글이 들어가면 인코딩이 되어서 들어감 
+          근데 이걸 decodeURI로 디코딩해주면 한글이 깨져서 나옴 */}
+          <ResultText>"{decodeURI(params.keyword)}"에 대한 검색 결과</ResultText>
           <VoteLength>
-            총 <span>{voteList.length}</span>건
+            총 <span>{voteList.length.toLocaleString()}</span>건
           </VoteLength>
         </FilterSection>
         <VoteList voteList={voteList} />
