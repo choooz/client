@@ -1,6 +1,7 @@
 "use client";
 
 import { CategorySelect, SortSelect, VoteList } from "components/vote-list";
+import { SORT_LIST } from "lib/constants";
 import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
@@ -10,11 +11,12 @@ import { CategoryNameType } from "types/vote";
 function CategoryPage() {
   const [categoryOption, setCategoryOption] = useState("");
 
+  // @Todo option에 type 지정해주면 select 컴포넌트에서 충돌 발생
   const onChangeCategoryOption = (value: string) => {
     setCategoryOption(value);
   };
 
-  const [sortOption, setSortOption] = useState("ByTime");
+  const [sortOption, setSortOption] = useState(SORT_LIST[0].value);
 
   const onChangeSortOption = (value: string) => {
     setSortOption(value);

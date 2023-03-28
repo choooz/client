@@ -37,3 +37,5 @@ export interface MyPageVote extends Vote {
 export type AorB = "A" | "B";
 
 export type Voting = PostVotingRequest;
+
+export type SortOption = "ByTime" | "ByPoular";
