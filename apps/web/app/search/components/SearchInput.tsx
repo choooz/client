@@ -22,8 +22,6 @@ function SearchInput({
         placeholder="검색어를 입력하세요."
         isSearchRecommendation={isSearchRecommendation}
         onFocus={onToggleSearchRecommendation}
-        // @Todo SearchRecommendation 영역에서 onBlur 적용 안되게 수정 필요
-        onBlur={onToggleSearchRecommendation}
         onChange={onChangeKeyword}
       />
       <Link href={`search/${keyword}`}>

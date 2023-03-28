@@ -1,4 +1,4 @@
-import { useDebounce, useToggle } from "@chooz/hooks";
+import { useDebounce, useOutsideClick, useToggle } from "@chooz/hooks";
 import { getSearchRecommendationAPI } from "lib/apis/vote";
 import { useState } from "react";
 import SearchInput from "./SearchInput";
@@ -13,9 +13,9 @@ function SearchContainer() {
     setKeyword(e.target.value);
   };
 
-  useDebounce({ func: () => searchRecommendation(keyword), delay: 500, deps: [keyword] });
+  useDebounce({ func: () => getSearchRecommendation(keyword), delay: 500, deps: [keyword] });
 
-  const searchRecommendation = async (keyword: string) => {
+  const getSearchRecommendation = async (keyword: string) => {
     const { recommendKeywords } = await getSearchRecommendationAPI({
       keyword,
       category: null,
@@ -23,8 +23,13 @@ function SearchContainer() {
     setRecommendationKeywordList(recommendKeywords);
   };
 
+  const { targetEl } = useOutsideClick<HTMLDivElement>(
+    isSearchRecommendation,
+    onToggleSearchRecommendation,
+  );
+
   return (
-    <>
+    <div ref={targetEl}>
       <SearchInput
         isSearchRecommendation={isSearchRecommendation}
         onToggleSearchRecommendation={onToggleSearchRecommendation}
@@ -34,7 +39,7 @@ function SearchContainer() {
       {isSearchRecommendation && (
         <SearchRecommendation recommendationKeywordList={recommendationKeywordList} />
       )}
-    </>
+    </div>
   );
 }
 
