@@ -4,9 +4,7 @@ import { media } from "@chooz/ui/styles/media";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";
-import { ActiveType, Direction } from "types/vote";
-
-type GenderType = "FEMALE" | "MALE" | null;
+import { ActiveType, Direction, GenderType } from "types/vote";
 
 interface Props {
   gender: GenderType;

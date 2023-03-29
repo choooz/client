@@ -7,6 +7,7 @@ interface Props {
 
 function VoteList({ voteList }: Props) {
   if (!voteList) return null;
+
   return (
     <>
       {voteList.map((vote: Vote, index: number) => (

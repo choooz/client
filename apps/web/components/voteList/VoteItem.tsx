@@ -1,10 +1,12 @@
+"use client";
+
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
+import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
-import { BookmarkIcon } from "public/icons";
-import { Eximg1, Eximg2 } from "public/images";
-import styled from "styled-components";
+import { AIcon, BIcon, BookmarkIcon } from "public/icons";
+import styled, { css } from "styled-components";
 import { Vote } from "types/vote";
 
 interface Props {
@@ -12,22 +14,38 @@ interface Props {
 }
 
 function VoteItem({ vote }: Props) {
+  const { imageA, imageB, titleA, titleB, totalTitle, modifiedDate, countVoted } = vote;
+
   return (
     <Container>
-      <ImageContainer>
-        <Image alt="left image" src={Eximg1} style={LeftImageCss} />
-        <Image alt="right image" src={Eximg2} style={RightImageCss} />
-      </ImageContainer>
+      <ABImage>
+        {imageA ? (
+          <Image alt="left image" width={510} height={200} src={imageA} style={LeftImageCss} />
+        ) : (
+          <AItem>
+            <AIcon />
+            <ItemTitle>{titleA}</ItemTitle>
+          </AItem>
+        )}
+        {imageB ? (
+          <Image alt="right image" width={510} height={200} src={imageB} style={RightImageCss} />
+        ) : (
+          <BItem>
+            <BIcon />
+            <ItemTitle>{titleB}</ItemTitle>
+          </BItem>
+        )}
+      </ABImage>
       <VoteContainer>
         <MessageBox>
           <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
-          <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
+          <NumberOfSolver>🔥{countVoted}명 해결중!</NumberOfSolver>
         </MessageBox>
         <BookmarkIconStyled />
       </VoteContainer>
       <TitleContainer>
-        <VoteTitle>{vote.totalTitle}</VoteTitle>
-        <Date>11h</Date>
+        <VoteTitle>{totalTitle}</VoteTitle>
+        <VoteModifiedDate>{timeDataProcessing(modifiedDate)}</VoteModifiedDate>
       </TitleContainer>
     </Container>
   );
@@ -36,18 +54,12 @@ function VoteItem({ vote }: Props) {
 const Container = styled.div`
   margin-top: 20px;
   ${({ theme }) => theme.textStyle.Font_Minimum}
-  ${media.medium} {
-    height: 360px;
-  }
 `;
 
-const ImageContainer = styled.div`
+const ABImage = styled.div`
   display: flex;
   max-width: 560px;
   margin: 0 auto;
-  ${media.medium} {
-    width: 560px;
-  }
   /*  @todo 음영효과 추가
   ::after {
     content: "";
@@ -56,6 +68,39 @@ const ImageContainer = styled.div`
     width: 100px;
     height: 100px;
   } */
+`;
+
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  padding: 15% 0;
+  flex-grow: 1;
+  border-radius: 8px;
+  margin-right: 1px;
+  aspect-ratio: 1;
+`;
+
+const AItem = styled(Item)`
+  background-image: linear-gradient(169deg, #9bb7ff -8%, #00dacd 114%);
+`;
+
+const BItem = styled(Item)`
+  background-image: linear-gradient(to bottom, #ffa4d5 0%, #8054ff 100%);
+`;
+
+const ItemTitle = styled.span`
+  opacity: 0.8;
+  font-weight: 700;
+  ${({ theme }) =>
+    css`
+      color: ${theme.palette.ink.lightest};
+      ${theme.textStyle.Font_Regular}
+      ${media.medium} {
+        ${theme.textStyle.Title_Large}
+      }
+    `};
 `;
 
 const LeftImageCss = {
@@ -122,7 +167,7 @@ const VoteTitle = styled.h3`
   }
 `;
 
-const Date = styled.span`
+const VoteModifiedDate = styled.span`
   color: ${({ theme }) => theme.palette.ink.light};
   ${({ theme }) => theme.textStyle.Font_Regular}
   ${media.medium} {

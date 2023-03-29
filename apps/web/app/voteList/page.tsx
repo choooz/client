@@ -1,37 +1,41 @@
 "use client";
 
+import { useSelect } from "@chooz/ui";
 import { CategorySelectBox, SortSelectBox, VoteList } from "components/voteList";
-import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
 import { media } from "styles/media";
 import { CategoryNameType } from "types/vote";
 
 function VoteListPage() {
+  const [isCategoryOpen, onChangeCategoryOpen, categoryOption, onChangeCategoryOption] =
+    useSelect("");
+
   const { voteList, subscribe } = useInfiniteVoteListService({
     size: 3,
     sortBy: "ByTime",
+    category: categoryOption as CategoryNameType, // @Todo 강제 형변환하지 않고 useSelect에 제네릭으로 넘겨주게 하기
   });
-  const [selectedCategory, setSelectedCategory] = useState<CategoryNameType>();
-  const onChangeCategory = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory(e.target.value as CategoryNameType);
-  };
-  console.log(voteList);
 
   return (
     <PageWrapper>
       <PageInner>
         <FilterSection>
-          <CategorySelectBox />
+          <CategorySelectBox
+            isCategoryOpen={isCategoryOpen}
+            onChangeCategoryOpen={onChangeCategoryOpen}
+            categoryOption={categoryOption}
+            onChangeCategoryOption={onChangeCategoryOption}
+          />
           <RightFilterContainer>
             <SortSelectBox />
-            <div>
-              <input type="checkbox" />
+            <RadioBox>
+              <RadioButton type="radio" />
               선택만 보기
-            </div>
+            </RadioBox>
           </RightFilterContainer>
         </FilterSection>
-        <VoteList voteList={voteList} selectedCategory={selectedCategory} />
+        <VoteList voteList={voteList} />
         <div ref={subscribe} />
       </PageInner>
     </PageWrapper>
@@ -60,9 +64,19 @@ const FilterSection = styled.div`
 
 const RightFilterContainer = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   width: 183px;
   justify-content: space-between;
+`;
+
+const RadioBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const RadioButton = styled.input`
+  margin-right: 6px;
 `;
 
 export default VoteListPage;

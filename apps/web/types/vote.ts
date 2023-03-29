@@ -4,17 +4,24 @@ export type Direction = "left" | "right";
 
 export type ActiveType = "active" | "inactive" | null;
 
+export type GenderType = "FEMALE" | "MALE" | null;
 export interface Writer {
   imageUrl: string;
   nickname: string;
   userid: number;
 }
 export interface Vote {
+  titleA: string;
+  titleB: string;
   voteId: number;
-  category: CategoryNameType;
+  category: CategoryNameType | null;
   totalTitle: string;
   writer: Writer;
-  filteredAge: number;
-  filteredGender: boolean;
-  filteredMbti: string;
+  filteredAge: string | null;
+  filteredGender: GenderType | null;
+  filteredMbti: string | null;
+  modifiedDate: string;
+  countVoted: number;
+  imageA: string | null;
+  imageB: string | null;
 }
