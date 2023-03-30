@@ -2,29 +2,17 @@ import { AGE_LIST, MBTI_LIST } from "lib/constants";
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function FilterBar() {
-  const [filter, setFilter] = useState({
-    gender: "",
-    age: "",
-    mbti: "",
-  });
-
-  const onChangeFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    setFilter((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+interface Props {
+  filter: {
+    age: string;
+    mbti: string;
+    gender: string;
   };
+  onChangeFilter: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onDeleteFilter: (name: string) => void;
+}
 
-  const onDeleteFilter = (name: string) => {
-    setFilter((prev) => ({
-      ...prev,
-      [name]: "",
-    }));
-  };
-
+function FilterBar({ filter, onChangeFilter, onDeleteFilter }: Props) {
   return (
     <Container>
       <FilterBox>

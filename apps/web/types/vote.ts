@@ -39,3 +39,8 @@ export type AorB = "A" | "B";
 export type Voting = PostVotingRequest;
 
 export type SortOption = "ByTime" | "ByPoular";
+export interface Filter {
+  gender: string;
+  mbti: string;
+  age: string;
+}

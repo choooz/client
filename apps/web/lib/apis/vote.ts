@@ -142,6 +142,24 @@ export const getSearchVoteListAPI = async ({
   });
   return response.data.voteSlice;
 };
+export const getFilterdStatisticsById = async (
+  voteId: number,
+  gender: string,
+  mbti: string,
+  age: string,
+) => {
+  const response = await apiClient.get<GetVoteStatisticsResponse>(
+    `api/vote/${voteId}/select-statistics`,
+    {
+      params: {
+        gender,
+        mbti,
+        age,
+      },
+    },
+  );
+  return response.data;
+};
 
 interface GetSearchRecommendationRequest {
   keyword: string;
