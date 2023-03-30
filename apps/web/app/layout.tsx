@@ -5,8 +5,8 @@ import styled, { ThemeProvider } from "styled-components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GlobalStyles } from "styles/globalStyles";
-import Header from "components/common/Header";
 import StyledComponentsRegistry from "../lib/registry";
+import useReplaceUser from "hooks/useReplaceUser";
 
 function RootLayout({
   // Layouts must accept a children prop.
@@ -24,6 +24,8 @@ function RootLayout({
       },
     },
   });
+
+  useReplaceUser();
 
   return (
     <html lang="kr">
