@@ -43,28 +43,11 @@ function Header({ centerMenu, leftMenu, rightMenu }: Props) {
       case "menu":
         return (
           <RightMenu>
-            <Image
-              alt="마이페이지로"
-              src={MyPageIcon}
-              width={28}
-              height={28}
-              onClick={() => router.push(Path.MY_PAGE)}
-            />
-
-            <Image
-              alt="알람으로"
-              src={AlertIcon}
-              onClick={() => router.push("/")}
-              width={28}
-              height={28}
-            />
-            <Image
-              alt="매뉴로"
-              src={MoreIcon}
-              onClick={() => router.push("/")}
-              width={28}
-              height={28}
-            />
+            <Link href={Path.MY_PAGE}>
+              <Image alt="마이페이지로" src={MyPageIcon} width={28} height={28} />
+            </Link>
+            <Image alt="알람으로" src={AlertIcon} width={28} height={28} />
+            <Image alt="매뉴로" src={MoreIcon} width={28} height={28} />
           </RightMenu>
         );
       default:
