@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import useFilteredStatisticsService from "services/useFilteredStatisticsService";
-
-interface Filter {
-  age: string;
-  mbti: string;
-  gender: string;
-}
+import { Filter } from "types/vote";
 
 const useFilterStatistics = (postId: number) => {
   const [filter, setFilter] = useState<Filter>({
