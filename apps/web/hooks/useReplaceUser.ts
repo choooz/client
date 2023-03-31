@@ -13,7 +13,6 @@ export default function useReplaceUser() {
 
   useEffect(() => {
     if (isLogin()) {
-      console.log("pathname");
       if (
         pathname === Path.LOGIN_PAGE ||
         pathname === Path.REGISTER_PAGE ||
@@ -24,7 +23,11 @@ export default function useReplaceUser() {
         router.push(Path.MAIN_PAGE);
       }
     } else {
-      if (pathname === Path.MY_PAGE || pathname === Path.POST_PAGE || Path.PROFILE_EDIT) {
+      if (
+        pathname === Path.MY_PAGE ||
+        pathname === Path.POST_PAGE ||
+        pathname === Path.PROFILE_EDIT
+      ) {
         router.push(Path.LOGIN_PAGE);
       }
     }
