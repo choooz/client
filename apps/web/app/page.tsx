@@ -65,7 +65,7 @@ function SelectPage() {
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`${Path.MAIN_PAGE}detail/${mainVoteList[nowShowing].voteId}`}>
+            <Link href={`${Path.MAIN_PAGE}${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>

@@ -110,8 +110,8 @@ interface GetVoteStatisticsResponse {
 }
 
 export const getStatisticsById = async (voteId: number) => {
-  const response = await apiClient.get<GetVoteStatisticsResponse>(
-    `api/vote/${voteId}/select-statistics`,
+  const response = await axios.get<GetVoteStatisticsResponse>(
+    `${SERVER_URL}api/vote/${voteId}/select-statistics`,
   );
   return response.data;
 };
@@ -148,8 +148,8 @@ export const getFilterdStatisticsById = async (
   mbti: string,
   age: string,
 ) => {
-  const response = await apiClient.get<GetVoteStatisticsResponse>(
-    `api/vote/${voteId}/select-statistics`,
+  const response = await axios.get<GetVoteStatisticsResponse>(
+    `${SERVER_URL}api/vote/${voteId}/select-statistics`,
     {
       params: {
         gender,
