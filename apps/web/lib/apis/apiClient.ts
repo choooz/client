@@ -64,6 +64,8 @@ apiClient.interceptors.response.use(
             refreshToken: newRefreshToken,
           };
 
+          userStorage.set(choozUser);
+
           axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
 
           // 실패했던 요청 새로운 accessToken으로 재요청
@@ -71,8 +73,7 @@ apiClient.interceptors.response.use(
 
           return axios(originalRequest);
         } catch (e) {
-          // @Todo refresh 토큰 request가 두번씩 가고 있어서 에러가 남 로그아웃 임시 주석처리
-          // logout();ㅋ
+          logout();
         }
         break;
 
