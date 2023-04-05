@@ -1,6 +1,5 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
-import apiClient from "./apiClient";
 
 export type CodeType = string | string[];
 
@@ -21,17 +20,5 @@ interface NaverLoginRequest {
 
 export const naverLoginAPI = async (naverLoginRequest: NaverLoginRequest) => {
   const response = await axios.post(`${SERVER_URL}api/oauth/naver`, naverLoginRequest);
-  return response.data;
-};
-
-interface ReIssuanceTokenRequest {
-  tokenType: string;
-  refreshToken: string;
-}
-
-export const reIssuanceTokenAPI = async (reIssuanceTokenRequest: ReIssuanceTokenRequest) => {
-  const response = await apiClient.get(`api/token`, {
-    params: reIssuanceTokenRequest,
-  });
   return response.data;
 };
