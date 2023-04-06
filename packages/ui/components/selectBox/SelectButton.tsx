@@ -10,28 +10,27 @@ function SelectButton({ children, onChangeOpen }: SelectProps) {
     <>
       <StyledButton
         type="button"
+        // @todo 고유한 id를 만들어야함
         id="select-box-1"
         aria-haspopup="true"
         aria-expanded="true"
         aria-controls="select-list"
         onClick={onChangeOpen}
       >
-        <span>{children}</span>
+        <SelectedText className="selected-text-container">{children}</SelectedText>
       </StyledButton>
     </>
   );
 }
 
 const StyledButton = styled.button`
-  width: 80px;
-  height: 40px;
-  > span {
-    /* margin-right: 18px; */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
+  display: contents;
+`;
+
+const SelectedText = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default SelectButton;

@@ -1,13 +1,12 @@
 "use client";
 
-import { useToggle } from "@chooz/hooks";
+import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModal from "components/select/AddDetailModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
-import useOutSideClick from "hooks/useOutsideClick";
 import Image from "next/image";
 import Link from "next/link";
 import { AmplifyIcon } from "public/icons";
@@ -19,7 +18,7 @@ import { useSubmitState } from "store/submitState";
 import styled, { css } from "styled-components";
 import { Vote } from "types/vote";
 
-/** 
+/**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
  */
 function SelectPage() {
@@ -29,7 +28,7 @@ function SelectPage() {
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService();
-  const { targetEl } = useOutSideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
 
   const [select, setSelect] = useState<"A" | "B" | null>(null);
@@ -41,7 +40,7 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, totalTitle, imageA, imageB } = mainVoteList[nowShowing];
+  const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
   return (
     <>
       <PageWrapper>
@@ -57,9 +56,9 @@ function SelectPage() {
 
           <SelectAB
             imageA={imageA || ""}
-            titleA="화살표"
+            titleA={titleA || ""}
             imageB={imageB || ""}
-            titleB="화살살표"
+            titleB={titleB || ""}
             select={select}
             onChangeSelect={onChangeSelect}
           />

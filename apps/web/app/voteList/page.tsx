@@ -1,15 +1,24 @@
 "use client";
 
-import { useSelect } from "@chooz/ui";
-import { CategorySelectBox, SortSelectBox, VoteList } from "components/voteList";
+import { CategorySelect, SortSelect, VoteList } from "components/voteList";
+import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
 import { media } from "styles/media";
 import { CategoryNameType } from "types/vote";
 
 function VoteListPage() {
-  const [isCategoryOpen, onChangeCategoryOpen, categoryOption, onChangeCategoryOption] =
-    useSelect("");
+  const [categoryOption, setCategoryOption] = useState("");
+
+  const onChangeCategoryOption = (value: string) => {
+    setCategoryOption(value);
+  };
+
+  const [sortOption, setSortOption] = useState("ByTime");
+
+  const onChangeSortOption = (value: string) => {
+    setSortOption(value);
+  };
 
   const { voteList, subscribe } = useInfiniteVoteListService({
     size: 3,
@@ -21,14 +30,12 @@ function VoteListPage() {
     <PageWrapper>
       <PageInner>
         <FilterSection>
-          <CategorySelectBox
-            isCategoryOpen={isCategoryOpen}
-            onChangeCategoryOpen={onChangeCategoryOpen}
+          <CategorySelect
             categoryOption={categoryOption}
             onChangeCategoryOption={onChangeCategoryOption}
           />
           <RightFilterContainer>
-            <SortSelectBox />
+            <SortSelect sortOption={sortOption} onChangeSortOption={onChangeSortOption} />
             <RadioBox>
               <RadioButton type="radio" />
               선택만 보기
@@ -59,6 +66,7 @@ const PageInner = styled.div`
 
 const FilterSection = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 

@@ -1,13 +1,31 @@
 import styled, { css } from "styled-components";
+import Option from "./Option";
 
-interface OptionListProps {
-  children: React.ReactNode;
+interface Option {
+  value: string;
+  label: string;
+}
+interface Props {
+  options: Option[];
+  // @todo 수정하기
+  onChangeSelectedOption: (value: any) => void;
+  onToggleOpen: () => void;
 }
 
-function OptionList({ children }: OptionListProps) {
+function OptionList({ options, onChangeSelectedOption, onToggleOpen }: Props) {
   return (
-    <Ul aria-labelledby="select-box-1" id="select-list" role="listbox">
-      {children}
+    // @todo 고유한 id를 만들어야함
+    <Ul id="select-list" aria-labelledby="select-box-1" role="listbox">
+      {options.map(({ value, label }) => (
+        <Option
+          key={`select_${value}`}
+          label={label}
+          onChangeSelectedOption={() => {
+            onChangeSelectedOption(value);
+            onToggleOpen();
+          }}
+        />
+      ))}
     </Ul>
   );
 }
