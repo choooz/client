@@ -31,7 +31,7 @@ export default function useInfiniteMainListService(size: number, sortBy: string)
   };
 
   useEffect(() => {
-    if (nowShowing === mainVoteList.length - 1) fetchNextPage();
+    if (nowShowing === mainVoteList.length - 5) fetchNextPage();
   }, [nowShowing, mainVoteList.length]);
 
   return { data, isLoading, isError, mainVoteList, nowShowing, onChangeNowShowing };
