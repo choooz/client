@@ -3,6 +3,8 @@ import { getVoteListAPI } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 import { useEffect, useMemo, useState } from "react";
 
+const SafeRange = 5;
+
 export default function useInfiniteMainListService(size: number, sortBy: string) {
   const [nowShowing, setNowShowing] = useState(0);
 
@@ -31,7 +33,7 @@ export default function useInfiniteMainListService(size: number, sortBy: string)
   };
 
   useEffect(() => {
-    if (nowShowing === mainVoteList.length - 5) fetchNextPage();
+    if (nowShowing === mainVoteList.length - SafeRange) fetchNextPage();
   }, [nowShowing, mainVoteList.length]);
 
   return { data, isLoading, isError, mainVoteList, nowShowing, onChangeNowShowing };

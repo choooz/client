@@ -42,7 +42,6 @@ function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
     lastTouchEventTimeRef.current = now;
     //터치의 시작이 끝보다 위면 up, 아래면 down
     if (e.touches[0].clientY < e.changedTouches[0].clientY + 300) {
-      console.log("up");
       setDrag("up");
       setTimeout(() => {
         onChangeNowShowing(1);

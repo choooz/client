@@ -1,6 +1,6 @@
 "use client";
 
-import { useToggle, useOutsideClick, useDebounce } from "@chooz/hooks";
+import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import Header from "components/common/Header";
