@@ -15,7 +15,7 @@ const Path = {
 
   // common
   MAIN_PAGE: "/",
-  VOTE_DETAIL_PAGE: "/detail",
+  VOTE_DETAIL_PAGE: "/detail/",
   SEARCH_PAGE: "/search",
   CATEGORY_PAGE: "/search/list/",
 } as const;
