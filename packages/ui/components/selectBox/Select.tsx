@@ -1,6 +1,5 @@
-import { useOutsideClick, useToggle } from "@chooz/hooks";
+import { useOutsideClick } from "@chooz/hooks";
 import { Option, OptionList, SelectButton } from "@chooz/ui";
-import styled from "styled-components";
 
 interface Option {
   value: string;
@@ -11,11 +10,19 @@ interface SelectProps extends React.HTMLAttributes<HTMLDivElement> {
   defaultValue: string;
   onChangeSelectedOption: (value: string) => void;
   options: Option[];
+  isOpen: boolean;
+  onToggleOpen: () => void;
   children?: React.ReactNode;
 }
 
-function Select({ defaultValue, onChangeSelectedOption, options, children }: SelectProps) {
-  const [isOpen, onToggleOpen] = useToggle();
+function Select({
+  defaultValue,
+  onChangeSelectedOption,
+  options,
+  isOpen,
+  onToggleOpen,
+  children,
+}: SelectProps) {
   const { targetEl } = useOutsideClick<HTMLDivElement>(isOpen, onToggleOpen);
 
   return (
