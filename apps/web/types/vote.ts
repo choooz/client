@@ -1,3 +1,5 @@
+import { PostVotingRequest } from "lib/apis/vote";
+
 export type CategoryNameType = "FOODS" | "CAREER" | "LOVE" | "FASHION" | "INTEREST" | "NULL";
 
 export type Direction = "left" | "right";
@@ -15,7 +17,7 @@ export interface Vote {
   titleB: string;
   voteId: number;
   category: CategoryNameType | null;
-  totalTitle: string;
+  title: string;
   writer: Writer;
   filteredAge: string | null;
   filteredGender: GenderType | null;
@@ -25,3 +27,7 @@ export interface Vote {
   imageA: string | null;
   imageB: string | null;
 }
+
+export type AorB = "A" | "B";
+
+export type Voting = PostVotingRequest;

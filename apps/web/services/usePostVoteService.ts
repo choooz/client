@@ -1,12 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { postVoteAPI, PostVote } from "lib/apis/vote";
 import { uploadProfileImageAPI } from "lib/apis/upload";
-import { useSubmitState } from "store/submitState";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export default function usePostVoteService() {
-  const { setIsSubmit } = useSubmitState();
   const router = useRouter();
 
   const [vote, setVote] = useState<PostVote>({
@@ -107,7 +105,6 @@ export default function usePostVoteService() {
   const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
     onSuccess: () => {
       router.push("/select/1?isSuccess=true");
-      setIsSubmit(true);
     },
   });
 

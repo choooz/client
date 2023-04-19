@@ -1,13 +1,15 @@
-import { useMutation } from "@tanstack/react-query";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 import { modifyVoteAPI, ModifyVote } from "lib/apis/vote";
-import React, { useState } from "react";
+import { reactQueryKeys } from "lib/queryKeys";
+import React, { useEffect, useState } from "react";
 import { Vote } from "types/vote";
 
-function useModifyVoteService(initialValue: Vote) {
+function useModifyVoteService(onToggle: () => void, initialValue: Vote) {
+  const queryClient = new QueryClient();
   const [vote, setVote] = useState<ModifyVote>({
     title: "",
     detail: "",
-    category: "FOOD",
+    category: "NULL",
     titleA: "",
     titleB: "",
   });
@@ -35,9 +37,24 @@ function useModifyVoteService(initialValue: Vote) {
     });
   };
 
-  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, initialValue.voteId), {
+  // @TODO: detail값 추가되면 채워넣기
+  useEffect(() => {
+    if (!initialValue) return;
+    const { totalTitle, titleA, titleB, category, voteId } = initialValue;
+    setVote({
+      title: totalTitle,
+      detail: "",
+      category,
+      titleA,
+      titleB,
+    });
+  }, [initialValue]);
+
+  const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, initialValue?.voteId || 0), {
     onSuccess: () => {
-      alert("내용이 추가되었습니다. (여기까지 구현)");
+      alert("내용이 추가하기 성공.");
+      queryClient.invalidateQueries(reactQueryKeys.mainVoteList());
+      onToggle();
     },
   });
 

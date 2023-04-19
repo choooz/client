@@ -6,21 +6,48 @@ import CommentToolBar from "./CommentToolBar";
 import Comment from "./Comment";
 import Image from "next/image";
 import Link from "next/link";
-import { Reduction } from "public/icons";
+import { AmplifyIcon } from "public/icons";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getCommentById, postComment } from "lib/apis/comments";
+import { reactQueryKeys } from "lib/queryKeys";
+import useMutateCommentService from "services/useMutateCommentService";
 
-function CommentContainer() {
+interface Props {
+  postId: number;
+}
+
+function CommentContainer({ postId }: Props) {
+  const {
+    data: commentDatas,
+    isLoading,
+    isError,
+  } = useQuery(reactQueryKeys.detailCommentList(postId), () => getCommentById(postId));
+  const {
+    mutate: onSubmitComment,
+    commentForm,
+    onChangeCommentForm,
+  } = useMutateCommentService(postId);
+
+  if (isLoading) return <div>로딩중</div>;
+  if (isError) return <div>에러</div>;
+  if (!commentDatas) return <div>데이터 없음</div>;
+
   return (
     <Container>
-      <CommentToolBar />
-      <CommentForm />
-      <Comment />
-      <Comment /> <Comment />
-      <Comment /> <Comment />
-      <Comment />
+      <CommentToolBar commentCount={commentDatas.length} />
+      <CommentForm
+        commentForm={commentForm}
+        onChangeCommentForm={onChangeCommentForm}
+        onSubmitComment={onSubmitComment}
+      />
+      {commentDatas.map((commentData) => (
+        <Comment comment={commentData} key={`comment_${commentData.id}`} />
+      ))}
+
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-        <Link href="select/1/detail">
+        <Link href="select">
           <DetailButtonInner>
-            <Image alt="자세히 보기" src={Reduction} width={40} height={40} /> 간단히 보기
+            <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 간단히 보기
           </DetailButtonInner>
         </Link>
       </DetailButton>

@@ -1,12 +1,15 @@
-
 import React from "react";
 import styled, { css } from "styled-components";
 
-function CommentToolBar() {
+interface Props {
+  commentCount: number;
+}
+
+function CommentToolBar({ commentCount }: Props) {
   return (
     <Container>
       <Title>
-        댓글 <span className="point">0</span>
+        댓글 <span className="point">{commentCount}</span>
         <Select name="" id="">
           <option value="1">최신순</option>
           <option value="2">추천순</option>

@@ -19,6 +19,7 @@ function RootLayout({
 
   return (
     <html lang="kr">
+      <head></head>
       <body>
         <div id="portal" />
         <QueryClientProvider client={queryClient}>
@@ -26,10 +27,10 @@ function RootLayout({
           <StyledComponentsRegistry>
             <ThemeProvider theme={theme}>
               <GlobalStyles />
-              <div id="stars" />
-              <div id="stars2" />
-              <div id="stars3" />
               <Applayout>
+                <div id="stars" />
+                <div id="stars2" />
+                <div id="stars3" />
                 <Header />
                 {children}
               </Applayout>
@@ -44,9 +45,10 @@ function RootLayout({
 const Applayout = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
   padding: 0 16px;
   flex: 1;
+  overflow: hidden;
 `;
 
 export default RootLayout;

@@ -9,41 +9,42 @@ import SelectAB from "components/select/SelectAB";
 import VoteToolbar from "components/select/VoteToolbar";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AmplifyIcon } from "public/icons";
 import { Success } from "public/images";
 import React, { useState } from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useModifyVoteService from "services/useModifyVoteService";
-import { useSubmitState } from "store/submitState";
+import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
-import { Vote } from "types/vote";
+import { AorB } from "types/vote";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
  */
 function SelectPage() {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const router = useRouter();
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService(10, "ByTime");
-  const { isSubmit, onToggleisSubmit } = useSubmitState();
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
-    mainVoteList[nowShowing],
-  );
-
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
+  const { select, onChangeSelect } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
-  const [select, setSelect] = useState<"A" | "B" | null>(null);
-  const onChangeSelect = (select: "A" | "B") => {
-    setSelect(select);
-  };
+  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
+    onChangeToggleDetail,
+    mainVoteList[nowShowing],
+  );
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, totalTitle, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+  const { modifiedDate, title, imageA, imageB, titleA, titleB } = mainVoteList[nowShowing];
+  console.log(mainVoteList[nowShowing]);
   return (
     <>
       <PageWrapper>
@@ -53,7 +54,7 @@ function SelectPage() {
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
             targetEl={targetEl}
-            title={totalTitle}
+            title={title}
             date={modifiedDate}
           />
 
@@ -62,12 +63,12 @@ function SelectPage() {
             titleA={titleA || ""}
             imageB={imageB || ""}
             titleB={titleB || ""}
-            select={select}
+            select={select.choice}
             onChangeSelect={onChangeSelect}
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`select/detail`}>
+            <Link href={`select/detail/${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>
@@ -78,8 +79,14 @@ function SelectPage() {
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
 
-      {isSubmit && (
-        <FloatModalTemplate onToggleModal={onToggleisSubmit}>
+      {params.get("isSuccess") && (
+        <FloatModalTemplate
+          onToggleModal={() => {
+            // 메인페이지 url 변경할때 같이 수정해야함
+            router.push("/select/1?isSuccess=");
+            console.log("작동");
+          }}
+        >
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
         </FloatModalTemplate>
@@ -112,7 +119,6 @@ const PageInner = styled.div<{ drag: Drag }>`
   height: 525px;
   background-color: ${({ theme }) => theme.palette.background.white};
   max-width: 640px;
-  position: relative;
   padding: 30px;
   z-index: 1000;
   width: 100%;

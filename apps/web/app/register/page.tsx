@@ -68,14 +68,14 @@ const PageWrapper = styled.div`
 const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
-  height: 558px;
+  height: calc(100vh - 68px - 55px);
   background-color: white;
   max-width: 640px;
   position: relative;
   padding: 30px;
   ${media.medium} {
-    height: 717px;
-    padding: 80px;
+    padding: 60px;
+    height: calc(100vh - 68px - 55px);
   }
 `;
 

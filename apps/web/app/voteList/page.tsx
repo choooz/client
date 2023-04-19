@@ -60,6 +60,12 @@ const PageInner = styled.div`
   max-width: 640px;
   position: relative;
   padding: 20px;
+  height: calc(100vh - 30px - 55px);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   ${media.medium} {
     padding: 20px 40px;
   }

@@ -1,10 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { AorB } from "types/vote";
 
 interface Props {
   A: number;
   B: number;
-  select: "A" | "B";
+  select: AorB | null;
 }
 
 function VoteAnalyzeBar({ A, B, select }: Props) {

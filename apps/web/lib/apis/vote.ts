@@ -1,4 +1,4 @@
-import { CategoryNameType } from "types/vote";
+import { AorB, CategoryNameType } from "types/vote";
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
 import { Vote } from "types/vote";
@@ -34,7 +34,7 @@ interface GetVoteListResponse {
 }
 
 export const getVoteListAPI = async ({ page, size, sortBy, category }: GetVoteListRequest) => {
-  const response = await apiClient.get<GetVoteListResponse>("api/votes", {
+  const response = await axios.get<GetVoteListResponse>(`${SERVER_URL}api/votes`, {
     params: {
       page,
       size,
@@ -66,7 +66,7 @@ export const postVoteAPI = async (body: PostVoteRequest) => {
 interface ModifyVoteRequest {
   title: string;
   detail: string;
-  category: string;
+  category: CategoryNameType | null;
   titleA: string;
   titleB: string;
 }
@@ -78,18 +78,15 @@ export const modifyVoteAPI = async (body: ModifyVoteRequest, voteId: number) => 
   return response.data;
 };
 
-interface TempVote {}
-
 interface GetVoteByIdResponst {
   user: {
-    userImage: string;
+    userImage: string | null;
     userGender: string;
     userAge: number;
     userMbti: string;
     nickName: null;
   };
-  nickName: null;
-  voteCreatedDate: Date;
+  voteCreatedDate: string;
   category: null;
   title: string;
   imageA: string;
@@ -99,9 +96,16 @@ interface GetVoteByIdResponst {
   filteredMbti: string;
   titleA: string;
   titleB: string;
-  description: null;
+  description: string;
 }
 export const getVoteByIdAPI = async (id: number) => {
   const response = await axios.get<GetVoteByIdResponst>(`${SERVER_URL}api/votes/${id}`);
+  return response.data;
+};
+export interface PostVotingRequest {
+  choice: AorB | null;
+}
+export const postVotingAPI = async (body: PostVotingRequest, voteId: number) => {
+  const response = await apiClient.post(`api/votes/${voteId}/voting`, body);
   return response.data;
 };
