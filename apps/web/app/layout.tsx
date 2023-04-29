@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GlobalStyles } from "styles/globalStyles";
 import StyledComponentsRegistry from "../lib/registry";
 import useReplaceUser from "hooks/useReplaceUser";
+import Header from "components/common/header/Header";
 
 function RootLayout({
   // Layouts must accept a children prop.
@@ -37,6 +38,7 @@ function RootLayout({
           <StyledComponentsRegistry>
             <ThemeProvider theme={theme}>
               <GlobalStyles />
+              <Header />
               <Applayout>
                 <div id="stars" />
                 <div id="stars2" />
