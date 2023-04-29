@@ -10,7 +10,7 @@ export function getTokens() {
 
 export function logout() {
   userStorage.remove();
-  window.location.replace(Path.LOGIN_PAGE);
+  window.location.replace(Path.MAIN_PAGE);
 }
 
 export function isLogin() {
