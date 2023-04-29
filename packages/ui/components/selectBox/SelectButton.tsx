@@ -17,7 +17,7 @@ function SelectButton({ children, onChangeOpen }: SelectProps) {
         aria-controls="select-list"
         onClick={onChangeOpen}
       >
-        <SelectedText className="selected-text-container">{children}</SelectedText>
+        <SelectedText className="selected-label">{children}</SelectedText>
       </StyledButton>
     </>
   );

@@ -9,11 +9,11 @@ interface ButtonStyledProps {
   /**
    * 버튼 가로 길이
    */
-  width: `${number}px` | `${number}%`;
+  width?: `${number}px` | `${number}%`;
   /**
    * 버튼 세로 길이
    */
-  height: `${number}px` | `${number}%`;
+  height?: `${number}px` | `${number}%`;
   /**
    * 버튼 둥글기
    */
