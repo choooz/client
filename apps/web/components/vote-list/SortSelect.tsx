@@ -33,7 +33,7 @@ const SelectStyled = styled.span<{ isOpen: boolean }>`
     ${({ theme }) => theme.textStyle.Font_Regular};
     width: 80px;
     height: 40px;
-    .selected-text-container {
+    .selected-label {
       border: 1px solid ${theme.palette.border.base};
       border-radius: 4px;
       padding: 11px 13px;
