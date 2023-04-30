@@ -1,15 +1,24 @@
+import { useOutsideClick, useToggle } from "@chooz/hooks";
+import { Button } from "@chooz/ui";
+import WarningSmallModal from "components/register/WarningSmallModal";
+import MenuBox from "components/select/MenuBox";
 import Image from "next/image";
 import { HambergerIcon } from "public/icons";
 import { PurpleMonster } from "public/images";
 import React from "react";
+import useUpdateCommnetService from "services/useUpdateCommnetService";
 import styled, { css } from "styled-components";
 import { Comment } from "types/comments";
+import CommentDeleteModal from "./CommentDeleteModal";
 
 interface Props {
   comment: Comment;
+  mutateDeleteComment(): void;
+  mutateLike(): void;
+  mutateHate(): void;
 }
 
-function Comment({ comment }: Props) {
+function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props) {
   const {
     id,
     content,
@@ -24,6 +33,10 @@ function Comment({ comment }: Props) {
     parentId,
     userId,
   } = comment;
+
+  const [toggleMenu, onToggleMenu] = useToggle(false);
+  const [toggleWarningModal, onToggleWarningModal] = useToggle(false);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onToggleMenu);
 
   return (
     <Container>
@@ -51,12 +64,12 @@ function Comment({ comment }: Props) {
         <CommentInfo>
           <div>{createdDate.slice(0, 10)}</div>
           <Comma />
-          <div>❤️ 좋아요 {likeCount}</div> <Comma />
-          <div>🖤 싫어요 {hateCount}</div> <Comma />
+          <div onClick={mutateLike}>❤️ 좋아요 {likeCount}</div> <Comma />
+          <div onClick={mutateHate}>🖤 싫어요 {hateCount}</div> <Comma />
           <div>답글쓰기</div>
         </CommentInfo>
       </ContentsBox>
-      <div>
+      <div onClick={onToggleMenu} ref={targetEl}>
         <Image
           src={HambergerIcon}
           alt="더보기"
@@ -66,6 +79,10 @@ function Comment({ comment }: Props) {
           }}
         />
       </div>
+      {toggleMenu && <MenuBox isDelete onDelete={onToggleWarningModal} right="20px" />}
+      {toggleWarningModal && (
+        <CommentDeleteModal onToggleModal={onToggleWarningModal} onSubmit={mutateDeleteComment} />
+      )}
     </Container>
   );
 }
@@ -74,6 +91,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  position: relative;
 `;
 
 const Flex = styled.div`
@@ -93,7 +111,7 @@ const Contents = styled.div`
   display: flex;
   align-items: center;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.dark};
+    color: ${theme.palette.ink.darker};
   `}
 `;
 
@@ -104,7 +122,7 @@ const TagBox = styled.div`
   width: auto;
   ${({ theme }) => css`
     background-color: ${theme.palette.background.soft};
-    color: ${theme.palette.ink.light};
+    color: ${theme.palette.ink.base};
     ${theme.textStyle.Font_Minimum}
   `}
 `;
@@ -121,7 +139,7 @@ const DivideTag = styled.div`
 const NickName = styled.div`
   font-weight: 700;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.dark};
+    color: ${theme.palette.ink.darker};
     ${theme.textStyle.Font_Regular}
   `}
 `;
@@ -131,7 +149,7 @@ const CommentInfo = styled.div`
   align-items: center;
   gap: 4px;
   ${({ theme }) => css`
-    color: ${theme.palette.ink.light};
+    color: ${theme.palette.ink.base};
     ${theme.textStyle.Font_Minimum}
   `}
 `;

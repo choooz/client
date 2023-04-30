@@ -1,6 +1,7 @@
 import { Input } from "@chooz/ui";
 import Image from "next/image";
-import { Eximg1 } from "public/images";
+import { PurpleMonster } from "public/images";
+
 import React from "react";
 import styled, { css } from "styled-components";
 import { CommentForm } from "types/comments";
@@ -9,20 +10,19 @@ interface Props {
   commentForm: CommentForm;
   onSubmitComment: () => void;
   onChangeCommentForm: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  profileImage?: string;
 }
 
-function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Props) {
+function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment, profileImage }: Props) {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmitComment();
   };
 
-  console.log(commentForm);
-
   return (
     <Container>
       <Image
-        src={Eximg1}
+        src={profileImage || PurpleMonster}
         alt="댓글 프로필"
         style={{
           width: "40px",

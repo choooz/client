@@ -13,6 +13,7 @@ interface Props {
   targetEl: React.RefObject<HTMLImageElement>;
   title: string;
   date: string;
+  totalVoteCount?: number;
 }
 
 function VoteToolbar({
@@ -22,12 +23,13 @@ function VoteToolbar({
   toggleMenu,
   targetEl,
   date,
+  totalVoteCount = 0,
 }: Props) {
   return (
     <>
       <TagRow>
         <FlexRow>
-          <NumberOfSolver>🔥3,645명 해결중!</NumberOfSolver>
+          <NumberOfSolver>🔥{totalVoteCount.toLocaleString()}명 해결중!</NumberOfSolver>
           <TargetMessage>당신을 기다렸어요</TargetMessage>
         </FlexRow>
         <FlexRow>
@@ -46,7 +48,16 @@ function VoteToolbar({
         {title}
         <DateText>{date.slice(0, 10)}</DateText>
       </TitleRow>
-      {toggleMenu && <MenuBox onChangeToggleDetail={onChangeToggleDetail} />}
+      {toggleMenu && (
+        <MenuBox
+          top="70px"
+          right="41px"
+          isDelete
+          isModify
+          onDelete={() => void 0}
+          onModify={onChangeToggleDetail}
+        />
+      )}
     </>
   );
 }
@@ -70,7 +81,7 @@ const TitleRow = styled.div`
 `;
 
 const DateText = styled.div`
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.base};
   font-weight: 400;
   font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
     Roboto, "Helvetica Neue";

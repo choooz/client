@@ -55,24 +55,35 @@ export const AGE_LIST = [
 ];
 
 export const MBTI_LIST = [
-  { id: "ESTP", name: "ESTP" },
-  { id: "ESFP", name: "ESFP" },
-  { id: "ENFP", name: "ENFP" },
-  { id: "ENTP", name: "ENTP" },
-  { id: "ESTJ", name: "ESTJ" },
-  { id: "ESFJ", name: "ESFJ" },
-  { id: "ENFJ", name: "ENFJ" },
-  { id: "ENTJ", name: "ENTJ" },
-  { id: "ISTJ", name: "ISTJ" },
-  { id: "ISFJ", name: "ISFJ" },
-  { id: "INFJ", name: "INFJ" },
-  { id: "INTJ", name: "INTJ" },
-  { id: "ISTP", name: "ISTP" },
-  { id: "ISFP", name: "ISFP" },
-  { id: "INFP", name: "INFP" },
-  { id: "INTP", name: "INTP" },
+  { value: "ESTP", label: "ESTP" },
+  { value: "ESFP", label: "ESFP" },
+  { value: "ENFP", label: "ENFP" },
+  { value: "ENTP", label: "ENTP" },
+  { value: "ESTJ", label: "ESTJ" },
+  { value: "ESFJ", label: "ESFJ" },
+  { value: "ENFJ", label: "ENFJ" },
+  { value: "ENTJ", label: "ENTJ" },
+  { value: "ISTJ", label: "ISTJ" },
+  { value: "ISFJ", label: "ISFJ" },
+  { value: "INFJ", label: "INFJ" },
+  { value: "INTJ", label: "INTJ" },
+  { value: "ISTP", label: "ISTP" },
+  { value: "ISFP", label: "ISFP" },
+  { value: "INFP", label: "INFP" },
+  { value: "INTP", label: "INTP" },
 ];
 export const PREV = -1;
 export const NEXT = 1;
 export const FIRST_STEP = 1;
 export const SECOND_STEP = 2;
+
+export const MY_PAGE_VOTE_TYPE = [
+  { id: "created", name: "✍ 작성한 투표" },
+  { id: "participated", name: "👍 참여한 투표" },
+  { id: "bookmarked", name: "📑 북마크 투표" },
+];
+
+export const PROFILE_EDIT_PAGE_TAB_LIST = [
+  { id: "profile_modify", name: "🖋 프로필 수정" },
+  { id: "notice", name: "🔔 알림" },
+];

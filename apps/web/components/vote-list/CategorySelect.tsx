@@ -31,7 +31,7 @@ const SelectStyled = styled.div`
 
   ${({ theme }) => `
     ${theme.textStyle.Title_Large};
-    color: ${theme.palette.ink.dark};
+    color: ${theme.palette.ink.darker};
     .selected-text-container {
         font-weight: 700;
       }
