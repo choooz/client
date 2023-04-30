@@ -13,6 +13,7 @@ import { reactQueryKeys } from "lib/queryKeys";
 import useMutateCommentService from "services/useMutateCommentService";
 import useUpdateCommnetService from "services/useUpdateCommnetService";
 import useCommentFilter from "./hooks/useCommentFilter";
+import { useGetUserInfo } from "hooks/useGetUserInfo";
 
 interface Props {
   postId: number;
@@ -47,6 +48,8 @@ function CommentContainer({ postId }: Props) {
   } = useMutateCommentService(postId);
   const { mutateDeleteComment, mutateLike, mutateHate } = useUpdateCommnetService(postId);
 
+  const { data: userInfo } = useGetUserInfo();
+
   if (isLoading) return <div>로딩중</div>;
   if (isError) return <div>에러</div>;
   if (!comments) return <div>데이터 없음</div>;
@@ -63,6 +66,7 @@ function CommentContainer({ postId }: Props) {
         commentForm={commentForm}
         onChangeCommentForm={onChangeCommentForm}
         onSubmitComment={onSubmitComment}
+        profileImage={userInfo?.imageUrl}
       />
       {commentDatas.map((commentData) => (
         <Comment
