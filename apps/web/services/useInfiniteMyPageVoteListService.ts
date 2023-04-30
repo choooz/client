@@ -1,18 +1,16 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInfiniteScroll } from "hooks/useInfiniteScroll";
-import { getVoteListAPI, GetVoteListRequest } from "lib/apis/vote";
+import { getMyPageVoteList, GetMyPageVoteListRequest } from "lib/apis/user";
+
 import { reactQueryKeys } from "lib/queryKeys";
 
-type Params = Omit<GetVoteListRequest, "page">;
+type Params = Omit<GetMyPageVoteListRequest, "page">;
 
-export default function useInfiniteVoteListService(params: Params) {
+// @Todo infinite service 합칠 수 있는 방법 고민하기
+export default function useInfiniteMyPageVoteListService(params: Params) {
   const { data, fetchNextPage } = useInfiniteQuery(
-    reactQueryKeys.voteList([params.sortBy, params.category]),
-    ({ pageParam }) =>
-      getVoteListAPI({
-        ...params,
-        page: pageParam?.page || 0,
-      }),
+    reactQueryKeys.voteList([params.voteType]),
+    ({ pageParam }) => getMyPageVoteList({ ...params, page: pageParam?.page || 0 }),
     {
       getNextPageParam: ({ last, number }) => {
         if (last) return undefined;

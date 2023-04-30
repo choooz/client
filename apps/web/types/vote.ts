@@ -16,6 +16,7 @@ export interface Vote {
   titleA: string;
   titleB: string;
   voteId: number;
+  detail: string;
   category: CategoryNameType | null;
   title: string;
   writer: Writer;
@@ -26,6 +27,10 @@ export interface Vote {
   countVoted: number;
   imageA: string | null;
   imageB: string | null;
+}
+
+export interface MyPageVote extends Vote {
+  countComment: number;
 }
 
 export type AorB = "A" | "B";

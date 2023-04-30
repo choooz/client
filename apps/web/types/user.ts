@@ -12,6 +12,8 @@ export enum Gender {
 
 export type SocialType = "NAVER" | "KAKAO";
 
+export type Agetype = "teenager" | "twenties" | "thirties" | "forties" | "fifties" | null;
+
 export interface UserInfo {
   gender: "MALE" | "FEMALE" | null;
   MBTI: MBTIType;
@@ -27,5 +29,6 @@ export interface GetUserInfoResponse {
   imageUrl: string;
   age: string;
   gender: "MALE" | "FEMALE";
-  MBTI: MBTIType;
+  // @Todo mbti source 하나로 통일
+  mbti: string;
 }

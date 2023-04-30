@@ -22,31 +22,27 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
         <br /> 선택사항이니 부담갖지 않아도 돼요.
       </DescriptionText>
       <VoteBox>
-        {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => {
-          return (
-            <>
-              <Vote
-                width="48%"
-                height="100%"
-                borderRadius="10px"
-                key={value}
-                selected={categoryLists.includes(value)}
-                onClick={onClickCategory}
-                name={value}
-              >
-                <Image alt="항목" src={image} height={32} />
-                <VoteText>
-                  {categoryLists.includes(value) && (
-                    <CheckBoxWrapper>
-                      <Image alt="선택" src={CheckRound} width={16} />
-                    </CheckBoxWrapper>
-                  )}
-                  {label}
-                </VoteText>
-              </Vote>
-            </>
-          );
-        })}
+        {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => (
+          <Vote
+            width="48%"
+            height="100%"
+            borderRadius="10px"
+            key={value}
+            selected={categoryLists.includes(value)}
+            onClick={onClickCategory}
+            name={value}
+          >
+            <Image alt="항목" src={image} height={32} />
+            <VoteText>
+              {categoryLists.includes(value) && (
+                <CheckBoxWrapper>
+                  <Image alt="선택" src={CheckRound} width={16} />
+                </CheckBoxWrapper>
+              )}
+              {label}
+            </VoteText>
+          </Vote>
+        ))}
       </VoteBox>
       <ButtonWrapper>
         <CompleteButton variant="primary" width="100%" height="56px" onClick={onClickComplete}>
@@ -70,7 +66,7 @@ const WelcomeText = styled.div`
 const DescriptionText = styled.div`
   padding-bottom: 32px;
   animation: ${transitions.delaypopInFromBottom} 0.9s ease-in-out;
-  color: ${({ theme }) => theme.palette.ink.light};
+  color: ${({ theme }) => theme.palette.ink.base};
   ${({ theme }) => theme.textStyle.Title_Small};
 `;
 

@@ -10,6 +10,7 @@ import { useEffect } from "react";
 function kakaoLoginProcess() {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const code = searchParams.get("code") ?? "";
 
   useEffect(() => {

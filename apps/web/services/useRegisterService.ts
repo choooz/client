@@ -1,5 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
-import { addInfoAPI, addInterestCategoryAPI, getUserInfo } from "lib/apis/user";
+import { addInfoAPI, addInterestCategoryAPI } from "lib/apis/user";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
@@ -8,7 +7,6 @@ import { CategoryNameType } from "types/vote";
 
 export default function useRegisterService() {
   const router = useRouter();
-  const queryClient = new QueryClient();
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
     gender: null,
@@ -62,7 +60,6 @@ export default function useRegisterService() {
       alert(error);
     }
   };
-
   // @note interest page
 
   const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);

@@ -21,17 +21,6 @@ interface GetVoteListResponse {
     size: number;
   };
 }
-interface GetVoteListResponse {
-  voteSlice: {
-    content: Vote[];
-    empty: boolean;
-    first: boolean;
-    last: boolean;
-    number: number;
-    numberOfElements: number;
-    size: number;
-  };
-}
 
 export const getVoteListAPI = async ({ page, size, sortBy, category }: GetVoteListRequest) => {
   const response = await axios.get<GetVoteListResponse>(`${SERVER_URL}api/votes`, {
@@ -105,7 +94,24 @@ export const getVoteByIdAPI = async (id: number) => {
 export interface PostVotingRequest {
   choice: AorB | null;
 }
-export const postVotingAPI = async (body: PostVotingRequest, voteId: number) => {
-  const response = await apiClient.post(`api/votes/${voteId}/voting`, body);
+
+export const getVoteCountById = async (voteId: number) => {
+  const response = await apiClient.get(`api/vote/${voteId}/total-statistics`);
+  return response.data;
+};
+
+interface GetVoteStatisticsResponse {
+  message: string;
+  percentageA: number;
+  percentageB: number;
+  totalCountA: number;
+  totalCountB: number;
+  voteId: number;
+}
+
+export const getStatisticsById = async (voteId: number) => {
+  const response = await apiClient.get<GetVoteStatisticsResponse>(
+    `api/vote/${voteId}/select-statistics`,
+  );
   return response.data;
 };
