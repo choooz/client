@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { getTokens, logout } from "lib/utils/auth";
+import { logout } from "lib/utils/auth";
 import userStorage from "lib/utils/userStorage";
 import { SERVER_URL } from "../constants";
 import { reIssuanceTokenAPI } from "./auth";
@@ -16,7 +16,7 @@ apiClient.interceptors.request.use(
       throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
     }
 
-    const tokens = getTokens();
+    const tokens = userStorage.get();
     if (!tokens) throw new Error("No tokens found");
     const { accessToken } = tokens;
 
@@ -42,7 +42,7 @@ apiClient.interceptors.response.use(
       case 401:
         const originalRequest = config;
 
-        const tokens = getTokens();
+        const tokens = userStorage.get();
         if (!tokens) throw new Error("No tokens found");
         const { refreshToken } = tokens;
 
@@ -51,17 +51,13 @@ apiClient.interceptors.response.use(
             tokenType: "ACCESS",
             refreshToken,
           });
-          const { token: newRefreshToken } = await reIssuanceTokenAPI({
-            tokenType: "REFRESH",
-            refreshToken,
-          });
 
           const user = userStorage.get();
           if (!user) throw new Error("No user found");
 
           const choozUser = {
             accessToken: newAccessToken,
-            refreshToken: newRefreshToken,
+            refreshToken,
           };
 
           userStorage.set(choozUser);
@@ -73,8 +69,7 @@ apiClient.interceptors.response.use(
 
           return axios(originalRequest);
         } catch (e) {
-          // @Todo refresh 토큰 request가 두번씩 가고 있어서 에러가 남 로그아웃 임시 주석처리
-          // logout();
+          logout();
         }
         break;
 
