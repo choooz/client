@@ -21,6 +21,10 @@ export default function useMutateCommentService(voteId: number) {
   const { mutate } = useMutation(() => postComment(commentForm, voteId), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
+      setCommentForm({
+        content: "",
+        parentId: null,
+      });
     },
   });
 

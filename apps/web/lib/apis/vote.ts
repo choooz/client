@@ -110,8 +110,71 @@ interface GetVoteStatisticsResponse {
 }
 
 export const getStatisticsById = async (voteId: number) => {
-  const response = await apiClient.get<GetVoteStatisticsResponse>(
-    `api/vote/${voteId}/select-statistics`,
+  const response = await axios.get<GetVoteStatisticsResponse>(
+    `${SERVER_URL}api/vote/${voteId}/select-statistics`,
   );
+  return response.data;
+};
+
+export interface GetSearchVoteListRequest {
+  keyword: string;
+  page: number;
+  size: number;
+  sortBy: string;
+  category?: CategoryNameType | null;
+}
+
+export const getSearchVoteListAPI = async ({
+  keyword,
+  page,
+  size,
+  sortBy,
+  category,
+}: GetSearchVoteListRequest) => {
+  const response = await axios.get(`${SERVER_URL}api/votes/search`, {
+    params: {
+      keyword,
+      sortBy,
+      page,
+      size,
+      category,
+    },
+  });
+  return response.data.voteSlice;
+};
+export const getFilterdStatisticsById = async (
+  voteId: number,
+  gender: string,
+  mbti: string,
+  age: string,
+) => {
+  const response = await axios.get<GetVoteStatisticsResponse>(
+    `${SERVER_URL}api/vote/${voteId}/select-statistics`,
+    {
+      params: {
+        gender,
+        mbti,
+        age,
+      },
+    },
+  );
+  return response.data;
+};
+
+interface GetSearchRecommendationRequest {
+  keyword: string;
+  category?: CategoryNameType | null;
+}
+
+export const getSearchRecommendationAPI = async ({
+  keyword,
+  category,
+}: GetSearchRecommendationRequest) => {
+  const response = await axios.get(`${SERVER_URL}api/votes/recommend`, {
+    params: {
+      keyword,
+      category,
+    },
+  });
   return response.data;
 };

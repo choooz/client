@@ -48,7 +48,7 @@ const SelectedButton = styled.button<{ selected: boolean }>`
         `
       : css`
           color: ${theme.palette.ink.light};
-          background-color: ${theme.palette.background.myPageInactve};
+          background-color: ${theme.palette.background.darker};
         `};
 `;
 

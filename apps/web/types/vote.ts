@@ -1,5 +1,6 @@
 import { PostVotingRequest } from "lib/apis/vote";
 
+// @Todo ui타입과 api타입을 분리해야할 것 같다. null값 땜시
 export type CategoryNameType = "FOODS" | "CAREER" | "LOVE" | "FASHION" | "INTEREST" | "NULL";
 
 export type Direction = "left" | "right";
@@ -36,3 +37,10 @@ export interface MyPageVote extends Vote {
 export type AorB = "A" | "B";
 
 export type Voting = PostVotingRequest;
+
+export type SortOption = "ByTime" | "ByPoular";
+export interface Filter {
+  gender: string;
+  mbti: string;
+  age: string;
+}

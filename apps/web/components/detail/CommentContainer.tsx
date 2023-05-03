@@ -33,7 +33,7 @@ function CommentContainer({ postId }: Props) {
     {
       getNextPageParam: (lastPage, pages) => {
         // @NOTE 백엔드에서 last 작동이 안되어 주석
-        // if (lastPage.last) return undefined;
+        if (lastPage.last) return undefined;
         return pages.length + 1;
       },
       keepPreviousData: true,
@@ -93,6 +93,7 @@ function CommentContainer({ postId }: Props) {
 }
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -100,7 +101,7 @@ const Container = styled.div`
 
 const DetailButton = styled(Button)`
   position: absolute;
-  bottom: -24px;
+  bottom: -50px;
   right: 50%;
   transform: translateX(50%);
 `;

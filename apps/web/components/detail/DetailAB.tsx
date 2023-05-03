@@ -1,4 +1,5 @@
 import Image, { StaticImageData } from "next/image";
+import { CheckRound } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
@@ -72,8 +73,15 @@ function DetailAB({
         </RightVote>
       </ImageWrapper>
       <FlexRow>
-        <SmallTitle>{titleA}</SmallTitle>
-        <SmallTitle>{titleB}</SmallTitle>
+        <SmallTitle>
+          {select === "A" && <Image alt="선택" src={CheckRound} width={16} />}
+          {titleA}
+        </SmallTitle>
+
+        <SmallTitle>
+          {select === "B" && <Image alt="선택" src={CheckRound} width={16} />}
+          {titleB}
+        </SmallTitle>
       </FlexRow>
     </Container>
   );
@@ -98,6 +106,9 @@ const SmallTitle = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.palette.border.base};
   padding: 4px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
 const FlexRow = styled.div`
