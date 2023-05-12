@@ -21,11 +21,11 @@ function kakaoLoginProcess() {
 
   const kakaoLogin = async () => {
     try {
-      const { accessToken, newUser } = await kakaoLoginAPI({
+      const { accessToken, refreshToken, newUser } = await kakaoLoginAPI({
         code,
         redirectUrl: KAKAO_LOGIN_REDIRECT_URL,
       });
-      userStorage.set(accessToken);
+      userStorage.set({ accessToken, refreshToken });
       newUser ? router.push(Path.REGISTER_PAGE) : router.push(Path.MAIN_PAGE);
     } catch (error) {
       alert("에러가 발생하였습니다.");

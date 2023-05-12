@@ -12,12 +12,11 @@ export default function useMutateVotingService(voteId: number) {
   const { mutate } = useMutation((choice: AorB) => postVotingById(voteId, { choice }), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.DETAIL_ANALYSIS]);
-
+      queryClient.invalidateQueries([queryKeys.VOTING_CHECK]);
     },
   });
 
   const onMutateVoting = (select: AorB) => {
-    setSelect({ choice: select });
     mutate(select);
   };
 
@@ -26,6 +25,9 @@ export default function useMutateVotingService(voteId: number) {
       if (data.voted) {
         setSelect({ choice: data.userChoice });
       } else setSelect({ choice: null });
+    },
+    onError: () => {
+      setSelect({ choice: null });
     },
     // @note 캐시를 사용하지 않는다.
     cacheTime: 0,

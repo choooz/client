@@ -38,7 +38,6 @@ export interface GetCommentResponse {
 
 export const getCommentById = async (voteId: number, filter: CommentFilter, page: number) => {
   const { age, gender, mbti, sortBy } = filter;
-  console.log(page);
   const response = await axios.get<GetCommentResponse>(
     `${SERVER_URL}api/votes/${voteId}/comments`,
     {

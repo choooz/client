@@ -3,7 +3,7 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import Header from "components/common/Header";
+import Header from "components/common/header/Header";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
@@ -27,11 +27,11 @@ function SelectPage() {
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
-    useInfiniteMainListService(10, "ByTime");
+    useInfiniteMainListService(20, "ByTime");
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
-  const { onActFlip, drag } = useFlipAnimation(onChangeNowShowing);
+  const { onActFlip, drag, onTouchMoveActFlip } = useFlipAnimation(onChangeNowShowing);
   const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
@@ -39,13 +39,16 @@ function SelectPage() {
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category } =
-    mainVoteList[nowShowing];
-
+    mainVoteList[nowShowing] || {};
   return (
     <>
-      <Header leftMenu="logo" rightMenu="menu" />
       <PageWrapper>
-        <PageInner className="animate" onWheel={onActFlip} drag={drag}>
+        <PageInner
+          className="animate"
+          onWheel={onActFlip}
+          onTouchMove={onTouchMoveActFlip}
+          drag={drag}
+        >
           <VoteToolbar
             onChangeToggleDetail={onChangeToggleDetail}
             onChangeToggleMenu={onChangeToggleMenu}
@@ -65,7 +68,7 @@ function SelectPage() {
           />
           <AddDescriptionButton>﹢</AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`${Path.MAIN_PAGE}${mainVoteList[nowShowing].voteId}`}>
+            <Link href={`${Path.VOTE_DETAIL_PAGE}${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>

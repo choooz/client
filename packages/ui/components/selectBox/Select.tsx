@@ -28,10 +28,8 @@ function Select({
   return (
     <div ref={targetEl}>
       <SelectButton onChangeOpen={onToggleOpen}>
-        <>
-          {options.find(({ value }) => value === defaultValue)?.label}
-          <span id="indicator">{children}</span>
-        </>
+        {options.find(({ value }) => value === defaultValue)?.label}
+        <span id="indicator">{children}</span>
       </SelectButton>
       {isOpen ? (
         <OptionList

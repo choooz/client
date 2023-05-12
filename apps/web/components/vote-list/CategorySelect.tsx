@@ -32,7 +32,7 @@ const SelectStyled = styled.div`
   ${({ theme }) => `
     ${theme.textStyle.Title_Large};
     color: ${theme.palette.ink.darker};
-    .selected-text-container {
+    .selected-label {
         font-weight: 700;
       }
     ${media.medium} {
