@@ -3,7 +3,6 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import Header from "components/common/header/Header";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";

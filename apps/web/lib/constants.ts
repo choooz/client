@@ -1,6 +1,3 @@
-import { StaticImageData } from "next/image";
-import { Career, Etc, Fashion, Food, Interest, Love } from "public/icons";
-import { CategoryNameType } from "types/vote";
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
@@ -16,30 +13,6 @@ export const NAVER_LOGIN_REDIRECT_URL =
   process.env.NODE_ENV === "development"
     ? `http://localhost:3000/${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
-
-// export const CATEGORY_NAMES = ["음식", "직업", "연애", "패션", "재미", "기타"];
-export const CATEGORY_LIST = [
-  { value: "", label: "전체" },
-  { value: "NULL", label: "기타" },
-  { value: "FOODS", label: "음식" },
-  { value: "CAREER", label: "직업" },
-  { value: "LOVE", label: "연애" },
-  { value: "FASHION", label: "패션" },
-  { value: "INTEREST", label: "재미" },
-];
-
-export const IMAGE_CATEGORY_LIST: {
-  image: StaticImageData;
-  value: CategoryNameType;
-  label: string;
-}[] = [
-  { image: Etc, value: "NULL", label: "기타" },
-  { image: Food, value: "FOODS", label: "음식" },
-  { image: Career, value: "CAREER", label: "직업" },
-  { image: Love, value: "LOVE", label: "연애" },
-  { image: Fashion, value: "FASHION", label: "패션" },
-  { image: Interest, value: "INTEREST", label: "재미" },
-];
 
 export const SORT_LIST = [
   { value: "ByTime", label: "최신순" },

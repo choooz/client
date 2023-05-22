@@ -1,8 +1,8 @@
-import { CATEGORY_LIST } from "lib/constants";
 import { Select } from "@chooz/ui";
 import styled from "styled-components";
 import { media } from "styles/media";
 import { useToggle } from "@chooz/hooks";
+import { SELECT_BOX_CATEGORY_LIST } from "types/vote";
 
 interface Props {
   categoryOption: string;
@@ -16,7 +16,7 @@ function CategorySelect({ categoryOption, onChangeCategoryOption }: Props) {
       <Select
         defaultValue={categoryOption}
         onChangeSelectedOption={onChangeCategoryOption}
-        options={CATEGORY_LIST}
+        options={SELECT_BOX_CATEGORY_LIST}
         isOpen={isOpen}
         onToggleOpen={onToggleOpen}
       >
