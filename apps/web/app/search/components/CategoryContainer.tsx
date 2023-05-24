@@ -8,15 +8,9 @@ import CategoryItem from "./CategoryItem";
 function CategoryContainer() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryNameType | null>(null);
 
-  const onChangeSelectedCategory = (category: CategoryNameType | null) => {
-    setSelectedCategory(category);
-  };
-
   const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
     const category = e.currentTarget.name as CategoryNameType;
-    selectedCategory === category
-      ? onChangeSelectedCategory(null)
-      : onChangeSelectedCategory(category);
+    setSelectedCategory(category);
   };
   return (
     <CategorySection>

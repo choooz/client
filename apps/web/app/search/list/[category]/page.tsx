@@ -8,14 +8,18 @@ import styled from "styled-components";
 import { media } from "styles/media";
 import { CategoryNameType } from "types/vote";
 
-function CategoryPage() {
-  const [categoryOption, setCategoryOption] = useState("");
-
-  // @Todo option에 type 지정해주면 select 컴포넌트에서 충돌 발생
+function CategoryPage({ params }: { params: { category: string } }) {
+  const [categoryOption, setCategoryOption] = useState(params.category);
+  /**
+   * @Todo option에 type 지정해주면 select 컴포넌트에서 충돌 발생
+   * @Todo Select 컴포넌트에서 string로 타입을 지정해주니 CategoryNameType를 사용할 수 없음
+   */
   const onChangeCategoryOption = (value: string) => {
     setCategoryOption(value);
   };
-
+  /**
+   * @Todo SORT_LIST 이름만 보고 알기 힘들다.
+   **/
   const [sortOption, setSortOption] = useState(SORT_LIST[0].value);
 
   const onChangeSortOption = (value: string) => {

@@ -12,6 +12,7 @@ export default function useInfiniteVoteListService(params: Params) {
       getVoteListAPI({
         ...params,
         page: pageParam?.page || 0,
+        category: params.category,
       }),
     {
       getNextPageParam: ({ last, number }) => {
