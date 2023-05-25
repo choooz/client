@@ -23,6 +23,7 @@ function VoteItem({ vote }: Props) {
     <Link href={`${Path.VOTE_DETAIL_PAGE}${voteId}`}>
       <Container>
         <ABImage>
+          <GradientBox />
           {imageA ? (
             <ImageWrapper>
               <Image
@@ -75,19 +76,22 @@ const Container = styled.div`
   ${({ theme }) => theme.textStyle.Font_Minimum}
 `;
 
+const GradientBox = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  border-radius: 0 0 8px 8px;
+  z-index: 1;
+  background: linear-gradient(to top, rgba(17, 17, 17, 0.6) 0%, rgba(17, 17, 17, 0) 50%);
+`;
+
 const ABImage = styled.div`
   position: relative;
   display: flex;
   max-width: 560px;
   margin: 0 auto;
-  /*  @todo 음영효과 추가
-  ::after {
-    content: "";
-    z-index: 99;
-    background-image: linear-gradient(to top, rgba(17, 17, 17, 0.6) 50%, rgba(17, 17, 17, 0) 18%);
-    width: 100px;
-    height: 100px;
-  } */
 `;
 
 const ImageWrapper = styled.div`
@@ -103,6 +107,7 @@ const Item = styled.div`
   flex-direction: column;
   padding: 15% 0;
   flex-grow: 1;
+  aspect-ratio: 1;
 `;
 
 const AItem = styled(Item)`
@@ -134,6 +139,7 @@ const VoteContainer = styled.div`
   margin-top: 8px;
   max-width: 560px;
   margin: 8px auto 0;
+  z-index: 2;
   ${media.medium} {
     width: 521px;
     margin: 0 auto;
@@ -158,6 +164,7 @@ const TitleContainer = styled.div`
   justify-content: space-between;
   max-width: 560px;
   margin: 0 auto;
+  z-index: 2;
   ${media.medium} {
     width: 528px;
     margin: 0 auto;
