@@ -1,23 +1,16 @@
 import { media } from "@chooz/ui/styles/media";
 import styled from "styled-components";
-import { IMAGE_CATEGORY_LIST } from "lib/constants";
 import { useState } from "react";
-import { CategoryNameType } from "types/vote";
+import { CategoryNameType, IMAGE_CATEGORY_LIST } from "types/vote";
 import CategoryItem from "./CategoryItem";
 
 // @Todo 공통 컴포넌트로 묶을 수 있다면 묶기
 function CategoryContainer() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryNameType | null>(null);
 
-  const onChangeSelectedCategory = (category: CategoryNameType | null) => {
-    setSelectedCategory(category);
-  };
-
   const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
     const category = e.currentTarget.name as CategoryNameType;
-    selectedCategory === category
-      ? onChangeSelectedCategory(null)
-      : onChangeSelectedCategory(category);
+    setSelectedCategory(category);
   };
   return (
     <CategorySection>

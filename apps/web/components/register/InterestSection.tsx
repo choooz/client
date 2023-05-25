@@ -3,9 +3,8 @@ import Image from "next/image";
 import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
-import { CheckRound, Chick } from "public/images";
-import { IMAGE_CATEGORY_LIST } from "lib/constants";
-import { CategoryNameType } from "types/vote";
+import { CheckRound } from "public/images";
+import { CategoryNameType, IMAGE_CATEGORY_LIST } from "types/vote";
 
 interface Props {
   categoryLists: CategoryNameType[];
