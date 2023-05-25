@@ -1,6 +1,6 @@
 "use client";
 
-import { CategorySelect, SortSelect, VoteList } from "components/vote-list";
+import { CategorySelect, SortSelect, VoteList } from "app/search/components";
 import { SORT_LIST } from "lib/constants";
 import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
@@ -28,7 +28,7 @@ function CategoryPage({ params }: { params: { category: string } }) {
 
   const { voteList, subscribe } = useInfiniteVoteListService({
     size: 3,
-    sortBy: "ByTime",
+    sortBy: sortOption,
     category: categoryOption as CategoryNameType, // @Todo 강제 형변환하지 않고 useSelect에 제네릭으로 넘겨주게 하기
   });
 

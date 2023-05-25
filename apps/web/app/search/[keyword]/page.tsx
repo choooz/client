@@ -1,10 +1,9 @@
 "use client";
 
-import { VoteList } from "components/vote-list";
-
 import useInfiniteSearchResultService from "services/useInfiniteSearchResultService";
 import styled from "styled-components";
 import { media } from "styles/media";
+import { VoteList } from "../components";
 
 function SearchResultPage({ params }: { params: { keyword: string } }) {
   const { voteList, subscribe } = useInfiniteSearchResultService({

@@ -5,64 +5,68 @@ import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
+import Link from "next/link";
 import { AIcon, BIcon, BookmarkIcon } from "public/icons";
 import styled, { css } from "styled-components";
 import { Vote } from "types/vote";
+import Path from "lib/Path";
 
 interface Props {
   vote: Vote;
 }
 
 function VoteItem({ vote }: Props) {
-  const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted } = vote;
+  const { voteId, imageA, imageB, titleA, titleB, title, modifiedDate, countVoted } = vote;
 
   // @Todo Image에 sizes와 priority 추가
   return (
-    <Container>
-      <ABImage>
-        {imageA ? (
-          <ImageWrapper>
-            <Image
-              alt="left image"
-              src={imageA}
-              fill
-              style={{ borderRadius: "8px 0 0 8px", objectFit: "cover" }}
-            />
-          </ImageWrapper>
-        ) : (
-          <AItem>
-            <AIcon />
-            <ItemTitle>{titleA}</ItemTitle>
-          </AItem>
-        )}
-        {imageB ? (
-          <ImageWrapper>
-            <Image
-              alt="right image"
-              src={imageB}
-              fill
-              style={{ borderRadius: "0 8px 8px 0", objectFit: "cover" }}
-            />
-          </ImageWrapper>
-        ) : (
-          <BItem>
-            <BIcon />
-            <ItemTitle>{titleB}</ItemTitle>
-          </BItem>
-        )}
-      </ABImage>
-      <VoteContainer>
-        <MessageBox>
-          <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
-          <NumberOfSolver>🔥{countVoted}명 해결중!</NumberOfSolver>
-        </MessageBox>
-        <BookmarkIconStyled />
-      </VoteContainer>
-      <TitleContainer>
-        <VoteTitle>{title}</VoteTitle>
-        <VoteModifiedDate>{timeDataProcessing(modifiedDate)}</VoteModifiedDate>
-      </TitleContainer>
-    </Container>
+    <Link href={`${Path.VOTE_DETAIL_PAGE}${voteId}`}>
+      <Container>
+        <ABImage>
+          {imageA ? (
+            <ImageWrapper>
+              <Image
+                alt="left image"
+                src={imageA}
+                fill
+                style={{ borderRadius: "8px 0 0 8px", objectFit: "cover" }}
+              />
+            </ImageWrapper>
+          ) : (
+            <AItem>
+              <AIcon />
+              <ItemTitle>{titleA}</ItemTitle>
+            </AItem>
+          )}
+          {imageB ? (
+            <ImageWrapper>
+              <Image
+                alt="right image"
+                src={imageB}
+                fill
+                style={{ borderRadius: "0 8px 8px 0", objectFit: "cover" }}
+              />
+            </ImageWrapper>
+          ) : (
+            <BItem>
+              <BIcon />
+              <ItemTitle>{titleB}</ItemTitle>
+            </BItem>
+          )}
+        </ABImage>
+        <VoteContainer>
+          <MessageBox>
+            <TargetMessage>이 고민을 찾고있는 분이에요!</TargetMessage>
+            <NumberOfSolver>🔥{countVoted}명 해결중!</NumberOfSolver>
+          </MessageBox>
+          <BookmarkIconStyled />
+        </VoteContainer>
+        <TitleContainer>
+          <VoteTitle>{title}</VoteTitle>
+          <VoteModifiedDate>{timeDataProcessing(modifiedDate)}</VoteModifiedDate>
+        </TitleContainer>
+      </Container>
+    </Link>
   );
 }
 
