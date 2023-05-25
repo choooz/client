@@ -16,7 +16,7 @@ export const NAVER_LOGIN_REDIRECT_URL =
 
 export const SORT_LIST = [
   { value: "ByTime", label: "최신순" },
-  { value: "ByPoular", label: "인기순" },
+  { value: "ByPopularity", label: "인기순" },
 ];
 
 export const AGE_LIST = [
