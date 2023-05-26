@@ -61,7 +61,10 @@ function VoteContainer({ postId }: { postId: number }) {
         targetEl={targetEl}
         title={title}
         date={voteCreatedDate}
-        totalVoteCount={voteCountQuery.data?.totalVoteCount || 0}
+        /*
+         * @Todo 이렇게 해야하나?
+         */
+        countVoted={voteCountQuery.data?.totalVoteCount || 0}
       />
       <DetailAB
         imageA={imageA || EmptyAImg}
