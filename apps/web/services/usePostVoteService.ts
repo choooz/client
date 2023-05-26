@@ -104,7 +104,7 @@ export default function usePostVoteService() {
 
   const { mutate: mutateVote } = useMutation(() => postVoteAPI(vote), {
     onSuccess: () => {
-      router.push("/select?isSuccess=true");
+      router.push("/?isSuccess=true");
     },
   });
 
