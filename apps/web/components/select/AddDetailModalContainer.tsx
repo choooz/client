@@ -1,9 +1,8 @@
 import { DivideLine, Input, ModalTemplate, Template } from "@chooz/ui";
 import React from "react";
 import styled from "styled-components";
-import { CATEGORY_LIST } from "lib/constants";
 import useModifyVoteService from "services/useModifyVoteService";
-import { Vote } from "types/vote";
+import { SELECT_BOX_CATEGORY_LIST } from "types/vote";
 import { ModifyVote } from "lib/apis/vote";
 
 interface Props {
@@ -45,7 +44,7 @@ function AddDetailModalContainer({ onToggleModal, voteId, initialVoteValue }: Pr
           <DivideLine />
           <QuestionText>나이</QuestionText>
           <ChipWrapper>
-            {CATEGORY_LIST.map(({ label, value }) => (
+            {SELECT_BOX_CATEGORY_LIST.map(({ label, value }) => (
               <div key={value}>
                 <InvisibleInput
                   type="radio"

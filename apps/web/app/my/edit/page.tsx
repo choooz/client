@@ -7,7 +7,7 @@ import TabContainer from "components/my/TabContainer";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { uploadProfileImageAPI } from "lib/apis/upload";
 import { updateUserInfo } from "lib/apis/user";
-import { IMAGE_CATEGORY_LIST, PROFILE_EDIT_PAGE_TAB_LIST } from "lib/constants";
+import { PROFILE_EDIT_PAGE_TAB_LIST } from "lib/constants";
 import Path from "lib/Path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,7 @@ import useRegisterService from "services/useRegisterService";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { Gender } from "types/user";
+import { IMAGE_CATEGORY_LIST } from "types/vote";
 
 function ProfileEditPage() {
   const router = useRouter();

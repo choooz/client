@@ -3,7 +3,6 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import Header from "components/common/header/Header";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
@@ -38,7 +37,7 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category } =
+  const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category, countVoted } =
     mainVoteList[nowShowing] || {};
   return (
     <>
@@ -56,6 +55,7 @@ function SelectPage() {
             targetEl={targetEl}
             title={title}
             date={modifiedDate}
+            countVoted={countVoted}
           />
 
           <SelectAB
@@ -66,7 +66,9 @@ function SelectPage() {
             select={select.choice}
             onMutateVoting={onMutateVoting}
           />
-          <AddDescriptionButton>﹢</AddDescriptionButton>
+          <AddDescriptionButton>
+            <Link href={`${Path.POST_PAGE}`}>﹢</Link>
+          </AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
             <Link href={`${Path.VOTE_DETAIL_PAGE}${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
@@ -82,7 +84,6 @@ function SelectPage() {
       {params.get("isSuccess") && (
         <FloatModalTemplate
           onToggleModal={() => {
-            // 메인페이지 url 변경할때 같이 수정해야함
             router.push(`${Path.MAIN_PAGE}?isSuccess=`);
           }}
         >
