@@ -65,7 +65,9 @@ function SelectPage() {
             select={select.choice}
             onMutateVoting={onMutateVoting}
           />
-          <AddDescriptionButton>﹢</AddDescriptionButton>
+          <AddDescriptionButton>
+            <Link href={`${Path.POST_PAGE}`}>﹢</Link>
+          </AddDescriptionButton>
           <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
             <Link href={`${Path.VOTE_DETAIL_PAGE}${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
