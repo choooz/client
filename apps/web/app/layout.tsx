@@ -56,7 +56,6 @@ function RootLayout({
 const Applayout = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
   padding: 0 16px;
   flex: 1;
   overflow: hidden;

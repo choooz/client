@@ -26,7 +26,7 @@ function SelectPage() {
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
-    useInfiniteMainListService(20, "ByTime");
+    useInfiniteMainListService(5, "ByTime");
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
@@ -39,6 +39,7 @@ function SelectPage() {
 
   const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category, countVoted } =
     mainVoteList[nowShowing] || {};
+
   return (
     <>
       <PageWrapper>
@@ -57,7 +58,6 @@ function SelectPage() {
             date={modifiedDate}
             countVoted={countVoted}
           />
-
           <SelectAB
             imageA={imageA || ""}
             titleA={titleA || ""}
@@ -111,6 +111,7 @@ function SelectPage() {
 const PageWrapper = styled.div`
   position: relative;
   width: 100%;
+  height: 90vh;
   display: flex;
   justify-content: center;
   scrollbar-width: none;
