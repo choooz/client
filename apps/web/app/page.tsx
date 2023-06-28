@@ -111,7 +111,6 @@ function SelectPage() {
 const PageWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 90vh;
   display: flex;
   justify-content: center;
   scrollbar-width: none;

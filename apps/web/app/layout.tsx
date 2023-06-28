@@ -59,6 +59,7 @@ const Applayout = styled.div`
   padding: 0 16px;
   flex: 1;
   overflow: hidden;
+  height: calc(100vh - 55px);
 `;
 
 export default RootLayout;
