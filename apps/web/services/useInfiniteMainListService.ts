@@ -3,9 +3,14 @@ import { getVoteListAPI } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 import { useEffect, useMemo, useState } from "react";
 
+interface Props {
+  size: number;
+  sortBy: string;
+}
+
 const SafeRange = 5;
 
-export default function useInfiniteMainListService(size: number, sortBy: string) {
+export default function useInfiniteMainListService({ size, sortBy }: Props) {
   const [nowShowing, setNowShowing] = useState(0);
 
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(

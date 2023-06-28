@@ -26,7 +26,7 @@ function SelectPage() {
   const params = new URLSearchParams(searchParams);
   const router = useRouter();
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
-    useInfiniteMainListService(5, "ByTime");
+    useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
   const [toggleMenu, onChangeToggleMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
