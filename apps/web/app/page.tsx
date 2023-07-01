@@ -37,8 +37,18 @@ function SelectPage() {
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
   if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
-  const { modifiedDate, title, imageA, imageB, titleA, titleB, detail, category, countVoted } =
-    mainVoteList[nowShowing] || {};
+  const {
+    modifiedDate,
+    title,
+    imageA,
+    imageB,
+    titleA,
+    titleB,
+    detail,
+    category,
+    countVoted,
+    writer,
+  } = mainVoteList[nowShowing] || {};
 
   return (
     <>
@@ -57,6 +67,7 @@ function SelectPage() {
             title={title}
             date={modifiedDate}
             countVoted={countVoted}
+            writer={writer}
           />
           <SelectAB
             imageA={imageA || ""}
