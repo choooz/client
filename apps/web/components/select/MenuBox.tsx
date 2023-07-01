@@ -2,27 +2,23 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 interface Props {
-  isModify?: boolean;
   onModify?: () => void;
-  isDelete?: boolean;
+
   onDelete?: () => void;
   top?: string;
   right?: string;
 }
 
-function MenuBox({ isModify, onModify, isDelete, onDelete, top = "0", right = "0px" }: Props) {
+function MenuBox({ onModify, onDelete, top = "0", right = "0px" }: Props) {
   return (
     <Container top={top} right={right}>
-      {isModify && (
-        <MenuText className="modify" onClick={onModify}>
-          수정하기
-        </MenuText>
-      )}
-      {isDelete && (
-        <MenuText className="delete" onClick={onDelete}>
-          삭제하기
-        </MenuText>
-      )}
+      <MenuText className="modify" onClick={onModify}>
+        수정하기
+      </MenuText>
+
+      <MenuText className="delete" onClick={onDelete}>
+        삭제하기
+      </MenuText>
     </Container>
   );
 }

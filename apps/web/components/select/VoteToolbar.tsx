@@ -1,9 +1,11 @@
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
+import { useGetUserInfo } from "hooks/useGetUserInfo";
 import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
 import React from "react";
 import styled from "styled-components";
+import { Writer } from "types/vote";
 import MenuBox from "./MenuBox";
 
 interface Props {
@@ -14,6 +16,7 @@ interface Props {
   title: string;
   date: string;
   countVoted: number;
+  writer: Writer;
 }
 
 function VoteToolbar({
@@ -24,7 +27,12 @@ function VoteToolbar({
   targetEl,
   date,
   countVoted,
+  writer,
 }: Props) {
+  const { userInfo } = useGetUserInfo();
+
+  const amIWriter = userInfo?.userId === writer.userid;
+
   return (
     <>
       <TagRow>
@@ -34,14 +42,16 @@ function VoteToolbar({
         </FlexRow>
         <FlexRow>
           <Image src={SaveIcon} alt="저장하기" width={32} height={32} />
-          <Image
-            ref={targetEl}
-            src={HambergerIcon}
-            alt="매뉴"
-            width={32}
-            height={32}
-            onClick={onChangeToggleMenu}
-          />
+          {amIWriter && (
+            <Image
+              ref={targetEl}
+              src={HambergerIcon}
+              alt="매뉴"
+              width={32}
+              height={32}
+              onClick={onChangeToggleMenu}
+            />
+          )}
         </FlexRow>
       </TagRow>
       <TitleRow>
@@ -49,14 +59,7 @@ function VoteToolbar({
         <DateText>{date.slice(0, 10)}</DateText>
       </TitleRow>
       {toggleMenu && (
-        <MenuBox
-          top="70px"
-          right="41px"
-          isDelete
-          isModify
-          onDelete={() => void 0}
-          onModify={onChangeToggleDetail}
-        />
+        <MenuBox top="70px" right="41px" onDelete={() => void 0} onModify={onChangeToggleDetail} />
       )}
     </>
   );
