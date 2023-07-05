@@ -19,7 +19,7 @@ interface Props {
   writer: Writer;
 }
 
-function VoteToolbar({
+function ChipContainer({
   onChangeToggleDetail,
   onChangeToggleMenu,
   title,
@@ -95,4 +95,4 @@ const FlexRow = styled.div`
   gap: 4px;
 `;
 
-export default VoteToolbar;
+export default ChipContainer;

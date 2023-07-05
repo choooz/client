@@ -6,7 +6,7 @@ import { media } from "@chooz/ui/styles/media";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import SelectAB from "components/select/SelectAB";
-import VoteToolbar from "components/select/VoteToolbar";
+import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
@@ -59,7 +59,7 @@ function SelectPage() {
           onTouchMove={onTouchMoveActFlip}
           drag={drag}
         >
-          <VoteToolbar
+          <ChipContainer
             onChangeToggleDetail={onChangeToggleDetail}
             onChangeToggleMenu={onChangeToggleMenu}
             toggleMenu={toggleMenu}
@@ -91,7 +91,6 @@ function SelectPage() {
         <FirstPageBase className="animate2" drag={drag} />
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
-
       {params.get("isSuccess") && (
         <FloatModalTemplate
           onToggleModal={() => {
