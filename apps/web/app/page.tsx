@@ -5,7 +5,6 @@ import { Button, FloatModalTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
-import SelectAB from "components/select/SelectAB";
 import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
@@ -17,6 +16,7 @@ import React from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
+import SelectAorBContainer from "./select/components/SelectAorBContainer";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
@@ -69,7 +69,7 @@ function SelectPage() {
             countVoted={countVoted}
             writer={writer}
           />
-          <SelectAB
+          <SelectAorBContainer
             imageA={imageA || ""}
             titleA={titleA || ""}
             imageB={imageB || ""}
