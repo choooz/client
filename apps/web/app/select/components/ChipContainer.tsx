@@ -6,12 +6,12 @@ import { HambergerIcon, SaveIcon } from "public/icons";
 import React from "react";
 import styled from "styled-components";
 import { Writer } from "types/vote";
-import MenuBox from "./MenuBox";
+import ModifyDeleteButtonBox from "./ModifyDeleteButtonBox";
 
 interface Props {
-  onToggleUpdateModal(): void;
-  onToggleSelectBox(): void;
-  isSelectBox: boolean;
+  onToggleModifyModal(): void;
+  onToggleModifyDeleteButtonBox(): void;
+  isModifyDeleteButtonBox: boolean;
   targetEl: React.RefObject<HTMLImageElement>;
   title: string;
   date: string;
@@ -20,10 +20,10 @@ interface Props {
 }
 
 function ChipContainer({
-  onToggleUpdateModal,
-  onToggleSelectBox,
+  onToggleModifyModal,
+  onToggleModifyDeleteButtonBox,
   title,
-  isSelectBox,
+  isModifyDeleteButtonBox,
   targetEl,
   date,
   countVoted,
@@ -49,7 +49,7 @@ function ChipContainer({
               alt="매뉴"
               width={32}
               height={32}
-              onClick={onToggleSelectBox}
+              onClick={onToggleModifyDeleteButtonBox}
             />
           )}
         </FlexRow>
@@ -58,14 +58,12 @@ function ChipContainer({
         {title}
         <DateText>{date.slice(0, 10)}</DateText>
       </TitleRow>
-      {isSelectBox && (
-        <MenuBox
+      {isModifyDeleteButtonBox && (
+        <ModifyDeleteButtonBox
           top="70px"
           right="41px"
-          isDelete
-          isModify
           onDelete={() => void 0}
-          onModify={onToggleUpdateModal}
+          onModify={onToggleModifyModal}
         />
       )}
     </>

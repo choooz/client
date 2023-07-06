@@ -3,8 +3,8 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import UpdateVoteModal from "app/select/components/UpdateVoteModal";
-import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
+import ModifyVoteModal from "app/select/components/ModifyVoteModal";
+import useFlipAnimation, { Drag } from "app/select/hooks/useFlipAnimation";
 import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
@@ -18,15 +18,15 @@ import styled, { css } from "styled-components";
 import SelectAorBContainer from "./select/components/SelectAorBContainer";
 import PostCompleteComponent from "./select/components/PostCompleteComponent";
 
-/**
- * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
- */
 function SelectPage() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const [isUpdateModal, onToggleUpdateModal] = useToggle(false);
-  const [isSelectBox, onToggleSelectBox] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLImageElement>(isSelectBox, onToggleSelectBox);
+  const [isModifyModal, onToggleModifyModal] = useToggle(false);
+  const [isModifyDeleteButtonBox, onToggleModifyDeleteButtonBox] = useToggle(false);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(
+    isModifyDeleteButtonBox,
+    onToggleModifyDeleteButtonBox,
+  );
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
   const { onActFlip, drag, onTouchMoveActFlip } = useFlipAnimation(onChangeNowShowing);
@@ -58,9 +58,9 @@ function SelectPage() {
           drag={drag}
         >
           <ChipContainer
-            onToggleUpdateModal={onToggleUpdateModal}
-            onToggleSelectBox={onToggleSelectBox}
-            isSelectBox={isSelectBox}
+            onToggleModifyModal={onToggleModifyModal}
+            onToggleModifyDeleteButtonBox={onToggleModifyDeleteButtonBox}
+            isModifyDeleteButtonBox={isModifyDeleteButtonBox}
             targetEl={targetEl}
             title={title}
             date={modifiedDate}
@@ -90,9 +90,9 @@ function SelectPage() {
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
       {params.get("isSuccess") && <PostCompleteComponent />}
-      {isUpdateModal && (
-        <UpdateVoteModal
-          onToggleModal={onToggleUpdateModal}
+      {isModifyModal && (
+        <ModifyVoteModal
+          onToggleModal={onToggleModifyModal}
           initialVoteValue={{
             title,
             detail,

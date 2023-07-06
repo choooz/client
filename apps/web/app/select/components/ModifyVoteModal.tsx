@@ -11,7 +11,7 @@ interface Props {
   initialVoteValue: ModifyVote;
 }
 
-function UpdateVoteModal({ onToggleModal, voteId, initialVoteValue }: Props) {
+function ModifyVoteModal({ onToggleModal, voteId, initialVoteValue }: Props) {
   const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
     onToggleModal,
     initialVoteValue,
@@ -153,4 +153,4 @@ const Chip = styled.label`
   }
 `;
 
-export default UpdateVoteModal;
+export default ModifyVoteModal;
