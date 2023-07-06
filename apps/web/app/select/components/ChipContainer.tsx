@@ -1,6 +1,7 @@
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
+import { deleteVoteAPI } from "lib/apis/vote";
 import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
 import React from "react";
@@ -17,6 +18,7 @@ interface Props {
   date: string;
   countVoted: number;
   writer: Writer;
+  voteId: number;
 }
 
 function ChipContainer({
@@ -28,10 +30,15 @@ function ChipContainer({
   date,
   countVoted,
   writer,
+  voteId,
 }: Props) {
   const { userInfo } = useGetUserInfo();
 
-  const amIWriter = userInfo?.userId === writer.userid;
+  const amIWriter = userInfo?.userId === writer?.userid;
+
+  const onDeleteVote = async () => {
+    await deleteVoteAPI(voteId);
+  };
 
   return (
     <>
@@ -62,7 +69,7 @@ function ChipContainer({
         <ModifyDeleteButtonBox
           top="70px"
           right="41px"
-          onDelete={() => void 0}
+          onDelete={onDeleteVote}
           onModify={onToggleModifyModal}
         />
       )}

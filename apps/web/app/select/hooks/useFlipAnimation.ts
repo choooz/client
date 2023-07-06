@@ -8,8 +8,8 @@ function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
   const onActFlip = (e: React.WheelEvent<HTMLDivElement>) => {
     const now = Date.now();
     const timeDiff = now - lastTouchEventTimeRef.current;
-    if (timeDiff < 1000) {
-      // 이전 이벤트가 1초 내에 발생한 경우 무시
+    if (timeDiff < 1500) {
+      // 이전 이벤트가 1.5초 내에 발생한 경우 무시
       return;
     }
     lastTouchEventTimeRef.current = now;

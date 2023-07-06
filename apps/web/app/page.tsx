@@ -4,7 +4,6 @@ import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";
-import useFlipAnimation, { Drag } from "app/select/hooks/useFlipAnimation";
 import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
@@ -17,6 +16,7 @@ import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
 import SelectAorBContainer from "./select/components/SelectAorBContainer";
 import PostCompleteComponent from "./select/components/PostCompleteComponent";
+import useFlipAnimation, { Drag } from "./select/hooks/useFlipAnimation";
 
 function SelectPage() {
   const searchParams = useSearchParams();
@@ -42,6 +42,7 @@ function SelectPage() {
     category,
     countVoted,
     writer,
+    voteId,
   } = mainVoteList[nowShowing] || {};
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
@@ -66,6 +67,7 @@ function SelectPage() {
             date={modifiedDate}
             countVoted={countVoted}
             writer={writer}
+            voteId={voteId}
           />
           <SelectAorBContainer
             imageA={imageA || ""}
@@ -79,7 +81,7 @@ function SelectPage() {
             <Link href={`${Path.POST_PAGE}`}>﹢</Link>
           </CreateVoteButton>
           <DetailViewButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`${Path.VOTE_DETAIL_PAGE}${mainVoteList[nowShowing].voteId}`}>
+            <Link href={`${Path.VOTE_DETAIL_PAGE}${voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>

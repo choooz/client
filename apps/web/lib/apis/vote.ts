@@ -67,6 +67,11 @@ export const modifyVoteAPI = async (body: ModifyVoteRequest, voteId: number) => 
   return response.data;
 };
 
+export const deleteVoteAPI = async (voteId: number) => {
+  const response = await apiClient.delete(`api/votes/${voteId}`);
+  return response.data;
+};
+
 interface GetVoteByIdResponst {
   user: {
     userImage: string | null;
