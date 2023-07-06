@@ -3,7 +3,7 @@
 import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import AddDetailModalContainer from "components/select/AddDetailModalContainer";
+import UpdateVoteModal from "app/select/components/UpdateVoteModal";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
 import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
@@ -24,18 +24,13 @@ import PostCompleteComponent from "./select/components/PostCompleteComponent";
 function SelectPage() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
-    useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
   const [isUpdateModal, onToggleUpdateModal] = useToggle(false);
   const [isSelectBox, onToggleSelectBox] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(isSelectBox, onToggleSelectBox);
+  const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
+    useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
   const { onActFlip, drag, onTouchMoveActFlip } = useFlipAnimation(onChangeNowShowing);
   const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
-
-  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
-  if (isError) return <PageInner drag={drag}>에러</PageInner>;
-  if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
-
   const {
     modifiedDate,
     title,
@@ -48,6 +43,10 @@ function SelectPage() {
     countVoted,
     writer,
   } = mainVoteList[nowShowing] || {};
+
+  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
+  if (isError) return <PageInner drag={drag}>에러</PageInner>;
+  if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   return (
     <>
@@ -92,7 +91,7 @@ function SelectPage() {
       </PageWrapper>
       {params.get("isSuccess") && <PostCompleteComponent />}
       {isUpdateModal && (
-        <AddDetailModalContainer
+        <UpdateVoteModal
           onToggleModal={onToggleUpdateModal}
           initialVoteValue={{
             title,

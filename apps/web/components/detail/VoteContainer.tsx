@@ -1,5 +1,5 @@
 import { useOutsideClick, useToggle } from "@chooz/hooks";
-import AddDetailModalContainer from "components/select/AddDetailModalContainer";
+import UpdateVoteModal from "app/select/components/UpdateVoteModal";
 import ChipContainer from "app/select/components/ChipContainer";
 import { EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
@@ -86,7 +86,7 @@ function VoteContainer({ postId }: { postId: number }) {
       />
       <VoteDetail>{description}</VoteDetail>
       {toggleDetail && (
-        <AddDetailModalContainer
+        <UpdateVoteModal
           onToggleModal={onChangeToggleDetail}
           initialVoteValue={{
             title,
