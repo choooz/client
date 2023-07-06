@@ -14,6 +14,9 @@ export default function useMutateVotingService(voteId: number) {
       queryClient.invalidateQueries([queryKeys.DETAIL_ANALYSIS]);
       queryClient.invalidateQueries([queryKeys.VOTING_CHECK]);
     },
+    onError: () => {
+      alert("로그인 후 진행해주세요.");
+    },
   });
 
   const onMutateVoting = (select: AorB) => {
