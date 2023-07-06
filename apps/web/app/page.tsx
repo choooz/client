@@ -1,7 +1,7 @@
 "use client";
 
 import { useToggle, useOutsideClick } from "@chooz/hooks";
-import { Button, FloatComponentTemplate } from "@chooz/ui";
+import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
@@ -9,14 +9,14 @@ import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { AmplifyIcon } from "public/icons";
-import { Success } from "public/images";
 import React from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
 import SelectAorBContainer from "./select/components/SelectAorBContainer";
+import PostCompleteComponent from "./select/components/PostCompleteComponent";
 
 /**
  * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
@@ -24,7 +24,6 @@ import SelectAorBContainer from "./select/components/SelectAorBContainer";
 function SelectPage() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const router = useRouter();
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
   const [toggleDetail, onChangeToggleDetail] = useToggle(false);
@@ -91,16 +90,7 @@ function SelectPage() {
         <FirstPageBase className="animate2" drag={drag} />
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
-      {params.get("isSuccess") && (
-        <FloatComponentTemplate
-          onToggleModal={() => {
-            router.push(`${Path.MAIN_PAGE}?isSuccess=`);
-          }}
-        >
-          <Image alt="체크" src={Success} width={56} height={56} />
-          <GuideText>선택결정이 등록되었어요.</GuideText>
-        </FloatComponentTemplate>
-      )}
+      {params.get("isSuccess") && <PostCompleteComponent />}
       {toggleDetail && (
         <AddDetailModalContainer
           onToggleModal={onChangeToggleDetail}
@@ -225,12 +215,6 @@ const AddDescriptionButton = styled.div`
   font-size: 45px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   cursor: pointer;
-`;
-
-const GuideText = styled.div`
-  color: ${({ theme }) => theme.palette.background.white};
-  ${({ theme }) => theme.textStyle.Title_Large}
-  font-weight: 700;
 `;
 
 const DetailButton = styled(Button)`
