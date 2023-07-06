@@ -3,19 +3,17 @@ import styled, { css } from "styled-components";
 
 interface Props {
   onModify?: () => void;
-
   onDelete?: () => void;
   top?: string;
   right?: string;
 }
 
-function MenuBox({ onModify, onDelete, top = "0", right = "0px" }: Props) {
+function ModifyDeleteButtonBox({ onModify, onDelete, top = "0", right = "0px" }: Props) {
   return (
     <Container top={top} right={right}>
       <MenuText className="modify" onClick={onModify}>
         수정하기
       </MenuText>
-
       <MenuText className="delete" onClick={onDelete}>
         삭제하기
       </MenuText>
@@ -55,4 +53,4 @@ const MenuText = styled.div`
   }
 `;
 
-export default MenuBox;
+export default ModifyDeleteButtonBox;

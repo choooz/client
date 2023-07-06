@@ -1,37 +1,44 @@
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
+import { deleteVoteAPI } from "lib/apis/vote";
 import Image from "next/image";
 import { HambergerIcon, SaveIcon } from "public/icons";
 import React from "react";
 import styled from "styled-components";
 import { Writer } from "types/vote";
-import MenuBox from "./MenuBox";
+import ModifyDeleteButtonBox from "./ModifyDeleteButtonBox";
 
 interface Props {
-  onChangeToggleDetail(): void;
-  onChangeToggleMenu(): void;
-  toggleMenu: boolean;
+  onToggleModifyModal(): void;
+  onToggleModifyDeleteButtonBox(): void;
+  isModifyDeleteButtonBox: boolean;
   targetEl: React.RefObject<HTMLImageElement>;
   title: string;
   date: string;
   countVoted: number;
   writer: Writer;
+  voteId: number;
 }
 
-function VoteToolbar({
-  onChangeToggleDetail,
-  onChangeToggleMenu,
+function ChipContainer({
+  onToggleModifyModal,
+  onToggleModifyDeleteButtonBox,
   title,
-  toggleMenu,
+  isModifyDeleteButtonBox,
   targetEl,
   date,
   countVoted,
   writer,
+  voteId,
 }: Props) {
   const { userInfo } = useGetUserInfo();
 
-  const amIWriter = userInfo?.userId === writer.userid;
+  const amIWriter = userInfo?.userId === writer?.userid;
+
+  const onDeleteVote = async () => {
+    await deleteVoteAPI(voteId);
+  };
 
   return (
     <>
@@ -49,7 +56,7 @@ function VoteToolbar({
               alt="매뉴"
               width={32}
               height={32}
-              onClick={onChangeToggleMenu}
+              onClick={onToggleModifyDeleteButtonBox}
             />
           )}
         </FlexRow>
@@ -58,8 +65,13 @@ function VoteToolbar({
         {title}
         <DateText>{date.slice(0, 10)}</DateText>
       </TitleRow>
-      {toggleMenu && (
-        <MenuBox top="70px" right="41px" onDelete={() => void 0} onModify={onChangeToggleDetail} />
+      {isModifyDeleteButtonBox && (
+        <ModifyDeleteButtonBox
+          top="70px"
+          right="41px"
+          onDelete={onDeleteVote}
+          onModify={onToggleModifyModal}
+        />
       )}
     </>
   );
@@ -95,4 +107,4 @@ const FlexRow = styled.div`
   gap: 4px;
 `;
 
-export default VoteToolbar;
+export default ChipContainer;

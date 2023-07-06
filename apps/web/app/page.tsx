@@ -1,42 +1,36 @@
 "use client";
 
 import { useToggle, useOutsideClick } from "@chooz/hooks";
-import { Button, FloatModalTemplate } from "@chooz/ui";
+import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
-import AddDetailModalContainer from "components/select/AddDetailModalContainer";
-import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
-import SelectAB from "components/select/SelectAB";
-import VoteToolbar from "components/select/VoteToolbar";
+import ModifyVoteModal from "app/select/components/ModifyVoteModal";
+import ChipContainer from "app/select/components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { AmplifyIcon } from "public/icons";
-import { Success } from "public/images";
 import React from "react";
 import useInfiniteMainListService from "services/useInfiniteMainListService";
 import useMutateVotingService from "services/useMutateVotingService";
 import styled, { css } from "styled-components";
+import SelectAorBContainer from "./select/components/SelectAorBContainer";
+import PostCompleteComponent from "./select/components/PostCompleteComponent";
+import useFlipAnimation, { Drag } from "./select/hooks/useFlipAnimation";
 
-/**
- * @TODO: 현재 드래그 빠바박 여러번 하면 카드가 여러번 넘어가는 문제가 있음
- */
 function SelectPage() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
-  const router = useRouter();
+  const [isModifyModal, onToggleModifyModal] = useToggle(false);
+  const [isModifyDeleteButtonBox, onToggleModifyDeleteButtonBox] = useToggle(false);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(
+    isModifyDeleteButtonBox,
+    onToggleModifyDeleteButtonBox,
+  );
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
-  const [toggleDetail, onChangeToggleDetail] = useToggle(false);
-  const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
   const { onActFlip, drag, onTouchMoveActFlip } = useFlipAnimation(onChangeNowShowing);
   const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
-
-  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
-  if (isError) return <PageInner drag={drag}>에러</PageInner>;
-  if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
-
   const {
     modifiedDate,
     title,
@@ -48,7 +42,12 @@ function SelectPage() {
     category,
     countVoted,
     writer,
+    voteId,
   } = mainVoteList[nowShowing] || {};
+
+  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
+  if (isError) return <PageInner drag={drag}>에러</PageInner>;
+  if (!data) return <PageInner drag={drag}>데이터 없음</PageInner>;
 
   return (
     <>
@@ -59,17 +58,18 @@ function SelectPage() {
           onTouchMove={onTouchMoveActFlip}
           drag={drag}
         >
-          <VoteToolbar
-            onChangeToggleDetail={onChangeToggleDetail}
-            onChangeToggleMenu={onChangeToggleMenu}
-            toggleMenu={toggleMenu}
+          <ChipContainer
+            onToggleModifyModal={onToggleModifyModal}
+            onToggleModifyDeleteButtonBox={onToggleModifyDeleteButtonBox}
+            isModifyDeleteButtonBox={isModifyDeleteButtonBox}
             targetEl={targetEl}
             title={title}
             date={modifiedDate}
             countVoted={countVoted}
             writer={writer}
+            voteId={voteId}
           />
-          <SelectAB
+          <SelectAorBContainer
             imageA={imageA || ""}
             titleA={titleA || ""}
             imageB={imageB || ""}
@@ -77,34 +77,24 @@ function SelectPage() {
             select={select.choice}
             onMutateVoting={onMutateVoting}
           />
-          <AddDescriptionButton>
+          <CreateVoteButton>
             <Link href={`${Path.POST_PAGE}`}>﹢</Link>
-          </AddDescriptionButton>
-          <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-            <Link href={`${Path.VOTE_DETAIL_PAGE}${mainVoteList[nowShowing].voteId}`}>
+          </CreateVoteButton>
+          <DetailViewButton width="127px" height="48px" variant="primary" borderRadius="100px">
+            <Link href={`${Path.VOTE_DETAIL_PAGE}${voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>
             </Link>
-          </DetailButton>
+          </DetailViewButton>
         </PageInner>
         <FirstPageBase className="animate2" drag={drag} />
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
-
-      {params.get("isSuccess") && (
-        <FloatModalTemplate
-          onToggleModal={() => {
-            router.push(`${Path.MAIN_PAGE}?isSuccess=`);
-          }}
-        >
-          <Image alt="체크" src={Success} width={56} height={56} />
-          <GuideText>선택결정이 등록되었어요.</GuideText>
-        </FloatModalTemplate>
-      )}
-      {toggleDetail && (
-        <AddDetailModalContainer
-          onToggleModal={onChangeToggleDetail}
+      {params.get("isSuccess") && <PostCompleteComponent />}
+      {isModifyModal && (
+        <ModifyVoteModal
+          onToggleModal={onToggleModifyModal}
           initialVoteValue={{
             title,
             detail,
@@ -211,7 +201,7 @@ const SecondPageBase = styled(FirstPageBase)`
     `}
 `;
 
-const AddDescriptionButton = styled.div`
+const CreateVoteButton = styled.div`
   position: absolute;
   bottom: 30px;
   right: 30px;
@@ -228,13 +218,7 @@ const AddDescriptionButton = styled.div`
   cursor: pointer;
 `;
 
-const GuideText = styled.div`
-  color: ${({ theme }) => theme.palette.background.white};
-  ${({ theme }) => theme.textStyle.Title_Large}
-  font-weight: 700;
-`;
-
-const DetailButton = styled(Button)`
+const DetailViewButton = styled(Button)`
   position: absolute;
   bottom: -24px;
   right: 50%;
