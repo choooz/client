@@ -26,9 +26,9 @@ function SelectPage() {
   const params = new URLSearchParams(searchParams);
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
-  const [toggleDetail, onChangeToggleDetail] = useToggle(false);
-  const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
+  const [isUpdateModal, onToggleUpdateModal] = useToggle(false);
+  const [isSelectBox, onToggleSelectBox] = useToggle(false);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(isSelectBox, onToggleSelectBox);
   const { onActFlip, drag, onTouchMoveActFlip } = useFlipAnimation(onChangeNowShowing);
   const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
 
@@ -59,9 +59,9 @@ function SelectPage() {
           drag={drag}
         >
           <ChipContainer
-            onChangeToggleDetail={onChangeToggleDetail}
-            onChangeToggleMenu={onChangeToggleMenu}
-            toggleMenu={toggleMenu}
+            onToggleUpdateModal={onToggleUpdateModal}
+            onToggleSelectBox={onToggleSelectBox}
+            isSelectBox={isSelectBox}
             targetEl={targetEl}
             title={title}
             date={modifiedDate}
@@ -76,24 +76,24 @@ function SelectPage() {
             select={select.choice}
             onMutateVoting={onMutateVoting}
           />
-          <AddDescriptionButton>
+          <CreateVoteButton>
             <Link href={`${Path.POST_PAGE}`}>﹢</Link>
-          </AddDescriptionButton>
-          <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
+          </CreateVoteButton>
+          <DetailViewButton width="127px" height="48px" variant="primary" borderRadius="100px">
             <Link href={`${Path.VOTE_DETAIL_PAGE}${mainVoteList[nowShowing].voteId}`}>
               <DetailButtonInner>
                 <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 자세히 보기
               </DetailButtonInner>
             </Link>
-          </DetailButton>
+          </DetailViewButton>
         </PageInner>
         <FirstPageBase className="animate2" drag={drag} />
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
       {params.get("isSuccess") && <PostCompleteComponent />}
-      {toggleDetail && (
+      {isUpdateModal && (
         <AddDetailModalContainer
-          onToggleModal={onChangeToggleDetail}
+          onToggleModal={onToggleUpdateModal}
           initialVoteValue={{
             title,
             detail,
@@ -200,7 +200,7 @@ const SecondPageBase = styled(FirstPageBase)`
     `}
 `;
 
-const AddDescriptionButton = styled.div`
+const CreateVoteButton = styled.div`
   position: absolute;
   bottom: 30px;
   right: 30px;
@@ -217,7 +217,7 @@ const AddDescriptionButton = styled.div`
   cursor: pointer;
 `;
 
-const DetailButton = styled(Button)`
+const DetailViewButton = styled(Button)`
   position: absolute;
   bottom: -24px;
   right: 50%;
