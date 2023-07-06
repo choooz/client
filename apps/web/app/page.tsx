@@ -1,7 +1,7 @@
 "use client";
 
 import { useToggle, useOutsideClick } from "@chooz/hooks";
-import { Button, FloatModalTemplate } from "@chooz/ui";
+import { Button, FloatComponentTemplate } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import AddDetailModalContainer from "components/select/AddDetailModalContainer";
 import useFlipAnimation, { Drag } from "components/select/hooks/useFlipAnimation";
@@ -92,14 +92,14 @@ function SelectPage() {
         <SecondPageBase className="animate3" drag={drag} />
       </PageWrapper>
       {params.get("isSuccess") && (
-        <FloatModalTemplate
+        <FloatComponentTemplate
           onToggleModal={() => {
             router.push(`${Path.MAIN_PAGE}?isSuccess=`);
           }}
         >
           <Image alt="체크" src={Success} width={56} height={56} />
           <GuideText>선택결정이 등록되었어요.</GuideText>
-        </FloatModalTemplate>
+        </FloatComponentTemplate>
       )}
       {toggleDetail && (
         <AddDetailModalContainer
