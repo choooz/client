@@ -88,7 +88,7 @@ function VoteContainer({ postId }: { postId: number }) {
       {toggleDetail && (
         <ModifyVoteModal
           onToggleModal={onChangeToggleDetail}
-          initialVoteValue={{
+          prevVoteValue={{
             title,
             detail: description,
             titleA,

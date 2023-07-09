@@ -95,7 +95,7 @@ function SelectPage() {
       {isModifyModal && (
         <ModifyVoteModal
           onToggleModal={onToggleModifyModal}
-          initialVoteValue={{
+          prevVoteValue={{
             title,
             detail,
             titleA,
