@@ -8,7 +8,7 @@ function useModifyVoteService(onToggle: () => void, initialValue: ModifyVote, vo
   const [vote, setVote] = useState<ModifyVote>({
     title: "",
     detail: "",
-    category: "NULL",
+    category: null,
     titleA: "",
     titleB: "",
   });

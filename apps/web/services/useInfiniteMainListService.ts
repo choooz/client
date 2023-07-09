@@ -3,9 +3,14 @@ import { getVoteListAPI } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 import { useEffect, useMemo, useState } from "react";
 
+interface Props {
+  size: number;
+  sortBy: string;
+}
+
 const SafeRange = 5;
 
-export default function useInfiniteMainListService(size: number, sortBy: string) {
+export default function useInfiniteMainListService({ size, sortBy }: Props) {
   const [nowShowing, setNowShowing] = useState(0);
 
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
@@ -14,7 +19,7 @@ export default function useInfiniteMainListService(size: number, sortBy: string)
     {
       getNextPageParam: (lastPage, pages) => {
         if (lastPage.last) return undefined;
-        return pages.length + 1;
+        return pages.length;
       },
       keepPreviousData: true,
       cacheTime: 1000 * 60 * 5,
@@ -28,7 +33,7 @@ export default function useInfiniteMainListService(size: number, sortBy: string)
 
   const onChangeNowShowing = (index: number) => {
     if (nowShowing + index < 0) return;
-    if (nowShowing + index > mainVoteList.length) return;
+    if (nowShowing + index > mainVoteList.length - 1) return;
     setNowShowing((prev) => prev + index);
   };
 

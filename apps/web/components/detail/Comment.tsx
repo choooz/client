@@ -1,12 +1,9 @@
 import { useOutsideClick, useToggle } from "@chooz/hooks";
-import { Button } from "@chooz/ui";
-import WarningSmallModal from "components/register/WarningSmallModal";
-import MenuBox from "components/select/MenuBox";
+import ModifyDeleteButtonBox from "app/select/components/ModifyDeleteButtonBox";
 import Image from "next/image";
 import { HambergerIcon } from "public/icons";
 import { PurpleMonster } from "public/images";
 import React from "react";
-import useUpdateCommnetService from "services/useUpdateCommnetService";
 import styled, { css } from "styled-components";
 import { Comment } from "types/comments";
 import CommentDeleteModal from "./CommentDeleteModal";
@@ -79,7 +76,9 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
           }}
         />
       </div>
-      {toggleMenu && <MenuBox isDelete onDelete={onToggleWarningModal} right="20px" />}
+      {toggleMenu && (
+        <ModifyDeleteButtonBox isDeleteButton onDelete={onToggleWarningModal} right="20px" />
+      )}
       {toggleWarningModal && (
         <CommentDeleteModal onToggleModal={onToggleWarningModal} onSubmit={mutateDeleteComment} />
       )}

@@ -1,9 +1,8 @@
 import { useOutsideClick, useToggle } from "@chooz/hooks";
-import AddDetailModalContainer from "components/select/AddDetailModalContainer";
-import VoteToolbar from "components/select/VoteToolbar";
+import ModifyVoteModal from "app/select/components/ModifyVoteModal";
+import ChipContainer from "app/select/components/ChipContainer";
 import { EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
-import useFilteredStatisticsService from "services/useFilteredStatisticsService";
 import useMutateVotingService from "services/useMutateVotingService";
 import useStatisticsService from "services/useStatisticsService";
 import useVoteLoadService from "services/useVoteLoadService";
@@ -54,7 +53,7 @@ function VoteContainer({ postId }: { postId: number }) {
     VoteData;
   return (
     <>
-      <VoteToolbar
+      <ChipContainer
         onChangeToggleDetail={onChangeToggleDetail}
         onChangeToggleMenu={onChangeToggleMenu}
         toggleMenu={toggleMenu}
@@ -87,7 +86,7 @@ function VoteContainer({ postId }: { postId: number }) {
       />
       <VoteDetail>{description}</VoteDetail>
       {toggleDetail && (
-        <AddDetailModalContainer
+        <ModifyVoteModal
           onToggleModal={onChangeToggleDetail}
           initialVoteValue={{
             title,

@@ -14,7 +14,7 @@ interface Props {
   onMutateVoting: (select: AorB) => void;
 }
 
-function SelectAB({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Props) {
+function SelectAorBContainer({ titleA, titleB, imageA, imageB, select, onMutateVoting }: Props) {
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
   };
@@ -156,4 +156,4 @@ const VoteImageWrapper = styled.div`
     height: 340px;
   }
 `;
-export default SelectAB;
+export default SelectAorBContainer;
