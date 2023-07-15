@@ -1,10 +1,10 @@
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { modifyVoteAPI, ModifyVote } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 import React, { useEffect, useState } from "react";
 
 function useModifyVoteService(onToggle: () => void, initialValue: ModifyVote, voteId: number) {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const [vote, setVote] = useState<ModifyVote>({
     title: "",
     detail: "",
