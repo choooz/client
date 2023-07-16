@@ -50,8 +50,10 @@ function PostPage() {
 }
 
 const PageWrapper = styled.div`
+  overflow: scroll;
   width: 100%;
   padding-top: 16px;
+  padding-bottom: 20px;
   ${media.medium} {
     padding-top: 40px;
   }
@@ -64,10 +66,8 @@ const PageInner = styled.div`
   max-width: 640px;
   position: relative;
   padding: 30px;
-  height: calc(100vh - 30px - 55px);
   ${media.medium} {
     padding: 40px;
-    height: calc(100vh - 60px - 55px);
   }
 `;
 
