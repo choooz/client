@@ -13,9 +13,12 @@ import useFilterStatistics from "./hooks/useFilterStatistics";
 import VoteAnalyzeBar from "./VoteAnalyzeBar";
 
 function VoteContainer({ postId }: { postId: number }) {
-  const [toggleDetail, onChangeToggleDetail] = useToggle(false);
-  const [toggleMenu, onChangeToggleMenu] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onChangeToggleMenu);
+  const [isModifyModal, onToggleModifyModal] = useToggle(false);
+  const [isModifyDeleteButtonBox, onToggleModifyDeleteButtonBox] = useToggle(false);
+  const { targetEl } = useOutsideClick<HTMLImageElement>(
+    isModifyDeleteButtonBox,
+    onToggleModifyDeleteButtonBox,
+  );
   const { data: VoteData, isLoading, isError } = useVoteLoadService(postId);
   const { voteCountQuery, voteStatisticsQuery } = useStatisticsService(postId);
   const {
@@ -54,9 +57,9 @@ function VoteContainer({ postId }: { postId: number }) {
   return (
     <>
       <ChipContainer
-        onChangeToggleDetail={onChangeToggleDetail}
-        onChangeToggleMenu={onChangeToggleMenu}
-        toggleMenu={toggleMenu}
+        onToggleModifyModal={onToggleModifyModal}
+        onToggleModifyDeleteButtonBox={onToggleModifyDeleteButtonBox}
+        isModifyDeleteButtonBox={isModifyDeleteButtonBox}
         targetEl={targetEl}
         title={title}
         date={voteCreatedDate}
@@ -85,9 +88,9 @@ function VoteContainer({ postId }: { postId: number }) {
         percentageB={percentageB}
       />
       <VoteDetail>{description}</VoteDetail>
-      {toggleDetail && (
+      {isModifyModal && (
         <ModifyVoteModal
-          onToggleModal={onChangeToggleDetail}
+          onToggleModal={onToggleModifyModal}
           prevVoteValue={{
             title,
             detail: description,
