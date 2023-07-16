@@ -14,6 +14,7 @@ import useMutateCommentService from "services/useMutateCommentService";
 import useUpdateCommnetService from "services/useUpdateCommnetService";
 import useCommentFilter from "./hooks/useCommentFilter";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
+import Path from "lib/Path";
 
 interface Props {
   postId: number;
@@ -82,9 +83,9 @@ function CommentContainer({ postId }: Props) {
       </Button>
 
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
-        <Link href="select">
+        <Link href={Path.MAIN_PAGE}>
           <DetailButtonInner>
-            <Image alt="자세히 보기" src={AmplifyIcon} width={40} height={40} /> 간단히 보기
+            <Image alt="간단히 보기" src={AmplifyIcon} width={40} height={40} /> 간단히 보기
           </DetailButtonInner>
         </Link>
       </DetailButton>
