@@ -52,8 +52,9 @@ function VoteContainer({ postId }: { postId: number }) {
     totalCountA: filteredTotalCountA,
     totalCountB: filteredTotalCountB,
   } = voteFilteredStatisticsQuery.data;
-  const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate, category } =
+  const { title, titleA, titleB, imageA, imageB, description, voteCreatedDate, category, writer } =
     VoteData;
+
   return (
     <>
       <ChipContainer
@@ -63,6 +64,8 @@ function VoteContainer({ postId }: { postId: number }) {
         targetEl={targetEl}
         title={title}
         date={voteCreatedDate}
+        writer={writer}
+        voteId={postId}
         /*
          * @Todo 이렇게 해야하나?
          */

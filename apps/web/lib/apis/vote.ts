@@ -72,8 +72,8 @@ export const deleteVoteAPI = async (voteId: number) => {
   return response.data;
 };
 
-interface GetVoteByIdResponst {
-  user: {
+interface GetVoteByIdResponse {
+  writer: {
     userImage: string | null;
     userGender: string;
     userAge: number;
@@ -93,7 +93,7 @@ interface GetVoteByIdResponst {
   description: string;
 }
 export const getVoteByIdAPI = async (id: number) => {
-  const response = await axios.get<GetVoteByIdResponst>(`${SERVER_URL}api/votes/${id}`);
+  const response = await axios.get<GetVoteByIdResponse>(`${SERVER_URL}api/votes/${id}`);
   return response.data;
 };
 export interface PostVotingRequest {
