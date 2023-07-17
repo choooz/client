@@ -3,8 +3,15 @@ import { modifyVoteAPI, ModifyVote } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 import React, { useEffect, useState } from "react";
 
-function useModifyVoteService(onToggle: () => void, initialValue: ModifyVote, voteId: number) {
+interface Props {
+  onToggleModal: () => void;
+  prevVoteValue: ModifyVote;
+  voteId: number;
+}
+
+function useModifyVoteService({ onToggleModal, prevVoteValue, voteId }: Props) {
   const queryClient = useQueryClient();
+
   const [vote, setVote] = useState<ModifyVote>({
     title: "",
     detail: "",
@@ -38,8 +45,8 @@ function useModifyVoteService(onToggle: () => void, initialValue: ModifyVote, vo
 
   // @TODO: detail값 추가되면 채워넣기
   useEffect(() => {
-    if (!initialValue) return;
-    const { title, titleA, titleB, category, detail } = initialValue;
+    if (!prevVoteValue) return;
+    const { title, titleA, titleB, category, detail } = prevVoteValue;
     setVote({
       title: title,
       detail,
@@ -47,13 +54,13 @@ function useModifyVoteService(onToggle: () => void, initialValue: ModifyVote, vo
       titleA,
       titleB,
     });
-  }, [initialValue]);
+  }, [prevVoteValue]);
 
   const { mutate: mutateVote } = useMutation(() => modifyVoteAPI(vote, voteId || 0), {
     onSuccess: () => {
       alert("내용이 추가하기 성공.");
       queryClient.invalidateQueries(reactQueryKeys.mainVoteList());
-      onToggle();
+      onToggleModal();
     },
   });
 

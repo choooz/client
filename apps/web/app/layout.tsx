@@ -8,6 +8,7 @@ import { GlobalStyles } from "styles/globalStyles";
 import StyledComponentsRegistry from "../lib/registry";
 import useReplaceUser from "hooks/useReplaceUser";
 import Header from "components/common/header/Header";
+import { media } from "styles/media";
 
 function RootLayout({
   // Layouts must accept a children prop.
@@ -56,10 +57,13 @@ function RootLayout({
 const Applayout = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 16px;
+  padding: 13px 16px 0;
   flex: 1;
   overflow: hidden;
-  height: calc(100vh - 55px);
+  height: calc(100svh - 55px);
+  ${media.medium} {
+    padding-top: 37px;
+  }
 `;
 
 export default RootLayout;

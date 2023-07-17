@@ -8,15 +8,15 @@ import { ModifyVote } from "lib/apis/vote";
 interface Props {
   onToggleModal(): void;
   voteId: number;
-  initialVoteValue: ModifyVote;
+  prevVoteValue: ModifyVote;
 }
 
-function ModifyVoteModal({ onToggleModal, voteId, initialVoteValue }: Props) {
-  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService(
+function ModifyVoteModal({ onToggleModal, voteId, prevVoteValue }: Props) {
+  const { onChangeVote, onChangeVoteByClick, mutateVote, vote } = useModifyVoteService({
     onToggleModal,
-    initialVoteValue,
+    prevVoteValue,
     voteId,
-  );
+  });
 
   const { title, detail, titleA, titleB, category } = vote;
 
@@ -42,7 +42,7 @@ function ModifyVoteModal({ onToggleModal, voteId, initialVoteValue }: Props) {
             <Input width="auto" onChange={onChangeVote} name="titleB" value={titleB} />
           </FlexRow>
           <DivideLine />
-          <QuestionText>나이</QuestionText>
+          <QuestionText>카테고리</QuestionText>
           <ChipWrapper>
             {SELECT_BOX_CATEGORY_LIST.map(({ label, value }) => (
               <div key={value}>
