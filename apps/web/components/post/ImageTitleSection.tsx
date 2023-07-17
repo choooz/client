@@ -30,8 +30,11 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
 
   const { title, titleA, titleB, imageA, imageB } = vote;
   return (
-    <Template nextButtonText="다음" nextButtonProps={{ onClick: onNextStep, disabled: IsDisabled }}>
-      <Container>
+    <Container>
+      <Template
+        nextButtonText="다음"
+        nextButtonProps={{ onClick: onNextStep, disabled: IsDisabled }}
+      >
         {step === 2 && (
           <TitleBox>
             <QuestionText> 질문을 입력해주세요.(선택)</QuestionText>
@@ -106,8 +109,9 @@ function ImageTitleSection({ onChangeVote, onUploadImage, vote, onChangePostStep
             />
           </InputBox>
         </VoteWrapper>
-      </Container>
-    </Template>
+      </Template>
+      <ButtonSpace />
+    </Container>
   );
 }
 
@@ -199,5 +203,9 @@ const VSIcon = styled.div`
     height: 40px;
   }
 `;
-
+const ButtonSpace = styled.div`
+  width: 100%;
+  height: 56px;
+  margin-bottom: 30px;
+`;
 export default React.memo(ImageTitleSection);

@@ -76,7 +76,6 @@ function TargetSection({
         ))}
       </ChipWrapper>
       <QuestionText>MBTI</QuestionText>
-
       {/* 추가적으로 나중에 밑쪽 화살표 추가하기 */}
       <Select name="filteredMbti" onChange={onChangeVoteBySelect} value={filteredMbti}>
         <option value="" hidden>
@@ -93,6 +92,7 @@ function TargetSection({
           초기화
         </Button>
       </ResetButtonWrapper>
+      <ButtonSpace />
     </Template>
   );
 }
@@ -171,6 +171,12 @@ const ResetButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   padding-top: 32px;
+`;
+
+const ButtonSpace = styled.div`
+  width: 100%;
+  height: 56px;
+  margin-bottom: 30px;
 `;
 
 export default TargetSection;
