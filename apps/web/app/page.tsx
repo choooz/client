@@ -29,7 +29,8 @@ function SelectPage() {
   );
   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
-  const { onActFlip, drag, onTouchMoveActFlip } = useFlipAnimation(onChangeNowShowing);
+  const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
+    useFlipAnimation(onChangeNowShowing);
   const { select, onMutateVoting } = useMutateVotingService(mainVoteList[nowShowing]?.voteId);
   const {
     modifiedDate,
@@ -55,7 +56,8 @@ function SelectPage() {
         <PageInner
           className="animate"
           onWheel={onActFlip}
-          onTouchMove={onTouchMoveActFlip}
+          onTouchStart={onTouchStartPosition}
+          onTouchEnd={onTouchMoveActFlip}
           drag={drag}
         >
           <ChipContainer
