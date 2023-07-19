@@ -41,9 +41,11 @@ function RootLayout({
               <GlobalStyles />
               <Header />
               <Applayout>
-                <div id="stars" />
-                <div id="stars2" />
-                <div id="stars3" />
+                <Stars>
+                  <div id="stars" />
+                  <div id="stars2" />
+                  <div id="stars3" />
+                </Stars>
                 {children}
               </Applayout>
             </ThemeProvider>
@@ -62,8 +64,12 @@ const Applayout = styled.div`
   overflow: hidden;
   height: calc(100svh - 55px);
   ${media.medium} {
-    padding-top: 37px;
+    padding: 40px 16px 0;
   }
+`;
+
+const Stars = styled.div`
+  height: 100%;
 `;
 
 export default RootLayout;
