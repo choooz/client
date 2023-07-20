@@ -3,8 +3,6 @@
 import { media } from "@chooz/ui/styles/media";
 import { useQuery } from "@tanstack/react-query";
 import ImageUploadButton from "components/common/ImageUploadButton";
-import TabContainer from "components/my/TabContainer";
-import VoteList from "components/my/VoteList";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { getVoteCount, VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
@@ -15,6 +13,8 @@ import { useState } from "react";
 import useInfiniteMyPageVoteListService from "services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";
+import TabContainer from "./components/TabContainer";
+import VoteList from "./components/VoteList";
 
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState<VoteListType>("created");

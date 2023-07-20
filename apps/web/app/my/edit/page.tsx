@@ -2,8 +2,7 @@
 
 import { Button, transitions } from "@chooz/ui";
 import ImageUploadButton from "components/common/ImageUploadButton";
-import MbtiSelect from "components/my/MbtiSelect";
-import TabContainer from "components/my/TabContainer";
+import MbtiSelect from "app/my/components/MbtiSelect";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { uploadProfileImageAPI } from "lib/apis/upload";
 import { updateUserInfo } from "lib/apis/user";
@@ -18,6 +17,7 @@ import styled, { css } from "styled-components";
 import { media } from "styles/media";
 import { Gender } from "types/user";
 import { IMAGE_CATEGORY_LIST } from "types/vote";
+import TabContainer from "../components/TabContainer";
 
 function ProfileEditPage() {
   const router = useRouter();
