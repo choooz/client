@@ -61,8 +61,10 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
         <CommentInfo>
           <div>{createdDate.slice(0, 10)}</div>
           <Comma />
-          <div onClick={mutateLike}>❤️ 좋아요 {likeCount}</div> <Comma />
-          <div onClick={mutateHate}>🖤 싫어요 {hateCount}</div> <Comma />
+          <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount}</InteractionButton>{" "}
+          <Comma />
+          <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount}</InteractionButton>{" "}
+          <Comma />
           <div>답글쓰기</div>
         </CommentInfo>
       </ContentsBox>
@@ -76,9 +78,7 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
           }}
         />
       </div>
-      {toggleMenu && (
-        <ModifyDeleteButtonBox isDeleteButton onDelete={onToggleWarningModal} right="20px" />
-      )}
+      {toggleMenu && <ModifyDeleteButtonBox onDelete={onToggleWarningModal} right="20px" />}
       {toggleWarningModal && (
         <CommentDeleteModal onToggleModal={onToggleWarningModal} onSubmit={mutateDeleteComment} />
       )}
@@ -160,6 +160,12 @@ const Comma = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.palette.background.selected};
   `}
+`;
+
+const InteractionButton = styled.div`
+  :active {
+    transform: scale(1.15);
+  }
 `;
 
 export default Comment;
