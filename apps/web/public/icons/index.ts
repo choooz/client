@@ -21,3 +21,7 @@ export { default as AlertIcon } from "./AlertIcon.png";
 export { default as MoreIcon } from "./MoreIcon.png";
 export { default as MyPageIcon } from "./MyPageIcon.png";
 export { default as Back } from "./Back.png";
+export { default as LightAString } from "./Light-A.png";
+export { default as DarkAString } from "./Dark-A.png";
+export { default as LightBString } from "./Light-B.png";
+export { default as DarkBString } from "./Dark-B.png";

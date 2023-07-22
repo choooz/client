@@ -1,6 +1,7 @@
+import Image from "next/image";
+import { DarkAString, DarkBString, LightBString } from "public/icons";
 import React from "react";
 import styled, { css } from "styled-components";
-import { AorB } from "types/vote";
 
 interface Props {
   percentageA: number;
@@ -22,10 +23,32 @@ function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB }: 
       ) : (
         <AnalyzeBar>
           <Share selected={isSelectedA} share={percentageA}>
+            {isSelectedA && (
+              <Image
+                src={DarkAString}
+                alt="A"
+                style={{
+                  width: "12px",
+                  height: "15px",
+                  marginRight: "8px",
+                }}
+              />
+            )}
             {percentageA}% &nbsp;
             <div className="number">{totalCountA.toLocaleString()}명</div>
           </Share>
           <Share selected={!isSelectedA} share={percentageB}>
+            {!isSelectedA && (
+              <Image
+                src={LightBString}
+                alt="A"
+                style={{
+                  width: "12px",
+                  height: "15px",
+                  marginRight: "8px",
+                }}
+              />
+            )}
             {percentageB}% &nbsp;
             <div className="number">{totalCountB.toLocaleString()}명</div>
           </Share>
