@@ -11,6 +11,7 @@ import DetailAB from "./DetailAB";
 import FilterBar from "./FilterBar";
 import useFilterStatistics from "./hooks/useFilterStatistics";
 import VoteAnalyzeBar from "./VoteAnalyzeBar";
+import VoteWriterBox from "./VoteWriterBox";
 
 function VoteContainer({ postId }: { postId: number }) {
   const [isModifyModal, onToggleModifyModal] = useToggle(false);
@@ -57,6 +58,7 @@ function VoteContainer({ postId }: { postId: number }) {
 
   return (
     <>
+      <VoteWriterBox writer={writer} />
       <ChipContainer
         onToggleModifyModal={onToggleModifyModal}
         onToggleModifyDeleteButtonBox={onToggleModifyDeleteButtonBox}
