@@ -64,12 +64,12 @@ const Applayout = styled.div`
   overflow: hidden;
   height: calc(100svh - 55px);
   ${media.medium} {
-    padding: 40px 16px 0;
+    padding-top: 34px;
   }
 `;
 
 const Stars = styled.div`
-  height: 100%;
+  height: 6px;
 `;
 
 export default RootLayout;
