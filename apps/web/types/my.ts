@@ -1,5 +1,7 @@
 import { Vote } from "./vote";
 
-export interface MyPageVote extends Vote {
+export interface MyVote extends Vote {
   countComment: number;
 }
+
+export type MyVoteListType = "created" | "participated" | "bookmarked";

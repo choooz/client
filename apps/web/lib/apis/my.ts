@@ -1,16 +1,14 @@
 import apiClient from "lib/apis/apiClient";
-import { MyPageVote } from "types/my";
+import { MyVote, MyVoteListType } from "types/my";
 
-export type VoteListType = "created" | "participated" | "bookmarked";
-
-export interface GetMyPageVoteListRequest {
+export interface GetMyVoteListRequest {
   page: number;
   size: number;
-  voteType: VoteListType;
+  voteType: MyVoteListType;
 }
 
-interface GetMyPageVoteListResponse {
-  content: MyPageVote[];
+interface GetMyVoteListResponse {
+  content: MyVote[];
   empty: boolean;
   first: boolean;
   last: boolean;
@@ -19,8 +17,8 @@ interface GetMyPageVoteListResponse {
   size: number;
 }
 
-export const getMyPageVoteList = async ({ page, size, voteType }: GetMyPageVoteListRequest) => {
-  const response = await apiClient.get<GetMyPageVoteListResponse>("api/user/mypage", {
+export const getMyVoteList = async ({ page, size, voteType }: GetMyVoteListRequest) => {
+  const response = await apiClient.get<GetMyVoteListResponse>("api/user/mypage", {
     params: {
       page,
       size,

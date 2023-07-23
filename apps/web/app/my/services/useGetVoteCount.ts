@@ -1,10 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { getVoteCount } from "lib/apis/my";
-
 import { reactQueryKeys } from "lib/queryKeys";
 
 function useGetVoteCount() {
-  const { data } = useQuery(reactQueryKeys.myPageVoteCount(), getVoteCount);
+  const { data } = useQuery(reactQueryKeys.myVoteCount(), getVoteCount);
 
   const { countCreatedVote, countParticipatedVote, countBookmarkedVote } = data || {};
 

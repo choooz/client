@@ -1,11 +1,11 @@
 import { media } from "@chooz/ui/styles/media";
 import styled from "styled-components";
-import { MyPageVote } from "types/vote";
+import { MyVote } from "types/vote";
 import VoteItemDesktop from "./VoteItemDesktop";
 import VoteItemMobile from "./VoteItemMobile";
 
 interface Props {
-  voteList: MyPageVote[];
+  voteList: MyVote[];
 }
 
 function VoteList({ voteList }: Props) {
@@ -14,12 +14,12 @@ function VoteList({ voteList }: Props) {
   return (
     <>
       <MobileVoteList>
-        {voteList.map((vote: MyPageVote, index: number) => (
+        {voteList.map((vote: MyVote, index: number) => (
           <VoteItemMobile key={`my_page_${index}`} vote={vote} />
         ))}
       </MobileVoteList>
       <DesktopVoteList>
-        {voteList.map((vote: MyPageVote, index: number) => (
+        {voteList.map((vote: MyVote, index: number) => (
           <VoteItemDesktop key={`my_page_${index}`} vote={vote} />
         ))}
       </DesktopVoteList>

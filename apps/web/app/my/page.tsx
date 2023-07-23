@@ -1,30 +1,28 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
-import { useQuery } from "@tanstack/react-query";
 import ImageUploadButton from "components/common/ImageUploadButton";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
-import { getVoteCount, VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import Path from "lib/Path";
-import { reactQueryKeys } from "lib/queryKeys";
 import Link from "next/link";
 import { useState } from "react";
-import useInfiniteMyPageVoteListService from "app/my/services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";
 import TabContainer from "./components/TabContainer";
 import VoteList from "./components/VoteList";
 import CountVoteContainer from "./components/VoteCountContainer";
+import { MyVoteListType } from "types/my";
+import useInfiniteMyVoteListService from "./services/useInfiniteMyPageVoteListService";
 
 function MyPage() {
-  const [selectedTab, setSelectedTab] = useState<VoteListType>("created");
+  const [selectedTab, setSelectedTab] = useState<MyVoteListType>("created");
 
   const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSelectedTab(e.currentTarget.value as VoteListType);
+    setSelectedTab(e.currentTarget.value as MyVoteListType);
   };
 
-  const { voteList, subscribe } = useInfiniteMyPageVoteListService({
+  const { voteList, subscribe } = useInfiniteMyVoteListService({
     size: 7,
     voteType: selectedTab,
   });

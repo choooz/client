@@ -7,10 +7,10 @@ import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
 import { AIcon, BIcon, BookmarkIcon } from "public/icons";
 import styled, { css } from "styled-components";
-import { MyPageVote } from "types/vote";
+import { MyVote } from "types/my";
 
 interface Props {
-  vote: MyPageVote;
+  vote: MyVote;
 }
 
 function VoteItemMobile({ vote }: Props) {
