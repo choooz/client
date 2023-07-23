@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInfiniteScroll } from "hooks/useInfiniteScroll";
-import { getMyPageVoteList, GetMyPageVoteListRequest } from "lib/apis/user";
+import { getMyPageVoteList, GetMyPageVoteListRequest } from "lib/apis/my";
 
 import { reactQueryKeys } from "lib/queryKeys";
 

@@ -10,11 +10,12 @@ import Path from "lib/Path";
 import { reactQueryKeys } from "lib/queryKeys";
 import Link from "next/link";
 import { useState } from "react";
-import useInfiniteMyPageVoteListService from "services/useInfiniteMyPageVoteListService";
+import useInfiniteMyPageVoteListService from "app/my/services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";
 import TabContainer from "./components/TabContainer";
 import VoteList from "./components/VoteList";
+import CountVoteContainer from "./components/VoteCountContainer";
 
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState<VoteListType>("created");
@@ -23,24 +24,16 @@ function MyPage() {
     setSelectedTab(e.currentTarget.value as VoteListType);
   };
 
-  const loadVoteCount = () => {
-    const { data } = useQuery(reactQueryKeys.myPageVoteCount(), getVoteCount);
-    return { data };
-  };
-
   const { voteList, subscribe } = useInfiniteMyPageVoteListService({
     size: 7,
     voteType: selectedTab,
   });
 
   const { data: userInfo } = useGetUserInfo();
-  const { data: voteCount } = loadVoteCount();
 
   if (!userInfo) return <div>데이터 없음</div>;
-  if (!voteCount) return <div>데이터 없음</div>;
 
   const { gender, username, age, mbti } = userInfo;
-  const { countCreatedVote, countParticipatedVote, countBookmarkedVote } = voteCount;
 
   return (
     <PageWrapper>
@@ -64,20 +57,7 @@ function MyPage() {
           </ProfileModifyButton>
         </Profile>
         {/* @TODO api 연결하면 map 사용 */}
-        <NumberOfVoteSection>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countCreatedVote}</NumberOfVote>
-            <NumberOfVoteText>작성한 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countParticipatedVote}</NumberOfVote>
-            <NumberOfVoteText>참여한 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countBookmarkedVote}</NumberOfVote>
-            <NumberOfVoteText>북마크 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-        </NumberOfVoteSection>
+        <CountVoteContainer />
       </PageInner>
       <TabContainerWrapper>
         <TabContainer
@@ -162,29 +142,6 @@ const ProfileModifyButton = styled.button`
   border: 1px solid ${({ theme }) => theme.palette.border.light};
   border-radius: 4px;
   margin-top: 25px;
-`;
-
-const NumberOfVoteSection = styled.section`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 24px;
-`;
-
-const NumberOfVoteContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const NumberOfVote = styled.span`
-  ${({ theme }) => theme.textStyle.Title_Large};
-  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue";
-`;
-
-const NumberOfVoteText = styled.span`
-  color: ${({ theme }) => theme.palette.ink.light};
 `;
 
 const TabContainerWrapper = styled.div`
