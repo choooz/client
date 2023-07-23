@@ -1,19 +1,15 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
-import ImageUploadButton from "components/common/ImageUploadButton";
-import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
-import Path from "lib/Path";
-import Link from "next/link";
 import { useState } from "react";
 import styled, { css } from "styled-components";
-import { Gender } from "types/user";
 import TabContainer from "./components/TabContainer";
 import VoteList from "./components/VoteList";
 import CountVoteContainer from "./components/VoteCountContainer";
 import { MyVoteListType } from "types/my";
 import useInfiniteMyVoteListService from "./services/useInfiniteMyPageVoteListService";
+import UserInfoContainer from "./components/UserInfoContainer";
 
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState<MyVoteListType>("created");
@@ -27,34 +23,10 @@ function MyPage() {
     voteType: selectedTab,
   });
 
-  const { data: userInfo } = useGetUserInfo();
-
-  if (!userInfo) return <div>데이터 없음</div>;
-
-  const { gender, username, age, mbti } = userInfo;
-
   return (
     <PageWrapper>
       <PageInner>
-        <AddImageButtonWrapper>
-          <ImageUploadButton width="107px" height="107px" />
-        </AddImageButtonWrapper>
-        <Profile>
-          <UserInfo>
-            <>
-              {gender === Gender.MALE ? "남" : "여"}
-              <Divider />
-              {age}
-              <Divider />
-              {mbti}
-            </>
-          </UserInfo>
-          <Nickname>{username}</Nickname>
-          <ProfileModifyButton>
-            <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
-          </ProfileModifyButton>
-        </Profile>
-        {/* @TODO api 연결하면 map 사용 */}
+        <UserInfoContainer />
         <CountVoteContainer />
       </PageInner>
       <TabContainerWrapper>
@@ -93,53 +65,6 @@ const PageInner = styled.div`
   ${media.medium} {
     padding: 20px 40px;
   }
-`;
-
-const AddImageButtonWrapper = styled.div`
-  float: left;
-`;
-
-const Profile = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 17px;
-
-  ${media.medium} {
-    padding-left: 28px;
-  }
-`;
-
-const UserInfo = styled.span`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 86px;
-  background-color: ${({ theme }) => theme.palette.background.black};
-  border-radius: 4px;
-`;
-
-const Divider = styled.div`
-  width: 1px;
-  height: 8px;
-  margin: 0 4px;
-  background-color: ${({ theme }) => theme.palette.ink.base};
-`;
-
-const Nickname = styled.span`
-  margin-top: 8px;
-  ${({ theme }) => css`
-    ${theme.textStyle.Title_Small};
-    color: ${theme.palette.ink.lighter};
-  `};
-`;
-
-const ProfileModifyButton = styled.button`
-  width: 71px;
-  height: 30px;
-  border: 1px solid ${({ theme }) => theme.palette.border.light};
-  border-radius: 4px;
-  margin-top: 25px;
 `;
 
 const TabContainerWrapper = styled.div`
