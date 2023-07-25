@@ -9,7 +9,7 @@ import { media } from "@chooz/ui/styles/media";
 function UserInfoContainer() {
   const { data: userInfo } = useGetUserInfo();
 
-  if (!userInfo) return <div>데이터 없음</div>;
+  if (!userInfo) return <></>;
 
   const { gender, username, age, mbti } = userInfo;
 
