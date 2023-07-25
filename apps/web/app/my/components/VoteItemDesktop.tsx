@@ -5,10 +5,10 @@ import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
 import { AIcon, BIcon } from "public/icons";
 import styled, { css } from "styled-components";
-import { MyPageVote } from "types/vote";
+import { MyVote } from "types/vote";
 
 interface Props {
-  vote: MyPageVote;
+  vote: MyVote;
 }
 
 function VoteItemDesktop({ vote }: Props) {

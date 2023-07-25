@@ -1,6 +1,6 @@
+import { MyVoteListType } from "types/my";
 import { Agetype } from "types/user";
 import { GenderType } from "types/vote";
-import { VoteListType } from "./apis/user";
 
 export const queryKeys = {
   USER_INFO: "userInfo" as const,
@@ -12,8 +12,8 @@ export const queryKeys = {
   DETAIL_ANALYSIS: "analysisByVoteId" as const,
   DETAIL_FILTERED_ANALYSIS: "filteredAnalysisByVoteId" as const,
   VOTING_CHECK: "votingCheck" as const,
-  MY_PAGE_VOTE_LIST: "myPageVoteList" as const,
-  MY_PAGE_VOTE_COUNT: "myPageVoteCount" as const,
+  MY_VOTE_LIST: "myVoteList" as const,
+  MY_VOTE_COUNT: "myVoteCount" as const,
 };
 
 export const reactQueryKeys = {
@@ -34,6 +34,6 @@ export const reactQueryKeys = {
   detailFilterdAnalysis: (id: number, mbti: string, gender: string, age: string) =>
     [queryKeys.DETAIL_FILTERED_ANALYSIS, id, mbti, gender, age] as const,
   votingCheck: (id: number) => [queryKeys.VOTING_CHECK, id] as const,
-  myPageVoteList: (params: VoteListType) => [queryKeys.MY_PAGE_VOTE_LIST, ...params] as const,
-  myPageVoteCount: () => [queryKeys.MY_PAGE_VOTE_COUNT] as const,
+  myVoteList: (params: MyVoteListType) => [queryKeys.MY_VOTE_LIST, ...params] as const,
+  myVoteCount: () => [queryKeys.MY_VOTE_COUNT] as const,
 };

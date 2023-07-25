@@ -58,10 +58,6 @@ export interface Vote {
   imageB: string | null;
 }
 
-export interface MyPageVote extends Vote {
-  countComment: number;
-}
-
 export type AorB = "A" | "B";
 
 export type Voting = PostVotingRequest;

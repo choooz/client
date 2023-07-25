@@ -1,83 +1,33 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
-import { useQuery } from "@tanstack/react-query";
-import ImageUploadButton from "components/common/ImageUploadButton";
-import TabContainer from "components/my/TabContainer";
-import VoteList from "components/my/VoteList";
-import { useGetUserInfo } from "hooks/useGetUserInfo";
-import { getVoteCount, VoteListType } from "lib/apis/user";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
-import Path from "lib/Path";
-import { reactQueryKeys } from "lib/queryKeys";
-import Link from "next/link";
 import { useState } from "react";
-import useInfiniteMyPageVoteListService from "services/useInfiniteMyPageVoteListService";
 import styled, { css } from "styled-components";
-import { Gender } from "types/user";
+import TabContainer from "./components/TabContainer";
+import VoteList from "./components/VoteList";
+import CountVoteContainer from "./components/VoteCountContainer";
+import { MyVoteListType } from "types/my";
+import useInfiniteMyVoteListService from "./services/useInfiniteMyPageVoteListService";
+import UserInfoContainer from "./components/UserInfoContainer";
 
 function MyPage() {
-  const [selectedTab, setSelectedTab] = useState<VoteListType>("created");
+  const [selectedTab, setSelectedTab] = useState<MyVoteListType>("created");
 
   const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSelectedTab(e.currentTarget.value as VoteListType);
+    setSelectedTab(e.currentTarget.value as MyVoteListType);
   };
 
-  const loadVoteCount = () => {
-    const { data } = useQuery(reactQueryKeys.myPageVoteCount(), getVoteCount);
-    return { data };
-  };
-
-  const { voteList, subscribe } = useInfiniteMyPageVoteListService({
+  const { voteList, subscribe } = useInfiniteMyVoteListService({
     size: 7,
     voteType: selectedTab,
   });
 
-  const { data: userInfo } = useGetUserInfo();
-  const { data: voteCount } = loadVoteCount();
-
-  if (!userInfo) return <div>데이터 없음</div>;
-  if (!voteCount) return <div>데이터 없음</div>;
-
-  const { gender, username, age, mbti } = userInfo;
-  const { countCreatedVote, countParticipatedVote, countBookmarkedVote } = voteCount;
-
   return (
     <PageWrapper>
       <PageInner>
-        <AddImageButtonWrapper>
-          <ImageUploadButton width="107px" height="107px" />
-        </AddImageButtonWrapper>
-        <Profile>
-          <UserInfo>
-            <>
-              {gender === Gender.MALE ? "남" : "여"}
-              <Divider />
-              {age}
-              <Divider />
-              {mbti}
-            </>
-          </UserInfo>
-          <Nickname>{username}</Nickname>
-          <ProfileModifyButton>
-            <Link href={Path.PROFILE_EDIT}>프로필 수정</Link>
-          </ProfileModifyButton>
-        </Profile>
-        {/* @TODO api 연결하면 map 사용 */}
-        <NumberOfVoteSection>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countCreatedVote}</NumberOfVote>
-            <NumberOfVoteText>작성한 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countParticipatedVote}</NumberOfVote>
-            <NumberOfVoteText>참여한 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-          <NumberOfVoteContainer>
-            <NumberOfVote>{countBookmarkedVote}</NumberOfVote>
-            <NumberOfVoteText>북마크 투표</NumberOfVoteText>
-          </NumberOfVoteContainer>
-        </NumberOfVoteSection>
+        <UserInfoContainer />
+        <CountVoteContainer />
       </PageInner>
       <TabContainerWrapper>
         <TabContainer
@@ -115,76 +65,6 @@ const PageInner = styled.div`
   ${media.medium} {
     padding: 20px 40px;
   }
-`;
-
-const AddImageButtonWrapper = styled.div`
-  float: left;
-`;
-
-const Profile = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 17px;
-
-  ${media.medium} {
-    padding-left: 28px;
-  }
-`;
-
-const UserInfo = styled.span`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 86px;
-  background-color: ${({ theme }) => theme.palette.background.black};
-  border-radius: 4px;
-`;
-
-const Divider = styled.div`
-  width: 1px;
-  height: 8px;
-  margin: 0 4px;
-  background-color: ${({ theme }) => theme.palette.ink.base};
-`;
-
-const Nickname = styled.span`
-  margin-top: 8px;
-  ${({ theme }) => css`
-    ${theme.textStyle.Title_Small};
-    color: ${theme.palette.ink.lighter};
-  `};
-`;
-
-const ProfileModifyButton = styled.button`
-  width: 71px;
-  height: 30px;
-  border: 1px solid ${({ theme }) => theme.palette.border.light};
-  border-radius: 4px;
-  margin-top: 25px;
-`;
-
-const NumberOfVoteSection = styled.section`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 24px;
-`;
-
-const NumberOfVoteContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const NumberOfVote = styled.span`
-  ${({ theme }) => theme.textStyle.Title_Large};
-  font-family: NeoDunggeunmo, Pretendard Variable, -apple-system, BlinkMacSystemFont, system-ui,
-    Roboto, "Helvetica Neue";
-`;
-
-const NumberOfVoteText = styled.span`
-  color: ${({ theme }) => theme.palette.ink.light};
 `;
 
 const TabContainerWrapper = styled.div`
