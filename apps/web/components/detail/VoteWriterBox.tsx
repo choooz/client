@@ -13,7 +13,7 @@ interface Props {
   };
 }
 
-const VoteWriterBox = ({ writer }: Props) => {
+function VoteWriterBox({ writer }: Props) {
   const { nickName, userAge, userGender, userImage, userMbti } = writer;
   return (
     <Container>
@@ -38,7 +38,7 @@ const VoteWriterBox = ({ writer }: Props) => {
       </ContentsBox>
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   display: flex;
