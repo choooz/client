@@ -8,7 +8,6 @@ export default function useBookMarkService(voteId: number) {
   const bookMarkCheckQuery = useQuery(
     reactQueryKeys.bookmarkCheck(voteId),
     () => getBookMarkCheckAPI(voteId),
-
     {
       enabled: !!voteId,
     },

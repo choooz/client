@@ -36,15 +36,13 @@ function ChipContainer({
   const { userInfo } = useGetUserInfo();
 
   const { bookMarkCheckQuery, mutateBookMark } = useBookMarkService(voteId);
-  const { data, isError, isLoading } = bookMarkCheckQuery;
+  const { data } = bookMarkCheckQuery;
 
   const amIWriter = userInfo?.userId === writer?.userid;
 
   const onDeleteVote = async () => {
     await deleteVoteAPI(voteId);
   };
-
-  if (isError || isLoading) return <></>;
 
   return (
     <>
@@ -54,11 +52,12 @@ function ChipContainer({
           <TargetMessage>당신을 기다렸어요</TargetMessage>
         </FlexRow>
         <FlexRow>
-          {data.bookmarked ? (
+          {data?.bookmarked && (
             <div onClick={() => mutateBookMark()}>
               <ActiveBookmarkIcon />
             </div>
-          ) : (
+          )}
+          {(!data || !data?.bookmarked) && (
             <div onClick={() => mutateBookMark()}>
               <InactiveBookmarkIcon />
             </div>
