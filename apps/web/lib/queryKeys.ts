@@ -14,6 +14,7 @@ export const queryKeys = {
   VOTING_CHECK: "votingCheck" as const,
   MY_VOTE_LIST: "myVoteList" as const,
   MY_VOTE_COUNT: "myVoteCount" as const,
+  BOOKMARK_CHECK: "bookmarkCheck" as const,
 };
 
 export const reactQueryKeys = {
@@ -36,4 +37,5 @@ export const reactQueryKeys = {
   votingCheck: (id: number) => [queryKeys.VOTING_CHECK, id] as const,
   myVoteList: (params: MyVoteListType) => [queryKeys.MY_VOTE_LIST, ...params] as const,
   myVoteCount: () => [queryKeys.MY_VOTE_COUNT] as const,
+  bookmarkCheck: (id: number) => [queryKeys.BOOKMARK_CHECK, id] as const,
 };
