@@ -1,7 +1,6 @@
-import { useState } from "react";
 import styled, { css } from "styled-components";
 
-interface Params {
+interface Props {
   tabList: {
     id: string;
     name: string;
@@ -10,7 +9,7 @@ interface Params {
   onClickSelectedTab: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-function TabContainer({ tabList, selectedTab, onClickSelectedTab }: Params) {
+function TabContainer({ tabList, selectedTab, onClickSelectedTab }: Props) {
   return (
     <TabList>
       {tabList.map(({ id, name }) => (
