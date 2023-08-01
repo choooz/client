@@ -13,7 +13,7 @@ export const addInfoAPI = async (addInfoRequest: AddInfoRequest) => {
   return response.data;
 };
 interface AddInterestCategoryRequest {
-  categoryLists: CategoryNameType[];
+  categoryList: CategoryNameType[];
 }
 
 export const addInterestCategoryAPI = async (
