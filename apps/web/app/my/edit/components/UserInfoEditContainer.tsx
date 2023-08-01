@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
 import { Button, transitions } from "@chooz/ui";
-import ImageUploadButton from "components/common/ImageUploadButton";
 import MbtiSelect from "app/my/components/MbtiSelect";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { uploadProfileImageAPI } from "lib/apis/upload";
@@ -13,6 +12,7 @@ import { media } from "styles/media";
 import { Gender } from "types/user";
 import { IMAGE_CATEGORY_LIST } from "types/vote";
 import { updateUserInfo } from "lib/apis/my";
+import ImageUpload from "./ImageUpload";
 
 function UserInfoEditContainer() {
   const router = useRouter();
@@ -68,14 +68,7 @@ function UserInfoEditContainer() {
   return (
     <PageInner>
       <FlexSpaceBetween>
-        <ImageUpload htmlFor="file">
-          {imageUrl ? (
-            <Image alt="프로필 사진" src={imageUrl} width={107} height={107} />
-          ) : (
-            <ImageUploadButton width="107px" height="107px" />
-          )}
-          <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
-        </ImageUpload>
+        <ImageUpload imageUrl={imageUrl} onUploadImage={onUploadImage} />
         <WithdrawalButton>회원 탈퇴</WithdrawalButton>
       </FlexSpaceBetween>
       <UserInfoTitle>닉네임</UserInfoTitle>
@@ -225,14 +218,6 @@ const CheckBoxWrapper = styled.div`
 
 const CompleteButton = styled(Button)`
   margin-top: 40px;
-`;
-
-const ImageUpload = styled.label`
-  cursor: pointer;
-`;
-
-const ImageUploadInput = styled.input`
-  display: none;
 `;
 
 export default UserInfoEditContainer;
