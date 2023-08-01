@@ -53,14 +53,14 @@ function ChipContainer({
         </FlexRow>
         <FlexRow>
           {data?.bookmarked && (
-            <div onClick={() => mutateBookMark()}>
+            <button onClick={() => mutateBookMark()}>
               <ActiveBookmarkIcon />
-            </div>
+            </button>
           )}
           {(!data || !data?.bookmarked) && (
-            <div onClick={() => mutateBookMark()}>
+            <button onClick={() => mutateBookMark()}>
               <InactiveBookmarkIcon />
-            </div>
+            </button>
           )}
 
           {amIWriter && (
