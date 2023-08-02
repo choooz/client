@@ -11,6 +11,7 @@ function CategoryContainer() {
     const category = e.currentTarget.name as CategoryNameType;
     setSelectedCategory(category);
   };
+
   return (
     <Section>
       {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => (

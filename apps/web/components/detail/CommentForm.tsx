@@ -1,6 +1,6 @@
 import { Input } from "@chooz/ui";
 import Image from "next/image";
-import { Eximg1, PurpleMonster } from "public/images";
+import { PurpleMonster } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
 import { CommentForm } from "types/comments";
