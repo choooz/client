@@ -5,18 +5,29 @@ import Link from "next/link";
 import { Gender } from "types/user";
 import styled, { css } from "styled-components";
 import { media } from "@chooz/ui/styles/media";
+import Image from "next/image";
 
 function UserInfoContainer() {
   const { data: userInfo } = useGetUserInfo();
 
   if (!userInfo) return <></>;
 
-  const { gender, username, age, mbti } = userInfo;
+  const { gender, username, age, mbti, imageUrl } = userInfo;
 
   return (
     <>
       <AddImageButtonWrapper>
-        <ImageUploadButton width="107px" height="107px" />
+        {imageUrl ? (
+          <Image
+            alt="프로필 사진"
+            src={imageUrl}
+            width={107}
+            height={107}
+            style={{ borderRadius: "8px" }}
+          />
+        ) : (
+          <ImageUploadButton width="107px" height="107px" />
+        )}
       </AddImageButtonWrapper>
       <Profile>
         <UserInfo>
