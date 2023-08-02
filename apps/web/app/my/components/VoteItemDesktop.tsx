@@ -1,8 +1,10 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
+import Path from "lib/Path";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AIcon, BIcon } from "public/icons";
 import styled, { css } from "styled-components";
 import { MyVote } from "types/my";
@@ -12,11 +14,13 @@ interface Props {
 }
 
 function VoteItemDesktop({ vote }: Props) {
-  const { imageA, imageB, title, modifiedDate, countVoted, countComment } = vote;
+  const router = useRouter();
+
+  const { imageA, imageB, title, modifiedDate, countVoted, voteId } = vote;
 
   // @Todo Image에 sizes와 priority 추가
   return (
-    <Container>
+    <Container onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}>
       <ABImage>
         {imageA ? (
           <ImageWrapper>
@@ -68,6 +72,7 @@ const Container = styled.div`
   height: 84px;
   margin-top: 20px;
   ${({ theme }) => theme.textStyle.Font_Minimum}
+  cursor: pointer;
 `;
 
 const ABImage = styled.div`

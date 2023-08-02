@@ -1,6 +1,7 @@
 import { media } from "@chooz/ui/styles/media";
 import styled from "styled-components";
-import { MyVote } from "types/vote";
+import { MyVote } from "types/my";
+
 import VoteItemDesktop from "./VoteItemDesktop";
 import VoteItemMobile from "./VoteItemMobile";
 

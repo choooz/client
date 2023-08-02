@@ -3,8 +3,10 @@
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
+import Path from "lib/Path";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AIcon, BIcon, BookmarkIcon } from "public/icons";
 import styled, { css } from "styled-components";
 import { MyVote } from "types/my";
@@ -14,12 +16,14 @@ interface Props {
 }
 
 function VoteItemMobile({ vote }: Props) {
-  const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted } = vote;
+  const router = useRouter();
+
+  const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted, voteId } = vote;
   /**
    * @Todo Image에 sizes와 priority 추가
    */
   return (
-    <Container>
+    <Container onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}>
       <ABImage>
         {imageA ? (
           <ImageWrapper>
@@ -70,6 +74,7 @@ function VoteItemMobile({ vote }: Props) {
 const Container = styled.div`
   margin-top: 20px;
   ${({ theme }) => theme.textStyle.Font_Minimum}
+  cursor: pointer;
 `;
 
 const ABImage = styled.div`
