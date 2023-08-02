@@ -40,9 +40,9 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
       <Image
         src={imageUrl || PurpleMonster}
         alt="댓글 프로필"
+        width={40}
+        height={40}
         style={{
-          width: "40px",
-          height: "40px",
           borderRadius: "8px",
           marginRight: "10px",
         }}
