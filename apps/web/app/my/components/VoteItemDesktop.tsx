@@ -5,7 +5,7 @@ import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
 import { AIcon, BIcon } from "public/icons";
 import styled, { css } from "styled-components";
-import { MyVote } from "types/vote";
+import { MyVote } from "types/my";
 
 interface Props {
   vote: MyVote;
@@ -151,11 +151,14 @@ const VoteTitle = styled.h3`
   overflow: hidden;
   white-space: nowrap;
   margin-top: 8px;
-  ${({ theme }) => theme.textStyle.Font_Regular}
-  ${media.medium} {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-    ${({ theme }) => theme.textStyle.Title_Small}
-  }
+  ${({ theme }) =>
+    css`
+      ${theme.textStyle.Font_Regular}
+      ${media.medium} {
+        color: ${theme.palette.ink.darker};
+        ${theme.textStyle.Font_Regular}
+      }
+    `};
 `;
 
 const CommentAndDateContainer = styled.div`

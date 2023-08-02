@@ -15,8 +15,9 @@ interface Props {
 
 function VoteItemMobile({ vote }: Props) {
   const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted } = vote;
-
-  // @Todo Image에 sizes와 priority 추가
+  /**
+   * @Todo Image에 sizes와 priority 추가
+   */
   return (
     <Container>
       <ABImage>
@@ -76,14 +77,6 @@ const ABImage = styled.div`
   display: flex;
   max-width: 560px;
   margin: 0 auto;
-  /*  @todo 음영효과 추가
-  ::after {
-    content: "";
-    z-index: 99;
-    background-image: linear-gradient(to top, rgba(17, 17, 17, 0.6) 50%, rgba(17, 17, 17, 0) 18%);
-    width: 100px;
-    height: 100px;
-  } */
 `;
 
 const ImageWrapper = styled.div`
@@ -167,19 +160,25 @@ const VoteTitle = styled.h3`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  ${({ theme }) => theme.textStyle.Font_Regular}
-  ${media.medium} {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-    ${({ theme }) => theme.textStyle.Title_Small}
-  }
+  ${({ theme }) =>
+    css`
+      ${theme.textStyle.Font_Regular}
+      ${media.medium} {
+        color: ${({ theme }) => theme.palette.ink.lightest};
+        ${({ theme }) => theme.textStyle.Title_Small}
+      }
+    `};
 `;
 
 const VoteModifiedDate = styled.span`
-  color: ${({ theme }) => theme.palette.ink.base};
-  ${({ theme }) => theme.textStyle.Font_Regular}
-  ${media.medium} {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
+  ${({ theme }) =>
+    css`
+      color: ${theme.palette.ink.base};
+      ${theme.textStyle.Font_Regular};
+      ${media.medium} {
+        color: ${theme.palette.ink.lightest};
+      }
+    `};
 `;
 
 export default VoteItemMobile;
