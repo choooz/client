@@ -41,7 +41,7 @@ export const getVoteCount = async () => {
 
 interface UpdateUserInfoRequest {
   nickname: string;
-  // image: string;
+  image?: string;
   mbti: string;
   categoryList: string[];
 }

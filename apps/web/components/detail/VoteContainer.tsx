@@ -1,6 +1,6 @@
 import { useOutsideClick, useToggle } from "@chooz/hooks";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";
-import ChipContainer from "app/select/components/ChipContainer";
+import ChipContainer from "components/ChipContainer";
 import { EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
 import useMutateVotingService from "services/useMutateVotingService";

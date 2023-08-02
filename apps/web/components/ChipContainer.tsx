@@ -8,7 +8,7 @@ import React from "react";
 import useBookMarkService from "services/useVoteBookMarkService";
 import styled from "styled-components";
 import { Writer } from "types/vote";
-import ModifyDeleteButtonBox from "./ModifyDeleteButtonBox";
+import ModifyDeleteButtonBox from "../app/select/components/ModifyDeleteButtonBox";
 
 interface Props {
   onToggleModifyModal(): void;
@@ -38,6 +38,9 @@ function ChipContainer({
   const { bookMarkCheckQuery, mutateBookMark } = useBookMarkService(voteId);
   const { data } = bookMarkCheckQuery;
 
+  /*
+   * @Todo 여러 곳에서 쓰이고 있는데, 한 곳에서 관리하면 좋지 않을까?
+   * */
   const amIWriter = userInfo?.userId === writer?.userid;
 
   const onDeleteVote = async () => {
@@ -48,7 +51,7 @@ function ChipContainer({
     <>
       <TagRow>
         <FlexRow>
-          <NumberOfSolver>🔥{countVoted}명 해결중!</NumberOfSolver>
+          <NumberOfSolver>🔥{countVoted.toLocaleString()}명 해결중!</NumberOfSolver>
           <TargetMessage>당신을 기다렸어요</TargetMessage>
         </FlexRow>
         <FlexRow>
