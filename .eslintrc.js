@@ -10,7 +10,7 @@ module.exports = {
     "plugin:@next/next/recommended",
     "plugin:@typescript-eslint/recommended",
     "eslint-config-prettier",
-    "plugin:storybook/recommended",
+    // "plugin:storybook/recommended",
   ],
   plugins: ["@typescript-eslint", "import", "prettier", "react", "react-hooks", "jsx-a11y"],
   settings: {
