@@ -5,3 +5,5 @@ node_modules
 .pnp.cjs
 .pnp.loager.mjs
 !.storybook
+.github
+.gitmessage
