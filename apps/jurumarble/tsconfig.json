@@ -6,7 +6,6 @@
     "module": "esnext",
     "jsx": "preserve",
     "incremental": true,
-    "moduleResolution": "bundler",
     "plugins": [
       {
         "name": "next"
