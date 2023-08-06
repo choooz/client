@@ -6,9 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen": "svgr --index-template src/assets/icons/templates/indexTemplate.cjs  --config-file src/assets/icons/config/basic.config.cjs",
+    "gen:icon": "yarn gen --out-dir ./src/assets/icons/components ./src/assets/icons",
+    "icon:build": "yarn gen:icon"
   },
   "dependencies": {
+    "@svgr/plugin-jsx": "^8.0.1",
+    "@svgr/plugin-prettier": "^8.0.1",
     "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -16,6 +21,8 @@
     "styled-reset": "^4.5.1"
   },
   "devDependencies": {
+    "@svgr/cli": "^8.0.1",
+    "@svgr/core": "^8.0.0",
     "@types/eslint": "^8",
     "@types/node": "20.4.7",
     "@types/react": "18.2.18",
