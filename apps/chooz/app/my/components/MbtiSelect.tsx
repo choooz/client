@@ -1,7 +1,7 @@
 import { MBTI_LIST } from "lib/constants";
 import { Select } from "@chooz/ui";
 import styled, { css } from "styled-components";
-import { useToggle } from "@chooz/hooks";
+import { useToggle } from "@monorepo/hooks";
 import { SelectIndicator } from "public/icons";
 
 interface Props {

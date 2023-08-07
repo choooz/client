@@ -1,4 +1,4 @@
-import { useOutsideClick, useToggle } from "@chooz/hooks";
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import Path from "lib/Path";

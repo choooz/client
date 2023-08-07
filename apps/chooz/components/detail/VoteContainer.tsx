@@ -1,4 +1,4 @@
-import { useOutsideClick, useToggle } from "@chooz/hooks";
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";
 import ChipContainer from "components/ChipContainer";
 import { EmptyAImg, EmptyBImg } from "public/images";

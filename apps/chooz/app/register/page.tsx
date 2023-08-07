@@ -5,7 +5,7 @@ import WarningSmallModal from "components/register/WarningSmallModal";
 import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
 import { media } from "styles/media";
-import { useToggle } from "@chooz/hooks";
+import { useToggle } from "@monorepo/hooks";
 
 function RegisterPage() {
   const {

@@ -1,4 +1,4 @@
-import { useOutsideClick, useToggle } from "@chooz/hooks";
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/select/components/ModifyDeleteButtonBox";
 import Image from "next/image";
 import { HambergerIcon } from "public/icons";

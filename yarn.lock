@@ -2961,20 +2961,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chooz/hooks@workspace:*, @chooz/hooks@workspace:packages/hooks":
-  version: 0.0.0-use.local
-  resolution: "@chooz/hooks@workspace:packages/hooks"
-  dependencies:
-    "@types/react": ^18.2.18
-    react: ^18.2.0
-  languageName: unknown
-  linkType: soft
-
 "@chooz/ui@workspace:*, @chooz/ui@workspace:packages/ui":
   version: 0.0.0-use.local
   resolution: "@chooz/ui@workspace:packages/ui"
   dependencies:
-    "@chooz/hooks": "workspace:*"
+    "@monorepo/hooks": "workspace:*"
     "@types/react": ^18.2.18
     "@types/react-dom": ^18.2.7
     "@types/styled-components": ^5
@@ -3235,8 +3226,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monorepo/web@workspace:apps/web"
   dependencies:
-    "@chooz/hooks": "workspace:*"
     "@chooz/ui": "workspace:*"
+    "@monorepo/hooks": "workspace:*"
     "@next/font": ^13.1.6
     "@svgr/cli": ^7.0.0
     "@svgr/webpack": ^6.5.1
@@ -3264,6 +3255,15 @@ __metadata:
     style-loader: ^3.3.2
     styled-components: ^5.3.6
     typescript: 5.1.6
+  languageName: unknown
+  linkType: soft
+
+"@monorepo/hooks@workspace:*, @monorepo/hooks@workspace:packages/hooks":
+  version: 0.0.0-use.local
+  resolution: "@monorepo/hooks@workspace:packages/hooks"
+  dependencies:
+    "@types/react": ^18.2.18
+    react: ^18.2.0
   languageName: unknown
   linkType: soft
 

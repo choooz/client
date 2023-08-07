@@ -1,6 +1,6 @@
 "use client";
 
-import { useToggle, useOutsideClick } from "@chooz/hooks";
+import { useToggle, useOutsideClick } from "@monorepo/hooks";
 import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";

@@ -24,7 +24,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:apps/jurumarble"\
       },\
       {\
-        "name": "@chooz/hooks",\
+        "name": "@monorepo/hooks",\
         "reference": "workspace:packages/hooks"\
       },\
       {\
@@ -35,9 +35,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
-      ["@chooz/hooks", ["workspace:packages/hooks"]],\
       ["@chooz/ui", ["workspace:packages/ui"]],\
       ["@monorepo/chooz", ["workspace:apps/chooz"]],\
+      ["@monorepo/hooks", ["workspace:packages/hooks"]],\
       ["@monorepo/jurumarble", ["workspace:apps/jurumarble"]],\
       ["monorepo", ["workspace:."]]\
     ],\
@@ -6442,23 +6442,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@chooz/hooks", [\
-        ["workspace:packages/hooks", {\
-          "packageLocation": "./packages/hooks/",\
-          "packageDependencies": [\
-            ["@chooz/hooks", "workspace:packages/hooks"],\
-            ["@types/react", "npm:18.2.18"],\
-            ["react", "npm:18.2.0"]\
-          ],\
-          "linkType": "SOFT"\
-        }]\
-      ]],\
       ["@chooz/ui", [\
         ["workspace:packages/ui", {\
           "packageLocation": "./packages/ui/",\
           "packageDependencies": [\
             ["@chooz/ui", "workspace:packages/ui"],\
-            ["@chooz/hooks", "workspace:packages/hooks"],\
+            ["@monorepo/hooks", "workspace:packages/hooks"],\
             ["@types/react", "npm:18.2.18"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@types/styled-components", "npm:5.1.26"],\
@@ -6755,8 +6744,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/chooz/",\
           "packageDependencies": [\
             ["@monorepo/chooz", "workspace:apps/chooz"],\
-            ["@chooz/hooks", "workspace:packages/hooks"],\
             ["@chooz/ui", "workspace:packages/ui"],\
+            ["@monorepo/hooks", "workspace:packages/hooks"],\
             ["@next/font", "npm:13.1.6"],\
             ["@svgr/cli", "npm:7.0.0"],\
             ["@svgr/webpack", "npm:6.5.1"],\
@@ -6784,6 +6773,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["style-loader", "virtual:a9e685c95fc9c2c05e15b14465ecc20924383932b7a1aa62172e110ba174ebedc352c8daf5023eb54ef5f0a5595ca6cf8763ef2477e003ebd1850bfb16231d67#npm:3.3.2"],\
             ["styled-components", "virtual:a9e685c95fc9c2c05e15b14465ecc20924383932b7a1aa62172e110ba174ebedc352c8daf5023eb54ef5f0a5595ca6cf8763ef2477e003ebd1850bfb16231d67#npm:5.3.6"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=d73830"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@monorepo/hooks", [\
+        ["workspace:packages/hooks", {\
+          "packageLocation": "./packages/hooks/",\
+          "packageDependencies": [\
+            ["@monorepo/hooks", "workspace:packages/hooks"],\
+            ["@types/react", "npm:18.2.18"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "linkType": "SOFT"\
         }]\

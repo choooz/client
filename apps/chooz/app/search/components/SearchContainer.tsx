@@ -1,4 +1,4 @@
-import { useDebounce, useOutsideClick, useToggle } from "@chooz/hooks";
+import { useDebounce, useOutsideClick, useToggle } from "@monorepo/hooks";
 import { getSearchRecommendationAPI } from "lib/apis/vote";
 import { useState } from "react";
 import SearchInput from "./SearchInput";

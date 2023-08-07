@@ -1,7 +1,7 @@
 import { Select } from "@chooz/ui";
 import styled from "styled-components";
 import { media } from "styles/media";
-import { useToggle } from "@chooz/hooks";
+import { useToggle } from "@monorepo/hooks";
 import { SELECT_BOX_CATEGORY_LIST } from "types/vote";
 
 interface Props {

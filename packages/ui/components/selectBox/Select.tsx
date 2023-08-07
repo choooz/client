@@ -1,4 +1,4 @@
-import { useOutsideClick } from "@chooz/hooks";
+import { useOutsideClick } from "@monorepo/hooks";
 import { Option, OptionList, SelectButton } from "@chooz/ui";
 
 interface Option {
