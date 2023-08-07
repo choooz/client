@@ -3209,7 +3209,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@monorepo/jurumarble@workspace:apps/jurumarble":
+"@monorepo/chooz@workspace:apps/chooz":
   version: 0.0.0-use.local
   resolution: "@monorepo/jurumarble@workspace:apps/jurumarble"
   dependencies:
@@ -3263,6 +3263,24 @@ __metadata:
     slick-carousel: ^1.8.1
     style-loader: ^3.3.2
     styled-components: ^5.3.6
+    typescript: 5.1.6
+  languageName: unknown
+  linkType: soft
+
+"@monorepo/jurumarble@workspace:apps/jurumarble":
+  version: 0.0.0-use.local
+  resolution: "@monorepo/jurumarble@workspace:apps/jurumarble"
+  dependencies:
+    "@types/eslint": ^8
+    "@types/node": 20.4.7
+    "@types/react": 18.2.18
+    "@types/styled-components": ^5.1.26
+    eslint-config-next: 13.4.12
+    next: 13.4.12
+    react: 18.2.0
+    react-dom: 18.2.0
+    styled-components: ^6.0.7
+    styled-reset: ^4.5.1
     typescript: 5.1.6
   languageName: unknown
   linkType: soft
