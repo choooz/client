@@ -19,8 +19,6 @@
     "babel-plugin-styled-components": "^2.0.7",
     "babel-preset-next": "^1.4.0",
     "css-loader": "^6.7.3",
-    "eslint": "8.30.0",
-    "eslint-config-next": "13.0.7",
     "next": "^13.1.6",
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",
@@ -40,6 +38,8 @@
     "@types/react-slick": "^0",
     "@types/slick-carousel": "^1",
     "@types/styled-components": "^5",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.0.7",
     "typescript": "5.1.6"
   }
 }
