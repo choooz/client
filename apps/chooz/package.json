@@ -10,8 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chooz/ui": "workspace:*",
     "@monorepo/hooks": "workspace:*",
+    "@monorepo/ui": "workspace:*",
     "@next/font": "^13.1.6",
     "@tanstack/react-query": "^4.20.4",
     "@tanstack/react-query-devtools": "^4.20.4",

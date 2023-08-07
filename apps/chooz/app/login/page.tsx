@@ -1,6 +1,6 @@
 "use client";
 
-import { transitions } from "@chooz/ui";
+import { transitions } from "@monorepo/ui";
 import { BigPurpleMonster, LogoBlack } from "public/images";
 import Image from "next/image";
 import useLoginService from "services/useLoginService";

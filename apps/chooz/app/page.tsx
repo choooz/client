@@ -1,8 +1,8 @@
 "use client";
 
 import { useToggle, useOutsideClick } from "@monorepo/hooks";
-import { Button } from "@chooz/ui";
-import { media } from "@chooz/ui/styles/media";
+import { Button } from "@monorepo/ui";
+import { media } from "@monorepo/ui/styles/media";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";
 import ChipContainer from "components/ChipContainer";
 import Path from "lib/Path";

@@ -1,4 +1,4 @@
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import styled from "styled-components";
 import { useState } from "react";
 import { CategoryNameType, IMAGE_CATEGORY_LIST } from "types/vote";

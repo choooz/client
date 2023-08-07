@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Image from "next/image";
-import { Input, Template, transitions } from "@chooz/ui";
+import { Input, Template, transitions } from "@monorepo/ui";
 import { PostVoteRequest } from "lib/apis/vote";
 import { EmptyAImg, EmptyBImg } from "public/images";
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { FIRST_STEP, NEXT, SECOND_STEP } from "lib/constants";
 import React, { useMemo, useState } from "react";
 import ImageUploadButton from "components/common/ImageUploadButton";

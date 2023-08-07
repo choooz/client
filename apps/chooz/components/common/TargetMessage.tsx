@@ -1,4 +1,4 @@
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import React from "react";
 import styled from "styled-components";
 

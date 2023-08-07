@@ -1,5 +1,5 @@
 {
-  "name": "@chooz/ui",
+  "name": "@monorepo/ui",
   "packageManager": "yarn@3.3.0",
   "version": "0.1.0",
   "description": "",

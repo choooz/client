@@ -1,4 +1,4 @@
-import { Input } from "@chooz/ui";
+import { Input } from "@monorepo/ui";
 import Image from "next/image";
 import { PurpleMonster } from "public/images";
 import React from "react";

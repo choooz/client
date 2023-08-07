@@ -2,7 +2,7 @@ import { LogoWhite } from "public/images";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { usePathname } from "next/navigation";
 import Path from "lib/Path";
 import HeaderSearchIcon from "public/icons/HeaderSearchIcon";

@@ -1,4 +1,4 @@
-import { Button, ModalTemplate } from "@chooz/ui";
+import { Button, ModalTemplate } from "@monorepo/ui";
 import { WarningIcon } from "public/icons";
 import styled from "styled-components";
 

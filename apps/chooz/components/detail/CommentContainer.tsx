@@ -1,4 +1,4 @@
-import { Button } from "@chooz/ui";
+import { Button } from "@monorepo/ui";
 import React from "react";
 import styled from "styled-components";
 import CommentForm from "./CommentForm";

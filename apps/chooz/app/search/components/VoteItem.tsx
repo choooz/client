@@ -1,6 +1,6 @@
 "use client";
 
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";

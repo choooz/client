@@ -1,6 +1,6 @@
 "use client";
 
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { ImageTitleSection, TargetSection } from "components";
 import { FIRST_STEP, SECOND_STEP } from "lib/constants";
 import React, { useState } from "react";

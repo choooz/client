@@ -1,6 +1,6 @@
 "use client";
 
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
 import { useState } from "react";
 import styled, { css } from "styled-components";

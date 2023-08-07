@@ -1,6 +1,6 @@
-import { Button, RegisterTemplate, transitions } from "@chooz/ui";
+import { Button, RegisterTemplate, transitions } from "@monorepo/ui";
 import { CheckRound, Female, Male, PurpleMonster } from "public/images";
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 import { Gender } from "types/user";

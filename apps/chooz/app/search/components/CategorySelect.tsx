@@ -1,4 +1,4 @@
-import { Select } from "@chooz/ui";
+import { Select } from "@monorepo/ui";
 import styled from "styled-components";
 import { media } from "styles/media";
 import { useToggle } from "@monorepo/hooks";

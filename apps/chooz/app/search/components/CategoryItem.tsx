@@ -1,4 +1,4 @@
-import { Button, transitions } from "@chooz/ui";
+import { Button, transitions } from "@monorepo/ui";
 import Path from "lib/Path";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";

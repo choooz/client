@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@chooz/ui";
+import { Button } from "@monorepo/ui";
 import React from "react";
 import styled, { css } from "styled-components";
 import { media } from "styles/media";

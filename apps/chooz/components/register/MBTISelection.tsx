@@ -1,4 +1,4 @@
-import { RegisterTemplate, transitions } from "@chooz/ui";
+import { RegisterTemplate, transitions } from "@monorepo/ui";
 import { Eyes } from "public/images";
 import Image from "next/image";
 import React, { MouseEvent } from "react";

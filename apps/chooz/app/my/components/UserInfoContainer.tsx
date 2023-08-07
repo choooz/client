@@ -4,7 +4,7 @@ import Path from "lib/Path";
 import Link from "next/link";
 import { Gender } from "types/user";
 import styled, { css } from "styled-components";
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import Image from "next/image";
 
 function UserInfoContainer() {

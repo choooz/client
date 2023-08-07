@@ -1,4 +1,4 @@
-import { FloatComponentTemplate } from "@chooz/ui";
+import { FloatComponentTemplate } from "@monorepo/ui";
 import Path from "lib/Path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

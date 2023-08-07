@@ -1,4 +1,4 @@
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import Path from "lib/Path";
 import Link from "next/link";
 import { SearchIcon } from "public/icons";

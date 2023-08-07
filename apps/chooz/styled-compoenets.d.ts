@@ -4,7 +4,7 @@ import {
   LineHeightTypes,
   PaletteTypes,
   TextStyleTypes,
-} from "@chooz/ui/styles/theme";
+} from "@monorepo/ui/styles/theme";
 import "styled-components";
 
 declare module "styled-components" {

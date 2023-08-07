@@ -1,6 +1,6 @@
 "use client";
 
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import Path from "lib/Path";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";

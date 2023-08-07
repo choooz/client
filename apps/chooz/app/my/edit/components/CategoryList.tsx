@@ -1,5 +1,5 @@
-import { Button, transitions } from "@chooz/ui";
-import { media } from "@chooz/ui/styles/media";
+import { Button, transitions } from "@monorepo/ui";
+import { media } from "@monorepo/ui/styles/media";
 import Image from "next/image";
 import { CheckRound } from "public/images";
 import styled, { css } from "styled-components";

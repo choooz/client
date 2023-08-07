@@ -1,6 +1,6 @@
 "use client";
 
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import CommentContainer from "components/detail/CommentContainer";
 import VoteContainer from "components/detail/VoteContainer";
 import React from "react";

@@ -1,5 +1,5 @@
 import { MBTI_LIST } from "lib/constants";
-import { Select } from "@chooz/ui";
+import { Select } from "@monorepo/ui";
 import styled, { css } from "styled-components";
 import { useToggle } from "@monorepo/hooks";
 import { SelectIndicator } from "public/icons";

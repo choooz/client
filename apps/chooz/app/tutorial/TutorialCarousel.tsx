@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { Choice, Detail, Increase, MChoice, MIncrease, Next } from "public/gifs";
 import { BrowserView, MobileView } from "react-device-detect";
 

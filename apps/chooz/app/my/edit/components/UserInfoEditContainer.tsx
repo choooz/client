@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Button } from "@chooz/ui";
+import { Button } from "@monorepo/ui";
 import MbtiSelect from "app/my/components/MbtiSelect";
 
 import { media } from "styles/media";

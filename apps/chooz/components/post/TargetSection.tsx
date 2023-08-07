@@ -1,4 +1,4 @@
-import { Button, Template } from "@chooz/ui";
+import { Button, Template } from "@monorepo/ui";
 import { PostVote } from "lib/apis/vote";
 import { AGE_LIST, FIRST_STEP, MBTI_LIST } from "lib/constants";
 import React from "react";

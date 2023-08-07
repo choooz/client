@@ -1,6 +1,6 @@
-import { RegisterTemplate, transitions } from "@chooz/ui";
+import { RegisterTemplate, transitions } from "@monorepo/ui";
 import { Arm } from "public/images";
-import { media } from "@chooz/ui/styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import Image from "next/image";
 import styled from "styled-components";
 import { UserInfo } from "types/user";

@@ -1,4 +1,4 @@
-import { DivideLine, Input, ModalTemplate, Template } from "@chooz/ui";
+import { DivideLine, Input, ModalTemplate, Template } from "@monorepo/ui";
 import React from "react";
 import styled from "styled-components";
 import useModifyVoteService from "services/useModifyVoteService";

@@ -1,6 +1,6 @@
 import { SORT_LIST } from "lib/constants";
 import styled, { css } from "styled-components";
-import { Select } from "@chooz/ui";
+import { Select } from "@monorepo/ui";
 import { SelectIndicator } from "public/icons";
 import { useToggle } from "@monorepo/hooks";
 

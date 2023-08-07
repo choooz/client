@@ -1,4 +1,4 @@
-import { theme } from "@chooz/ui";
+import { theme } from "@monorepo/ui";
 
 interface Props {
   variant: "primary" | "searchRecommendation";

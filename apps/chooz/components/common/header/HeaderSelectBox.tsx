@@ -1,6 +1,6 @@
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import { Button } from "@chooz/ui";
-import { media } from "@chooz/ui/styles/media";
+import { Button } from "@monorepo/ui";
+import { media } from "@monorepo/ui/styles/media";
 import Path from "lib/Path";
 import { isLogin, logout } from "lib/utils/auth";
 import { useRouter } from "next/navigation";

@@ -1,6 +1,6 @@
 "use client";
 
-import { theme } from "@chooz/ui";
+import { theme } from "@monorepo/ui";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "styles/globalStyles";
 import StyledComponentsRegistry from "../lib/registry";
