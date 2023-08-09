@@ -6776,6 +6776,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/jurumarble/",\
           "packageDependencies": [\
             ["@monorepo/jurumarble", "workspace:apps/jurumarble"],\
+            ["@monorepo/hooks", "workspace:packages/hooks"],\
+            ["@monorepo/ui", "workspace:packages/ui"],\
             ["@svgr/cli", "npm:8.0.1"],\
             ["@svgr/core", "npm:8.0.0"],\
             ["@svgr/plugin-jsx", "virtual:10d8a5bb90b4e558ebc5a6562fa1e6dd351f5fd2c2b51a984684ec3fa328867b26a672abd779db7c7e0d15c418f88f65b90658919a072d355c44c01797aa51c9#npm:8.0.1"],\
