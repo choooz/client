@@ -14,9 +14,9 @@ export function useGetUserInfo() {
 
   const { data } = useQuery(reactQueryKeys.userInfo(), getUserInfo, {
     onSuccess: (data) => {
-      /*
-      @Todo state를 사용 안하고 할 수 있는 방법 없을까?
-      */
+      /**
+       * @Todo state를 사용 안하고 할 수 있는 방법 없을까?
+       */
       setUserInfo(data);
     },
   });
