@@ -1,17 +1,80 @@
 "use client";
 
-import styled from "styled-components";
+import BottomBar from "components/BottomBar";
+import Header from "components/Header";
+import styled, { css } from "styled-components";
+// import { Input } from "@monorepo/ui";
 
-export default function Home() {
+function Main() {
   return (
-    <main>
-      <ASD>HelloWorld</ASD>
-    </main>
+    <Container>
+      <Header />
+      <Banner />
+      <Input />
+      <H2>
+        우리술
+        <Main01Color> TOP 10</Main01Color>
+      </H2>
+      <H3>7시, 지금 가장 인기있는 우리술이에요.</H3>
+      <Caerousel />
+      <DivideLine />
+      <H2>
+        우리술
+        <Main01Color> 투표</Main01Color>
+      </H2>
+      <H3>7시, 현재 가장 핫한 우리 술이에요.</H3>
+      <BottomBar />
+    </Container>
   );
 }
-const ASD = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: red;
-  font-weight: 100;
+
+const Container = styled.div`
+  padding: 0 20px;
 `;
+
+const Banner = styled.div`
+  margin-top: 36px;
+  background-color: ${({ theme }) => theme.colors.main_01};
+  aspect-ratio: 16 / 9;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  height: 24px;
+  margin-top: 28px;
+`;
+
+const H2 = styled.h2`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.headline01};
+      margin-top: 40px;
+    `}
+`;
+
+const Main01Color = styled.span`
+  color: ${({ theme }) => theme.colors.main_01};
+`;
+
+const H3 = styled.h3`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.subhead01};
+      color: ${theme.colors.black_02};
+      margin-top: 8px;
+    `}
+`;
+
+const Caerousel = styled.div`
+  height: 160px;
+  margin-top: 32px;
+  background-color: ${({ theme }) => theme.colors.main_01};
+`;
+
+const DivideLine = styled.div`
+  height: 8px;
+  margin-top: 40px;
+  background-color: ${({ theme }) => theme.colors.bg_01};
+`;
+
+export default Main;

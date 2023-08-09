@@ -3234,6 +3234,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monorepo/jurumarble@workspace:apps/jurumarble"
   dependencies:
+    "@monorepo/hooks": "workspace:*"
+    "@monorepo/ui": "workspace:*"
     "@svgr/cli": ^8.0.1
     "@svgr/core": ^8.0.0
     "@svgr/plugin-jsx": ^8.0.1
