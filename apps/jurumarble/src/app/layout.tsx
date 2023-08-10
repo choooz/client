@@ -1,6 +1,7 @@
+import StyledLayout from "components/StyledLayout";
 import { pretandard } from "lib/localFont";
-import type { Metadata } from "next";
 import StyledComponents from "lib/styles/StyledComponents";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "주루마블",
@@ -12,7 +13,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="kr">
       <head></head>
       <StyledComponents>
-        <body className={pretandard.className}>{children}</body>
+        <body className={pretandard.className}>
+          <StyledLayout>{children}</StyledLayout>
+        </body>
       </StyledComponents>
     </html>
   );
