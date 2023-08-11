@@ -3,6 +3,8 @@
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
 import styled, { css } from "styled-components";
+import Carousel from "./main/components/Carousel";
+
 // import { Input } from "@monorepo/ui";
 
 function Main() {
@@ -16,7 +18,7 @@ function Main() {
         <Main01Color> TOP 10</Main01Color>
       </H2>
       <H3>7시, 지금 가장 인기있는 우리술이에요.</H3>
-      <Caerousel />
+      <Carousel />
       <DivideLine />
       <H2>
         우리술
@@ -63,12 +65,6 @@ const H3 = styled.h3`
       color: ${theme.colors.black_02};
       margin-top: 8px;
     `}
-`;
-
-const Caerousel = styled.div`
-  height: 160px;
-  margin-top: 32px;
-  background-color: ${({ theme }) => theme.colors.main_01};
 `;
 
 const DivideLine = styled.div`
