@@ -7,12 +7,12 @@ import { CheckRound } from "public/images";
 import { CategoryNameType, IMAGE_CATEGORY_LIST } from "types/vote";
 
 interface Props {
-  categoryLists: CategoryNameType[];
+  categoryList: CategoryNameType[];
   onClickCategory: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onClickComplete: () => void;
 }
 
-function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Props) {
+function InterestSection({ categoryList, onClickCategory, onClickComplete }: Props) {
   return (
     <>
       <WelcomeText>Chooz에 오신 것을 환영합니다!</WelcomeText>
@@ -27,13 +27,13 @@ function InterestSection({ categoryLists, onClickCategory, onClickComplete }: Pr
             height="100%"
             borderRadius="10px"
             key={value}
-            selected={categoryLists.includes(value)}
+            selected={categoryList.includes(value)}
             onClick={onClickCategory}
             name={value}
           >
             <Image alt="항목" src={image} height={32} />
             <VoteText>
-              {categoryLists.includes(value) && (
+              {categoryList.includes(value) && (
                 <CheckBoxWrapper>
                   <Image alt="선택" src={CheckRound} width={16} />
                 </CheckBoxWrapper>

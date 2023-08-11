@@ -27,7 +27,6 @@ const ImageWrapper = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 `;
 
 const ImageCircle = styled.div`

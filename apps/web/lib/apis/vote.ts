@@ -2,7 +2,7 @@ import { AorB, CategoryNameType } from "types/vote";
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
 import { Vote } from "types/vote";
-import apiClient from "./apiClient";
+import apiClient from "lib/apis/apiClient";
 
 export interface GetVoteListRequest {
   page: number;
@@ -181,5 +181,19 @@ export const getSearchRecommendationAPI = async ({
       category,
     },
   });
+  return response.data;
+};
+
+export const postBookmarkAPI = async (voteId: number) => {
+  const response = await apiClient.post(`api/votes/${voteId}/bookmark`, { voteId });
+  return response.data;
+};
+
+interface GetBookmarkResponse {
+  bookmarked: boolean;
+}
+
+export const getBookMarkCheckAPI = async (voteId: number) => {
+  const response = await apiClient.get<GetBookmarkResponse>(`api/votes/${voteId}/bookmark`);
   return response.data;
 };

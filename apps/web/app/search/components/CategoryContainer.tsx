@@ -4,7 +4,6 @@ import { useState } from "react";
 import { CategoryNameType, IMAGE_CATEGORY_LIST } from "types/vote";
 import CategoryItem from "./CategoryItem";
 
-// @Todo 공통 컴포넌트로 묶을 수 있다면 묶기
 function CategoryContainer() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryNameType | null>(null);
 
@@ -12,8 +11,9 @@ function CategoryContainer() {
     const category = e.currentTarget.name as CategoryNameType;
     setSelectedCategory(category);
   };
+
   return (
-    <CategorySection>
+    <Section>
       {IMAGE_CATEGORY_LIST.map(({ image, value, label }) => (
         <CategoryItem
           key={`search_category_page_${value}`}
@@ -24,11 +24,11 @@ function CategoryContainer() {
           onClickCategory={onClickCategory}
         />
       ))}
-    </CategorySection>
+    </Section>
   );
 }
 
-const CategorySection = styled.section`
+const Section = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 9px;

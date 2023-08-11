@@ -4,7 +4,7 @@ import { useToggle, useOutsideClick } from "@chooz/hooks";
 import { Button } from "@chooz/ui";
 import { media } from "@chooz/ui/styles/media";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";
-import ChipContainer from "app/select/components/ChipContainer";
+import ChipContainer from "components/ChipContainer";
 import Path from "lib/Path";
 import Image from "next/image";
 import Link from "next/link";

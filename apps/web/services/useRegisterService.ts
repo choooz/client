@@ -1,9 +1,9 @@
+import useClickCategory from "hooks/useClickCategory";
 import { addInfoAPI, addInterestCategoryAPI } from "lib/apis/user";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import { MouseEvent, useState } from "react";
 import { Gender, UserInfo } from "types/user";
-import { CategoryNameType } from "types/vote";
 
 export default function useRegisterService() {
   const router = useRouter();
@@ -60,21 +60,17 @@ export default function useRegisterService() {
       alert(error);
     }
   };
-  // @note interest page
 
-  const [categoryLists, setCategoryLists] = useState<CategoryNameType[]>([]);
+  /*
+   * @Note interest page
+   */
 
-  const onClickCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const category = e.currentTarget.name as CategoryNameType;
-    categoryLists.includes(category)
-      ? setCategoryLists((prev) => prev.filter((item) => item !== category))
-      : setCategoryLists((prev) => [...prev.concat(category)]);
-  };
+  const { categoryList, onClickCategory } = useClickCategory();
 
   const onClickComplete = async () => {
     try {
       await addInterestCategoryAPI({
-        categoryLists,
+        categoryList,
       });
       router.push(Path.MAIN_PAGE);
     } catch (error) {
@@ -90,9 +86,9 @@ export default function useRegisterService() {
     onChangeMBTI,
     onChangeAge,
     onDeleteAge,
-    onCompleteRegister,
-    categoryLists,
+    categoryList,
     onClickCategory,
+    onCompleteRegister,
     onClickComplete,
   };
 }

@@ -10,7 +10,7 @@ export { default as PreviousIcon } from "./PreviousIcon.svg";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as AmplifyIcon } from "./amplifyIcon.png";
 export { default as AddIcon } from "./addIcon.png";
-export { default as SaveIcon } from "./saveIcon.png";
+
 export { default as Career } from "./Career.png";
 export { default as Etc } from "./Etc.png";
 export { default as Food } from "./Food.png";
@@ -21,3 +21,9 @@ export { default as AlertIcon } from "./AlertIcon.png";
 export { default as MoreIcon } from "./MoreIcon.png";
 export { default as MyPageIcon } from "./MyPageIcon.png";
 export { default as Back } from "./Back.png";
+export { default as LightAString } from "./Light-A.png";
+export { default as DarkAString } from "./Dark-A.png";
+export { default as LightBString } from "./Light-B.png";
+export { default as DarkBString } from "./Dark-B.png";
+export { default as ActiveBookmarkIcon } from "./ActiveBookmark.svg";
+export { default as InactiveBookmarkIcon } from "./InactiveBookmark.svg";

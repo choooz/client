@@ -3,22 +3,27 @@
 import { media } from "@chooz/ui/styles/media";
 import NumberOfSolver from "components/common/NumberOfSolver";
 import TargetMessage from "components/common/TargetMessage";
+import Path from "lib/Path";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AIcon, BIcon, BookmarkIcon } from "public/icons";
 import styled, { css } from "styled-components";
-import { MyPageVote } from "types/vote";
+import { MyVote } from "types/my";
 
 interface Props {
-  vote: MyPageVote;
+  vote: MyVote;
 }
 
 function VoteItemMobile({ vote }: Props) {
-  const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted } = vote;
+  const router = useRouter();
 
-  // @Todo Image에 sizes와 priority 추가
+  const { imageA, imageB, titleA, titleB, title, modifiedDate, countVoted, voteId } = vote;
+  /**
+   * @Todo Image에 sizes와 priority 추가
+   */
   return (
-    <Container>
+    <Container onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}>
       <ABImage>
         {imageA ? (
           <ImageWrapper>
@@ -69,6 +74,7 @@ function VoteItemMobile({ vote }: Props) {
 const Container = styled.div`
   margin-top: 20px;
   ${({ theme }) => theme.textStyle.Font_Minimum}
+  cursor: pointer;
 `;
 
 const ABImage = styled.div`
@@ -76,14 +82,6 @@ const ABImage = styled.div`
   display: flex;
   max-width: 560px;
   margin: 0 auto;
-  /*  @todo 음영효과 추가
-  ::after {
-    content: "";
-    z-index: 99;
-    background-image: linear-gradient(to top, rgba(17, 17, 17, 0.6) 50%, rgba(17, 17, 17, 0) 18%);
-    width: 100px;
-    height: 100px;
-  } */
 `;
 
 const ImageWrapper = styled.div`
@@ -167,19 +165,25 @@ const VoteTitle = styled.h3`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  ${({ theme }) => theme.textStyle.Font_Regular}
-  ${media.medium} {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-    ${({ theme }) => theme.textStyle.Title_Small}
-  }
+  ${({ theme }) =>
+    css`
+      ${theme.textStyle.Font_Regular}
+      ${media.medium} {
+        color: ${({ theme }) => theme.palette.ink.lightest};
+        ${({ theme }) => theme.textStyle.Title_Small}
+      }
+    `};
 `;
 
 const VoteModifiedDate = styled.span`
-  color: ${({ theme }) => theme.palette.ink.base};
-  ${({ theme }) => theme.textStyle.Font_Regular}
-  ${media.medium} {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-  }
+  ${({ theme }) =>
+    css`
+      color: ${theme.palette.ink.base};
+      ${theme.textStyle.Font_Regular};
+      ${media.medium} {
+        color: ${theme.palette.ink.lightest};
+      }
+    `};
 `;
 
 export default VoteItemMobile;

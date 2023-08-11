@@ -1,22 +1,26 @@
 "use client";
 
 import { media } from "@chooz/ui/styles/media";
+import Path from "lib/Path";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { AIcon, BIcon } from "public/icons";
 import styled, { css } from "styled-components";
-import { MyPageVote } from "types/vote";
+import { MyVote } from "types/my";
 
 interface Props {
-  vote: MyPageVote;
+  vote: MyVote;
 }
 
 function VoteItemDesktop({ vote }: Props) {
-  const { imageA, imageB, title, modifiedDate, countVoted, countComment } = vote;
+  const router = useRouter();
+
+  const { imageA, imageB, title, modifiedDate, countVoted, voteId } = vote;
 
   // @Todo Image에 sizes와 priority 추가
   return (
-    <Container>
+    <Container onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}>
       <ABImage>
         {imageA ? (
           <ImageWrapper>
@@ -68,6 +72,7 @@ const Container = styled.div`
   height: 84px;
   margin-top: 20px;
   ${({ theme }) => theme.textStyle.Font_Minimum}
+  cursor: pointer;
 `;
 
 const ABImage = styled.div`
@@ -151,11 +156,14 @@ const VoteTitle = styled.h3`
   overflow: hidden;
   white-space: nowrap;
   margin-top: 8px;
-  ${({ theme }) => theme.textStyle.Font_Regular}
-  ${media.medium} {
-    color: ${({ theme }) => theme.palette.ink.lightest};
-    ${({ theme }) => theme.textStyle.Title_Small}
-  }
+  ${({ theme }) =>
+    css`
+      ${theme.textStyle.Font_Regular}
+      ${media.medium} {
+        color: ${theme.palette.ink.darker};
+        ${theme.textStyle.Font_Regular}
+      }
+    `};
 `;
 
 const CommentAndDateContainer = styled.div`

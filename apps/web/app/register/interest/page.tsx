@@ -7,12 +7,12 @@ import styled from "styled-components";
 import { media } from "styles/media";
 
 function Interest() {
-  const { categoryLists, onClickCategory, onClickComplete } = useRegisterService();
+  const { categoryList, onClickCategory, onClickComplete } = useRegisterService();
   return (
     <PageWrapper>
       <PageInner>
         <InterestSection
-          categoryLists={categoryLists}
+          categoryList={categoryList}
           onClickCategory={onClickCategory}
           onClickComplete={onClickComplete}
         />

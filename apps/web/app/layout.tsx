@@ -2,13 +2,12 @@
 
 import { theme } from "@chooz/ui";
 import styled, { ThemeProvider } from "styled-components";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { GlobalStyles } from "styles/globalStyles";
 import StyledComponentsRegistry from "../lib/registry";
 import useReplaceUser from "hooks/useReplaceUser";
 import Header from "components/common/header/Header";
 import { media } from "styles/media";
+import ReactQueryProvider from "lib/ReactQueryProvider";
 
 function RootLayout({
   // Layouts must accept a children prop.
@@ -17,16 +16,6 @@ function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        staleTime: 1000 * 60 * 60 * 24,
-        cacheTime: 1000 * 60 * 60 * 24,
-      },
-    },
-  });
-
   useReplaceUser();
 
   return (
@@ -34,21 +23,22 @@ function RootLayout({
       <head></head>
       <body>
         <div id="portal" />
-        <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools />
+        <ReactQueryProvider>
           <StyledComponentsRegistry>
             <ThemeProvider theme={theme}>
               <GlobalStyles />
               <Header />
               <Applayout>
-                <div id="stars" />
-                <div id="stars2" />
-                <div id="stars3" />
+                <Stars>
+                  <div id="stars" />
+                  <div id="stars2" />
+                  <div id="stars3" />
+                </Stars>
                 {children}
               </Applayout>
             </ThemeProvider>
           </StyledComponentsRegistry>
-        </QueryClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
@@ -62,8 +52,12 @@ const Applayout = styled.div`
   overflow: hidden;
   height: calc(100svh - 55px);
   ${media.medium} {
-    padding-top: 37px;
+    padding-top: 34px;
   }
+`;
+
+const Stars = styled.div`
+  height: 6px;
 `;
 
 export default RootLayout;

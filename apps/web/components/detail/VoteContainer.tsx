@@ -1,6 +1,6 @@
 import { useOutsideClick, useToggle } from "@chooz/hooks";
 import ModifyVoteModal from "app/select/components/ModifyVoteModal";
-import ChipContainer from "app/select/components/ChipContainer";
+import ChipContainer from "components/ChipContainer";
 import { EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
 import useMutateVotingService from "services/useMutateVotingService";
@@ -11,6 +11,7 @@ import DetailAB from "./DetailAB";
 import FilterBar from "./FilterBar";
 import useFilterStatistics from "./hooks/useFilterStatistics";
 import VoteAnalyzeBar from "./VoteAnalyzeBar";
+import VoteWriterBox from "./VoteWriterBox";
 
 function VoteContainer({ postId }: { postId: number }) {
   const [isModifyModal, onToggleModifyModal] = useToggle(false);
@@ -57,6 +58,7 @@ function VoteContainer({ postId }: { postId: number }) {
 
   return (
     <>
+      <VoteWriterBox writer={writer} />
       <ChipContainer
         onToggleModifyModal={onToggleModifyModal}
         onToggleModifyDeleteButtonBox={onToggleModifyDeleteButtonBox}
