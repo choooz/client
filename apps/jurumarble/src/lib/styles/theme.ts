@@ -7,6 +7,7 @@ const colors = {
   black_03: "#676767",
   black_04: "#898989",
   black_05: "#cccccc",
+  white: "#ffffff",
   bg_01: "#f0f0f0",
   bg_02: "#f5f5f5",
   line_01: "#e9e9e9",
@@ -71,11 +72,10 @@ const typography = {
     letter-spacing: -0.16px;
     `,
   body_long01: `
-
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
-    line-height: 130%;
+    line-height: 150%;
     letter-spacing: -0.16px;
     `,
   body02: `
@@ -103,7 +103,7 @@ const typography = {
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
-    line-height: 100%;
+    line-height: 130%;
     `,
   chip: `
     font-size: 12px;
