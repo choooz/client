@@ -113,10 +113,34 @@ const typography = {
     `,
 } as const;
 
+const mediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;
+
+const mediaSize = {
+  xxlarge: 1920,
+  xlarge: 1366,
+  large: 1024,
+  medium: 720,
+  small: 414,
+  xsmall: 320,
+} as const;
+
+const { xxlarge, xlarge, large, medium, small, xsmall } = mediaSize;
+
+const media = {
+  xxlarge: mediaQuery(xxlarge),
+  xlarge: mediaQuery(xlarge),
+  large: mediaQuery(large),
+  medium: mediaQuery(medium),
+  small: mediaQuery(small),
+  xsmall: mediaQuery(xsmall),
+} as const;
+
 export type ThemeColors = typeof colors;
 export type ThemeTypography = typeof typography;
+export type ThemeMedia = typeof media;
 
 export const jurumarbleTheme: DefaultTheme = {
   colors,
   typography,
+  media,
 };
