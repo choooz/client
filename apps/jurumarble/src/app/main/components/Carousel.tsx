@@ -5,28 +5,28 @@ import { css, styled } from "styled-components";
 const mockData = [
   {
     src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명",
-    areaName: "지역명",
+    drinkName: "제품명 제품명 제품명1",
+    areaName: "지역명1",
   },
   {
     src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명",
-    areaName: "지역명",
+    drinkName: "제품명 제품명 제품명2",
+    areaName: "지역명2",
   },
   {
     src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명",
-    areaName: "지역명",
+    drinkName: "제품명 제품명 제품명3",
+    areaName: "지역명3",
   },
   {
     src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명",
-    areaName: "지역명",
+    drinkName: "제품명 제품명 제품명4",
+    areaName: "지역명4",
   },
   {
     src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명",
-    areaName: "지역명",
+    drinkName: "제품명 제품명 제품명5",
+    areaName: "지역명5",
   },
 ];
 
