@@ -39,7 +39,6 @@ const NAVIGATION_LIST = [
 function BottomBar() {
   const pathName = usePathname();
   const router = useRouter();
-  console.log(pathName);
   return (
     <Container>
       <Inner>
