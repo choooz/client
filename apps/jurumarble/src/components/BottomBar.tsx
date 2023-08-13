@@ -83,14 +83,7 @@ const BarItem = styled.div<{ active: number }>`
   justify-content: center;
   gap: 4px;
   white-space: nowrap;
-  ${({ active, theme }) =>
-    active
-      ? css`
-          color: ${theme.colors.black_01};
-        `
-      : css`
-          color: ${theme.colors.black_05};
-        `};
+  color: ${({ active, theme }) => (active ? theme.colors.black_01 : theme.colors.black_05)};
 `;
 
 export default BottomBar;
