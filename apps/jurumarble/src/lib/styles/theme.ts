@@ -82,7 +82,7 @@ const typography = {
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: 130%
+    line-height: 130%;
     letter-spacing: -0.16px;
     `,
   body03: `

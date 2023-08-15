@@ -3234,6 +3234,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monorepo/jurumarble@workspace:apps/jurumarble"
   dependencies:
+    "@emotion/is-prop-valid": ^1.2.1
     "@monorepo/hooks": "workspace:*"
     "@monorepo/ui": "workspace:*"
     "@svgr/cli": ^8.0.1
@@ -3243,11 +3244,13 @@ __metadata:
     "@types/eslint": ^8
     "@types/node": 20.4.7
     "@types/react": 18.2.18
+    "@types/react-is": ^18
     "@types/styled-components": ^5.1.26
     eslint-config-next: 13.4.12
     next: 13.4.12
     react: 18.2.0
     react-dom: 18.2.0
+    react-is: ^18.2.0
     styled-components: ^6.0.7
     styled-reset: ^4.5.1
     typescript: 5.1.6
@@ -4195,6 +4198,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: e02ea908289a7ad26053308248d2b87f6aeafd73d0e2de2a3d435947bcea0422599016ffd1c3e38ff36c42f5e1c87c7417f05b0a157e48649e4a02f21727d54f
+  languageName: node
+  linkType: hard
+
+"@types/react-is@npm:^18":
+  version: 18.2.1
+  resolution: "@types/react-is@npm:18.2.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: b44c3262efa2c68fa6fe2beb9ef86170b18305469461a3f97aa14943cc033cb21a26944f718bdb6434eea6e8f7fcba251c4f45b65b897a3fcf751b5a6003cf82
   languageName: node
   linkType: hard
 

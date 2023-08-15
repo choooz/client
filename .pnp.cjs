@@ -6776,6 +6776,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/jurumarble/",\
           "packageDependencies": [\
             ["@monorepo/jurumarble", "workspace:apps/jurumarble"],\
+            ["@emotion/is-prop-valid", "npm:1.2.1"],\
             ["@monorepo/hooks", "workspace:packages/hooks"],\
             ["@monorepo/ui", "workspace:packages/ui"],\
             ["@svgr/cli", "npm:8.0.1"],\
@@ -6785,11 +6786,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", "npm:8.44.1"],\
             ["@types/node", "npm:20.4.7"],\
             ["@types/react", "npm:18.2.18"],\
+            ["@types/react-is", "npm:18.2.1"],\
             ["@types/styled-components", "npm:5.1.26"],\
             ["eslint-config-next", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:13.4.12"],\
             ["next", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:13.4.12"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#npm:18.2.0"],\
+            ["react-is", "npm:18.2.0"],\
             ["styled-components", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:6.0.7"],\
             ["styled-reset", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:4.5.1"],\
             ["typescript", "patch:typescript@npm%3A5.1.6#~builtin<compat/typescript>::version=5.1.6&hash=d73830"]\
@@ -8238,6 +8241,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.7-a20ba684a5-e02ea90828.zip/node_modules/@types/react-dom/",\
           "packageDependencies": [\
             ["@types/react-dom", "npm:18.2.7"],\
+            ["@types/react", "npm:18.0.26"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/react-is", [\
+        ["npm:18.2.1", {\
+          "packageLocation": "./.yarn/cache/@types-react-is-npm-18.2.1-b5cfa2d08b-b44c3262ef.zip/node_modules/@types/react-is/",\
+          "packageDependencies": [\
+            ["@types/react-is", "npm:18.2.1"],\
             ["@types/react", "npm:18.0.26"]\
           ],\
           "linkType": "HARD"\
