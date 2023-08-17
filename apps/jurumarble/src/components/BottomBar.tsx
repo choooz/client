@@ -63,7 +63,6 @@ const Container = styled.section`
   bottom: 0;
   left: 0;
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: 0px -16px 32px 0px rgba(235, 235, 235, 0.8);
 `;
 
 const Inner = styled.div`

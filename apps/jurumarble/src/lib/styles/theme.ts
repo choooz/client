@@ -18,99 +18,104 @@ const colors = {
   sub_02: "#aedac4",
   system_red: "#dc0000",
   system_green: "#04b014",
+  system_yellow: "#f5a623",
+  system_blue: "rgba(0, 26, 255, 0.80)",
+  system_black: "rgba(0, 0, 0, 0.80)",
   modal: "rgba(0, 0, 0, 0.5)",
+  main_drop_shadow_top: "rgba(235, 235, 235, 0.80)",
+  main_drop_shadow_bottom: "rgba(235, 235, 235, 0.80)",
+  modal_shadow: "rgba(235, 235, 235, 0.80)",
 } as const;
 
 const typography = {
   headline01: `
     font-size: 24px; 
-    font-style: normal; 
     font-weight: 700; 
     line-height: 130%; 
     letter-spacing: -0.24px; 
     `,
   headline02: `
     font-size: 20px;
-    font-style: normal;
     font-weight: 700;
     line-height: 130%;
     letter-spacing: -0.2px;
     `,
   headline03: `
     font-size: 18px;
-    font-style: normal;
     font-weight: 600;
     line-height: 130%;
     letter-spacing: -0.18px;
     `,
   headline04: `
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
     line-height: 130%;
     letter-spacing: -0.16px;
     `,
   subhead01: `
     font-size: 18px;
-    font-style: normal;
     font-weight: 400;
     line-height: 130%;
     letter-spacing: -0.18px;
     `,
   subhead02: `
     font-size: 14px;
-    font-style: normal;
     font-weight: 400;
     line-height: 130%;
     letter-spacing: -0.14px;
     `,
   body01: `
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
     line-height: 130%;
     letter-spacing: -0.16px;
     `,
   body_long01: `
     font-size: 16px;
-    font-style: normal;
     font-weight: 700;
     line-height: 150%;
     letter-spacing: -0.16px;
     `,
   body02: `
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     line-height: 130%;
     letter-spacing: -0.16px;
     `,
   body03: `
     font-size: 14px;
-    font-style: normal;
     font-weight: 400;
     line-height: 130%;
     letter-spacing: -0.14px;
     `,
   body_long03: `
     font-size: 14px;
-    font-style: normal;
     font-weight: 400;
     line-height: 150%;
     letter-spacing: -0.14px;
     `,
   caption: `
     font-size: 12px;
-    font-style: normal;
     font-weight: 600;
     line-height: 130%;
     `,
   chip: `
     font-size: 12px;
-    font-style: normal;
     font-weight: 600;
     line-height: 100%;
     `,
+  navigation: `
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 130%; 
+    letter-spacing: -0.1px;
+    `,
+  button01: `
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 130%; 
+  letter-spacing: -0.14px;
+`,
 } as const;
 
 const mediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;
