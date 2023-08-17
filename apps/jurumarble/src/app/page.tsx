@@ -155,12 +155,4 @@ const VoteTitle = styled.div`
     `}
 `;
 
-const BottomSheet = styled.div`
-  ${({ theme }) =>
-    css`
-      border-radius: 16px 16px 0px 0px;
-      box-shadow: 0px 0px 32px 0px ${theme.colors.modal};
-    `}
-`;
-
 export default Main;
