@@ -6,7 +6,6 @@ import Image from "next/image";
 import { EmptyAImg } from "public/images";
 import styled, { css } from "styled-components";
 import Carousel from "./main/components/Carousel";
-
 function Main() {
   return (
     <Container>
