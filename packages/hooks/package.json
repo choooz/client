@@ -1,5 +1,5 @@
 {
-  "name": "@chooz/hooks",
+  "name": "@monorepo/hooks",
   "packageManager": "yarn@3.3.0",
   "description": "",
   "author": "",
@@ -10,7 +10,6 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18",
-    "typescript": "^4.9.4"
+    "@types/react": "^18.2.18"
   }
 }

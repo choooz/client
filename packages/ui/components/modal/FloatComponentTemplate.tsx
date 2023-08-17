@@ -1,4 +1,4 @@
-import { Portal, transitions } from "@chooz/ui";
+import { Portal, transitions } from "@monorepo/ui";
 import React from "react";
 import styled from "styled-components";
 
