@@ -18,7 +18,13 @@ const colors = {
   sub_02: "#aedac4",
   system_red: "#dc0000",
   system_green: "#04b014",
+  system_yellow: "#f5a623",
+  system_blue: "rgba(0, 26, 255, 0.80)",
+  system_black: "rgba(0, 0, 0, 0.80)",
   modal: "rgba(0, 0, 0, 0.5)",
+  main_drop_shadow_top: "rgba(235, 235, 235, 0.80)",
+  main_drop_shadow_bottom: "rgba(235, 235, 235, 0.80)",
+  modal_shadow: "rgba(235, 235, 235, 0.80)",
 } as const;
 
 const typography = {
@@ -104,6 +110,12 @@ const typography = {
     line-height: 130%; 
     letter-spacing: -0.1px;
     `,
+  button01: `
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 130%; 
+  letter-spacing: -0.14px;
+`,
 } as const;
 
 const mediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;
