@@ -1,8 +1,6 @@
 "use client";
 
 import { media } from "@monorepo/ui/styles/media";
-import NumberOfSolver from "components/common/NumberOfSolver";
-import TargetMessage from "components/common/TargetMessage";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +8,7 @@ import { AIcon, BIcon, BookmarkIcon } from "public/icons";
 import styled, { css } from "styled-components";
 import { Vote } from "types/vote";
 import Path from "lib/Path";
+import { NumberOfSolver, TargetMessage } from "components";
 
 interface Props {
   vote: Vote;

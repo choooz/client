@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 
 interface Props {
   children: React.ReactNode;

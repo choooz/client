@@ -1,11 +1,16 @@
 "use client";
 
-import { AgeSelection, GenderSelection, MBTISelection, ProgressBar } from "components";
-import WarningSmallModal from "components/register/WarningSmallModal";
 import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { useToggle } from "@monorepo/hooks";
+import {
+  AgeSelection,
+  GenderSelection,
+  MBTISelection,
+  ProgressBar,
+  WarningSmallModal,
+} from "./components";
 
 function RegisterPage() {
   const {

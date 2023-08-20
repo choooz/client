@@ -1,10 +1,10 @@
 "use client";
 
-import InterestSection from "components/register/InterestSection";
 import React from "react";
 import useRegisterService from "services/useRegisterService";
 import styled from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
+import { InterestSection } from "../components";
 
 function Interest() {
   const { categoryList, onClickCategory, onClickComplete } = useRegisterService();

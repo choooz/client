@@ -1,11 +1,11 @@
 "use client";
 
 import { media } from "@monorepo/ui/styles/media";
-import { ImageTitleSection, TargetSection } from "components";
 import { FIRST_STEP, SECOND_STEP } from "lib/constants";
 import React, { useState } from "react";
 import usePostVoteService from "services/usePostVoteService";
 import styled from "styled-components";
+import { ImageTitleSection, TargetSection } from "./components";
 
 function PostPage() {
   const {

@@ -2,7 +2,7 @@ import { Button, transitions } from "@monorepo/ui";
 import Image from "next/image";
 import React from "react";
 import styled, { css } from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { CheckRound } from "public/images";
 import { CategoryNameType, IMAGE_CATEGORY_LIST } from "types/vote";
 

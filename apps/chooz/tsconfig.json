@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -12,7 +11,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "app/*": ["./app/*"],
+      "components/*": ["./components/*"],
+      "lib/*": ["./lib/*"],
+      "hooks/*": ["./hooks/*"],
+      "public/*": ["./public/*"]
+    }
   },
   "exclude": ["**/node_modules", "**/.*/"],
   "include": [

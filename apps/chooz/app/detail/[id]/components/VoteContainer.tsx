@@ -7,9 +7,9 @@ import useMutateVotingService from "services/useMutateVotingService";
 import useStatisticsService from "services/useStatisticsService";
 import useVoteLoadService from "services/useVoteLoadService";
 import styled from "styled-components";
+import useFilterStatistics from "../hooks/useFilterStatistics";
 import DetailAB from "./DetailAB";
 import FilterBar from "./FilterBar";
-import useFilterStatistics from "./hooks/useFilterStatistics";
 import VoteAnalyzeBar from "./VoteAnalyzeBar";
 import VoteWriterBox from "./VoteWriterBox";
 
