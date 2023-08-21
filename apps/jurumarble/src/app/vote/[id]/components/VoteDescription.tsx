@@ -1,5 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
+import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css } from "styled-components";
 
 type AorB = "A" | "B";
@@ -53,11 +54,19 @@ function VoteDescription({
           onClick={() => onClickVote("A")}
           percent={percentageA > 0 ? percentageA : 0}
         >
-          <Image src={imageA} alt="A 이미지" fill />
+          <Image
+            src={imageA}
+            alt="A 이미지"
+            fill
+            style={{
+              maxWidth: "720px",
+            }}
+          />
           <div className="overlay">
             <OverLayTitle>{titleA}</OverLayTitle>
             <OverlayPercent>{percentageA}%</OverlayPercent>
             <OverlayCount> {totalCountA}명</OverlayCount>
+            <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
           </div>
         </LeftVote>
 
@@ -66,11 +75,12 @@ function VoteDescription({
           onClick={() => onClickVote("B")}
           percent={percentageB > 0 ? percentageB : 0}
         >
-          <Image src={imageB} fill alt="B 이미지" />
+          <Image src={imageB} alt="B 이미지" fill />
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>
             <OverlayPercent>{percentageB}%</OverlayPercent>
             <OverlayCount> {totalCountB}명</OverlayCount>
+            <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
           </div>
         </RightVote>
       </ImageWrapper>
@@ -88,8 +98,8 @@ const Container = styled.div``;
 const ImageWrapper = styled.div`
   position: relative;
   display: flex;
-  justify-content: space-between;
   width: 100%;
+  height: 100%;
   gap: 9px;
 `;
 
@@ -136,20 +146,24 @@ const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
   width: 50%;
   aspect-ratio: 1;
   max-height: 300px;
+  display: flex;
+  justify-content: center;
   .overlay {
-    border-radius: 4px;
     position: absolute;
     top: 0;
     left: 0;
     width: 0%;
     visibility: hidden;
-    height: 100%;
+    height: calc(100% - 4px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 30px;
+    padding: 0 20px;
     color: white;
+    background: rgba(250, 94, 45, 0.7);
+    border-radius: 10px;
+    border: 2px solid #ff4a16;
     ${({ selected, percent }) =>
       selected === "active" &&
       css`
@@ -169,18 +183,29 @@ const RightVote = styled(LeftVote)`
 `;
 
 const OverLayTitle = styled.div`
-  font-weight: 700;
+  ${({ theme }) => theme.typography.body01}
+  padding-top: 26px;
 `;
 
 const OverlayPercent = styled.div`
-  font-weight: 700;
-  font-size: 60px;
-  line-height: 40px;
-  padding: 24px 0 12px 0;
+  ${({ theme }) => theme.typography.headline01}
+  padding-top: 8px;
 `;
 
 const OverlayCount = styled.div`
-  font-weight: 400;
+  ${({ theme }) => theme.typography.body03}
+`;
+
+const OverlayButton = styled.div`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.chip}
+      background-color: ${theme.colors.main_01};
+    `}
+  display: flex;
+  border-radius: 4px;
+  margin-top: 8px;
+  padding: 6px 8px;
 `;
 
 export default VoteDescription;

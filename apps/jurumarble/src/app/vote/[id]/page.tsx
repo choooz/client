@@ -6,6 +6,7 @@ import { ExImg1 } from "public/images";
 import BottomBar from "components/BottomBar";
 import VoteDescription from "./components/VoteDescription";
 import { useState } from "react";
+import ChipContainer from "./components/ChipContainer";
 
 function Detail() {
   const [selected, setSelected] = useState<"A" | "B" | null>(null);
@@ -28,6 +29,7 @@ function Detail() {
       />
 
       <PageInner>
+        <ChipContainer />
         <VoteDescription
           imageA={ExImg1}
           imageB={ExImg1}
@@ -61,6 +63,7 @@ const Container = styled.div`
 `;
 
 const PageInner = styled.div`
+  padding: 20px;
   border-top-left-radius: 20px;
   position: relative;
   margin: 0 auto;
