@@ -98,21 +98,21 @@ const ImageUploadButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 
-const VoteImageWrapper = styled.div`
-  gap: 12px;
-  overflow: hidden;
-  margin-top: 16px;
-  width: 100%;
-  background: ${({ theme }) => theme.palette.background.hard};
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  height: 290px;
-  position: relative;
-  background: ${({ theme }) => theme.palette.background.white};
-  justify-content: space-between;
-  cursor: pointer;
-`;
+// const VoteImageWrapper = styled.div`
+//   gap: 12px;
+//   overflow: hidden;
+//   margin-top: 16px;
+//   width: 100%;
+//   background: ${({ theme }) => theme.palette.background.hard};
+//   border-radius: 8px;
+//   display: flex;
+//   align-items: center;
+//   height: 290px;
+//   position: relative;
+//   background: ${({ theme }) => theme.palette.background.white};
+//   justify-content: space-between;
+//   cursor: pointer;
+// `;
 
 const VoteOptionText = styled.div`
   margin-top: 12px;

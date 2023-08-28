@@ -14,7 +14,7 @@ function Main() {
       <TopSection>
         <Header />
         <Banner />
-        <Input />
+        <Input width="100%" />
         <H2>
           우리술
           <Main01Color> TOP 10</Main01Color>
