@@ -2,7 +2,6 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
@@ -12,7 +11,15 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": {
+      "app/*": ["./app/*"],
+      "components/*": ["./components/*"],
+      "lib/*": ["./lib/*"],
+      "hooks/*": ["./hooks/*"],
+      "public/*": ["./public/*"]
+    }
   },
   "exclude": ["**/node_modules", "**/.*/"],
   "include": [
@@ -25,8 +32,10 @@
     "**/*.mjs",
     "**/*.jsx",
     "**/*.json",
-    "../../package/ui/styles/theme.ts",
-    "../../package/ui/styles/transitions.ts",
+    "../../packages/ui/components/button/Button.tsx",
+    "../../packages/*",
+    "../../packages/ui/styles/theme.ts",
+    "../../packages/ui/styles/transitions.ts",
     ".next/types/**/*.ts",
     "../../packages/ui/components/selectBox/hooks/useSelect.ts",
     "../../packages/hooks/src/useOutsideClick.ts",

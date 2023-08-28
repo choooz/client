@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ImageUploadButton from "components/common/ImageUploadButton";
+import ImageUploadButton from "components/ImageUploadButton";
 import Image from "next/image";
 
 interface Props {

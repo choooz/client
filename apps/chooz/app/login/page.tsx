@@ -5,9 +5,9 @@ import { BigPurpleMonster, LogoBlack } from "public/images";
 import Image from "next/image";
 import useLoginService from "services/useLoginService";
 import styled, { css } from "styled-components";
-import { media } from "styles/media";
 import { KakaoIcon, NaverIcon } from "public/icons";
 import Link from "next/link";
+import { media } from "@monorepo/ui/styles/media";
 
 function LoginPage() {
   const { socialLink } = useLoginService();

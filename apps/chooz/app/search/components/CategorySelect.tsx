@@ -1,6 +1,6 @@
 import { Select } from "@monorepo/ui";
 import styled from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { useToggle } from "@monorepo/hooks";
 import { SELECT_BOX_CATEGORY_LIST } from "types/vote";
 

@@ -5,7 +5,7 @@ import { SORT_LIST } from "lib/constants";
 import { useState } from "react";
 import useInfiniteVoteListService from "services/useInfiniteVoteListService";
 import styled from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { CategoryNameType } from "types/vote";
 
 function CategoryPage({ params }: { params: { category: string } }) {

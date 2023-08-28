@@ -6,7 +6,7 @@ import { EmptyAImg, EmptyBImg } from "public/images";
 import { media } from "@monorepo/ui/styles/media";
 import { FIRST_STEP, NEXT, SECOND_STEP } from "lib/constants";
 import React, { useMemo, useState } from "react";
-import ImageUploadButton from "components/common/ImageUploadButton";
+import ImageUploadButton from "components/ImageUploadButton";
 
 interface Props {
   vote: PostVoteRequest;

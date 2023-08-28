@@ -12,9 +12,9 @@ import { getCommentById } from "lib/apis/comments";
 import { reactQueryKeys } from "lib/queryKeys";
 import useMutateCommentService from "services/useMutateCommentService";
 import useUpdateCommnetService from "services/useUpdateCommnetService";
-import useCommentFilter from "./hooks/useCommentFilter";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import Path from "lib/Path";
+import useCommentFilter from "../hooks/useCommentFilter";
 
 interface Props {
   postId: number;

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DarkAString, DarkBString, LightBString } from "public/icons";
+import { DarkAString, LightBString } from "public/icons";
 import React from "react";
 import styled, { css } from "styled-components";
 

@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import { CheckRound, EmptyAImg, EmptyBImg } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { ActiveType, AorB, Direction } from "types/vote";
 
 interface Props {

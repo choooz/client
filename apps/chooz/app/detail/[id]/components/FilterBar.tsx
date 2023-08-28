@@ -1,5 +1,5 @@
 import { AGE_LIST, MBTI_LIST } from "lib/constants";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface Props {

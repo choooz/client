@@ -2,12 +2,12 @@
 
 import { theme } from "@monorepo/ui";
 import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "styles/globalStyles";
 import StyledComponentsRegistry from "../lib/registry";
 import useReplaceUser from "hooks/useReplaceUser";
-import Header from "components/common/header/Header";
-import { media } from "styles/media";
+import Header from "components/header/Header";
+import { media } from "@monorepo/ui/styles/media";
 import ReactQueryProvider from "lib/ReactQueryProvider";
+import { GlobalStyles } from "lib/styles/globalStyles";
 
 function RootLayout({
   // Layouts must accept a children prop.

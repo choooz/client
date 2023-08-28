@@ -1,8 +1,8 @@
 "use client";
 
 import { media } from "@monorepo/ui/styles/media";
-import NumberOfSolver from "components/common/NumberOfSolver";
-import TargetMessage from "components/common/TargetMessage";
+import NumberOfSolver from "components/NumberOfSolver";
+import TargetMessage from "components/TargetMessage";
 import Path from "lib/Path";
 import { timeDataProcessing } from "lib/utils/timeDataProcessing";
 import Image from "next/image";
