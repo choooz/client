@@ -1583,6 +1583,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@monorepo/hooks@workspace:packages/hooks"
   dependencies:
+    "@types/node": 20.5.7
+    "@types/react": 18.2.21
     react: ^18.2.0
     typescript: 4.9.3
   languageName: unknown
@@ -1594,7 +1596,6 @@ __metadata:
   dependencies:
     "@emotion/is-prop-valid": ^1.2.1
     "@monorepo/hooks": "workspace:*"
-    "@monorepo/ui": "workspace:*"
     "@svgr/cli": ^8.0.1
     "@svgr/core": ^8.0.0
     "@svgr/plugin-jsx": ^8.0.1
@@ -1603,6 +1604,7 @@ __metadata:
     "@tanstack/react-query-devtools": ^4.33.0
     "@types/node": 20.5.7
     "@types/react": 18.2.21
+    "@types/react-dom": ^18.2.7
     "@types/styled-components": ^5
     next: 13.4.12
     react: 18.2.0
@@ -1619,6 +1621,9 @@ __metadata:
   resolution: "@monorepo/ui@workspace:packages/ui"
   dependencies:
     "@monorepo/hooks": "workspace:*"
+    "@types/node": 20.5.7
+    "@types/react": 18.2.21
+    "@types/styled-components": ^5
     react: ^18.2.0
     react-dom: ^18.2.0
     react-is: ^18.2.0
@@ -2346,6 +2351,15 @@ __metadata:
   version: 15.7.5
   resolution: "@types/prop-types@npm:15.7.5"
   checksum: 5b43b8b15415e1f298243165f1d44390403bb2bd42e662bca3b5b5633fdd39c938e91b7fce3a9483699db0f7a715d08cef220c121f723a634972fdf596aec980
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.2.7":
+  version: 18.2.7
+  resolution: "@types/react-dom@npm:18.2.7"
+  dependencies:
+    "@types/react": "*"
+  checksum: e02ea908289a7ad26053308248d2b87f6aeafd73d0e2de2a3d435947bcea0422599016ffd1c3e38ff36c42f5e1c87c7417f05b0a157e48649e4a02f21727d54f
   languageName: node
   linkType: hard
 

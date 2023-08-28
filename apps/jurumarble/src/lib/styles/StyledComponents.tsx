@@ -6,7 +6,6 @@ import { StyleSheetManager, ThemeProvider } from "styled-components";
 import { jurumarbleTheme } from "./theme";
 import isPropValid from "@emotion/is-prop-valid";
 import GlobalStyles from "./globalStyles";
-import { theme } from "@monorepo/ui";
 
 function StyledComponents({ children }: PropsWithChildren) {
   return (
@@ -20,7 +19,7 @@ function StyledComponents({ children }: PropsWithChildren) {
           return typeof elementToBeRendered === "string" ? isPropValid(propName) : true;
         }}
       > */}
-      <ThemeProvider theme={{ ...jurumarbleTheme, ...theme }}>
+      <ThemeProvider theme={jurumarbleTheme}>
         <>
           <GlobalStyles />
           {children}
