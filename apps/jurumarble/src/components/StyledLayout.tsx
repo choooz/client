@@ -1,7 +1,7 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 function StyledLayout({ children }: PropsWithChildren) {
   return <Container>{children}</Container>;

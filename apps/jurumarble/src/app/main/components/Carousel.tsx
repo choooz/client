@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { EmptyAImg } from "public/images";
-import { css, styled } from "styled-components";
+import styled, { css } from "styled-components";
 
 const mockData = [
   {

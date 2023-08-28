@@ -4,6 +4,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  transpilePackages: ["@monorepo/ui, @monorepo/hooks"],
 };
 
 module.exports = nextConfig;
