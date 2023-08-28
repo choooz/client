@@ -24,6 +24,7 @@ function Input({ width, height, variant, ...rest }: InputProps) {
 const InputStyled = styled.input<InputProps>`
   color: ${({ theme }) => theme.colors.black_01};
   width: ${({ width }) => width};
+  border: none;
 `;
 
 export default Input;
