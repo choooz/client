@@ -1,5 +1,6 @@
 "use client";
 
+import { Input } from "@monorepo/ui";
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
 import Image from "next/image";
@@ -65,11 +66,11 @@ const Banner = styled.div`
   aspect-ratio: 16 / 9;
 `;
 
-const Input = styled.input`
-  width: 100%;
-  height: 24px;
-  margin-top: 28px;
-`;
+// const Input = styled.input`
+//   width: 100%;
+//   height: 24px;
+//   margin-top: 28px;
+// `;
 
 const H2 = styled.h2`
   ${({ theme }) =>
