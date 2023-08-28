@@ -6,7 +6,7 @@ import SvgIcHome from "src/assets/icons/components/IcHome";
 import SvgIcMapPin from "src/assets/icons/components/IcMapPin";
 import SvgIcMark from "src/assets/icons/components/IcMark";
 import SvgIcUser from "src/assets/icons/components/IcUser";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const NAVIGATION_LIST = [
   {

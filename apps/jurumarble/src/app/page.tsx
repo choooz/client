@@ -6,7 +6,6 @@ import Image from "next/image";
 import { EmptyAImg } from "public/images";
 import styled, { css } from "styled-components";
 import Carousel from "./main/components/Carousel";
-// import { Input } from "@monorepo/ui";
 
 function Main() {
   return (
@@ -153,6 +152,14 @@ const VoteTitle = styled.div`
       ${theme.typography.headline03};
       color: ${theme.colors.black_01};
       padding: 0 20px;
+    `}
+`;
+
+const BottomSheet = styled.div`
+  ${({ theme }) =>
+    css`
+      border-radius: 16px 16px 0px 0px;
+      box-shadow: 0px 0px 32px 0px ${theme.colors.modal};
     `}
 `;
 
