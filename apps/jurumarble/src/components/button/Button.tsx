@@ -5,7 +5,7 @@ interface ButtonStyledProps {
   /**
    * 버튼 타입
    */
-  variant?: "primary" | "inactive" | "outline" | "warning";
+  variant?: "primary" | "outline";
   /**
    * 버튼 가로 길이
    */
@@ -24,6 +24,23 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, But
   children: React.ReactNode;
 }
 
+const variantStyles = {
+  primary: css`
+    ${({ theme }) => css`
+      background-color: ${theme.colors.main_01};
+      color: ${theme.colors.white};
+      border-radius: 10px;
+    `}
+  `,
+  outline: css`
+    ${({ theme }) => css`
+      border: 1px solid ${theme.colors.black_05};
+      color: ${theme.colors.black_03};
+      border-radius: 10px;
+    `}
+  `,
+};
+
 function Button({ width, height, variant, borderRadius = "4px", children, ...rest }: ButtonProps) {
   return (
     <ButtonStyled
@@ -39,13 +56,18 @@ function Button({ width, height, variant, borderRadius = "4px", children, ...res
 }
 
 const ButtonStyled = styled.button<ButtonStyledProps>`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  border-radius: ${({ borderRadius }) => borderRadius};
-  font-weight: 700;
+  ${({ theme, width, height, borderRadius, variant }) => css`
+    background-color: ${theme.colors.white};
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: ${width};
+    height: ${height};
+    border-radius: ${borderRadius};
+    padding: 0;
+    border: none;
+    ${variant && variantStyles[variant]};
+  `}
 `;
 
 export default Button;
