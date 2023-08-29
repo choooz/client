@@ -29,19 +29,17 @@ const variantStyles = {
     ${({ theme }) => css`
       background-color: ${theme.colors.main_01};
       color: ${theme.colors.white};
-      border-radius: 10px;
     `}
   `,
   outline: css`
     ${({ theme }) => css`
       border: 1px solid ${theme.colors.black_05};
       color: ${theme.colors.black_03};
-      border-radius: 10px;
     `}
   `,
 };
 
-function Button({ width, height, variant, borderRadius = "4px", children, ...rest }: ButtonProps) {
+function Button({ width, height, variant, borderRadius = "10px", children, ...rest }: ButtonProps) {
   return (
     <ButtonStyled
       variant={variant}
@@ -57,16 +55,16 @@ function Button({ width, height, variant, borderRadius = "4px", children, ...res
 
 const ButtonStyled = styled.button<ButtonStyledProps>`
   ${({ theme, width, height, borderRadius, variant }) => css`
-    background-color: ${theme.colors.white};
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     width: ${width};
     height: ${height};
     border-radius: ${borderRadius};
+    ${variant && variantStyles[variant]};
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
     border: none;
-    ${variant && variantStyles[variant]};
+    cursor: pointer;
   `}
 `;
 
