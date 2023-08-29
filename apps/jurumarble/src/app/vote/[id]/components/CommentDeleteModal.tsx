@@ -1,3 +1,4 @@
+import { Button, ModalTemplate } from "components/index";
 import styled from "styled-components";
 
 interface Props {

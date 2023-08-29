@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { styled } from "styled-components";
+import styled from "styled-components";
+
 import useCommentFilter from "../hooks/useCommentFilter";
 
 import Comment from "./Comment";
