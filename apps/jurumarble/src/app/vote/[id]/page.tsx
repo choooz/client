@@ -7,8 +7,12 @@ import BottomBar from "components/BottomBar";
 import VoteDescription from "./components/VoteDescription";
 import { useState } from "react";
 import ChipContainer from "./components/ChipContainer";
+import CommentContainer from "./components/CommentContainer";
+import { useSearchParams } from "next/navigation";
 
 function Detail() {
+  const searchParams = useSearchParams();
+  const postId = searchParams.get("id");
   const [selected, setSelected] = useState<"A" | "B" | null>(null);
   const onMutateVoting = (select: "A" | "B") => {
     setSelected(select);
@@ -42,12 +46,12 @@ function Detail() {
           select={selected}
           onMutateVoting={onMutateVoting}
         />
+        <CommentContainer postId={Number(postId)} />
       </PageInner>
       <BottomBar />
     </Container>
   );
 }
-
 const Container = styled.div`
   position: relative;
   width: 100%;
