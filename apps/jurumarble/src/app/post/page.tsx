@@ -1,24 +1,24 @@
 "use client";
 
 import ImageUploadButton from "components/ImageUploadButton";
-import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css } from "styled-components";
 import DrinkSearchModal from "./components/DrinkSearchModal";
 import { useToggle } from "@monorepo/hooks";
-import { Button } from "components/index";
+import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
+import { Button, Input } from "components/index";
 
 function PostPage() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle(false);
   return (
     <>
-      <DetailHeader>
-        <PreviousButton>
-          <SvgIcPrev width={24} height={24} />
-        </PreviousButton>
-        등록하기
-        <EmptySpace />
-      </DetailHeader>
       <Container>
+        <DetailHeader>
+          <PreviousButton>
+            <SvgIcPrevious width={24} height={24} />
+          </PreviousButton>
+          등록하기
+          <EmptySpace />
+        </DetailHeader>
         <GuideText>고민되는 술을 선택해주세요</GuideText>
         <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
         <label htmlFor="file">
@@ -29,16 +29,20 @@ function PostPage() {
         </label>
         <VoteOptionText>
           <InputBox>
-            <input width="100%" placeholder="선택지1을 입력" name="titleA" maxLength={22} />
+            <ABInput width="100%" placeholder="선택지 A 입력" name="titleA" maxLength={22} />
           </InputBox>
           <InputBox>
-            <input width="100%" placeholder="선택지2를 입력" name="titleB" maxLength={22} />
+            <ABInput width="100%" placeholder="선택지 B 입력" name="titleB" maxLength={22} />
           </InputBox>
         </VoteOptionText>
       </Container>
       <BottomSheet>
-        <button>술 검색하기</button>
-        <button>직접 등록하기</button>
+        <ButtonStyled width="100%" height="100%" variant="primary">
+          술 검색하기
+        </ButtonStyled>
+        <ButtonStyled width="100%" height="100%" variant="outline">
+          직접 등록하기
+        </ButtonStyled>
       </BottomSheet>
       {isDrinkSearchModal && (
         <DrinkSearchModal onToggleDrinkSearchModal={onToggleDrinkSearchModal} />
@@ -58,13 +62,14 @@ const DetailHeader = styled.header`
       color: ${theme.colors.black_01};
       display: flex;
       align-items: center;
-      justify-content: center;
       height: 48px;
     `}
 `;
 
-const PreviousButton = styled.button`
-  margin-left: 12px;
+const PreviousButton = styled(Button)`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.white};
+  `}
 `;
 
 const EmptySpace = styled.div`
@@ -98,22 +103,6 @@ const ImageUploadButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 
-// const VoteImageWrapper = styled.div`
-//   gap: 12px;
-//   overflow: hidden;
-//   margin-top: 16px;
-//   width: 100%;
-//   background: ${({ theme }) => theme.palette.background.hard};
-//   border-radius: 8px;
-//   display: flex;
-//   align-items: center;
-//   height: 290px;
-//   position: relative;
-//   background: ${({ theme }) => theme.palette.background.white};
-//   justify-content: space-between;
-//   cursor: pointer;
-// `;
-
 const VoteOptionText = styled.div`
   margin-top: 12px;
   display: flex;
@@ -122,10 +111,26 @@ const VoteOptionText = styled.div`
   gap: 16px;
 `;
 
+const ABInput = styled(Input)`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.body_long03}
+      color: ${theme.colors.black_04};
+      border-bottom: 1px solid ${theme.colors.line_01};
+    `}
+`;
+
 const InputBox = styled.div`
   display: flex;
   gap: 12px;
   flex: 0.5;
+`;
+
+const ButtonStyled = styled(Button)`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.body01}
+    `}
 `;
 
 const BottomSheet = styled.div`
@@ -134,13 +139,15 @@ const BottomSheet = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 8px;
+      padding: 20px;
       position: fixed;
       bottom: 0;
       width: 100%;
       height: 160px;
       max-width: 720px;
       border-radius: 16px 16px 0px 0px;
-      box-shadow: 0px 0px 32px 0px ${theme.colors.modal};
+      box-shadow: 0px 0px 32px 0px ${theme.colors.modal_shadow};
     `}
 `;
 

@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-const SvgArrowBackIos = (props: SVGProps<SVGSVGElement>) => (
+const SvgIcPrevious = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="1em"
     height="1em"
@@ -30,4 +30,4 @@ const SvgArrowBackIos = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-export default SvgArrowBackIos;
+export default SvgIcPrevious;
