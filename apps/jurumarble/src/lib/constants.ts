@@ -1,3 +1,5 @@
+export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || "";
+
 export const REGION_LIST = [
   { value: "gyeonggiDo", label: "경기도" },
   { value: "chungcheongDo", label: "충청도" },
