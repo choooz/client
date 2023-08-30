@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function useUpdateSelectedDrinkList() {
-  const [selectedDrinkList, setDrinkList] = useState([]);
+  const [selectedDrinkList, setDrinkList] = useState([] as string[]);
 
   const onClickAddDrink = (e: React.MouseEvent<HTMLButtonElement>) => {
     const name = e.currentTarget.name;

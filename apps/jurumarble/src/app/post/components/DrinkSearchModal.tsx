@@ -72,7 +72,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
             {TEMP_LIST.map(({ drinkName, manufacturer }) => (
               <DrinkItem
                 onClickAddDrink={onClickAddDrink}
-                src={EmptyAImg}
+                staticImage={EmptyAImg}
                 drinkName={drinkName}
                 manufacturer={manufacturer}
                 selectedDrinkList={selectedDrinkList}

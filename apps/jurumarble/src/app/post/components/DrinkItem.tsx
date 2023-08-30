@@ -1,10 +1,10 @@
 import { transitions } from "lib/styles";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import styled, { css, useTheme } from "styled-components";
 
 interface Props {
-  src: string;
+  staticImage: StaticImageData;
   drinkName: string;
   manufacturer: string;
   stamp?: boolean;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 function DrinkItem({
-  src,
+  staticImage,
   drinkName = "제품명",
   manufacturer = "제조사",
   stamp,
@@ -28,7 +28,7 @@ function DrinkItem({
       selected={selectedDrinkList.includes(manufacturer)}
     >
       <ImageWrapper>
-        <Image alt="임시 이미지" src={src} fill style={{ borderRadius: "10px" }} />
+        <Image alt="임시 이미지" src={staticImage} fill style={{ borderRadius: "10px" }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
