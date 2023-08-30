@@ -4,21 +4,26 @@ import ImageUploadButton from "components/ImageUploadButton";
 import styled, { css } from "styled-components";
 import DrinkSearchModal from "./components/DrinkSearchModal";
 import { useToggle } from "@monorepo/hooks";
-import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { Button, Input } from "components/index";
+import VoteHeader from "components/VoteHeader";
+import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
+import { useRouter } from "next/navigation";
 
 function PostPage() {
-  const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle(false);
+  const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
+  const router = useRouter();
   return (
     <>
       <Container>
-        <DetailHeader>
-          <PreviousButton>
-            <SvgIcPrevious width={24} height={24} />
-          </PreviousButton>
+        <VoteHeader
+          leftButton={
+            <PreviousButton onClick={() => router.back()}>
+              <SvgIcPrevious width={24} height={24} />
+            </PreviousButton>
+          }
+        >
           등록하기
-          <EmptySpace />
-        </DetailHeader>
+        </VoteHeader>
         <GuideText>고민되는 술을 선택해주세요</GuideText>
         <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
         <label htmlFor="file">
@@ -37,7 +42,12 @@ function PostPage() {
         </VoteOptionText>
       </Container>
       <BottomSheet>
-        <ButtonStyled width="100%" height="100%" variant="primary">
+        <ButtonStyled
+          width="100%"
+          height="100%"
+          variant="primary"
+          onClick={onToggleDrinkSearchModal}
+        >
           술 검색하기
         </ButtonStyled>
         <ButtonStyled width="100%" height="100%" variant="outline">
@@ -55,26 +65,10 @@ const Container = styled.div`
   padding: 0 20px;
 `;
 
-const DetailHeader = styled.header`
-  ${({ theme }) =>
-    css`
-      ${theme.typography.headline03}
-      color: ${theme.colors.black_01};
-      display: flex;
-      align-items: center;
-      height: 48px;
-    `}
-`;
-
 const PreviousButton = styled(Button)`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
   `}
-`;
-
-const EmptySpace = styled.div`
-  width: 24px;
-  height: 24px;
 `;
 
 const GuideText = styled.div`
