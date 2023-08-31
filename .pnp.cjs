@@ -4119,10 +4119,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@svgr/plugin-prettier", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:4.33.0"],\
             ["@tanstack/react-query-devtools", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:4.33.0"],\
+            ["@types/lodash", "npm:4.14.197"],\
             ["@types/node", "npm:20.5.7"],\
             ["@types/react", "npm:18.2.21"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@types/styled-components", "npm:5.1.26"],\
+            ["axios", "npm:1.5.0"],\
+            ["lodash", "npm:4.17.21"],\
             ["next", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:13.4.12"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#npm:18.2.0"],\
@@ -5316,6 +5319,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/hoist-non-react-statics", "npm:3.3.1"],\
             ["@types/react", "npm:18.2.21"],\
             ["hoist-non-react-statics", "npm:3.3.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/lodash", [\
+        ["npm:4.14.197", {\
+          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.197-8db1555bb5-53d7567d17.zip/node_modules/@types/lodash/",\
+          "packageDependencies": [\
+            ["@types/lodash", "npm:4.14.197"]\
           ],\
           "linkType": "HARD"\
         }]\
