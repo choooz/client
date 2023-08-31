@@ -2,9 +2,8 @@
   "name": "monorepo",
   "private": true,
   "scripts": {
-    "dev:chooz": "yarn workspace @monorepo/chooz dev",
-    "dev:juma": "yarn workspace @monorepo/jurumarble dev",
-    "build:juma": "yarn workspace @monorepo/jurumarble build"
+    "chooz": "yarn workspace @monorepo/chooz",
+    "juma": "yarn workspace @monorepo/jurumarble"
   },
   "workspaces": {
     "packages": [
