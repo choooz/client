@@ -16,22 +16,10 @@ function CommentDeleteModal({ onToggleModal, onSubmit }: Props) {
       <GuideText>정말로 삭제하시겠습니까?</GuideText>
       <DetailText>댓글은 삭제후 다시 복구할 수 없습니다.</DetailText>
       <ButtonWrapper>
-        <Button
-          variant="inactive"
-          width="156px"
-          height="48px"
-          borderRadius="0 0 0 4px"
-          onClick={onToggleModal}
-        >
+        <Button width="156px" height="48px" borderRadius="0 0 0 4px" onClick={onToggleModal}>
           취소
         </Button>
-        <Button
-          variant="warning"
-          width="156px"
-          height="48px"
-          borderRadius="0 0 4px 0"
-          onClick={onClickDelete}
-        >
+        <Button width="156px" height="48px" borderRadius="0 0 4px 0" onClick={onClickDelete}>
           확인
         </Button>
       </ButtonWrapper>
