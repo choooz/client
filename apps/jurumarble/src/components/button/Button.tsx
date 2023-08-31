@@ -24,6 +24,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, But
   children: React.ReactNode;
 }
 
+function Button({ width, height, variant, borderRadius = "10px", children, ...rest }: ButtonProps) {
+  return (
+    <ButtonStyled
+      variant={variant}
+      width={width}
+      height={height}
+      borderRadius={borderRadius}
+      {...rest}
+    >
+      {children}
+    </ButtonStyled>
+  );
+}
+
 const variantStyles = {
   primary: css`
     ${({ theme }) => css`
@@ -38,20 +52,6 @@ const variantStyles = {
     `}
   `,
 };
-
-function Button({ width, height, variant, borderRadius = "10px", children, ...rest }: ButtonProps) {
-  return (
-    <ButtonStyled
-      variant={variant}
-      width={width}
-      height={height}
-      borderRadius={borderRadius}
-      {...rest}
-    >
-      {children}
-    </ButtonStyled>
-  );
-}
 
 const ButtonStyled = styled.button<ButtonStyledProps>`
   ${({ theme, width, height, borderRadius, variant }) => css`
