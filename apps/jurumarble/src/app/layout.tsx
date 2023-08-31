@@ -17,8 +17,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <StyledComponents>
           <body className={pretandard.className}>
             <StyledLayout>
+              <>
               <div id="portal" />
               {children}
+              </>
             </StyledLayout>
           </body>
         </StyledComponents>
