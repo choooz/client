@@ -1,5 +1,4 @@
-import useOutsideClick from "hooks/useOutsideClick";
-import useToggle from "hooks/useToggle";
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
 import React from "react";
