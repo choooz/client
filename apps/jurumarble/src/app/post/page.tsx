@@ -8,56 +8,118 @@ import { Button, Input } from "components/index";
 import VoteHeader from "components/VoteHeader";
 import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
+import Image from "next/image";
+import { EmptyAImg } from "public/images";
+import usePostVoteService from "./services/usePostVoteService";
+import TitleAndDescriptionSection from "./components/TitleAndDescriptionSection";
+import PostBottomSheet from "./components/PostBottomSheet";
+
+const STEP_ONE = 1;
+const STEP_TWO = 2;
 
 function PostPage() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
   const router = useRouter();
+
+  const [postStep, setPostStep] = useState<number>(STEP_ONE);
+  const onChangePostStep = () => {
+    setPostStep((prev) => prev + 1);
+  };
+
+  const { onChangeVoteText, postVoteInfo, onUploadImage, mutateVote } = usePostVoteService();
+
+  const isCompleted = useMemo(() => {
+    return !postVoteInfo.titleA || !postVoteInfo.titleB;
+  }, [postVoteInfo]);
+
+  const { title, titleA, titleB, imageA, imageB } = postVoteInfo;
+
   return (
-    <>
-      <Container>
-        <VoteHeader
-          leftButton={
-            <PreviousButton onClick={() => router.back()}>
-              <SvgIcPrevious width={24} height={24} />
-            </PreviousButton>
-          }
-        >
-          등록하기
-        </VoteHeader>
-        <GuideText>고민되는 술을 선택해주세요</GuideText>
-        <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
-        <label htmlFor="file">
+    <Container>
+      <VoteHeader
+        leftButton={
+          <PreviousButton onClick={() => router.back()}>
+            <SvgIcPrevious width={24} height={24} />
+          </PreviousButton>
+        }
+      >
+        등록하기
+      </VoteHeader>
+      <GuideText>고민되는 술을 선택해주세요</GuideText>
+      <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
+      <label htmlFor="file">
+        {!imageA && !imageB ? (
           <ImageUploadButtonWrapper>
             <ImageUploadButton width="100%" height="163px" />
           </ImageUploadButtonWrapper>
-          <ImageUploadInput multiple type="file" id="file" />
-        </label>
-        <VoteOptionText>
-          <InputBox>
-            <ABInput width="100%" placeholder="선택지 A 입력" name="titleA" maxLength={22} />
-          </InputBox>
-          <InputBox>
-            <ABInput width="100%" placeholder="선택지 B 입력" name="titleB" maxLength={22} />
-          </InputBox>
-        </VoteOptionText>
-      </Container>
-      <BottomSheet>
-        <ButtonStyled
-          width="100%"
-          height="100%"
-          variant="primary"
-          onClick={onToggleDrinkSearchModal}
-        >
-          술 검색하기
-        </ButtonStyled>
-        <ButtonStyled width="100%" height="100%" variant="outline">
-          직접 등록하기
-        </ButtonStyled>
-      </BottomSheet>
+        ) : (
+          <VoteImageWrapper>
+            <Image
+              src={imageA || EmptyAImg}
+              alt="A이미지"
+              width={272}
+              height={272}
+              style={{
+                objectFit: "cover",
+                width: "50%",
+                height: "auto",
+              }}
+            />
+            <Image
+              src={imageB || EmptyAImg}
+              alt="B이미지"
+              width={272}
+              height={272}
+              style={{
+                objectFit: "cover",
+                width: "50%",
+                height: "auto",
+              }}
+            />
+          </VoteImageWrapper>
+        )}
+        <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
+      </label>
+      <VoteOptionText>
+        <InputBox>
+          <ABInput
+            width="100%"
+            placeholder="선택지 A 입력"
+            name="titleA"
+            maxLength={22}
+            value={titleA}
+            onChange={onChangeVoteText}
+          />
+        </InputBox>
+        <InputBox>
+          <ABInput
+            width="100%"
+            placeholder="선택지 B 입력"
+            name="titleB"
+            maxLength={22}
+            value={titleB}
+            onChange={onChangeVoteText}
+          />
+        </InputBox>
+      </VoteOptionText>
+      {postStep === STEP_TWO && (
+        <TitleAndDescriptionSection
+          title={title}
+          onChangeVoteText={onChangeVoteText}
+          isCompleted={isCompleted}
+        />
+      )}
+      {postStep === STEP_ONE && (
+        <PostBottomSheet
+          onToggleDrinkSearchModal={onToggleDrinkSearchModal}
+          onChangePostStep={onChangePostStep}
+        />
+      )}
       {isDrinkSearchModal && (
         <DrinkSearchModal onToggleDrinkSearchModal={onToggleDrinkSearchModal} />
       )}
-    </>
+    </Container>
   );
 }
 
@@ -97,6 +159,21 @@ const ImageUploadButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 
+const VoteImageWrapper = styled.div`
+  gap: 12px;
+  overflow: hidden;
+  margin-top: 16px;
+  width: 100%;
+  background: ${({ theme }) => theme.colors.black_05};
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  height: 290px;
+  position: relative;
+  justify-content: space-between;
+  cursor: pointer;
+`;
+
 const VoteOptionText = styled.div`
   margin-top: 12px;
   display: flex;
@@ -118,31 +195,6 @@ const InputBox = styled.div`
   display: flex;
   gap: 12px;
   flex: 0.5;
-`;
-
-const ButtonStyled = styled(Button)`
-  ${({ theme }) =>
-    css`
-      ${theme.typography.body01}
-    `}
-`;
-
-const BottomSheet = styled.div`
-  ${({ theme }) =>
-    css`
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      padding: 20px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 160px;
-      max-width: 720px;
-      border-radius: 16px 16px 0px 0px;
-      box-shadow: 0px 0px 32px 0px ${theme.colors.modal_shadow};
-    `}
 `;
 
 export default PostPage;
