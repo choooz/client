@@ -4124,6 +4124,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react", "npm:18.2.21"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@types/styled-components", "npm:5.1.26"],\
+            ["axios", "npm:1.5.0"],\
             ["lodash", "npm:4.17.21"],\
             ["next", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:13.4.12"],\
             ["react", "npm:18.2.0"],\
