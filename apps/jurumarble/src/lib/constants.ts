@@ -1,4 +1,18 @@
+import Path from "./Path";
+
+export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
 export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || "";
+
+export const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || "";
+export const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || "";
+export const KAKAO_LOGIN_REDIRECT_URL =
+  process.env.NODE_ENV === "development"
+    ? `http://localhost:3000/${Path.KAKAO_LOGIN_PROCESS}`
+    : `${CLIENT_URL}${Path.KAKAO_LOGIN_PROCESS}`;
+export const NAVER_LOGIN_REDIRECT_URL =
+  process.env.NODE_ENV === "development"
+    ? `http://localhost:3000/${Path.NAVER_LOGIN_PROCESS}`
+    : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
 export const REGION_LIST = [
   { value: "gyeonggiDo", label: "경기도" },
