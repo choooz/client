@@ -1,4 +1,5 @@
 "use client";
+
 import Header from "components/Header";
 import styled, { css } from "styled-components";
 import VoteWriterBox from "./components/VoteWriterBox";
@@ -9,6 +10,8 @@ import { useState } from "react";
 import ChipContainer from "./components/ChipContainer";
 import CommentContainer from "./components/CommentContainer";
 import { useSearchParams } from "next/navigation";
+import { useToggle } from "@monorepo/hooks";
+import SearchRestaurantModal from "./components/SearchRestaurantModal";
 
 function Detail() {
   const searchParams = useSearchParams();
@@ -17,6 +20,9 @@ function Detail() {
   const onMutateVoting = (select: "A" | "B") => {
     setSelected(select);
   };
+
+  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(true);
+
   return (
     <Container>
       <Header />
@@ -48,6 +54,9 @@ function Detail() {
         />
         <CommentContainer postId={Number(postId)} />
       </PageInner>
+      {isSearchRestaurantModal && (
+        <SearchRestaurantModal onToggleSearchRestaurantModal={onToggleSearchRestaurantModal} />
+      )}
       <BottomBar />
     </Container>
   );
