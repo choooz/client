@@ -1,14 +1,19 @@
 import { Button } from "components/button";
 import { Input } from "components/input";
 import SvgIcSearch from "src/assets/icons/components/IcSearch";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
-function DrinkSearchInput() {
+interface Props {
+  placeholder?: string;
+}
+
+function SearchInput({ placeholder }: Props) {
+  const theme = useTheme();
   return (
     <Search>
-      <InputStyled width="100%" placeholder="검색어를 입력하세요."></InputStyled>
+      <InputStyled width="100%" placeholder={placeholder}></InputStyled>
       <SearchButton>
-        <SvgIcSearch />
+        <SvgIcSearch width={22} height={22} fill={theme.colors.black_04} />
       </SearchButton>
     </Search>
   );
@@ -17,6 +22,7 @@ function DrinkSearchInput() {
 const Search = styled.div`
   display: flex;
   margin-top: 8px;
+  width: 100%;
 `;
 
 const InputStyled = styled(Input)`
@@ -42,7 +48,8 @@ const SearchButton = styled(Button)`
     border-radius: 0 8px 8px 0;
     width: 44px;
     height: 44px;
+    padding-right: 10px;
   `}
 `;
 
-export default DrinkSearchInput;
+export default SearchInput;

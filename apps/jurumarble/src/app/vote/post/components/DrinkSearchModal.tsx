@@ -8,7 +8,7 @@ import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
 import DrinkItem from "./DrinkItem";
-import DrinkSearchInput from "./DrinkSearchInput";
+import SearchInput from "../../../../components/SearchInput";
 import RegionSelect from "./RegionSelect";
 import SelectedDrinkChip from "./SelectedDrinkChip";
 
@@ -57,7 +57,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
           regionOption={regionOption}
           onChangeRegionOption={onChangeRegionOption}
         ></RegionSelect>
-        {regionOption && <DrinkSearchInput />}
+        {regionOption && <SearchInput placeholder="관심있는 술을 검색해보세요." />}
         <SelectedDrinkChipList>
           {selectedDrinkList.map((manufacturer) => (
             <SelectedDrinkChip manufacturer={manufacturer} onClickDeleteItem={onClickDeleteItem}>
@@ -106,7 +106,7 @@ const ResultSection = styled.section`
   padding: 24px 0 24px 0;
 `;
 
-const DrinkList = styled.li`
+const DrinkList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
