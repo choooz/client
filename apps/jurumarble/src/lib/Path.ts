@@ -9,7 +9,7 @@ const Path = {
 
   // logged In
   REGISTER_PAGE: "/register",
-  POST_PAGE: "/post",
+  POST_PAGE: "/vote/post",
   MY_PAGE: "/my",
   PROFILE_EDIT: "/my/edit",
 
