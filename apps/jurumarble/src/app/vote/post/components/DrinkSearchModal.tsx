@@ -110,7 +110,6 @@ const DrinkList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 500px;
   overflow: auto;
   height: 400px;
   -ms-overflow-style: none /* IE and Edge 스크롤바 없애는 css*/;
