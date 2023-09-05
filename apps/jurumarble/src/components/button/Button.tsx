@@ -58,13 +58,13 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
     width: ${width};
     height: ${height};
     border-radius: ${borderRadius};
-    ${variant && variantStyles[variant]};
     display: inline-flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     border: none;
     cursor: pointer;
+    ${variant && variantStyles[variant]};
   `}
 `;
 
