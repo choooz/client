@@ -65,6 +65,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
     border: none;
     cursor: pointer;
     ${variant && variantStyles[variant]};
+    ${theme.typography.button01}
   `}
 `;
 
