@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export type Drag = "up" | "down" | null;
 function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
