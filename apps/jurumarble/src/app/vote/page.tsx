@@ -11,10 +11,10 @@ import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
 import useInfiniteMainListService from "./post/services/useGetVoteListService";
+import usePostBookmarkService from "./post/services/useBookmarkService";
 import ChipContainer from "./[id]/components/ChipContainer";
 import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
-import useBookmarkService from "services/useBookmarkService";
 
 export type Drag = "up" | "down" | null;
 
@@ -37,7 +37,7 @@ function VoteHomePage() {
   const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
     mainVoteList[nowShowing] || {};
 
-  const { mutateBookMark, bookMarkCheckQuery } = useBookmarkService(voteId);
+  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
 
   const { data: bookmarkCheck } = bookMarkCheckQuery;
 
