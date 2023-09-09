@@ -4,30 +4,47 @@ import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
 import Header from "components/Header";
 import { media } from "lib/styles";
-import { ExImg1 } from "public/images";
+import { useRouter } from "next/navigation";
+import { EmptyAImg, ExImg1 } from "public/images";
 import React, { useState } from "react";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
+import useInfiniteMainListService from "./post/services/useGetVoteListService";
+import usePostBookmarkService from "./post/services/useBookmarkService";
 import ChipContainer from "./[id]/components/ChipContainer";
 import VoteDescription from "./[id]/components/VoteDescription";
+import Path from "lib/Path";
 
 export type Drag = "up" | "down" | null;
 
 function VoteHomePage() {
-  //   const { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
-  //     useInfiniteMainListService({ size: 5, sortBy: "ByTime" });
+  const router = useRouter();
   const [selected, setSelected] = useState<"A" | "B" | null>(null);
   const onMutateVoting = (select: "A" | "B") => {
     setSelected(select);
   };
 
-  const onChangeNowShowing = () => {
-    console.log("z");
-  };
+  const { isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
+    useInfiniteMainListService({
+      size: 10,
+      sortBy: "ByTime",
+    });
 
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
+
+  const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
+    mainVoteList[nowShowing] || {};
+
+  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
+
+  const { data: bookmarkCheck } = bookMarkCheckQuery;
+
+  const isBookmark = bookmarkCheck?.bookmarked || false;
+
+  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
+  if (isError) return <PageInner drag={drag}>에러</PageInner>;
   return (
     <>
       <Background>
@@ -38,7 +55,12 @@ function VoteHomePage() {
             <br /> 기다리고 있어요
           </AskVoteText>
           <div>
-            <Button variant="primary" width="104px" height="40px">
+            <Button
+              variant="primary"
+              width="104px"
+              height="40px"
+              onClick={() => router.push(Path.POST_PAGE)}
+            >
               작성하기 <BigFont>﹢</BigFont>
             </Button>
           </div>
@@ -51,20 +73,27 @@ function VoteHomePage() {
             onTouchEnd={onTouchMoveActFlip}
             drag={drag}
           >
-            <ChipContainer />
+            <ChipContainer
+              title={title}
+              date="20.08.22"
+              region={region}
+              description={detail}
+              mutateBookMark={mutateBookMark}
+              isBookmark={isBookmark}
+            />
             <VoteDescription
-              imageA={ExImg1}
-              imageB={ExImg1}
+              imageA={imageA || EmptyAImg}
+              imageB={imageB || EmptyAImg}
               percentageA={50}
               percentageB={50}
-              titleA={"A가 더 좋아요"}
-              titleB={"B가 더 좋아요"}
+              titleA={titleA}
+              titleB={titleB}
               totalCountA={100}
               totalCountB={100}
               select={selected}
               onMutateVoting={onMutateVoting}
             />
-            <MoreButton>
+            <MoreButton onClick={() => router.push(`vote/${voteId}`)}>
               더보기 <SvgIcDetail width={16} height={16} />
             </MoreButton>
           </PageInner>

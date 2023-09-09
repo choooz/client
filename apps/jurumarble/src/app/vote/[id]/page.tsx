@@ -39,7 +39,7 @@ function Detail() {
       />
 
       <PageInner>
-        <ChipContainer />
+        {/* <ChipContainer /> */}
         <VoteDescription
           imageA={ExImg1}
           imageB={ExImg1}
