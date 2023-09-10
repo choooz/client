@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
     font: inherit;
     color: inherit;
 }
+
     *, :after, :before, ::before, ::after {
     box-sizing: border-box;
     }
@@ -24,6 +25,28 @@ const GlobalStyles = createGlobalStyle`
     }
     input {
         outline: none;
+    }
+
+    :root{
+        .Toastify__toast-container{
+            display: flex;
+            justify-content:center;
+            top:8px;
+
+        }
+        .Toastify__toast {
+            background-color:black;
+            color:white;
+            border-radius:12px;
+            text-align:center;
+            font-size: 16px;
+            font-weight: 700;
+            width:auto;
+            padding: 12px 16px;
+        }
+        .Toastify__close-button{
+            display:none;
+        }
     }
 `;
 

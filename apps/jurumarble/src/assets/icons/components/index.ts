@@ -19,3 +19,4 @@ export { default as SvgIcSearch } from "./IcSearch";
 export { default as SvgStamp } from "./IcStamp";
 export { default as SvgIcUser } from "./IcUser";
 export { default as SvgIcX } from "./IcX";
+export { default as SvgIcBookmarkActive } from "./IcBookmarkActive";

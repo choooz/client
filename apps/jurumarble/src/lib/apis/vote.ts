@@ -1,4 +1,49 @@
+import axios from "axios";
 import { SERVER_URL } from "lib/constants";
+
+export interface GetVoteListRequest {
+  keyword?: string;
+  sortBy: "ByTime" | "ByPopularity";
+  page: number;
+  size: number;
+}
+
+interface Vote {
+  voteId: number;
+  postedUserId: number;
+  title: string;
+  detail: string;
+  filteredGender: null;
+  filteredAge: null;
+  filteredMbti: null;
+  votedCount: number;
+  voteType: string;
+  imageA: string;
+  imageB: string;
+  titleA: string;
+  titleB: string;
+  region: string;
+}
+interface GetVoteListResponse {
+  content: Vote[];
+  first: boolean;
+  last: boolean;
+  numberOfElements: 10;
+  size: 10;
+  empty: boolean;
+}
+
+export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteListRequest) => {
+  const response = await axios.get<GetVoteListResponse>(`${SERVER_URL}api/votes`, {
+    params: {
+      page,
+      size,
+      sortBy,
+      keyword,
+    },
+  });
+  return response.data;
+};
 
 interface Writer {
   userImage: string | null;

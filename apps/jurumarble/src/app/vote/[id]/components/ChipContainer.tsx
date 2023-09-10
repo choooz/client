@@ -1,31 +1,58 @@
+import { UseMutateFunction } from "@tanstack/react-query";
 import React from "react";
+import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled from "styled-components";
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
+import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
 
-const ChipContainer = () => {
+interface Props {
+  title: string;
+  date: string;
+  description: string;
+  region: string;
+  mutateBookMark: UseMutateFunction;
+  isBookmark: boolean;
+}
+
+const ChipContainer = ({ date, description, title, region, mutateBookMark, isBookmark }: Props) => {
+  const [toggleMenu, onToggleMenu] = useToggle();
+  const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
   return (
     <>
       <TagRow>
         <FlexRow>
-          <RegionTag>서울</RegionTag>
-          <NormalTag>122명이 즐겼어요</NormalTag>
+          {region && <RegionTag>{region}</RegionTag>}
+          {/* <NormalTag>122명이 즐겼어요</NormalTag> */}
         </FlexRow>
         <FlexRow>
-          <SvgIcBookmark width={18} height={20} />
+          {isBookmark ? (
+            <SvgIcBookmarkActive width={20} height={20} onClick={() => mutateBookMark()} />
+          ) : (
+            <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+          )}
 
-          <SvgIcMenu width={20} height={20} />
+          <div ref={targetEl} onClick={onToggleMenu}>
+            <SvgIcMenu width={20} height={20} />
+          </div>
         </FlexRow>
       </TagRow>
       <TitleRow>
-        서울에서 유명한 술은??
+        {title}
         {/* <DateText>{date.slice(0, 10)}</DateText> */}
       </TitleRow>
-      <DateText>23.05.01</DateText>
-      <Description>
-        아니 친구가 서울에서 풍정 소주가 유명하다는데 아무리 봐도 저는 옥지춘이 유명한거 같단
-        말이죠~~~골라주세요!!
-      </Description>
+      <DateText>{date}</DateText>
+      <Description>{description}</Description>
+      {toggleMenu && (
+        <ModifyDeleteButtonBox
+          top="70px"
+          right="41px"
+          onDelete={() => {}}
+          onModify={() => {}}
+          onShare={() => {}}
+        />
+      )}
     </>
   );
 };
