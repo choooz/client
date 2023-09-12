@@ -2,7 +2,7 @@
 
 import { media } from "@monorepo/ui/styles/media";
 import { MY_PAGE_VOTE_TYPE } from "lib/constants";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import styled, { css } from "styled-components";
 import TabContainer from "./components/TabContainer";
 import VoteList from "./components/VoteList";
@@ -10,6 +10,7 @@ import CountVoteContainer from "./components/VoteCountContainer";
 import { MyVoteListType } from "types/my";
 import useInfiniteMyVoteListService from "./services/useInfiniteMyPageVoteListService";
 import UserInfoContainer from "./components/UserInfoContainer";
+import { AsyncBoundary } from "../../lib/AsyncBoundary";
 
 function MyPage() {
   const [selectedTab, setSelectedTab] = useState<MyVoteListType>("created");
@@ -26,7 +27,9 @@ function MyPage() {
   return (
     <PageWrapper>
       <PageInner>
-        <UserInfoContainer />
+        <AsyncBoundary>
+          <UserInfoContainer />
+        </AsyncBoundary>
         <CountVoteContainer />
       </PageInner>
       <TabContainerWrapper>

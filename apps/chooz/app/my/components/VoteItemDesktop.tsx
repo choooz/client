@@ -128,7 +128,10 @@ const Message = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
+  /**
+  * 디자인이 깨져 임시 주석처리
+  * width: 46px;
+  */
   padding: 4px 6px;
   border-radius: 4px;
   ${({ theme }) => css`

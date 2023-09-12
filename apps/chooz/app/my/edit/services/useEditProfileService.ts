@@ -10,12 +10,12 @@ export default function useEditProfileService() {
 
   const { categoryList, onClickCategory } = useClickCategory();
 
-  const { userInfo, setUserInfo } = useGetUserInfo();
+  const { data: userInfo, setUserInfo } = useGetUserInfo();
 
-  const { username, mbti, imageUrl } = userInfo;
+  const { username, mbti, imageUrl } = userInfo!;
 
   const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo((prevUserInfo) => ({ ...prevUserInfo, username: e.target.value }));
+    setUserInfo({ ...userInfo, username: e.target.value });
   };
 
   const onChangeMbti = (value: string) => {
