@@ -10,9 +10,8 @@ import Image from "next/image";
 function UserInfoContainer() {
   const { data: userInfo } = useGetUserInfo();
 
-  if (!userInfo) return <></>;
-
-  const { gender, username, age, mbti, imageUrl } = userInfo;
+  if (!userInfo) return null;
+  const { gender, username, age, mbti, imageUrl } = userInfo!;
 
   return (
     <>
