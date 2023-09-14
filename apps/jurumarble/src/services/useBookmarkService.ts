@@ -5,7 +5,7 @@ import { queryKeys, reactQueryKeys } from "lib/queryKeys";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-export default function usePostBookmarkService(voteId: number) {
+export default function useBookmarkService(voteId: number) {
   const queryClient = useQueryClient();
 
   const bookMarkCheckQuery = useQuery(

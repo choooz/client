@@ -14,7 +14,9 @@ function Option({ label, onChangeSelectedOption }: Props) {
 }
 
 const Li = styled.li`
-  padding: 14px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default Option;

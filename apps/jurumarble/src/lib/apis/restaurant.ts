@@ -1,5 +1,5 @@
 import { SERVER_URL } from "lib/constants";
-import { http } from "./http";
+import { http } from "./http/http";
 
 interface GetRestaurantRequest {
   voteId: number;

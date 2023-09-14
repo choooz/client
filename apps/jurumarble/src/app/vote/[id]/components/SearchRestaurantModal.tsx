@@ -1,14 +1,13 @@
 "use client";
 
 import { Button, ModalTemplate } from "components/index";
-import SearchInput from "components/SearchInput";
 import VoteHeader from "components/VoteHeader";
-import { ThemeColors, transitions } from "lib/styles";
+import { transitions } from "lib/styles";
 import Image from "next/image";
 import { EmptyAImg } from "public/images";
 import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme } from "styled-components";
 import RestaurantItem from "./RestaurantItem";
 
 interface Props {
@@ -139,7 +138,7 @@ const FoodItem = styled.div`
   position: relative;
 `;
 
-const ColorBox = styled.div<{ theme: ThemeColors; selected: boolean }>`
+const ColorBox = styled.div<{ theme: DefaultTheme; selected: boolean }>`
   ${({ theme, selected }) =>
     css`
       border-radius: 4px;

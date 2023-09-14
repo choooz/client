@@ -2,10 +2,13 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getVoteListAPI } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
 import { useEffect, useMemo, useState } from "react";
+import { SortType } from "src/types/common";
+
+type VoteListSortType = Omit<SortType, "ByName">;
 
 interface Props {
   size: number;
-  sortBy: "ByTime" | "ByPopularity";
+  sortBy: VoteListSortType;
   keyword?: string;
 }
 

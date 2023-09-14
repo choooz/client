@@ -18,6 +18,7 @@ const Path = {
   MAIN_PAGE: "/",
   VOTE_DETAIL_PAGE: "/detail",
   SEARCH_PAGE: "/search",
+  DRINK_INFO_PAGE: "/drink-info",
 } as const;
 
 export default Path;

@@ -1,4 +1,4 @@
-import { http } from "./http";
+import { http } from "./http/http";
 
 export const postBookmarkAPI = async (voteId: number) => {
   const response = await http.post(`api/votes/${voteId}/bookmark`, { voteId });

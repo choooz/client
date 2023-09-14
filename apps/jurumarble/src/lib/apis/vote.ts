@@ -1,14 +1,17 @@
-import axios from "axios";
 import { SERVER_URL } from "lib/constants";
+import { SortType } from "src/types/common";
+import { baseApi } from "./http/base";
+
+type VoteListSortType = Omit<SortType, "ByName">;
 
 export interface GetVoteListRequest {
   keyword?: string;
-  sortBy: "ByTime" | "ByPopularity";
+  sortBy: VoteListSortType;
   page: number;
   size: number;
 }
 
-interface Vote {
+export interface Vote {
   voteId: number;
   postedUserId: number;
   title: string;
@@ -34,7 +37,7 @@ interface GetVoteListResponse {
 }
 
 export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteListRequest) => {
-  const response = await axios.get<GetVoteListResponse>(`${SERVER_URL}api/votes`, {
+  const response = await baseApi.get<GetVoteListResponse>("api/votes", {
     params: {
       page,
       size,
@@ -132,4 +135,50 @@ export const postDrinkVoteAPI = async (voteInfo: PostDrinkVoteRequest) => {
   });
   const res = await response.json();
   return res.data;
+};
+
+export interface GetVoteDrinkListRequest {
+  page: number;
+  size: number;
+  keyword?: string;
+  region?: string;
+  sortBy: string;
+}
+
+interface Pageable {
+  sort: Sort;
+  pageNumber: number;
+  pageSize: number;
+  offset: number;
+  paged: boolean;
+  unpaged: boolean;
+}
+
+interface Sort {
+  sorted: boolean;
+  unsorted: boolean;
+  empty: boolean;
+}
+
+export interface GetVotetDrinkListResponse {
+  voteSlice: {
+    content: Vote[];
+    pageable: Pageable;
+    sort: Sort;
+    first: boolean;
+    last: boolean;
+    number: number;
+    numberOfElements: number;
+    size: number;
+    empty: boolean;
+  };
+}
+
+export const getVoteDrinkList = async (params: GetVoteDrinkListRequest) => {
+  const response = await baseApi.get<GetVotetDrinkListResponse>("api/votes/drinks", {
+    params: {
+      ...params,
+    },
+  });
+  return response.data.voteSlice;
 };

@@ -1,25 +1,34 @@
 import { Button } from "components/button";
 import { Input } from "components/input";
+import { SvgIcX } from "src/assets/icons/components";
 import SvgIcSearch from "src/assets/icons/components/IcSearch";
 import styled, { css, useTheme } from "styled-components";
 
 interface Props {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
 
-function SearchInput({ placeholder }: Props) {
+function SearchInput({ value, onChange, placeholder }: Props) {
   const theme = useTheme();
   return (
     <Search>
-      <InputStyled width="100%" placeholder={placeholder}></InputStyled>
+      <InputStyled
+        width="100%"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      ></InputStyled>
       <SearchButton>
         <SvgIcSearch width={22} height={22} fill={theme.colors.black_04} />
+        {/* <SvgIcX width={18} height={18} color="#CCCCCC" /> */}
       </SearchButton>
     </Search>
   );
 }
 
-const Search = styled.div`
+const Search = styled.form`
   display: flex;
   margin-top: 8px;
   width: 100%;

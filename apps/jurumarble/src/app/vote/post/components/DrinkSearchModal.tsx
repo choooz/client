@@ -7,10 +7,10 @@ import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
-import DrinkItem from "./DrinkItem";
 import SearchInput from "../../../../components/SearchInput";
 import RegionSelect from "./RegionSelect";
 import SelectedDrinkChip from "./SelectedDrinkChip";
+import DrinkItem from "components/DrinkItem";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
@@ -57,7 +57,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
           regionOption={regionOption}
           onChangeRegionOption={onChangeRegionOption}
         ></RegionSelect>
-        {regionOption && <SearchInput placeholder="관심있는 술을 검색해보세요." />}
+        {/* {regionOption && <SearchInput placeholder="관심있는 술을 검색해보세요." />} */}
         <SelectedDrinkChipList>
           {selectedDrinkList.map((manufacturer) => (
             <SelectedDrinkChip manufacturer={manufacturer} onClickDeleteItem={onClickDeleteItem}>
@@ -69,15 +69,15 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
       {regionOption && (
         <ResultSection>
           <DrinkList>
-            {TEMP_LIST.map(({ drinkName, manufacturer }) => (
+            {/* {TEMP_LIST.map(({ drinkName, manufacturer }) => (
               <DrinkItem
-                onClickAddDrink={onClickAddDrink}
+                onClick={onClickAddDrink}
                 staticImage={EmptyAImg}
                 drinkName={drinkName}
                 manufacturer={manufacturer}
                 selectedDrinkList={selectedDrinkList}
               />
-            ))}
+            ))} */}
           </DrinkList>
           <CompleteButton width="100%" height="56px" disabled={selectedDrinkList.length < 2}>
             선택 완료
