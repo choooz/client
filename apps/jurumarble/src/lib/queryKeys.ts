@@ -4,7 +4,8 @@ export const queryKeys = {
   USER_INFO: "userInfo" as const,
   VOTE_LIST: "voteList" as const,
   RESTAURANT_LIST: "restaurantList" as const,
-  DRINK_LIST: "drinkList" as const,
+  SEARCH_DRINK_LIST: "searchDrinkList" as const,
+  SEARCH_VOTE_DRINK_LIST: "searchVoteDrinkList" as const,
 };
 
 export const reactQueryKeys = {
@@ -14,5 +15,4 @@ export const reactQueryKeys = {
   userInfo: () => [queryKeys.USER_INFO],
   voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
   restaurantList: (params: any) => [queryKeys.RESTAURANT_LIST, ...params],
-  drinkList: (params: any) => [queryKeys.DRINK_LIST, ...params],
 };
