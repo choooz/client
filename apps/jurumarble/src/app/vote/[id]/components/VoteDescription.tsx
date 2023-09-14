@@ -98,7 +98,7 @@ const Container = styled.div``;
 const ImageWrapper = styled.div`
   position: relative;
   display: flex;
-  width: 100%;z
+  width: 100%;
   height: 100%;
   gap: 9px;
 `;
