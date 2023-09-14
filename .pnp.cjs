@@ -36,7 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["@monorepo/chooz", ["workspace:apps/chooz"]],\
-      ["@monorepo/hooks", ["workspace:packages/hooks"]],\
+      ["@monorepo/hooks", ["virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks", "workspace:packages/hooks"]],\
       ["@monorepo/jurumarble", ["workspace:apps/jurumarble"]],\
       ["@monorepo/ui", ["workspace:packages/ui"]],\
       ["monorepo", ["workspace:."]]\
@@ -4065,7 +4065,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./apps/chooz/",\
           "packageDependencies": [\
             ["@monorepo/chooz", "workspace:apps/chooz"],\
-            ["@monorepo/hooks", "workspace:packages/hooks"],\
+            ["@monorepo/hooks", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks"],\
             ["@monorepo/ui", "workspace:packages/ui"],\
             ["@next/font", "npm:13.4.19"],\
             ["@svgr/cli", "npm:7.0.0"],\
@@ -4094,13 +4094,27 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@monorepo/hooks", [\
+        ["virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks", {\
+          "packageLocation": "./.yarn/__virtual__/@monorepo-hooks-virtual-9a9d2697d3/1/packages/hooks/",\
+          "packageDependencies": [\
+            ["@monorepo/hooks", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks"],\
+            ["@types/node", "npm:20.5.7"],\
+            ["@types/react", "npm:18.2.21"],\
+            ["react", "npm:18.2.0"],\
+            ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "SOFT"\
+        }],\
         ["workspace:packages/hooks", {\
           "packageLocation": "./packages/hooks/",\
           "packageDependencies": [\
             ["@monorepo/hooks", "workspace:packages/hooks"],\
             ["@types/node", "npm:20.5.7"],\
             ["@types/react", "npm:18.2.21"],\
-            ["react", "npm:18.2.0"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
           ],\
           "linkType": "SOFT"\
@@ -4112,7 +4126,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@monorepo/jurumarble", "workspace:apps/jurumarble"],\
             ["@emotion/is-prop-valid", "npm:1.2.1"],\
-            ["@monorepo/hooks", "workspace:packages/hooks"],\
+            ["@monorepo/hooks", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks"],\
             ["@svgr/cli", "npm:8.1.0"],\
             ["@svgr/core", "npm:8.1.0"],\
             ["@svgr/plugin-jsx", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
@@ -4143,7 +4157,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/ui/",\
           "packageDependencies": [\
             ["@monorepo/ui", "workspace:packages/ui"],\
-            ["@monorepo/hooks", "workspace:packages/hooks"],\
+            ["@monorepo/hooks", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks"],\
             ["@types/node", "npm:20.5.7"],\
             ["@types/react", "npm:18.2.21"],\
             ["@types/styled-components", "npm:5.1.26"],\
