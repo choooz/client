@@ -1,14 +1,17 @@
 import { SERVER_URL } from "lib/constants";
+import { SortType } from "src/types/common";
 import { baseApi } from "./http/base";
+
+type VoteListSortType = Omit<SortType, "ByName">;
 
 export interface GetVoteListRequest {
   keyword?: string;
-  sortBy: "ByTime" | "ByPopularity";
+  sortBy: VoteListSortType;
   page: number;
   size: number;
 }
 
-interface Vote {
+export interface Vote {
   voteId: number;
   postedUserId: number;
   title: string;
@@ -134,14 +137,12 @@ export const postDrinkVoteAPI = async (voteInfo: PostDrinkVoteRequest) => {
   return res.data;
 };
 
-export type SortBy = "ByTime" | "ByName" | "ByPopularity";
-
 export interface GetVoteDrinkListRequest {
   page: number;
   size: number;
   keyword?: string;
   region?: string;
-  sortBy: SortBy;
+  sortBy: string;
 }
 
 interface Pageable {
@@ -159,26 +160,9 @@ interface Sort {
   empty: boolean;
 }
 
-interface Content {
-  voteId: number;
-  postedUserId: number;
-  title: string;
-  detail?: any;
-  filteredGender?: any;
-  filteredAge?: any;
-  filteredMbti?: any;
-  votedCount?: any;
-  voteType: string;
-  imageA: string;
-  imageB: string;
-  titleA: string;
-  titleB: string;
-  region: string;
-}
-
-interface GetVotetDrinkListResponse {
+export interface GetVotetDrinkListResponse {
   voteSlice: {
-    content: Content[];
+    content: Vote[];
     pageable: Pageable;
     sort: Sort;
     first: boolean;
