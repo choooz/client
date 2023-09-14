@@ -51,6 +51,9 @@ const SelectStyled = styled.div<{ isOpen: boolean }>`
       left: 22px;
       width: 335px;
       height: 330px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
     li {
       display: flex;
