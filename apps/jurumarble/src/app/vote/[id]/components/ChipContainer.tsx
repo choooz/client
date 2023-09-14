@@ -1,4 +1,5 @@
 import { UseMutateFunction } from "@tanstack/react-query";
+import Chip from "components/Chip";
 import React from "react";
 import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
@@ -23,8 +24,8 @@ const ChipContainer = ({ date, description, title, region, mutateBookMark, isBoo
     <>
       <TagRow>
         <FlexRow>
-          {region && <RegionTag>{region}</RegionTag>}
-          {/* <NormalTag>122명이 즐겼어요</NormalTag> */}
+          {region && <Chip variant="region">{region}</Chip>}
+          {/* <Chip variant="numberOfParticipants">122명이 즐겼어요</Chip> */}
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
@@ -84,19 +85,6 @@ const DateText = styled.div`
 const FlexRow = styled.div`
   display: flex;
   gap: 8px;
-`;
-
-const NormalTag = styled.div`
-  padding: 10px 8px;
-  ${({ theme }) => theme.typography.caption}
-  background-color: ${({ theme }) => theme.colors.bg_01};
-  color: ${({ theme }) => theme.colors.black_01};
-  border-radius: 4px;
-`;
-
-const RegionTag = styled(NormalTag)`
-  background-color: ${({ theme }) => theme.colors.main_02};
-  color: ${({ theme }) => theme.colors.main_01};
 `;
 
 const Description = styled.div`
