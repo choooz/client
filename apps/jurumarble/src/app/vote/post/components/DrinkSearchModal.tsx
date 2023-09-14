@@ -7,10 +7,10 @@ import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
-import DrinkItem from "./DrinkItem";
 import SearchInput from "../../../../components/SearchInput";
 import RegionSelect from "./RegionSelect";
 import SelectedDrinkChip from "./SelectedDrinkChip";
+import DrinkItem from "components/DrinkItem";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
@@ -71,7 +71,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
           <DrinkList>
             {TEMP_LIST.map(({ drinkName, manufacturer }) => (
               <DrinkItem
-                onClickAddDrink={onClickAddDrink}
+                onClick={onClickAddDrink}
                 staticImage={EmptyAImg}
                 drinkName={drinkName}
                 manufacturer={manufacturer}
