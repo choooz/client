@@ -57,7 +57,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
           regionOption={regionOption}
           onChangeRegionOption={onChangeRegionOption}
         ></RegionSelect>
-        {regionOption && <SearchInput placeholder="관심있는 술을 검색해보세요." />}
+        {/* {regionOption && <SearchInput placeholder="관심있는 술을 검색해보세요." />} */}
         <SelectedDrinkChipList>
           {selectedDrinkList.map((manufacturer) => (
             <SelectedDrinkChip manufacturer={manufacturer} onClickDeleteItem={onClickDeleteItem}>
@@ -69,7 +69,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
       {regionOption && (
         <ResultSection>
           <DrinkList>
-            {TEMP_LIST.map(({ drinkName, manufacturer }) => (
+            {/* {TEMP_LIST.map(({ drinkName, manufacturer }) => (
               <DrinkItem
                 onClick={onClickAddDrink}
                 staticImage={EmptyAImg}
@@ -77,7 +77,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
                 manufacturer={manufacturer}
                 selectedDrinkList={selectedDrinkList}
               />
-            ))}
+            ))} */}
           </DrinkList>
           <CompleteButton width="100%" height="56px" disabled={selectedDrinkList.length < 2}>
             선택 완료
