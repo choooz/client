@@ -7265,7 +7265,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/react-dom", "npm:18.2.7"],\
             ["clsx", "npm:1.2.1"],\
             ["react", "npm:18.2.0"],\
-            ["react-dom", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#npm:18.2.0"]\
+            ["react-dom", "virtual:a9e685c95fc9c2c05e15b14465ecc20924383932b7a1aa62172e110ba174ebedc352c8daf5023eb54ef5f0a5595ca6cf8763ef2477e003ebd1850bfb16231d67#npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react-dom",\
