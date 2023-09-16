@@ -27,11 +27,12 @@ export default function usePostVoteService() {
 
   const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
-    // if (e.target.files[0].size > 10000000 || e.target.files[1].size > 10000000) {
-    //   alert("파일 용량이 10MB를 초과하였습니다.");
-    //   return;
-    // }
+
     if (e.target.files.length === 2) {
+      if (e.target.files[0].size > 10485760 || e.target.files[1].size > 10485760) {
+        alert("파일 용량이 10MB를 초과하였습니다.");
+        return;
+      }
       const formDataA = new FormData();
       const formDataB = new FormData();
       formDataA.append("images", e.target.files[0]);
@@ -52,6 +53,10 @@ export default function usePostVoteService() {
     }
 
     if (e.target.files.length === 1) {
+      if (e.target.files[0].size > 10485760) {
+        alert("파일 용량이 10MB를 초과하였습니다.");
+        return;
+      }
       const formDataA = new FormData();
       formDataA.append("images", e.target.files[0]);
       try {
