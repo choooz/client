@@ -10,7 +10,6 @@ import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import Image from "next/image";
-import { EmptyAImg } from "public/images";
 import usePostVoteService from "./services/usePostVoteService";
 import TitleAndDescriptionSection from "./components/TitleAndDescriptionSection";
 import PostBottomSheet from "./components/PostBottomSheet";
@@ -49,36 +48,46 @@ function PostPage() {
       <GuideText>고민되는 술을 선택해주세요</GuideText>
       <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
       <label htmlFor="file">
-        {!imageA && !imageB ? (
-          <ImageUploadButtonWrapper>
+        <ImageSection>
+          {!imageA && !imageB ? (
             <ImageUploadButton width="100%" height="163px" />
-          </ImageUploadButtonWrapper>
-        ) : (
-          <VoteImageWrapper>
-            <Image
-              src={imageA || EmptyAImg}
-              alt="A이미지"
-              width={272}
-              height={272}
-              style={{
-                objectFit: "cover",
-                width: "50%",
-                height: "auto",
-              }}
-            />
-            <Image
-              src={imageB || EmptyAImg}
-              alt="B이미지"
-              width={272}
-              height={272}
-              style={{
-                objectFit: "cover",
-                width: "50%",
-                height: "auto",
-              }}
-            />
-          </VoteImageWrapper>
-        )}
+          ) : (
+            <ImageContainer>
+              <ImageWrapper>
+                {imageA ? (
+                  <Image
+                    src={imageA}
+                    alt="A이미지"
+                    fill
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                  />
+                ) : (
+                  <ImageBox />
+                )}
+                <AorBMark AorB="A">A</AorBMark>
+              </ImageWrapper>
+              <ImageWrapper>
+                {imageB ? (
+                  <Image
+                    src={imageB}
+                    alt="B이미지"
+                    fill
+                    style={{
+                      objectFit: "cover",
+                      borderRadius: "10px",
+                    }}
+                  />
+                ) : (
+                  <ImageBox />
+                )}
+                <AorBMark AorB="B">B</AorBMark>
+              </ImageWrapper>
+            </ImageContainer>
+          )}
+        </ImageSection>
         <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
       </label>
       <VoteOptionText>
@@ -155,23 +164,48 @@ const ImageUploadInput = styled.input`
   display: none;
 `;
 
-const ImageUploadButtonWrapper = styled.div`
-  margin-top: 16px;
+const ImageSection = styled.section`
+  margin-top: 24px;
+  cursor: pointer;
 `;
 
-const VoteImageWrapper = styled.div`
-  gap: 12px;
-  overflow: hidden;
-  margin-top: 16px;
+const ImageContainer = styled.div`
   width: 100%;
-  background: ${({ theme }) => theme.colors.black_05};
-  border-radius: 8px;
+  gap: 9px;
   display: flex;
-  align-items: center;
-  height: 290px;
-  position: relative;
-  justify-content: space-between;
-  cursor: pointer;
+`;
+
+const ImageWrapper = styled.div`
+  ${({ theme }) => css`
+    color: ${theme.colors.white};
+    position: relative;
+    width: 50%;
+    aspect-ratio: 1;
+  `}
+`;
+
+const ImageBox = styled.div`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.black_05};
+    border-radius: 10px;
+    height: 100%;
+  `}
+`;
+
+const AorBMark = styled.div<{ AorB: string }>`
+  ${({ theme, AorB }) => css`
+    ${theme.typography.caption}
+    background-color: ${AorB === "A" ? theme.colors.sub_01 : theme.colors.sub_02};
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px 0px 4px 0px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `}
 `;
 
 const VoteOptionText = styled.div`
