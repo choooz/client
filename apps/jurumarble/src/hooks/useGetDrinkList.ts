@@ -9,7 +9,7 @@ const getQueryKey = (params: SearchDrinkServiceProps) => [
   { ...params },
 ];
 
-export default function useGetDrinkListService(params: SearchDrinkServiceProps) {
+export default function useGetDrinkList(params: SearchDrinkServiceProps) {
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     getQueryKey(params),
     ({ pageParam }) =>
