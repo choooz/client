@@ -11,7 +11,7 @@ export default function useExecuteVoteService(voteId: number) {
   const { mutate } = useMutation((choice: "A" | "B") => postExecuteVote(voteId, { choice }), {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.VOTE_DETAIL]);
-      queryClient.invalidateQueries([queryKeys.VOTE_DETAIL]);
+      queryClient.invalidateQueries([queryKeys.VOTING_CHECK]);
     },
     onError: () => {
       alert("로그인 후 진행해주세요.");
