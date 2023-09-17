@@ -90,18 +90,9 @@ export const modifyVoteAPI = async (newVoteInfo: ModifyVoteRequest, voteId: numb
   return voteInfo.data;
 };
 
-export interface PostVoteRequest {
-  title: string;
-  titleA: string;
-  titleB: string;
-  imageA: string;
-  imageB: string;
-  drinkAId: string;
-  drinkBId: string;
-}
-
 export interface PostNormalVoteRequest {
   title: string;
+  detail: string;
   titleA: string;
   titleB: string;
   imageA: string;
@@ -109,31 +100,30 @@ export interface PostNormalVoteRequest {
 }
 
 export const postNormalVoteAPI = async (voteInfo: PostNormalVoteRequest) => {
-  const response = await fetch(`${SERVER_URL}api/votes/normal`, {
-    method: "POST",
-    body: JSON.stringify({
-      voteInfo,
-    }),
-  });
-  const res = await response.json();
-  return res.data;
+  const response = await http.post("api/votes/normal", voteInfo);
+  return response.data;
 };
+// export const postNormalVoteAPI = async (voteInfo: PostNormalVoteRequest) => {
+//   const response = await fetch(`${SERVER_URL}api/votes/normal`, {
+//     method: "POST",
+//     body: JSON.stringify({
+//       voteInfo,
+//     }),
+//   });
+//   const res = await response.json();
+//   return res.data;
+// };
 
 export interface PostDrinkVoteRequest {
   title: string;
-  drinkAId: string;
-  drinkBId: string;
+  detail: string;
+  drinkAId: number;
+  drinkBId: number;
 }
 
 export const postDrinkVoteAPI = async (voteInfo: PostDrinkVoteRequest) => {
-  const response = await fetch(`${SERVER_URL}api/votes/drink`, {
-    method: "POST",
-    body: JSON.stringify({
-      voteInfo,
-    }),
-  });
-  const res = await response.json();
-  return res.data;
+  const response = await http.post("api/votes/drink", voteInfo);
+  return response.data;
 };
 
 export interface GetVoteDrinkListRequest {
