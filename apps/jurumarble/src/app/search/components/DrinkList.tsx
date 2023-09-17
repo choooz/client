@@ -42,7 +42,7 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
         <DrinkItem
           key={drinkInfo.id}
           drinkInfo={drinkInfo}
-          onClick={() => onClickDrinkItem(drinkInfo.id)}
+          onClickDrinkItem={() => onClickDrinkItem(drinkInfo.id)}
         />
       ))}
       {!isSelectedTab && (

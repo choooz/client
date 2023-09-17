@@ -9,21 +9,17 @@ import styled, { css, useTheme } from "styled-components";
 interface Props {
   drinkInfo: DrinkInfo;
   stamp?: boolean;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClickDrinkItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedDrinkList?: string[];
 }
 
-function DrinkItem({ drinkInfo, stamp, onClick, selectedDrinkList }: Props) {
+function DrinkItem({ drinkInfo, stamp, onClickDrinkItem, selectedDrinkList }: Props) {
   const { name, productName, image } = drinkInfo;
 
   const { colors } = useTheme();
 
   return (
-    <Container
-      onClick={() => onClick(drinkInfo)}
-      name={name}
-      selected={selectedDrinkList?.includes(name)}
-    >
+    <Container onClick={onClickDrinkItem} name={name} selected={selectedDrinkList?.includes(name)}>
       <ImageWrapper>
         <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
       </ImageWrapper>
