@@ -50,29 +50,26 @@ export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteLis
   return response.data;
 };
 
-interface Writer {
-  userImage: string | null;
-  userGender: string;
-  userAge: number;
-  userMbti: string;
-  nickName: string;
-}
-
 export interface GetVoteByIdResponse {
-  writer: Writer;
-  voteCreatedDate: Date;
+  voteId: number;
+  postedUserId: number;
   title: string;
+  detail: string;
+  filteredGender: string;
+  filteredAge: string;
+  filteredMbti: string;
+  votedCount: number;
+  voteType: string;
   imageA: string;
   imageB: string;
   titleA: string;
   titleB: string;
-  description: string;
+  region: string;
 }
 
 export const getVoteByVoteIdAPI = async (voteId: number) => {
-  const response = await fetch(`${SERVER_URL}api/votes/${voteId}`, {});
-  const voteInfo = await response.json();
-  return voteInfo.data;
+  const response = await baseApi.get<GetVoteByIdResponse>(`api/votes/${voteId}`);
+  return response.data;
 };
 
 interface ModifyVoteRequest {
@@ -184,33 +181,6 @@ export const getVoteDrinkList = async (params: GetVoteDrinkListRequest) => {
   });
   return response.data.voteSlice;
 };
-
-// export interface GetCommentResponse {
-//   content: CommentResponse[];
-//   empty: boolean;
-//   first: boolean;
-//   last: boolean;
-//   numberOfElements: number;
-//   size: number;
-// }
-
-// export const getCommentById = async (voteId: number, filter: CommentFilter, page: number) => {
-//   const { age, gender, mbti, sortBy } = filter;
-//   const response = await axios.get<GetCommentResponse>(
-//     `${SERVER_URL}api/votes/${voteId}/comments`,
-//     {
-//       params: {
-//         age,
-//         mbti,
-//         gender,
-//         sortBy,
-//         page,
-//         size: 5,
-//       },
-//     },
-//   );
-//   return response.data;
-// };
 
 export const postExecuteVote = async (voteId: number, body: { choice: "A" | "B" | null }) => {
   const response = await http.post(`api/votes/${voteId}/vote`, body);

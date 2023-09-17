@@ -9,19 +9,35 @@ import VoteDescription from "./components/VoteDescription";
 import { useState } from "react";
 import ChipContainer from "./components/ChipContainer";
 import CommentContainer from "./components/CommentContainer";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useToggle } from "@monorepo/hooks";
 import SearchRestaurantModal from "./components/SearchRestaurantModal";
+import usePostBookmarkService from "../post/services/useBookmarkService";
+import useVoteLoadService from "./services/useVoteLoadService";
 
 function Detail() {
-  const searchParams = useSearchParams();
-  const postId = searchParams.get("id");
+  const params = useParams();
+
+  const postId = params.id;
   const [selected, setSelected] = useState<"A" | "B" | null>(null);
   const onMutateVoting = (select: "A" | "B") => {
     setSelected(select);
   };
 
   const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(true);
+
+  const { data, isError, isLoading } = useVoteLoadService(Number(postId));
+
+  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(Number(postId));
+
+  const { data: bookmarkCheck } = bookMarkCheckQuery;
+
+  const isBookmark = bookmarkCheck?.bookmarked || false;
+
+  if (isLoading) return <div>로딩중</div>;
+  if (isError) return <div>에러</div>;
+  if (!data) return <div></div>;
+  const { detail, title, titleA, titleB, region, imageA, imageB } = data;
 
   return (
     <Container>
@@ -39,14 +55,21 @@ function Detail() {
       />
 
       <PageInner>
-        {/* <ChipContainer /> */}
+        <ChipContainer
+          title={title}
+          date="20.08.22"
+          region={region}
+          description={detail}
+          mutateBookMark={mutateBookMark}
+          isBookmark={isBookmark}
+        />
         <VoteDescription
-          imageA={ExImg1}
-          imageB={ExImg1}
+          imageA={imageA || ExImg1}
+          imageB={imageB || ExImg1}
           percentageA={50}
           percentageB={50}
-          titleA={"A가 더 좋아요"}
-          titleB={"B가 더 좋아요"}
+          titleA={titleA}
+          titleB={titleB}
           totalCountA={100}
           totalCountB={100}
           select={selected}

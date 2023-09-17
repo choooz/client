@@ -5,7 +5,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 // import useCommentFilter from "../hooks/useCommentFilter";
-import useCommentServices from "../sercices/useCommentServices";
+import useCommentServices from "../services/useCommentServices";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
