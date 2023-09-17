@@ -4,23 +4,23 @@ import { ExImg1 } from "public/images";
 import React from "react";
 import styled, { css } from "styled-components";
 
-interface Props {}
+interface Props {
+  commentForm: string;
+  onChangeCommentForm(e: React.ChangeEvent<HTMLInputElement>): void;
+  onSubmitComment(): void;
+}
 
-function CommentForm() {
+function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Props) {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // onSubmitComment();
+    onSubmitComment();
   };
 
   return (
     <Container>
       <Form onSubmit={onSubmit}>
-        <Input
-          placeholder="댓글을 남겨주세요"
-          //   value={commentForm.content}
-          //   onChange={onChangeCommentForm}
-        />
-        <SubmitButton type="submit">등록</SubmitButton>
+        <Input placeholder="댓글을 남겨주세요" value={commentForm} onChange={onChangeCommentForm} />
+        <SubmitButton type="submit">등록</SubmitButton>ㅕ
       </Form>
     </Container>
   );

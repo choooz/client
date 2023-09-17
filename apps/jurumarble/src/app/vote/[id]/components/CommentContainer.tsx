@@ -1,7 +1,11 @@
+import { useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "lib/queryKeys";
 import Link from "next/link";
+import { useState } from "react";
 import styled from "styled-components";
 
-import useCommentFilter from "../hooks/useCommentFilter";
+// import useCommentFilter from "../hooks/useCommentFilter";
+import useCommentServices from "../sercices/useCommentServices";
 
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
@@ -12,39 +16,97 @@ interface Props {
 }
 
 function CommentContainer({ postId }: Props) {
-  const { commentFilter, onChangeCommentFilter } = useCommentFilter();
+  const queryClient = useQueryClient();
+  const [sortBy, setSortBy] = useState<"ByTime" | "ByPopularity">("ByTime");
+  const onChangeFilter = (sort: "ByTime" | "ByPopularity") => {
+    setSortBy(sort);
+  };
+
+  // const { commentFilter, onChangeCommentFilter } = useCommentFilter();
+  const { comments, isError, isLoading, mutateHate, mutateLike, mutateComment } =
+    useCommentServices(postId, sortBy, "votes");
+
+  const [commentForm, setCommentForm] = useState("");
+  const onChangeCommentForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommentForm(e.target.value);
+  };
+  const onSubmitComment = () => {
+    mutateComment(
+      {
+        content: commentForm,
+        parentId: null,
+      },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
+          setCommentForm("");
+        },
+      },
+    );
+  };
+
+  if (isError) return <div>에러</div>;
+  if (!comments) return <div>데이터 없음</div>;
+
+  const commentList = comments.pages.flatMap((page) => page.content);
+
   return (
-    <Container>
-      <CommentToolBar commentCount={65} onChangeFilter={onChangeCommentFilter} />
-      {/* <CommentForm
-        commentForm={commentForm}
-        onChangeCommentForm={onChangeCommentForm}
-        onSubmitComment={onSubmitComment}
-        profileImage={userInfo?.imageUrl}
-      /> */}
-      <CommentForm />
-      <Comment
-        comment={{
-          id: 1,
-          content: "댓글 내용",
-          age: 1,
-          createdDate: "21.07.07",
-          gender: "댓글 내용",
-          hateCount: 1,
-          imageUrl: "댓글 내용",
-          likeCount: 1,
-          mbti: "댓글 내용",
-          nickName: "댓글 내용",
-          parentId: 1,
-          userId: 1,
-        }}
-        mutateDeleteComment={() => void 0}
-        mutateLike={() => void 0}
-        mutateHate={() => void 0}
-        key={`comment_id`}
-      />
-      <hr />
-    </Container>
+    <>
+      <Container>
+        <CommentToolBar
+          commentCount={comments.pages[0].numberOfElements}
+          onChangeFilter={onChangeFilter}
+          sortBy={sortBy}
+        />
+        <CommentForm
+          commentForm={commentForm}
+          onChangeCommentForm={onChangeCommentForm}
+          onSubmitComment={onSubmitComment}
+        />
+
+        {!isLoading &&
+          commentList.map(
+            (
+              {
+                id,
+                age,
+                content,
+                createdDate,
+                gender,
+                hateCount,
+                imageUrlstring,
+                likeCount,
+                mbti,
+                nickName,
+                userId,
+              },
+              index,
+            ) => (
+              <Comment
+                comment={{
+                  id,
+                  content,
+                  age,
+                  createdDate,
+                  gender,
+                  hateCount,
+                  imageUrlstring,
+                  likeCount,
+                  mbti,
+                  nickName,
+                  userId: userId,
+                }}
+                mutateDeleteComment={() => void 0}
+                mutateLike={() => mutateLike(id)}
+                mutateHate={() => mutateHate(id)}
+                key={`comment_id_${index}`}
+              />
+            ),
+          )}
+        <br />
+      </Container>
+      <BgContainer />
+    </>
   );
 }
 
@@ -55,21 +117,11 @@ const Container = styled.div`
   gap: 16px;
 `;
 
-const DetailButton = styled.button`
-  position: absolute;
-  bottom: -50px;
-  right: 50%;
-  transform: translateX(50%);
-`;
-
-const DetailButtonInner = styled.div`
+const BgContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.bg_02};
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding-right: 4px;
-  font-size: 14px;
+  height: 76px;
+  padding-bottom: 50px;
 `;
 
 export default CommentContainer;

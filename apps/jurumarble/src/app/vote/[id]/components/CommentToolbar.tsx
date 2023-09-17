@@ -3,23 +3,24 @@ import styled, { css } from "styled-components";
 
 interface Props {
   commentCount: number;
-  sortBy?: string;
-  onChangeFilter: (sort: string) => void;
+  sortBy: "ByTime" | "ByPopularity";
+  onChangeFilter: (sort: "ByTime" | "ByPopularity") => void;
 }
 
 function CommentToolBar({ commentCount, onChangeFilter, sortBy }: Props) {
+  console.log("sortBy", sortBy);
   return (
     <Container>
       <Title>
         댓글 <span className="point">{commentCount}</span>
       </Title>
       <ButtonGroup>
-        <Button onClick={() => onChangeFilter("인기순")} bold={sortBy === "인기순"}>
-          인기순
+        <Button onClick={() => onChangeFilter("ByTime")} bold={sortBy === "ByTime"}>
+          최신순
         </Button>
         <Divider />
-        <Button onClick={() => onChangeFilter("최신순")} bold={sortBy === "최신순"}>
-          최신순
+        <Button onClick={() => onChangeFilter("ByPopularity")} bold={sortBy === "ByPopularity"}>
+          인기순
         </Button>
       </ButtonGroup>
     </Container>

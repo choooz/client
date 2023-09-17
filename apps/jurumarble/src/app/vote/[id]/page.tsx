@@ -78,6 +78,7 @@ const Container = styled.div`
 const PageInner = styled.div`
   padding: 20px;
   border-top-left-radius: 20px;
+  border-bottom: none;
   position: relative;
   margin: 0 auto;
   border-radius: 4px;
