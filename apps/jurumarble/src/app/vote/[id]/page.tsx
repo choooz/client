@@ -14,21 +14,24 @@ import { useToggle } from "@monorepo/hooks";
 import SearchRestaurantModal from "./components/SearchRestaurantModal";
 import usePostBookmarkService from "../post/services/useBookmarkService";
 import useVoteLoadService from "./services/useVoteLoadService";
+import useExecuteVoteService from "./services/useExecuteVoteService";
 
 function Detail() {
   const params = useParams();
 
   const postId = params.id;
   const [selected, setSelected] = useState<"A" | "B" | null>(null);
-  const onMutateVoting = (select: "A" | "B") => {
-    setSelected(select);
-  };
 
   const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(true);
 
   const { data, isError, isLoading } = useVoteLoadService(Number(postId));
 
   const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(Number(postId));
+
+  const { mutate, select } = useExecuteVoteService(Number(postId));
+  const onMutateVoting = (select: "A" | "B") => {
+    mutate(select);
+  };
 
   const { data: bookmarkCheck } = bookMarkCheckQuery;
 
@@ -72,7 +75,7 @@ function Detail() {
           titleB={titleB}
           totalCountA={100}
           totalCountB={100}
-          select={selected}
+          select={select.choice}
           onMutateVoting={onMutateVoting}
         />
         <CommentContainer postId={Number(postId)} />

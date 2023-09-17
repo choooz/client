@@ -1,7 +1,10 @@
+import { postExecuteVote } from "lib/apis/vote";
 import Image, { StaticImageData } from "next/image";
+import { useParams } from "next/navigation";
 import React from "react";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css } from "styled-components";
+import useExecuteVoteService from "../services/useExecuteVoteService";
 
 type AorB = "A" | "B";
 type ActiveType = "active" | "inactive" | null;
@@ -32,6 +35,9 @@ function VoteDescription({
   totalCountB,
   onMutateVoting,
 }: Props) {
+  const params = useParams();
+  console.log(select);
+
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
   };
@@ -57,9 +63,12 @@ function VoteDescription({
           <Image
             src={imageA}
             alt="A 이미지"
-            fill
+            width={160}
+            height={160}
             style={{
-              maxWidth: "720px",
+              objectFit: "cover",
+              width: "auto",
+              height: "100%",
             }}
           />
           <div className="overlay">
@@ -75,7 +84,17 @@ function VoteDescription({
           onClick={() => onClickVote("B")}
           percent={percentageB > 0 ? percentageB : 0}
         >
-          <Image src={imageB} alt="B 이미지" fill />
+          <Image
+            src={imageB}
+            alt="B 이미지"
+            width={160}
+            height={160}
+            style={{
+              objectFit: "cover",
+              width: "auto",
+              height: "100%",
+            }}
+          />
           <div className="overlay">
             <OverLayTitle>{titleB}</OverLayTitle>
             <OverlayPercent>{percentageB}%</OverlayPercent>
@@ -93,7 +112,9 @@ function VoteDescription({
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  overflow: hidden;
+`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -126,13 +147,15 @@ const FlexRow = styled.div`
 const variantStyles = {
   active: css`
     transition: all 0.3s ease-in-out;
-    width: 100%;
+    width: 90%;
     font-size: 16px;
     font-weight: 700;
     padding: 0 1px;
+    pointer-events: none;
   `,
   inactive: css`
-    width: 0%;
+    width: 10%;
+    pointer-events: none;
   `,
 };
 
@@ -147,6 +170,7 @@ const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
   aspect-ratio: 1;
   max-height: 300px;
   display: flex;
+  transition: all 0.3s ease-in-out;
   justify-content: center;
   .overlay {
     position: absolute;
@@ -164,6 +188,7 @@ const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
     background: rgba(250, 94, 45, 0.7);
     border-radius: 10px;
     border: 2px solid #ff4a16;
+
     ${({ selected, percent }) =>
       selected === "active" &&
       css`
@@ -172,6 +197,9 @@ const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
       `};
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
+  &:hover {
+    width: 90%;
+  }
 `;
 
 const RightVote = styled(LeftVote)`
