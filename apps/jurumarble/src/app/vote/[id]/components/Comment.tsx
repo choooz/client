@@ -1,4 +1,5 @@
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
+import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
 import React from "react";
@@ -54,20 +55,20 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
             <DivideTag /> {mbti} */}
             여 | 20대 | INTJ | 10병
           </TagBox>
-          <NickName> {nickName}</NickName>
         </Flex>
+        <NickName> {nickName}</NickName>
 
         <Contents>{content}</Contents>
         <CommentInfo>
           <div>{createdDate.slice(0, 10)}</div>・
-          <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount}</InteractionButton> ・
-          <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount}</InteractionButton>{" "}
+          <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton> ・
+          <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount ?? 0}</InteractionButton>{" "}
         </CommentInfo>
       </ContentsBox>
       <div onClick={onToggleMenu} ref={targetEl}>
         <SvgIcMenu width={20} height={20} />
       </div>
-      {/* {toggleMenu && <ModifyDeleteButtonBox onDelete={onToggleWarningModal} right="20px" />} */}
+      {toggleMenu && <ModifyDeleteButtonBox onDelete={onToggleWarningModal} right="20px" />}
       {toggleWarningModal && (
         <CommentDeleteModal onToggleModal={onToggleWarningModal} onSubmit={mutateDeleteComment} />
       )}
@@ -95,7 +96,7 @@ const ContentsBox = styled.div`
 `;
 
 const Contents = styled.div`
-  padding: 8px 0 8px 0;
+  padding: 12px 0 12px 0;
   display: flex;
   align-items: center;
   ${({ theme }) => css`
@@ -127,6 +128,7 @@ const DivideTag = styled.div`
 `;
 
 const NickName = styled.div`
+  padding-top: 6px;
   font-weight: 700;
   ${({ theme }) => css`
     color: ${theme.colors.black_02};

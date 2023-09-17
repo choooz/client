@@ -4,26 +4,25 @@ import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
 import Header from "components/Header";
 import { media } from "lib/styles";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { EmptyAImg, ExImg1 } from "public/images";
 import React, { useState } from "react";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
 import useInfiniteMainListService from "./post/services/useGetVoteListService";
+import usePostBookmarkService from "./post/services/useBookmarkService";
 import ChipContainer from "./[id]/components/ChipContainer";
 import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
-import useBookmarkService from "services/useBookmarkService";
+import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 
 export type Drag = "up" | "down" | null;
 
 function VoteHomePage() {
+  const params = useParams();
+
   const router = useRouter();
-  const [selected, setSelected] = useState<"A" | "B" | null>(null);
-  const onMutateVoting = (select: "A" | "B") => {
-    setSelected(select);
-  };
 
   const { isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({
@@ -37,7 +36,12 @@ function VoteHomePage() {
   const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
     mainVoteList[nowShowing] || {};
 
-  const { mutateBookMark, bookMarkCheckQuery } = useBookmarkService(voteId);
+  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
+
+  const { mutate, select } = useExecuteVoteService(voteId);
+  const onMutateVoting = (select: "A" | "B") => {
+    mutate(select);
+  };
 
   const { data: bookmarkCheck } = bookMarkCheckQuery;
 
@@ -90,7 +94,7 @@ function VoteHomePage() {
               titleB={titleB}
               totalCountA={100}
               totalCountB={100}
-              select={selected}
+              select={select.choice}
               onMutateVoting={onMutateVoting}
             />
             <MoreButton onClick={() => router.push(`vote/${voteId}`)}>
