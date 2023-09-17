@@ -20,7 +20,7 @@ function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Prop
     <Container>
       <Form onSubmit={onSubmit}>
         <Input placeholder="댓글을 남겨주세요" value={commentForm} onChange={onChangeCommentForm} />
-        <SubmitButton type="submit">등록</SubmitButton>ㅕ
+        <SubmitButton type="submit">등록</SubmitButton>
       </Form>
     </Container>
   );
