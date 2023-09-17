@@ -6,13 +6,13 @@ import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
-import RegionSelect from "./RegionSelect";
 import SelectedDrinkChip from "./SelectedDrinkChip";
 import DrinkItem from "app/vote/post/components/DrinkItem";
 import useGetDrinkListService from "hooks/useGetDrinkList";
 import SearchInput from "components/SearchInput";
 import useInput from "hooks/useInput";
 import { DrinkInfoType } from "src/types/vote";
+import RegionSelect from "components/RegionSelect";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
@@ -49,10 +49,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete
         <TitleStyled>술 검색하기</TitleStyled>
       </VoteHeader>
       <SearchSection>
-        <RegionSelect
-          regionOption={regionOption}
-          onChangeRegionOption={onChangeRegionOption}
-        ></RegionSelect>
+        <RegionSelect regionOption={regionOption} onChangeRegionOption={onChangeRegionOption} />
         <SearchInput
           placeholder="관심있는 술을 검색해보세요."
           value={keyword}
