@@ -1,37 +1,31 @@
 import Chip from "components/Chip";
 import { DrinkInfo } from "lib/apis/drink";
-import Path from "lib/Path";
+
 import { transitions } from "lib/styles";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import styled, { css, useTheme } from "styled-components";
 
 interface Props {
   drinkInfo: DrinkInfo;
   stamp?: boolean;
-  onClickAddDrink?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedDrinkList?: string[];
 }
 
-function DrinkItem({ drinkInfo, stamp, onClickAddDrink, selectedDrinkList }: Props) {
-  const { id, name, productName, image } = drinkInfo;
+function DrinkItem({ drinkInfo, stamp, onClick, selectedDrinkList }: Props) {
+  const { name, productName, image } = drinkInfo;
 
   const { colors } = useTheme();
 
-  const router = useRouter();
-  const onClickDrinkItem = () => {
-    router.push(`${Path.DRINK_INFO_PAGE}/${id}`);
-  };
-
   return (
     <Container
-      onClick={onClickAddDrink || onClickDrinkItem}
-      name={productName}
-      selected={selectedDrinkList?.includes(productName)}
+      onClick={() => onClick(drinkInfo)}
+      name={name}
+      selected={selectedDrinkList?.includes(name)}
     >
       <ImageWrapper>
-        <Image alt="임시 이미지" src={image} fill style={{ borderRadius: "10px" }} />
+        <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
