@@ -1,46 +1,29 @@
 import Chip from "components/Chip";
 import { DrinkInfo } from "lib/apis/drink";
-import Path from "lib/Path";
 import { transitions } from "lib/styles";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import SvgStamp from "src/assets/icons/components/IcStamp";
-import styled, { css, useTheme } from "styled-components";
+import { DrinkInfoType } from "src/types/vote";
+import styled, { css } from "styled-components";
 
 interface Props {
   drinkInfo: DrinkInfo;
-  stamp?: boolean;
-  onClickAddDrink?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  selectedDrinkList?: string[];
+  onClickAddDrink: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedDrinkList: DrinkInfoType[];
 }
 
-function DrinkItem({ drinkInfo, stamp, onClickAddDrink, selectedDrinkList }: Props) {
-  const { id, name, productName, image } = drinkInfo;
+function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
+  const { name, productName, image } = drinkInfo;
 
-  const { colors } = useTheme();
-
-  const router = useRouter();
-  const onClickDrinkItem = () => {
-    router.push(`${Path.DRINK_INFO_PAGE}/${id}`);
-  };
+  const isInclude = (selectedDrink: DrinkInfoType) => selectedDrink.id === drinkInfo.id;
 
   return (
-    <Container
-      onClick={onClickAddDrink || onClickDrinkItem}
-      name={productName}
-      selected={selectedDrinkList?.includes(productName)}
-    >
+    <Container onClick={onClickAddDrink} name={name} selected={selectedDrinkList.some(isInclude)}>
       <ImageWrapper>
-        <Image alt="임시 이미지" src={image} fill style={{ borderRadius: "10px" }} />
+        <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
           <Name>{name}</Name>
-          {stamp && (
-            <StampWrapper>
-              <SvgStamp width={24} height={24} fill={colors.black_05} />
-            </StampWrapper>
-          )}
         </NameStampContainer>
         <ManufacturerName>{productName}</ManufacturerName>
         <ChipContainer>
@@ -52,7 +35,7 @@ function DrinkItem({ drinkInfo, stamp, onClickAddDrink, selectedDrinkList }: Pro
   );
 }
 
-const Container = styled.button<{ selected: boolean | undefined }>`
+const Container = styled.button<{ selected: boolean }>`
   display: flex;
   box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
   height: 120px;
@@ -84,10 +67,6 @@ const NameStampContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`;
-
-const StampWrapper = styled.div`
-  margin-right: 1px;
 `;
 
 const Name = styled.div`

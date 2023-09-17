@@ -3,11 +3,19 @@ import styled, { css, useTheme } from "styled-components";
 
 interface Props {
   title: string;
+  detail: string;
   onChangeVoteText: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   isCompleted: boolean;
+  onClickPostVoteComplete: () => void;
 }
 
-function TitleAndDescriptionSection({ title, onChangeVoteText, isCompleted }: Props) {
+function TitleAndDescriptionSection({
+  title,
+  detail,
+  onChangeVoteText,
+  isCompleted,
+  onClickPostVoteComplete,
+}: Props) {
   const theme = useTheme();
 
   return (
@@ -17,11 +25,24 @@ function TitleAndDescriptionSection({ title, onChangeVoteText, isCompleted }: Pr
         placeholder="제목을 입력해주세요"
         borderColor={theme.colors.line_01}
         value={title}
+        name="title"
         onChange={onChangeVoteText}
       />
       <H3>설명</H3>
-      <TextArea placeholder="설명을 입력해주세요" borderColor={theme.colors.black_05} />
-      <CompleteButton width="100%" height="56px" variant="primary" disabled={isCompleted}>
+      <TextArea
+        placeholder="설명을 입력해주세요"
+        borderColor={theme.colors.black_05}
+        value={detail}
+        name="detail"
+        onChange={onChangeVoteText}
+      />
+      <CompleteButton
+        width="100%"
+        height="56px"
+        variant="primary"
+        disabled={isCompleted}
+        onClick={onClickPostVoteComplete}
+      >
         등록 완료
       </CompleteButton>
     </>

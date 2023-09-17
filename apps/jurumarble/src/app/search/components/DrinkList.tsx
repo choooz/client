@@ -1,8 +1,11 @@
 import { Button } from "components/button";
-import DrinkItem from "components/DrinkItem";
 import { SortType } from "src/types/common";
 import styled, { css } from "styled-components";
-import useSearchDrinkService from "../services/useDrinkService";
+
+import Path from "lib/Path";
+import { useRouter } from "next/navigation";
+import DrinkItem from "./DrinkItem";
+import useGetDrinkListService from "hooks/useGetDrinkList";
 
 interface Props {
   searchText: string;
@@ -12,7 +15,7 @@ interface Props {
 }
 
 function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Props) {
-  const { drinkList, fetchNextPage, hasNextPage } = useSearchDrinkService({
+  const { drinkList, fetchNextPage, hasNextPage } = useGetDrinkListService({
     page: 0,
     size: 3,
     keyword: searchText,
@@ -24,6 +27,11 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
     return <></>;
   }
 
+  const onClickDrinkItem = (id: number) => {
+    router.push(`${Path.DRINK_INFO_PAGE}/${id}`);
+  };
+  const router = useRouter();
+
   const onClickFetchNextPage = () => {
     hasNextPage && fetchNextPage();
   };
@@ -31,7 +39,11 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
   return (
     <Container>
       {drinkList.map((drinkInfo) => (
-        <DrinkItem key={drinkInfo.id} drinkInfo={drinkInfo} />
+        <DrinkItem
+          key={drinkInfo.id}
+          drinkInfo={drinkInfo}
+          onClickDrinkItem={() => onClickDrinkItem(drinkInfo.id)}
+        />
       ))}
       {!isSelectedTab && (
         <MoreButton variant="outline" width="100%" height="48px" onClick={onClickFetchNextPage}>

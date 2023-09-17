@@ -2,44 +2,40 @@
 
 import { Button, ModalTemplate } from "components/index";
 import VoteHeader from "components/VoteHeader";
-import { EmptyAImg } from "public/images";
 import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
-import SearchInput from "../../../../components/SearchInput";
 import RegionSelect from "./RegionSelect";
 import SelectedDrinkChip from "./SelectedDrinkChip";
-import DrinkItem from "components/DrinkItem";
+import DrinkItem from "app/vote/post/components/DrinkItem";
+import useGetDrinkListService from "hooks/useGetDrinkList";
+import SearchInput from "components/SearchInput";
+import useInput from "hooks/useInput";
+import { DrinkInfoType } from "src/types/vote";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
+  onClickSearchDrinkComplete: (selectedDrinkList: DrinkInfoType[]) => void;
 }
 
-const TEMP_LIST = [
-  { manufacturer: "gyeonggiDo", drinkName: "경기도" },
-  { manufacturer: "chungcheongDo", drinkName: "충청도" },
-  { manufacturer: "gyeongsangDo", drinkName: "경상도" },
-  { manufacturer: "gangwonDo", drinkName: "강원도" },
-  { manufacturer: "jeollaDo", drinkName: "전라도" },
-  { manufacturer: "seoul", drinkName: "서울" },
-  { manufacturer: "incheon", drinkName: "인천" },
-  { manufacturer: "sejong", drinkName: "세종" },
-  { manufacturer: "daejeon", drinkName: "대전" },
-  { manufacturer: "busan", drinkName: "부산" },
-  { manufacturer: "daegu", drinkName: "대구" },
-  { manufacturer: "gwangju", drinkName: "광주" },
-  { manufacturer: "ulsan", drinkName: "울산" },
-  { manufacturer: "jeju", drinkName: "제주" },
-];
-
-function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
+function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete }: Props) {
   const [regionOption, setRegionOption] = useState("");
   const onChangeRegionOption = (value: string) => {
     setRegionOption(value);
   };
 
   const { selectedDrinkList, onClickAddDrink, onClickDeleteItem } = useUpdateSelectedDrinkList();
+
+  const { value: keyword, onChange: onChangeKeyword } = useInput({ useDebounce: true });
+
+  const { drinkList } = useGetDrinkListService({
+    keyword,
+    region: regionOption,
+    page: 0,
+    size: 100,
+    sortBy: "ByPopularity",
+  });
 
   return (
     <ModalTemplate width="375px" height="100%" onToggleModal={onToggleDrinkSearchModal}>
@@ -57,33 +53,43 @@ function DrinkSearchModal({ onToggleDrinkSearchModal }: Props) {
           regionOption={regionOption}
           onChangeRegionOption={onChangeRegionOption}
         ></RegionSelect>
-        {/* {regionOption && <SearchInput placeholder="관심있는 술을 검색해보세요." />} */}
+        <SearchInput
+          placeholder="관심있는 술을 검색해보세요."
+          value={keyword}
+          onChange={onChangeKeyword}
+        />
         <SelectedDrinkChipList>
-          {selectedDrinkList.map((manufacturer) => (
-            <SelectedDrinkChip manufacturer={manufacturer} onClickDeleteItem={onClickDeleteItem}>
-              {manufacturer}
+          {selectedDrinkList.map((drinkInfo) => (
+            <SelectedDrinkChip
+              key={drinkInfo.id}
+              onClickDeleteItem={() => onClickDeleteItem(drinkInfo)}
+            >
+              {drinkInfo.name}
             </SelectedDrinkChip>
           ))}
         </SelectedDrinkChipList>
       </SearchSection>
-      {regionOption && (
-        <ResultSection>
-          <DrinkList>
-            {/* {TEMP_LIST.map(({ drinkName, manufacturer }) => (
-              <DrinkItem
-                onClick={onClickAddDrink}
-                staticImage={EmptyAImg}
-                drinkName={drinkName}
-                manufacturer={manufacturer}
-                selectedDrinkList={selectedDrinkList}
-              />
-            ))} */}
-          </DrinkList>
-          <CompleteButton width="100%" height="56px" disabled={selectedDrinkList.length < 2}>
-            선택 완료
-          </CompleteButton>
-        </ResultSection>
-      )}
+
+      <ResultSection>
+        <DrinkList>
+          {drinkList.map((drinkInfo) => (
+            <DrinkItem
+              key={drinkInfo.id}
+              onClickAddDrink={() => onClickAddDrink(drinkInfo)}
+              drinkInfo={drinkInfo}
+              selectedDrinkList={selectedDrinkList}
+            />
+          ))}
+        </DrinkList>
+        <CompleteButton
+          width="100%"
+          height="56px"
+          disabled={selectedDrinkList.length < 2}
+          onClick={() => onClickSearchDrinkComplete(selectedDrinkList)}
+        >
+          선택 완료
+        </CompleteButton>
+      </ResultSection>
     </ModalTemplate>
   );
 }

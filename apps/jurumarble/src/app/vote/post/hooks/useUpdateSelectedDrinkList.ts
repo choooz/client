@@ -1,19 +1,18 @@
 import { useState } from "react";
+import { DrinkInfoType } from "src/types/vote";
 
 export default function useUpdateSelectedDrinkList() {
-  const [selectedDrinkList, setDrinkList] = useState([] as string[]);
+  const [selectedDrinkList, setDrinkList] = useState<DrinkInfoType[]>([]);
 
-  const onClickAddDrink = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const name = e.currentTarget.name;
-    selectedDrinkList.includes(name)
-      ? setDrinkList((prev) => prev.filter((item) => item !== name))
-      : selectedDrinkList.length < 2 && setDrinkList((prev) => [...prev.concat(name)]);
+  const onClickAddDrink = (clickDrink: DrinkInfoType) => {
+    const isInclude = (selectedDrink: DrinkInfoType) => selectedDrink.id === clickDrink.id;
+    selectedDrinkList.some(isInclude)
+      ? setDrinkList((prev) => prev.filter((selectedDrink) => selectedDrink.id !== clickDrink.id))
+      : selectedDrinkList.length < 2 && setDrinkList((prev) => [...prev.concat(clickDrink)]);
   };
 
-  const onClickDeleteItem = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const name = e.currentTarget.name;
-
-    setDrinkList((prev) => prev.filter((item) => item !== name));
+  const onClickDeleteItem = (clickDrink: DrinkInfoType) => {
+    setDrinkList((prev) => prev.filter((selectedDrink) => selectedDrink.id !== clickDrink.id));
   };
 
   return { selectedDrinkList, onClickAddDrink, onClickDeleteItem };
