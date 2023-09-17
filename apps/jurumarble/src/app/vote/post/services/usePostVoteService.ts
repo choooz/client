@@ -2,20 +2,25 @@ import React, { useCallback, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { uploadImageAPI } from "lib/apis/common";
-import { postNormalVoteAPI, PostVoteRequest } from "lib/apis/vote";
+import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
+import { DrinkInfoType, PostVoteType } from "src/types/vote";
+import Path from "lib/Path";
 
 export default function usePostVoteService() {
   const router = useRouter();
 
-  const [postVoteInfo, setPostVoteInfo] = useState<PostVoteRequest>({
+  const [postVoteInfo, setPostVoteInfo] = useState<PostVoteType>({
     title: "",
+    detail: "",
     titleA: "",
     titleB: "",
     imageA: "",
     imageB: "",
-    drinkAId: "",
-    drinkBId: "",
+    drinkAId: 0,
+    drinkBId: 0,
   });
+
+  const { title, detail, titleA, titleB, imageA, imageB, drinkAId, drinkBId } = postVoteInfo;
 
   const onChangeVoteText = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,6 +28,21 @@ export default function usePostVoteService() {
       ...postVoteInfo,
       [name]: value,
     });
+  };
+
+  const updatePostVoteInfo = (selectedDrinkList: DrinkInfoType[]) => {
+    /**
+     * @Todo 더 좋은 방법 없을까?
+     */
+    setPostVoteInfo((prev) => ({
+      ...prev,
+      titleA: selectedDrinkList[0].name,
+      titleB: selectedDrinkList[1].name,
+      imageA: selectedDrinkList[0].image,
+      imageB: selectedDrinkList[1].image,
+      drinkAId: selectedDrinkList[0].id,
+      drinkBId: selectedDrinkList[1].id,
+    }));
   };
 
   const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,16 +94,54 @@ export default function usePostVoteService() {
     }
   }, []);
 
-  const { mutate: mutateVote } = useMutation(() => postNormalVoteAPI(postVoteInfo), {
-    onSuccess: () => {
-      router.push("/?isSuccess=true");
+  const { mutate: mutateNomalVote } = useMutation(
+    (voteInfo: Omit<PostVoteType, "drinkAId" | "drinkBId">) => postNormalVoteAPI(voteInfo),
+    {
+      onSuccess: () => {
+        router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
+      },
     },
-  });
+  );
+  const { mutate: mutateDrinkVote } = useMutation(
+    (voteInfo: Omit<PostVoteType, "titleA" | "titleB" | "imageA" | "imageB">) =>
+      postDrinkVoteAPI(voteInfo),
+    {
+      onSuccess: () => {
+        router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
+      },
+    },
+  );
+
+  const guidePostVote = () => {
+    if (title === "") {
+      alert("제목을 입력해주세요.");
+      return;
+    }
+    if (detail === "") {
+      alert("설명을 입력해주세요.");
+      return;
+    }
+    if (titleA === "") {
+      alert("선택지 A를 입력해주세요.");
+      return;
+    }
+    if (titleB === "") {
+      alert("선택지 B를 입력해주세요.");
+      return;
+    }
+  };
+  const onClickPostVoteComplete = () => {
+    guidePostVote();
+    postVoteInfo.drinkAId === 0
+      ? mutateNomalVote({ title, detail, titleA, titleB, imageA, imageB })
+      : mutateDrinkVote({ title, detail, drinkAId, drinkBId });
+  };
 
   return {
     postVoteInfo,
     onChangeVoteText,
     onUploadImage,
-    mutateVote,
+    onClickPostVoteComplete,
+    updatePostVoteInfo,
   };
 }
