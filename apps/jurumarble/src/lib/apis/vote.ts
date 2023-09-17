@@ -2,6 +2,7 @@ import axios from "axios";
 import { SERVER_URL } from "lib/constants";
 import { SortType } from "src/types/common";
 import { baseApi } from "./http/base";
+import { http } from "./http/http";
 
 type VoteListSortType = Omit<SortType, "ByName">;
 
@@ -39,50 +40,6 @@ interface GetVoteListResponse {
 
 export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteListRequest) => {
   const response = await baseApi.get<GetVoteListResponse>("api/votes", {
-    params: {
-      page,
-      size,
-      sortBy,
-      keyword,
-    },
-  });
-  return response.data;
-};
-
-export interface GetVoteListRequest {
-  keyword?: string;
-  sortBy: "ByTime" | "ByPopularity";
-  page: number;
-  size: number;
-}
-
-interface Vote {
-  voteId: number;
-  postedUserId: number;
-  title: string;
-  detail: string;
-  filteredGender: null;
-  filteredAge: null;
-  filteredMbti: null;
-  votedCount: number;
-  voteType: string;
-  imageA: string;
-  imageB: string;
-  titleA: string;
-  titleB: string;
-  region: string;
-}
-interface GetVoteListResponse {
-  content: Vote[];
-  first: boolean;
-  last: boolean;
-  numberOfElements: 10;
-  size: 10;
-  empty: boolean;
-}
-
-export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteListRequest) => {
-  const response = await axios.get<GetVoteListResponse>(`${SERVER_URL}api/votes`, {
     params: {
       page,
       size,
@@ -226,4 +183,47 @@ export const getVoteDrinkList = async (params: GetVoteDrinkListRequest) => {
     },
   });
   return response.data.voteSlice;
+};
+
+// export interface GetCommentResponse {
+//   content: CommentResponse[];
+//   empty: boolean;
+//   first: boolean;
+//   last: boolean;
+//   numberOfElements: number;
+//   size: number;
+// }
+
+// export const getCommentById = async (voteId: number, filter: CommentFilter, page: number) => {
+//   const { age, gender, mbti, sortBy } = filter;
+//   const response = await axios.get<GetCommentResponse>(
+//     `${SERVER_URL}api/votes/${voteId}/comments`,
+//     {
+//       params: {
+//         age,
+//         mbti,
+//         gender,
+//         sortBy,
+//         page,
+//         size: 5,
+//       },
+//     },
+//   );
+//   return response.data;
+// };
+
+export const postExecuteVote = async (voteId: number, body: { choice: "A" | "B" | null }) => {
+  const response = await http.post(`api/votes/${voteId}/vote`, body);
+  return response.data;
+};
+
+export type AorB = "A" | "B";
+interface GetVotingCheckResponse {
+  userChoice: AorB | null;
+  voted: boolean;
+}
+
+export const getVotingCheck = async (voteId: number) => {
+  const response = await http.get<GetVotingCheckResponse>(`api/votes/${voteId}/voted`);
+  return response.data;
 };
