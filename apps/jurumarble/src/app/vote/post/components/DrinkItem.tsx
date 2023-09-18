@@ -1,7 +1,7 @@
 import Chip from "components/Chip";
-import { DrinkInfo } from "lib/apis/drink";
 import { transitions } from "lib/styles";
 import Image from "next/image";
+import { DrinkInfo } from "src/types/drink";
 import { DrinkInfoType } from "src/types/vote";
 import styled, { css } from "styled-components";
 

@@ -1,9 +1,9 @@
 import Chip from "components/Chip";
-import { DrinkInfo } from "lib/apis/drink";
 
 import { transitions } from "lib/styles";
 import Image from "next/image";
 import SvgStamp from "src/assets/icons/components/IcStamp";
+import { DrinkInfo } from "src/types/drink";
 import styled, { css, useTheme } from "styled-components";
 
 interface Props {
