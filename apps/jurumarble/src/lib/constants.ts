@@ -34,8 +34,12 @@ export const REGION_LIST = [
   { value: "JEJU", label: "제주" },
 ];
 
-export const SORT_LIST = [
-  { value: "ByName", label: "이름순" },
+export const DRINK_VOTE_SORT_LIST = [
   { value: "ByPopularity", label: "인기순" },
   { value: "ByTime", label: "최신순" },
+];
+
+export const DRINK_INFO_SORT_LIST = [
+  { value: "ByName", label: "이름순" },
+  { value: "ByPopularity", label: "인기순" },
 ];
