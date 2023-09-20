@@ -3,21 +3,25 @@
 import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
 import SearchInput from "components/SearchInput";
-import useInput from "hooks/useInput";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css, DefaultTheme } from "styled-components";
-import { useState } from "react";
-import { SORT_LIST } from "lib/constants";
+import { ChangeEvent, useCallback, useEffect } from "react";
 import DrinkList from "./DrinkList";
 import DrinkVoteList from "./DrinkVoteList";
 import SortSelect from "./SortSelect";
 import RegionSmallSelect from "./RegionSmallSelect";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { RegionType, SortType } from "src/types/common";
+import { SORT_LIST } from "lib/constants";
 
 const TAB_LIST = [
   { id: "total", name: "통합" },
   { id: "drinkInfo", name: "우리술 정보" },
   { id: "drinkVote", name: "우리술 투표" },
 ] as const;
+
+const drinkInfoSortOptionList = SORT_LIST.filter((sortOption) => sortOption.value !== "ByTime");
+const drinkVoteSortOptionList = SORT_LIST.filter((sortOption) => sortOption.value !== "ByName");
 
 type TabList = (typeof TAB_LIST)[number]["id"];
 
@@ -33,25 +37,52 @@ type TabList = (typeof TAB_LIST)[number]["id"];
  */
 
 function SearchContainer() {
-  const { value: searchText, onChange: onChangeSearchText } = useInput({
-    initialValue: "",
-    useDebounce: true,
-  });
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const [selectedTab, setSelectedTab] = useState<TabList>("total");
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const searchText = searchParams.get("searchText") as string;
+  const onChangeSearchText = (e: ChangeEvent<HTMLInputElement>) => {
+    router.replace(pathname + "?" + createQueryString("searchText", e.target.value));
+  };
+
+  const selectedTab = searchParams.get("selectedTab");
   const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSelectedTab(e.currentTarget.value as TabList);
+    router.replace(
+      pathname + "?" + createQueryString("selectedTab", e.currentTarget.value as TabList),
+    );
   };
 
-  const [sortOption, setSortOption] = useState(SORT_LIST[1].value);
+  const sortOption = searchParams.get("sortOption") as SortType;
   const onChangeSortOption = (value: string) => {
-    setSortOption(value);
+    router.replace(pathname + "?" + createQueryString("sortOption", value));
   };
 
-  const [regionOption, setRegionOption] = useState("");
+  const regionOption = searchParams.get("regionOption") as RegionType;
   const onChangeRegionOption = (value: string) => {
-    setRegionOption(value);
+    router.replace(pathname + "?" + createQueryString("regionOption", value));
   };
+
+  useEffect(() => {
+    const queryParams = {
+      searchText: searchText || "",
+      selectedTab: selectedTab || "total",
+      sortOption: sortOption || "ByPopularity",
+      regionOption: regionOption || "",
+    };
+    const queryString = new URLSearchParams(queryParams).toString();
+
+    router.replace(pathname + "?" + queryString);
+  }, []);
 
   const isSelectedTab = (tabName: string) => {
     return selectedTab === tabName;
@@ -110,7 +141,11 @@ function SearchContainer() {
       topSectionItem: (
         <>
           <SelectContainer>
-            <SortSelect defaultOption={sortOption} onChangeSortOption={onChangeSortOption} />
+            <SortSelect
+              defaultOption={sortOption}
+              onChangeSortOption={onChangeSortOption}
+              options={drinkInfoSortOptionList}
+            />
             <RegionSmallSelect
               defaultOption={regionOption}
               onChangeSortOption={onChangeRegionOption}
@@ -131,7 +166,11 @@ function SearchContainer() {
       bottomSectionItem: (
         <>
           <SelectContainer>
-            <SortSelect defaultOption={sortOption} onChangeSortOption={onChangeSortOption} />
+            <SortSelect
+              defaultOption={sortOption}
+              onChangeSortOption={onChangeSortOption}
+              options={drinkVoteSortOptionList}
+            />
             <RegionSmallSelect
               defaultOption={regionOption}
               onChangeSortOption={onChangeRegionOption}
@@ -147,7 +186,7 @@ function SearchContainer() {
       ),
     },
   };
-  const { topSectionItem, bottomSectionItem } = renderItem[selectedTab];
+  const { topSectionItem, bottomSectionItem } = renderItem[(selectedTab as TabList) || "total"];
 
   return (
     <>
