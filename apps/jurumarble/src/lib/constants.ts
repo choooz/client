@@ -14,10 +14,6 @@ export const NAVER_LOGIN_REDIRECT_URL =
     ? `http://localhost:3000/${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
-/**
- * @Todo type으로 사용할 수 있는 방법 알아보기
- */
-
 export const REGION_LIST = [
   { value: "SEOUL", label: "서울" },
   { value: "INCHEON", label: "인천" },
