@@ -9,7 +9,7 @@ import useGetDrinkListService from "hooks/useGetDrinkList";
 
 interface Props {
   searchText: string;
-  sortOption: string;
+  sortOption: SortType;
   regionOption: string;
   isSelectedTab: boolean;
 }
@@ -20,7 +20,7 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
     size: 3,
     keyword: searchText,
     region: regionOption,
-    sortBy: sortOption as SortType,
+    sortBy: sortOption,
   });
 
   if (!drinkList) {
