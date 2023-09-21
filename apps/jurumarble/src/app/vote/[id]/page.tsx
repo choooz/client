@@ -12,7 +12,7 @@ import CommentContainer from "./components/CommentContainer";
 import { useParams, useSearchParams } from "next/navigation";
 import { useToggle } from "@monorepo/hooks";
 import SearchRestaurantModal from "./components/SearchRestaurantModal";
-import usePostBookmarkService from "../post/services/useBookmarkService";
+import usePostBookmarkService from "../services/useBookmarkService";
 import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
 

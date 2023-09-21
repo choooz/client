@@ -1597,19 +1597,18 @@ __metadata:
   dependencies:
     "@emotion/is-prop-valid": ^1.2.1
     "@monorepo/hooks": "workspace:*"
+    "@react-hookz/web": ^23.1.0
     "@svgr/cli": ^8.0.1
     "@svgr/core": ^8.0.0
     "@svgr/plugin-jsx": ^8.0.1
     "@svgr/plugin-prettier": ^8.0.1
     "@tanstack/react-query": ^4.33.0
     "@tanstack/react-query-devtools": ^4.33.0
-    "@types/lodash": ^4
     "@types/node": 20.5.7
     "@types/react": 18.2.21
     "@types/react-dom": ^18.2.7
     "@types/styled-components": ^5
     axios: ^1.5.0
-    lodash: ^4.17.21
     next: 13.4.12
     react: 18.2.0
     react-dom: 18.2.0
@@ -1781,6 +1780,29 @@ __metadata:
   version: 13.4.19
   resolution: "@next/swc-win32-x64-msvc@npm:13.4.19"
   conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@react-hookz/deep-equal@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@react-hookz/deep-equal@npm:1.0.4"
+  checksum: 0923e364d309e32ee54e0850471a86488faf149d7a04ee838552cf5d54f493964623a8d742880ec82410cc1105530123f056e66dfc72b7da235d4cc93fad708f
+  languageName: node
+  linkType: hard
+
+"@react-hookz/web@npm:^23.1.0":
+  version: 23.1.0
+  resolution: "@react-hookz/web@npm:23.1.0"
+  dependencies:
+    "@react-hookz/deep-equal": ^1.0.4
+  peerDependencies:
+    js-cookie: ^3.0.5
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  peerDependenciesMeta:
+    js-cookie:
+      optional: true
+  checksum: bf28241ccbf0c139d4cc843ebe04a963c74935abf9846ae1d64964ecc96b7c214441835a6ad82d9b00ebbd36c7f74a8b193f8035dfc9f2ab49055ff3d035d8b8
   languageName: node
   linkType: hard
 
@@ -2335,13 +2357,6 @@ __metadata:
     "@types/react": "*"
     hoist-non-react-statics: ^3.3.0
   checksum: 2c0778570d9a01d05afabc781b32163f28409bb98f7245c38d5eaf082416fdb73034003f5825eb5e21313044e8d2d9e1f3fe2831e345d3d1b1d20bcd12270719
-  languageName: node
-  linkType: hard
-
-"@types/lodash@npm:^4":
-  version: 4.14.197
-  resolution: "@types/lodash@npm:4.14.197"
-  checksum: 53d7567d1704de76cf33266c78062e0fd722d4b846e5b1417d0b6ef0ee41c0d9c451b92bc34f73d5f1fcc45c7d36511e92f6f47a9279b48157ba60a92ddaa078
   languageName: node
   linkType: hard
 

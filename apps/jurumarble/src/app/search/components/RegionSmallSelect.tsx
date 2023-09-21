@@ -1,4 +1,4 @@
-import { REGION_LIST, SORT_LIST } from "lib/constants";
+import { REGION_LIST } from "lib/constants";
 import styled, { css } from "styled-components";
 import { useToggle } from "@monorepo/hooks";
 import SvgIcExpandMore from "src/assets/icons/components/IcExpandMore";

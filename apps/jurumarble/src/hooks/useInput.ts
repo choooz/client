@@ -1,5 +1,5 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
-import debounce from "lodash/debounce";
+import { useCallback, useState } from "react";
+import { useDebouncedCallback } from "@react-hookz/web";
 
 export interface UseInputHookType {
   /**
@@ -34,27 +34,27 @@ export default function useInput({
   const [value, setValue] = useState<InputAcceptType>(initialValue ?? "");
   const [debouncedValue, setDebouncedValue] = useState<InputAcceptType>(initialValue ?? "");
 
-  const handleSetDebounceValue = useMemo(
-    () =>
-      debounce((value: string) => {
-        setDebouncedValue(value);
-      }, debounceTimeout),
-    [debounceTimeout],
+  const debouncedChange = useDebouncedCallback(
+    (keyword: string) => {
+      setDebouncedValue(keyword);
+    },
+    [setDebouncedValue],
+    debounceTimeout,
   );
 
   const handleSetValue = useCallback(
     (value: InputAcceptType) => {
       setValue(value);
       if (useDebounce) {
-        handleSetDebounceValue(value);
+        debouncedChange(value);
       }
     },
-    [handleSetDebounceValue, useDebounce],
+    [debouncedChange, useDebounce],
   );
 
   const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
-      handleSetValue(event.target.value);
+    (value: string) => {
+      handleSetValue(value);
     },
     [handleSetValue],
   );

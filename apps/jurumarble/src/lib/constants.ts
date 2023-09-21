@@ -14,10 +14,6 @@ export const NAVER_LOGIN_REDIRECT_URL =
     ? `http://localhost:3000/${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
-/**
- * @Todo type으로 사용할 수 있는 방법 알아보기
- */
-
 export const REGION_LIST = [
   { value: "SEOUL", label: "서울" },
   { value: "INCHEON", label: "인천" },
@@ -38,8 +34,12 @@ export const REGION_LIST = [
   { value: "JEJU", label: "제주" },
 ];
 
-export const SORT_LIST = [
-  { value: "ByName", label: "이름순" },
+export const DRINK_VOTE_SORT_LIST = [
   { value: "ByPopularity", label: "인기순" },
   { value: "ByTime", label: "최신순" },
+];
+
+export const DRINK_INFO_SORT_LIST = [
+  { value: "ByName", label: "이름순" },
+  { value: "ByPopularity", label: "인기순" },
 ];

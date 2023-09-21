@@ -4127,19 +4127,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@monorepo/jurumarble", "workspace:apps/jurumarble"],\
             ["@emotion/is-prop-valid", "npm:1.2.1"],\
             ["@monorepo/hooks", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#workspace:packages/hooks"],\
+            ["@react-hookz/web", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:23.1.0"],\
             ["@svgr/cli", "npm:8.1.0"],\
             ["@svgr/core", "npm:8.1.0"],\
             ["@svgr/plugin-jsx", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
             ["@svgr/plugin-prettier", "virtual:f6fc21e1196a5e36ccf7110701b6043e0b913ea4ae1d1deb9368d1ebef4cb8924deb4e8e07aafc9678d844b070003814a4413e37134a210b07db139914fa76a4#npm:8.1.0"],\
             ["@tanstack/react-query", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:4.33.0"],\
             ["@tanstack/react-query-devtools", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:4.33.0"],\
-            ["@types/lodash", "npm:4.14.197"],\
             ["@types/node", "npm:20.5.7"],\
             ["@types/react", "npm:18.2.21"],\
             ["@types/react-dom", "npm:18.2.7"],\
             ["@types/styled-components", "npm:5.1.26"],\
             ["axios", "npm:1.5.0"],\
-            ["lodash", "npm:4.17.21"],\
             ["next", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:13.4.12"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#npm:18.2.0"],\
@@ -4335,6 +4334,46 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/unplugged/@next-swc-win32-x64-msvc-npm-13.4.19-a7d9a1e2ab/node_modules/@next/swc-win32-x64-msvc/",\
           "packageDependencies": [\
             ["@next/swc-win32-x64-msvc", "npm:13.4.19"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@react-hookz/deep-equal", [\
+        ["npm:1.0.4", {\
+          "packageLocation": "./.yarn/cache/@react-hookz-deep-equal-npm-1.0.4-8c04a45317-0923e364d3.zip/node_modules/@react-hookz/deep-equal/",\
+          "packageDependencies": [\
+            ["@react-hookz/deep-equal", "npm:1.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@react-hookz/web", [\
+        ["npm:23.1.0", {\
+          "packageLocation": "./.yarn/cache/@react-hookz-web-npm-23.1.0-083b50b16f-bf28241ccb.zip/node_modules/@react-hookz/web/",\
+          "packageDependencies": [\
+            ["@react-hookz/web", "npm:23.1.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:23.1.0", {\
+          "packageLocation": "./.yarn/__virtual__/@react-hookz-web-virtual-cae5623a0d/0/cache/@react-hookz-web-npm-23.1.0-083b50b16f-bf28241ccb.zip/node_modules/@react-hookz/web/",\
+          "packageDependencies": [\
+            ["@react-hookz/web", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:23.1.0"],\
+            ["@react-hookz/deep-equal", "npm:1.0.4"],\
+            ["@types/js-cookie", null],\
+            ["@types/react", "npm:18.2.21"],\
+            ["@types/react-dom", "npm:18.2.7"],\
+            ["js-cookie", null],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:040d27df013de8c2443d97cd34785bd6338b0d64a4a625937768b1a38353fca7b8404d53a1248b5c67570c2a031bc43d100149c15012f4485eb41e15d763240d#npm:18.2.0"]\
+          ],\
+          "packagePeers": [\
+            "@types/js-cookie",\
+            "@types/react-dom",\
+            "@types/react",\
+            "js-cookie",\
+            "react-dom",\
+            "react"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5334,15 +5373,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/hoist-non-react-statics", "npm:3.3.1"],\
             ["@types/react", "npm:18.2.21"],\
             ["hoist-non-react-statics", "npm:3.3.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@types/lodash", [\
-        ["npm:4.14.197", {\
-          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.197-8db1555bb5-53d7567d17.zip/node_modules/@types/lodash/",\
-          "packageDependencies": [\
-            ["@types/lodash", "npm:4.14.197"]\
           ],\
           "linkType": "HARD"\
         }]\

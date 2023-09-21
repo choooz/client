@@ -3,15 +3,18 @@
 import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
 import SearchInput from "components/SearchInput";
-import useInput from "hooks/useInput";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css, DefaultTheme } from "styled-components";
-import { useState } from "react";
-import { SORT_LIST } from "lib/constants";
+import { useCallback } from "react";
 import DrinkList from "./DrinkList";
 import DrinkVoteList from "./DrinkVoteList";
 import SortSelect from "./SortSelect";
 import RegionSmallSelect from "./RegionSmallSelect";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { DrinkInfoSortType, VoteSortType, RegionType } from "src/types/common";
+import { useDebouncedCallback } from "@react-hookz/web";
+import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
+import DivideLine from "components/DivideLine";
 
 const TAB_LIST = [
   { id: "total", name: "통합" },
@@ -22,38 +25,66 @@ const TAB_LIST = [
 type TabList = (typeof TAB_LIST)[number]["id"];
 
 /**
- * @Todo 아래와 같이 분리하기
+ * @TODO 아래와 같이 분리하기
  * <SeachProvider>
  * <SearchInputContainer />
  * <SearchVoteListContainer />
  * </SearchProvider>
  *
- * @Todo 검색 상태를 관리하는 Context를 만들기
+ * @TODO 검색 상태를 관리하는 Context를 만들기
  * const {textInput} = useSearchContext()
  */
 
 function SearchContainer() {
-  const { value: searchText, onChange: onChangeSearchText } = useInput({
-    initialValue: "",
-    useDebounce: true,
-  });
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const [selectedTab, setSelectedTab] = useState<TabList>("total");
-  const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSelectedTab(e.currentTarget.value as TabList);
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const searchText = (searchParams.get("searchText") as string) ?? "";
+
+  const onChangeSearchText = (keyword: string) => {
+    router.replace(pathname + "?" + createQueryString("searchText", keyword), {
+      scroll: true,
+    });
+  };
+  const debouncedChange = useDebouncedCallback(
+    (keyword: string) => {
+      onChangeSearchText(keyword);
+    },
+    [onChangeSearchText],
+    500,
+  );
+
+  const selectedTab = searchParams.get("selectedTab") ?? "total";
+  const onClickSelectedTab = (tab: TabList) => {
+    router.replace(pathname + "?" + createQueryString("selectedTab", tab));
   };
 
-  const [sortOption, setSortOption] = useState(SORT_LIST[1].value);
-  const onChangeSortOption = (value: string) => {
-    setSortOption(value);
+  const drinkInfoSortOption = searchParams.get("drinkInfoSortOption") ?? "ByPopularity";
+  const onChangeDrinkInfoSortOption = (value: DrinkInfoSortType) => {
+    router.replace(pathname + "?" + createQueryString("drinkInfoSortOption", value));
   };
 
-  const [regionOption, setRegionOption] = useState("");
-  const onChangeRegionOption = (value: string) => {
-    setRegionOption(value);
+  const drinkVoteSortOption = searchParams.get("drinkVoteSortOption") ?? "ByPopularity";
+  const onChangeDrinkVoteSortOption = (value: VoteSortType) => {
+    router.replace(pathname + "?" + createQueryString("drinkVoteSortOption", value));
   };
 
-  const isSelectedTab = (tabName: string) => {
+  const regionOption = searchParams.get("regionOption") ?? "";
+  const onChangeRegionOption = (value: RegionType) => {
+    router.replace(pathname + "?" + createQueryString("regionOption", value));
+  };
+
+  const isSelectedTab = (tabName: TabList) => {
     return selectedTab === tabName;
   };
 
@@ -67,7 +98,7 @@ function SearchContainer() {
           <H2>우리술 정보</H2>
           <DrinkList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab("total")}
           />
@@ -75,11 +106,8 @@ function SearchContainer() {
             variant="outline"
             width="100%"
             height="48px"
-            /**
-             * @Todo enum으로 사용하면 좋을 것 같다.
-             */
-            value={"drinkInfo"}
-            onClick={onClickSelectedTab}
+            value="drinkInfo"
+            onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
           >
             우리술 정보 더보기
           </MoreButton>
@@ -90,7 +118,7 @@ function SearchContainer() {
           <H2>우리술 투표</H2>
           <DrinkVoteList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkVoteSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab("total")}
           />
@@ -99,7 +127,7 @@ function SearchContainer() {
             width="100%"
             height="48px"
             value="drinkVote"
-            onClick={onClickSelectedTab}
+            onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
           >
             우리술 투표 더보기
           </MoreButton>
@@ -110,7 +138,11 @@ function SearchContainer() {
       topSectionItem: (
         <>
           <SelectContainer>
-            <SortSelect defaultOption={sortOption} onChangeSortOption={onChangeSortOption} />
+            <SortSelect
+              defaultOption={drinkInfoSortOption}
+              onChangeSortOption={onChangeDrinkInfoSortOption}
+              options={DRINK_INFO_SORT_LIST}
+            />
             <RegionSmallSelect
               defaultOption={regionOption}
               onChangeSortOption={onChangeRegionOption}
@@ -118,7 +150,7 @@ function SearchContainer() {
           </SelectContainer>
           <DrinkList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={false}
           />
@@ -131,7 +163,11 @@ function SearchContainer() {
       bottomSectionItem: (
         <>
           <SelectContainer>
-            <SortSelect defaultOption={sortOption} onChangeSortOption={onChangeSortOption} />
+            <SortSelect
+              defaultOption={drinkVoteSortOption}
+              onChangeSortOption={onChangeDrinkVoteSortOption}
+              options={DRINK_VOTE_SORT_LIST}
+            />
             <RegionSmallSelect
               defaultOption={regionOption}
               onChangeSortOption={onChangeRegionOption}
@@ -139,7 +175,7 @@ function SearchContainer() {
           </SelectContainer>
           <DrinkVoteList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkVoteSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab("total")}
           />
@@ -147,14 +183,14 @@ function SearchContainer() {
       ),
     },
   };
-  const { topSectionItem, bottomSectionItem } = renderItem[selectedTab];
+  const { topSectionItem, bottomSectionItem } = renderItem[selectedTab as TabList];
 
   return (
     <>
       <TopSection>
         <SearchBox>
           <SvgIcPrev width={24} height={24} />
-          <SearchInput value={searchText} onChange={onChangeSearchText} />
+          <SearchInput value={searchText} onChange={debouncedChange} />
         </SearchBox>
         <TabBox>
           {TAB_LIST.map(({ id, name }) => (
@@ -162,7 +198,7 @@ function SearchContainer() {
               key={`tab_${id}`}
               value={id}
               selected={id === selectedTab}
-              onClick={onClickSelectedTab}
+              onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
             >
               {name}
             </SelectedButton>
@@ -190,14 +226,6 @@ const SearchBox = styled.div`
 const TabBox = styled.ul`
   display: flex;
   margin-top: 8px;
-`;
-
-const DivideLine = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.bg_01};
-    height: 8px;
-    margin-bottom: 8px;
-  `}
 `;
 
 const SelectedButton = styled.button<{ theme: DefaultTheme; selected: boolean }>`

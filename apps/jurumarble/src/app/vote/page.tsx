@@ -5,17 +5,16 @@ import { Button } from "components/button";
 import Header from "components/Header";
 import { media } from "lib/styles";
 import { useParams, useRouter } from "next/navigation";
-import { EmptyAImg, ExImg1 } from "public/images";
-import React, { useState } from "react";
+import { EmptyAImg } from "public/images";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
-import useInfiniteMainListService from "./post/services/useGetVoteListService";
-import usePostBookmarkService from "./post/services/useBookmarkService";
+import usePostBookmarkService from "./services/useBookmarkService";
 import ChipContainer from "./[id]/components/ChipContainer";
 import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
 import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
+import useInfiniteMainListService from "./services/useGetVoteListService";
 
 export type Drag = "up" | "down" | null;
 

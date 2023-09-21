@@ -1,4 +1,4 @@
-import { SortType } from "src/types/common";
+import { DrinkInfoSortType } from "src/types/common";
 import { baseApi } from "./http/base";
 
 export interface GetDrinkListRequest {
@@ -6,7 +6,7 @@ export interface GetDrinkListRequest {
   size: number;
   keyword?: string;
   region?: string;
-  sortBy: SortType;
+  sortBy: DrinkInfoSortType;
 }
 
 interface GetDrinkListResponse {
@@ -58,5 +58,16 @@ export const getDrinkList = async (params: GetDrinkListRequest) => {
       ...params,
     },
   });
+  return response.data;
+};
+
+export interface GetHotDrinkResponse {
+  drinkId: number;
+  name: string;
+  manufactureAddress: string;
+  image: string;
+}
+export const getHotDrinkList = async () => {
+  const response = await baseApi.get<GetHotDrinkResponse[]>("api/drinks/hot");
   return response.data;
 };

@@ -1,15 +1,14 @@
 import { Button } from "components/button";
-import { SortType } from "src/types/common";
 import styled, { css } from "styled-components";
-
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import DrinkItem from "./DrinkItem";
 import useGetDrinkListService from "hooks/useGetDrinkList";
+import { DrinkInfoSortType } from "src/types/common";
 
 interface Props {
   searchText: string;
-  sortOption: string;
+  sortOption: DrinkInfoSortType;
   regionOption: string;
   isSelectedTab: boolean;
 }
@@ -20,7 +19,7 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
     size: 3,
     keyword: searchText,
     region: regionOption,
-    sortBy: sortOption as SortType,
+    sortBy: sortOption,
   });
 
   if (!drinkList) {
