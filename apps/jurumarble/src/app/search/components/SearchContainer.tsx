@@ -14,6 +14,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DrinkInfoSortType, VoteSortType, RegionType } from "src/types/common";
 import { useDebouncedCallback } from "@react-hookz/web";
 import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
+import DivideLine from "components/DivideLine";
 
 const TAB_LIST = [
   { id: "total", name: "통합" },
@@ -225,14 +226,6 @@ const SearchBox = styled.div`
 const TabBox = styled.ul`
   display: flex;
   margin-top: 8px;
-`;
-
-const DivideLine = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.bg_01};
-    height: 8px;
-    margin-bottom: 8px;
-  `}
 `;
 
 const SelectedButton = styled.button<{ theme: DefaultTheme; selected: boolean }>`
