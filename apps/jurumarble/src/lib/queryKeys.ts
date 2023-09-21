@@ -1,4 +1,6 @@
 export const queryKeys = {
+  HOT_DRINK_LIST: "hotDrinkList" as const,
+  HOT_DRINK_VOTE: "hotDrinkVote" as const,
   MAIN_VOTE_LIST: "mainVoteList" as const,
   BOOKMARK_CHECK: "bookmarkCheck" as const,
   USER_INFO: "userInfo" as const,
