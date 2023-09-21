@@ -1,14 +1,11 @@
-import axios from "axios";
 import { SERVER_URL } from "lib/constants";
-import { SortType } from "src/types/common";
+import { VoteSortType } from "src/types/common";
 import { baseApi } from "./http/base";
 import { http } from "./http/http";
 
-type VoteListSortType = Omit<SortType, "ByName">;
-
 export interface GetVoteListRequest {
   keyword?: string;
-  sortBy: VoteListSortType;
+  sortBy: VoteSortType;
   page: number;
   size: number;
 }
@@ -185,5 +182,17 @@ interface GetVotingCheckResponse {
 
 export const getVotingCheck = async (voteId: number) => {
   const response = await http.get<GetVotingCheckResponse>(`api/votes/${voteId}/voted`);
+  return response.data;
+};
+
+interface GetHotDrinkVoteResponse {
+  voteId: number;
+  voteTitle: string;
+  drinkAImage: string;
+  drinkBImage: string;
+}
+
+export const getHotDrinkVote = async () => {
+  const response = await baseApi.get<GetHotDrinkVoteResponse>("api/votes/drinks/hot");
   return response.data;
 };
