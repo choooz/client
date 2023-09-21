@@ -1,5 +1,6 @@
-import React from "react";
-import styled, { css } from "styled-components";
+"use client";
+import React, { forwardRef } from "react";
+import styled from "styled-components";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -17,9 +18,20 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   autoFocus?: boolean;
 }
 
-function Input({ width, height, variant, ...rest }: InputProps) {
-  return <InputStyled type="text" width={width} height={height} variant={variant} {...rest} />;
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ width, height, variant, ...rest }, ref) => {
+    return (
+      <InputStyled
+        ref={ref}
+        type="text"
+        width={width}
+        height={height}
+        variant={variant}
+        {...rest}
+      />
+    );
+  },
+);
 
 const InputStyled = styled.input<InputProps>`
   color: ${({ theme }) => theme.colors.black_01};
