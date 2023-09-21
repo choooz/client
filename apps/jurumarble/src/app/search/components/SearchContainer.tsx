@@ -5,14 +5,15 @@ import { Button } from "components/button";
 import SearchInput from "components/SearchInput";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css, DefaultTheme } from "styled-components";
-import { ChangeEvent, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import DrinkList from "./DrinkList";
 import DrinkVoteList from "./DrinkVoteList";
 import SortSelect from "./SortSelect";
 import RegionSmallSelect from "./RegionSmallSelect";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { RegionType, SortType } from "src/types/common";
-import { SORT_LIST } from "lib/constants";
+import { DrinkInfoSortType, VoteSortType, RegionType } from "src/types/common";
+import { useDebouncedCallback } from "@react-hookz/web";
+import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
 
 const TAB_LIST = [
   { id: "total", name: "통합" },
@@ -20,19 +21,16 @@ const TAB_LIST = [
   { id: "drinkVote", name: "우리술 투표" },
 ] as const;
 
-const drinkInfoSortOptionList = SORT_LIST.filter((sortOption) => sortOption.value !== "ByTime");
-const drinkVoteSortOptionList = SORT_LIST.filter((sortOption) => sortOption.value !== "ByName");
-
 type TabList = (typeof TAB_LIST)[number]["id"];
 
 /**
- * @Todo 아래와 같이 분리하기
+ * @TODO 아래와 같이 분리하기
  * <SeachProvider>
  * <SearchInputContainer />
  * <SearchVoteListContainer />
  * </SearchProvider>
  *
- * @Todo 검색 상태를 관리하는 Context를 만들기
+ * @TODO 검색 상태를 관리하는 Context를 만들기
  * const {textInput} = useSearchContext()
  */
 
@@ -50,41 +48,42 @@ function SearchContainer() {
     [searchParams],
   );
 
-  const searchText = searchParams.get("searchText") as string;
-  const onChangeSearchText = (e: ChangeEvent<HTMLInputElement>) => {
-    router.replace(pathname + "?" + createQueryString("searchText", e.target.value));
+  const searchText = (searchParams.get("searchText") as string) ?? "";
+
+  const onChangeSearchText = (keyword: string) => {
+    router.replace(pathname + "?" + createQueryString("searchText", keyword), {
+      scroll: true,
+    });
+  };
+  const debouncedChange = useDebouncedCallback(
+    (keyword: string) => {
+      onChangeSearchText(keyword);
+    },
+    [onChangeSearchText],
+    500,
+  );
+
+  const selectedTab = searchParams.get("selectedTab") ?? "total";
+  const onClickSelectedTab = (tab: TabList) => {
+    router.replace(pathname + "?" + createQueryString("selectedTab", tab));
   };
 
-  const selectedTab = searchParams.get("selectedTab");
-  const onClickSelectedTab = (e: React.MouseEvent<HTMLButtonElement>) => {
-    router.replace(
-      pathname + "?" + createQueryString("selectedTab", e.currentTarget.value as TabList),
-    );
+  const drinkInfoSortOption = searchParams.get("drinkInfoSortOption") ?? "ByPopularity";
+  const onChangeDrinkInfoSortOption = (value: DrinkInfoSortType) => {
+    router.replace(pathname + "?" + createQueryString("drinkInfoSortOption", value));
   };
 
-  const sortOption = searchParams.get("sortOption") as SortType;
-  const onChangeSortOption = (value: string) => {
-    router.replace(pathname + "?" + createQueryString("sortOption", value));
+  const drinkVoteSortOption = searchParams.get("drinkVoteSortOption") ?? "ByPopularity";
+  const onChangeDrinkVoteSortOption = (value: VoteSortType) => {
+    router.replace(pathname + "?" + createQueryString("drinkVoteSortOption", value));
   };
 
-  const regionOption = searchParams.get("regionOption") as RegionType;
-  const onChangeRegionOption = (value: string) => {
+  const regionOption = searchParams.get("regionOption") ?? "";
+  const onChangeRegionOption = (value: RegionType) => {
     router.replace(pathname + "?" + createQueryString("regionOption", value));
   };
 
-  useEffect(() => {
-    const queryParams = {
-      searchText: searchText || "",
-      selectedTab: selectedTab || "total",
-      sortOption: sortOption || "ByPopularity",
-      regionOption: regionOption || "",
-    };
-    const queryString = new URLSearchParams(queryParams).toString();
-
-    router.replace(pathname + "?" + queryString);
-  }, []);
-
-  const isSelectedTab = (tabName: string) => {
+  const isSelectedTab = (tabName: TabList) => {
     return selectedTab === tabName;
   };
 
@@ -98,7 +97,7 @@ function SearchContainer() {
           <H2>우리술 정보</H2>
           <DrinkList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab("total")}
           />
@@ -106,11 +105,8 @@ function SearchContainer() {
             variant="outline"
             width="100%"
             height="48px"
-            /**
-             * @Todo enum으로 사용하면 좋을 것 같다.
-             */
-            value={"drinkInfo"}
-            onClick={onClickSelectedTab}
+            value="drinkInfo"
+            onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
           >
             우리술 정보 더보기
           </MoreButton>
@@ -121,7 +117,7 @@ function SearchContainer() {
           <H2>우리술 투표</H2>
           <DrinkVoteList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkVoteSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab("total")}
           />
@@ -130,7 +126,7 @@ function SearchContainer() {
             width="100%"
             height="48px"
             value="drinkVote"
-            onClick={onClickSelectedTab}
+            onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
           >
             우리술 투표 더보기
           </MoreButton>
@@ -142,9 +138,9 @@ function SearchContainer() {
         <>
           <SelectContainer>
             <SortSelect
-              defaultOption={sortOption}
-              onChangeSortOption={onChangeSortOption}
-              options={drinkInfoSortOptionList}
+              defaultOption={drinkInfoSortOption}
+              onChangeSortOption={onChangeDrinkInfoSortOption}
+              options={DRINK_INFO_SORT_LIST}
             />
             <RegionSmallSelect
               defaultOption={regionOption}
@@ -153,7 +149,7 @@ function SearchContainer() {
           </SelectContainer>
           <DrinkList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={false}
           />
@@ -167,9 +163,9 @@ function SearchContainer() {
         <>
           <SelectContainer>
             <SortSelect
-              defaultOption={sortOption}
-              onChangeSortOption={onChangeSortOption}
-              options={drinkVoteSortOptionList}
+              defaultOption={drinkVoteSortOption}
+              onChangeSortOption={onChangeDrinkVoteSortOption}
+              options={DRINK_VOTE_SORT_LIST}
             />
             <RegionSmallSelect
               defaultOption={regionOption}
@@ -178,7 +174,7 @@ function SearchContainer() {
           </SelectContainer>
           <DrinkVoteList
             searchText={searchText}
-            sortOption={sortOption}
+            sortOption={drinkVoteSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab("total")}
           />
@@ -186,14 +182,14 @@ function SearchContainer() {
       ),
     },
   };
-  const { topSectionItem, bottomSectionItem } = renderItem[(selectedTab as TabList) || "total"];
+  const { topSectionItem, bottomSectionItem } = renderItem[selectedTab as TabList];
 
   return (
     <>
       <TopSection>
         <SearchBox>
           <SvgIcPrev width={24} height={24} />
-          <SearchInput value={searchText} onChange={onChangeSearchText} />
+          <SearchInput value={searchText} onChange={debouncedChange} />
         </SearchBox>
         <TabBox>
           {TAB_LIST.map(({ id, name }) => (
@@ -201,7 +197,7 @@ function SearchContainer() {
               key={`tab_${id}`}
               value={id}
               selected={id === selectedTab}
-              onClick={onClickSelectedTab}
+              onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
             >
               {name}
             </SelectedButton>
