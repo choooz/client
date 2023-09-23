@@ -39,13 +39,29 @@ interface GetEnjoyedDrinkListRequest {
   region?: string;
 }
 
-interface GetEnjoyedDrinkListResponse extends DrinkListResponse {}
+export interface GetEnjoyedDrinkListResponse extends DrinkListResponse {}
 
 export const getEnjoyedDrinkList = async (params: GetEnjoyedDrinkListRequest) => {
   const response = await http.get<GetEnjoyedDrinkListResponse>("api/drinks/enjoys", {
     params: {
       ...params,
     },
+  });
+  return response.data;
+};
+
+export interface GetIsEnjoyedDrinkAPIResponse {
+  enjoyed: boolean;
+}
+
+export const getIsEnjoyedDrinkAPI = async (drinkId: number) => {
+  const response = await http.get<GetIsEnjoyedDrinkAPIResponse>(`api/drinks/${drinkId}/enjoy`);
+  return response.data;
+};
+
+export const postDrinkEnjoyAPI = async (drinkId: number) => {
+  const response = await http.post(`api/drinks/enjoys`, {
+    drinkId,
   });
   return response.data;
 };
