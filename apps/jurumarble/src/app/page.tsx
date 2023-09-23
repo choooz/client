@@ -5,7 +5,7 @@ import DivideLine from "components/DivideLine";
 import Header from "components/Header";
 import Image from "next/image";
 import { MainBannerImage } from "public/images";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import HotDrinkContainer from "./main/components/HotDrinkContainer";
 import HotDrinkVoteContainer from "./main/components/HotDrinkVoteContainer";
 import SearchInputWrapper from "./main/components/SearchInputWrapper";
