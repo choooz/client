@@ -8,7 +8,7 @@ import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
 import SelectedDrinkChip from "./SelectedDrinkChip";
 import DrinkItem from "app/vote/post/components/DrinkItem";
-import useGetDrinkListService from "hooks/useGetDrinkList";
+import useGetDrinkList from "hooks/useGetDrinkList";
 import SearchInput from "components/SearchInput";
 import useInput from "hooks/useInput";
 import { DrinkInfoType } from "src/types/vote";
@@ -29,7 +29,7 @@ function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete
 
   const { value: keyword, onChange: onChangeKeyword } = useInput({ useDebounce: true });
 
-  const { drinkList } = useGetDrinkListService({
+  const { drinkList } = useGetDrinkList({
     keyword,
     region: regionOption,
     page: 0,

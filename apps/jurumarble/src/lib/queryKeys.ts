@@ -12,6 +12,8 @@ export const queryKeys = {
   VOTING_CHECK: "votingCheck" as const,
   DETAIL_COMMENT_LIST: "commentByVoteId" as const,
   DETAIL_VOTE_COUNT: "voteCountByVoteId" as const,
+  DRINK_STEMP_LIST: "drinkStempList" as const,
+  DRINK_STEMP: "drinkStemp" as const,
 };
 
 export const reactQueryKeys = {

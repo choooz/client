@@ -18,6 +18,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  height: 60px;
 `;
 
 const IconContainer = styled.div`

@@ -1,41 +1,53 @@
-import Chip from "components/Chip";
 import { transitions } from "lib/styles";
 import Image from "next/image";
+import SvgStamp from "src/assets/icons/components/IcStamp";
 import { DrinkInfo } from "src/types/drink";
-import { DrinkInfoType } from "src/types/vote";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
+import useDrinkStempService from "../service/useDrinkStempService";
 
 interface Props {
   drinkInfo: DrinkInfo;
-  onClickAddDrink: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  selectedDrinkList: DrinkInfoType[];
+  onClickReplaceDrinkInfo: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  selectedDrinkList?: string[];
 }
 
-function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
-  const { name, productName, image } = drinkInfo;
+function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Props) {
+  const { id, name, productName, image } = drinkInfo;
 
-  const isInclude = (selectedDrink: DrinkInfoType) => selectedDrink.id === drinkInfo.id;
+  const { colors } = useTheme();
+
+  const { isStempedDrink, postDrinkEnjoy } = useDrinkStempService(id);
+
+  const stempColor = isStempedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
   return (
-    <Container onClick={onClickAddDrink} name={name} selected={selectedDrinkList.some(isInclude)}>
+    <Container
+      onClick={onClickReplaceDrinkInfo}
+      name={name}
+      selected={selectedDrinkList?.includes(name)}
+    >
       <ImageWrapper>
         <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
           <Name>{name}</Name>
+          <StampWrapper
+            onClick={(e) => {
+              e.stopPropagation();
+              postDrinkEnjoy(id);
+            }}
+          >
+            <SvgStamp width={24} height={24} fill={stempColor} />
+          </StampWrapper>
         </NameStampContainer>
         <ManufacturerName>{productName}</ManufacturerName>
-        <ChipContainer>
-          <Chip variant="region">서울</Chip>
-          <Chip variant="numberOfParticipants">213명이 즐겼어요</Chip>
-        </ChipContainer>
       </InfoContainer>
     </Container>
   );
 }
 
-const Container = styled.button<{ selected: boolean }>`
+const Container = styled.button<{ selected: boolean | undefined }>`
   display: flex;
   box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
   height: 120px;
@@ -69,6 +81,10 @@ const NameStampContainer = styled.div`
   justify-content: space-between;
 `;
 
+const StampWrapper = styled.button`
+  margin-right: 1px;
+`;
+
 const Name = styled.div`
   ${({ theme }) =>
     css`
@@ -87,12 +103,6 @@ const ManufacturerName = styled.span`
       margin-top: 4px;
       display: inherit;
     `}
-`;
-
-const ChipContainer = styled.div`
-  display: flex;
-  margin-top: 13px;
-  gap: 4px;
 `;
 
 export default DrinkItem;

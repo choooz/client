@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import DrinkItem from "./DrinkItem";
-import useGetDrinkListService from "hooks/useGetDrinkList";
 import { DrinkInfoSortType } from "src/types/common";
+import useGetDrinkList from "hooks/useGetDrinkList";
 
 interface Props {
   searchText: string;
@@ -14,7 +14,7 @@ interface Props {
 }
 
 function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Props) {
-  const { drinkList, fetchNextPage, hasNextPage } = useGetDrinkListService({
+  const { drinkList, fetchNextPage, hasNextPage } = useGetDrinkList({
     page: 0,
     size: 3,
     keyword: searchText,
