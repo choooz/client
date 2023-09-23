@@ -47,8 +47,8 @@ const SelectStyled = styled.div<{ isOpen: boolean }>`
     }
     #select-list {
       overflow: auto;
-      top: 110px;
-      left: 22px;
+      top: 6px;
+      left: -100px;
       width: 335px;
       height: 330px;
       display: flex;

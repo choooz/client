@@ -15,20 +15,26 @@ interface Props {
 function OptionList({ options, onChangeSelectedOption, onToggleOpen }: Props) {
   return (
     // @todo 고유한 id를 만들어야함
-    <Ul id="select-list" aria-labelledby="select-box-1" role="listbox">
-      {options.map(({ value, label }) => (
-        <Option
-          key={`select_${value}`}
-          label={label}
-          onChangeSelectedOption={() => {
-            onChangeSelectedOption(value);
-            onToggleOpen();
-          }}
-        />
-      ))}
-    </Ul>
+    <Wrapper>
+      <Ul id="select-list" aria-labelledby="select-box-1" role="listbox">
+        {options.map(({ value, label }) => (
+          <Option
+            key={`select_${value}`}
+            label={label}
+            onChangeSelectedOption={() => {
+              onChangeSelectedOption(value);
+              onToggleOpen();
+            }}
+          />
+        ))}
+      </Ul>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  position: relative;
+`;
 
 const Ul = styled.ul`
   position: absolute;
