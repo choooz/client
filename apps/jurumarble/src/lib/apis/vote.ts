@@ -49,7 +49,6 @@ export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteLis
 
 export interface GetVoteByIdResponse {
   voteId: number;
-  postedUserId: number;
   title: string;
   detail: string;
   filteredGender: string;
@@ -62,6 +61,13 @@ export interface GetVoteByIdResponse {
   titleA: string;
   titleB: string;
   region: string;
+  postedUserAge: string | null;
+  postedUserAlcoholLimit: "HIGH" | "MEDIUM" | "LOW" | null;
+  postedUserGender: "" | "";
+  postedUserId: number;
+  postedUserImageUrl: null;
+  postedUserMbti: string | null;
+  postedUserNickname: string;
 }
 
 export const getVoteByVoteIdAPI = async (voteId: number) => {

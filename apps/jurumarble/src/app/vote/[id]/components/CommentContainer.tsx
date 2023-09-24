@@ -105,7 +105,6 @@ function CommentContainer({ postId }: Props) {
           )}
         <br />
       </Container>
-      <BgContainer />
     </>
   );
 }
@@ -115,13 +114,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-
-const BgContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.bg_02};
-  width: 100%;
-  height: 76px;
-  padding-bottom: 50px;
 `;
 
 export default CommentContainer;
