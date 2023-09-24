@@ -1,7 +1,12 @@
+"use client";
+
+import { RegisterProgressSection, RegisterStepSection } from "./sections";
+
 function RegisterPage() {
   return (
     <div>
-      <h1>Register</h1>
+      <RegisterProgressSection />
+      <RegisterStepSection />
     </div>
   );
 }

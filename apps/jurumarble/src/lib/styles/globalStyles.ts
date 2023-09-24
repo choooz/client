@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
     padding: 0;
     font: inherit;
     color: inherit;
+    -webkit-tap-highlight-color: transparent;
 }
 
     *, :after, :before, ::before, ::after {

@@ -20,9 +20,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="kr">
       <head></head>
-      <ReactQueryProvider>
-        <StyledComponents>
-          <body className={pretandard.className}>
+      <body className={pretandard.className} suppressHydrationWarning={true}>
+        <ReactQueryProvider>
+          <StyledComponents>
             <StyledLayout>
               <>
                 <div id="portal" />
@@ -30,9 +30,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
               </>
             </StyledLayout>
-          </body>
-        </StyledComponents>
-      </ReactQueryProvider>
+          </StyledComponents>
+        </ReactQueryProvider>
+      </body>
     </html>
   );
 }
