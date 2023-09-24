@@ -1,3 +1,4 @@
+import { baseApi } from "./http/base";
 import { http } from "./http/http";
 import { AorB } from "./vote";
 
@@ -13,7 +14,7 @@ export interface GetCommentRequest {
   typeId: number;
 }
 
-interface CommentResponse {
+export interface CommentResponse {
   id: number;
   userId: number;
   voteId: number;
@@ -50,7 +51,7 @@ export const getCommentById = async ({
   sortBy,
   typeId,
 }: GetCommentRequest) => {
-  const response = await http.get<GetCommentResponse>(`api/${commentType}/${typeId}/comments`, {
+  const response = await baseApi.get<GetCommentResponse>(`api/${commentType}/${typeId}/comments`, {
     params: {
       sortBy,
       page: paging.page,

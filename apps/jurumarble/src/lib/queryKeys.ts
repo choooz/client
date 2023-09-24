@@ -14,6 +14,7 @@ export const queryKeys = {
   DETAIL_VOTE_COUNT: "voteCountByVoteId" as const,
   DRINK_STEMP_LIST: "drinkStempList" as const,
   DRINK_STEMP: "drinkStemp" as const,
+  DETAIL_FILTERED_ANALYSIS: "filteredAnalysisByVoteId" as const,
 };
 
 export const reactQueryKeys = {
@@ -33,4 +34,6 @@ export const reactQueryKeys = {
     sortBy?: string,
   ) => [queryKeys.DETAIL_COMMENT_LIST, typeId, commentType, size, page, sortBy] as const,
   detailVoteCount: (id: number) => [queryKeys.DETAIL_VOTE_COUNT, id] as const,
+  detailFilterdAnalysis: (id: number, mbti?: string, gender?: string, age?: string) =>
+    [queryKeys.DETAIL_FILTERED_ANALYSIS, id, mbti, gender, age] as const,
 };
