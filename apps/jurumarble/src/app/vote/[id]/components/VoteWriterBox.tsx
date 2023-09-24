@@ -5,11 +5,11 @@ import styled, { css } from "styled-components";
 interface Props {
   writer: {
     userImage: string | StaticImageData;
-    userGender: string;
-    userAge: number;
-    userMbti: string;
-    nickName: string;
-    alchol: string;
+    userGender: string | null;
+    userAge: string | null;
+    userMbti: string | null;
+    nickName: string | null;
+    alchol: string | null;
   };
 }
 
@@ -27,14 +27,28 @@ function VoteWriterBox({ writer }: Props) {
         }}
       />
       <ContentsBox>
-        <Flex>
-          <TagBox>
-            {userGender}
-            <DivideTag /> {userAge}대
-            <DivideTag /> {userMbti}
-            <DivideTag /> {alchol}
-          </TagBox>
-        </Flex>
+        {(userAge || userGender || userAge || alchol || userMbti) && (
+          <Flex>
+            <TagBox>
+              {userGender && userGender}
+              {userAge && (
+                <>
+                  <DivideTag /> {userAge}대
+                </>
+              )}
+              {userMbti && (
+                <>
+                  <DivideTag /> {userMbti}
+                </>
+              )}
+              {alchol && (
+                <>
+                  <DivideTag /> {alchol}
+                </>
+              )}
+            </TagBox>
+          </Flex>
+        )}
         <NickName> {nickName}</NickName>
       </ContentsBox>
     </Container>

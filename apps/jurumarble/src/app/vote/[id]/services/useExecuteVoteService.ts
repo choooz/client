@@ -12,6 +12,7 @@ export default function useExecuteVoteService(voteId: number) {
     onSuccess: () => {
       queryClient.invalidateQueries([queryKeys.VOTE_DETAIL]);
       queryClient.invalidateQueries([queryKeys.VOTING_CHECK]);
+      queryClient.invalidateQueries([queryKeys.DETAIL_FILTERED_ANALYSIS]);
     },
     onError: () => {
       alert("로그인 후 진행해주세요.");

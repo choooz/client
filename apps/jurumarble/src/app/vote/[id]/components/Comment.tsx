@@ -1,5 +1,6 @@
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
+import { CommentResponse } from "lib/apis/comment";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
 import React from "react";
@@ -9,7 +10,19 @@ import styled, { css } from "styled-components";
 import CommentDeleteModal from "./CommentDeleteModal";
 
 interface Props {
-  comment?: any;
+  comment: {
+    id: number;
+    content: string;
+    age: string;
+    createdDate: string;
+    gender: string;
+    hateCount: number;
+    imageUrlstring: string;
+    likeCount: number;
+    mbti: string;
+    nickName: string;
+    userId: number;
+  };
   mutateDeleteComment(): void;
   mutateLike?(): void;
   mutateHate?(): void;
@@ -27,7 +40,6 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
     likeCount,
     mbti,
     nickName,
-    parentId,
     userId,
   } = comment;
 
@@ -48,14 +60,24 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
         }}
       />
       <ContentsBox>
-        <Flex>
-          <TagBox>
-            {/* {gender}
-            <DivideTag /> {age}
-            <DivideTag /> {mbti} */}
-            여 | 20대 | INTJ | 10병
-          </TagBox>
-        </Flex>
+        {(age || gender || mbti) && (
+          <Flex>
+            <TagBox>
+              {gender && gender}
+              {age && (
+                <>
+                  <DivideTag /> {age}대
+                </>
+              )}
+              {mbti && (
+                <>
+                  <DivideTag /> {mbti}
+                </>
+              )}
+            </TagBox>
+          </Flex>
+        )}
+
         <NickName> {nickName}</NickName>
 
         <Contents>{content}</Contents>

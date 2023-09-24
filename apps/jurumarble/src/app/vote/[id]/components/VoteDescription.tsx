@@ -36,7 +36,6 @@ function VoteDescription({
   onMutateVoting,
 }: Props) {
   const params = useParams();
-  console.log(select);
 
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";

@@ -6,7 +6,6 @@ import VoteWriterBox from "./components/VoteWriterBox";
 import { ExImg1 } from "public/images";
 import BottomBar from "components/BottomBar";
 import VoteDescription from "./components/VoteDescription";
-import { useState } from "react";
 import ChipContainer from "./components/ChipContainer";
 import CommentContainer from "./components/CommentContainer";
 import { useParams, useSearchParams } from "next/navigation";
@@ -15,45 +14,77 @@ import SearchRestaurantModal from "./components/SearchRestaurantModal";
 import usePostBookmarkService from "../services/useBookmarkService";
 import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
+import useFilteredStatisticsService from "./services/useFilterStatisticsService";
+import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
+import { useState } from "react";
 
 function Detail() {
   const params = useParams();
+  const [filter, setFilter] = useState({
+    age: "",
+    mbti: "",
+    gender: "",
+  });
 
   const postId = params.id;
-  const [selected, setSelected] = useState<"A" | "B" | null>(null);
 
-  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(true);
+  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(false);
 
   const { data, isError, isLoading } = useVoteLoadService(Number(postId));
 
   const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(Number(postId));
 
-  const { mutate, select } = useExecuteVoteService(Number(postId));
+  const { mutate, select } = useExecuteVoteService(Number(data?.voteId));
   const onMutateVoting = (select: "A" | "B") => {
     mutate(select);
   };
-
+  const { voteStatisticsQuery } = useFilteredStatisticsService(
+    Number(postId),
+    filter.gender,
+    filter.age,
+    filter.mbti,
+  );
+  const {
+    data: statistics,
+    isLoading: isStatisticsLoading,
+    isError: isStatisticsError,
+  } = voteStatisticsQuery;
   const { data: bookmarkCheck } = bookMarkCheckQuery;
 
   const isBookmark = bookmarkCheck?.bookmarked || false;
 
-  if (isLoading) return <div>로딩중</div>;
-  if (isError) return <div>에러</div>;
-  if (!data) return <div></div>;
-  const { detail, title, titleA, titleB, region, imageA, imageB } = data;
+  if (isLoading || isStatisticsLoading) return <div>로딩중</div>;
+  if (isError || isStatisticsError) return <div>에러</div>;
+  if (!data || !statistics) return <div></div>;
+  const {
+    detail,
+    title,
+    titleA,
+    titleB,
+    region,
+    imageA,
+    imageB,
+    postedUserAge,
+    postedUserGender,
+    postedUserMbti,
+    postedUserImageUrl,
+    postedUserNickname,
+    postedUserAlcoholLimit,
+  } = data;
 
+  const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
   return (
     <Container>
       <Header />
 
       <VoteWriterBox
         writer={{
-          nickName: "김민수",
-          userAge: 10,
-          userGender: "여",
-          userImage: ExImg1,
-          alchol: "10병",
-          userMbti: "ENFP",
+          nickName: postedUserNickname,
+          userAge: postedUserAge,
+          userGender: postedUserGender,
+          userImage: postedUserImageUrl || ExImg1,
+          alchol: postedUserAlcoholLimit,
+          userMbti: postedUserMbti,
         }}
       />
 
@@ -69,20 +100,29 @@ function Detail() {
         <VoteDescription
           imageA={imageA || ExImg1}
           imageB={imageB || ExImg1}
-          percentageA={50}
-          percentageB={50}
+          percentageA={percentageA}
+          percentageB={percentageB}
           titleA={titleA}
           titleB={titleB}
-          totalCountA={100}
-          totalCountB={100}
+          totalCountA={totalCountA}
+          totalCountB={totalCountB}
           select={select.choice}
           onMutateVoting={onMutateVoting}
         />
+        {!!select.choice && (
+          <VoteAnalyzeBar
+            totalCountA={totalCountA}
+            totalCountB={totalCountB}
+            percentageA={percentageA}
+            percentageB={percentageB}
+          />
+        )}
         <CommentContainer postId={Number(postId)} />
       </PageInner>
       {isSearchRestaurantModal && (
         <SearchRestaurantModal onToggleSearchRestaurantModal={onToggleSearchRestaurantModal} />
       )}
+
       <BottomBar />
     </Container>
   );
@@ -99,6 +139,7 @@ const Container = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.bg_02};
   `}
+  min-height:100vh;
 `;
 
 const PageInner = styled.div`
