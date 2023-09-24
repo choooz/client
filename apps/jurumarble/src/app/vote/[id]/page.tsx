@@ -16,23 +16,34 @@ import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
 import useFilteredStatisticsService from "./services/useFilterStatisticsService";
 import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
+import { useState } from "react";
 
 function Detail() {
   const params = useParams();
+  const [filter, setFilter] = useState({
+    age: "",
+    mbti: "",
+    gender: "",
+  });
 
   const postId = params.id;
 
-  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(true);
+  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(false);
 
   const { data, isError, isLoading } = useVoteLoadService(Number(postId));
 
   const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(Number(postId));
 
-  const { mutate, select } = useExecuteVoteService(Number(postId));
+  const { mutate, select } = useExecuteVoteService(Number(data?.voteId));
   const onMutateVoting = (select: "A" | "B") => {
     mutate(select);
   };
-  const { voteStatisticsQuery } = useFilteredStatisticsService(Number(postId));
+  const { voteStatisticsQuery } = useFilteredStatisticsService(
+    Number(postId),
+    filter.gender,
+    filter.age,
+    filter.mbti,
+  );
   const {
     data: statistics,
     isLoading: isStatisticsLoading,

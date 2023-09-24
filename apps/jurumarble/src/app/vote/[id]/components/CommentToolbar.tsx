@@ -8,7 +8,6 @@ interface Props {
 }
 
 function CommentToolBar({ commentCount, onChangeFilter, sortBy }: Props) {
-  console.log("sortBy", sortBy);
   return (
     <Container>
       <Title>
