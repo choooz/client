@@ -5,7 +5,6 @@ import { Button } from "components/button";
 import SearchInput from "components/SearchInput";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css, DefaultTheme } from "styled-components";
-import { useCallback } from "react";
 import DrinkList from "./DrinkList";
 import DrinkVoteList from "./DrinkVoteList";
 import SortSelect from "./SortSelect";
@@ -15,6 +14,7 @@ import { DrinkInfoSortType, VoteSortType, RegionType } from "src/types/common";
 import { useDebouncedCallback } from "@react-hookz/web";
 import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
 import DivideLine from "components/DivideLine";
+import { useCreateQueryString } from "hooks/useCreateQueryString";
 
 const TAB_LIST = [
   { id: "total", name: "통합" },
@@ -40,14 +40,7 @@ function SearchContainer() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set(name, value);
-      return params.toString();
-    },
-    [searchParams],
-  );
+  const createQueryString = useCreateQueryString(searchParams);
 
   const searchText = (searchParams.get("searchText") as string) ?? "";
 
