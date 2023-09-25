@@ -1,3 +1,5 @@
+"use client";
+
 import { SvgHeaderSearch, SvgLogo, SvgNotification } from "src/assets/icons/components";
 import styled from "styled-components";
 
