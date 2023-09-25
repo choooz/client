@@ -43,3 +43,8 @@ export const DRINK_INFO_SORT_LIST = [
   { value: "ByName", label: "이름순" },
   { value: "ByPopularity", label: "인기순" },
 ];
+
+export const GENDER = {
+  MALE: "MALE",
+  FEMALE: "FEMALE",
+} as const;
