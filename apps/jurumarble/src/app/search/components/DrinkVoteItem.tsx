@@ -1,13 +1,13 @@
-import { Vote } from "lib/apis/vote";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import useBookmarkService from "services/useBookmarkService";
+import { Content } from "src/types/vote";
 import styled from "styled-components";
 import ChipContainer from "./ChipContainer";
 import VoteDescription from "./VoteDescription";
 
 interface Props {
-  voteDrink: Vote;
+  voteDrink: Content;
 }
 /**
  *

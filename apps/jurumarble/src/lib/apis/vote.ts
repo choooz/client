@@ -1,5 +1,6 @@
 import { SERVER_URL } from "lib/constants";
 import { VoteSortType } from "src/types/common";
+import { Content, CommonVoteListResponse } from "src/types/vote";
 import { baseApi } from "./http/base";
 import { http } from "./http/http";
 
@@ -10,24 +11,11 @@ export interface GetVoteListRequest {
   size: number;
 }
 
-export interface Vote {
-  voteId: number;
-  postedUserId: number;
-  title: string;
-  detail: string;
-  filteredGender: null;
-  filteredAge: null;
-  filteredMbti: null;
-  votedCount: number;
-  voteType: string;
-  imageA: string;
-  imageB: string;
-  titleA: string;
-  titleB: string;
-  region: string;
-}
+/**
+ * @TODO 숫자 제거 필요
+ */
 interface GetVoteListResponse {
-  content: Vote[];
+  content: Content[];
   first: boolean;
   last: boolean;
   numberOfElements: 10;
@@ -137,33 +125,8 @@ export interface GetVoteDrinkListRequest {
   sortBy: string;
 }
 
-interface Pageable {
-  sort: Sort;
-  pageNumber: number;
-  pageSize: number;
-  offset: number;
-  paged: boolean;
-  unpaged: boolean;
-}
-
-interface Sort {
-  sorted: boolean;
-  unsorted: boolean;
-  empty: boolean;
-}
-
 export interface GetVotetDrinkListResponse {
-  voteSlice: {
-    content: Vote[];
-    pageable: Pageable;
-    sort: Sort;
-    first: boolean;
-    last: boolean;
-    number: number;
-    numberOfElements: number;
-    size: number;
-    empty: boolean;
-  };
+  voteSlice: CommonVoteListResponse;
 }
 
 export const getVoteDrinkList = async (params: GetVoteDrinkListRequest) => {
