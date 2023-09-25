@@ -15,13 +15,15 @@ export const queryKeys = {
   DRINK_STEMP_LIST: "drinkStempList" as const,
   DRINK_STEMP: "drinkStemp" as const,
   DETAIL_FILTERED_ANALYSIS: "filteredAnalysisByVoteId" as const,
+  MY_PARTICIPATED_VOTE: "myParticipatedVote" as const,
+  MY_CREATED_VOTE: "myCreatedVote" as const,
+  MY_BOOKMARKED_VOTE: "myBookmarkedVote" as const,
 };
 
 export const reactQueryKeys = {
   // @note any 처리
   mainVoteList: () => [queryKeys.MAIN_VOTE_LIST] as const,
   bookmarkCheck: () => [queryKeys.BOOKMARK_CHECK] as const,
-  userInfo: () => [queryKeys.USER_INFO],
   voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
   restaurantList: (params: any) => [queryKeys.RESTAURANT_LIST, ...params],
   voteDetail: (voteId: number) => [queryKeys.VOTE_DETAIL, voteId] as const,

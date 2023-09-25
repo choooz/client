@@ -14,6 +14,7 @@ import PostBottomSheet from "./PostBottomSheet";
 import DrinkSearchModal from "./DrinkSearchModal";
 import usePostVoteService from "../services/usePostVoteService";
 import { DrinkInfoType } from "src/types/vote";
+import AorBMark from "components/AorBMark";
 
 const STEP_ONE = 1;
 const STEP_TWO = 2;
@@ -207,22 +208,6 @@ const ImageBox = styled.div`
     background-color: ${theme.colors.black_05};
     border-radius: 10px;
     height: 100%;
-  `}
-`;
-
-const AorBMark = styled.div<{ AorB: string }>`
-  ${({ theme, AorB }) => css`
-    ${theme.typography.caption}
-    background-color: ${AorB === "A" ? theme.colors.sub_01 : theme.colors.sub_02};
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 10px 0px 4px 0px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   `}
 `;
 
