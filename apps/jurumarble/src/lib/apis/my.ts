@@ -44,14 +44,13 @@ export const getVoteCount = async () => {
   return response.data;
 };
 
-interface UpdateUserInfoRequest {
+export interface UpdateUserInfoRequest {
+  imageUrl: string;
   nickname: string;
-  image?: string;
+  alcoholLimit: string;
   mbti: string;
-  categoryList: string[];
 }
-
-export const updateUserInfo = async (updateUserInfoRequest: UpdateUserInfoRequest) => {
-  const response = await http.patch("api/user/mypage/edit", updateUserInfoRequest);
+export const updateUserInfoAPI = async (updateUserInfoRequest: UpdateUserInfoRequest) => {
+  const response = await http.put("api/users", updateUserInfoRequest);
   return response.data;
 };
