@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadImageAPI } from "lib/apis/common";
-import { updateUserInfoAPI } from "lib/apis/my";
+import { deleteUserAPI, updateUserInfoAPI } from "lib/apis/my";
 import { queryKeys } from "lib/queryKeys";
 
 type UpdateUserInfoRequest = Exclude<Parameters<typeof updateUserInfoAPI>[0], undefined>;
@@ -51,11 +51,14 @@ export default function useEditProfileService() {
     },
   );
 
+  const { mutate: deleteUser } = useMutation(() => deleteUserAPI());
+
   return {
     onUploadImage,
     onChangeNickname,
     onChangeAlcoholCapacity,
     onChangeMBTI,
     updateUserInfo,
+    deleteUser,
   };
 }
