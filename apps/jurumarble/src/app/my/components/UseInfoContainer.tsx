@@ -4,8 +4,9 @@ import Path from "lib/Path";
 import Link from "next/link";
 import styled, { css } from "styled-components";
 import Image from "next/image";
-import { useGetUserInfo } from "services/useGetUserInfo";
+
 import { DrinkImage } from "public/images";
+import useGetUserInfo from "services/useGetUserInfo";
 
 function UserInfoContainer() {
   const { userInfo } = useGetUserInfo();
