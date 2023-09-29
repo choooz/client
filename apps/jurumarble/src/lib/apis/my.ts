@@ -54,3 +54,8 @@ export const updateUserInfoAPI = async (updateUserInfoRequest: UpdateUserInfoReq
   const response = await http.put("api/users", updateUserInfoRequest);
   return response.data;
 };
+
+export const deleteUserAPI = async () => {
+  const response = await http.delete("api/users");
+  return response.data;
+};

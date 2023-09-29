@@ -8,15 +8,25 @@ import useEditProfileService from "../services/useEditProfileService";
 import ImageUpload from "./ImageUpload";
 import SelectDrinkCapacity from "./SelectDrinkCapacity";
 import SelectMBTI from "./SelectMBTI";
+import WithdrawalModal from "./WithdrawalModal";
+import { useToggle } from "@monorepo/hooks";
 
 function UserInfoEditContainer() {
   const { userInfo } = useGetUserInfo();
   const { gender, ageType, alcoholLimit, imageUrl, mbti, nickname } = userInfo!;
 
-  const { onUploadImage, onChangeNickname, onChangeAlcoholCapacity, onChangeMBTI, updateUserInfo } =
-    useEditProfileService();
+  const {
+    onUploadImage,
+    onChangeNickname,
+    onChangeAlcoholCapacity,
+    onChangeMBTI,
+    updateUserInfo,
+    deleteUser,
+  } = useEditProfileService();
 
   const router = useRouter();
+
+  const [isToggleWithdrawalModal, onToggleWithdrawalModal] = useToggle();
 
   return (
     <Container>
@@ -42,7 +52,7 @@ function UserInfoEditContainer() {
       <SelectMBTI MBTI={mbti} onChangeMBTI={onChangeMBTI}></SelectMBTI>
       <WarningMessage>MBTI 수정시 2개월간 바꿀 수 없습니다.</WarningMessage>
       <FlexEnd>
-        <WithdrawalButton variant="outline" borderRadius="4px">
+        <WithdrawalButton variant="outline" borderRadius="4px" onClick={onToggleWithdrawalModal}>
           회원탈퇴
         </WithdrawalButton>
       </FlexEnd>
@@ -62,6 +72,12 @@ function UserInfoEditContainer() {
       >
         완료
       </CompleteButton>
+      {isToggleWithdrawalModal && (
+        <WithdrawalModal
+          deleteUser={deleteUser}
+          onToggleWithdrawalModal={onToggleWithdrawalModal}
+        />
+      )}
     </Container>
   );
 }

@@ -43,6 +43,10 @@ const variantStyles = {
     ${({ theme }) => css`
       background-color: ${theme.colors.main_01};
       color: ${theme.colors.white};
+      :disabled {
+        background-color: ${theme.colors.black_05};
+        color: ${theme.colors.black_03};
+      }
     `}
   `,
   outline: css`
