@@ -80,19 +80,21 @@ const typography = {
     font-size: 16px;
     font-weight: 400;
     line-height: 130%;
-    letter-spacing: -0.16px;
     `,
   body03: `
     font-size: 14px;
     font-weight: 400;
     line-height: 130%;
-    letter-spacing: -0.14px;
     `,
   body_long03: `
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
-    letter-spacing: -0.14px;
+    `,
+  body04: `
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 130%;
     `,
   caption: `
     font-size: 12px;
@@ -108,14 +110,17 @@ const typography = {
     font-size: 10px;
     font-weight: 500;
     line-height: 130%; 
-    letter-spacing: -0.1px;
     `,
   button01: `
   font-size: 14px;
   font-weight: 600;
   line-height: 130%; 
-  letter-spacing: -0.14px;
-`,
+  `,
+  button02: `
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 130%; 
+  `,
 } as const;
 
 const mediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;
