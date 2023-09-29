@@ -48,3 +48,41 @@ export const GENDER = {
   MALE: "MALE",
   FEMALE: "FEMALE",
 } as const;
+
+export const ALCOHOL_LEVEL_LIST = [
+  {
+    id: "LOW",
+    label: "미주가",
+    description: "도수가 비교적 낮은 맥주•막걸리•과실주 등 맛으로 즐기는 타입",
+  },
+  {
+    id: "MEDIUM",
+    label: "락주가",
+    description: "도수가 비교적 낮은 맥주•막걸리•과실주 등 맛으로 즐기는 타입",
+  },
+  {
+    id: "HIGH",
+    label: "애주가",
+    description: "높은 도수의 소주•위스키 등 독한 술을 사랑하는 타입",
+  },
+] as const;
+export type AlcoholLevelTypes = (typeof ALCOHOL_LEVEL_LIST)[number]["id"];
+
+export const MBTI_LIST = [
+  { id: "ESTP", label: "ESTP" },
+  { id: "ESFP", label: "ESFP" },
+  { id: "ENFP", label: "ENFP" },
+  { id: "ENTP", label: "ENTP" },
+  { id: "ESTJ", label: "ESTJ" },
+  { id: "ESFJ", label: "ESFJ" },
+  { id: "ENFJ", label: "ENFJ" },
+  { id: "ENTJ", label: "ENTJ" },
+  { id: "ISTJ", label: "ISTJ" },
+  { id: "ISFJ", label: "ISFJ" },
+  { id: "INFJ", label: "INFJ" },
+  { id: "INTJ", label: "INTJ" },
+  { id: "ISTP", label: "ISTP" },
+  { id: "ISFP", label: "ISFP" },
+  { id: "INFP", label: "INFP" },
+  { id: "INTP", label: "INTP" },
+];

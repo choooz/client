@@ -1,12 +1,8 @@
 "use client";
 
+import { AlcoholLevelTypes } from "lib/constants";
 import { createContext, PropsWithChildren, useMemo, useState } from "react";
-import {
-  AlcoholLevelTypes,
-  GenderTypes,
-  RegisterStepTypes,
-  REGISTER_STEPS_CONTENT,
-} from "../constants";
+import { GenderTypes, RegisterStepTypes, REGISTER_STEPS_CONTENT } from "../constants";
 
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;

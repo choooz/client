@@ -4,17 +4,16 @@ import { getUserInfo, GetUserInfoResponse } from "lib/apis/user";
 
 const getQueryKey = [queryKeys.USER_INFO];
 
-type MyPageUserInfo = Omit<GetUserInfoResponse, "email">;
-
-export function useGetUserInfo() {
-  const { data: userInfo } = useQuery<MyPageUserInfo>(getQueryKey, getUserInfo, {
+export default function useGetUserInfo() {
+  const { data: userInfo } = useQuery<GetUserInfoResponse>(getQueryKey, getUserInfo, {
     placeholderData: () => ({
       gender: "MALE",
-      nickname: "주루마블",
+      nickname: "",
       ageType: "twenties",
       imageUrl: "",
       mbti: "ESTJ",
-      alcoholLimit: "1",
+      alcoholLimit: "LOW",
+      email: "",
     }),
   });
 

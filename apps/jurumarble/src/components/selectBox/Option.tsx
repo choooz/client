@@ -6,11 +6,7 @@ interface Props {
 }
 
 function Option({ label, onChangeSelectedOption }: Props) {
-  return (
-    <Li role="option" onClick={onChangeSelectedOption}>
-      {label}
-    </Li>
-  );
+  return <Li onClick={onChangeSelectedOption}>{label}</Li>;
 }
 
 const Li = styled.li`

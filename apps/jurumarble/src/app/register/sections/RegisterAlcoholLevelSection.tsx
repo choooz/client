@@ -1,5 +1,6 @@
+import { ALCOHOL_LEVEL_LIST } from "lib/constants";
 import styled, { css } from "styled-components";
-import { REGISTER_ALCOHOL_LEVEL_LIST } from "../constants";
+
 import { useRegisterContext } from "../contexts";
 
 export const RegisterAlcoholLevelSection = () => {
@@ -7,7 +8,7 @@ export const RegisterAlcoholLevelSection = () => {
 
   return (
     <Wrapper>
-      {REGISTER_ALCOHOL_LEVEL_LIST.map((item) => (
+      {ALCOHOL_LEVEL_LIST.map((item) => (
         <Item
           key={item.id}
           onClick={() => onChangeAlcoholLevel(item.id)}
