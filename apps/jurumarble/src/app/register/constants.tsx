@@ -25,26 +25,6 @@ export const REGISTER_STEPS_CONTENT = {
 
 export type RegisterStepTypes = keyof typeof REGISTER_STEPS_CONTENT;
 
-export const REGISTER_ALCOHOL_LEVEL_LIST = [
-  {
-    id: "미주가",
-    label: "미주가",
-    description: "도수가 비교적 낮은 맥주•막걸리•과실주 등 맛으로 즐기는 타입",
-  },
-  {
-    id: "락주가",
-    label: "락주가",
-    description: "도수가 비교적 낮은 맥주•막걸리•과실주 등 맛으로 즐기는 타입",
-  },
-  {
-    id: "애주가",
-    label: "애주가",
-    description: "높은 도수의 소주•위스키 등 독한 술을 사랑하는 타입",
-  },
-] as const;
-
-export type AlcoholLevelTypes = (typeof REGISTER_ALCOHOL_LEVEL_LIST)[number]["id"];
-
 export const REGISTER_GENDER_LIST = [
   {
     id: "MAN",
