@@ -30,8 +30,28 @@ export interface DrinkInfo {
   enjoyCount: number | null;
 }
 
+export interface DrinkMapInfo {
+  drinkId: number;
+  name: string;
+  region: string;
+  latitude: number;
+  longitude: number;
+}
+
 export interface DrinkListResponse {
   content: DrinkInfo[];
+  pageable: Pageable;
+  sort: Sort;
+  first: boolean;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  size: number;
+  empty: boolean;
+}
+
+export interface DrinkMapResponse {
+  content: DrinkMapInfo[];
   pageable: Pageable;
   sort: Sort;
   first: boolean;

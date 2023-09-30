@@ -18,6 +18,7 @@ export const queryKeys = {
   MY_PARTICIPATED_VOTE: "myParticipatedVote" as const,
   MY_CREATED_VOTE: "myCreatedVote" as const,
   MY_BOOKMARKED_VOTE: "myBookmarkedVote" as const,
+  DRINKS_MAP: "drinksMap" as const,
 };
 
 export const reactQueryKeys = {
@@ -38,4 +39,12 @@ export const reactQueryKeys = {
   detailVoteCount: (id: number) => [queryKeys.DETAIL_VOTE_COUNT, id] as const,
   detailFilterdAnalysis: (id: number, mbti?: string, gender?: string, age?: string) =>
     [queryKeys.DETAIL_FILTERED_ANALYSIS, id, mbti, gender, age] as const,
+  drinksMap: (
+    startX: number,
+    startY: number,
+    endX: number,
+    endY: number,
+    page: number,
+    size: number,
+  ) => [queryKeys.DRINKS_MAP, startX, startY, endX, endY, page, size] as const,
 };

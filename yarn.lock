@@ -1427,6 +1427,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.22.15":
+  version: 7.23.1
+  resolution: "@babel/runtime@npm:7.23.1"
+  dependencies:
+    regenerator-runtime: ^0.14.0
+  checksum: 0cd0d43e6e7dc7f9152fda8c8312b08321cda2f56ef53d6c22ebdd773abdc6f5d0a69008de90aa41908d00e2c1facb24715ff121274e689305c858355ff02c70
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.8.4":
   version: 7.22.11
   resolution: "@babel/runtime@npm:7.22.11"
@@ -1613,6 +1622,7 @@ __metadata:
     react: 18.2.0
     react-dom: 18.2.0
     react-is: ^18.2.0
+    react-kakao-maps-sdk: ^1.1.21
     react-toastify: ^9.1.3
     styled-components: ^5.3.6
     styled-reset: ^4.5.1
@@ -3226,6 +3236,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kakao.maps.d.ts@npm:^0.1.39":
+  version: 0.1.39
+  resolution: "kakao.maps.d.ts@npm:0.1.39"
+  checksum: b89c3ee7d6e2e86b1f53fa43060097f7cfc11b5a1e6c3862ab0e4126aa17483c6642d24c2a67deaa1c36de3fb604ec3fc7c049e6e4ddb0689782b040fa341526
+  languageName: node
+  linkType: hard
+
 "lines-and-columns@npm:^1.1.6":
   version: 1.2.4
   resolution: "lines-and-columns@npm:1.2.4"
@@ -3640,6 +3657,19 @@ __metadata:
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
   checksum: e72d0ba81b5922759e4aff17e0252bd29988f9642ed817f56b25a3e217e13eea8a7f2322af99a06edb779da12d5d636e9fda473d620df9a3da0df2a74141d53e
+  languageName: node
+  linkType: hard
+
+"react-kakao-maps-sdk@npm:^1.1.21":
+  version: 1.1.21
+  resolution: "react-kakao-maps-sdk@npm:1.1.21"
+  dependencies:
+    "@babel/runtime": ^7.22.15
+    kakao.maps.d.ts: ^0.1.39
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: c30bd27f79c18da81a7083ba9b6e39ec1ee0bdfb8d1ae3890b96bf44bf77279a36e44f29ec652de89f97a6e4c1f32bfa3660d738f1b6f3eaf26e14d7c3241d20
   languageName: node
   linkType: hard
 
