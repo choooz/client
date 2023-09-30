@@ -22,3 +22,4 @@ export { default as SvgIcBookmarkActive } from "./IcBookmarkActive";
 export { default as SvgLogo } from "./IcLogo";
 export { default as SvgNotification } from "./IcNotification";
 export { default as SvgHeaderSearch } from "./IcHeaderSearch";
+export { default as SvgIcThunder } from "./IcThunder";
