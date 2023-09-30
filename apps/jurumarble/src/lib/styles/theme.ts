@@ -25,6 +25,8 @@ const colors = {
   main_drop_shadow_top: "rgba(235, 235, 235, 0.80)",
   main_drop_shadow_bottom: "rgba(235, 235, 235, 0.80)",
   modal_shadow: "rgba(235, 235, 235, 0.80)",
+  kakao: "#fee500",
+  naver: "#03c75a",
 } as const;
 
 const typography = {
