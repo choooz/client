@@ -5,7 +5,10 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useDrinksMapService from "../services/useDrinksMapService";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { useToggle } from "@react-hookz/web";
+import RegionBottomSheet from "./RegionBottomsheet";
 const MapContainer = () => {
+  const [on, toggle] = useToggle();
   const mapRef = useRef<kakao.maps.Map>(null);
   const [mapXY, setMapXY] = useState({
     startX: 0,
@@ -45,7 +48,7 @@ const MapContainer = () => {
             <br /> 우리술을 찾아드려요
           </h1>
 
-          <Button variant="primary" height="40px" width="82px">
+          <Button variant="primary" height="40px" width="82px" onClick={toggle}>
             직접 설정
           </Button>
         </SettingWrapper>
@@ -98,6 +101,7 @@ const MapContainer = () => {
           ))}
         </Map>
       </MapBox>
+      <RegionBottomSheet onToggleDrinkSearchModal={toggle} on={on} />
     </Container>
   );
 };
