@@ -6,7 +6,14 @@ import styled, { css, useTheme } from "styled-components";
 import useDrinkStempService from "../service/useDrinkStempService";
 
 interface Props {
-  drinkInfo: DrinkInfo;
+  drinkInfo:
+    | DrinkInfo
+    | {
+        id: number;
+        name: string;
+        productName: string;
+        image: string;
+      };
   onClickReplaceDrinkInfo: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedDrinkList?: string[];
 }
@@ -54,6 +61,7 @@ const Container = styled.button<{ selected: boolean | undefined }>`
   padding: 16px;
   border-radius: 16px;
   cursor: pointer;
+  width: 100%;
   ${({ theme, selected }) =>
     selected &&
     css`

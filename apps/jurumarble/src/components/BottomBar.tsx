@@ -16,7 +16,7 @@ const NAVIGATION_LIST = [
   },
   {
     name: "술도장",
-    path: "/stamp",
+    path: "/stemp",
     icon: <SvgIcMark width={24} height={24} />,
   },
   {
