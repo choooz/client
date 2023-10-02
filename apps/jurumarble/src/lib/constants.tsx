@@ -1,3 +1,5 @@
+import LevelChip from "components/LevelChip";
+import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
@@ -74,18 +76,24 @@ export const GENDER = {
 export const ALCOHOL_LEVEL_LIST = [
   {
     id: "LOW",
-    label: "미주가",
+    label: "아름다울 미(美)주가",
     description: "도수가 비교적 낮은 맥주•막걸리•과실주 등 맛으로 즐기는 타입",
+    image: DrinkCapacityLow,
+    levelChip: () => <LevelChip level={1} />,
   },
   {
     id: "MEDIUM",
-    label: "락주가",
-    description: "도수가 비교적 낮은 맥주•막걸리•과실주 등 맛으로 즐기는 타입",
+    label: "즐거울 락(㦡)주가",
+    description: "소주 등 술맛이 나야 진정한 술이라고 생각하는 타입",
+    image: DrinkCapacityMedium,
+    levelChip: () => <LevelChip level={2} />,
   },
   {
     id: "HIGH",
-    label: "애주가",
+    label: "사랑할 애(愛)주가",
     description: "높은 도수의 소주•위스키 등 독한 술을 사랑하는 타입",
+    image: DrinkCapacityHigh,
+    levelChip: () => <LevelChip level={3} />,
   },
 ] as const;
 export type AlcoholLevelTypes = (typeof ALCOHOL_LEVEL_LIST)[number]["id"];
