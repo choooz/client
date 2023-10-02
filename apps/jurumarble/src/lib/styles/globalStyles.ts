@@ -27,6 +27,10 @@ const GlobalStyles = createGlobalStyle`
     input {
         outline: none;
     }
+    a {
+    text-decoration: none;
+    cursor: pointer;
+}
 
     :root{
         .Toastify__toast-container{
