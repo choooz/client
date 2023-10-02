@@ -13,7 +13,7 @@ export const KAKAO_LOGIN_REDIRECT_URL =
     : `${CLIENT_URL}${Path.KAKAO_LOGIN_PROCESS}`;
 export const NAVER_LOGIN_REDIRECT_URL =
   process.env.NODE_ENV === "development"
-    ? `http://localhost:3000/${Path.NAVER_LOGIN_PROCESS}`
+    ? `http://localhost:3000${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
 export const REGION_LIST = [
