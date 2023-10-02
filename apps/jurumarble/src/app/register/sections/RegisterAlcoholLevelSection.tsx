@@ -1,4 +1,5 @@
 import { ALCOHOL_LEVEL_LIST } from "lib/constants";
+import { transitions } from "lib/styles";
 import Image from "next/image";
 import styled, { css } from "styled-components";
 
@@ -43,14 +44,19 @@ const Item = styled.div<{
   padding: 16px 24px;
   cursor: pointer;
   display: flex;
+  transition: all 0.3s ease-in-out;
 
   ${({ $selected }) =>
     $selected &&
     css`
       & {
+        animation: ${transitions.blink} 0.7s ease-in-out;
         background: rgba(255, 92, 0, 0.5);
       }
     `}
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.main_02};
+  }
 `;
 
 const Text = styled.div`
