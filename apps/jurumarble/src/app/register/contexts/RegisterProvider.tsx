@@ -2,7 +2,13 @@
 
 import { AlcoholLevelTypes } from "lib/constants";
 import { createContext, PropsWithChildren, useMemo, useState } from "react";
-import { GenderTypes, RegisterStepTypes, REGISTER_STEPS_CONTENT } from "../constants";
+import {
+  GenderTypes,
+  NumberPadTypes,
+  RegisterStepTypes,
+  REGISTER_STEPS_CONTENT,
+  YearOfBirthType,
+} from "../constants";
 
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;
@@ -11,9 +17,12 @@ export const RegisterContext = createContext<{
   currentStepIndex: number;
   alcoholLevel: AlcoholLevelTypes | null;
   gender: GenderTypes | null;
+  yearOfBirth: YearOfBirthType | null;
   buttonDisabled: boolean;
   onChangeAlcoholLevel: (value: AlcoholLevelTypes) => void;
   onChangeGender: (value: GenderTypes) => void;
+  onChangeYearOfBirth: (value: string) => void;
+  onDeleteYearOfBirth: () => void;
 }>({
   step: "STEP1",
   onNextStep: () => {},
@@ -21,9 +30,12 @@ export const RegisterContext = createContext<{
   currentStepIndex: 0,
   gender: null,
   alcoholLevel: null,
+  yearOfBirth: "",
   buttonDisabled: false,
   onChangeAlcoholLevel: () => {},
   onChangeGender: () => {},
+  onChangeYearOfBirth: () => {},
+  onDeleteYearOfBirth: () => {},
 });
 
 export const RegisterProvider = ({ children }: PropsWithChildren) => {
@@ -31,6 +43,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
 
   const [alcoholLevel, setAlcoholLevel] = useState<AlcoholLevelTypes | null>(null);
   const [gender, setGender] = useState<GenderTypes | null>(null);
+  const [yearOfBirth, setYearOfBirth] = useState<YearOfBirthType | null>("");
 
   const stepList = Object.keys(REGISTER_STEPS_CONTENT) as RegisterStepTypes[];
   const currentStepIndex =
@@ -61,6 +74,13 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     setGender(value);
   };
 
+  const onChangeYearOfBirth = (value: NumberPadTypes) => {
+    setYearOfBirth((prev) => (prev?.length === 4 ? prev : prev + value));
+  };
+  const onDeleteYearOfBirth = () => {
+    setYearOfBirth("");
+  };
+
   const buttonDisabled = useMemo(() => {
     if (step === "STEP1") {
       return alcoholLevel === null;
@@ -70,8 +90,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       return gender === null;
     }
 
+    if (step === "STEP3") {
+      return yearOfBirth === "" || yearOfBirth?.length !== 4;
+    }
+
     return false;
-  }, [step, alcoholLevel, gender]);
+  }, [step, alcoholLevel, gender, yearOfBirth]);
 
   const value = useMemo(
     () => ({
@@ -81,9 +105,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       gender,
       currentStepIndex,
       alcoholLevel,
+      yearOfBirth,
       buttonDisabled,
       onChangeAlcoholLevel,
       onChangeGender,
+      onChangeYearOfBirth,
+      onDeleteYearOfBirth,
     }),
     [
       step,
@@ -92,9 +119,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       gender,
       currentStepIndex,
       alcoholLevel,
+      yearOfBirth,
       buttonDisabled,
       onChangeGender,
       onChangeAlcoholLevel,
+      onChangeYearOfBirth,
+      onDeleteYearOfBirth,
     ],
   );
 

@@ -39,3 +39,9 @@ export const REGISTER_GENDER_LIST = [
 ] as const;
 
 export type GenderTypes = (typeof REGISTER_GENDER_LIST)[number]["id"];
+
+export const NumberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+
+export type NumberPadTypes = (typeof NumberPad)[number];
+
+export type YearOfBirthType = NumberPadTypes;
