@@ -28,13 +28,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  margin: 0 auto;
+  margin: 32px auto 0 auto;
   width: 162px;
   gap: 16px;
-  margin-top: 32px;
   ${media.medium} {
-    margin: 0;
-    justify-content: space-between;
+    margin-top: 64px;
+    justify-content: center;
     flex-direction: row;
     align-items: unset;
   }
@@ -49,6 +48,7 @@ const InputBox = styled.div`
     justify-content: center;
     gap: 9px;
     font-weight: 700;
+    white-space: nowrap;
     ${media.medium} {
       height: 80px;
       font-size: 50px;
