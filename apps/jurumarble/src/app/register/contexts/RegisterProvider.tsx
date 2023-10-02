@@ -3,7 +3,9 @@
 import { AlcoholLevelTypes } from "lib/constants";
 import { createContext, PropsWithChildren, useMemo, useState } from "react";
 import {
+  Direction,
   GenderTypes,
+  MBTIType,
   NumberPadTypes,
   RegisterStepTypes,
   REGISTER_STEPS_CONTENT,
@@ -18,11 +20,17 @@ export const RegisterContext = createContext<{
   alcoholLevel: AlcoholLevelTypes | null;
   gender: GenderTypes | null;
   yearOfBirth: YearOfBirthType | null;
+  MBTI: MBTIType;
   buttonDisabled: boolean;
   onChangeAlcoholLevel: (value: AlcoholLevelTypes) => void;
   onChangeGender: (value: GenderTypes) => void;
   onChangeYearOfBirth: (value: string) => void;
   onDeleteYearOfBirth: () => void;
+  onChangeMBTI: ({ name, value }: { name: string; value: string }) => void;
+  activeValue: (
+    direction: Direction,
+    MBTIKey: "M" | "B" | "T" | "I",
+  ) => "active" | "inactive" | null;
 }>({
   step: "STEP1",
   onNextStep: () => {},
@@ -31,11 +39,19 @@ export const RegisterContext = createContext<{
   gender: null,
   alcoholLevel: null,
   yearOfBirth: "",
+  MBTI: {
+    M: null,
+    B: null,
+    T: null,
+    I: null,
+  },
   buttonDisabled: false,
   onChangeAlcoholLevel: () => {},
   onChangeGender: () => {},
   onChangeYearOfBirth: () => {},
   onDeleteYearOfBirth: () => {},
+  onChangeMBTI: () => {},
+  activeValue: () => null,
 });
 
 export const RegisterProvider = ({ children }: PropsWithChildren) => {
@@ -44,6 +60,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
   const [alcoholLevel, setAlcoholLevel] = useState<AlcoholLevelTypes | null>(null);
   const [gender, setGender] = useState<GenderTypes | null>(null);
   const [yearOfBirth, setYearOfBirth] = useState<YearOfBirthType | null>("");
+  const [MBTI, setMBTI] = useState<MBTIType>({
+    M: null,
+    B: null,
+    T: null,
+    I: null,
+  });
 
   const stepList = Object.keys(REGISTER_STEPS_CONTENT) as RegisterStepTypes[];
   const currentStepIndex =
@@ -81,6 +103,26 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     setYearOfBirth("");
   };
 
+  const onChangeMBTI = ({ name, value }: { name: string; value: string }) => {
+    setMBTI((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
+    const lookupTable: Record<Direction, Record<"M" | "B" | "T" | "I", string>> = {
+      left: { M: "E", B: "S", T: "T", I: "J" },
+      right: { M: "I", B: "N", T: "F", I: "P" },
+    };
+    return lookupTable[direction][MBTIKey];
+  };
+
+  const activeValue = (
+    direction: Direction,
+    MBTIKey: "M" | "B" | "T" | "I",
+  ): "active" | "inactive" | null => {
+    if (!MBTI[MBTIKey]) return null;
+    return `${MBTI[MBTIKey] === getMBTI(direction, MBTIKey) ? "" : "in"}active`;
+  };
+
   const buttonDisabled = useMemo(() => {
     if (step === "STEP1") {
       return alcoholLevel === null;
@@ -94,8 +136,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       return yearOfBirth === "" || yearOfBirth?.length !== 4;
     }
 
+    if (step === "STEP4") {
+      return Object.values(MBTI).some((value) => value === null);
+    }
+
     return false;
-  }, [step, alcoholLevel, gender, yearOfBirth]);
+  }, [step, alcoholLevel, gender, yearOfBirth, MBTI]);
 
   const value = useMemo(
     () => ({
@@ -106,11 +152,14 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       currentStepIndex,
       alcoholLevel,
       yearOfBirth,
+      MBTI,
       buttonDisabled,
       onChangeAlcoholLevel,
       onChangeGender,
       onChangeYearOfBirth,
       onDeleteYearOfBirth,
+      onChangeMBTI,
+      activeValue,
     }),
     [
       step,
@@ -120,11 +169,14 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       currentStepIndex,
       alcoholLevel,
       yearOfBirth,
+      MBTI,
       buttonDisabled,
       onChangeGender,
       onChangeAlcoholLevel,
       onChangeYearOfBirth,
       onDeleteYearOfBirth,
+      onChangeMBTI,
+      activeValue,
     ],
   );
 
