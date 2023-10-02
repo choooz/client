@@ -6,3 +6,4 @@ export * from "./selectBox";
 export { default as FloatComponentTemplate } from "./modal/FloatComponentTemplate";
 export { default as DivideLine } from "./divide/DivideLine";
 export { default as ImageUploadButton } from "./ImageUploadButton";
+export { default as LevelChip } from "./LevelChip";
