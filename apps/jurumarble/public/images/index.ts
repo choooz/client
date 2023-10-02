@@ -5,3 +5,6 @@ export { default as DrinkImage } from "./DrinkImage.png";
 export { default as MainBannerImage } from "./MainBannerImage.png";
 export { default as Male } from "./male.png";
 export { default as Female } from "./female.png";
+export { default as DrinkCapacityLow } from "./DrinkCapacityLow.png";
+export { default as DrinkCapacityMedium } from "./DrinkCapacityMedium.png";
+export { default as DrinkCapacityHigh } from "./DrinkCapacityHigh.png";
