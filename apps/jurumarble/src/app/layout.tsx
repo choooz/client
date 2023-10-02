@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import { KAKAO_MAP_API_KEY } from "lib/constants";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "주루마블",
@@ -14,6 +16,12 @@ export const metadata: Metadata = {
 
 if (typeof window !== "undefined") {
   injectStyle();
+}
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -33,6 +41,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </StyledComponents>
         </ReactQueryProvider>
       </body>
+      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
+      <Script
+        type="text/javascript"
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_API_KEY}&libraries=services&autoload=false`}
+      ></Script>
     </html>
   );
 }

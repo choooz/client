@@ -5,6 +5,8 @@ export const SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL || "";
 
 export const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID || "";
 export const NAVER_CLIENT_ID = process.env.NEXT_PUBLIC_NAVER_CLIENT_ID || "";
+
+export const KAKAO_MAP_API_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY || "";
 export const KAKAO_LOGIN_REDIRECT_URL =
   process.env.NODE_ENV === "development"
     ? `http://localhost:3000/${Path.KAKAO_LOGIN_PROCESS}`
@@ -32,6 +34,26 @@ export const REGION_LIST = [
   { value: "JEONBUK", label: "전라북도" },
   { value: "JEONNAM", label: "전라남도" },
   { value: "JEJU", label: "제주" },
+];
+
+export const REGION_LIST_BOUNDS = [
+  { value: "SEOUL", label: "서울", lat: 37.53391, long: 126.9775 },
+  { value: "INCHEON", label: "인천", lat: 37.45323333333334, long: 126.70735277777779 },
+  { value: "DAEJEON", label: "대전", lat: 36.347119444444445, long: 127.38656666666667 },
+  { value: "DAEGU", label: "대구", lat: 35.868541666666665, long: 128.60355277777776 },
+  { value: "GWANGJU", label: "광주", lat: 35.156974999999996, long: 126.85336388888888 },
+  { value: "BUSAN", label: "부산", lat: 35.17701944444444, long: 129.07695277777776 },
+  { value: "ULSAN", label: "울산", lat: 35.53540833333333, long: 129.3136888888889 },
+  { value: "SEJONG", label: "세종", lat: 36.4800121, long: 127.289069 },
+  { value: "GYEONGGI", label: "경기도", lat: 37.39067, long: 126.7888 },
+  { value: "GANGWON", label: "강원도", lat: 38.642618, long: 127.170231 },
+  { value: "CHUNGBUK", label: "충청북도", lat: 36.6325, long: 127.49358611111111 },
+  { value: "CHUNGNAM", label: "충청남도", lat: 36.32387222222223, long: 127.42295555555556 },
+  { value: "GYEONGBUK", label: "경상북도", lat: 36.491286, long: 128.889433 },
+  { value: "GYEONGNAM", label: "경상남도", lat: 35.459369, long: 128.214826 },
+  { value: "JEONBUK", label: "전라북도", lat: 35.81727, long: 127.11105277777777 },
+  { value: "JEONNAM", label: "전라남도", lat: 34.813044444444444, long: 126.465 },
+  { value: "JEJU", label: "제주", lat: 33.48569444444445, long: 126.50033333333333 },
 ];
 
 export const DRINK_VOTE_SORT_LIST = [

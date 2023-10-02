@@ -1,5 +1,5 @@
 import { DrinkInfoSortType } from "src/types/common";
-import { DrinkListResponse } from "src/types/drink";
+import { DrinkListResponse, DrinkMapResponse } from "src/types/drink";
 import { baseApi } from "./http/base";
 import { http } from "./http/http";
 
@@ -62,6 +62,24 @@ export const getIsEnjoyedDrinkAPI = async (drinkId: number) => {
 export const postDrinkEnjoyAPI = async (drinkId: number) => {
   const response = await http.post(`api/drinks/enjoys`, {
     drinkId,
+  });
+  return response.data;
+};
+
+export interface GetDrinksMapRequest {
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+  page: number;
+  size: number;
+}
+
+export const getDrinksMap = async (params: GetDrinksMapRequest) => {
+  const response = await baseApi.get<DrinkMapResponse>("api/drinks/map", {
+    params: {
+      ...params,
+    },
   });
   return response.data;
 };

@@ -15,6 +15,7 @@ import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
 import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
+import { useMemo } from "react";
 
 export type Drag = "up" | "down" | null;
 
@@ -34,6 +35,16 @@ function VoteHomePage() {
 
   const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
     mainVoteList[nowShowing] || {};
+
+  const safeImageA = useMemo(() => {
+    console.log(imageA);
+    if (!imageA || imageA === "string") return EmptyAImg;
+    return imageA;
+  }, [imageA]);
+  const safeImageB = useMemo(() => {
+    if (!imageB || imageB === "string") return EmptyAImg;
+    return imageB;
+  }, [imageB]);
 
   const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
 
@@ -85,8 +96,8 @@ function VoteHomePage() {
               isBookmark={isBookmark}
             />
             <VoteDescription
-              imageA={imageA || EmptyAImg}
-              imageB={imageB || EmptyAImg}
+              imageA={safeImageA}
+              imageB={safeImageB}
               percentageA={50}
               percentageB={50}
               titleA={titleA}
