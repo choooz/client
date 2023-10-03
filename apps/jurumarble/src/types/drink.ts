@@ -36,6 +36,8 @@ export interface DrinkMapInfo {
   region: string;
   latitude: number;
   longitude: number;
+  manufacturer: string;
+  image: string;
 }
 
 export interface DrinkListResponse {
