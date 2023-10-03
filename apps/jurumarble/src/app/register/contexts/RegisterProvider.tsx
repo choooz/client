@@ -14,6 +14,7 @@ import {
   REGISTER_STEPS_CONTENT,
   YearOfBirthType,
 } from "../constants";
+import { toast } from "react-toastify";
 
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;
@@ -137,17 +138,15 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
   const buttonDisabled = useMemo(() => {
     if (step === "STEP1") {
       return drinkCapacity === null;
-    }
-
-    if (step === "STEP2") {
+    } else if (step === "STEP2") {
       return gender === null;
-    }
-
-    if (step === "STEP3") {
-      return yearOfBirth === "" || yearOfBirth?.length !== 4;
-    }
-
-    if (step === "STEP4") {
+    } else if (step === "STEP3") {
+      /**
+       * @TODO 토스트 메시지가 두번씩 뜨는 이슈
+       */
+      Number(yearOfBirth) > 2004 && toast.error("2004년 이후 출생자는 가입이 불가능합니다.");
+      return yearOfBirth === "" || yearOfBirth?.length !== 4 || Number(yearOfBirth) > 2004;
+    } else if (step === "STEP4") {
       return Object.values(MBTI).some((value) => value === null);
     }
 
