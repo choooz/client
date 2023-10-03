@@ -90,6 +90,7 @@ const BarItem = styled.div<{ isActive: boolean }>`
 const Padding = styled.div`
   width: 100%;
   height: 63px;
+  background-color: ${({ theme }) => theme.colors.bg_01};
 `;
 
 export default BottomBar;
