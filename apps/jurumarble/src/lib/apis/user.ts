@@ -19,3 +19,15 @@ export const getUserInfo = async () => {
   const response = await http.get<GetUserInfoResponse>("api/users");
   return response.data;
 };
+
+interface AddUserInfoRequest {
+  mbti: string;
+  birthOfAge: number;
+  gender: string;
+  alcoholLimit: string;
+}
+
+export const addUserInfoAPI = async (params: AddUserInfoRequest) => {
+  const response = await http.put<AddUserInfoRequest>("api/users/additional-info", params);
+  return response.data;
+};

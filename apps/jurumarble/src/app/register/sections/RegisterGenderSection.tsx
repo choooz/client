@@ -1,15 +1,14 @@
 import styled from "styled-components";
-import { REGISTER_GENDER_LIST } from "../constants";
 import { useRegisterContext } from "../contexts";
-import { Female, Male } from "public/images";
 import Image from "next/image";
+import { GENDER_LIST } from "lib/constants";
 
 export const RegisterGenderSection = () => {
   const { gender, onChangeGender } = useRegisterContext();
 
   return (
     <Wrapper>
-      {REGISTER_GENDER_LIST.map((item) => (
+      {GENDER_LIST.map((item) => (
         <Item
           key={item.id}
           $width={gender === null ? 50 : gender === item.id ? 70 : 30}
