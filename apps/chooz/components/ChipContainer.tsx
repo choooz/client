@@ -1,5 +1,3 @@
-import NumberOfSolver from "components/common/NumberOfSolver";
-import TargetMessage from "components/common/TargetMessage";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import { deleteVoteAPI } from "lib/apis/vote";
 import Image from "next/image";
@@ -9,6 +7,8 @@ import useBookMarkService from "services/useVoteBookMarkService";
 import styled from "styled-components";
 import { Writer } from "types/vote";
 import ModifyDeleteButtonBox from "../app/select/components/ModifyDeleteButtonBox";
+import NumberOfSolver from "./NumberOfSolver";
+import TargetMessage from "./TargetMessage";
 
 interface Props {
   onToggleModifyModal(): void;

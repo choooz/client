@@ -2,8 +2,8 @@
 
 import { Button } from "@monorepo/ui";
 import React from "react";
-import styled, { css } from "styled-components";
-import { media } from "styles/media";
+import styled from "styled-components";
+import { media } from "@monorepo/ui/styles/media";
 import TutorialCarousel from "./TutorialCarousel";
 
 function TutorialPage() {

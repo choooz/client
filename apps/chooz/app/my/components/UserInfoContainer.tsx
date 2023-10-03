@@ -1,4 +1,4 @@
-import ImageUploadButton from "components/common/ImageUploadButton";
+import ImageUploadButton from "components/ImageUploadButton";
 import { useGetUserInfo } from "hooks/useGetUserInfo";
 import Path from "lib/Path";
 import Link from "next/link";

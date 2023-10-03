@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { Button } from "@monorepo/ui";
 import MbtiSelect from "app/my/components/MbtiSelect";
 
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { Gender } from "types/user";
 import ImageUpload from "./ImageUpload";
 import CategoryList from "./CategoryList";

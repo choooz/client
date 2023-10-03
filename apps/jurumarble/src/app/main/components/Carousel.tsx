@@ -1,53 +1,35 @@
+import { GetHotDrinkResponse } from "lib/apis/drink";
+import Path from "lib/Path";
 import Image from "next/image";
-import { EmptyAImg } from "public/images";
-import { css, styled } from "styled-components";
+import { useRouter } from "next/navigation";
+import styled, { css } from "styled-components";
 
-const mockData = [
-  {
-    src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명1",
-    areaName: "지역명1",
-  },
-  {
-    src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명2",
-    areaName: "지역명2",
-  },
-  {
-    src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명3",
-    areaName: "지역명3",
-  },
-  {
-    src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명4",
-    areaName: "지역명4",
-  },
-  {
-    src: EmptyAImg,
-    drinkName: "제품명 제품명 제품명5",
-    areaName: "지역명5",
-  },
-];
+interface Props {
+  hotDrinkList: GetHotDrinkResponse[];
+}
 
-function Carousel() {
+function Carousel({ hotDrinkList }: Props) {
+  const router = useRouter();
   return (
     <Container>
       <Slides>
-        {mockData.map(({ src, drinkName, areaName }, index) => (
-          <Slide key={drinkName}>
-            <Box>
-              <DrinkImageWrapper>
-                <RankginMark>{index + 1}</RankginMark>
-                <Image alt="임시 이미지" src={src} fill style={{ borderRadius: "10px" }} />
-              </DrinkImageWrapper>
-              <DrinkText>
-                {drinkName}
-                <AreaName>{areaName}</AreaName>
-              </DrinkText>
-            </Box>
-          </Slide>
-        ))}
+        {hotDrinkList.map((hotDrink: GetHotDrinkResponse, index: number) => {
+          const { drinkId, image, name, manufactureAddress } = hotDrink;
+          return (
+            <Slide key={drinkId} onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)}>
+              <Box>
+                <DrinkImageWrapper>
+                  <RankginMark>{index + 1}</RankginMark>
+                  <Image alt="전통주" src={image} fill style={{ borderRadius: "10px" }} />
+                </DrinkImageWrapper>
+                <DrinkText>
+                  {name}
+                  <AreaName>{manufactureAddress}</AreaName>
+                </DrinkText>
+              </Box>
+            </Slide>
+          );
+        })}
       </Slides>
     </Container>
   );
@@ -63,6 +45,7 @@ const Slides = styled.ol`
   height: 168px;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  gap: 8px;
   /**
     @Todo 모바일에서는 보이게 하기
    **/
@@ -78,6 +61,7 @@ const Slide = styled.li`
   height: 120px;
   padding-top: 20px;
   scroll-snap-align: start;
+  cursor: pointer;
 `;
 
 const Box = styled.div`

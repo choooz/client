@@ -2,7 +2,7 @@
 
 import useInfiniteSearchResultService from "services/useInfiniteSearchResultService";
 import styled from "styled-components";
-import { media } from "styles/media";
+import { media } from "@monorepo/ui/styles/media";
 import { VoteList } from "../components";
 
 function SearchResultPage({ params }: { params: { keyword: string } }) {

@@ -13,5 +13,13 @@
     "incremental": true,
     "newLine": "lf"
   },
+  "references": [
+    {
+      "path": "packages/hooks"
+    },
+    {
+      "path": "packages/ui"
+    }
+  ],
   "exclude": ["**/node_modules", "**/.*/"]
 }

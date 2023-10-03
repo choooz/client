@@ -25,79 +25,83 @@ const colors = {
   main_drop_shadow_top: "rgba(235, 235, 235, 0.80)",
   main_drop_shadow_bottom: "rgba(235, 235, 235, 0.80)",
   modal_shadow: "rgba(235, 235, 235, 0.80)",
+  kakao: "#fee500",
+  naver: "#03c75a",
 } as const;
 
 const typography = {
   headline01: `
     font-size: 24px; 
     font-weight: 700; 
-    line-height: 130%; 
+    line-height: 21px; 
     letter-spacing: -0.24px; 
     `,
   headline02: `
     font-size: 20px;
     font-weight: 700;
-    line-height: 130%;
+    line-height: 21px;
     letter-spacing: -0.2px;
     `,
   headline03: `
     font-size: 18px;
     font-weight: 600;
-    line-height: 130%;
+    line-height: 21px;
     letter-spacing: -0.18px;
     `,
   headline04: `
     font-size: 16px;
     font-weight: 700;
-    line-height: 130%;
+    line-height: 21px;
     letter-spacing: -0.16px;
     `,
   subhead01: `
     font-size: 18px;
     font-weight: 400;
-    line-height: 130%;
+    line-height: 21px;
     letter-spacing: -0.18px;
     `,
   subhead02: `
     font-size: 14px;
     font-weight: 400;
-    line-height: 130%;
+    line-height: 21px;
     letter-spacing: -0.14px;
     `,
   body01: `
     font-size: 16px;
     font-weight: 700;
-    line-height: 130%;
+    line-height: 21px;
     letter-spacing: -0.16px;
     `,
   body_long01: `
     font-size: 16px;
     font-weight: 700;
-    line-height: 150%;
+    line-height: 24px;
     letter-spacing: -0.16px;
     `,
   body02: `
     font-size: 16px;
     font-weight: 400;
-    line-height: 130%;
-    letter-spacing: -0.16px;
+    line-height: 21px;
     `,
   body03: `
     font-size: 14px;
     font-weight: 400;
-    line-height: 130%;
-    letter-spacing: -0.14px;
+    line-height: 21px;
     `,
   body_long03: `
     font-size: 14px;
     font-weight: 400;
     line-height: 150%;
-    letter-spacing: -0.14px;
+    `,
+  body04: `
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
     `,
   caption: `
     font-size: 12px;
     font-weight: 600;
-    line-height: 130%;
+    line-height: 21px;
     `,
   chip: `
     font-size: 12px;
@@ -107,15 +111,18 @@ const typography = {
   navigation: `
     font-size: 10px;
     font-weight: 500;
-    line-height: 130%; 
-    letter-spacing: -0.1px;
+    line-height: 21px; 
     `,
   button01: `
   font-size: 14px;
   font-weight: 600;
-  line-height: 130%; 
-  letter-spacing: -0.14px;
-`,
+  line-height: 21px; 
+  `,
+  button02: `
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px; 
+  `,
 } as const;
 
 const mediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;

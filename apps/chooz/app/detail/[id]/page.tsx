@@ -1,10 +1,11 @@
 "use client";
 
 import { media } from "@monorepo/ui/styles/media";
-import CommentContainer from "components/detail/CommentContainer";
-import VoteContainer from "components/detail/VoteContainer";
+
 import React from "react";
 import styled from "styled-components";
+import CommentContainer from "./components/CommentContainer";
+import VoteContainer from "./components/VoteContainer";
 
 function DetailPage({
   params,
