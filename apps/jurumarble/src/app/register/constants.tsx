@@ -3,7 +3,6 @@ import {
   RegisterBirthSection,
   RegisterGenderSection,
 } from "./sections";
-import { Female, Male } from "public/images";
 import RegisterMBTISection from "./sections/RegisterMBTISection";
 
 export const REGISTER_STEPS_CONTENT = {
@@ -31,32 +30,8 @@ export const REGISTER_STEPS_CONTENT = {
 
 export type RegisterStepTypes = keyof typeof REGISTER_STEPS_CONTENT;
 
-export const REGISTER_GENDER_LIST = [
-  {
-    id: "MAN",
-    label: "남성",
-    src: Male,
-  },
-  {
-    id: "WOMEN",
-    label: "여성",
-    src: Female,
-  },
-] as const;
-
-export type GenderTypes = (typeof REGISTER_GENDER_LIST)[number]["id"];
-
 export const NumberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
 export type NumberPadTypes = (typeof NumberPad)[number];
 
 export type YearOfBirthType = NumberPadTypes;
-
-export interface MBTIType {
-  M: "E" | "I" | null;
-  B: "S" | "N" | null;
-  T: "T" | "F" | null;
-  I: "J" | "P" | null;
-}
-
-export type Direction = "left" | "right";

@@ -1,5 +1,11 @@
 import LevelChip from "components/LevelChip";
-import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
+import {
+  DrinkCapacityHigh,
+  DrinkCapacityLow,
+  DrinkCapacityMedium,
+  Female,
+  Male,
+} from "public/images";
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";
@@ -68,10 +74,29 @@ export const DRINK_INFO_SORT_LIST = [
   { value: "ByPopularity", label: "인기순" },
 ];
 
+/**
+ * @TODO 사용 제거 후 삭제
+ */
+
 export const GENDER = {
   MALE: "MALE",
   FEMALE: "FEMALE",
 } as const;
+
+export const GENDER_LIST = [
+  {
+    id: "MALE",
+    label: "남성",
+    src: Male,
+  },
+  {
+    id: "FEMALE",
+    label: "여성",
+    src: Female,
+  },
+] as const;
+
+export type GenderTypes = (typeof GENDER_LIST)[number]["id"];
 
 export const ALCOHOL_LEVEL_LIST = [
   {

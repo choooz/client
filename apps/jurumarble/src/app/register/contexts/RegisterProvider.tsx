@@ -1,13 +1,14 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { addUserInfo } from "lib/apis/user";
-import { DrinkCapacityTypes } from "lib/constants";
+import { addUserInfoAPI } from "lib/apis/user";
+import { DrinkCapacityTypes, GenderTypes } from "lib/constants";
+import Path from "lib/Path";
+import { useRouter } from "next/navigation";
 import { createContext, PropsWithChildren, useMemo, useState } from "react";
+import { Direction, MBTIType } from "src/types/register";
+import { useToggle } from "@monorepo/hooks";
 import {
-  Direction,
-  GenderTypes,
-  MBTIType,
   NumberPadTypes,
   RegisterStepTypes,
   REGISTER_STEPS_CONTENT,
@@ -23,6 +24,7 @@ export const RegisterContext = createContext<{
   gender: GenderTypes | null;
   yearOfBirth: YearOfBirthType | null;
   MBTI: MBTIType;
+  stringfiedMBTI: string;
   buttonDisabled: boolean;
   onChangeDrinkCapacity: (value: DrinkCapacityTypes) => void;
   onChangeGender: (value: GenderTypes) => void;
@@ -33,6 +35,9 @@ export const RegisterContext = createContext<{
     direction: Direction,
     MBTIKey: "M" | "B" | "T" | "I",
   ) => "active" | "inactive" | null;
+  addUser: () => void;
+  isWarningModal: boolean;
+  onToggleWarningModal: () => void;
 }>({
   step: "STEP1",
   onNextStep: () => {},
@@ -47,6 +52,7 @@ export const RegisterContext = createContext<{
     T: null,
     I: null,
   },
+  stringfiedMBTI: "",
   buttonDisabled: false,
   onChangeDrinkCapacity: () => {},
   onChangeGender: () => {},
@@ -54,6 +60,9 @@ export const RegisterContext = createContext<{
   onDeleteYearOfBirth: () => {},
   onChangeMBTI: () => {},
   activeValue: () => null,
+  addUser: () => {},
+  isWarningModal: false,
+  onToggleWarningModal: () => {},
 });
 
 export const RegisterProvider = ({ children }: PropsWithChildren) => {
@@ -76,17 +85,17 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       : 1;
 
   const onNextStep = () => {
-    if (currentStepIndex < stepList.length) {
-      setStep(stepList[currentStepIndex]);
-    }
+    currentStepIndex < stepList.length
+      ? setStep(stepList[currentStepIndex])
+      : onToggleWarningModal();
   };
 
-  const onChangeDrinkCapacity = (value: DrinkCapacityTypes) => {
-    if (drinkCapacity === value) {
+  const onChangeDrinkCapacity = (id: DrinkCapacityTypes) => {
+    if (drinkCapacity === id) {
       setDrinkCapacity(null);
       return;
     }
-    setDrinkCapacity(value);
+    setDrinkCapacity(id);
   };
 
   const onChangeGender = (value: GenderTypes) => {
@@ -145,6 +154,26 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     return false;
   }, [step, drinkCapacity, gender, yearOfBirth, MBTI]);
 
+  const router = useRouter();
+
+  const stringfiedMBTI = `${MBTI.M}${MBTI.B}${MBTI.T}${MBTI.I}`;
+
+  const { mutate: addUser } = useMutation(
+    () =>
+      addUserInfoAPI({
+        alcoholLimit: drinkCapacity!,
+        gender: gender!,
+        birthOfAge: Number(yearOfBirth),
+        mbti: stringfiedMBTI,
+      }),
+    {
+      onSuccess: () => router.replace(Path.MAIN_PAGE),
+      onError: (error) => alert(error),
+    },
+  );
+
+  const [isWarningModal, onToggleWarningModal] = useToggle();
+
   const value = useMemo(
     () => ({
       step,
@@ -155,6 +184,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       drinkCapacity,
       yearOfBirth,
       MBTI,
+      stringfiedMBTI,
       buttonDisabled,
       onChangeDrinkCapacity,
       onChangeGender,
@@ -162,6 +192,9 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       onDeleteYearOfBirth,
       onChangeMBTI,
       activeValue,
+      addUser,
+      isWarningModal,
+      onToggleWarningModal,
     }),
     [
       step,
@@ -172,6 +205,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       drinkCapacity,
       yearOfBirth,
       MBTI,
+      stringfiedMBTI,
       buttonDisabled,
       onChangeGender,
       onChangeDrinkCapacity,
@@ -179,6 +213,9 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       onDeleteYearOfBirth,
       onChangeMBTI,
       activeValue,
+      addUser,
+      isWarningModal,
+      onToggleWarningModal,
     ],
   );
 
