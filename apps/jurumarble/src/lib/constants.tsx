@@ -96,7 +96,7 @@ export const ALCOHOL_LEVEL_LIST = [
     levelChip: () => <LevelChip level={3} />,
   },
 ] as const;
-export type AlcoholLevelTypes = (typeof ALCOHOL_LEVEL_LIST)[number]["id"];
+export type DrinkCapacityTypes = (typeof ALCOHOL_LEVEL_LIST)[number]["id"];
 
 export const MBTI_LIST = [
   { id: "ESTP", label: "ESTP" },

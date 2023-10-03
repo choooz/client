@@ -1,6 +1,8 @@
 "use client";
 
-import { AlcoholLevelTypes } from "lib/constants";
+import { useMutation } from "@tanstack/react-query";
+import { addUserInfo } from "lib/apis/user";
+import { DrinkCapacityTypes } from "lib/constants";
 import { createContext, PropsWithChildren, useMemo, useState } from "react";
 import {
   Direction,
@@ -17,12 +19,12 @@ export const RegisterContext = createContext<{
   onNextStep: () => void;
   stepList: RegisterStepTypes[];
   currentStepIndex: number;
-  alcoholLevel: AlcoholLevelTypes | null;
+  drinkCapacity: DrinkCapacityTypes | null;
   gender: GenderTypes | null;
   yearOfBirth: YearOfBirthType | null;
   MBTI: MBTIType;
   buttonDisabled: boolean;
-  onChangeAlcoholLevel: (value: AlcoholLevelTypes) => void;
+  onChangeDrinkCapacity: (value: DrinkCapacityTypes) => void;
   onChangeGender: (value: GenderTypes) => void;
   onChangeYearOfBirth: (value: string) => void;
   onDeleteYearOfBirth: () => void;
@@ -37,7 +39,7 @@ export const RegisterContext = createContext<{
   stepList: [],
   currentStepIndex: 0,
   gender: null,
-  alcoholLevel: null,
+  drinkCapacity: null,
   yearOfBirth: "",
   MBTI: {
     M: null,
@@ -46,7 +48,7 @@ export const RegisterContext = createContext<{
     I: null,
   },
   buttonDisabled: false,
-  onChangeAlcoholLevel: () => {},
+  onChangeDrinkCapacity: () => {},
   onChangeGender: () => {},
   onChangeYearOfBirth: () => {},
   onDeleteYearOfBirth: () => {},
@@ -57,7 +59,7 @@ export const RegisterContext = createContext<{
 export const RegisterProvider = ({ children }: PropsWithChildren) => {
   const [step, setStep] = useState<RegisterStepTypes>("STEP1");
 
-  const [alcoholLevel, setAlcoholLevel] = useState<AlcoholLevelTypes | null>(null);
+  const [drinkCapacity, setDrinkCapacity] = useState<DrinkCapacityTypes | null>(null);
   const [gender, setGender] = useState<GenderTypes | null>(null);
   const [yearOfBirth, setYearOfBirth] = useState<YearOfBirthType | null>("");
   const [MBTI, setMBTI] = useState<MBTIType>({
@@ -79,12 +81,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const onChangeAlcoholLevel = (value: AlcoholLevelTypes) => {
-    if (alcoholLevel === value) {
-      setAlcoholLevel(null);
+  const onChangeDrinkCapacity = (value: DrinkCapacityTypes) => {
+    if (drinkCapacity === value) {
+      setDrinkCapacity(null);
       return;
     }
-    setAlcoholLevel(value);
+    setDrinkCapacity(value);
   };
 
   const onChangeGender = (value: GenderTypes) => {
@@ -125,7 +127,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
 
   const buttonDisabled = useMemo(() => {
     if (step === "STEP1") {
-      return alcoholLevel === null;
+      return drinkCapacity === null;
     }
 
     if (step === "STEP2") {
@@ -141,7 +143,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     }
 
     return false;
-  }, [step, alcoholLevel, gender, yearOfBirth, MBTI]);
+  }, [step, drinkCapacity, gender, yearOfBirth, MBTI]);
 
   const value = useMemo(
     () => ({
@@ -150,11 +152,11 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       stepList,
       gender,
       currentStepIndex,
-      alcoholLevel,
+      drinkCapacity,
       yearOfBirth,
       MBTI,
       buttonDisabled,
-      onChangeAlcoholLevel,
+      onChangeDrinkCapacity,
       onChangeGender,
       onChangeYearOfBirth,
       onDeleteYearOfBirth,
@@ -167,12 +169,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       stepList,
       gender,
       currentStepIndex,
-      alcoholLevel,
+      drinkCapacity,
       yearOfBirth,
       MBTI,
       buttonDisabled,
       onChangeGender,
-      onChangeAlcoholLevel,
+      onChangeDrinkCapacity,
       onChangeYearOfBirth,
       onDeleteYearOfBirth,
       onChangeMBTI,

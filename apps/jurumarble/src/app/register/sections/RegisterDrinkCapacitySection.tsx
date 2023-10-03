@@ -5,13 +5,13 @@ import styled, { css } from "styled-components";
 
 import { useRegisterContext } from "../contexts";
 
-export const RegisterAlcoholLevelSection = () => {
-  const { onChangeAlcoholLevel, alcoholLevel } = useRegisterContext();
+export const RegisterDrinkCapacitySection = () => {
+  const { onChangeDrinkCapacity, drinkCapacity } = useRegisterContext();
 
   return (
     <Wrapper>
       {ALCOHOL_LEVEL_LIST.map(({ id, label, description, image, levelChip }) => (
-        <Item key={id} $selected={id === alcoholLevel} onClick={() => onChangeAlcoholLevel(id)}>
+        <Item key={id} $selected={id === drinkCapacity} onClick={() => onChangeDrinkCapacity(id)}>
           <Image alt={label} width={56} height={56} src={image} />
           <Text>
             <Title>
