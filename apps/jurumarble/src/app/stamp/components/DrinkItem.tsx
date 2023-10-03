@@ -34,7 +34,7 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
       selected={selectedDrinkList?.includes(name)}
     >
       <ImageWrapper>
-        <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
+        <Image alt={name} src={image} width={88} height={88} style={{ borderRadius: "10px" }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>

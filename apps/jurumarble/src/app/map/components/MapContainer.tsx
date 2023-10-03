@@ -11,8 +11,12 @@ import { ExImg1 } from "public/images";
 import RegionSmallSelect from "./RegionSmallSelect";
 import { DRINK_INFO_SORT_LIST } from "lib/constants";
 import DrinkItem from "app/stamp/components/DrinkItem";
+import { useGeoLocation } from "../hooks/useGeoLocation";
+import SvgIcMyLocationFloating from "src/assets/icons/ic_my_location_floating.svg";
+import Image from "next/image";
 
 const MapContainer = () => {
+  const { error, location, toggleOnLocation, onLocation } = useGeoLocation();
   const [on, toggle] = useToggle();
   const mapRef = useRef<kakao.maps.Map>(null);
   const [mapXY, setMapXY] = useState({
@@ -21,6 +25,8 @@ const MapContainer = () => {
     endX: 40.856225138838,
     endY: 132.02500466772065,
   });
+
+  console.log(location);
 
   const { drinksList } = useDrinksMapService({
     startX: mapXY.startX,
@@ -96,35 +102,50 @@ const MapContainer = () => {
         </div>
       </TopBox>
 
-      <Map // 지도를 표시할 Container
-        center={state.center}
-        isPanto={state.isPanto}
-        style={{
-          // 지도의 크기
-          width: "100%",
-          height: "375px",
-        }}
-        ref={mapRef}
-        level={state.level} // 지도의 확대 레벨
-        onIdle={() => onIdleMap()}
-      >
-        <MapMarker // 마커를 생성합니다
-          position={{
-            // 마커가 표시될 위치입니다
-            lat: 37.5662952,
-            lng: 126.9779,
+      <div style={{ position: "relative" }}>
+        <Map // 지도를 표시할 Container
+          center={state.center}
+          isPanto={state.isPanto}
+          style={{
+            // 지도의 크기
+            width: "100%",
+            height: "375px",
           }}
-        />
-        {drinksList.map(({ latitude, longitude }) => (
-          <MapMarker // 마커를 생성합니다
-            position={{
-              // 마커가 표시될 위치입니다
-              lat: latitude,
-              lng: longitude,
-            }}
-          />
-        ))}
-      </Map>
+          ref={mapRef}
+          level={state.level} // 지도의 확대 레벨
+          onIdle={() => onIdleMap()}
+        >
+          {onLocation && (
+            <MapMarker // 마커를 생성합니다
+              position={{
+                // 마커가 표시될 위치입니다
+                lat: location.latitude,
+                lng: location.longitude,
+              }}
+              image={{
+                src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png",
+                size: {
+                  width: 64,
+                  height: 69,
+                },
+              }}
+            />
+          )}
+          {drinksList.map(({ latitude, longitude, drinkId }, index) => (
+            <MapMarker // 마커를 생성합니다
+              key={`${drinkId}-${latitude}-${longitude}-${index}`}
+              position={{
+                // 마커가 표시될 위치입니다
+                lat: latitude,
+                lng: longitude,
+              }}
+            />
+          ))}
+          <MyLocationButton onClick={toggleOnLocation}>
+            <Image src={SvgIcMyLocationFloating} width={40} height={40} alt="내위치 켜기" />
+          </MyLocationButton>
+        </Map>
+      </div>
       <FilterBox>
         <RegionSmallSelect
           defaultOption={sortBy}
@@ -133,13 +154,13 @@ const MapContainer = () => {
         />
       </FilterBox>
       <DrinkBox>
-        {drinksList.map(({ drinkId, name, region, latitude, longitude }) => (
+        {drinksList.map(({ drinkId, name, latitude, longitude, image, manufacturer }) => (
           <DrinkItem
             drinkInfo={{
               id: drinkId,
               name: name,
-              productName: region,
-              image: ExImg1 as unknown as string,
+              productName: manufacturer,
+              image: image || (ExImg1 as unknown as string),
             }}
             onClickReplaceDrinkInfo={() => {
               setChangeMapCenter(latitude, longitude);
@@ -194,6 +215,18 @@ const DrinkBox = styled.div`
   flex-direction: column;
   gap: 8px;
   padding: 0 20px;
+`;
+
+const MyLocationButton = styled.div`
+  position: absolute;
+  z-index: 100;
+  left: 20px;
+  bottom: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
 `;
 
 export default MapContainer;
