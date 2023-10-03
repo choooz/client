@@ -1,4 +1,5 @@
 import { postExecuteVote } from "lib/apis/vote";
+import { media } from "lib/styles";
 import Image, { StaticImageData } from "next/image";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -56,52 +57,48 @@ function VoteDescription({
   return (
     <Container>
       <ImageWrapper>
-        <LeftVote
-          selected={activeValue("left")}
-          onClick={() => onClickVote("A")}
-          percent={percentageA > 0 ? percentageA : 0}
-        >
-          <Image
-            src={imageA}
-            alt="A 이미지"
-            width={160}
-            height={160}
-            style={{
-              objectFit: "cover",
-              width: "auto",
-              height: "100%",
-            }}
-          />
-          <div className="overlay">
-            <OverLayTitle>{titleA}</OverLayTitle>
-            <OverlayPercent>{percentageA}%</OverlayPercent>
-            <OverlayCount> {totalCountA}명</OverlayCount>
-            {voteType === "DRINK" && <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>}
-          </div>
+        <LeftVote selected={activeValue("left")} onClick={() => onClickVote("A")}>
+          <VoteImageWrapper>
+            <Image
+              src={imageA}
+              alt="A 이미지"
+              width={160}
+              height={160}
+              style={{
+                objectFit: "cover",
+                width: "auto",
+                height: "100%",
+              }}
+            />
+            <div className="overlay">
+              <OverLayTitle>{titleA}</OverLayTitle>
+              <OverlayPercent>{percentageA}%</OverlayPercent>
+              <OverlayCount> {totalCountA}명</OverlayCount>
+              <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
+            </div>
+          </VoteImageWrapper>
         </LeftVote>
 
-        <RightVote
-          selected={activeValue("right")}
-          onClick={() => onClickVote("B")}
-          percent={percentageB > 0 ? percentageB : 0}
-        >
-          <Image
-            src={imageB}
-            alt="B 이미지"
-            width={160}
-            height={160}
-            style={{
-              objectFit: "cover",
-              width: "auto",
-              height: "100%",
-            }}
-          />
-          <div className="overlay">
-            <OverLayTitle>{titleB}</OverLayTitle>
-            <OverlayPercent>{percentageB}%</OverlayPercent>
-            <OverlayCount> {totalCountB}명</OverlayCount>
-            {voteType === "DRINK" && <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>}
-          </div>
+        <RightVote selected={activeValue("right")} onClick={() => onClickVote("B")}>
+          <VoteImageWrapper>
+            <Image
+              src={imageB}
+              alt="B 이미지"
+              width={160}
+              height={160}
+              style={{
+                objectFit: "cover",
+                width: "auto",
+                height: "100%",
+              }}
+            />
+            <div className="overlay">
+              <OverLayTitle>{titleB}</OverLayTitle>
+              <OverlayPercent>{percentageB}%</OverlayPercent>
+              <OverlayCount> {totalCountB}명</OverlayCount>
+              <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
+            </div>
+          </VoteImageWrapper>
         </RightVote>
       </ImageWrapper>
       <FlexRow>
@@ -148,14 +145,14 @@ const FlexRow = styled.div`
 const variantStyles = {
   active: css`
     transition: all 0.3s ease-in-out;
-    width: 90%;
+    width: 70%;
     font-size: 16px;
     font-weight: 700;
     padding: 0 1px;
     pointer-events: none;
   `,
   inactive: css`
-    width: 10%;
+    width: 30%;
     pointer-events: none;
   `,
 };
@@ -165,7 +162,7 @@ const typeGuardVariantStyle = (selected: ActiveType) => {
   return variantStyles[selected];
 };
 
-const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
+const LeftVote = styled.div<{ selected: ActiveType }>`
   position: relative;
   width: 50%;
   aspect-ratio: 1;
@@ -177,9 +174,8 @@ const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
     position: absolute;
     top: 0;
     left: 0;
-    width: 0%;
     visibility: hidden;
-    height: calc(100% - 4px);
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -190,16 +186,16 @@ const LeftVote = styled.div<{ selected: ActiveType; percent: number }>`
     border-radius: 10px;
     border: 2px solid #ff4a16;
 
-    ${({ selected, percent }) =>
+    ${({ selected }) =>
       selected === "active" &&
       css`
-        width: ${percent}%;
+        width: 100%;
         visibility: visible;
       `};
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
   &:hover {
-    width: 90%;
+    width: 70%;
   }
 `;
 
@@ -235,6 +231,21 @@ const OverlayButton = styled.div`
   border-radius: 4px;
   margin-top: 8px;
   padding: 6px 8px;
+`;
+
+const VoteImageWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 184px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  ${media.medium} {
+    height: 340px;
+  }
 `;
 
 export default VoteDescription;
