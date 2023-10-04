@@ -113,6 +113,7 @@ function PostVoteContainer() {
             maxLength={22}
             value={titleA}
             onChange={onChangeVoteText}
+            AorB="A"
           />
         </InputBox>
         <InputBox>
@@ -123,6 +124,7 @@ function PostVoteContainer() {
             maxLength={22}
             value={titleB}
             onChange={onChangeVoteText}
+            AorB="B"
           />
         </InputBox>
       </VoteOptionText>
@@ -219,12 +221,15 @@ const VoteOptionText = styled.div`
   gap: 16px;
 `;
 
-const ABInput = styled(Input)`
-  ${({ theme }) =>
+const ABInput = styled(Input)<{ AorB: "A" | "B" }>`
+  ${({ theme, AorB }) =>
     css`
       ${theme.typography.body_long03}
       color: ${theme.colors.black_04};
       border-bottom: 1px solid ${theme.colors.line_01};
+      :focus {
+        border-bottom: 1px solid ${AorB === "A" ? theme.colors.sub_01 : theme.colors.sub_02};
+      }
     `}
 `;
 
