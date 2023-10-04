@@ -12,7 +12,9 @@ function MyEnjoiedDrinkInfoSection({ numberOfStampedDrinks }: Props) {
       <div>
         <H2>
           우리술 도장을 <br />
-          <MainColor>{numberOfStampedDrinks}</MainColor>개 모았어요.
+          <div>
+            <MainColor>{numberOfStampedDrinks}</MainColor>개 모았어요.
+          </div>
         </H2>
       </div>
       <Image
@@ -37,6 +39,9 @@ const Section = styled.section`
 const H2 = styled.h2`
   ${({ theme }) => css`
     ${theme.typography.headline02}
+    display: flex;
+    flex-direction: column;
+    line-height: 26px;
   `}
 `;
 
