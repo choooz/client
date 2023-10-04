@@ -4,7 +4,7 @@ import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
 import Header from "components/Header";
 import { media } from "lib/styles";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { EmptyAImg } from "public/images";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
@@ -16,11 +16,17 @@ import Path from "lib/Path";
 import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
 import { useMemo } from "react";
+import { toast } from "react-toastify";
 
 export type Drag = "up" | "down" | null;
 
 function VoteHomePage() {
-  const params = useParams();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  /**
+   * @TODO 여러번 뜨는 현상 지속시 삭제
+   */
+  params.get("isSuccess") && toast.success("정상적으로 투표가 등록되었습니다!.");
 
   const router = useRouter();
 
@@ -59,6 +65,7 @@ function VoteHomePage() {
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
+
   return (
     <>
       <Background>

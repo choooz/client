@@ -5,6 +5,7 @@ import { uploadImageAPI } from "lib/apis/common";
 import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
 import { DrinkInfoType, PostVoteType } from "src/types/vote";
 import Path from "lib/Path";
+import { toast } from "react-toastify";
 
 export default function usePostVoteService() {
   const router = useRouter();
@@ -114,19 +115,19 @@ export default function usePostVoteService() {
 
   const guidePostVote = () => {
     if (title === "") {
-      alert("제목을 입력해주세요.");
+      toast("제목을 입력해주세요.");
       return;
     }
     if (detail === "") {
-      alert("설명을 입력해주세요.");
+      toast("설명을 입력해주세요.");
       return;
     }
     if (titleA === "") {
-      alert("선택지 A를 입력해주세요.");
+      toast("선택지 A를 입력해주세요.");
       return;
     }
     if (titleB === "") {
-      alert("선택지 B를 입력해주세요.");
+      toast("선택지 B를 입력해주세요.");
       return;
     }
   };
