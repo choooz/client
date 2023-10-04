@@ -4,7 +4,7 @@ import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import DrinkItem from "./DrinkItem";
 import { DrinkInfoSortType } from "src/types/common";
-import useGetDrinkList from "hooks/useGetDrinkList";
+import useGetDrinkList from "../services/useGetDrinkList";
 
 interface Props {
   searchText: string;
