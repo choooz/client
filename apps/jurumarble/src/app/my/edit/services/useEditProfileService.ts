@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadImageAPI } from "lib/apis/common";
 import { deleteUserAPI, updateUserInfoAPI } from "lib/apis/my";
+import Path from "lib/Path";
 import { queryKeys } from "lib/queryKeys";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type UpdateUserInfoRequest = Exclude<Parameters<typeof updateUserInfoAPI>[0], undefined>;
 
@@ -39,9 +42,12 @@ export default function useEditProfileService() {
     queryClient.setQueryData(getQueryKey, (prev: any) => ({ ...prev, mbti: value }));
   };
 
+  const router = useRouter();
+
   const { mutate: updateUserInfo } = useMutation(
     (newUserInfo: UpdateUserInfoRequest) => updateUserInfoAPI(newUserInfo),
     {
+      onSuccess: () => router.push(Path.MY_PAGE),
       onError: () => {
         /**
          * @TODO 서버 메시지와 연동
@@ -51,7 +57,12 @@ export default function useEditProfileService() {
     },
   );
 
-  const { mutate: deleteUser } = useMutation(() => deleteUserAPI());
+  const { mutate: deleteUser } = useMutation(() => deleteUserAPI(), {
+    onSuccess: () => {
+      toast("회원 탈퇴가 완료되었습니다.");
+      router.push(Path.MAIN_PAGE);
+    },
+  });
 
   return {
     onUploadImage,
