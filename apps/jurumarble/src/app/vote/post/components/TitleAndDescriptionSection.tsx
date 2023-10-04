@@ -16,14 +16,11 @@ function TitleAndDescriptionSection({
   isCompleted,
   onClickPostVoteComplete,
 }: Props) {
-  const theme = useTheme();
-
   return (
     <>
       <H3>제목</H3>
       <TextArea
         placeholder="제목을 입력해주세요"
-        borderColor={theme.colors.line_01}
         value={title}
         name="title"
         onChange={onChangeVoteText}
@@ -31,7 +28,6 @@ function TitleAndDescriptionSection({
       <H3>설명</H3>
       <TextArea
         placeholder="설명을 입력해주세요"
-        borderColor={theme.colors.black_05}
         value={detail}
         name="detail"
         onChange={onChangeVoteText}
@@ -57,10 +53,10 @@ const H3 = styled.h3`
     `}
 `;
 
-const TextArea = styled.textarea<{ borderColor: string }>`
-  ${({ theme, borderColor }) =>
+const TextArea = styled.textarea`
+  ${({ theme }) =>
     css`
-      border: 1px solid ${borderColor};
+      border: 1px solid ${theme.colors.line_01};
       margin-top: 12px;
       border-radius: 4px 0px 0px 4px;
       resize: none;

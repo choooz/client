@@ -3,14 +3,14 @@ import { getEnjoyedDrinkList } from "lib/apis/drink";
 import { queryKeys } from "lib/queryKeys";
 import { useInfiniteScroll } from "@monorepo/hooks";
 
-type DrinkStempListProps = Exclude<Parameters<typeof getEnjoyedDrinkList>[0], undefined>;
+type DrinkStampListProps = Exclude<Parameters<typeof getEnjoyedDrinkList>[0], undefined>;
 
-const getDrinkListQueryKey = (params: DrinkStempListProps) => [
-  queryKeys.DRINK_STEMP_LIST,
+const getDrinkListQueryKey = (params: DrinkStampListProps) => [
+  queryKeys.DRINK_STAMP_LIST,
   { ...params },
 ];
 
-export default function useDrinkStempListService(params: DrinkStempListProps) {
+export default function useDrinkStampListService(params: DrinkStampListProps) {
   const { data, fetchNextPage } = useInfiniteQuery(
     getDrinkListQueryKey(params),
     ({ pageParam }) =>
@@ -29,11 +29,11 @@ export default function useDrinkStempListService(params: DrinkStempListProps) {
     },
   );
 
-  const numberOfStempedDrinks = data?.pages[0].numberOfElements ?? 0;
+  const numberOfStampedDrinks = data?.pages[0].numberOfElements ?? 0;
 
   const drinkList = data?.pages.flatMap((page) => page.content) ?? [];
 
   const [subscribe] = useInfiniteScroll(fetchNextPage);
 
-  return { drinkList, fetchNextPage, subscribe, numberOfStempedDrinks };
+  return { drinkList, fetchNextPage, subscribe, numberOfStampedDrinks };
 }

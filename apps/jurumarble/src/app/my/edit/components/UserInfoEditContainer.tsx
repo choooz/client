@@ -60,15 +60,14 @@ function UserInfoEditContainer() {
         variant="primary"
         width="100%"
         height="56px"
-        onClick={() => {
+        onClick={() =>
           updateUserInfo({
             nickname,
             alcoholLimit,
             mbti,
             imageUrl,
-          });
-          router.push(Path.MY_PAGE);
-        }}
+          })
+        }
       >
         완료
       </CompleteButton>
