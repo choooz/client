@@ -1,9 +1,9 @@
 import { transitions } from "lib/styles";
 import Image from "next/image";
+import useDrinkStampService from "services/useDrinkStampService";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import { DrinkInfo } from "src/types/drink";
 import styled, { css, useTheme } from "styled-components";
-import useDrinkStampService from "../service/useDrinkStampService";
 
 interface Props {
   drinkInfo:
