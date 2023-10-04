@@ -2,16 +2,16 @@
 
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
-import DrinkStempContainer from "./components/DrinkStempContainer";
+import DrinkStampContainer from "./components/DrinkStampContainer";
 
-function StempPage() {
+function StampPage() {
   return (
     <>
       <Header />
-      <DrinkStempContainer />
+      <DrinkStampContainer />
       <BottomBar />
     </>
   );
 }
 
-export default StempPage;
+export default StampPage;

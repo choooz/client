@@ -3,7 +3,7 @@ import Image from "next/image";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import { DrinkInfo } from "src/types/drink";
 import styled, { css, useTheme } from "styled-components";
-import useDrinkStempService from "../service/useDrinkStempService";
+import useDrinkStampService from "../service/useDrinkStampService";
 
 interface Props {
   drinkInfo:
@@ -23,9 +23,9 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
 
   const { colors } = useTheme();
 
-  const { isStempedDrink, postDrinkEnjoy } = useDrinkStempService(id);
+  const { isStampedDrink, postDrinkEnjoy } = useDrinkStampService(id);
 
-  const stempColor = isStempedDrink?.enjoyed ? colors.main_01 : colors.black_05;
+  const stampColor = isStampedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
   return (
     <Container
@@ -45,7 +45,7 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
               postDrinkEnjoy(id);
             }}
           >
-            <SvgStamp width={24} height={24} fill={stempColor} />
+            <SvgStamp width={24} height={24} fill={stampColor} />
           </StampWrapper>
         </NameStampContainer>
         <ManufacturerName>{productName}</ManufacturerName>

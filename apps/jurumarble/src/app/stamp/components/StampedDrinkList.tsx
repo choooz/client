@@ -11,7 +11,7 @@ interface Props {
   drinkList: DrinkInfo[];
 }
 
-function StempedDrinkList({ regionOption, onChangeRegionOption, drinkList }: Props) {
+function StampedDrinkList({ regionOption, onChangeRegionOption, drinkList }: Props) {
   const router = useRouter();
 
   return (
@@ -41,4 +41,4 @@ const DrinkList = styled.ul`
   margin-top: 24px;
 `;
 
-export default StempedDrinkList;
+export default StampedDrinkList;

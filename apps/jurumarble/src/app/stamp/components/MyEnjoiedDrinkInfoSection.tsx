@@ -3,16 +3,16 @@ import { DrinkImage } from "public/images";
 import styled, { css } from "styled-components";
 
 interface Props {
-  numberOfStempedDrinks: number;
+  numberOfStampedDrinks: number;
 }
 
-function MyEnjoiedDrinkInfoSection({ numberOfStempedDrinks }: Props) {
+function MyEnjoiedDrinkInfoSection({ numberOfStampedDrinks }: Props) {
   return (
     <Section>
       <div>
         <H2>
           우리술 도장을 <br />
-          <MainColor>{numberOfStempedDrinks}</MainColor>개 모았어요.
+          <MainColor>{numberOfStampedDrinks}</MainColor>개 모았어요.
         </H2>
       </div>
       <Image
