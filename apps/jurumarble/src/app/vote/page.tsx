@@ -39,19 +39,10 @@ function VoteHomePage() {
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
 
-  const { title, imageA, imageB, titleA, titleB, detail, voteId, region, voteType } =
+  const { title, imageA, imageB, titleA, titleB, detail, voteId, region, postedUserId, voteType } =
     mainVoteList[nowShowing] || {};
 
-  const safeImageA = useMemo(() => {
-    if (!imageA || imageA === "string") return EmptyAImg;
-    return imageA;
-  }, [imageA]);
-  const safeImageB = useMemo(() => {
-    if (!imageB || imageB === "string") return EmptyAImg;
-    return imageB;
-  }, [imageB]);
-
-  const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
+  const { mutateBookMark, bookMarkCheckQuery } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
   const onMutateVoting = (select: "A" | "B") => {
@@ -90,6 +81,8 @@ function VoteHomePage() {
             drag={drag}
           >
             <ChipContainer
+              voteId={voteId}
+              postedUserId={postedUserId}
               title={title}
               date="20.08.22"
               region={region}
