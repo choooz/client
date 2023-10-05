@@ -2,7 +2,9 @@ import { postExecuteVote } from "lib/apis/vote";
 import { media } from "lib/styles";
 import Image, { StaticImageData } from "next/image";
 import { useParams } from "next/navigation";
+import { ExImg1 } from "public/images";
 import React from "react";
+import useGetUserInfo from "services/useGetUserInfo";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
 import styled, { css } from "styled-components";
 import useExecuteVoteService from "../services/useExecuteVoteService";
@@ -11,11 +13,22 @@ type AorB = "A" | "B";
 type ActiveType = "active" | "inactive" | null;
 type Direction = "left" | "right";
 
+// const safeImageA = useMemo(() => {
+//   if (!imageA || imageA === "string") return EmptyAImg;
+//   return imageA;
+// }, [imageA]);
+// const safeImageB = useMemo(() => {
+//   if (!imageB || imageB === "string") return EmptyAImg;
+//   return imageB;
+// }, [imageB]);
+
+const getSafeImage = (image: string) => (image.includes("http") ? image : ExImg1);
+
 interface Props {
   titleA: string;
   titleB: string;
-  imageA: string | StaticImageData;
-  imageB: string | StaticImageData;
+  imageA: string;
+  imageB: string;
   select: AorB | null;
   percentageA: number;
   percentageB: number;
@@ -36,7 +49,7 @@ function VoteDescription({
   totalCountB,
   onMutateVoting,
 }: Props) {
-  const params = useParams();
+  const { userInfo } = useGetUserInfo();
 
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
@@ -58,7 +71,7 @@ function VoteDescription({
         <LeftVote selected={activeValue("left")} onClick={() => onClickVote("A")}>
           <VoteImageWrapper>
             <Image
-              src={imageA}
+              src={getSafeImage(imageA)}
               alt="A 이미지"
               width={160}
               height={160}
@@ -80,7 +93,7 @@ function VoteDescription({
         <RightVote selected={activeValue("right")} onClick={() => onClickVote("B")}>
           <VoteImageWrapper>
             <Image
-              src={imageB}
+              src={getSafeImage(imageB)}
               alt="B 이미지"
               width={160}
               height={160}

@@ -33,18 +33,8 @@ function VoteHomePage() {
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
 
-  const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
+  const { title, imageA, imageB, titleA, titleB, detail, voteId, region, postedUserId } =
     mainVoteList[nowShowing] || {};
-
-  const safeImageA = useMemo(() => {
-    console.log(imageA);
-    if (!imageA || imageA === "string") return EmptyAImg;
-    return imageA;
-  }, [imageA]);
-  const safeImageB = useMemo(() => {
-    if (!imageB || imageB === "string") return EmptyAImg;
-    return imageB;
-  }, [imageB]);
 
   const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
 
@@ -88,6 +78,8 @@ function VoteHomePage() {
             drag={drag}
           >
             <ChipContainer
+              voteId={voteId}
+              postedUserId={postedUserId}
               title={title}
               date="20.08.22"
               region={region}
@@ -96,8 +88,8 @@ function VoteHomePage() {
               isBookmark={isBookmark}
             />
             <VoteDescription
-              imageA={safeImageA}
-              imageB={safeImageB}
+              imageA={imageA}
+              imageB={imageB}
               percentageA={50}
               percentageB={50}
               titleA={titleA}
