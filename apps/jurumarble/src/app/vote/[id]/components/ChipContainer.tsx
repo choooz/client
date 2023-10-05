@@ -7,6 +7,10 @@ import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled from "styled-components";
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
+import useGetUserInfo from "services/useGetUserInfo";
+import { useRouter } from "next/navigation";
+import Path from "lib/Path";
+import useVoteDeleteService from "../services/useVoteDeleteService";
 
 interface Props {
   title: string;
@@ -15,9 +19,23 @@ interface Props {
   region: string;
   mutateBookMark: UseMutateFunction;
   isBookmark: boolean;
+  postedUserId: number;
+  voteId: number;
 }
 
-const ChipContainer = ({ date, description, title, region, mutateBookMark, isBookmark }: Props) => {
+const ChipContainer = ({
+  voteId,
+  date,
+  description,
+  title,
+  region,
+  mutateBookMark,
+  isBookmark,
+  postedUserId,
+}: Props) => {
+  const { userInfo } = useGetUserInfo();
+  const { onDelete } = useVoteDeleteService(voteId);
+  const router = useRouter();
   const [toggleMenu, onToggleMenu] = useToggle();
   const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
   return (
@@ -29,14 +47,15 @@ const ChipContainer = ({ date, description, title, region, mutateBookMark, isBoo
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
-            <SvgIcBookmarkActive width={20} height={20} onClick={() => mutateBookMark()} />
+            <SvgIcBookmarkActive width={26} height={26} onClick={() => mutateBookMark()} />
           ) : (
             <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
           )}
-
-          <div ref={targetEl} onClick={onToggleMenu}>
-            <SvgIcMenu width={20} height={20} />
-          </div>
+          {userInfo?.userId === postedUserId && (
+            <div ref={targetEl} onClick={onToggleMenu}>
+              <SvgIcMenu width={20} height={20} />
+            </div>
+          )}
         </FlexRow>
       </TagRow>
       <TitleRow>
@@ -49,9 +68,15 @@ const ChipContainer = ({ date, description, title, region, mutateBookMark, isBoo
         <ModifyDeleteButtonBox
           top="70px"
           right="41px"
-          onDelete={() => {}}
-          onModify={() => {}}
-          onShare={() => {}}
+          onDelete={() => {
+            if (confirm("정말 삭제하시겠습니까?")) {
+              onDelete();
+              alert("삭제되었습니다.");
+            }
+          }}
+          onModify={() => {
+            router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}/update`);
+          }}
         />
       )}
     </>
