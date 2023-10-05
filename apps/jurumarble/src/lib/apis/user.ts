@@ -13,6 +13,7 @@ export interface GetUserInfoResponse {
   gender: GenderType;
   mbti: string;
   alcoholLimit: string;
+  userId: number;
 }
 
 export const getUserInfo = async () => {
