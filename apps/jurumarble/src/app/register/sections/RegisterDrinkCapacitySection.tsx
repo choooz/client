@@ -31,10 +31,10 @@ const Wrapper = styled.div`
   margin: 32px 0;
   background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.line_01};
+  border-radius: 8px;
   box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.04), 2px 2px 20px 0px rgba(0, 0, 0, 0.06);
 
   > div + div {
-    border-top: 1px solid ${({ theme }) => theme.colors.line_01};
   }
 `;
 
@@ -45,17 +45,20 @@ const Item = styled.div<{
   cursor: pointer;
   display: flex;
   transition: all 0.3s ease-in-out;
+  border-top: 1px solid ${({ theme }) => theme.colors.line_01};
 
-  ${({ $selected }) =>
+  ${({ theme, $selected }) =>
     $selected &&
     css`
       & {
         animation: ${transitions.blink} 0.7s ease-in-out;
-        background: rgba(255, 92, 0, 0.5);
+        background: rgba(255, 92, 0, 0.2);
+        border: 1px solid ${theme.colors.main_01};
+        border-radius: 8px;
       }
     `}
   &:hover {
-    background-color: ${({ theme }) => theme.colors.main_02};
+    background: rgba(255, 92, 0, 0.2);
   }
 `;
 

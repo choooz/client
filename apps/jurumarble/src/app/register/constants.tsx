@@ -8,17 +8,17 @@ import RegisterMBTISection from "./sections/RegisterMBTISection";
 export const REGISTER_STEPS_CONTENT = {
   STEP1: {
     title: "평소에 어떤 술을 즐기시나요?",
-    subTitle: "여행의 즐거움을 더할 우리술을 추천드릴게요.",
+    subTitle: "여행의 즐거움을 레벨업할 우리술을 추천드릴게요.",
     component: () => <RegisterDrinkCapacitySection />,
   },
   STEP2: {
     title: "여행자님의 성별은 무엇인가요?",
-    subTitle: "같은 성별이 선호하는 우리술이 무엇인지 추천드릴게요",
+    subTitle: "같은 성별의 여행자들이 선호하는 우리술을 추천드릴게요.",
     component: () => <RegisterGenderSection />,
   },
   STEP3: {
     title: "여행자님의 출생년도는 어떻게 되나요?",
-    subTitle: "비슷한 나이대의 여행자들이 선호하는 우리술이 무엇인지 추천드릴게요.",
+    subTitle: "비슷한 나이대의 여행자들이 선호하는 우리술을 추천드릴게요.",
     component: () => <RegisterBirthSection />,
   },
   STEP4: {

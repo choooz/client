@@ -1,7 +1,6 @@
 import { Button, ModalTemplate } from "components/index";
 import { ALCOHOL_LEVEL_LIST, GENDER_LIST } from "lib/constants";
 import { SvgWarningIcon } from "src/assets/icons/components";
-
 import styled, { css } from "styled-components";
 import { useRegisterContext } from "../contexts";
 
@@ -19,7 +18,7 @@ function WarningModal() {
   return (
     <ModalTemplate width="335px" height="510px" onToggleModal={onToggleWarningModal}>
       <Container>
-        <WarningIconStyled width="56px" height="56px" />
+        <SvgWarningIcon width="56px" height="56px" />
         <GuideText>선택하신 항목을 확인해주세요.</GuideText>
         <UserInfoList>
           <ListItem>
@@ -67,12 +66,10 @@ const Container = styled.div`
   ${({ theme }) => css`
     ${theme.typography.body02}
     padding: 40px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   `}
-`;
-
-const WarningIconStyled = styled(SvgWarningIcon)`
-  display: flex;
-  margin: 0 auto;
 `;
 
 const GuideText = styled.div`
@@ -93,6 +90,7 @@ const UserInfoList = styled.ul`
     flex-direction: column;
     margin-top: 24px;
     padding: 20px;
+    width: 100%;
   `}
 `;
 
@@ -135,6 +133,7 @@ const ButtonContainer = styled.div`
     display: flex;
     gap: 8px;
     margin-top: 40px;
+    width: 100%;
   `};
 `;
 
