@@ -14,6 +14,7 @@ export default function useGetUserInfo() {
       mbti: "ESTJ",
       alcoholLimit: "LOW",
       email: "",
+      userId: 0,
     }),
   });
 

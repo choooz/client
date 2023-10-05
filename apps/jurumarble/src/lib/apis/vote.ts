@@ -165,3 +165,8 @@ export const getHotDrinkVote = async () => {
   const response = await baseApi.get<GetHotDrinkVoteResponse>("api/votes/drinks/hot");
   return response.data;
 };
+
+export const deleteVote = async (voteId: number) => {
+  const response = await http.delete(`api/votes/${voteId}`);
+  return response.data;
+};
