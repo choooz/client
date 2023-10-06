@@ -44,6 +44,7 @@ function VoteListContainer() {
         <VoteList>
           {myVoteList.map(({ voteId, region, title, imageA, imageB }) => (
             <VoteItem
+              key={voteId}
               voteId={voteId}
               region={region}
               title={title}
