@@ -49,12 +49,6 @@ export default function useEditProfileService() {
     (newUserInfo: UpdateUserInfoRequest) => updateUserInfoAPI(newUserInfo),
     {
       onSuccess: () => router.push(Path.MY_PAGE),
-      onError: (error) => {
-        /**
-         * @TODO 서버 메시지와 연동
-         */
-        toast.error("MBTI 수정시 2개월간 바꿀 수 없습니다.");
-      },
     },
   );
 
