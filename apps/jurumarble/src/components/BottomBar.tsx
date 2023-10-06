@@ -1,5 +1,6 @@
 "use client";
 
+import Path from "lib/Path";
 import { usePathname, useRouter } from "next/navigation";
 import SvgIcCheck from "src/assets/icons/components/IcCheck";
 import SvgIcHome from "src/assets/icons/components/IcHome";
@@ -11,27 +12,27 @@ import styled from "styled-components";
 const NAVIGATION_LIST = [
   {
     name: "홈",
-    path: "/",
+    path: Path.MAIN_PAGE,
     icon: <SvgIcHome width={24} height={24} />,
   },
   {
     name: "술도장",
-    path: "/stemp",
+    path: Path.STAMP_PAGE,
     icon: <SvgIcMark width={24} height={24} />,
   },
   {
     name: "투표",
-    path: "/vote",
+    path: Path.VOTE_HOME,
     icon: <SvgIcCheck width={24} height={24} />,
   },
   {
     name: "술지도",
-    path: "/map",
+    path: Path.DRINK_MAP_PAGE,
     icon: <SvgIcMapPin width={24} height={24} />,
   },
   {
     name: "마이",
-    path: "/my",
+    path: Path.MY_PAGE,
     icon: <SvgIcUser width={24} height={24} />,
   },
 ];
@@ -45,10 +46,8 @@ function BottomBar() {
       <Container>
         <Inner>
           {NAVIGATION_LIST.map(({ icon, name, path }) => {
-            // pathname이 "/" 일때 홈만 true이고, 그외일때 현재 url에 path가 포함되어 있으면 active
-            const isActive = pathName === "/" ? pathName === path : pathName.includes(path);
             return (
-              <BarItem key={`${name}`} isActive={isActive} onClick={() => router.push(path)}>
+              <BarItem key={name} isActive={pathName === path} onClick={() => router.push(path)}>
                 {icon}
                 <span>{name}</span>
               </BarItem>
@@ -66,6 +65,7 @@ const Container = styled.section`
   bottom: 0;
   left: 0;
   background-color: ${({ theme }) => theme.colors.white};
+  padding: 0 20px;
 `;
 
 const Inner = styled.div`
@@ -77,13 +77,11 @@ const Inner = styled.div`
 `;
 
 const BarItem = styled.div<{ isActive: boolean }>`
-  padding: 10px 21px;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  white-space: nowrap;
   color: ${({ isActive, theme }) => (isActive ? theme.colors.black_01 : theme.colors.black_05)};
 `;
 

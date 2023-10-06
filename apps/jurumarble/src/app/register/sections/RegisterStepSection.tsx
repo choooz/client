@@ -14,7 +14,6 @@ export const RegisterStepSection = () => {
   return (
     <Wrapper>
       <>
-        {step === "STEP1" && <StyledTooltip>주루마블에 오신 여행자님 환영합니다!</StyledTooltip>}
         <ContentHeader title={title} subTitle={subTitle} />
         {component()}
       </>

@@ -1,15 +1,15 @@
 import MyEnjoiedDrinkInfoSection from "./MyEnjoiedDrinkInfoSection";
-import StempedDrinkList from "./StempedDrinkList";
+import StampedDrinkList from "./StampedDrinkList";
 import { useState } from "react";
-import useDrinkStempService from "../service/useDrinkStempListService";
+import useDrinkStampService from "../service/useDrinkStampListService";
 
-function DrinkStempContainer() {
+function DrinkStampContainer() {
   const [regionOption, setRegionOption] = useState("");
   const onChangeRegionOption = (value: string) => {
     setRegionOption(value);
   };
 
-  const { drinkList, subscribe, numberOfStempedDrinks } = useDrinkStempService({
+  const { drinkList, subscribe, numberOfStampedDrinks } = useDrinkStampService({
     page: 0,
     size: 10,
     region: regionOption,
@@ -17,8 +17,8 @@ function DrinkStempContainer() {
 
   return (
     <>
-      <MyEnjoiedDrinkInfoSection numberOfStempedDrinks={numberOfStempedDrinks} />
-      <StempedDrinkList
+      <MyEnjoiedDrinkInfoSection numberOfStampedDrinks={numberOfStampedDrinks} />
+      <StampedDrinkList
         regionOption={regionOption}
         onChangeRegionOption={onChangeRegionOption}
         drinkList={drinkList}
@@ -28,4 +28,4 @@ function DrinkStempContainer() {
   );
 }
 
-export default DrinkStempContainer;
+export default DrinkStampContainer;

@@ -50,15 +50,18 @@ const SelectStyled = styled.div<{ isOpen: boolean }>`
       top: 6px;
       left: -100px;
       width: 335px;
-      height: 330px;
+      height: 60vh;
       display: flex;
       flex-direction: column;
-      gap: 20px;
     }
     li {
       display: flex;
       justify-content: center;
-      ${theme.typography.button01};
+      padding: 16px 0;
+      ${theme.typography.button02};
+      :hover {
+        background-color: ${theme.colors.bg_02};
+      }
     }
     svg {
       ${isOpen && "transform: rotateX( 180deg )"}

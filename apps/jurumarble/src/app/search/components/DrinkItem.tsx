@@ -2,21 +2,26 @@ import Chip from "components/Chip";
 
 import { transitions } from "lib/styles";
 import Image from "next/image";
+import useDrinkStampService from "services/useDrinkStampService";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import { DrinkInfo } from "src/types/drink";
 import styled, { css, useTheme } from "styled-components";
 
 interface Props {
   drinkInfo: DrinkInfo;
-  stamp?: boolean;
+
   onClickDrinkItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedDrinkList?: string[];
 }
 
-function DrinkItem({ drinkInfo, stamp, onClickDrinkItem, selectedDrinkList }: Props) {
-  const { name, productName, image } = drinkInfo;
+function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
+  const { id, name, productName, image, enjoyCount } = drinkInfo;
 
   const { colors } = useTheme();
+
+  const { isStampedDrink, postDrinkEnjoy } = useDrinkStampService(id);
+
+  const stampColor = isStampedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
   return (
     <Container onClick={onClickDrinkItem} name={name} selected={selectedDrinkList?.includes(name)}>
@@ -26,16 +31,19 @@ function DrinkItem({ drinkInfo, stamp, onClickDrinkItem, selectedDrinkList }: Pr
       <InfoContainer>
         <NameStampContainer>
           <Name>{name}</Name>
-          {stamp && (
-            <StampWrapper>
-              <SvgStamp width={24} height={24} fill={colors.black_05} />
-            </StampWrapper>
-          )}
+          <StampWrapper
+            onClick={(e) => {
+              e.stopPropagation();
+              postDrinkEnjoy(id);
+            }}
+          >
+            <SvgStamp width={24} height={24} fill={stampColor} />
+          </StampWrapper>
         </NameStampContainer>
         <ManufacturerName>{productName}</ManufacturerName>
         <ChipContainer>
           <Chip variant="region">서울</Chip>
-          <Chip variant="numberOfParticipants">213명이 즐겼어요</Chip>
+          <Chip variant="numberOfParticipants">{enjoyCount}명이 즐겼어요</Chip>
         </ChipContainer>
       </InfoContainer>
     </Container>

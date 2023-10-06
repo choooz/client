@@ -86,6 +86,16 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       : 1;
 
   const onNextStep = () => {
+    if (Number(yearOfBirth) > 2004) {
+      toast.error("2004년 이후 출생자는 가입이 불가능합니다.");
+      setYearOfBirth("");
+      return;
+    } else if (999 < Number(yearOfBirth) && Number(yearOfBirth) < 1900) {
+      toast.error("출생년도를 다시 한번 확인해주세요.");
+      setYearOfBirth("");
+      return;
+    }
+
     currentStepIndex < stepList.length
       ? setStep(stepList[currentStepIndex])
       : onToggleWarningModal();
@@ -141,11 +151,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     } else if (step === "STEP2") {
       return gender === null;
     } else if (step === "STEP3") {
-      /**
-       * @TODO 토스트 메시지가 두번씩 뜨는 이슈
-       */
-      Number(yearOfBirth) > 2004 && toast.error("2004년 이후 출생자는 가입이 불가능합니다.");
-      return yearOfBirth === "" || yearOfBirth?.length !== 4 || Number(yearOfBirth) > 2004;
+      return yearOfBirth === "" || yearOfBirth?.length !== 4;
     } else if (step === "STEP4") {
       return Object.values(MBTI).some((value) => value === null);
     }
@@ -166,7 +172,10 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
         mbti: stringfiedMBTI,
       }),
     {
-      onSuccess: () => router.replace(Path.MAIN_PAGE),
+      onSuccess: () => {
+        toast.success("회원가입이 완료되었습니다.");
+        router.replace(Path.MAIN_PAGE);
+      },
       onError: (error) => alert(error),
     },
   );

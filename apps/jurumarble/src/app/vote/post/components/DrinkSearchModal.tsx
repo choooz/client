@@ -8,11 +8,11 @@ import styled, { css } from "styled-components";
 import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
 import SelectedDrinkChip from "./SelectedDrinkChip";
 import DrinkItem from "app/vote/post/components/DrinkItem";
-import useGetDrinkList from "hooks/useGetDrinkList";
 import SearchInput from "components/SearchInput";
 import useInput from "hooks/useInput";
 import { DrinkInfoType } from "src/types/vote";
 import RegionSelect from "components/RegionSelect";
+import useGetDrinkList from "../services/useGetDrinkList";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
@@ -66,7 +66,6 @@ function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete
           ))}
         </SelectedDrinkChipList>
       </SearchSection>
-
       <ResultSection>
         <DrinkList>
           {drinkList.map((drinkInfo) => (
@@ -114,7 +113,7 @@ const DrinkList = styled.ul`
   flex-direction: column;
   gap: 8px;
   overflow: auto;
-  height: 400px;
+  height: 50vh;
   -ms-overflow-style: none /* IE and Edge 스크롤바 없애는 css*/;
   scrollbar-width: none; /* Firefox 스크롤바 없애는 css */
   &::-webkit-scrollbar {

@@ -33,7 +33,7 @@ const SelectStyled = styled.span<{ isOpen: boolean }>`
   ${({ theme, isOpen }) => css`
     ${theme.typography.button01};
     color: ${theme.colors.black_03};
-    width: 80px;
+    width: 85px;
     height: 40px;
     .selected-label {
       border: 1px solid ${theme.colors.line_01};

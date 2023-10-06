@@ -12,6 +12,8 @@ const Path = {
   POST_PAGE: "/vote/post",
   MY_PAGE: "/my",
   PROFILE_EDIT: "/my/edit",
+  NOTIFICATION_PAGE: "/notification",
+  STAMP_PAGE: "/stamp",
 
   // common
   MAIN_PAGE: "/",
@@ -19,6 +21,7 @@ const Path = {
   VOTE_DETAIL_PAGE: "/vote",
   SEARCH_PAGE: "/search",
   DRINK_INFO_PAGE: "/drink-info",
+  DRINK_MAP_PAGE: "/map",
 } as const;
 
 export default Path;
