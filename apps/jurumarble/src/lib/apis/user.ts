@@ -3,13 +3,11 @@ import { http } from "./http/http";
 
 type GenderType = keyof typeof GENDER;
 
-export type Agetype = "teenager" | "twenties" | "thirties" | "forties" | "fifties" | null;
-
 export interface GetUserInfoResponse {
   nickname: string;
   email: string;
   imageUrl: string;
-  ageType: Agetype;
+  yearOfBirth: number;
   gender: GenderType;
   mbti: string;
   alcoholLimit: string;
