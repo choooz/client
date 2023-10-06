@@ -18,6 +18,7 @@ export const queryKeys = {
   MY_PARTICIPATED_VOTE: "myParticipatedVote" as const,
   MY_CREATED_VOTE: "myCreatedVote" as const,
   MY_BOOKMARKED_VOTE: "myBookmarkedVote" as const,
+  THE_NUMBER_OF_MY_VOTE: "theNumberOfMyVote" as const,
   DRINKS_MAP: "drinksMap" as const,
 };
 
