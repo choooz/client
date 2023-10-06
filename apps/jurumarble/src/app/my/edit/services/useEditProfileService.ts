@@ -3,6 +3,7 @@ import { uploadImageAPI } from "lib/apis/common";
 import { deleteUserAPI, updateUserInfoAPI } from "lib/apis/my";
 import Path from "lib/Path";
 import { queryKeys } from "lib/queryKeys";
+import { logout } from "lib/utils/auth";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -48,11 +49,11 @@ export default function useEditProfileService() {
     (newUserInfo: UpdateUserInfoRequest) => updateUserInfoAPI(newUserInfo),
     {
       onSuccess: () => router.push(Path.MY_PAGE),
-      onError: () => {
+      onError: (error) => {
         /**
          * @TODO 서버 메시지와 연동
          */
-        alert("MBTI 수정시 2개월간 바꿀 수 없습니다.");
+        toast.error("MBTI 수정시 2개월간 바꿀 수 없습니다.");
       },
     },
   );
@@ -61,6 +62,7 @@ export default function useEditProfileService() {
     onSuccess: () => {
       toast("회원 탈퇴가 완료되었습니다.");
       router.push(Path.MAIN_PAGE);
+      logout();
     },
   });
 

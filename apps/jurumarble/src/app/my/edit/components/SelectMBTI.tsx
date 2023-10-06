@@ -3,7 +3,6 @@ import { useToggle, useOutsideClick } from "@monorepo/hooks";
 import { SvgArrowDown } from "src/assets/icons/components";
 import { useId } from "react";
 import { MBTI_LIST } from "lib/constants";
-import depths from "lib/styles/depths";
 
 interface Props {
   MBTI: string;
