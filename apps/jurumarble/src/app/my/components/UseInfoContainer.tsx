@@ -13,7 +13,11 @@ function UserInfoContainer() {
 
   if (!userInfo) return <></>;
 
-  const { gender, nickname, ageType, mbti, imageUrl, alcoholLimit } = userInfo;
+  const { gender, nickname, yearOfBirth, mbti, imageUrl } = userInfo;
+
+  const date = new Date();
+  const age = date.getFullYear() - yearOfBirth;
+  const ageRange = Math.floor(age / 10) * 10;
 
   return (
     <Container>
@@ -30,11 +34,9 @@ function UserInfoContainer() {
         <UserInfo>
           {gender === "MALE" ? "남" : "여"}
           <Divider />
-          {ageType}
+          {ageRange}대
           <Divider />
           {mbti}
-          <Divider />
-          {alcoholLimit}
         </UserInfo>
         <Nickname>{nickname}</Nickname>
         <Link href={Path.PROFILE_EDIT}>
@@ -73,7 +75,7 @@ const UserInfo = styled.span`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 130px;
+    width: 96px;
     height: 24px;
     border-radius: 4px;
   `};

@@ -1,7 +1,5 @@
 import { Button } from "components/button";
 import { GENDER } from "lib/constants";
-import Path from "lib/Path";
-import { useRouter } from "next/navigation";
 import useGetUserInfo from "services/useGetUserInfo";
 import styled, { css } from "styled-components";
 import useEditProfileService from "../services/useEditProfileService";
@@ -13,7 +11,7 @@ import { useToggle } from "@monorepo/hooks";
 
 function UserInfoEditContainer() {
   const { userInfo } = useGetUserInfo();
-  const { gender, ageType, alcoholLimit, imageUrl, mbti, nickname } = userInfo!;
+  const { gender, yearOfBirth, alcoholLimit, imageUrl, mbti, nickname } = userInfo!;
 
   const {
     onUploadImage,
@@ -23,8 +21,6 @@ function UserInfoEditContainer() {
     updateUserInfo,
     deleteUser,
   } = useEditProfileService();
-
-  const router = useRouter();
 
   const [isToggleWithdrawalModal, onToggleWithdrawalModal] = useToggle();
 
@@ -45,7 +41,7 @@ function UserInfoEditContainer() {
         </GenderAndAgeBox>
         <GenderAndAgeBox>
           <H3>나이</H3>
-          <Input placeholder={ageType ?? "나이를 설정해주세요."} width="50%" disabled />
+          <Input placeholder={`${yearOfBirth}`} width="50%" disabled />
         </GenderAndAgeBox>
       </GenderAndAge>
       <H3>MBTI</H3>
