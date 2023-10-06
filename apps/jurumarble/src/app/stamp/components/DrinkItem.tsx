@@ -89,7 +89,7 @@ const NameStampContainer = styled.div`
   justify-content: space-between;
 `;
 
-const StampWrapper = styled.button`
+const StampWrapper = styled.div`
   margin-right: 1px;
 `;
 

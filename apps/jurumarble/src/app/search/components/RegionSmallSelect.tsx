@@ -9,8 +9,6 @@ interface Props {
   onChangeSortOption: (id: string) => void;
 }
 
-REGION_LIST.unshift({ value: "", label: "지역" });
-
 function RegionSmallSelect({ defaultOption, onChangeSortOption }: Props) {
   const [isOpen, onToggleOpen] = useToggle();
 
@@ -19,7 +17,7 @@ function RegionSmallSelect({ defaultOption, onChangeSortOption }: Props) {
       <Select
         defaultValue={defaultOption}
         onChangeSelectedOption={onChangeSortOption}
-        options={REGION_LIST}
+        options={[{ value: "", label: "지역", lat: 0, long: 0 }, ...REGION_LIST]}
         isOpen={isOpen}
         onToggleOpen={onToggleOpen}
       >

@@ -1,8 +1,8 @@
 import axios from "axios";
-import type { AxiosInstance, AxiosRequestConfig } from "axios";
 import { SERVER_URL } from "lib/constants";
 import userStorage from "lib/utils/userStorage";
 import { logout } from "lib/utils/auth";
+import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
   baseURL: SERVER_URL,
@@ -30,6 +30,10 @@ axiosInstance.interceptors.response.use(
     } = error;
 
     switch (status) {
+      case 400:
+        toast.error(error.response.data.message);
+        throw new Error(error.response.data.message);
+
       case 401:
         const tokens = userStorage.get();
         if (!tokens) throw new Error("No tokens found");

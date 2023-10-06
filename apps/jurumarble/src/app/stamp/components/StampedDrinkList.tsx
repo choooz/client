@@ -1,9 +1,9 @@
-import RegionSelect from "components/RegionSelect";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
 import { DrinkInfo } from "src/types/drink";
 import styled from "styled-components";
 import DrinkItem from "./DrinkItem";
+import RegionSelect from "./RegionSelect";
 
 interface Props {
   regionOption: string;
