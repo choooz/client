@@ -52,6 +52,7 @@ function VoteListContainer() {
             />
           ))}
         </VoteList>
+        <div ref={subscribe}></div>
       </Container>
     </>
   );
