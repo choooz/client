@@ -1,5 +1,5 @@
 import { Button, Portal } from "components/index";
-import { REGION_LIST_BOUNDS } from "lib/constants";
+import { REGION_LIST } from "lib/constants";
 import { transitions } from "lib/styles";
 import Image from "next/image";
 import React from "react";
@@ -33,7 +33,7 @@ const RegionBottomSheet = ({ on, onToggleDrinkSearchModal, setChangeMapCenter }:
             />{" "}
           </SelectBox>
           <List>
-            {REGION_LIST_BOUNDS.map(({ label, value, lat, long }) => (
+            {REGION_LIST.map(({ label, value, lat, long }) => (
               <RegionItem
                 onClick={() => {
                   setChangeMapCenter(lat, long);
