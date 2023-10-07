@@ -76,7 +76,12 @@ const DrinkInfoContainer = () => {
             <Chip variant="region">{manufactureAddress.slice(0, 2)}</Chip>
             <Chip variant="numberOfParticipants">{manufactureAddress.slice(0, 2)}</Chip>
           </FlexRow>
-          <SvgStamp onClick={() => postDrinkEnjoy(id)} width={24} height={24} fill={stampColor} />
+          <SvgStamp
+            onClick={() => postDrinkEnjoy(Number(id))}
+            width={24}
+            height={24}
+            fill={stampColor}
+          />
         </FlexBetweenRow>
         <TitleBox>
           <div className="title">{name}</div>
