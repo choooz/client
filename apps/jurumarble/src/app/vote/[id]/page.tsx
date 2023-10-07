@@ -8,15 +8,15 @@ import BottomBar from "components/BottomBar";
 import VoteDescription from "./components/VoteDescription";
 import ChipContainer from "./components/ChipContainer";
 import CommentContainer from "./components/CommentContainer";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useToggle } from "@monorepo/hooks";
 import SearchRestaurantModal from "./components/SearchRestaurantModal";
-import usePostBookmarkService from "../services/useBookmarkService";
 import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
 import useFilteredStatisticsService from "./services/useFilterStatisticsService";
 import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
 import { useState } from "react";
+import useBookmarkService from "services/useBookmarkService";
 
 function Detail() {
   const params = useParams();
@@ -32,7 +32,7 @@ function Detail() {
 
   const { data, isError, isLoading } = useVoteLoadService(Number(postId));
 
-  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(Number(postId));
+  const { mutateBookMark, isBookmark } = useBookmarkService(Number(postId));
 
   const { mutate, select } = useExecuteVoteService(Number(data?.voteId));
   const onMutateVoting = (select: "A" | "B") => {
@@ -49,9 +49,6 @@ function Detail() {
     isLoading: isStatisticsLoading,
     isError: isStatisticsError,
   } = voteStatisticsQuery;
-  const { data: bookmarkCheck } = bookMarkCheckQuery;
-
-  const isBookmark = bookmarkCheck?.bookmarked || false;
 
   if (isLoading || isStatisticsLoading) return <div>로딩중</div>;
   if (isError || isStatisticsError) return <div>에러</div>;

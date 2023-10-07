@@ -23,9 +23,23 @@ const ChipContainer = ({ date, title, region, mutateBookMark, isBookmark }: Prop
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
-            <SvgIcBookmarkActive width={20} height={20} onClick={() => mutateBookMark()} />
+            <SvgIcBookmarkActive
+              width={20}
+              height={20}
+              onClick={(e) => {
+                e.stopPropagation();
+                mutateBookMark();
+              }}
+            />
           ) : (
-            <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+            <SvgIcBookmark
+              width={20}
+              height={20}
+              onClick={(e) => {
+                e.stopPropagation();
+                mutateBookMark();
+              }}
+            />
           )}
         </FlexRow>
       </TagRow>

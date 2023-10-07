@@ -40,7 +40,7 @@ function UserInfoEditContainer() {
           <Input placeholder={gender === GENDER.MALE ? "남성" : "여성"} width="100%" disabled />
         </GenderAndAgeBox>
         <GenderAndAgeBox>
-          <H3>나이</H3>
+          <H3>출생년도</H3>
           <Input placeholder={`${yearOfBirth}`} width="50%" disabled />
         </GenderAndAgeBox>
       </GenderAndAge>
