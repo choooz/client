@@ -147,13 +147,13 @@ const MapContainer = () => {
           </MyLocationButton>
         </Map>
       </div>
-      <FilterBox>
+      {/* <FilterBox>
         <RegionSmallSelect
           defaultOption={sortBy}
           onChangeSortOption={onChangeDrinkInfoSortOption}
           options={DRINK_INFO_SORT_LIST}
         />
-      </FilterBox>
+      </FilterBox> */}
       <DrinkBox>
         {drinksList.map(({ drinkId, name, latitude, longitude, image, manufacturer }) => (
           <DrinkItem
@@ -215,7 +215,7 @@ const DrinkBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 0 20px;
+  padding: 30px 20px;
 `;
 
 const MyLocationButton = styled.div`
