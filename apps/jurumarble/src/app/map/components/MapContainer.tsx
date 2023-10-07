@@ -13,6 +13,7 @@ import RegionSmallSelect from "./RegionSmallSelect";
 import { DRINK_INFO_SORT_LIST } from "lib/constants";
 import { useGeoLocation } from "../hooks/useGeoLocation";
 import SvgIcMyLocationFloating from "src/assets/icons/ic_my_location_floating.svg";
+import SvgIcPin from "src/assets/icons/ic_pin.svg";
 import Image from "next/image";
 
 const MapContainer = () => {
@@ -123,10 +124,10 @@ const MapContainer = () => {
                 lng: location.longitude,
               }}
               image={{
-                src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png",
+                src: "https://elasticbeanstalk-ap-northeast-2-319210348301.s3.ap-northeast-2.amazonaws.com/static/f0bc29bd-c5a8-46ad-9012-e5401f0a1636pin.svg",
                 size: {
-                  width: 64,
-                  height: 69,
+                  width: 29,
+                  height: 42,
                 },
               }}
             />
