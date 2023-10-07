@@ -20,6 +20,7 @@ export const queryKeys = {
   MY_BOOKMARKED_VOTE: "myBookmarkedVote" as const,
   THE_NUMBER_OF_MY_VOTE: "theNumberOfMyVote" as const,
   DRINKS_MAP: "drinksMap" as const,
+  DRINKS_INFO: "drinksInfo" as const,
 };
 
 export const reactQueryKeys = {
@@ -47,4 +48,5 @@ export const reactQueryKeys = {
     page: number,
     size: number,
   ) => [queryKeys.DRINKS_MAP, startX, startY, endX, endY, page, size] as const,
+  drinksInfo: (id: number) => [queryKeys.DRINKS_INFO, id] as const,
 };

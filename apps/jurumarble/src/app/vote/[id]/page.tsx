@@ -105,6 +105,7 @@ function Detail() {
           totalCountB={totalCountB}
           select={select.choice}
           onMutateVoting={onMutateVoting}
+          voteType={data.voteType}
         />
         {!!select.choice && (
           <VoteAnalyzeBar

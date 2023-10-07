@@ -83,3 +83,20 @@ export const getDrinksMap = async (params: GetDrinksMapRequest) => {
   });
   return response.data;
 };
+
+export interface GetDrinkInfoResponse {
+  drinkId: number;
+  name: string;
+  type: string;
+  manufacturer: string;
+  alcoholicBeverage: string;
+  rawMaterial: string;
+  capacity: string;
+  manufactureAddress: string;
+  image: string;
+}
+
+export const getDrinkInfo = async (drinkId: number) => {
+  const response = await baseApi.get<GetDrinkInfoResponse>(`api/drinks/${drinkId}`);
+  return response.data;
+};

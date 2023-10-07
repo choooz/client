@@ -21,6 +21,7 @@ interface Props {
   totalCountA: number;
   totalCountB: number;
   onMutateVoting: (select: AorB) => void;
+  voteType: string;
 }
 
 function VoteDescription({
@@ -34,6 +35,7 @@ function VoteDescription({
   totalCountA,
   totalCountB,
   onMutateVoting,
+  voteType,
 }: Props) {
   const params = useParams();
 
@@ -74,7 +76,7 @@ function VoteDescription({
             <OverLayTitle>{titleA}</OverLayTitle>
             <OverlayPercent>{percentageA}%</OverlayPercent>
             <OverlayCount> {totalCountA}명</OverlayCount>
-            <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
+            {voteType === "DRINK" && <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>}
           </div>
         </LeftVote>
 
@@ -98,7 +100,7 @@ function VoteDescription({
             <OverLayTitle>{titleB}</OverLayTitle>
             <OverlayPercent>{percentageB}%</OverlayPercent>
             <OverlayCount> {totalCountB}명</OverlayCount>
-            <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
+            {voteType === "DRINK" && <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>}
           </div>
         </RightVote>
       </ImageWrapper>
