@@ -11,6 +11,10 @@ import useGetUserInfo from "services/useGetUserInfo";
 import { useRouter } from "next/navigation";
 import Path from "lib/Path";
 import useVoteDeleteService from "../services/useVoteDeleteService";
+import { formatDate } from "lib/utils/formatDate";
+import NonWriterBox from "app/vote/components/NonWriterBox";
+import { toast } from "react-toastify";
+import useVoteReportService from "../services/useVoteReportService";
 
 interface Props {
   title: string;
@@ -37,7 +41,9 @@ const ChipContainer = ({
   const { onDelete } = useVoteDeleteService(voteId);
   const router = useRouter();
   const [toggleMenu, onToggleMenu] = useToggle();
+  const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle();
   const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
+  const { mutate } = useVoteReportService();
   return (
     <>
       <TagRow>
@@ -51,18 +57,20 @@ const ChipContainer = ({
           ) : (
             <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
           )}
-          {userInfo?.userId === postedUserId && (
-            <div ref={targetEl} onClick={onToggleMenu}>
-              <SvgIcMenu width={20} height={20} />
-            </div>
-          )}
+
+          <div
+            ref={targetEl}
+            onClick={userInfo?.userId === postedUserId ? onToggleMenu : onToggleNonWriterMenu}
+          >
+            <SvgIcMenu width={20} height={20} />
+          </div>
         </FlexRow>
       </TagRow>
       <TitleRow>
         {title}
         {/* <DateText>{date.slice(0, 10)}</DateText> */}
       </TitleRow>
-      <DateText>{date}</DateText>
+      <DateText>{formatDate(date)}</DateText>
       <Description>{description}</Description>
       {toggleMenu && (
         <ModifyDeleteButtonBox
@@ -76,6 +84,22 @@ const ChipContainer = ({
           }}
           onModify={() => {
             router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}/update`);
+          }}
+        />
+      )}
+      {toggleNonWriterMenu && (
+        <NonWriterBox
+          top="70px"
+          right="41px"
+          // onCopy={() => {
+          //   navigator.clipboard.writeText(content);
+          //   toast("복사되었어요!");
+          //   onToggleNonWriterMenu();
+          // }}
+          onReport={() => {
+            mutate(voteId);
+
+            onToggleNonWriterMenu();
           }}
         />
       )}

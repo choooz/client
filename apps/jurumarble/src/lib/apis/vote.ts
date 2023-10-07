@@ -36,6 +36,7 @@ export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteLis
 };
 
 export interface GetVoteByIdResponse {
+  createdAt: string;
   voteId: number;
   title: string;
   detail: string;
