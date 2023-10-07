@@ -49,6 +49,27 @@ export default function usePostVoteService() {
   const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
 
+    if (e.target.files.length === 1) {
+      if (e.target.files[0].size > 10485760) {
+        alert("파일 용량이 10MB를 초과하였습니다.");
+        return;
+      }
+      const formDataA = new FormData();
+      formDataA.append("images", e.target.files[0]);
+      try {
+        const dataA = await uploadImageAPI(formDataA);
+
+        setPostVoteInfo({
+          ...postVoteInfo,
+          imageA: dataA.imageUrl,
+          imageB: "",
+        });
+      } catch (error) {
+        alert("이미지 업로드에 실패했습니다." + error);
+      }
+      return;
+    }
+
     if (e.target.files.length === 2) {
       if (e.target.files[0].size > 10485760 || e.target.files[1].size > 10485760) {
         alert("파일 용량이 10MB를 초과하였습니다.");
@@ -66,27 +87,6 @@ export default function usePostVoteService() {
           ...postVoteInfo,
           imageA: dataA.imageUrl,
           imageB: dataB.imageUrl,
-        });
-      } catch (error) {
-        alert("이미지 업로드에 실패했습니다." + error);
-      }
-      return;
-    }
-
-    if (e.target.files.length === 1) {
-      if (e.target.files[0].size > 10485760) {
-        alert("파일 용량이 10MB를 초과하였습니다.");
-        return;
-      }
-      const formDataA = new FormData();
-      formDataA.append("images", e.target.files[0]);
-      try {
-        const dataA = await uploadImageAPI(formDataA);
-
-        setPostVoteInfo({
-          ...postVoteInfo,
-          imageA: dataA.imageUrl,
-          imageB: "",
         });
       } catch (error) {
         alert("이미지 업로드에 실패했습니다." + error);

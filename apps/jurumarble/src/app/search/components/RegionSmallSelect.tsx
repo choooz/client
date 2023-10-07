@@ -37,14 +37,13 @@ const SelectStyled = styled.span<{ isOpen: boolean }>`
       border: 1px solid ${theme.colors.line_01};
       border-radius: 8px;
       padding: 10px 12px;
-      width: 96px;
     }
     svg {
       ${isOpen && "transform: rotateX( 180deg )"}
     }
   `}
   #select-list {
-    width: 100px;
+    width: 85px;
     height: 200px;
     overflow: auto;
     display: flex;
