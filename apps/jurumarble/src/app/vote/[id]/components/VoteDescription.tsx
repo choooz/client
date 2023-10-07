@@ -1,3 +1,4 @@
+import AorBMark from "components/AorBMark";
 import { postExecuteVote } from "lib/apis/vote";
 import { media } from "lib/styles";
 import Image, { StaticImageData } from "next/image";
@@ -89,6 +90,7 @@ function VoteDescription({
               <OverlayCount> {totalCountA}명</OverlayCount>
               <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
             </div>
+            <AorBMark AorB="A">A</AorBMark>
           </VoteImageWrapper>
         </LeftVote>
 
@@ -111,6 +113,7 @@ function VoteDescription({
               <OverlayCount> {totalCountB}명</OverlayCount>
               <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
             </div>
+            <AorBMark AorB="B">B</AorBMark>
           </VoteImageWrapper>
         </RightVote>
       </ImageWrapper>
