@@ -1,7 +1,7 @@
 import { Button } from "components/button";
 import styled, { css } from "styled-components";
 import Path from "lib/Path";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import DrinkItem from "./DrinkItem";
 import { DrinkInfoSortType } from "src/types/common";
 import useGetDrinkList from "../services/useGetDrinkList";
@@ -13,10 +13,13 @@ interface Props {
   isSelectedTab: boolean;
 }
 
-function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Props) {
-  const { drinkList, fetchNextPage, hasNextPage } = useGetDrinkList({
+function DrinkList({ searchText, sortOption, regionOption }: Props) {
+  const searchParams = useSearchParams();
+  const selectedTab = searchParams.get("selectedTab");
+
+  const { drinkList, subscribe } = useGetDrinkList({
     page: 0,
-    size: 5,
+    size: selectedTab === "drinkInfo" ? 10 : 3,
     keyword: searchText,
     region: regionOption,
     sortBy: sortOption,
@@ -26,13 +29,9 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
     return <></>;
   }
 
+  const router = useRouter();
   const onClickDrinkItem = (id: number) => {
     router.push(`${Path.DRINK_INFO_PAGE}/${id}`);
-  };
-  const router = useRouter();
-
-  const onClickFetchNextPage = () => {
-    hasNextPage && fetchNextPage();
   };
 
   return (
@@ -44,11 +43,7 @@ function DrinkList({ searchText, sortOption, regionOption, isSelectedTab }: Prop
           onClickDrinkItem={() => onClickDrinkItem(drinkInfo.id)}
         />
       ))}
-      {!isSelectedTab && (
-        <MoreButton variant="outline" width="100%" height="48px" onClick={onClickFetchNextPage}>
-          우리술 정보 더보기
-        </MoreButton>
-      )}
+      {selectedTab === "drinkInfo" && <div ref={subscribe}></div>}
     </Container>
   );
 }
@@ -60,10 +55,4 @@ const Container = styled.div`
   margin-top: 24px;
 `;
 
-const MoreButton = styled(Button)`
-  ${({ theme }) => css`
-    ${theme.typography.body01}
-    margin: 24px 0 40px 0;
-  `};
-`;
 export default DrinkList;
