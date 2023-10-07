@@ -60,6 +60,7 @@ function BottomBar() {
 }
 
 const Container = styled.section`
+  z-index: 1000;
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -69,6 +70,7 @@ const Container = styled.section`
 `;
 
 const Inner = styled.div`
+  z-index: 1000;
   max-width: 720px;
   display: flex;
   margin: 0 auto;

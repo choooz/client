@@ -39,7 +39,7 @@ function VoteHomePage() {
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
 
-  const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
+  const { title, imageA, imageB, titleA, titleB, detail, voteId, region, voteType } =
     mainVoteList[nowShowing] || {};
 
   const safeImageA = useMemo(() => {
@@ -103,6 +103,7 @@ function VoteHomePage() {
               isBookmark={isBookmark}
             />
             <VoteDescription
+              voteType={voteType}
               imageA={safeImageA}
               imageB={safeImageB}
               percentageA={50}
