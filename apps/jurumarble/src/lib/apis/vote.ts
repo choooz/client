@@ -57,6 +57,8 @@ export interface GetVoteByIdResponse {
   postedUserImageUrl: null;
   postedUserMbti: string | null;
   postedUserNickname: string;
+  drinkAId: number;
+  drinkBId: number;
 }
 
 export const getVoteByVoteIdAPI = async (voteId: number) => {

@@ -59,7 +59,7 @@ function UpdateVoteContainer() {
           </PreviousButton>
         }
       >
-        등록하기
+        수정하기
       </VoteHeader>
       <GuideText>고민되는 술을 선택해주세요</GuideText>
       <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
