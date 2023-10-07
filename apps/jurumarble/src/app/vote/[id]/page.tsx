@@ -67,6 +67,7 @@ function Detail() {
     postedUserImageUrl,
     postedUserNickname,
     postedUserAlcoholLimit,
+    createdAt,
   } = data;
 
   const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
@@ -89,7 +90,7 @@ function Detail() {
         <ChipContainer
           voteId={Number(data.voteId)}
           title={title}
-          date="20.08.22"
+          date={String(createdAt)}
           region={region}
           description={detail}
           mutateBookMark={mutateBookMark}

@@ -210,9 +210,6 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
       `};
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
-  &:hover {
-    width: 70%;
-  }
 `;
 
 const RightVote = styled(LeftVote)`

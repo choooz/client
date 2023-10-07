@@ -5,7 +5,6 @@ import { Button } from "components/button";
 import Header from "components/Header";
 import { media } from "lib/styles";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EmptyAImg } from "public/images";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
@@ -14,7 +13,6 @@ import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
 import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
-import { useMemo } from "react";
 import { toast } from "react-toastify";
 import useBookmarkService from "services/useBookmarkService";
 
@@ -39,10 +37,21 @@ function VoteHomePage() {
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
 
-  const { title, imageA, imageB, titleA, titleB, detail, voteId, region, postedUserId, voteType } =
-    mainVoteList[nowShowing] || {};
+  const {
+    title,
+    imageA,
+    imageB,
+    titleA,
+    titleB,
+    detail,
+    voteId,
+    region,
+    postedUserId,
+    createdAt,
+    voteType,
+  } = mainVoteList[nowShowing] || {};
 
-  const { mutateBookMark, bookMarkCheckQuery } = useBookmarkService(voteId);
+  const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
   const onMutateVoting = (select: "A" | "B") => {
@@ -84,7 +93,7 @@ function VoteHomePage() {
               voteId={voteId}
               postedUserId={postedUserId}
               title={title}
-              date="20.08.22"
+              date={String(createdAt)}
               region={region}
               description={detail}
               mutateBookMark={mutateBookMark}
@@ -92,8 +101,8 @@ function VoteHomePage() {
             />
             <VoteDescription
               voteType={voteType}
-              imageA={safeImageA}
-              imageB={safeImageB}
+              imageA={imageA}
+              imageB={imageB}
               percentageA={50}
               percentageB={50}
               titleA={titleA}
