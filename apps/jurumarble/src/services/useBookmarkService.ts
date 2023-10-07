@@ -1,33 +1,50 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getBookMarkCheckAPI, postBookmarkAPI } from "lib/apis/bookmark";
 import Path from "lib/Path";
-import { queryKeys, reactQueryKeys } from "lib/queryKeys";
+import { queryKeys } from "lib/queryKeys";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-export default function useBookmarkService(voteId: number) {
+type PostBookmarkProps = Exclude<Parameters<typeof postBookmarkAPI>[0], undefined>;
+const getBookmarkQueryKey = (params: PostBookmarkProps) => [queryKeys.BOOKMARK_CHECK, params];
+
+export default function useBookmarkService(voteId: PostBookmarkProps) {
   const queryClient = useQueryClient();
 
-  const bookMarkCheckQuery = useQuery(
-    reactQueryKeys.bookmarkCheck(),
+  const { data: bookmarkCheck } = useQuery(
+    getBookmarkQueryKey(voteId),
     () => getBookMarkCheckAPI(voteId),
     {
       enabled: !!voteId,
     },
   );
 
+  const isBookmark = bookmarkCheck?.bookmarked || false;
+
   const router = useRouter();
+
   const { mutate: mutateBookMark } = useMutation(() => postBookmarkAPI(voteId), {
-    onSuccess: () => {
-      queryClient.invalidateQueries([queryKeys.BOOKMARK_CHECK]);
-      toast("북마크에서 해제되었어요");
+    async onMutate() {
+      await queryClient.cancelQueries(getBookmarkQueryKey(voteId));
+      const previousData = queryClient.getQueryData(getBookmarkQueryKey(voteId));
+      queryClient.setQueryData(getBookmarkQueryKey(voteId), (old: any) => [old, voteId]);
+      return { previousData };
     },
-    onError: () => {
+    onSuccess: () => {
+      const previousData = queryClient.getQueryData(getBookmarkQueryKey(voteId)) as any;
+      toast(previousData[0].bookmarked ? "북마크에서 삭제되었어요" : "북마크에 추가되었어요");
+    },
+    onError(err, drinkId, context) {
+      queryClient.setQueryData(getBookmarkQueryKey(voteId), context?.previousData);
       if (confirm("로그인이 필요한 서비스입니다.")) {
-        router.push(Path.VOTE_HOME);
+        router.push(Path.LOGIN_PAGE);
       }
+    },
+
+    onSettled(_, __, drinkId) {
+      queryClient.invalidateQueries({ queryKey: getBookmarkQueryKey(voteId) });
     },
   });
 
-  return { mutateBookMark, bookMarkCheckQuery };
+  return { isBookmark, mutateBookMark };
 }

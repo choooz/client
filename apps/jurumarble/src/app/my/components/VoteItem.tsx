@@ -9,11 +9,7 @@ import VoteDescription from "./VoteDescription";
 type Props = Pick<Content, "voteId" | "region" | "title" | "imageA" | "imageB">;
 
 function VoteItem({ voteId, region, title, imageA, imageB }: Props) {
-  const { mutateBookMark, bookMarkCheckQuery } = useBookmarkService(voteId);
-
-  const { data: bookmarkCheck } = bookMarkCheckQuery;
-
-  const isBookmark = bookmarkCheck?.bookmarked || false;
+  const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const router = useRouter();
   const onClickDrinkVoteItem = () => {

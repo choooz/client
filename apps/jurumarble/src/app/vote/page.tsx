@@ -9,7 +9,6 @@ import { EmptyAImg } from "public/images";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
-import usePostBookmarkService from "./services/useBookmarkService";
 import ChipContainer from "./[id]/components/ChipContainer";
 import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
@@ -17,6 +16,7 @@ import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
 import { useMemo } from "react";
 import { toast } from "react-toastify";
+import useBookmarkService from "services/useBookmarkService";
 
 export type Drag = "up" | "down" | null;
 
@@ -43,7 +43,6 @@ function VoteHomePage() {
     mainVoteList[nowShowing] || {};
 
   const safeImageA = useMemo(() => {
-    console.log(imageA);
     if (!imageA || imageA === "string") return EmptyAImg;
     return imageA;
   }, [imageA]);
@@ -52,16 +51,12 @@ function VoteHomePage() {
     return imageB;
   }, [imageB]);
 
-  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
+  const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
   const onMutateVoting = (select: "A" | "B") => {
     mutate(select);
   };
-
-  const { data: bookmarkCheck } = bookMarkCheckQuery;
-
-  const isBookmark = bookmarkCheck?.bookmarked || false;
 
   if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;

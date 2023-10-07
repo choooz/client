@@ -25,7 +25,6 @@ export const queryKeys = {
 export const reactQueryKeys = {
   // @note any 처리
   mainVoteList: () => [queryKeys.MAIN_VOTE_LIST] as const,
-  bookmarkCheck: () => [queryKeys.BOOKMARK_CHECK] as const,
   voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
   restaurantList: (params: any) => [queryKeys.RESTAURANT_LIST, ...params],
   voteDetail: (voteId: number) => [queryKeys.VOTE_DETAIL, voteId] as const,
