@@ -53,7 +53,10 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
   const [toggleMenu, onToggleMenu] = useToggle(false);
   const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onToggleMenu);
-
+  const { targetEl: targetEl2 } = useOutsideClick<HTMLImageElement>(
+    toggleNonWriterMenu,
+    onToggleNonWriterMenu,
+  );
   return (
     <Container>
       <Image
@@ -101,12 +104,15 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
           <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount ?? 0}</InteractionButton>{" "}
         </CommentInfo>
       </ContentsBox>
-      <div
-        onClick={userId === userInfo?.userId ? onToggleMenu : onToggleNonWriterMenu}
-        ref={targetEl}
-      >
-        <SvgIcMenu width={20} height={20} />
-      </div>
+      {userId === userInfo?.userId ? (
+        <div onClick={onToggleMenu} ref={targetEl}>
+          <SvgIcMenu width={20} height={20} />
+        </div>
+      ) : (
+        <div onClick={onToggleNonWriterMenu} ref={targetEl2}>
+          <SvgIcMenu width={20} height={20} />
+        </div>
+      )}
       {toggleMenu && <ModifyDeleteButtonBox onDelete={mutateDeleteComment} right="20px" />}
       {toggleNonWriterMenu && (
         <NonWriterBox
@@ -117,7 +123,6 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
           }}
           onReport={() => {
             mutate(id);
-
             onToggleNonWriterMenu();
           }}
           right="20px"

@@ -43,6 +43,10 @@ const ChipContainer = ({
   const [toggleMenu, onToggleMenu] = useToggle();
   const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle();
   const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
+  const { targetEl: targetEl2 } = useOutsideClick<HTMLDivElement>(
+    toggleNonWriterMenu,
+    onToggleNonWriterMenu,
+  );
   const { mutate } = useVoteReportService();
   return (
     <>
@@ -58,12 +62,22 @@ const ChipContainer = ({
             <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
           )}
 
+          {userInfo?.userId === postedUserId ? (
+            <div onClick={onToggleMenu} ref={targetEl}>
+              <SvgIcMenu width={20} height={20} />
+            </div>
+          ) : (
+            <div onClick={onToggleNonWriterMenu} ref={targetEl2}>
+              <SvgIcMenu width={20} height={20} />
+            </div>
+          )}
+          {/* 
           <div
             ref={targetEl}
             onClick={userInfo?.userId === postedUserId ? onToggleMenu : onToggleNonWriterMenu}
           >
             <SvgIcMenu width={20} height={20} />
-          </div>
+          </div> */}
         </FlexRow>
       </TagRow>
       <TitleRow>
