@@ -1,10 +1,10 @@
 import AorBMark from "components/AorBMark";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import styled, { css } from "styled-components";
 
 interface Props {
-  imageA: string;
-  imageB: string;
+  imageA: string | StaticImageData;
+  imageB: string | StaticImageData;
 }
 
 function VoteDescription({ imageA, imageB }: Props) {
