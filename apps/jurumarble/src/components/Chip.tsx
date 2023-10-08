@@ -29,7 +29,7 @@ const variantStyles = {
 const Wrapper = styled.div<variant>`
   ${({ theme, variant }) => css`
     ${variant && variantStyles[variant]};
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
     padding: 10px 8px;
     border-radius: 4px;
   `}

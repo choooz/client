@@ -128,7 +128,7 @@ const FlexEnd = styled.div`
 
 const WithdrawalButton = styled(Button)`
   ${({ theme }) => css`
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
     margin-top: 20px;
     width: 58px;
     height: 24px;

@@ -97,7 +97,7 @@ const TagBox = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     color: ${theme.colors.black_04};
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
   `}
 `;
 

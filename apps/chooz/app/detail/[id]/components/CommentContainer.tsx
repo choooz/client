@@ -81,7 +81,6 @@ function CommentContainer({ postId }: Props) {
       <Button width="100%" height="48px" variant="outline" onClick={() => fetchNextPage()}>
         댓글 더보기
       </Button>
-
       <DetailButton width="127px" height="48px" variant="primary" borderRadius="100px">
         <Link href={Path.MAIN_PAGE}>
           <DetailButtonInner>

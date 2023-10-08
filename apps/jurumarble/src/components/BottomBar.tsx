@@ -75,7 +75,7 @@ const Inner = styled.div`
   display: flex;
   margin: 0 auto;
   justify-content: space-around;
-  ${({ theme }) => theme.typography.caption};
+  ${({ theme }) => theme.typography.caption_chip};
 `;
 
 const BarItem = styled.div<{ isActive: boolean }>`

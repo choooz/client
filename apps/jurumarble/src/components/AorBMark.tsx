@@ -11,7 +11,7 @@ function AorBMark({ AorB, children }: Props) {
 
 const AorBMarkStyled = styled.div<{ AorB: string }>`
   ${({ theme, AorB }) => css`
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
     background-color: ${AorB === "A" ? theme.colors.sub_01 : theme.colors.sub_02};
     position: absolute;
     top: 0;
