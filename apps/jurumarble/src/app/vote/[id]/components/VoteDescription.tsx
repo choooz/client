@@ -1,8 +1,9 @@
 import AorBMark from "components/AorBMark";
 import { postExecuteVote } from "lib/apis/vote";
+import Path from "lib/Path";
 import { media } from "lib/styles";
 import Image, { StaticImageData } from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ExImg1 } from "public/images";
 import React from "react";
 import useGetUserInfo from "services/useGetUserInfo";
@@ -37,6 +38,8 @@ interface Props {
   totalCountB: number;
   onMutateVoting: (select: AorB) => void;
   voteType: string;
+  drinkAId: number;
+  drinkBId: number;
 }
 
 function VoteDescription({
@@ -51,8 +54,11 @@ function VoteDescription({
   totalCountB,
   onMutateVoting,
   voteType,
+  drinkAId,
+  drinkBId,
 }: Props) {
   const { userInfo } = useGetUserInfo();
+  const router = useRouter();
 
   const getAB = (direction: Direction) => {
     return direction === "left" ? "A" : "B";
@@ -88,7 +94,12 @@ function VoteDescription({
               <OverLayTitle>{titleA}</OverLayTitle>
               <OverlayPercent>{percentageA}%</OverlayPercent>
               <OverlayCount> {totalCountA}명</OverlayCount>
-              <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
+              {voteType === "DRINK" && (
+                <OverlayButton onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkAId}`)}>
+                  {" "}
+                  술정보 보기 &nbsp; {">"}
+                </OverlayButton>
+              )}
             </div>
             <AorBMark AorB="A">A</AorBMark>
           </VoteImageWrapper>
@@ -111,7 +122,11 @@ function VoteDescription({
               <OverLayTitle>{titleB}</OverLayTitle>
               <OverlayPercent>{percentageB}%</OverlayPercent>
               <OverlayCount> {totalCountB}명</OverlayCount>
-              <OverlayButton> 술정보 보기 &nbsp; {">"}</OverlayButton>
+              {voteType === "DRINK" && (
+                <OverlayButton onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkBId}`)}>
+                  술정보 보기 &nbsp; {">"}
+                </OverlayButton>
+              )}
             </div>
             <AorBMark AorB="B">B</AorBMark>
           </VoteImageWrapper>

@@ -109,6 +109,8 @@ function Detail() {
           select={select.choice}
           onMutateVoting={onMutateVoting}
           voteType={data.voteType}
+          drinkAId={data.drinkAId}
+          drinkBId={data.drinkBId}
         />
         {!!select.choice && (
           <VoteAnalyzeBar

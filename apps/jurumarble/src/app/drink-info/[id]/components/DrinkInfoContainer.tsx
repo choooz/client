@@ -173,6 +173,7 @@ const DescriptionRow = styled.div`
   .label {
     white-space: nowrap;
     width: 64px;
+    min-width: 64px;
     ${({ theme }) => theme.typography.body_long03};
     color: ${({ theme }) => theme.colors.black_03};
   }
