@@ -67,8 +67,8 @@ function VoteHomePage() {
         <Header />
         <AskVoteBox>
           <AskVoteText>
-            당신의 투표를
-            <br /> 기다리고 있어요
+            여행에서 즐길 우리술은
+            <br /> 우리술 투표로 해결해요
           </AskVoteText>
           <div>
             <Button
@@ -111,6 +111,8 @@ function VoteHomePage() {
               totalCountB={100}
               select={select.choice}
               onMutateVoting={onMutateVoting}
+              drinkAId={1}
+              drinkBId={1}
             />
             <MoreButton onClick={() => router.push(`vote/${voteId}`)}>
               더보기 <SvgIcDetail width={16} height={16} />
@@ -240,6 +242,7 @@ const BigFont = styled.span`
 
 const AskVoteText = styled.div`
   ${({ theme }) => theme.typography.headline02}
+  line-height: 130%;
 `;
 
 const MoreButton = styled.button`
