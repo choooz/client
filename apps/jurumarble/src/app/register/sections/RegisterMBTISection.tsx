@@ -185,7 +185,6 @@ const LeftVote = styled.button<{ selected: ActiveType }>`
   &:hover {
     border-color: ${({ theme }) => theme.colors.main_01};
     color: ${({ theme }) => theme.colors.main_01};
-    font-weight: 800;
   }
 `;
 
@@ -195,11 +194,10 @@ const RightVote = styled(LeftVote)`
 
 const MbtiType = styled.div`
   ${({ theme }) => theme.typography.headline02}
-  font-weight: 800;
 `;
 
 const MbtiText = styled.div`
-  ${({ theme }) => theme.typography.chip}
+  ${({ theme }) => theme.typography.caption_chip}
 `;
 
 export default RegisterMBTISection;

@@ -63,7 +63,7 @@ const AddImageButtonWrapper = styled.div`
 
 const Profile = styled.div`
   ${({ theme }) => css`
-    ${theme.typography.chip}
+    ${theme.typography.caption_chip}
     display: flex;
     flex-direction: column;
     padding-left: 17px;

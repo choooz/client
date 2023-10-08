@@ -10,7 +10,7 @@ function LevelChip({ level }: Props) {
 
 const Chip = styled.div<{ level: number }>`
   ${({ theme, level }) => css`
-    ${theme.typography.chip}
+    ${theme.typography.caption_chip}
     width: 32px;
     height: 20px;
     border-radius: 4px;

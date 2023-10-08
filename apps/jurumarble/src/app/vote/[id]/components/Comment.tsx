@@ -169,7 +169,7 @@ const TagBox = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.sub_02};
     color: ${theme.colors.white};
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
   `};
   line-height: unset;
 `;
@@ -198,7 +198,7 @@ const CommentInfo = styled.div`
   gap: 4px;
   ${({ theme }) => css`
     color: ${theme.colors.black_04};
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
   `}
 `;
 

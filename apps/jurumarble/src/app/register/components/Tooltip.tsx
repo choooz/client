@@ -23,5 +23,5 @@ const Wrapper = styled.div`
 `;
 
 const Typography = styled.p`
-  ${({ theme }) => theme.typography.caption};
+  ${({ theme }) => theme.typography.caption_chip};
 `;

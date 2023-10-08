@@ -252,7 +252,7 @@ const OverlayCount = styled.div`
 const OverlayButton = styled.div`
   ${({ theme }) =>
     css`
-      ${theme.typography.chip}
+      ${theme.typography.caption_chip}
       background-color: ${theme.colors.main_01};
     `}
   display: flex;
