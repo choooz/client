@@ -94,6 +94,8 @@ export interface GetDrinkInfoResponse {
   capacity: string;
   manufactureAddress: string;
   image: string;
+  price: string;
+  enjoyCount: number;
 }
 
 export const getDrinkInfo = async (drinkId: number) => {

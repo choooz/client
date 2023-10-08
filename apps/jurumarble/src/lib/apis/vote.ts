@@ -36,6 +36,7 @@ export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteLis
 };
 
 export interface GetVoteByIdResponse {
+  createdAt: string;
   voteId: number;
   title: string;
   detail: string;
@@ -56,6 +57,8 @@ export interface GetVoteByIdResponse {
   postedUserImageUrl: null;
   postedUserMbti: string | null;
   postedUserNickname: string;
+  drinkAId: number;
+  drinkBId: number;
 }
 
 export const getVoteByVoteIdAPI = async (voteId: number) => {
@@ -163,5 +166,10 @@ interface GetHotDrinkVoteResponse {
 
 export const getHotDrinkVote = async () => {
   const response = await baseApi.get<GetHotDrinkVoteResponse>("api/votes/drinks/hot");
+  return response.data;
+};
+
+export const deleteVote = async (voteId: number) => {
+  const response = await http.delete(`api/votes/${voteId}`);
   return response.data;
 };

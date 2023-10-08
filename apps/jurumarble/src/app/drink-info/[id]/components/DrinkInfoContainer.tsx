@@ -35,6 +35,8 @@ const DrinkInfoContainer = () => {
     alcoholicBeverage,
     capacity,
     drinkId,
+    enjoyCount,
+    price,
     type,
   } = data;
 
@@ -74,7 +76,7 @@ const DrinkInfoContainer = () => {
         <FlexBetweenRow>
           <FlexRow>
             <Chip variant="region">{manufactureAddress.slice(0, 2)}</Chip>
-            <Chip variant="numberOfParticipants">{manufactureAddress.slice(0, 2)}</Chip>
+            <Chip variant="numberOfParticipants">{enjoyCount}명이 즐겼어요</Chip>
           </FlexRow>
           <SvgStamp
             onClick={() => postDrinkEnjoy(Number(id))}
@@ -102,7 +104,7 @@ const DrinkInfoContainer = () => {
           </DescriptionRow>
           <DescriptionRow>
             <div className="label">가격</div>
-            <div className="content">{alcoholicBeverage}도</div>
+            <div className="content">{price}원</div>
           </DescriptionRow>
           <DescriptionRow>
             <div className="label">양조장 주소</div>

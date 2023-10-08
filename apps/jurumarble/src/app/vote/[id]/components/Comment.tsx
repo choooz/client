@@ -1,11 +1,16 @@
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
+import NonWriterBox from "app/vote/components/NonWriterBox";
+import { Button } from "components/button";
 import { CommentResponse } from "lib/apis/comment";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
 import React from "react";
+import { toast } from "react-toastify";
+import useGetUserInfo from "services/useGetUserInfo";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled, { css } from "styled-components";
+import useCommentReportService from "../services/useCommentReportService";
 
 import CommentDeleteModal from "./CommentDeleteModal";
 
@@ -29,6 +34,8 @@ interface Props {
 }
 
 function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props) {
+  const { userInfo } = useGetUserInfo();
+  const { mutate } = useCommentReportService();
   const {
     id,
     content,
@@ -44,9 +51,12 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
   } = comment;
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
-  const [toggleWarningModal, onToggleWarningModal] = useToggle(false);
+  const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle(false);
   const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onToggleMenu);
-
+  const { targetEl: targetEl2 } = useOutsideClick<HTMLImageElement>(
+    toggleNonWriterMenu,
+    onToggleNonWriterMenu,
+  );
   return (
     <Container>
       <Image
@@ -81,18 +91,42 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
         <NickName> {nickName}</NickName>
 
         <Contents>{content}</Contents>
+        {userId === userInfo?.userId && (
+          <AddRestaurants>
+            <Button variant="outline" width="104px" height="40px">
+              음식점 추가 <BigFont>﹢</BigFont>
+            </Button>
+          </AddRestaurants>
+        )}
         <CommentInfo>
           <div>{createdDate.slice(0, 10)}</div>・
           <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton> ・
           <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount ?? 0}</InteractionButton>{" "}
         </CommentInfo>
       </ContentsBox>
-      <div onClick={onToggleMenu} ref={targetEl}>
-        <SvgIcMenu width={20} height={20} />
-      </div>
-      {toggleMenu && <ModifyDeleteButtonBox onDelete={onToggleWarningModal} right="20px" />}
-      {toggleWarningModal && (
-        <CommentDeleteModal onToggleModal={onToggleWarningModal} onSubmit={mutateDeleteComment} />
+      {userId === userInfo?.userId ? (
+        <div onClick={onToggleMenu} ref={targetEl}>
+          <SvgIcMenu width={20} height={20} />
+        </div>
+      ) : (
+        <div onClick={onToggleNonWriterMenu} ref={targetEl2}>
+          <SvgIcMenu width={20} height={20} />
+        </div>
+      )}
+      {toggleMenu && <ModifyDeleteButtonBox onDelete={mutateDeleteComment} right="20px" />}
+      {toggleNonWriterMenu && (
+        <NonWriterBox
+          onCopy={() => {
+            navigator.clipboard.writeText(content);
+            toast("복사되었어요!");
+            onToggleNonWriterMenu();
+          }}
+          onReport={() => {
+            mutate(id);
+            onToggleNonWriterMenu();
+          }}
+          right="20px"
+        />
       )}
     </Container>
   );
@@ -183,4 +217,11 @@ const InteractionButton = styled.div`
   }
 `;
 
+const AddRestaurants = styled.div`
+  padding: 0 0 12px 0;
+`;
+
+const BigFont = styled.span`
+  font-size: 17px;
+`;
 export default Comment;

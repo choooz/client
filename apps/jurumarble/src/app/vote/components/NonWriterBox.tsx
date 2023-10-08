@@ -2,20 +2,22 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 interface Props {
-  onModify?: () => void;
-  onDelete?: () => void;
+  onCopy?: () => void;
+  onReport?: () => void;
   top?: string;
   right?: string;
 }
 
-function ModifyDeleteButtonBox({ onModify, onDelete, top = "0", right = "0px" }: Props) {
+function NonWriterBox({ onCopy, onReport, top = "0", right = "0px" }: Props) {
   return (
     <Container top={top} right={right}>
-      <MenuText className="modify" onClick={onModify}>
-        수정하기
-      </MenuText>
-      <MenuText className="delete" onClick={onDelete}>
-        삭제하기
+      {onCopy && (
+        <MenuText className="modify" onClick={onCopy}>
+          복사하기
+        </MenuText>
+      )}
+      <MenuText className="delete" onClick={onReport}>
+        신고하기
       </MenuText>
     </Container>
   );
@@ -52,4 +54,4 @@ const MenuText = styled.div`
   }
 `;
 
-export default ModifyDeleteButtonBox;
+export default NonWriterBox;

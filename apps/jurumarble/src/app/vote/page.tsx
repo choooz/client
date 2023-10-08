@@ -5,7 +5,6 @@ import { Button } from "components/button";
 import Header from "components/Header";
 import { media } from "lib/styles";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EmptyAImg } from "public/images";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
@@ -14,7 +13,6 @@ import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
 import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
-import { useMemo } from "react";
 import { toast } from "react-toastify";
 import useBookmarkService from "services/useBookmarkService";
 
@@ -39,17 +37,19 @@ function VoteHomePage() {
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
 
-  const { title, imageA, imageB, titleA, titleB, detail, voteId, region, voteType } =
-    mainVoteList[nowShowing] || {};
-
-  const safeImageA = useMemo(() => {
-    if (!imageA || imageA === "string") return EmptyAImg;
-    return imageA;
-  }, [imageA]);
-  const safeImageB = useMemo(() => {
-    if (!imageB || imageB === "string") return EmptyAImg;
-    return imageB;
-  }, [imageB]);
+  const {
+    title,
+    imageA,
+    imageB,
+    titleA,
+    titleB,
+    detail,
+    voteId,
+    region,
+    postedUserId,
+    createdAt,
+    voteType,
+  } = mainVoteList[nowShowing] || {};
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
@@ -90,8 +90,10 @@ function VoteHomePage() {
             drag={drag}
           >
             <ChipContainer
+              voteId={voteId}
+              postedUserId={postedUserId}
               title={title}
-              date="20.08.22"
+              date={String(createdAt)}
               region={region}
               description={detail}
               mutateBookMark={mutateBookMark}
@@ -99,8 +101,8 @@ function VoteHomePage() {
             />
             <VoteDescription
               voteType={voteType}
-              imageA={safeImageA}
-              imageB={safeImageB}
+              imageA={imageA}
+              imageB={imageB}
               percentageA={50}
               percentageB={50}
               titleA={titleA}
