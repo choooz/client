@@ -21,6 +21,7 @@ export const queryKeys = {
   THE_NUMBER_OF_MY_VOTE: "theNumberOfMyVote" as const,
   DRINKS_MAP: "drinksMap" as const,
   DRINKS_INFO: "drinksInfo" as const,
+  NOTIFICATION_LIST: "notificationList" as const,
 };
 
 export const reactQueryKeys = {
