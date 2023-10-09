@@ -83,6 +83,8 @@ function CommentContainer({ postId }: Props) {
               index,
             ) => (
               <Comment
+                postId={Number(postId)}
+                voteType="votes"
                 comment={{
                   id,
                   content,
@@ -96,7 +98,6 @@ function CommentContainer({ postId }: Props) {
                   nickName,
                   userId: userId,
                 }}
-                mutateDeleteComment={() => void 0}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}

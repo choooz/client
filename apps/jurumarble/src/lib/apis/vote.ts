@@ -170,6 +170,6 @@ export const getHotDrinkVote = async () => {
 };
 
 export const deleteVote = async (voteId: number) => {
-  const response = await http.delete(`api/votes/${voteId}`);
+  const response = await http.delete(`api/votes/${voteId}/`);
   return response.data;
 };
