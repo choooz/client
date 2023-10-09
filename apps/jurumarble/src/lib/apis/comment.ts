@@ -92,3 +92,24 @@ export const postComment = async (
   const response = await http.post(`/api/${commentType}/${voteId}/comments/create`, body);
   return response.data;
 };
+
+export const deleteComment = async (
+  commentType: "votes" | "drinks",
+  typeId: number,
+  commentId: number,
+) => {
+  const response = await http.delete(`/api/${commentType}/${typeId}/comments/${commentId}`);
+  return response.data;
+};
+
+export const putComment = async (
+  commentType: "votes" | "drinks",
+  typeId: number,
+  commentId: number,
+  content: string,
+) => {
+  const response = await http.put(`/api/${commentType}/${typeId}/comments/${commentId}`, {
+    content,
+  });
+  return response.data;
+};

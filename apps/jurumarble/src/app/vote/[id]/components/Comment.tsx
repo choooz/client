@@ -5,16 +5,20 @@ import { Button } from "components/button";
 import { CommentResponse } from "lib/apis/comment";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
-import React from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import useGetUserInfo from "services/useGetUserInfo";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled, { css } from "styled-components";
+import useCommentDeleteService from "../services/useCommentDeleteService";
 import useCommentReportService from "../services/useCommentReportService";
 
 import CommentDeleteModal from "./CommentDeleteModal";
+import CommentForm from "./CommentForm";
 
 interface Props {
+  voteType: "drinks" | "votes";
+  postId: number;
   comment: {
     id: number;
     content: string;
@@ -28,12 +32,11 @@ interface Props {
     nickName: string;
     userId: number;
   };
-  mutateDeleteComment(): void;
   mutateLike?(): void;
   mutateHate?(): void;
 }
 
-function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props) {
+function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
   const { userInfo } = useGetUserInfo();
   const { mutate } = useCommentReportService();
   const {
@@ -57,6 +60,15 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
     toggleNonWriterMenu,
     onToggleNonWriterMenu,
   );
+  const { onDelete } = useCommentDeleteService(voteType, postId, id);
+
+  const [isModifying, setIsModifying] = useState(false);
+  const [commentForm, setCommentForm] = useState("");
+  const onChangeCommentForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommentForm(e.target.value);
+  };
+  const onSubmitComment = () => {};
+
   return (
     <Container>
       <Image
@@ -90,14 +102,25 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
 
         <NickName> {nickName}</NickName>
 
-        <Contents>{content}</Contents>
-        {userId === userInfo?.userId && (
-          <AddRestaurants>
-            <Button variant="outline" width="104px" height="40px">
-              음식점 추가 <BigFont>﹢</BigFont>
-            </Button>
-          </AddRestaurants>
+        {isModifying ? (
+          <CommentForm
+            commentForm={commentForm}
+            onChangeCommentForm={onChangeCommentForm}
+            onSubmitComment={onSubmitComment}
+          />
+        ) : (
+          <>
+            <Contents>{content}</Contents>
+            {userId === userInfo?.userId && (
+              <AddRestaurants>
+                <Button variant="outline" width="104px" height="40px">
+                  음식점 추가 <BigFont>﹢</BigFont>
+                </Button>
+              </AddRestaurants>
+            )}
+          </>
         )}
+
         <CommentInfo>
           <div>{createdDate.slice(0, 10)}</div>・
           <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton> ・
@@ -113,7 +136,13 @@ function Comment({ comment, mutateDeleteComment, mutateLike, mutateHate }: Props
           <SvgIcMenu width={20} height={20} />
         </div>
       )}
-      {toggleMenu && <ModifyDeleteButtonBox onDelete={mutateDeleteComment} right="20px" />}
+      {toggleMenu && (
+        <ModifyDeleteButtonBox
+          onDelete={onDelete}
+          onModify={() => setIsModifying((prev) => !prev)}
+          right="20px"
+        />
+      )}
       {toggleNonWriterMenu && (
         <NonWriterBox
           onCopy={() => {
