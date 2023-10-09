@@ -15,6 +15,7 @@ import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
 import { toast } from "react-toastify";
 import useBookmarkService from "services/useBookmarkService";
+import Loading from "components/Loading";
 
 export type Drag = "up" | "down" | null;
 
@@ -58,7 +59,7 @@ function VoteHomePage() {
     mutate(select);
   };
 
-  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
+  if (isLoading) return <Loading />;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
 
   return (

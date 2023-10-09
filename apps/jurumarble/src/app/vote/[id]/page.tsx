@@ -17,6 +17,7 @@ import useFilteredStatisticsService from "./services/useFilterStatisticsService"
 import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
 import { useState } from "react";
 import useBookmarkService from "services/useBookmarkService";
+import Loading from "components/Loading";
 
 function Detail() {
   const params = useParams();
@@ -50,7 +51,7 @@ function Detail() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
-  if (isLoading || isStatisticsLoading) return <div>로딩중</div>;
+  if (isLoading || isStatisticsLoading) return <Loading />;
   if (isError || isStatisticsError) return <div>에러</div>;
   if (!data || !statistics) return <div></div>;
   const {

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "components/button";
 import Chip from "components/Chip";
+import Loading from "components/Loading";
 import VoteHeader from "components/VoteHeader";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -22,9 +23,9 @@ const DrinkInfoContainer = () => {
   const { colors } = useTheme();
   const stampColor = isStampedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
-  if (isLoading) return <div>loading...</div>;
-  if (isError) return <div>error...</div>;
-  if (!data) return <div>no data...</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <></>;
+  if (!data) return <></>;
 
   const {
     name,
