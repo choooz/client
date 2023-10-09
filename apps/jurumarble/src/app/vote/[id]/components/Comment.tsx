@@ -5,7 +5,7 @@ import { Button } from "components/button";
 import { CommentResponse } from "lib/apis/comment";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGetUserInfo from "services/useGetUserInfo";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
@@ -15,6 +15,7 @@ import useCommentReportService from "../services/useCommentReportService";
 
 import CommentDeleteModal from "./CommentDeleteModal";
 import CommentForm from "./CommentForm";
+import CommentPutForm from "./CommentPutForm";
 
 interface Props {
   voteType: "drinks" | "votes";
@@ -60,14 +61,21 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
     toggleNonWriterMenu,
     onToggleNonWriterMenu,
   );
-  const { onDelete } = useCommentDeleteService(voteType, postId, id);
+  const { onDelete, onPutComment } = useCommentDeleteService(voteType, postId, id);
 
   const [isModifying, setIsModifying] = useState(false);
   const [commentForm, setCommentForm] = useState("");
-  const onChangeCommentForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeCommentForm = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentForm(e.target.value);
   };
-  const onSubmitComment = () => {};
+  const onSubmitComment = (content: string) => {
+    onPutComment(content);
+    setIsModifying(false);
+  };
+
+  useEffect(() => {
+    setCommentForm(content);
+  }, [comment]);
 
   return (
     <Container>
@@ -103,11 +111,26 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
         <NickName> {nickName}</NickName>
 
         {isModifying ? (
-          <CommentForm
-            commentForm={commentForm}
-            onChangeCommentForm={onChangeCommentForm}
-            onSubmitComment={onSubmitComment}
-          />
+          <>
+            <InputWrapper>
+              <CommentPutForm
+                commentForm={commentForm}
+                onChangeCommentForm={onChangeCommentForm}
+                onSubmitComment={onSubmitComment}
+              />
+            </InputWrapper>
+            <PutFormWrapper>
+              <Button
+                variant="outline"
+                width="45px"
+                height="32px"
+                borderRadius="4px"
+                onClick={() => setIsModifying(false)}
+              >
+                취소
+              </Button>
+            </PutFormWrapper>
+          </>
         ) : (
           <>
             <Contents>{content}</Contents>
@@ -118,14 +141,14 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
                 </Button>
               </AddRestaurants>
             )}
+            <CommentInfo>
+              <div>{createdDate.slice(0, 10)}</div>・
+              <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton>{" "}
+              ・
+              <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount ?? 0}</InteractionButton>{" "}
+            </CommentInfo>
           </>
         )}
-
-        <CommentInfo>
-          <div>{createdDate.slice(0, 10)}</div>・
-          <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton> ・
-          <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount ?? 0}</InteractionButton>{" "}
-        </CommentInfo>
       </ContentsBox>
       {userId === userInfo?.userId ? (
         <div onClick={onToggleMenu} ref={targetEl}>
@@ -253,4 +276,15 @@ const AddRestaurants = styled.div`
 const BigFont = styled.span`
   font-size: 17px;
 `;
+
+const PutFormWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+`;
+
+const InputWrapper = styled.div`
+  padding: 12px 0 8px 0;
+`;
+
 export default Comment;
