@@ -70,11 +70,11 @@ function DrinkCommentContainer() {
                 createdDate,
                 gender,
                 hateCount,
-                imageUrlstring,
                 likeCount,
                 mbti,
                 nickName,
                 userId,
+                restaurant,
               },
               index,
             ) => (
@@ -88,12 +88,13 @@ function DrinkCommentContainer() {
                   createdDate,
                   gender,
                   hateCount,
-                  imageUrlstring,
                   likeCount,
                   mbti,
                   nickName,
                   userId: userId,
+                  restaurant,
                 }}
+                mutateDeleteComment={() => void 0}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}
