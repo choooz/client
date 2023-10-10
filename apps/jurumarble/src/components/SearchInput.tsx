@@ -7,7 +7,14 @@ import { SvgIcX } from "src/assets/icons/components";
 import SvgIcSearch from "src/assets/icons/components/IcSearch";
 import styled, { css, useTheme } from "styled-components";
 
-interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "width"> {
+/**
+ * @TODO 리팩토링 필요
+ * 이정도면 도메인에 따라 분리하는게 나을까?
+ */
+
+interface Props {
+  value: string;
+  onChange?: (keyword: string) => void;
   placeholder?: string;
   eventHandler?: (e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => void;
 }
@@ -29,7 +36,7 @@ const SearchInput = forwardRef<HTMLInputElement, Props>(
           // onReset
           placeholder={placeholder}
           onChange={(e) => {
-            // onChange?.(e.target.value);
+            onChange?.(e.target.value);
           }}
         ></InputStyled>
         <SearchButton onClick={eventHandler}>
@@ -62,6 +69,7 @@ const InputStyled = styled(Input)`
   ${({ theme }) => css`
     ${theme.typography.body02}
     background-color: ${theme.colors.bg_02};
+    width: 100%;
     height: 44px;
     padding: 10px 12px;
     border-radius: 8px 0 0 8px;
