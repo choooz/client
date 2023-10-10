@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useDebouncedCallback } from "@react-hookz/web";
 
-export interface UseInputHookType {
+interface UseInputHookType {
   /**
    * input state가 initializing 될 때 넣을 값입니다.
    *

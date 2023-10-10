@@ -1,3 +1,5 @@
+"use client";
+
 export const USER_STORAGE_KEY = "CHOOZ_USER";
 
 interface Token {
