@@ -10,10 +10,11 @@ import styled, { css, useTheme } from "styled-components";
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "width"> {
   placeholder?: string;
   eventHandler?: (e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => void;
+  onChangeSearchText: (keyword: string) => void;
 }
 
 const SearchInput = forwardRef<HTMLInputElement, Props>(
-  ({ value, onChange, placeholder, eventHandler }, ref) => {
+  ({ value, onChangeSearchText, placeholder, eventHandler }, ref) => {
     const theme = useTheme();
     return (
       <Search
@@ -29,7 +30,7 @@ const SearchInput = forwardRef<HTMLInputElement, Props>(
           // onReset
           placeholder={placeholder}
           onChange={(e) => {
-            // onChange?.(e.target.value);
+            onChangeSearchText(e.target.value);
           }}
         ></InputStyled>
         <SearchButton onClick={eventHandler}>
