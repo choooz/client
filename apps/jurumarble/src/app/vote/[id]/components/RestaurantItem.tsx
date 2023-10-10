@@ -1,16 +1,22 @@
+import { RestaurantInfo } from "lib/apis/restaurant";
 import Image from "next/image";
-import { EmptyAImg } from "public/images";
 import styled, { css } from "styled-components";
 
-function RestaurantItem() {
+interface Props {
+  onClickSelectedRestaurant: (restaurantId: RestaurantInfo) => void;
+  restaurantInfo: RestaurantInfo;
+}
+
+function RestaurantItem({ restaurantInfo, onClickSelectedRestaurant }: Props) {
+  const { restaurantName, treatMenu, restaurantImage } = restaurantInfo;
   return (
-    <Container>
-      <Image alt="음식점 이미지" src={EmptyAImg} width={49} height={49} />
+    <Container onClick={() => onClickSelectedRestaurant(restaurantInfo)}>
+      <Image alt="음식점 이미지" src={restaurantImage} width={49} height={49} />
       <TextContainer>
-        <Name>이름</Name>
+        <Name>{restaurantName}</Name>
         <Menu>
           <>대표메뉴 : </>
-          ㅇㄴㅁㅇㄴㅁ
+          {treatMenu}
         </Menu>
       </TextContainer>
     </Container>
@@ -20,6 +26,7 @@ function RestaurantItem() {
 const Container = styled.li`
   display: flex;
   margin: 20px 0;
+  cursor: pointer;
 `;
 
 const TextContainer = styled.div`
