@@ -6,6 +6,7 @@ export const queryKeys = {
   USER_INFO: "userInfo" as const,
   VOTE_LIST: "voteList" as const,
   RESTAURANT_LIST: "restaurantList" as const,
+  RESTAURANT_IMAGE_LIST: "restaurantImageList" as const,
   SEARCH_DRINK_LIST: "searchDrinkList" as const,
   SEARCH_VOTE_DRINK_LIST: "searchVoteDrinkList" as const,
   VOTE_DETAIL: "voteDetail" as const,
@@ -28,7 +29,6 @@ export const reactQueryKeys = {
   // @note any 처리
   mainVoteList: () => [queryKeys.MAIN_VOTE_LIST] as const,
   voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
-  restaurantList: (params: any) => [queryKeys.RESTAURANT_LIST, ...params],
   voteDetail: (voteId: number) => [queryKeys.VOTE_DETAIL, voteId] as const,
   votingCheck: (id: number) => [queryKeys.VOTING_CHECK, id] as const,
   detailCommentList: (
