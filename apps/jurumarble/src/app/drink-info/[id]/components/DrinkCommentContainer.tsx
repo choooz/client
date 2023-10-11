@@ -79,6 +79,8 @@ function DrinkCommentContainer() {
               index,
             ) => (
               <Comment
+                postId={Number(postId)}
+                voteType="drinks"
                 comment={{
                   id,
                   content,
@@ -92,7 +94,6 @@ function DrinkCommentContainer() {
                   nickName,
                   userId: userId,
                 }}
-                mutateDeleteComment={() => void 0}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}

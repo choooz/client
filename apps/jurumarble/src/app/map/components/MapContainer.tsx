@@ -17,6 +17,7 @@ import SvgIcPin from "src/assets/icons/ic_pin.svg";
 import Image from "next/image";
 
 const MapContainer = () => {
+  const [onMap, toggleMap] = useToggle();
   const { error, location, toggleOnLocation, onLocation } = useGeoLocation();
   const [on, toggle] = useToggle();
   const mapRef = useRef<kakao.maps.Map>(null);
@@ -27,7 +28,11 @@ const MapContainer = () => {
     endY: 132.02500466772065,
   });
 
-  console.log(location);
+  useEffect(() => {
+    setTimeout(() => {
+      toggleMap();
+    }, 600);
+  }, []);
 
   const { drinksList } = useDrinksMapService({
     startX: mapXY.startX,
@@ -51,12 +56,22 @@ const MapContainer = () => {
     level: 13,
   });
 
-  useEffect(() => {
-    // 윈도우 리사이즈 실행
-    setTimeout(() => {
-      window.dispatchEvent(new Event("resize"));
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   const kakaoMapScript = document.createElement("script");
+  //   kakaoMapScript.async = false;
+  //   kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=700d399006256f95732f06b19c046ba5&autoload=false`;
+  //   document.head.appendChild(kakaoMapScript);
+
+  //   const onLoadKakaoAPI = () => {
+  //     window.kakao.maps.load(() => {
+  //       var container = document.getElementById("map");
+
+  //       var map = new window.kakao.maps.Map(container);
+  //     });
+  //   };
+
+  //   kakaoMapScript.addEventListener("load", onLoadKakaoAPI);
+  // }, []);
 
   const onIdleMap = () => {
     const map = mapRef.current;
@@ -103,8 +118,15 @@ const MapContainer = () => {
         </div>
       </TopBox>
 
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", height: "375px" }}>
         <Map // 지도를 표시할 Container
+          id="map"
+          onLoadStart={() => {
+            window.dispatchEvent(new Event("resize"));
+          }}
+          onLoad={() => {
+            mapRef.current?.getNode();
+          }}
           center={state.center}
           isPanto={state.isPanto}
           style={{
@@ -155,8 +177,9 @@ const MapContainer = () => {
         />
       </FilterBox> */}
       <DrinkBox>
-        {drinksList.map(({ drinkId, name, latitude, longitude, image, manufacturer }) => (
+        {drinksList.map(({ drinkId, name, latitude, longitude, image, manufacturer }, index) => (
           <DrinkItem
+            key={`${drinkId}-${index}`}
             drinkInfo={{
               id: drinkId,
               name: name,
