@@ -16,17 +16,9 @@ import { DrinkInfoType } from "src/types/vote";
 import AorBMark from "components/AorBMark";
 import { media } from "lib/styles";
 
-const STEP_ONE = 1;
-const STEP_TWO = 2;
-
 function PostVoteContainer() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
   const router = useRouter();
-
-  const [postStep, setPostStep] = useState<number>(STEP_ONE);
-  const onChangePostStep = () => {
-    setPostStep((prev) => prev + 1);
-  };
 
   const {
     onChangeVoteText,
@@ -43,7 +35,6 @@ function PostVoteContainer() {
   const onClickSearchDrinkComplete = (selectedDrinkList: DrinkInfoType[]) => {
     onToggleDrinkSearchModal();
     updatePostVoteInfo(selectedDrinkList);
-    onChangePostStep();
   };
 
   const { title, detail, titleA, titleB, imageA, imageB } = postVoteInfo;
@@ -82,19 +73,15 @@ function PostVoteContainer() {
           ) : (
             <ImageContainer>
               <ImageWrapper>
-                {imageA ? (
-                  <Image
-                    src={imageA}
-                    alt="A이미지"
-                    fill
-                    style={{
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
-                  />
-                ) : (
-                  <ImageBox />
-                )}
+                <Image
+                  src={imageA}
+                  alt="A이미지"
+                  fill
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: "10px",
+                  }}
+                />
                 <AorBMark AorB="A">A</AorBMark>
               </ImageWrapper>
               <ImageWrapper>
@@ -109,7 +96,7 @@ function PostVoteContainer() {
                     }}
                   />
                 ) : (
-                  <ImageBox />
+                  <ImageUploadButton width="100%" height="100%" />
                 )}
                 <AorBMark AorB="B">B</AorBMark>
               </ImageWrapper>
@@ -142,7 +129,7 @@ function PostVoteContainer() {
           />
         </InputBox>
       </VoteOptionText>
-      {postStep === STEP_TWO && (
+      {postVoteInfo.titleA && postVoteInfo.titleB && (
         <TitleAndDescriptionSection
           title={title}
           detail={detail}
@@ -229,14 +216,6 @@ const ImageWrapper = styled.div`
     position: relative;
     width: 50%;
     aspect-ratio: 1;
-  `}
-`;
-
-const ImageBox = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.black_05};
-    border-radius: 10px;
-    height: 100%;
   `}
 `;
 

@@ -5,7 +5,6 @@ import { uploadImageAPI } from "lib/apis/common";
 import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
 import { DrinkInfoType, PostVoteType } from "src/types/vote";
 import Path from "lib/Path";
-import { toast } from "react-toastify";
 
 export default function usePostVoteService() {
   const router = useRouter();
@@ -52,6 +51,20 @@ export default function usePostVoteService() {
     if (e.target.files.length === 1) {
       if (e.target.files[0].size > 10485760) {
         alert("파일 용량이 10MB를 초과하였습니다.");
+        return;
+      }
+      if (!!postVoteInfo.imageA) {
+        const formDataB = new FormData();
+        formDataB.append("images", e.target.files[0]);
+        try {
+          const dataB = await uploadImageAPI(formDataB);
+          setPostVoteInfo({
+            ...postVoteInfo,
+            imageB: dataB.imageUrl,
+          });
+        } catch (error) {
+          alert("이미지 업로드에 실패했습니다." + error);
+        }
         return;
       }
       const formDataA = new FormData();
@@ -113,26 +126,7 @@ export default function usePostVoteService() {
     },
   );
 
-  const guidePostVote = () => {
-    if (title === "") {
-      toast("제목을 입력해주세요.");
-      return;
-    }
-    if (detail === "") {
-      toast("설명을 입력해주세요.");
-      return;
-    }
-    if (titleA === "") {
-      toast("선택지 A를 입력해주세요.");
-      return;
-    }
-    if (titleB === "") {
-      toast("선택지 B를 입력해주세요.");
-      return;
-    }
-  };
   const onClickPostVoteComplete = () => {
-    guidePostVote();
     postVoteInfo.drinkAId === 0
       ? mutateNomalVote({ title, detail, titleA, titleB, imageA, imageB })
       : mutateDrinkVote({ title, detail, drinkAId, drinkBId });
