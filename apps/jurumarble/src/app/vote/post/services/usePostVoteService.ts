@@ -3,8 +3,9 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { uploadImageAPI } from "lib/apis/common";
 import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
-import { DrinkInfoType, PostVoteType } from "src/types/vote";
+import { PostVoteType } from "src/types/vote";
 import Path from "lib/Path";
+import { DrinkInfoType } from "src/types/drink";
 
 export default function usePostVoteService() {
   const router = useRouter();

@@ -2,7 +2,7 @@ import Chip from "components/Chip";
 import { transitions } from "lib/styles";
 import Image from "next/image";
 import { DrinkInfo } from "src/types/drink";
-import { DrinkInfoType } from "src/types/vote";
+import { DrinkInfoType } from "src/types/drink";
 import styled, { css } from "styled-components";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
-  const { name, productName, image } = drinkInfo;
+  const { name, manufacturer, image } = drinkInfo;
 
   const isInclude = (selectedDrink: DrinkInfoType) => selectedDrink.id === drinkInfo.id;
 
@@ -25,7 +25,7 @@ function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
         <NameStampContainer>
           <Name>{name}</Name>
         </NameStampContainer>
-        <ManufacturerName>{productName}</ManufacturerName>
+        <ManufacturerName>{manufacturer}</ManufacturerName>
         <ChipContainer>
           <Chip variant="region">서울</Chip>
           <Chip variant="numberOfParticipants">213명이 즐겼어요</Chip>

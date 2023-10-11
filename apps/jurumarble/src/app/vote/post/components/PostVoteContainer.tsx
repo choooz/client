@@ -12,7 +12,7 @@ import Image from "next/image";
 import TitleAndDescriptionSection from "./TitleAndDescriptionSection";
 import DrinkSearchModal from "./DrinkSearchModal";
 import usePostVoteService from "../services/usePostVoteService";
-import { DrinkInfoType } from "src/types/vote";
+import { DrinkInfoType } from "src/types/drink";
 import AorBMark from "components/AorBMark";
 import { media } from "lib/styles";
 import { SvgIcX, SvgInfo } from "src/assets/icons/components";

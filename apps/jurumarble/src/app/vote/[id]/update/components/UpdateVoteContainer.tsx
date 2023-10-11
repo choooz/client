@@ -9,10 +9,8 @@ import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import Image from "next/image";
-
-import { DrinkInfoType } from "src/types/vote";
+import { DrinkInfoType } from "src/types/drink";
 import AorBMark from "components/AorBMark";
-
 import TitleAndDescriptionSection from "app/vote/post/components/TitleAndDescriptionSection";
 import PostBottomSheet from "app/vote/post/components/PostBottomSheet";
 import DrinkSearchModal from "app/vote/post/components/DrinkSearchModal";
