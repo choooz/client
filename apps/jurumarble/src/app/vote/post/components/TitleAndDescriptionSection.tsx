@@ -1,4 +1,5 @@
 import { Button } from "components/button";
+import { transitions } from "lib/styles";
 import styled, { css, useTheme } from "styled-components";
 
 interface Props {
@@ -17,17 +18,19 @@ function TitleAndDescriptionSection({
   onClickPostVoteComplete,
 }: Props) {
   return (
-    <>
-      <H3>제목</H3>
+    <AnimationBoundary>
+      <H3>
+        투표 제목을 작성해주세요.<MainColor>*</MainColor>
+      </H3>
       <TextArea
-        placeholder="제목을 입력해주세요"
+        placeholder="질문을 입력해주세요"
         value={title}
         name="title"
         onChange={onChangeVoteText}
       />
-      <H3>설명</H3>
+      <H3>추가적인 설명이 필요하면 작성해주세요.</H3>
       <TextArea
-        placeholder="설명을 입력해주세요"
+        placeholder="내용을 입력해주세요"
         value={detail}
         name="detail"
         onChange={onChangeVoteText}
@@ -41,9 +44,30 @@ function TitleAndDescriptionSection({
       >
         등록 완료
       </CompleteButton>
-    </>
+    </AnimationBoundary>
   );
 }
+
+const AnimationBoundary = styled.div`
+  /**
+    * @TODO 뭔가 이상하다
+   */
+  h3:nth-child(1) {
+    animation: ${transitions.slideUp} 0.3s ease-in-out;
+  }
+  textarea:nth-child(2) {
+    animation: ${transitions.slideUp} 0.6s ease-in-out;
+  }
+  h3:nth-child(3) {
+    animation: ${transitions.slideUp} 0.9 ease-in-out;
+  }
+  textarea:nth-child(4) {
+    animation: ${transitions.slideUp} 1.2 ease-in-out;
+  }
+  button:nth-child(5) {
+    animation: ${transitions.slideUp} 1.5s ease-in-out;
+  }
+`;
 
 const H3 = styled.h3`
   ${({ theme }) =>
@@ -78,6 +102,12 @@ const CompleteButton = styled(Button)`
       background-color: ${theme.colors.black_05};
       color: ${theme.colors.black_03};
     }
+  `}
+`;
+
+const MainColor = styled.span`
+  ${({ theme }) => `
+    color: ${theme.colors.main_01};
   `}
 `;
 
