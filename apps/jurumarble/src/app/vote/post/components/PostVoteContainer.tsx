@@ -10,11 +10,11 @@ import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import TitleAndDescriptionSection from "./TitleAndDescriptionSection";
-import PostBottomSheet from "./PostBottomSheet";
 import DrinkSearchModal from "./DrinkSearchModal";
 import usePostVoteService from "../services/usePostVoteService";
 import { DrinkInfoType } from "src/types/vote";
 import AorBMark from "components/AorBMark";
+import { media } from "lib/styles";
 
 const STEP_ONE = 1;
 const STEP_TWO = 2;
@@ -59,8 +59,22 @@ function PostVoteContainer() {
       >
         등록하기
       </VoteHeader>
-      <GuideText>고민되는 술을 선택해주세요</GuideText>
-      <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
+      <FlexBetween>
+        <div>
+          <GuideText>
+            고민하고 계신 후보 2개와 <Br /> 후보 이미지를 등록해주세요.
+          </GuideText>
+          <SubText>후보 이미지는 선택 사항이에요.</SubText>
+        </div>
+        <ButtonStyled
+          width="96px"
+          height="40px"
+          variant="primary"
+          onClick={onToggleDrinkSearchModal}
+        >
+          술 검색하기
+        </ButtonStyled>
+      </FlexBetween>
       <label htmlFor="file">
         <ImageSection>
           {!imageA && !imageB ? (
@@ -108,7 +122,7 @@ function PostVoteContainer() {
         <InputBox>
           <ABInput
             width="100%"
-            placeholder="선택지 A 입력"
+            placeholder="후보 A 입력"
             name="titleA"
             maxLength={22}
             value={titleA}
@@ -119,7 +133,7 @@ function PostVoteContainer() {
         <InputBox>
           <ABInput
             width="100%"
-            placeholder="선택지 B 입력"
+            placeholder="후보 B 입력"
             name="titleB"
             maxLength={22}
             value={titleB}
@@ -135,12 +149,6 @@ function PostVoteContainer() {
           onChangeVoteText={onChangeVoteText}
           isCompleted={isCompleted}
           onClickPostVoteComplete={onClickPostVoteComplete}
-        />
-      )}
-      {postStep === STEP_ONE && (
-        <PostBottomSheet
-          onToggleDrinkSearchModal={onToggleDrinkSearchModal}
-          onChangePostStep={onChangePostStep}
         />
       )}
       {isDrinkSearchModal && (
@@ -163,13 +171,25 @@ const PreviousButton = styled(Button)`
   `}
 `;
 
+const FlexBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+`;
+
 const GuideText = styled.div`
   ${({ theme }) =>
     css`
       ${theme.typography.body01}
       color: ${theme.colors.black_02};
-      margin-top: 24px;
     `}
+`;
+
+const Br = styled.br`
+  ${media.medium} {
+    display: none;
+  }
 `;
 
 const SubText = styled.div`
@@ -177,7 +197,14 @@ const SubText = styled.div`
     css`
       ${theme.typography.body03}
       color: ${theme.colors.black_03};
-      margin-top: 8px;
+      margin-top: 11px;
+    `}
+`;
+
+const ButtonStyled = styled(Button)`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.button01}
     `}
 `;
 
