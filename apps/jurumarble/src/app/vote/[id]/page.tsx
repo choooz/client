@@ -9,8 +9,6 @@ import VoteDescription from "./components/VoteDescription";
 import ChipContainer from "./components/ChipContainer";
 import CommentContainer from "./components/CommentContainer";
 import { useParams } from "next/navigation";
-import { useToggle } from "@monorepo/hooks";
-import SearchRestaurantModal from "./components/SearchRestaurantModal";
 import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
 import useFilteredStatisticsService from "./services/useFilterStatisticsService";
@@ -28,8 +26,6 @@ function Detail() {
   });
 
   const postId = params.id;
-
-  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle(false);
 
   const { data, isError, isLoading } = useVoteLoadService(Number(postId));
 
@@ -75,7 +71,6 @@ function Detail() {
   return (
     <Container>
       <Header />
-
       <VoteWriterBox
         writer={{
           nickName: postedUserNickname,
@@ -86,7 +81,6 @@ function Detail() {
           userMbti: postedUserMbti,
         }}
       />
-
       <PageInner>
         <ChipContainer
           voteId={Number(data.voteId)}
@@ -123,10 +117,6 @@ function Detail() {
         )}
         <CommentContainer postId={Number(postId)} />
       </PageInner>
-      {isSearchRestaurantModal && (
-        <SearchRestaurantModal onToggleSearchRestaurantModal={onToggleSearchRestaurantModal} />
-      )}
-
       <BottomBar />
     </Container>
   );

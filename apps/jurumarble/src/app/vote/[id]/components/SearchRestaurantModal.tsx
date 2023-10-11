@@ -1,33 +1,63 @@
 "use client";
 
 import { Button, ModalTemplate } from "components/index";
+
 import VoteHeader from "components/VoteHeader";
+import useInput from "hooks/useInput";
+import { RestaurantInfo } from "lib/apis/restaurant";
 import { transitions } from "lib/styles";
 import Image from "next/image";
-import { EmptyAImg } from "public/images";
 import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css, DefaultTheme } from "styled-components";
+import useRestaurantImageService from "../services/useRestaurantImageService";
+import useRestaurantService from "../services/useRestaurantService";
 import RestaurantItem from "./RestaurantItem";
+import SearchInput from "./SearchInput";
 
 interface Props {
+  commentId: number;
+  postId: number;
   onToggleSearchRestaurantModal: () => void;
 }
 
-const TEMP_LIST = [
-  { manufacturer: "gyeonggiDo", drinkName: "경기도" },
-  { manufacturer: "chungcheongDo", drinkName: "충청도" },
-  { manufacturer: "gyeongsangDo", drinkName: "경상도" },
-  { manufacturer: "ulsan", drinkName: "울산" },
-  { manufacturer: "jeju", drinkName: "제주" },
-];
-
-function SearchRestaurantModal({ onToggleSearchRestaurantModal }: Props) {
-  const [selected, setSelected] = useState("");
-  const onClickSelected = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setSelected(e.currentTarget.name);
-    e.currentTarget.name === "nonSelect" && setSelected("nonSelect");
+function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModal }: Props) {
+  const [selectedRestaurant, setSelectedRestaurant] = useState<RestaurantInfo | null>(null);
+  const onClickSelectedRestaurant = (restaurantInfo: RestaurantInfo) => {
+    setSelectedRestaurant((prev) =>
+      restaurantInfo.contentId === prev?.contentId ? null : restaurantInfo,
+    );
   };
+
+  const { debouncedValue: searchText, onChange: onChangeSearchText } = useInput({
+    initialValue: "",
+    useDebounce: true,
+    debounceTimeout: 500,
+  });
+
+  const { restaurantList, subscribe } = useRestaurantService({
+    commentType: "votes",
+    typeId: postId,
+    commentId,
+    keyword: searchText,
+    page: 1,
+    region: "ALL",
+  });
+
+  if (!restaurantList) return null;
+
+  const [selectedImage, setSelectedImage] = useState("");
+  const onClickSelectedImage = (imageUrl: string) => {
+    selectedImage === imageUrl ? setSelectedImage("") : setSelectedImage(imageUrl);
+  };
+
+  const { restaurantImageList, postRestaurantImage } = useRestaurantImageService({
+    commentType: "votes",
+    typeId: postId,
+    commentId,
+    contentId: selectedRestaurant?.contentId!,
+  });
+
   return (
     <ModalTemplate width="375px" height="100%" onToggleModal={onToggleSearchRestaurantModal}>
       <VoteHeader
@@ -37,68 +67,89 @@ function SearchRestaurantModal({ onToggleSearchRestaurantModal }: Props) {
           </CloseButton>
         }
       >
-        <TitleStyled>이미지 선택</TitleStyled>
+        <TitleStyled>{selectedRestaurant ? "음식점 검색" : "이미지 선택"}</TitleStyled>
       </VoteHeader>
       <Container>
-        <RestaurantItem />
-        <FoodImageList>
-          <NonSelectedButton
-            variant="outline"
-            width="107px"
-            height="60px"
-            borderRadius="4px"
-            name="nonSelect"
-            onClick={onClickSelected}
-          >
-            <ColorBox selected={selected === "nonSelect"} />
-            선택 안함
-          </NonSelectedButton>
-          {TEMP_LIST.map(({ manufacturer }) => (
-            <FoodItem>
-              <Button key={manufacturer} name={manufacturer} onClick={onClickSelected}>
-                <ColorBox selected={selected === manufacturer} />
-              </Button>
-              <Image
-                alt="음식 이미지"
-                src={EmptyAImg}
-                width={107}
-                height={60}
-                style={{
-                  borderRadius: "4px",
-                }}
-              />
-            </FoodItem>
-          ))}
-        </FoodImageList>
-        <CompleteButton
-          width="335px"
-          height="56px"
-          variant="primary"
-          // onClick={onToggleDrinkSearchModal}
-        >
-          완료
-        </CompleteButton>
+        {selectedRestaurant ? (
+          <>
+            <RestaurantItem
+              restaurantInfo={selectedRestaurant}
+              onClickSelectedRestaurant={onClickSelectedRestaurant}
+            />
+            <FoodImageList>
+              <NonSelectedButton
+                variant="outline"
+                width="107px"
+                height="60px"
+                borderRadius="4px"
+                onClick={() => onClickSelectedImage("nonSelect")}
+              >
+                <ColorBox selectedImage={selectedImage === "nonSelect"} />
+                선택 안함
+              </NonSelectedButton>
+              {restaurantImageList &&
+                restaurantImageList.map((restaurantImage) => (
+                  <FoodItem key={restaurantImage}>
+                    <Button
+                      name={restaurantImage}
+                      onClick={() => onClickSelectedImage(restaurantImage)}
+                    >
+                      <ColorBox selectedImage={selectedImage === restaurantImage} />
+                    </Button>
+                    <Image
+                      alt="음식 이미지"
+                      src={restaurantImage}
+                      width={107}
+                      height={60}
+                      style={{
+                        borderRadius: "4px",
+                      }}
+                    />
+                  </FoodItem>
+                ))}
+            </FoodImageList>
+            <CompleteButton
+              width="335px"
+              height="56px"
+              variant="primary"
+              onClick={() => {
+                postRestaurantImage({
+                  commentType: "votes",
+                  typeId: postId,
+                  commentId,
+                  restaurantName: selectedRestaurant.restaurantName,
+                  restaurantImage: selectedImage,
+                });
+                onToggleSearchRestaurantModal();
+              }}
+            >
+              완료
+            </CompleteButton>
+          </>
+        ) : (
+          <>
+            <SearchInput
+              placeholder="관심있는 음식점을 검색해보세요."
+              value={searchText}
+              onChangeSearchText={onChangeSearchText}
+            />
+            <RestaurantList>
+              {restaurantList.map((restaurantInfo) => (
+                <>
+                  {restaurantInfo && (
+                    <RestaurantItem
+                      key={restaurantInfo.contentId}
+                      restaurantInfo={restaurantInfo}
+                      onClickSelectedRestaurant={onClickSelectedRestaurant}
+                    />
+                  )}
+                </>
+              ))}
+              <div ref={subscribe} />
+            </RestaurantList>
+          </>
+        )}
       </Container>
-      {/**
-       * @Note 음식점 검색
-       */}
-      {/* <VoteHeader
-        rightButton={
-          <CloseButton onClick={onToggleSearchRestaurantModal}>
-            <SvgIcX width={24} height={24} />
-          </CloseButton>
-        }
-      >
-        <TitleStyled>음식점 검색</TitleStyled>
-      </VoteHeader>
-      <Container>
-        <SearchInput placeholder="관심있는 음식점을 검색해보세요." />
-        <RestaurantList>
-          {TEMP_LIST.map(() => (
-            <RestaurantItem />
-          ))}
-        </RestaurantList>
-      </Container> */}
     </ModalTemplate>
   );
 }
@@ -115,6 +166,16 @@ const CloseButton = styled(Button)`
   margin: 14px 12px 0 0;
 `;
 
+const RestaurantList = styled.ul`
+  ${({ theme }) => css`
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+    overflow: auto;
+    height: 70vh;
+  `}
+`;
+
 const FoodImageList = styled.ul`
   display: flex;
   flex-wrap: wrap;
@@ -123,11 +184,6 @@ const FoodImageList = styled.ul`
   border-top: 1px solid ${({ theme }) => theme.colors.line_01};
   overflow: auto;
   padding-bottom: 80px;
-  -ms-overflow-style: none /* IE and Edge 스크롤바 없애는 css*/;
-  scrollbar-width: none; /* Firefox 스크롤바 없애는 css */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome , Safari , Opera 스크롤바 없애는 css*/
-  }
 `;
 
 const NonSelectedButton = styled(Button)`
@@ -138,8 +194,8 @@ const FoodItem = styled.div`
   position: relative;
 `;
 
-const ColorBox = styled.div<{ theme: DefaultTheme; selected: boolean }>`
-  ${({ theme, selected }) =>
+const ColorBox = styled.div<{ theme: DefaultTheme; selectedImage: boolean }>`
+  ${({ theme, selectedImage }) =>
     css`
       border-radius: 4px;
       position: absolute;
@@ -147,7 +203,7 @@ const ColorBox = styled.div<{ theme: DefaultTheme; selected: boolean }>`
       left: 0;
       width: 100%;
       height: 100%;
-      ${selected &&
+      ${selectedImage &&
       css`
         border: 2px solid ${theme.colors.main_01};
         background: rgba(255, 74, 22, 0.7);

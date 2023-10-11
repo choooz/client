@@ -6,7 +6,6 @@ import styled, { css } from "styled-components";
 import Image from "next/image";
 import { DrinkImage } from "public/images";
 import useGetUserInfo from "services/useGetUserInfo";
-import { useRouter } from "next/navigation";
 
 function UserInfoContainer() {
   const { userInfo } = useGetUserInfo();
@@ -14,9 +13,6 @@ function UserInfoContainer() {
   if (!userInfo) return <></>;
 
   const { gender, nickname, yearOfBirth, mbti, imageUrl } = userInfo;
-
-  const router = useRouter();
-  if (!(gender && yearOfBirth && mbti)) router.replace(Path.REGISTER_PAGE);
 
   const date = new Date();
   const age = date.getFullYear() - yearOfBirth;

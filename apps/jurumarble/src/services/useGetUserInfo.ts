@@ -8,11 +8,11 @@ export default function useGetUserInfo() {
   const { data: userInfo } = useQuery<GetUserInfoResponse>(getQueryKey, getUserInfo, {
     placeholderData: () => ({
       gender: "MALE",
-      nickname: "주루마블",
+      nickname: "",
       yearOfBirth: 1990,
       imageUrl: "",
       mbti: "ESTJ",
-      alcoholLimit: "LOW",
+      alcoholLimit: "",
       email: "",
       userId: 0,
     }),

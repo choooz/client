@@ -2,20 +2,20 @@ import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
 import NonWriterBox from "app/vote/components/NonWriterBox";
 import { Button } from "components/button";
-import { CommentResponse } from "lib/apis/comment";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useGetUserInfo from "services/useGetUserInfo";
+import { SvgIcMapPin } from "src/assets/icons/components";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled, { css } from "styled-components";
 import useCommentDeleteService from "../services/useCommentDeleteService";
 import useCommentReportService from "../services/useCommentReportService";
-
 import CommentDeleteModal from "./CommentDeleteModal";
 import CommentForm from "./CommentForm";
 import CommentPutForm from "./CommentPutForm";
+import SearchRestaurantModal from "./SearchRestaurantModal";
 
 interface Props {
   voteType: "drinks" | "votes";
@@ -27,11 +27,14 @@ interface Props {
     createdDate: string;
     gender: string;
     hateCount: number;
-    imageUrlstring: string;
     likeCount: number;
     mbti: string;
     nickName: string;
     userId: number;
+    restaurant: {
+      restaurantName: string;
+      restaurantImage: string;
+    };
   };
   mutateLike?(): void;
   mutateHate?(): void;
@@ -47,17 +50,17 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
     createdDate,
     gender,
     hateCount,
-    // imageUrl,
     likeCount,
     mbti,
     nickName,
     userId,
+    restaurant,
   } = comment;
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
   const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLImageElement>(toggleMenu, onToggleMenu);
-  const { targetEl: targetEl2 } = useOutsideClick<HTMLImageElement>(
+  const { targetEl } = useOutsideClick<HTMLButtonElement>(toggleMenu, onToggleMenu);
+  const { targetEl: targetEl2 } = useOutsideClick<HTMLButtonElement>(
     toggleNonWriterMenu,
     onToggleNonWriterMenu,
   );
@@ -76,6 +79,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
   useEffect(() => {
     setCommentForm(content);
   }, [comment]);
+  const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle();
 
   return (
     <Container>
@@ -91,7 +95,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
       />
       <ContentsBox>
         {(age || gender || mbti) && (
-          <Flex>
+          <FlexBetween>
             <TagBox>
               {gender && gender}
               {age && (
@@ -105,7 +109,16 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
                 </>
               )}
             </TagBox>
-          </Flex>
+            {userInfo?.userId === userId ? (
+              <button onClick={onToggleMenu} ref={targetEl}>
+                <SvgIcMenu width={20} height={20} />
+              </button>
+            ) : (
+              <button onClick={onToggleNonWriterMenu} ref={targetEl2}>
+                <SvgIcMenu width={20} height={20} />
+              </button>
+            )}
+          </FlexBetween>
         )}
 
         <NickName> {nickName}</NickName>
@@ -134,13 +147,34 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
         ) : (
           <>
             <Contents>{content}</Contents>
-            {userId === userInfo?.userId && (
+            {restaurant ? (
+              <>
+                <RestaurantImage>
+                  <Image
+                    src={restaurant.restaurantImage}
+                    alt="음식 이미지"
+                    fill
+                    style={{ borderRadius: "4px" }}
+                    objectFit="cover"
+                  />
+                </RestaurantImage>
+                <RestaurantNameBox>
+                  <SvgIcMapPin width={12} height={12} />
+                  {restaurant.restaurantName}
+                </RestaurantNameBox>
+              </>
+            ) : userInfo?.userId === userId ? (
               <AddRestaurants>
-                <Button variant="outline" width="104px" height="40px">
+                <Button
+                  variant="outline"
+                  width="104px"
+                  height="40px"
+                  onClick={onToggleSearchRestaurantModal}
+                >
                   음식점 추가 <BigFont>﹢</BigFont>
                 </Button>
               </AddRestaurants>
-            )}
+            ) : null}
             <CommentInfo>
               <div>{createdDate.slice(0, 10)}</div>・
               <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton>{" "}
@@ -150,15 +184,6 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
           </>
         )}
       </ContentsBox>
-      {userId === userInfo?.userId ? (
-        <div onClick={onToggleMenu} ref={targetEl}>
-          <SvgIcMenu width={20} height={20} />
-        </div>
-      ) : (
-        <div onClick={onToggleNonWriterMenu} ref={targetEl2}>
-          <SvgIcMenu width={20} height={20} />
-        </div>
-      )}
       {toggleMenu && (
         <ModifyDeleteButtonBox
           onDelete={onDelete}
@@ -180,6 +205,13 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
           right="20px"
         />
       )}
+      {isSearchRestaurantModal && (
+        <SearchRestaurantModal
+          commentId={id}
+          postId={postId}
+          onToggleSearchRestaurantModal={onToggleSearchRestaurantModal}
+        />
+      )}
     </Container>
   );
 }
@@ -191,9 +223,10 @@ const Container = styled.div`
   position: relative;
 `;
 
-const Flex = styled.div`
+const FlexBetween = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
 `;
 
@@ -209,6 +242,26 @@ const Contents = styled.div`
   align-items: center;
   ${({ theme }) => css`
     color: ${theme.colors.black_02};
+  `}
+`;
+
+const RestaurantImage = styled.div`
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  position: relative;
+`;
+
+const RestaurantNameBox = styled.div`
+  ${({ theme }) => css`
+    ${theme.typography.caption_chip}
+    color: ${theme.colors.black_04};
+    background-color: ${theme.colors.bg_01};
+    padding: 4px 8px;
+    border-radius: 4px;
+    gap: 4px;
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
   `}
 `;
 
@@ -248,6 +301,7 @@ const CommentInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+  margin-top: 12px;
   ${({ theme }) => css`
     color: ${theme.colors.black_04};
     ${theme.typography.caption_chip}

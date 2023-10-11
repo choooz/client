@@ -74,11 +74,11 @@ function CommentContainer({ postId }: Props) {
                 createdDate,
                 gender,
                 hateCount,
-                imageUrlstring,
                 likeCount,
                 mbti,
                 nickName,
                 userId,
+                restaurant,
               },
               index,
             ) => (
@@ -92,11 +92,11 @@ function CommentContainer({ postId }: Props) {
                   createdDate,
                   gender,
                   hateCount,
-                  imageUrlstring,
                   likeCount,
                   mbti,
                   nickName,
                   userId: userId,
+                  restaurant,
                 }}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}

@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { injectStyle } from "react-toastify/dist/inject-style";
+import AuthProcess from "components/AuthProcess";
 
 export const metadata: Metadata = {
   title: "주루마블",
@@ -24,11 +25,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ReactQueryProvider>
           <StyledComponents>
             <StyledLayout>
-              <>
-                <div id="portal" />
-                {children}
-                <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
-              </>
+              <div id="portal" />
+              <AuthProcess />
+              {children}
+              <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
             </StyledLayout>
           </StyledComponents>
         </ReactQueryProvider>

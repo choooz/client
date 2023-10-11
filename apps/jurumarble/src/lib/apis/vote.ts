@@ -66,6 +66,12 @@ export const getVoteByVoteIdAPI = async (voteId: number) => {
   return response.data;
 };
 
+// export const getVoteByVoteIdAPI = async (voteId: number) => {
+//   const response = await fetch(`${SERVER_URL}api/votes/${voteId}`, {});
+//   const voteInfo = await response.json();
+//   return voteInfo.data;
+// };
+
 interface ModifyVoteRequest {
   title: string;
   detail: string;

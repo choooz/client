@@ -22,7 +22,7 @@ export interface CommentResponse {
   nickName: string;
   parentId: number;
   content: string;
-  imageUrlstring: string;
+  imageUrl: string;
   gender: string;
   age: string;
   mbti: string;

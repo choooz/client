@@ -4,7 +4,6 @@ import CommentForm from "app/vote/[id]/components/CommentForm";
 import CommentToolBar from "app/vote/[id]/components/CommentToolbar";
 import useCommentServices from "app/vote/[id]/services/useCommentServices";
 import { queryKeys } from "lib/queryKeys";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
@@ -70,11 +69,11 @@ function DrinkCommentContainer() {
                 createdDate,
                 gender,
                 hateCount,
-                imageUrlstring,
                 likeCount,
                 mbti,
                 nickName,
                 userId,
+                restaurant,
               },
               index,
             ) => (
@@ -88,11 +87,11 @@ function DrinkCommentContainer() {
                   createdDate,
                   gender,
                   hateCount,
-                  imageUrlstring,
                   likeCount,
                   mbti,
                   nickName,
                   userId: userId,
+                  restaurant,
                 }}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}

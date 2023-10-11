@@ -27,8 +27,6 @@ function DrinkVoteList({ searchText, sortOption, regionOption }: Props) {
     return <></>;
   }
 
-  console.log(voteDrinkList);
-
   return (
     <Container>
       {voteDrinkList.map((voteDrink, index) => (
