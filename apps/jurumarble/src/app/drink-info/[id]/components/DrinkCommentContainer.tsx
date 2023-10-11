@@ -4,7 +4,6 @@ import CommentForm from "app/vote/[id]/components/CommentForm";
 import CommentToolBar from "app/vote/[id]/components/CommentToolbar";
 import useCommentServices from "app/vote/[id]/services/useCommentServices";
 import { queryKeys } from "lib/queryKeys";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useState } from "react";
 import styled from "styled-components";
@@ -94,7 +93,6 @@ function DrinkCommentContainer() {
                   userId: userId,
                   restaurant,
                 }}
-                mutateDeleteComment={() => void 0}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}
