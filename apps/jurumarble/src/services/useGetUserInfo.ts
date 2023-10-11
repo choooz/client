@@ -9,9 +9,9 @@ export default function useGetUserInfo() {
     placeholderData: () => ({
       gender: "MALE",
       nickname: "",
-      yearOfBirth: 0,
+      yearOfBirth: 1990,
       imageUrl: "",
-      mbti: "",
+      mbti: "ESTJ",
       alcoholLimit: "",
       email: "",
       userId: 0,
