@@ -1,6 +1,5 @@
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
-import { ExImg1 } from "public/images";
 import useBookmarkService from "services/useBookmarkService";
 import { Content } from "src/types/vote";
 import styled, { css } from "styled-components";
@@ -8,7 +7,6 @@ import ChipContainer from "./ChipContainer";
 import VoteDescription from "./VoteDescription";
 
 type Props = Pick<Content, "voteId" | "region" | "title" | "imageA" | "imageB">;
-const getSafeImage = (image: string) => (image.includes("http") ? image : ExImg1);
 
 function VoteItem({ voteId, region, title, imageA, imageB }: Props) {
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
@@ -27,7 +25,7 @@ function VoteItem({ voteId, region, title, imageA, imageB }: Props) {
         mutateBookMark={mutateBookMark}
         isBookmark={isBookmark}
       />
-      <VoteDescription imageA={getSafeImage(imageA)} imageB={getSafeImage(imageB)} />
+      <VoteDescription imageA={imageA} imageB={imageB} />
     </Container>
   );
 }
