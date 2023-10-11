@@ -17,7 +17,7 @@ export interface DrinkInfo {
   id: number;
   name: string;
   type: string;
-  productName: string;
+  manufacturer: string;
   alcoholicBeverage: string;
   rawMaterial: string;
   capacity: string;
@@ -29,6 +29,8 @@ export interface DrinkInfo {
   longitude: number;
   enjoyCount: number | null;
 }
+
+export type DrinkInfoType = Pick<DrinkInfo, "id" | "name" | "image">;
 
 export interface DrinkMapInfo {
   drinkId: number;

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DrinkInfoType } from "src/types/vote";
+import { DrinkInfoType } from "src/types/drink";
 
 export default function useUpdateSelectedDrinkList() {
   const [selectedDrinkList, setDrinkList] = useState<DrinkInfoType[]>([]);

@@ -11,7 +11,7 @@ interface Props {
     | {
         id: number;
         name: string;
-        productName: string;
+        manufacturer: string;
         image: string;
       };
   onClickReplaceDrinkInfo: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Props) {
-  const { id, name, productName, image } = drinkInfo;
+  const { id, name, manufacturer, image } = drinkInfo;
 
   const { colors } = useTheme();
 
@@ -48,7 +48,7 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
             <SvgStamp width={24} height={24} fill={stampColor} />
           </StampWrapper>
         </NameStampContainer>
-        <ManufacturerName>{productName}</ManufacturerName>
+        <ManufacturerName>{manufacturer}</ManufacturerName>
       </InfoContainer>
     </Container>
   );

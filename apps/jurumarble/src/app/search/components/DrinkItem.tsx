@@ -15,7 +15,7 @@ interface Props {
 }
 
 function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
-  const { id, name, productName, image, enjoyCount } = drinkInfo;
+  const { id, name, manufacturer, image, enjoyCount, region } = drinkInfo;
 
   const { colors } = useTheme();
 
@@ -40,9 +40,9 @@ function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
             <SvgStamp width={24} height={24} fill={stampColor} />
           </StampWrapper>
         </NameStampContainer>
-        <ManufacturerName>{productName}</ManufacturerName>
+        <ManufacturerName>{manufacturer}</ManufacturerName>
         <ChipContainer>
-          <Chip variant="region">서울</Chip>
+          <Chip variant="region">{region}</Chip>
           <Chip variant="numberOfParticipants">{enjoyCount}명이 즐겼어요</Chip>
         </ChipContainer>
       </InfoContainer>

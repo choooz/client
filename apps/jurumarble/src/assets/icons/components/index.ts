@@ -25,3 +25,4 @@ export { default as SvgHeaderSearch } from "./IcHeaderSearch";
 export { default as SvgIcThunder } from "./IcThunder";
 export { default as SvgWarningIcon } from "./IcWarningIcon";
 export { default as SvgNotificationCheck } from "./IcNotificationCheck";
+export { default as SvgInfo } from "./IcInfo";

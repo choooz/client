@@ -183,7 +183,7 @@ const MapContainer = () => {
             drinkInfo={{
               id: drinkId,
               name: name,
-              productName: manufacturer,
+              manufacturer: manufacturer,
               image: image || (ExImg1 as unknown as string),
             }}
             onClickReplaceDrinkInfo={() => {
