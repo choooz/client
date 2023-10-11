@@ -101,7 +101,6 @@ function CommentContainer({ postId }: Props) {
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}
-                postId={postId}
               />
             ),
           )}
