@@ -16,6 +16,9 @@ import useInfiniteMainListService from "./services/useGetVoteListService";
 import { toast } from "react-toastify";
 import useBookmarkService from "services/useBookmarkService";
 import Loading from "components/Loading";
+import Image from "next/image";
+import { ImgScroll } from "public/images";
+import { useRef } from "react";
 
 export type Drag = "up" | "down" | null;
 
@@ -59,12 +62,22 @@ function VoteHomePage() {
     mutate(select);
   };
 
+  const moreRef = useRef<HTMLDivElement>(null);
+
+  const onScrollBottom = () => {
+    // 스크롤을 최하단으로 내린다
+    moreRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   if (isLoading) return <Loading />;
   if (isError) return <PageInner drag={drag}>에러</PageInner>;
 
   return (
     <>
       <Background>
+        <ScrollImage onClick={onScrollBottom}>
+          <Image src={ImgScroll} alt="스크롤" width={60} height={64} />
+        </ScrollImage>
         <Header />
         <AskVoteBox>
           <AskVoteText>
@@ -115,7 +128,7 @@ function VoteHomePage() {
               drinkAId={1}
               drinkBId={1}
             />
-            <MoreButton onClick={() => router.push(`vote/${voteId}`)}>
+            <MoreButton onClick={() => router.push(`vote/${voteId}`)} ref={moreRef}>
               더보기 <SvgIcDetail width={16} height={16} />
             </MoreButton>
           </PageInner>
@@ -129,8 +142,14 @@ function VoteHomePage() {
 }
 
 const Background = styled.div`
+  position: relative;
   background-color: ${({ theme }) => theme.colors.bg_01};
+  overflow: scroll;
   height: calc(100svh - 100px);
+  // 스크롤 바 숨기기
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -264,5 +283,12 @@ const MoreButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 6px;
+`;
+
+const ScrollImage = styled.div`
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  z-index: 1600;
 `;
 export default VoteHomePage;
