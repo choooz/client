@@ -62,7 +62,7 @@ function VoteHomePage() {
     mutate(select);
   };
 
-  const moreRef = useRef<HTMLDivElement>(null);
+  const moreRef = useRef<HTMLButtonElement>(null);
 
   const onScrollBottom = () => {
     // 스크롤을 최하단으로 내린다
