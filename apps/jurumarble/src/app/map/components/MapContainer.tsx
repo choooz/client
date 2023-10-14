@@ -17,6 +17,14 @@ import SvgIcPin from "src/assets/icons/ic_pin.svg";
 import Image from "next/image";
 
 const MapContainer = () => {
+  const [delayRender, setDelayRender] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDelayRender(false);
+    }, 600);
+  }, []);
+
   const [onMap, toggleMap] = useToggle();
   const { error, location, toggleOnLocation, onLocation } = useGeoLocation();
   const [on, toggle] = useToggle();
@@ -98,6 +106,8 @@ const MapContainer = () => {
       onIdleMap();
     }, 100);
   };
+
+  if (delayRender) return <></>;
 
   return (
     <Container>

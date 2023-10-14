@@ -16,6 +16,16 @@ import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
 import { useState } from "react";
 import useBookmarkService from "services/useBookmarkService";
 import Loading from "components/Loading";
+import RegionSmallSelect from "app/search/components/RegionSmallSelect";
+import {
+  DRINK_INFO_SORT_LIST,
+  MBTI_LIST,
+  VOTE_AGE_FILTER_LIST,
+  VOTE_ALCOHOL_FILTER_LIST,
+  VOTE_GENDER_FILTER_LIST,
+  VOTE_MBTI_LIST,
+} from "lib/constants";
+import VoteSmallSelectFilter from "./components/VoteSmallSelectFilter";
 
 function Detail() {
   const params = useParams();
@@ -23,7 +33,15 @@ function Detail() {
     age: "",
     mbti: "",
     gender: "",
+    alcohol: "",
   });
+
+  const onChangeFilter = (filterKey: string, value: string) => {
+    setFilter({
+      ...filter,
+      [filterKey]: value,
+    });
+  };
 
   const postId = params.id;
 
@@ -47,9 +65,18 @@ function Detail() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
-  if (isLoading || isStatisticsLoading) return <Loading />;
-  if (isError || isStatisticsError) return <div>에러</div>;
-  if (!data || !statistics) return <div></div>;
+  const { voteStatisticsQuery: originalStaticsQuery } = useFilteredStatisticsService(
+    Number(postId),
+  );
+  const {
+    data: originalStatistics,
+    isLoading: isOriginalStatisticsLoading,
+    isError: isOriginalStatisticsError,
+  } = originalStaticsQuery;
+
+  if (isLoading || isStatisticsLoading || isOriginalStatisticsLoading) return <Loading />;
+  if (isError || isStatisticsError || isOriginalStatisticsError) return <div>에러</div>;
+  if (!data || !statistics || !originalStatistics) return <div></div>;
   const {
     detail,
     title,
@@ -68,6 +95,12 @@ function Detail() {
   } = data;
 
   const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
+  const {
+    percentageA: originalPercentageA,
+    percentageB: originalPercentageB,
+    totalCountA: originalTotalCountA,
+    totalCountB: originalTotalCountB,
+  } = originalStatistics;
   return (
     <Container>
       <Header />
@@ -95,12 +128,12 @@ function Detail() {
         <VoteDescription
           imageA={imageA}
           imageB={imageB}
-          percentageA={percentageA}
-          percentageB={percentageB}
+          percentageA={originalPercentageA}
+          percentageB={originalPercentageB}
           titleA={titleA}
           titleB={titleB}
-          totalCountA={totalCountA}
-          totalCountB={totalCountB}
+          totalCountA={originalTotalCountA}
+          totalCountB={originalTotalCountB}
           select={select.choice}
           onMutateVoting={onMutateVoting}
           voteType={data.voteType}
@@ -108,13 +141,40 @@ function Detail() {
           drinkBId={data.drinkBId}
         />
         {!!select.choice && (
-          <VoteAnalyzeBar
-            totalCountA={totalCountA}
-            totalCountB={totalCountB}
-            percentageA={percentageA}
-            percentageB={percentageB}
-          />
+          <>
+            <VoteAnalyzeBar
+              totalCountA={totalCountA}
+              totalCountB={totalCountB}
+              percentageA={percentageA}
+              percentageB={percentageB}
+            />
+            <div>
+              <FilterBox>
+                <VoteSmallSelectFilter
+                  defaultOption={filter.gender}
+                  onChangeSortOption={(id) => onChangeFilter("gender", id)}
+                  options={VOTE_GENDER_FILTER_LIST}
+                />
+                <VoteSmallSelectFilter
+                  defaultOption={filter.age}
+                  onChangeSortOption={(id) => onChangeFilter("age", id)}
+                  options={VOTE_AGE_FILTER_LIST}
+                />
+                <VoteSmallSelectFilter
+                  defaultOption={filter.mbti}
+                  onChangeSortOption={(id) => onChangeFilter("mbti", id)}
+                  options={VOTE_MBTI_LIST}
+                />
+                <VoteSmallSelectFilter
+                  defaultOption={filter.alcohol}
+                  onChangeSortOption={(id) => onChangeFilter("alcohol", id)}
+                  options={VOTE_ALCOHOL_FILTER_LIST}
+                />
+              </FilterBox>
+            </div>
+          </>
         )}
+
         <CommentContainer postId={Number(postId)} />
       </PageInner>
       <BottomBar />
@@ -144,6 +204,11 @@ const PageInner = styled.div`
   margin: 0 auto;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.white};
+`;
+
+const FilterBox = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default Detail;

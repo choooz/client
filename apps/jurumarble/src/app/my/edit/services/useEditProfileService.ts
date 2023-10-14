@@ -54,7 +54,9 @@ export default function useEditProfileService() {
 
   const { mutate: deleteUser } = useMutation(() => deleteUserAPI(), {
     onSuccess: () => {
-      toast("회원 탈퇴가 완료되었습니다.");
+      toast("회원 탈퇴가 완료되었습니다.", {
+        toastId: "deleteUser",
+      });
       router.push(Path.MAIN_PAGE);
       logout();
     },
