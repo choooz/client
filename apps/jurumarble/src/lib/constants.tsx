@@ -54,6 +54,28 @@ export const DRINK_INFO_SORT_LIST = [
   { value: "ByPopularity", label: "인기순" },
 ];
 
+export const VOTE_GENDER_FILTER_LIST = [
+  { value: "", label: "성별" },
+  { value: "MALE", label: "남성" },
+  { value: "FEMALE", label: "여성" },
+];
+
+export const VOTE_AGE_FILTER_LIST = [
+  { value: "", label: "나이" },
+  { value: "10", label: "10대" },
+  { value: "20", label: "20대" },
+  { value: "30", label: "30대" },
+  { value: "40", label: "40대" },
+  { value: "50", label: "50대" },
+];
+
+export const VOTE_ALCOHOL_FILTER_LIST = [
+  { value: "", label: "도수값" },
+  { value: "LOW", label: "Lv.1" },
+  { value: "MEDIUM", label: "Lv.2" },
+  { value: "HIGH", label: "Lv.3" },
+];
+
 /**
  * @TODO 사용 제거 후 삭제
  */
@@ -120,4 +142,24 @@ export const MBTI_LIST = [
   { id: "ISFP", label: "ISFP" },
   { id: "INFP", label: "INFP" },
   { id: "INTP", label: "INTP" },
+];
+
+export const VOTE_MBTI_LIST = [
+  { value: "", label: "MBTI" },
+  { value: "ESTP", label: "ESTP" },
+  { value: "ESFP", label: "ESFP" },
+  { value: "ENFP", label: "ENFP" },
+  { value: "ENTP", label: "ENTP" },
+  { value: "ESTJ", label: "ESTJ" },
+  { value: "ESFJ", label: "ESFJ" },
+  { value: "ENFJ", label: "ENFJ" },
+  { value: "ENTJ", label: "ENTJ" },
+  { value: "ISTJ", label: "ISTJ" },
+  { value: "ISFJ", label: "ISFJ" },
+  { value: "INFJ", label: "INFJ" },
+  { value: "INTJ", label: "INTJ" },
+  { value: "ISTP", label: "ISTP" },
+  { value: "ISFP", label: "ISFP" },
+  { value: "INFP", label: "INFP" },
+  { value: "INTP", label: "INTP" },
 ];

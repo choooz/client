@@ -31,6 +31,7 @@ function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB }: 
           </Share>
         </AnalyzeBar>
       )}
+      
     </>
   );
 }
