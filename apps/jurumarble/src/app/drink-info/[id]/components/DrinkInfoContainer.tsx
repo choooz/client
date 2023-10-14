@@ -104,9 +104,14 @@ const DrinkInfoContainer = () => {
             <div className="content">{rawMaterial}</div>
           </DescriptionRow>
           <DescriptionRow>
+            <div className="label">용량</div>
+            <div className="content">{capacity}</div>
+          </DescriptionRow>
+          <DescriptionRow>
             <div className="label">가격</div>
             <div className="content">{price}원</div>
           </DescriptionRow>
+
           <DescriptionRow>
             <div className="label">양조장 주소</div>
             <div className="content">{manufactureAddress}도</div>

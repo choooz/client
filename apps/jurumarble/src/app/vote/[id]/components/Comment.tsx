@@ -170,7 +170,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
                   {restaurant.restaurantName}
                 </RestaurantNameBox>
               </>
-            ) : userInfo?.userId === userId ? (
+            ) : userInfo?.userId === userId && voteType !== "drinks" ? (
               <AddRestaurants>
                 <Button
                   variant="outline"
