@@ -141,37 +141,40 @@ function Detail() {
           drinkBId={data.drinkBId}
         />
         {!!select.choice && (
-          <VoteAnalyzeBar
-            totalCountA={totalCountA}
-            totalCountB={totalCountB}
-            percentageA={percentageA}
-            percentageB={percentageB}
-          />
+          <>
+            <VoteAnalyzeBar
+              totalCountA={totalCountA}
+              totalCountB={totalCountB}
+              percentageA={percentageA}
+              percentageB={percentageB}
+            />
+            <div>
+              <FilterBox>
+                <VoteSmallSelectFilter
+                  defaultOption={filter.gender}
+                  onChangeSortOption={(id) => onChangeFilter("gender", id)}
+                  options={VOTE_GENDER_FILTER_LIST}
+                />
+                <VoteSmallSelectFilter
+                  defaultOption={filter.age}
+                  onChangeSortOption={(id) => onChangeFilter("age", id)}
+                  options={VOTE_AGE_FILTER_LIST}
+                />
+                <VoteSmallSelectFilter
+                  defaultOption={filter.mbti}
+                  onChangeSortOption={(id) => onChangeFilter("mbti", id)}
+                  options={VOTE_MBTI_LIST}
+                />
+                <VoteSmallSelectFilter
+                  defaultOption={filter.alcohol}
+                  onChangeSortOption={(id) => onChangeFilter("alcohol", id)}
+                  options={VOTE_ALCOHOL_FILTER_LIST}
+                />
+              </FilterBox>
+            </div>
+          </>
         )}
-        <div>
-          <FilterBox>
-            <VoteSmallSelectFilter
-              defaultOption={filter.gender}
-              onChangeSortOption={(id) => onChangeFilter("gender", id)}
-              options={VOTE_GENDER_FILTER_LIST}
-            />
-            <VoteSmallSelectFilter
-              defaultOption={filter.age}
-              onChangeSortOption={(id) => onChangeFilter("age", id)}
-              options={VOTE_AGE_FILTER_LIST}
-            />
-            <VoteSmallSelectFilter
-              defaultOption={filter.mbti}
-              onChangeSortOption={(id) => onChangeFilter("mbti", id)}
-              options={VOTE_MBTI_LIST}
-            />
-            <VoteSmallSelectFilter
-              defaultOption={filter.alcohol}
-              onChangeSortOption={(id) => onChangeFilter("alcohol", id)}
-              options={VOTE_ALCOHOL_FILTER_LIST}
-            />
-          </FilterBox>
-        </div>
+
         <CommentContainer postId={Number(postId)} />
       </PageInner>
       <BottomBar />
