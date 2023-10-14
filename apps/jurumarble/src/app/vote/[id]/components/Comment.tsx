@@ -156,15 +156,17 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
             <Contents>{content}</Contents>
             {restaurant ? (
               <>
-                <RestaurantImage>
-                  <Image
-                    src={restaurant.restaurantImage}
-                    alt="음식 이미지"
-                    fill
-                    style={{ borderRadius: "4px" }}
-                    objectFit="cover"
-                  />
-                </RestaurantImage>
+                {restaurant.restaurantImage !== "nonSelect" && (
+                  <RestaurantImage>
+                    <Image
+                      src={restaurant.restaurantImage}
+                      alt="음식 이미지"
+                      fill
+                      style={{ borderRadius: "4px" }}
+                      objectFit="cover"
+                    />
+                  </RestaurantImage>
+                )}
                 <RestaurantNameBox>
                   <SvgIcMapPin width={12} height={12} />
                   {restaurant.restaurantName}
