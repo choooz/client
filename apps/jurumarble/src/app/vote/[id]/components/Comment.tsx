@@ -2,6 +2,7 @@ import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
 import NonWriterBox from "app/vote/components/NonWriterBox";
 import { Button } from "components/button";
+import { convertAge, convertGender } from "lib/utils/formatUserInfo";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
 import React, { useEffect, useState } from "react";
@@ -12,6 +13,7 @@ import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled, { css } from "styled-components";
 import useCommentDeleteService from "../services/useCommentDeleteService";
 import useCommentReportService from "../services/useCommentReportService";
+import AlcholLevelTag from "./AlcholLevelTag";
 import CommentDeleteModal from "./CommentDeleteModal";
 import CommentForm from "./CommentForm";
 import CommentPutForm from "./CommentPutForm";
@@ -31,6 +33,7 @@ interface Props {
     mbti: string;
     nickName: string;
     userId: number;
+    alcoholLimitType: string;
     restaurant: {
       restaurantName: string;
       restaurantImage: string;
@@ -55,6 +58,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
     nickName,
     userId,
     restaurant,
+    alcoholLimitType,
   } = comment;
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
@@ -96,19 +100,22 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
       <ContentsBox>
         {(age || gender || mbti) && (
           <FlexBetween>
-            <TagBox>
-              {gender && gender}
-              {age && (
-                <>
-                  <DivideTag /> {age}대
-                </>
-              )}
-              {mbti && (
-                <>
-                  <DivideTag /> {mbti}
-                </>
-              )}
-            </TagBox>
+            <div className="flex">
+              <TagBox isMine={userInfo?.userId === userId}>
+                {gender && convertGender(gender)}
+                {age && (
+                  <>
+                    <DivideTag /> {convertAge(age)}
+                  </>
+                )}
+                {mbti && (
+                  <>
+                    <DivideTag /> {mbti}
+                  </>
+                )}
+              </TagBox>
+              <AlcholLevelTag alchol={alcoholLimitType} />
+            </div>
             {userInfo?.userId === userId ? (
               <button onClick={onToggleMenu} ref={targetEl}>
                 <SvgIcMenu width={20} height={20} />
@@ -228,6 +235,12 @@ const FlexBetween = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 6px;
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+  }
 `;
 
 const ContentsBox = styled.div`
@@ -265,14 +278,14 @@ const RestaurantNameBox = styled.div`
   `}
 `;
 
-const TagBox = styled.div`
+const TagBox = styled.div<{ isMine: boolean }>`
   display: flex;
   align-items: center;
   width: auto;
   border-radius: 4px;
   padding: 6px 8px;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.sub_02};
+  ${({ theme, isMine }) => css`
+    background-color: ${isMine ? theme.colors.sub_01 : theme.colors.sub_02};
     color: ${theme.colors.white};
     ${theme.typography.caption_chip}
   `};

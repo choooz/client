@@ -74,6 +74,7 @@ function DrinkCommentContainer() {
                 nickName,
                 userId,
                 restaurant,
+                alcoholLimitType,
               },
               index,
             ) => (
@@ -92,6 +93,7 @@ function DrinkCommentContainer() {
                   nickName,
                   userId: userId,
                   restaurant,
+                  alcoholLimitType,
                 }}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
