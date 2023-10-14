@@ -1,14 +1,16 @@
 import React, { useCallback, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { uploadImageAPI } from "lib/apis/common";
 import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
 import { PostVoteType } from "src/types/vote";
 import Path from "lib/Path";
 import { DrinkInfoType } from "src/types/drink";
+import { queryKeys } from "lib/queryKeys";
 
 export default function usePostVoteService() {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const [postVoteInfo, setPostVoteInfo] = useState<PostVoteType>({
     title: "",
@@ -113,6 +115,7 @@ export default function usePostVoteService() {
     (voteInfo: Omit<PostVoteType, "drinkAId" | "drinkBId">) => postNormalVoteAPI(voteInfo),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
         router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
       },
     },
@@ -122,6 +125,7 @@ export default function usePostVoteService() {
       postDrinkVoteAPI(voteInfo),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
         router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
       },
     },

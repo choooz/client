@@ -32,7 +32,9 @@ export default function useBookmarkService(voteId: PostBookmarkProps) {
     },
     onSuccess: () => {
       const previousData = queryClient.getQueryData(getBookmarkQueryKey(voteId)) as any;
-      toast(previousData[0].bookmarked ? "북마크에서 삭제되었어요" : "북마크에 추가되었어요");
+      toast(previousData[0].bookmarked ? "북마크에서 삭제되었어요" : "북마크에 추가되었어요", {
+        toastId: "bookmark",
+      });
     },
     onError(err, drinkId, context) {
       queryClient.setQueryData(getBookmarkQueryKey(voteId), context?.previousData);

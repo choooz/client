@@ -202,7 +202,9 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
         <NonWriterBox
           onCopy={() => {
             navigator.clipboard.writeText(content);
-            toast("복사되었어요!");
+            toast("복사되었어요!", {
+              toastId: "copy",
+            });
             onToggleNonWriterMenu();
           }}
           onReport={() => {
