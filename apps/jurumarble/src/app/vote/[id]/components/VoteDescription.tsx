@@ -74,9 +74,15 @@ function VoteDescription({
     onMutateVoting(chooz);
   };
 
+  const onRouteDrinkInfo = () => {
+    if (voteType !== "DRINK") return;
+    if (select === "A") router.push(`${Path.DRINK_INFO_PAGE}/${drinkAId}`);
+    if (select === "B") router.push(`${Path.DRINK_INFO_PAGE}/${drinkBId}`);
+  };
+
   return (
     <Container>
-      <ImageWrapper>
+      <ImageWrapper onClick={onRouteDrinkInfo}>
         <LeftVote selected={activeValue("left")} onClick={() => onClickVote("A")}>
           <VoteImageWrapper>
             <Image
@@ -94,12 +100,7 @@ function VoteDescription({
               <OverLayTitle>{titleA}</OverLayTitle>
               <OverlayPercent>{percentageA}%</OverlayPercent>
               <OverlayCount> {totalCountA}명</OverlayCount>
-              {voteType === "DRINK" && (
-                <OverlayButton onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkAId}`)}>
-                  {" "}
-                  술정보 보기 &nbsp; {">"}
-                </OverlayButton>
-              )}
+              {voteType === "DRINK" && <OverlayButton>술정보 보기 &nbsp; {">"}</OverlayButton>}
             </div>
             <AorBMark AorB="A">A</AorBMark>
           </VoteImageWrapper>
@@ -122,11 +123,7 @@ function VoteDescription({
               <OverLayTitle>{titleB}</OverLayTitle>
               <OverlayPercent>{percentageB}%</OverlayPercent>
               <OverlayCount> {totalCountB}명</OverlayCount>
-              {voteType === "DRINK" && (
-                <OverlayButton onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkBId}`)}>
-                  술정보 보기 &nbsp; {">"}
-                </OverlayButton>
-              )}
+              {voteType === "DRINK" && <OverlayButton>술정보 보기&nbsp; {">"}</OverlayButton>}
             </div>
             <AorBMark AorB="B">B</AorBMark>
           </VoteImageWrapper>
@@ -205,9 +202,11 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     position: absolute;
     top: 0;
     left: 0;
-    visibility: hidden;
+    /* visibility: hidden; */
     height: 100%;
-    display: flex;
+    width: 100%;
+    display: none;
+    z-index: 100000;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
@@ -221,7 +220,7 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
       selected === "active" &&
       css`
         width: 100%;
-        visibility: visible;
+        display: flex;
       `};
   }
   ${({ selected }) => typeGuardVariantStyle(selected)}
@@ -249,7 +248,8 @@ const OverlayCount = styled.div`
   ${({ theme }) => theme.typography.body03}
 `;
 
-const OverlayButton = styled.div`
+const OverlayButton = styled.button`
+  position: relative;
   ${({ theme }) =>
     css`
       ${theme.typography.caption_chip}
@@ -259,6 +259,7 @@ const OverlayButton = styled.div`
   border-radius: 4px;
   margin-top: 8px;
   padding: 6px 8px;
+  z-index: 100;
 `;
 
 const VoteImageWrapper = styled.div`
