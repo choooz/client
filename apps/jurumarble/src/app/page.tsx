@@ -15,12 +15,6 @@ import SearchInputWrapper from "./main/components/SearchInputWrapper";
 function MainPage() {
   return (
     <>
-      <Script src="https://developers.kakao.com/sdk/js/kakao.js" async />
-      <Script
-        type="text/javascript"
-        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_API_KEY}&libraries=services&autoload=false`}
-      ></Script>
-
       <Header />
 
       <TopSection>
