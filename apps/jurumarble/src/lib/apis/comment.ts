@@ -30,6 +30,7 @@ export interface CommentResponse {
   likeCount: number;
   hateCount: number;
   choice: AorB;
+  alcoholLimitType: string;
   restaurant: {
     restaurantName: string;
     restaurantImage: string;

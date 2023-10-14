@@ -19,6 +19,7 @@ import Loading from "components/Loading";
 import Image from "next/image";
 import { ImgScroll } from "public/images";
 import { useRef } from "react";
+import useFilteredStatisticsService from "./[id]/services/useFilterStatisticsService";
 
 export type Drag = "up" | "down" | null;
 
@@ -69,8 +70,18 @@ function VoteHomePage() {
     moreRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  if (isLoading) return <Loading />;
-  if (isError) return <PageInner drag={drag}>에러</PageInner>;
+  const { voteStatisticsQuery } = useFilteredStatisticsService(Number(voteId), "", "", "");
+
+  const {
+    data: statistics,
+    isLoading: isStatisticsLoading,
+    isError: isStatisticsError,
+  } = voteStatisticsQuery;
+
+  if (isLoading || isStatisticsLoading) return <Loading />;
+  if (isError || isStatisticsError) return <PageInner drag={drag}>에러</PageInner>;
+
+  const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
 
   return (
     <>
@@ -117,12 +128,12 @@ function VoteHomePage() {
               voteType={voteType}
               imageA={imageA}
               imageB={imageB}
-              percentageA={50}
-              percentageB={50}
+              percentageA={percentageA}
+              percentageB={percentageB}
               titleA={titleA}
               titleB={titleB}
-              totalCountA={100}
-              totalCountB={100}
+              totalCountA={totalCountA}
+              totalCountB={totalCountB}
               select={select.choice}
               onMutateVoting={onMutateVoting}
               drinkAId={1}
