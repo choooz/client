@@ -2,6 +2,7 @@ import AorBMark from "components/AorBMark";
 import { postExecuteVote } from "lib/apis/vote";
 import Path from "lib/Path";
 import { media } from "lib/styles";
+import depths from "lib/styles/depths";
 import Image, { StaticImageData } from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { ExImg1 } from "public/images";
@@ -206,7 +207,7 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     height: 100%;
     width: 100%;
     display: none;
-    z-index: 100000;
+    z-index: ${depths.overlay};
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
