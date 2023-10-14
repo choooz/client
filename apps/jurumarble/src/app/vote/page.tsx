@@ -2,7 +2,6 @@
 
 import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
-import Header from "components/Header";
 import { media } from "lib/styles";
 import { useRouter, useSearchParams } from "next/navigation";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
@@ -92,7 +91,6 @@ function VoteHomePage() {
         <ScrollImage onClick={onScrollBottom}>
           <Image src={ImgScroll} alt="스크롤" width={60} height={64} />
         </ScrollImage>
-        <Header />
         <AskVoteBox>
           <AskVoteText>
             여행에서 즐길 우리술은

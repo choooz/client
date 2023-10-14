@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "components/Header";
 import styled, { css } from "styled-components";
 import VoteWriterBox from "./components/VoteWriterBox";
 import { ExImg1 } from "public/images";
@@ -29,6 +28,7 @@ import VoteSmallSelectFilter from "./components/VoteSmallSelectFilter";
 
 function Detail() {
   const params = useParams();
+
   const [filter, setFilter] = useState({
     age: "",
     mbti: "",
@@ -103,7 +103,6 @@ function Detail() {
   } = originalStatistics;
   return (
     <Container>
-      <Header />
       <VoteWriterBox
         writer={{
           nickName: postedUserNickname,
