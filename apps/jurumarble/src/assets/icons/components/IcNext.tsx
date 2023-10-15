@@ -1,5 +1,5 @@
 import type { SVGProps } from "react";
-const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
+const SvgNext = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="1em"
     height="1em"
@@ -10,7 +10,7 @@ const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
   >
     <g id="arrow_back_ios">
       <mask
-        id="mask0_1910_10702"
+        id="mask0_1892_10608"
         style={{
           maskType: "alpha",
         }}
@@ -22,16 +22,19 @@ const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
       >
         <rect
           id="Bounding box"
+          x={20}
+          y={20}
           width={20}
           height={20}
+          transform="rotate(180 20 20)"
           fill="currentColor"
           vectorEffect="non-scaling-stroke"
         />
       </mask>
-      <g mask="url(#mask0_1910_10702)">
+      <g mask="url(#mask0_1892_10608)">
         <path
           id="arrow_back_ios_2"
-          d="M12.2671 17.7115L4.55554 9.99997L12.2671 2.28845L13.3872 3.40862L6.7959 9.99997L13.3872 16.5913L12.2671 17.7115Z"
+          d="M7.73294 2.28851L15.4445 10L7.73294 17.7115L6.61277 16.5914L13.2041 10L6.61277 3.40867L7.73294 2.28851Z"
           fill="currentColor"
           vectorEffect="non-scaling-stroke"
         />
@@ -39,4 +42,4 @@ const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
     </g>
   </svg>
 );
-export default SvgPrevious;
+export default SvgNext;
