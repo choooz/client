@@ -34,6 +34,7 @@ interface Props {
     nickName: string;
     userId: number;
     alcoholLimitType: string;
+    imageUrl: string;
     restaurant: {
       restaurantName: string;
       restaurantImage: string;
@@ -59,6 +60,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
     userId,
     restaurant,
     alcoholLimitType,
+    imageUrl,
   } = comment;
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
@@ -88,7 +90,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
   return (
     <Container>
       <Image
-        src={ExImg1}
+        src={imageUrl ? imageUrl : ExImg1}
         alt="댓글 프로필"
         width={40}
         height={40}
