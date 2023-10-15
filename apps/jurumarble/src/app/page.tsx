@@ -1,9 +1,8 @@
 "use client";
 
 import BottomBar from "components/BottomBar";
-import DivideLine from "components/DivideLine";
 import Header from "components/Header";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Banner from "./main/components/Banner";
 import HotDrinkContainer from "./main/components/HotDrinkContainer";
 import HotDrinkVoteContainer from "./main/components/HotDrinkVoteContainer";
@@ -37,6 +36,14 @@ const BottomSection = styled.section`
   padding: 0 20px 96px; // 64(BottomBar height) + 32(margin) = 96
   margin-top: 8px;
   overflow: auto;
+`;
+
+const DivideLine = styled.div`
+  ${({ theme }) => css`
+    background-color: ${theme.colors.bg_01};
+    height: 8px;
+    margin: 40px 0 8px 0;
+  `}
 `;
 
 export default MainPage;
