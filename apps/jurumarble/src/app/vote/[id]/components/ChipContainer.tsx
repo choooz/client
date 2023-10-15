@@ -57,19 +57,23 @@ const ChipContainer = ({
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
-            <SvgIcBookmarkActive width={26} height={26} onClick={() => mutateBookMark()} />
+            <SVGWrapper>
+              <SvgIcBookmarkActive width={26} height={26} onClick={() => mutateBookMark()} />
+            </SVGWrapper>
           ) : (
-            <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+            <SVGWrapper>
+              <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+            </SVGWrapper>
           )}
 
           {userInfo?.userId === postedUserId ? (
-            <div onClick={onToggleMenu} ref={targetEl}>
+            <SVGWrapper onClick={onToggleMenu} ref={targetEl}>
               <SvgIcMenu width={20} height={20} />
-            </div>
+            </SVGWrapper>
           ) : (
-            <div onClick={onToggleNonWriterMenu} ref={targetEl2}>
+            <SVGWrapper onClick={onToggleNonWriterMenu} ref={targetEl2}>
               <SvgIcMenu width={20} height={20} />
-            </div>
+            </SVGWrapper>
           )}
           {/* 
           <div
@@ -155,4 +159,11 @@ const Description = styled.div`
   color: ${({ theme }) => theme.colors.black_02};
 `;
 
+const SVGWrapper = styled.div`
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export default ChipContainer;
