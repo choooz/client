@@ -16,11 +16,7 @@ interface Props {
 function DrinkVoteItem({ voteDrink }: Props) {
   const { voteId, region, title, imageA, imageB } = voteDrink;
 
-  const { mutateBookMark, bookMarkCheckQuery } = useBookmarkService(voteId);
-
-  const { data: bookmarkCheck } = bookMarkCheckQuery;
-
-  const isBookmark = bookmarkCheck?.bookmarked || false;
+  const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const router = useRouter();
   const onClickDrinkVoteItem = () => {

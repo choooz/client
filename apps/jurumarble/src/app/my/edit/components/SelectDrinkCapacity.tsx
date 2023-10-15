@@ -118,7 +118,6 @@ const Label = styled.p`
   margin-bottom: 4px;
   ${({ theme }) => theme.typography.body04};
   color: ${({ theme }) => theme.colors.black_02};
-  font-weight: bold;
 `;
 
 const Description = styled.p`

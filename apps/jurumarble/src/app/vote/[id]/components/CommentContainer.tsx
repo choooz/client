@@ -3,10 +3,8 @@ import { queryKeys } from "lib/queryKeys";
 import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
-
 // import useCommentFilter from "../hooks/useCommentFilter";
 import useCommentServices from "../services/useCommentServices";
-
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import CommentToolBar from "./CommentToolbar";
@@ -74,15 +72,19 @@ function CommentContainer({ postId }: Props) {
                 createdDate,
                 gender,
                 hateCount,
-                imageUrlstring,
                 likeCount,
                 mbti,
                 nickName,
                 userId,
+                restaurant,
+                alcoholLimitType,
+                imageUrl,
               },
               index,
             ) => (
               <Comment
+                postId={Number(postId)}
+                voteType="votes"
                 comment={{
                   id,
                   content,
@@ -90,13 +92,14 @@ function CommentContainer({ postId }: Props) {
                   createdDate,
                   gender,
                   hateCount,
-                  imageUrlstring,
                   likeCount,
                   mbti,
                   nickName,
                   userId: userId,
+                  restaurant,
+                  alcoholLimitType,
+                  imageUrl,
                 }}
-                mutateDeleteComment={() => void 0}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}

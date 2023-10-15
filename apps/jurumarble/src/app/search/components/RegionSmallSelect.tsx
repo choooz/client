@@ -9,8 +9,6 @@ interface Props {
   onChangeSortOption: (id: string) => void;
 }
 
-REGION_LIST.unshift({ value: "", label: "지역" });
-
 function RegionSmallSelect({ defaultOption, onChangeSortOption }: Props) {
   const [isOpen, onToggleOpen] = useToggle();
 
@@ -19,7 +17,7 @@ function RegionSmallSelect({ defaultOption, onChangeSortOption }: Props) {
       <Select
         defaultValue={defaultOption}
         onChangeSelectedOption={onChangeSortOption}
-        options={REGION_LIST}
+        options={[{ value: "", label: "지역", lat: 0, long: 0 }, ...REGION_LIST]}
         isOpen={isOpen}
         onToggleOpen={onToggleOpen}
       >
@@ -39,14 +37,13 @@ const SelectStyled = styled.span<{ isOpen: boolean }>`
       border: 1px solid ${theme.colors.line_01};
       border-radius: 8px;
       padding: 10px 12px;
-      width: 96px;
     }
     svg {
       ${isOpen && "transform: rotateX( 180deg )"}
     }
   `}
   #select-list {
-    width: 100px;
+    width: 85px;
     height: 200px;
     overflow: auto;
     display: flex;

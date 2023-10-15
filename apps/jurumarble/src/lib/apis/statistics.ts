@@ -14,6 +14,7 @@ export const getFilterStatisticsById = async (
   gender?: string,
   mbti?: string,
   age?: string,
+  alcoholLimit?: string,
 ) => {
   const response = await baseApi.get<GetVoteStatisticsResponse>(
     `api/votes/${voteId}/select-statistics`,
@@ -22,6 +23,7 @@ export const getFilterStatisticsById = async (
         gender,
         mbti,
         age,
+        alcoholLimit,
       },
     },
   );

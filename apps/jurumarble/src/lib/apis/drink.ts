@@ -1,3 +1,5 @@
+import axios from "axios";
+import { DATA_GO_API_KEY } from "lib/constants";
 import { DrinkInfoSortType } from "src/types/common";
 import { DrinkListResponse, DrinkMapResponse } from "src/types/drink";
 import { baseApi } from "./http/base";
@@ -81,5 +83,60 @@ export const getDrinksMap = async (params: GetDrinksMapRequest) => {
       ...params,
     },
   });
+  return response.data;
+};
+
+export interface GetDrinkInfoResponse {
+  drinkId: number;
+  name: string;
+  type: string;
+  manufacturer: string;
+  alcoholicBeverage: string;
+  rawMaterial: string;
+  capacity: string;
+  manufactureAddress: string;
+  image: string;
+  price: string;
+  enjoyCount: number;
+}
+
+export const getDrinkInfo = async (drinkId: number) => {
+  const response = await baseApi.get<GetDrinkInfoResponse>(`api/drinks/${drinkId}`);
+  return response.data;
+};
+
+interface GetDrinkRecommendationListRequest {
+  page: number;
+  perPage: number;
+  returnType?: "json" | "xml";
+}
+
+interface GetDrinkRecommendationListResponse {
+  currentCount: number;
+  data: Data[];
+  matchCount: number;
+  page: number;
+  perPage: number;
+  totalCount: number;
+}
+
+interface Data {
+  규격: string;
+  도수: string;
+  전통주명: string;
+  제조사: string;
+  주원료: string;
+}
+
+export const getDrinkRecommendationListAPI = async (params: GetDrinkRecommendationListRequest) => {
+  const response = await axios.get<GetDrinkRecommendationListResponse>(
+    "https://api.odcloud.kr/api/15048755/v1/uddi:fec53d3a-2bef-4494-b50e-f4e566f403e0",
+    {
+      params: {
+        ...params,
+        serviceKey: DATA_GO_API_KEY,
+      },
+    },
+  );
   return response.data;
 };

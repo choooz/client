@@ -3,20 +3,16 @@ import styled, { css } from "styled-components";
 
 interface Props {
   onModify?: () => void;
-  onShare?: () => void;
   onDelete?: () => void;
   top?: string;
   right?: string;
 }
 
-function ModifyDeleteButtonBox({ onModify, onShare, onDelete, top = "0", right = "0px" }: Props) {
+function ModifyDeleteButtonBox({ onModify, onDelete, top = "0", right = "0px" }: Props) {
   return (
     <Container top={top} right={right}>
       <MenuText className="modify" onClick={onModify}>
         수정하기
-      </MenuText>
-      <MenuText className="modify" onClick={onShare}>
-        공유하기
       </MenuText>
       <MenuText className="delete" onClick={onDelete}>
         삭제하기

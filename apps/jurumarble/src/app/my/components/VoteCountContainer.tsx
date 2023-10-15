@@ -2,6 +2,7 @@
 
 import { TabList, TAB_LIST } from "src/types/my";
 import styled, { css } from "styled-components";
+import useGetTheNumberOfMyVoteService from "../services/useGetCountedVoteService";
 
 interface Props {
   selectedTab: string;
@@ -9,6 +10,13 @@ interface Props {
 }
 
 function VoteCountContainer({ selectedTab, onClickSelectedTab }: Props) {
+  const theNumberOfMyVote = useGetTheNumberOfMyVoteService();
+  const { writtenVoteCnt, joinedVoteCnt, bookmarkedVoteCnt } = theNumberOfMyVote ?? {
+    writtenVoteCnt: 0,
+    joinedVoteCnt: 0,
+    bookmarkedVoteCnt: 0,
+  };
+
   return (
     <Container>
       {TAB_LIST.map(({ id, name }) => {
@@ -18,7 +26,15 @@ function VoteCountContainer({ selectedTab, onClickSelectedTab }: Props) {
             onClick={() => onClickSelectedTab(id)}
             isSelected={id === selectedTab}
           >
-            <VoteCount>0</VoteCount>
+            <VoteCount>
+              {id === "created-vote"
+                ? writtenVoteCnt
+                : id === "paticipated-vote"
+                ? joinedVoteCnt
+                : id === "bookmarked-vote"
+                ? bookmarkedVoteCnt
+                : 0}
+            </VoteCount>
             <VoteTypeText>{name}</VoteTypeText>
           </VoteTypeTab>
         );

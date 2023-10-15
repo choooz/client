@@ -10,9 +10,9 @@ import SelectedDrinkChip from "./SelectedDrinkChip";
 import DrinkItem from "app/vote/post/components/DrinkItem";
 import SearchInput from "components/SearchInput";
 import useInput from "hooks/useInput";
-import { DrinkInfoType } from "src/types/vote";
-import RegionSelect from "components/RegionSelect";
+import { DrinkInfoType } from "src/types/drink";
 import useGetDrinkList from "../services/useGetDrinkList";
+import RegionSelect from "./RegionSelect";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;

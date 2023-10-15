@@ -22,7 +22,7 @@ export interface CommentResponse {
   nickName: string;
   parentId: number;
   content: string;
-  imageUrlstring: string;
+  imageUrl: string;
   gender: string;
   age: string;
   mbti: string;
@@ -30,6 +30,7 @@ export interface CommentResponse {
   likeCount: number;
   hateCount: number;
   choice: AorB;
+  alcoholLimitType: string;
   restaurant: {
     restaurantName: string;
     restaurantImage: string;
@@ -90,5 +91,26 @@ export const postComment = async (
   body: PostCommentRequest,
 ) => {
   const response = await http.post(`/api/${commentType}/${voteId}/comments/create`, body);
+  return response.data;
+};
+
+export const deleteComment = async (
+  commentType: "votes" | "drinks",
+  typeId: number,
+  commentId: number,
+) => {
+  const response = await http.delete(`/api/${commentType}/${typeId}/comments/${commentId}`);
+  return response.data;
+};
+
+export const putComment = async (
+  commentType: "votes" | "drinks",
+  typeId: number,
+  commentId: number,
+  content: string,
+) => {
+  const response = await http.put(`/api/${commentType}/${typeId}/comments/${commentId}`, {
+    content,
+  });
   return response.data;
 };

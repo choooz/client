@@ -1,4 +1,5 @@
 import { Button } from "components/button";
+import { useSearchParams } from "next/navigation";
 import styled, { css } from "styled-components";
 import useVoteDrinkService from "../services/useVoteDrinkService";
 import DrinkVoteItem from "./DrinkVoteItem";
@@ -10,8 +11,11 @@ interface Props {
   isSelectedTab: boolean;
 }
 
-function DrinkVoteList({ searchText, sortOption, regionOption, isSelectedTab }: Props) {
-  const { voteDrinkList, fetchNextPage, hasNextPage } = useVoteDrinkService({
+function DrinkVoteList({ searchText, sortOption, regionOption }: Props) {
+  const searchParams = useSearchParams();
+  const selectedTab = searchParams.get("selectedTab");
+
+  const { voteDrinkList, subscribe } = useVoteDrinkService({
     page: 0,
     size: 3,
     keyword: searchText,
@@ -23,20 +27,12 @@ function DrinkVoteList({ searchText, sortOption, regionOption, isSelectedTab }: 
     return <></>;
   }
 
-  const onClickFetchNextPage = () => {
-    hasNextPage && fetchNextPage();
-  };
-
   return (
     <Container>
       {voteDrinkList.map((voteDrink, index) => (
         <DrinkVoteItem key={`drinkVoteItem_${index}`} voteDrink={voteDrink} />
       ))}
-      {!isSelectedTab && (
-        <MoreButton variant="outline" width="100%" height="48px" onClick={onClickFetchNextPage}>
-          우리술 투표 더보기
-        </MoreButton>
-      )}
+      {selectedTab === "drinkVote" && <div ref={subscribe}></div>}
     </Container>
   );
 }
@@ -46,13 +42,6 @@ const Container = styled.div`
   flex-direction: column;
   margin-top: 24px;
   gap: 8px;
-`;
-
-const MoreButton = styled(Button)`
-  ${({ theme }) => css`
-    ${theme.typography.body01}
-    margin: 24px 0 40px 0;
-  `};
 `;
 
 export default DrinkVoteList;

@@ -7,26 +7,19 @@ import { Button, Input } from "components/index";
 import VoteHeader from "components/VoteHeader";
 import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import TitleAndDescriptionSection from "./TitleAndDescriptionSection";
-import PostBottomSheet from "./PostBottomSheet";
 import DrinkSearchModal from "./DrinkSearchModal";
 import usePostVoteService from "../services/usePostVoteService";
-import { DrinkInfoType } from "src/types/vote";
+import { DrinkInfoType } from "src/types/drink";
 import AorBMark from "components/AorBMark";
-
-const STEP_ONE = 1;
-const STEP_TWO = 2;
+import { media } from "lib/styles";
+import { SvgIcX, SvgInfo } from "src/assets/icons/components";
 
 function PostVoteContainer() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
   const router = useRouter();
-
-  const [postStep, setPostStep] = useState<number>(STEP_ONE);
-  const onChangePostStep = () => {
-    setPostStep((prev) => prev + 1);
-  };
 
   const {
     onChangeVoteText,
@@ -43,10 +36,11 @@ function PostVoteContainer() {
   const onClickSearchDrinkComplete = (selectedDrinkList: DrinkInfoType[]) => {
     onToggleDrinkSearchModal();
     updatePostVoteInfo(selectedDrinkList);
-    onChangePostStep();
   };
 
   const { title, detail, titleA, titleB, imageA, imageB } = postVoteInfo;
+
+  const [isTooltip, onToggleTooltip] = useToggle(true);
 
   return (
     <Container>
@@ -59,8 +53,38 @@ function PostVoteContainer() {
       >
         등록하기
       </VoteHeader>
-      <GuideText>고민되는 술을 선택해주세요</GuideText>
-      <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
+      <FlexBetween>
+        <div>
+          <GuideText>
+            고민하고 계신 후보 2개와 <Br /> 후보 이미지를 등록해주세요.
+          </GuideText>
+          <SubText>
+            후보 이미지는 선택 사항이에요.
+            <button onClick={onToggleTooltip}>
+              <SvgInfo width={24} height={24} />
+            </button>
+          </SubText>
+          {isTooltip && (
+            <Ballon>
+              <BalloonText>
+                술 검색하기 버튼을 클릭하면 <br />
+                우리술을 편하게 등록할 수 있어요.
+                <button onClick={onToggleTooltip}>
+                  <SvgIcX width={16} height={16} />
+                </button>
+              </BalloonText>
+            </Ballon>
+          )}
+        </div>
+        <ButtonStyled
+          width="96px"
+          height="40px"
+          variant="primary"
+          onClick={onToggleDrinkSearchModal}
+        >
+          술 검색하기
+        </ButtonStyled>
+      </FlexBetween>
       <label htmlFor="file">
         <ImageSection>
           {!imageA && !imageB ? (
@@ -68,19 +92,15 @@ function PostVoteContainer() {
           ) : (
             <ImageContainer>
               <ImageWrapper>
-                {imageA ? (
-                  <Image
-                    src={imageA}
-                    alt="A이미지"
-                    fill
-                    style={{
-                      objectFit: "cover",
-                      borderRadius: "10px",
-                    }}
-                  />
-                ) : (
-                  <ImageBox />
-                )}
+                <Image
+                  src={imageA}
+                  alt="A이미지"
+                  fill
+                  style={{
+                    objectFit: "cover",
+                    borderRadius: "10px",
+                  }}
+                />
                 <AorBMark AorB="A">A</AorBMark>
               </ImageWrapper>
               <ImageWrapper>
@@ -95,7 +115,7 @@ function PostVoteContainer() {
                     }}
                   />
                 ) : (
-                  <ImageBox />
+                  <ImageUploadButton width="100%" height="100%" />
                 )}
                 <AorBMark AorB="B">B</AorBMark>
               </ImageWrapper>
@@ -108,7 +128,7 @@ function PostVoteContainer() {
         <InputBox>
           <ABInput
             width="100%"
-            placeholder="선택지 A 입력"
+            placeholder="후보 A 입력"
             name="titleA"
             maxLength={22}
             value={titleA}
@@ -119,7 +139,7 @@ function PostVoteContainer() {
         <InputBox>
           <ABInput
             width="100%"
-            placeholder="선택지 B 입력"
+            placeholder="후보 B 입력"
             name="titleB"
             maxLength={22}
             value={titleB}
@@ -128,19 +148,13 @@ function PostVoteContainer() {
           />
         </InputBox>
       </VoteOptionText>
-      {postStep === STEP_TWO && (
+      {postVoteInfo.titleA && postVoteInfo.titleB && (
         <TitleAndDescriptionSection
           title={title}
           detail={detail}
           onChangeVoteText={onChangeVoteText}
           isCompleted={isCompleted}
           onClickPostVoteComplete={onClickPostVoteComplete}
-        />
-      )}
-      {postStep === STEP_ONE && (
-        <PostBottomSheet
-          onToggleDrinkSearchModal={onToggleDrinkSearchModal}
-          onChangePostStep={onChangePostStep}
         />
       )}
       {isDrinkSearchModal && (
@@ -163,13 +177,25 @@ const PreviousButton = styled(Button)`
   `}
 `;
 
+const FlexBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+`;
+
 const GuideText = styled.div`
   ${({ theme }) =>
     css`
       ${theme.typography.body01}
       color: ${theme.colors.black_02};
-      margin-top: 24px;
     `}
+`;
+
+const Br = styled.br`
+  ${media.medium} {
+    display: none;
+  }
 `;
 
 const SubText = styled.div`
@@ -177,7 +203,17 @@ const SubText = styled.div`
     css`
       ${theme.typography.body03}
       color: ${theme.colors.black_03};
-      margin-top: 8px;
+      margin-top: 11px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    `}
+`;
+
+const ButtonStyled = styled(Button)`
+  ${({ theme }) =>
+    css`
+      ${theme.typography.button01}
     `}
 `;
 
@@ -205,14 +241,6 @@ const ImageWrapper = styled.div`
   `}
 `;
 
-const ImageBox = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.black_05};
-    border-radius: 10px;
-    height: 100%;
-  `}
-`;
-
 const VoteOptionText = styled.div`
   margin-top: 12px;
   display: flex;
@@ -237,6 +265,39 @@ const InputBox = styled.div`
   display: flex;
   gap: 12px;
   flex: 0.5;
+`;
+
+const Ballon = styled.div`
+  position: relative;
+`;
+
+const BalloonText = styled.div`
+  ${({ theme }) => css`
+    ${theme.typography.body_long03}
+    color: ${theme.colors.white};
+    background-color: ${theme.colors.system_black};
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 4px;
+    position: absolute;
+    width: 272px;
+    margin-top: 6px;
+    left: 48px;
+
+    ::after {
+      content: "";
+      position: absolute;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid ${theme.colors.system_black};
+      border-right: 6px solid transparent;
+      border-left: 6px solid transparent;
+      bottom: 100%;
+      left: 49%;
+    }
+  `}
 `;
 
 export default PostVoteContainer;

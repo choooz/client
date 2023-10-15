@@ -11,7 +11,7 @@ interface Props {
     | {
         id: number;
         name: string;
-        productName: string;
+        manufacturer: string;
         image: string;
       };
   onClickReplaceDrinkInfo: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Props) {
-  const { id, name, productName, image } = drinkInfo;
+  const { id, name, manufacturer, image } = drinkInfo;
 
   const { colors } = useTheme();
 
@@ -34,7 +34,7 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
       selected={selectedDrinkList?.includes(name)}
     >
       <ImageWrapper>
-        <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
+        <Image alt={name} src={image} width={88} height={88} style={{ borderRadius: "10px" }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
@@ -48,7 +48,7 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
             <SvgStamp width={24} height={24} fill={stampColor} />
           </StampWrapper>
         </NameStampContainer>
-        <ManufacturerName>{productName}</ManufacturerName>
+        <ManufacturerName>{manufacturer}</ManufacturerName>
       </InfoContainer>
     </Container>
   );
@@ -89,7 +89,7 @@ const NameStampContainer = styled.div`
   justify-content: space-between;
 `;
 
-const StampWrapper = styled.button`
+const StampWrapper = styled.div`
   margin-right: 1px;
 `;
 

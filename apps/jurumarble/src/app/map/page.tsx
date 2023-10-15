@@ -2,10 +2,10 @@
 
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
-import React from "react";
-import MapContainer from "./components/MapContainer";
 import { KAKAO_MAP_API_KEY } from "lib/constants";
 import Script from "next/script";
+import React from "react";
+import MapContainer from "./components/MapContainer";
 
 declare global {
   interface Window {

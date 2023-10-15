@@ -5,7 +5,7 @@ import { queryKeys } from "lib/queryKeys";
 const getQueryKey = () => [queryKeys.HOT_DRINK_VOTE];
 
 export default function useGetHotDrinkVoteService() {
-  const { data } = useQuery(getQueryKey(), getHotDrinkVote);
+  const { data: hotDrinkVote } = useQuery(getQueryKey(), getHotDrinkVote);
 
-  return { data };
+  return { hotDrinkVote };
 }

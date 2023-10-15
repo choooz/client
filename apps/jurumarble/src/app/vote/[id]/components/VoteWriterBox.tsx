@@ -1,6 +1,8 @@
+import { convertAge } from "lib/utils/formatUserInfo";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 import styled, { css } from "styled-components";
+import AlcholLevelTag from "./AlcholLevelTag";
 
 interface Props {
   writer: {
@@ -30,10 +32,10 @@ function VoteWriterBox({ writer }: Props) {
         {(userAge || userGender || userAge || alchol || userMbti) && (
           <Flex>
             <TagBox>
-              {userGender && userGender}
+              {userGender === "MALE" ? "남" : "여"}
               {userAge && (
                 <>
-                  <DivideTag /> {userAge}대
+                  <DivideTag /> {convertAge(userAge)}
                 </>
               )}
               {userMbti && (
@@ -41,12 +43,14 @@ function VoteWriterBox({ writer }: Props) {
                   <DivideTag /> {userMbti}
                 </>
               )}
+            </TagBox>
+            <div>
               {alchol && (
                 <>
-                  <DivideTag /> {alchol}
+                  <AlcholLevelTag alchol={alchol} />
                 </>
               )}
-            </TagBox>
+            </div>
           </Flex>
         )}
         <NickName> {nickName}</NickName>
@@ -97,7 +101,7 @@ const TagBox = styled.div`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
     color: ${theme.colors.black_04};
-    ${theme.typography.caption}
+    ${theme.typography.caption_chip}
   `}
 `;
 

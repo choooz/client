@@ -24,27 +24,9 @@ export const NAVER_LOGIN_REDIRECT_URL =
     ? `http://localhost:3000${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
-export const REGION_LIST = [
-  { value: "SEOUL", label: "서울" },
-  { value: "INCHEON", label: "인천" },
-  { value: "DAEJEON", label: "대전" },
-  { value: "DAEGU", label: "대구" },
-  { value: "GWANGJU", label: "광주" },
-  { value: "BUSAN", label: "부산" },
-  { value: "ULSAN", label: "울산" },
-  { value: "SEJONG", label: "세종" },
-  { value: "GYEONGGI", label: "경기도" },
-  { value: "GANGWON", label: "강원도" },
-  { value: "CHUNGBUK", label: "충청북도" },
-  { value: "CHUNGNAM", label: "충청남도" },
-  { value: "GYEONGBUK", label: "경상북도" },
-  { value: "GYEONGNAM", label: "경상남도" },
-  { value: "JEONBUK", label: "전라북도" },
-  { value: "JEONNAM", label: "전라남도" },
-  { value: "JEJU", label: "제주" },
-];
+export const DATA_GO_API_KEY = process.env.NEXT_PUBLIC_DATA_GO_API_KEY || "";
 
-export const REGION_LIST_BOUNDS = [
+export const REGION_LIST = [
   { value: "SEOUL", label: "서울", lat: 37.53391, long: 126.9775 },
   { value: "INCHEON", label: "인천", lat: 37.45323333333334, long: 126.70735277777779 },
   { value: "DAEJEON", label: "대전", lat: 36.347119444444445, long: 127.38656666666667 },
@@ -53,14 +35,14 @@ export const REGION_LIST_BOUNDS = [
   { value: "BUSAN", label: "부산", lat: 35.17701944444444, long: 129.07695277777776 },
   { value: "ULSAN", label: "울산", lat: 35.53540833333333, long: 129.3136888888889 },
   { value: "SEJONG", label: "세종", lat: 36.4800121, long: 127.289069 },
-  { value: "GYEONGGI", label: "경기도", lat: 37.39067, long: 126.7888 },
-  { value: "GANGWON", label: "강원도", lat: 38.642618, long: 127.170231 },
-  { value: "CHUNGBUK", label: "충청북도", lat: 36.6325, long: 127.49358611111111 },
-  { value: "CHUNGNAM", label: "충청남도", lat: 36.32387222222223, long: 127.42295555555556 },
-  { value: "GYEONGBUK", label: "경상북도", lat: 36.491286, long: 128.889433 },
-  { value: "GYEONGNAM", label: "경상남도", lat: 35.459369, long: 128.214826 },
-  { value: "JEONBUK", label: "전라북도", lat: 35.81727, long: 127.11105277777777 },
-  { value: "JEONNAM", label: "전라남도", lat: 34.813044444444444, long: 126.465 },
+  { value: "GYEONGGI", label: "경기", lat: 37.39067, long: 126.7888 },
+  { value: "GANGWON", label: "강원", lat: 38.642618, long: 127.170231 },
+  { value: "CHUNGBUK", label: "충북", lat: 36.6325, long: 127.49358611111111 },
+  { value: "CHUNGNAM", label: "충남", lat: 36.32387222222223, long: 127.42295555555556 },
+  { value: "GYEONGBUK", label: "경북", lat: 36.491286, long: 128.889433 },
+  { value: "GYEONGNAM", label: "경남", lat: 35.459369, long: 128.214826 },
+  { value: "JEONBUK", label: "전북", lat: 35.81727, long: 127.11105277777777 },
+  { value: "JEONNAM", label: "전남", lat: 34.813044444444444, long: 126.465 },
   { value: "JEJU", label: "제주", lat: 33.48569444444445, long: 126.50033333333333 },
 ];
 
@@ -72,6 +54,28 @@ export const DRINK_VOTE_SORT_LIST = [
 export const DRINK_INFO_SORT_LIST = [
   { value: "ByName", label: "이름순" },
   { value: "ByPopularity", label: "인기순" },
+];
+
+export const VOTE_GENDER_FILTER_LIST = [
+  { value: "", label: "성별" },
+  { value: "MALE", label: "남성" },
+  { value: "FEMALE", label: "여성" },
+];
+
+export const VOTE_AGE_FILTER_LIST = [
+  { value: "", label: "나이" },
+  { value: "teenager", label: "10대" },
+  { value: "twenties", label: "20대" },
+  { value: "thirties", label: "30대" },
+  { value: "fourties", label: "40대" },
+  { value: "fifties", label: "50대" },
+];
+
+export const VOTE_ALCOHOL_FILTER_LIST = [
+  { value: "", label: "술레벨" },
+  { value: "LOW", label: "Lv.1" },
+  { value: "MEDIUM", label: "Lv.2" },
+  { value: "HIGH", label: "Lv.3" },
 ];
 
 /**
@@ -140,4 +144,24 @@ export const MBTI_LIST = [
   { id: "ISFP", label: "ISFP" },
   { id: "INFP", label: "INFP" },
   { id: "INTP", label: "INTP" },
+];
+
+export const VOTE_MBTI_LIST = [
+  { value: "", label: "MBTI" },
+  { value: "ESTP", label: "ESTP" },
+  { value: "ESFP", label: "ESFP" },
+  { value: "ENFP", label: "ENFP" },
+  { value: "ENTP", label: "ENTP" },
+  { value: "ESTJ", label: "ESTJ" },
+  { value: "ESFJ", label: "ESFJ" },
+  { value: "ENFJ", label: "ENFJ" },
+  { value: "ENTJ", label: "ENTJ" },
+  { value: "ISTJ", label: "ISTJ" },
+  { value: "ISFJ", label: "ISFJ" },
+  { value: "INFJ", label: "INFJ" },
+  { value: "INTJ", label: "INTJ" },
+  { value: "ISTP", label: "ISTP" },
+  { value: "ISFP", label: "ISFP" },
+  { value: "INFP", label: "INFP" },
+  { value: "INTP", label: "INTP" },
 ];

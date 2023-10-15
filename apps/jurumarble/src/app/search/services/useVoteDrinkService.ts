@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getVoteDrinkList } from "lib/apis/vote";
 import { queryKeys } from "lib/queryKeys";
+import { useInfiniteScroll } from "@monorepo/hooks";
 
 type SearchVoteDrinkServiceProps = Exclude<Parameters<typeof getVoteDrinkList>[0], undefined>;
 
@@ -10,7 +11,7 @@ const getQueryKey = (params: SearchVoteDrinkServiceProps) => [
 ];
 
 export default function useVoteDrinkService(params: SearchVoteDrinkServiceProps) {
-  const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
+  const { data, fetchNextPage } = useInfiniteQuery(
     getQueryKey(params),
     ({ pageParam }) =>
       getVoteDrinkList({
@@ -28,7 +29,9 @@ export default function useVoteDrinkService(params: SearchVoteDrinkServiceProps)
     },
   );
 
+  const [subscribe] = useInfiniteScroll(fetchNextPage);
+
   const voteDrinkList = data?.pages.flatMap((page) => page.content) ?? [];
 
-  return { voteDrinkList, fetchNextPage, hasNextPage };
+  return { voteDrinkList, subscribe };
 }

@@ -59,3 +59,14 @@ export const deleteUserAPI = async () => {
   const response = await http.delete("api/users");
   return response.data;
 };
+
+interface GetTheNumberOfMyVote {
+  writtenVoteCnt: number;
+  joinedVoteCnt: number;
+  bookmarkedVoteCnt: number;
+}
+
+export const getTheNumberOfMyVoteAPI = async () => {
+  const response = await http.get<GetTheNumberOfMyVote>("api/votes/myActivities");
+  return response.data;
+};

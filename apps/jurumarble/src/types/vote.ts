@@ -9,8 +9,6 @@ export type PostVoteType = PostNormalVoteRequest & PostDrinkVoteRequest;
  * @TODO 네이밍 변경 필요
  */
 
-export type DrinkInfoType = Pick<DrinkInfo, "id" | "name" | "image">;
-
 export interface Content {
   voteId: number;
   postedUserId: number;

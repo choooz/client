@@ -41,7 +41,6 @@ const H2 = styled.h2`
     ${theme.typography.headline02}
     display: flex;
     flex-direction: column;
-    line-height: 26px;
   `}
 `;
 

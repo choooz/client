@@ -60,6 +60,7 @@ function BottomBar() {
 }
 
 const Container = styled.section`
+  z-index: 1000;
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -69,11 +70,12 @@ const Container = styled.section`
 `;
 
 const Inner = styled.div`
+  z-index: 1000;
   max-width: 720px;
   display: flex;
   margin: 0 auto;
   justify-content: space-around;
-  ${({ theme }) => theme.typography.caption};
+  ${({ theme }) => theme.typography.caption_chip};
 `;
 
 const BarItem = styled.div<{ isActive: boolean }>`
@@ -83,11 +85,13 @@ const BarItem = styled.div<{ isActive: boolean }>`
   align-items: center;
   justify-content: center;
   color: ${({ isActive, theme }) => (isActive ? theme.colors.black_01 : theme.colors.black_05)};
+  cursor: pointer;
 `;
 
 const Padding = styled.div`
   width: 100%;
   height: 63px;
+  background-color: ${({ theme }) => theme.colors.bg_01};
 `;
 
 export default BottomBar;

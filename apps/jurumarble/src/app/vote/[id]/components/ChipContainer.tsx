@@ -7,6 +7,14 @@ import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled from "styled-components";
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
+import useGetUserInfo from "services/useGetUserInfo";
+import { useRouter } from "next/navigation";
+import Path from "lib/Path";
+import useVoteDeleteService from "../services/useVoteDeleteService";
+import { formatDate } from "lib/utils/formatDate";
+import NonWriterBox from "app/vote/components/NonWriterBox";
+import { toast } from "react-toastify";
+import useVoteReportService from "../services/useVoteReportService";
 
 interface Props {
   title: string;
@@ -15,11 +23,31 @@ interface Props {
   region: string;
   mutateBookMark: UseMutateFunction;
   isBookmark: boolean;
+  postedUserId: number;
+  voteId: number;
 }
 
-const ChipContainer = ({ date, description, title, region, mutateBookMark, isBookmark }: Props) => {
+const ChipContainer = ({
+  voteId,
+  date,
+  description,
+  title,
+  region,
+  mutateBookMark,
+  isBookmark,
+  postedUserId,
+}: Props) => {
+  const { userInfo } = useGetUserInfo();
+  const { onDelete } = useVoteDeleteService(voteId);
+  const router = useRouter();
   const [toggleMenu, onToggleMenu] = useToggle();
+  const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle();
   const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
+  const { targetEl: targetEl2 } = useOutsideClick<HTMLDivElement>(
+    toggleNonWriterMenu,
+    onToggleNonWriterMenu,
+  );
+  const { mutate } = useVoteReportService();
   return (
     <>
       <TagRow>
@@ -29,29 +57,67 @@ const ChipContainer = ({ date, description, title, region, mutateBookMark, isBoo
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
-            <SvgIcBookmarkActive width={20} height={20} onClick={() => mutateBookMark()} />
+            <SVGWrapper>
+              <SvgIcBookmarkActive width={26} height={26} onClick={() => mutateBookMark()} />
+            </SVGWrapper>
           ) : (
-            <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+            <SVGWrapper>
+              <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+            </SVGWrapper>
           )}
 
-          <div ref={targetEl} onClick={onToggleMenu}>
+          {userInfo?.userId === postedUserId ? (
+            <SVGWrapper onClick={onToggleMenu} ref={targetEl}>
+              <SvgIcMenu width={20} height={20} />
+            </SVGWrapper>
+          ) : (
+            <SVGWrapper onClick={onToggleNonWriterMenu} ref={targetEl2}>
+              <SvgIcMenu width={20} height={20} />
+            </SVGWrapper>
+          )}
+          {/* 
+          <div
+            ref={targetEl}
+            onClick={userInfo?.userId === postedUserId ? onToggleMenu : onToggleNonWriterMenu}
+          >
             <SvgIcMenu width={20} height={20} />
-          </div>
+          </div> */}
         </FlexRow>
       </TagRow>
       <TitleRow>
         {title}
         {/* <DateText>{date.slice(0, 10)}</DateText> */}
       </TitleRow>
-      <DateText>{date}</DateText>
+      <DateText>{formatDate(date)}</DateText>
       <Description>{description}</Description>
       {toggleMenu && (
         <ModifyDeleteButtonBox
           top="70px"
           right="41px"
-          onDelete={() => {}}
-          onModify={() => {}}
-          onShare={() => {}}
+          onDelete={() => {
+            if (confirm("정말 삭제하시겠습니까?")) {
+              onDelete();
+            }
+          }}
+          onModify={() => {
+            router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}/update`);
+          }}
+        />
+      )}
+      {toggleNonWriterMenu && (
+        <NonWriterBox
+          top="70px"
+          right="41px"
+          // onCopy={() => {
+          //   navigator.clipboard.writeText(content);
+          //   toast("복사되었어요!");
+          //   onToggleNonWriterMenu();
+          // }}
+          onReport={() => {
+            mutate(voteId);
+
+            onToggleNonWriterMenu();
+          }}
         />
       )}
     </>
@@ -93,4 +159,11 @@ const Description = styled.div`
   color: ${({ theme }) => theme.colors.black_02};
 `;
 
+const SVGWrapper = styled.div`
+  width: 26px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 export default ChipContainer;

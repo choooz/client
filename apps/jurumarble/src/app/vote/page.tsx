@@ -2,21 +2,23 @@
 
 import BottomBar from "components/BottomBar";
 import { Button } from "components/button";
-import Header from "components/Header";
 import { media } from "lib/styles";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EmptyAImg } from "public/images";
 import SvgIcDetail from "src/assets/icons/components/IcDetail";
 import styled, { css } from "styled-components";
 import useFlipAnimation from "./hooks/useFlipAnimation";
-import usePostBookmarkService from "./services/useBookmarkService";
 import ChipContainer from "./[id]/components/ChipContainer";
 import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
 import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useInfiniteMainListService from "./services/useGetVoteListService";
-import { useMemo } from "react";
 import { toast } from "react-toastify";
+import useBookmarkService from "services/useBookmarkService";
+import Loading from "components/Loading";
+import Image from "next/image";
+import { ImgScroll } from "public/images";
+import { useRef } from "react";
+import useFilteredStatisticsService from "./[id]/services/useFilterStatisticsService";
 
 export type Drag = "up" | "down" | null;
 
@@ -26,7 +28,10 @@ function VoteHomePage() {
   /**
    * @TODO 여러번 뜨는 현상 지속시 삭제
    */
-  params.get("isSuccess") && toast.success("정상적으로 투표가 등록되었습니다!.");
+  params.get("isSuccess") &&
+    toast.success("정상적으로 투표가 등록되었습니다!.", {
+      toastId: "voteSuccess",
+    });
 
   const router = useRouter();
 
@@ -39,41 +44,57 @@ function VoteHomePage() {
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
     useFlipAnimation(onChangeNowShowing);
 
-  const { title, imageA, imageB, titleA, titleB, detail, voteId, region } =
-    mainVoteList[nowShowing] || {};
+  const {
+    title,
+    imageA,
+    imageB,
+    titleA,
+    titleB,
+    detail,
+    voteId,
+    region,
+    postedUserId,
+    createdAt,
+    voteType,
+  } = mainVoteList[nowShowing] || {};
 
-  const safeImageA = useMemo(() => {
-    console.log(imageA);
-    if (!imageA || imageA === "string") return EmptyAImg;
-    return imageA;
-  }, [imageA]);
-  const safeImageB = useMemo(() => {
-    if (!imageB || imageB === "string") return EmptyAImg;
-    return imageB;
-  }, [imageB]);
-
-  const { mutateBookMark, bookMarkCheckQuery } = usePostBookmarkService(voteId);
+  const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
   const onMutateVoting = (select: "A" | "B") => {
     mutate(select);
   };
 
-  const { data: bookmarkCheck } = bookMarkCheckQuery;
+  const moreRef = useRef<HTMLButtonElement>(null);
 
-  const isBookmark = bookmarkCheck?.bookmarked || false;
+  const onScrollBottom = () => {
+    // 스크롤을 최하단으로 내린다
+    moreRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-  if (isLoading) return <PageInner drag={drag}>로딩중</PageInner>;
-  if (isError) return <PageInner drag={drag}>에러</PageInner>;
+  const { voteStatisticsQuery } = useFilteredStatisticsService(Number(voteId), "", "", "");
+
+  const {
+    data: statistics,
+    isLoading: isStatisticsLoading,
+    isError: isStatisticsError,
+  } = voteStatisticsQuery;
+
+  if (isLoading || isStatisticsLoading) return <Loading />;
+  if (isError || isStatisticsError) return <PageInner drag={drag}>에러</PageInner>;
+
+  const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
 
   return (
     <>
       <Background>
-        <Header />
+        <ScrollImage onClick={onScrollBottom}>
+          <Image src={ImgScroll} alt="스크롤" width={60} height={64} />
+        </ScrollImage>
         <AskVoteBox>
           <AskVoteText>
-            당신의 투표를
-            <br /> 기다리고 있어요
+            여행에서 즐길 우리술은
+            <br /> 우리술 투표로 해결해요
           </AskVoteText>
           <div>
             <Button
@@ -95,26 +116,31 @@ function VoteHomePage() {
             drag={drag}
           >
             <ChipContainer
+              voteId={voteId}
+              postedUserId={postedUserId}
               title={title}
-              date="20.08.22"
+              date={String(createdAt)}
               region={region}
               description={detail}
               mutateBookMark={mutateBookMark}
               isBookmark={isBookmark}
             />
             <VoteDescription
-              imageA={safeImageA}
-              imageB={safeImageB}
-              percentageA={50}
-              percentageB={50}
+              voteType={voteType}
+              imageA={imageA}
+              imageB={imageB}
+              percentageA={percentageA}
+              percentageB={percentageB}
               titleA={titleA}
               titleB={titleB}
-              totalCountA={100}
-              totalCountB={100}
+              totalCountA={totalCountA}
+              totalCountB={totalCountB}
               select={select.choice}
               onMutateVoting={onMutateVoting}
+              drinkAId={1}
+              drinkBId={1}
             />
-            <MoreButton onClick={() => router.push(`vote/${voteId}`)}>
+            <MoreButton onClick={() => router.push(`vote/${voteId}`)} ref={moreRef}>
               더보기 <SvgIcDetail width={16} height={16} />
             </MoreButton>
           </PageInner>
@@ -128,8 +154,14 @@ function VoteHomePage() {
 }
 
 const Background = styled.div`
+  position: relative;
   background-color: ${({ theme }) => theme.colors.bg_01};
+  overflow: scroll;
   height: calc(100svh - 100px);
+  // 스크롤 바 숨기기
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -242,6 +274,7 @@ const BigFont = styled.span`
 
 const AskVoteText = styled.div`
   ${({ theme }) => theme.typography.headline02}
+  line-height: 130%;
 `;
 
 const MoreButton = styled.button`
@@ -262,5 +295,12 @@ const MoreButton = styled.button`
   justify-content: center;
   align-items: center;
   gap: 6px;
+`;
+
+const ScrollImage = styled.div`
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  z-index: 1600;
 `;
 export default VoteHomePage;

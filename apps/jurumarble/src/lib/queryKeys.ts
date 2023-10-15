@@ -6,6 +6,7 @@ export const queryKeys = {
   USER_INFO: "userInfo" as const,
   VOTE_LIST: "voteList" as const,
   RESTAURANT_LIST: "restaurantList" as const,
+  RESTAURANT_IMAGE_LIST: "restaurantImageList" as const,
   SEARCH_DRINK_LIST: "searchDrinkList" as const,
   SEARCH_VOTE_DRINK_LIST: "searchVoteDrinkList" as const,
   VOTE_DETAIL: "voteDetail" as const,
@@ -18,15 +19,18 @@ export const queryKeys = {
   MY_PARTICIPATED_VOTE: "myParticipatedVote" as const,
   MY_CREATED_VOTE: "myCreatedVote" as const,
   MY_BOOKMARKED_VOTE: "myBookmarkedVote" as const,
+  THE_NUMBER_OF_MY_VOTE: "theNumberOfMyVote" as const,
   DRINKS_MAP: "drinksMap" as const,
+  DRINKS_INFO: "drinksInfo" as const,
+  NOTIFICATION_LIST: "notificationList" as const,
+  LOGIN_INFO: "loginInfo" as const,
+  TODAY_DRINK_RECOMMENDATION: "todayDrinkRecommendation" as const,
 };
 
 export const reactQueryKeys = {
   // @note any 처리
   mainVoteList: () => [queryKeys.MAIN_VOTE_LIST] as const,
-  bookmarkCheck: () => [queryKeys.BOOKMARK_CHECK] as const,
   voteList: (params: any) => [queryKeys.VOTE_LIST, ...params],
-  restaurantList: (params: any) => [queryKeys.RESTAURANT_LIST, ...params],
   voteDetail: (voteId: number) => [queryKeys.VOTE_DETAIL, voteId] as const,
   votingCheck: (id: number) => [queryKeys.VOTING_CHECK, id] as const,
   detailCommentList: (
@@ -37,8 +41,13 @@ export const reactQueryKeys = {
     sortBy?: string,
   ) => [queryKeys.DETAIL_COMMENT_LIST, typeId, commentType, size, page, sortBy] as const,
   detailVoteCount: (id: number) => [queryKeys.DETAIL_VOTE_COUNT, id] as const,
-  detailFilterdAnalysis: (id: number, mbti?: string, gender?: string, age?: string) =>
-    [queryKeys.DETAIL_FILTERED_ANALYSIS, id, mbti, gender, age] as const,
+  detailFilterdAnalysis: (
+    id: number,
+    mbti?: string,
+    gender?: string,
+    age?: string,
+    alcoholLimit?: string,
+  ) => [queryKeys.DETAIL_FILTERED_ANALYSIS, id, mbti, gender, age, alcoholLimit] as const,
   drinksMap: (
     startX: number,
     startY: number,
@@ -47,4 +56,5 @@ export const reactQueryKeys = {
     page: number,
     size: number,
   ) => [queryKeys.DRINKS_MAP, startX, startY, endX, endY, page, size] as const,
+  drinksInfo: (id: number) => [queryKeys.DRINKS_INFO, id] as const,
 };

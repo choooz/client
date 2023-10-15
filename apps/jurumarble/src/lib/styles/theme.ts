@@ -33,43 +33,43 @@ const typography = {
   headline01: `
     font-size: 24px; 
     font-weight: 700; 
-    line-height: 21px; 
+    line-height: 32px; 
     letter-spacing: -0.24px; 
     `,
   headline02: `
     font-size: 20px;
     font-weight: 700;
-    line-height: 21px;
+    line-height: 28px;
     letter-spacing: -0.2px;
     `,
   headline03: `
     font-size: 18px;
     font-weight: 600;
-    line-height: 21px;
+    line-height: 24px;
     letter-spacing: -0.18px;
     `,
   headline04: `
     font-size: 16px;
     font-weight: 700;
-    line-height: 21px;
+    line-height: 22px;
     letter-spacing: -0.16px;
     `,
   subhead01: `
     font-size: 18px;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 24px;
     letter-spacing: -0.18px;
     `,
   subhead02: `
     font-size: 14px;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 18px;
     letter-spacing: -0.14px;
     `,
   body01: `
     font-size: 16px;
     font-weight: 700;
-    line-height: 21px;
+    line-height: 22px;
     letter-spacing: -0.16px;
     `,
   body_long01: `
@@ -81,47 +81,42 @@ const typography = {
   body02: `
     font-size: 16px;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 24px;
     `,
   body03: `
     font-size: 14px;
     font-weight: 400;
-    line-height: 21px;
+    line-height: 18px;
     `,
   body_long03: `
     font-size: 14px;
     font-weight: 400;
-    line-height: 150%;
+    line-height: 20px;
     `,
   body04: `
     font-size: 14px;
     font-weight: 700;
-    line-height: 21px;
+    line-height: 18px;
     `,
-  caption: `
+  caption_chip: `
     font-size: 12px;
     font-weight: 600;
-    line-height: 21px;
-    `,
-  chip: `
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 100%;
+    line-height: 14px;
     `,
   navigation: `
     font-size: 10px;
     font-weight: 500;
-    line-height: 21px; 
+    line-height: 14px; 
     `,
   button01: `
   font-size: 14px;
   font-weight: 600;
-  line-height: 21px; 
+  line-height: 18px; 
   `,
   button02: `
   font-size: 14px;
   font-weight: 400;
-  line-height: 21px; 
+  line-height: 18px; 
   `,
 } as const;
 
