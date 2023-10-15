@@ -17,7 +17,6 @@ const Box = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #4a3c3c53;
   z-index: 999;
   transition: all 0.2s ease;
 

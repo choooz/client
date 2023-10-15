@@ -207,7 +207,8 @@ const PageInner = styled.div`
 
 const FilterBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 8px;
 `;
 
 export default Detail;
