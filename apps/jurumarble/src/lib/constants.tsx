@@ -24,6 +24,8 @@ export const NAVER_LOGIN_REDIRECT_URL =
     ? `http://localhost:3000${Path.NAVER_LOGIN_PROCESS}`
     : `${CLIENT_URL}${Path.NAVER_LOGIN_PROCESS}`;
 
+export const DATA_GO_API_KEY = process.env.NEXT_PUBLIC_DATA_GO_API_KEY || "";
+
 export const REGION_LIST = [
   { value: "SEOUL", label: "서울", lat: 37.53391, long: 126.9775 },
   { value: "INCHEON", label: "인천", lat: 37.45323333333334, long: 126.70735277777779 },
