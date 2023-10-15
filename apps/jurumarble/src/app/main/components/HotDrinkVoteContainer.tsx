@@ -5,15 +5,15 @@ import styled, { css } from "styled-components";
 import useGetHotDrinkVoteService from "../services/useGetHotDrinkVoteService";
 
 function HotDrinkVoteContainer() {
-  const { data: hotDrinkVote } = useGetHotDrinkVoteService();
+  const router = useRouter();
+
+  const { hotDrinkVote } = useGetHotDrinkVoteService();
   if (!hotDrinkVote) {
-    return null;
+    return;
   }
   const { voteId, voteTitle, drinkAImage, drinkBImage } = hotDrinkVote;
 
   const nowTime = new Date().getHours();
-
-  const router = useRouter();
 
   return (
     <>
