@@ -1,7 +1,6 @@
 import { Button, Portal } from "components/index";
 import { REGION_LIST } from "lib/constants";
 import { transitions } from "lib/styles";
-import Image from "next/image";
 import React from "react";
 import { SvgIcPrev, SvgIcX } from "src/assets/icons/components";
 import styled, { css } from "styled-components";

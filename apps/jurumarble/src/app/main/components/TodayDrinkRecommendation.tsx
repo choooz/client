@@ -5,9 +5,7 @@ import useGetDrinkRecommendationListService from "../services/useGetDrinkRecomme
 
 const SLIDE_MOVE_COUNT = 1;
 const ORIGINAL_IMAGE_LENGTH = 10;
-const IMAGE_HEIGHT = 18;
-
-const getRandom = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
+const MOVE_DISTANCE = 20;
 
 function TodayDrinkRecommendation() {
   const theme = useTheme();
@@ -29,7 +27,7 @@ function TodayDrinkRecommendation() {
       setTimeout(() => {
         setIsAnimation(false);
         slideRef.current!.style.transform = `translateY(-${
-          IMAGE_HEIGHT * ORIGINAL_IMAGE_LENGTH
+          MOVE_DISTANCE * ORIGINAL_IMAGE_LENGTH
         }px)`;
         setCurrentSlide(1);
       }, 500);
@@ -38,7 +36,7 @@ function TodayDrinkRecommendation() {
         setIsAnimation(true);
       }, 600);
     }
-    slideRef.current.style.transform = `translateY(-${IMAGE_HEIGHT * (currentSlide - 1)}px)`;
+    slideRef.current.style.transform = `translateY(-${MOVE_DISTANCE * (currentSlide - 1)}px)`;
   }, [currentSlide]);
 
   useEffect(() => {
@@ -58,9 +56,9 @@ function TodayDrinkRecommendation() {
         오늘의 우리술 추천
       </H3>
       <Slider ref={slideRef} isAnimation={isAnimation}>
-        {drinkRecommendationList?.map(({ 전통주명 }) => {
-          return <DrinkName>{전통주명}</DrinkName>;
-        })}
+        {drinkRecommendationList?.map(({ 전통주명 }) => (
+          <DrinkName key={전통주명}>{전통주명}</DrinkName>
+        ))}
       </Slider>
     </Container>
   );
@@ -69,9 +67,10 @@ function TodayDrinkRecommendation() {
 const Container = styled.div`
   display: flex;
   align-items: center;
-  overflow: hidden;
   padding: 0 20px;
   margin-top: 8px;
+  gap: 8px;
+  overflow: hidden;
 `;
 
 const Slider = styled.div<{ isAnimation: boolean }>`
@@ -79,7 +78,8 @@ const Slider = styled.div<{ isAnimation: boolean }>`
   flex-direction: column;
   height: 18px;
   transition: transform 0.5s ease-in-out;
-  ${({ isAnimation }) => isAnimation && `transform: translateY(-${IMAGE_HEIGHT}px);`}
+  gap: 2px;
+  ${({ isAnimation }) => isAnimation && `transform: translateY(-${MOVE_DISTANCE}px);`}
 `;
 
 const H3 = styled.h3`
@@ -89,12 +89,13 @@ const H3 = styled.h3`
     display: flex;
     align-items: center;
     gap: 2px;
+    overflow: hidden;
+    white-space: nowrap;
   `};
 `;
 
 const DrinkName = styled.span`
   ${({ theme }) => theme.typography.body03};
-  margin-left: 8px;
 `;
 
 export default TodayDrinkRecommendation;
