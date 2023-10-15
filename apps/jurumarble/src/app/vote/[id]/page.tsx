@@ -2,8 +2,7 @@
 
 import styled, { css } from "styled-components";
 import VoteWriterBox from "./components/VoteWriterBox";
-import { ExImg1 } from "public/images";
-import BottomBar from "components/BottomBar";
+import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
 import VoteDescription from "./components/VoteDescription";
 import ChipContainer from "./components/ChipContainer";
 import CommentContainer from "./components/CommentContainer";
@@ -12,13 +11,10 @@ import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
 import useFilteredStatisticsService from "./services/useFilterStatisticsService";
 import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import useBookmarkService from "services/useBookmarkService";
 import Loading from "components/Loading";
-import RegionSmallSelect from "app/search/components/RegionSmallSelect";
 import {
-  DRINK_INFO_SORT_LIST,
-  MBTI_LIST,
   VOTE_AGE_FILTER_LIST,
   VOTE_ALCOHOL_FILTER_LIST,
   VOTE_GENDER_FILTER_LIST,
@@ -75,6 +71,12 @@ function Detail() {
     isError: isOriginalStatisticsError,
   } = originalStaticsQuery;
 
+  const EmptyImage = useMemo(() => {
+    if (data?.postedUserAlcoholLimit === "LOW") return DrinkCapacityLow;
+    if (data?.postedUserAlcoholLimit === "MEDIUM") return DrinkCapacityMedium;
+    return DrinkCapacityHigh;
+  }, [data?.postedUserAlcoholLimit]);
+
   if (isLoading || isStatisticsLoading || isOriginalStatisticsLoading) return <Loading />;
   if (isError || isStatisticsError || isOriginalStatisticsError) return <div>에러</div>;
   if (!data || !statistics || !originalStatistics) return <div></div>;
@@ -109,7 +111,7 @@ function Detail() {
           nickName: postedUserNickname,
           userAge: postedUserAge,
           userGender: postedUserGender,
-          userImage: postedUserImageUrl || ExImg1,
+          userImage: postedUserImageUrl || EmptyImage,
           alchol: postedUserAlcoholLimit,
           userMbti: postedUserMbti,
         }}
