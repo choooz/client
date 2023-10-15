@@ -9,7 +9,7 @@ function HotDrinkVoteContainer() {
 
   const { hotDrinkVote } = useGetHotDrinkVoteService();
   if (!hotDrinkVote) {
-    return;
+    return null;
   }
   const { voteId, voteTitle, drinkAImage, drinkBImage } = hotDrinkVote;
 
