@@ -5,7 +5,7 @@ import { Button } from "components/button";
 import { convertAge, convertGender } from "lib/utils/formatUserInfo";
 import Image from "next/image";
 import { ExImg1 } from "public/images";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import useGetUserInfo from "services/useGetUserInfo";
 import { SvgIcMapPin } from "src/assets/icons/components";
@@ -14,10 +14,15 @@ import styled, { css } from "styled-components";
 import useCommentDeleteService from "../services/useCommentDeleteService";
 import useCommentReportService from "../services/useCommentReportService";
 import AlcholLevelTag from "./AlcholLevelTag";
-import CommentDeleteModal from "./CommentDeleteModal";
-import CommentForm from "./CommentForm";
 import CommentPutForm from "./CommentPutForm";
 import SearchRestaurantModal from "./SearchRestaurantModal";
+import {
+  DrinkCapacityHigh,
+  DrinkCapacityLow,
+  DrinkCapacityMedium,
+  Female,
+  Male,
+} from "public/images";
 
 interface Props {
   voteType: "drinks" | "votes";
@@ -34,6 +39,7 @@ interface Props {
     nickName: string;
     userId: number;
     alcoholLimitType: string;
+    imageUrl: string;
     restaurant: {
       restaurantName: string;
       restaurantImage: string;
@@ -59,6 +65,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
     userId,
     restaurant,
     alcoholLimitType,
+    imageUrl,
   } = comment;
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
@@ -85,10 +92,16 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
   }, [comment]);
   const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle();
 
+  const EmptyImage = useMemo(() => {
+    if (alcoholLimitType === "LOW") return DrinkCapacityLow;
+    if (alcoholLimitType === "MEDIUM") return DrinkCapacityMedium;
+    return DrinkCapacityHigh;
+  }, [alcoholLimitType]);
+
   return (
     <Container>
       <Image
-        src={ExImg1}
+        src={imageUrl ? imageUrl : EmptyImage}
         alt="댓글 프로필"
         width={40}
         height={40}

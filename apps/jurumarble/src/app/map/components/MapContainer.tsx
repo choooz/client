@@ -15,6 +15,7 @@ import { useGeoLocation } from "../hooks/useGeoLocation";
 import SvgIcMyLocationFloating from "src/assets/icons/ic_my_location_floating.svg";
 import SvgIcPin from "src/assets/icons/ic_pin.svg";
 import Image from "next/image";
+import Loading from "components/Loading";
 
 const MapContainer = () => {
   const [delayRender, setDelayRender] = useState(true);
@@ -107,7 +108,7 @@ const MapContainer = () => {
     }, 100);
   };
 
-  if (delayRender) return <></>;
+  if (delayRender) return <Loading />;
 
   return (
     <Container>

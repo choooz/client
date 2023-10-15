@@ -62,15 +62,15 @@ export const VOTE_GENDER_FILTER_LIST = [
 
 export const VOTE_AGE_FILTER_LIST = [
   { value: "", label: "나이" },
-  { value: "10", label: "10대" },
-  { value: "20", label: "20대" },
-  { value: "30", label: "30대" },
-  { value: "40", label: "40대" },
-  { value: "50", label: "50대" },
+  { value: "teenager", label: "10대" },
+  { value: "twenties", label: "20대" },
+  { value: "thirties", label: "30대" },
+  { value: "fourties", label: "40대" },
+  { value: "fifties", label: "50대" },
 ];
 
 export const VOTE_ALCOHOL_FILTER_LIST = [
-  { value: "", label: "도수값" },
+  { value: "", label: "술레벨" },
   { value: "LOW", label: "Lv.1" },
   { value: "MEDIUM", label: "Lv.2" },
   { value: "HIGH", label: "Lv.3" },

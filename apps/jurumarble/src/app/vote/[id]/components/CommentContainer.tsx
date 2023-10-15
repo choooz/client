@@ -78,6 +78,7 @@ function CommentContainer({ postId }: Props) {
                 userId,
                 restaurant,
                 alcoholLimitType,
+                imageUrl,
               },
               index,
             ) => (
@@ -97,6 +98,7 @@ function CommentContainer({ postId }: Props) {
                   userId: userId,
                   restaurant,
                   alcoholLimitType,
+                  imageUrl,
                 }}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
