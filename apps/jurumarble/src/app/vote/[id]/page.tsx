@@ -177,7 +177,6 @@ function Detail() {
 
         <CommentContainer postId={Number(postId)} />
       </PageInner>
-      <BottomBar />
     </Container>
   );
 }

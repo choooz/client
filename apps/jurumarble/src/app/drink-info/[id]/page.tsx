@@ -10,7 +10,6 @@ function DrinkInfoPage() {
     <>
       <DrinkInfoContainer />
       <DrinkCommentContainer />
-      <BottomBar />
     </>
   );
 }
