@@ -3,24 +3,20 @@
 import BottomBar from "components/BottomBar";
 import DivideLine from "components/DivideLine";
 import Header from "components/Header";
-import { KAKAO_MAP_API_KEY } from "lib/constants";
-import Image from "next/image";
-import Script from "next/script";
-import { MainBannerImage } from "public/images";
 import styled from "styled-components";
+import Banner from "./main/components/Banner";
 import HotDrinkContainer from "./main/components/HotDrinkContainer";
 import HotDrinkVoteContainer from "./main/components/HotDrinkVoteContainer";
 import SearchInputWrapper from "./main/components/SearchInputWrapper";
+import TodayDrinkRecommendation from "./main/components/TodayDrinkRecommendation";
 
 function MainPage() {
   return (
     <>
       <Header />
-
+      <TodayDrinkRecommendation />
       <TopSection>
-        <BannerImageWrapper>
-          <Image alt="배너" src={MainBannerImage} fill style={{ borderRadius: "16px" }} />
-        </BannerImageWrapper>
+        <Banner />
         <SearchInputWrapper />
         <HotDrinkContainer />
       </TopSection>
@@ -35,12 +31,6 @@ function MainPage() {
 
 const TopSection = styled.section`
   padding: 0 20px;
-`;
-
-const BannerImageWrapper = styled.div`
-  position: relative;
-  margin-top: 36px;
-  aspect-ratio: 16 / 9;
 `;
 
 const BottomSection = styled.section`
