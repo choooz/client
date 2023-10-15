@@ -8,10 +8,11 @@ export default function useFilteredStatisticsService(
   gender?: string,
   mbti?: string,
   age?: string,
+  alcoholLimit?: string,
 ) {
   const voteStatisticsQuery = useQuery(
-    reactQueryKeys.detailFilterdAnalysis(voteId, gender, mbti, age),
-    () => getFilterStatisticsById(voteId, gender, mbti, age),
+    reactQueryKeys.detailFilterdAnalysis(voteId, gender, mbti, age, alcoholLimit),
+    () => getFilterStatisticsById(voteId, gender, mbti, age, alcoholLimit),
     {
       enabled: !!voteId,
     },

@@ -56,8 +56,9 @@ function Detail() {
   const { voteStatisticsQuery } = useFilteredStatisticsService(
     Number(postId),
     filter.gender,
-    filter.age,
     filter.mbti,
+    filter.age,
+    filter.alcohol,
   );
   const {
     data: statistics,
