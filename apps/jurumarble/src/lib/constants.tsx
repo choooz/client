@@ -70,7 +70,7 @@ export const VOTE_AGE_FILTER_LIST = [
 ];
 
 export const VOTE_ALCOHOL_FILTER_LIST = [
-  { value: "", label: "도수값" },
+  { value: "", label: "술레벨" },
   { value: "LOW", label: "Lv.1" },
   { value: "MEDIUM", label: "Lv.2" },
   { value: "HIGH", label: "Lv.3" },
