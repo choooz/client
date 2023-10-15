@@ -85,6 +85,7 @@ const BarItem = styled.div<{ isActive: boolean }>`
   align-items: center;
   justify-content: center;
   color: ${({ isActive, theme }) => (isActive ? theme.colors.black_01 : theme.colors.black_05)};
+  cursor: pointer;
 `;
 
 const Padding = styled.div`
