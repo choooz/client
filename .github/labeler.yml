@@ -1,0 +1,17 @@
+dependencies:
+  - '**/yarn.lock'
+
+🙏리뷰해주세요:
+  - '**'
+
+JURUMARBLE:
+  - apps/jurumarble/*
+  - apps/jurumarble/**/*
+
+CHOOZ:
+  - apps/chooz/*
+  - apps/chooz/**/*
+
+PACKAGES:
+  - packages/*
+  - packages/**/*

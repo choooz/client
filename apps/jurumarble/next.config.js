@@ -1,3 +1,4 @@
+console.log("START");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   swcMinify: true,
