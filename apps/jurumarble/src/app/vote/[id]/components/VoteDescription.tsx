@@ -1,16 +1,13 @@
 import AorBMark from "components/AorBMark";
-import { postExecuteVote } from "lib/apis/vote";
 import Path from "lib/Path";
 import { media } from "lib/styles";
 import depths from "lib/styles/depths";
-import Image, { StaticImageData } from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ExImg1 } from "public/images";
 import React from "react";
-import useGetUserInfo from "services/useGetUserInfo";
-import SvgIcPrev from "src/assets/icons/components/IcPrev";
+import { SvgIcCheck } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
-import useExecuteVoteService from "../services/useExecuteVoteService";
 
 type AorB = "A" | "B";
 type ActiveType = "active" | "inactive" | null;
@@ -58,7 +55,6 @@ function VoteDescription({
   drinkAId,
   drinkBId,
 }: Props) {
-  const { userInfo } = useGetUserInfo();
   const router = useRouter();
 
   const getAB = (direction: Direction) => {
@@ -131,9 +127,14 @@ function VoteDescription({
         </RightVote>
       </ImageWrapper>
       <FlexRow>
-        <SmallTitle>{titleA}</SmallTitle>
-
-        <SmallTitle>{titleB}</SmallTitle>
+        <SmallTitle isSelect={select === "A"}>
+          {select === "A" && <SvgIcCheck width={20} height={20} />}
+          {titleA}
+        </SmallTitle>
+        <SmallTitle isSelect={select === "B"}>
+          {select === "B" && <SvgIcCheck width={20} height={20} />}
+          {titleB}
+        </SmallTitle>
       </FlexRow>
     </Container>
   );
@@ -151,16 +152,17 @@ const ImageWrapper = styled.div`
   gap: 9px;
 `;
 
-const SmallTitle = styled.div`
-  margin-top: 20px;
-  padding: 4px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  ${({ theme }) => css`
-    border-bottom: 1px solid ${theme.colors.line_01};
+const SmallTitle = styled.div<{ isSelect: boolean }>`
+  ${({ theme, isSelect }) => css`
     ${theme.typography.body_long03}
+    color: ${isSelect ? theme.colors.main_01 : theme.colors.black_01};
+    border-bottom: 1px solid ${theme.colors.line_01};
+    margin-top: 20px;
+    padding: 4px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   `};
 `;
 
@@ -272,6 +274,7 @@ const VoteImageWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 10px;
 
   ${media.medium} {
     height: 340px;

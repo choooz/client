@@ -6,6 +6,7 @@ import useDrinkStampService from "services/useDrinkStampService";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import { DrinkInfo } from "src/types/drink";
 import styled, { css, useTheme } from "styled-components";
+import { RatioFrame } from "@monorepo/ui";
 
 interface Props {
   drinkInfo: DrinkInfo;
@@ -26,7 +27,9 @@ function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
   return (
     <Container onClick={onClickDrinkItem} name={name} selected={selectedDrinkList?.includes(name)}>
       <ImageWrapper>
-        <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
+        <RatioFrame ratio="square">
+          <Image loading="lazy" alt={name} src={image} fill style={{ borderRadius: "10px" }} />
+        </RatioFrame>
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 interface Props {
-  variant: "region" | "numberOfParticipants";
+  variant: "region" | "numberOfParticipants" | "isVote";
   children: React.ReactNode;
 }
 
@@ -21,7 +21,14 @@ const variantStyles = {
   numberOfParticipants: css`
     ${({ theme }) => css`
       background-color: ${theme.colors.bg_01};
-      color: ${theme.colors.black_02};
+      color: ${theme.colors.black_01};
+    `}
+  `,
+  isVote: css`
+    ${({ theme }) => css`
+      background-color: ${theme.colors.bg_01};
+      color: ${theme.colors.black_01};
+      line-height: 12px;
     `}
   `,
 };

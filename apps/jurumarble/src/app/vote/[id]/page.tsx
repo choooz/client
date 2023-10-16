@@ -126,6 +126,7 @@ function Detail() {
           mutateBookMark={mutateBookMark}
           isBookmark={isBookmark}
           postedUserId={data.postedUserId}
+          select={select.choice}
         />
         <VoteDescription
           imageA={imageA}

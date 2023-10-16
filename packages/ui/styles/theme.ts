@@ -117,12 +117,14 @@ export type FontSizeTypes = typeof fontSize;
 export type FontWeightTypes = typeof fontWeight;
 export type LineHeightTypes = typeof lineHeight;
 
-const theme: DefaultTheme = {
+const theme = {
   palette,
   textStyle,
   fontSize,
   fontWeight,
   lineHeight,
-};
+} as const;
+
+export type Theme = typeof theme;
 
 export default theme;
