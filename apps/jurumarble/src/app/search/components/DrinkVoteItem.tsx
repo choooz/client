@@ -14,7 +14,7 @@ interface Props {
  * @Todo 타입 더 깔끔하게 정의 필요
  */
 function DrinkVoteItem({ voteDrink }: Props) {
-  const { voteId, region, title, imageA, imageB } = voteDrink;
+  const { voteId, region, title, imageA, imageB, votedCount } = voteDrink;
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
@@ -31,6 +31,7 @@ function DrinkVoteItem({ voteDrink }: Props) {
         region={region}
         mutateBookMark={mutateBookMark}
         isBookmark={isBookmark}
+        votedCount={votedCount}
       />
       <VoteDescription imageA={imageA} imageB={imageB} />
     </Container>
