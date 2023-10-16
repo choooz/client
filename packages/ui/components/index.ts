@@ -8,3 +8,4 @@ export { default as FloatComponentTemplate } from "./modal/FloatComponentTemplat
 export { default as DivideLine } from "./divide/DivideLine";
 export * from "./selectBox";
 export * from "./swiper";
+export * from "./ratioframe";
