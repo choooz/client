@@ -58,7 +58,6 @@ function VoteDescription({
   drinkAId,
   drinkBId,
 }: Props) {
-  const { userInfo } = useGetUserInfo();
   const router = useRouter();
 
   const getAB = (direction: Direction) => {

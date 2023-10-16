@@ -15,6 +15,7 @@ import { formatDate } from "lib/utils/formatDate";
 import NonWriterBox from "app/vote/components/NonWriterBox";
 import { toast } from "react-toastify";
 import useVoteReportService from "../services/useVoteReportService";
+import { AorB } from "lib/apis/vote";
 
 interface Props {
   title: string;
@@ -25,6 +26,7 @@ interface Props {
   isBookmark: boolean;
   postedUserId: number;
   voteId: number;
+  select: AorB | null;
 }
 
 const ChipContainer = ({
@@ -36,6 +38,7 @@ const ChipContainer = ({
   mutateBookMark,
   isBookmark,
   postedUserId,
+  select,
 }: Props) => {
   const { userInfo } = useGetUserInfo();
   const { onDelete } = useVoteDeleteService(voteId);
@@ -53,7 +56,7 @@ const ChipContainer = ({
       <TagRow>
         <FlexRow>
           {region && <Chip variant="region">{region}</Chip>}
-          {/* <Chip variant="numberOfParticipants">122명이 즐겼어요</Chip> */}
+          {select && <Chip variant="isVote">참여중</Chip>}
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
