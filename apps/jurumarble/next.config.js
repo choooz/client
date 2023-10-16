@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    unoptimized: true,
+  },
   transpilePackages: ["@monorepo/ui, @monorepo/hooks"],
   images: {
     domains: [
