@@ -3,12 +3,11 @@ import Path from "lib/Path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styled, { css } from "styled-components";
-import { useCallback, useEffect, useRef, useState } from "react";
 import { SvgIcPrevious, SvgNext } from "src/assets/icons/components";
-
-const SLIDE_MOVE_COUNT = 1;
-const ORIGINAL_IMAGE_LENGTH = 10;
-const MOVE_DISTANCE = 300;
+import { ContentSwiper } from "@monorepo/ui";
+import { Autoplay } from "swiper";
+import SwiperCore from "swiper";
+import { useRef } from "react";
 
 interface Props {
   hotDrinkList: GetHotDrinkResponse[];
@@ -16,83 +15,50 @@ interface Props {
 
 function Carousel({ hotDrinkList }: Props) {
   const router = useRouter();
-  const slideRef = useRef<HTMLOListElement>(null);
-  const [currentSlide, setCurrentSlide] = useState(1);
-  const [isAnimation, setIsAnimation] = useState(true);
-  const [isFlowing, setIsFlowing] = useState(true);
+  const ref = useRef<SwiperCore>(null);
 
-  const onNextSlide = useCallback(() => {
-    setCurrentSlide((prev) => prev + SLIDE_MOVE_COUNT);
-  }, [currentSlide]);
+  const onNextSlide = () => {
+    ref.current?.slideNext();
+  };
 
-  const onPrevSlide = useCallback(() => {
-    setCurrentSlide((prev) => prev - SLIDE_MOVE_COUNT);
-  }, [currentSlide]);
-
-  useEffect(() => {
-    if (!slideRef.current) return;
-
-    if (currentSlide === ORIGINAL_IMAGE_LENGTH + 1) {
-      setTimeout(() => {
-        setIsAnimation(false);
-        slideRef.current!.style.transform = `translateX(-${
-          MOVE_DISTANCE * ORIGINAL_IMAGE_LENGTH
-        }px)`;
-        setCurrentSlide(1);
-      }, 500);
-
-      setTimeout(() => {
-        setIsAnimation(true);
-      }, 600);
-    } else if (currentSlide === 0) {
-      setTimeout(() => {
-        setIsAnimation(false);
-        slideRef.current!.style.transform = `translateX(+${MOVE_DISTANCE}px)`;
-        setCurrentSlide(ORIGINAL_IMAGE_LENGTH);
-      }, 500);
-
-      setTimeout(() => {
-        setIsAnimation(true);
-      }, 600);
-    }
-    slideRef.current.style.transform = `translateX(-${MOVE_DISTANCE * (currentSlide - 1)}px)`;
-  }, [currentSlide]);
-
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-    if (isFlowing) {
-      intervalId = setInterval(() => {
-        setCurrentSlide((prev) => prev + SLIDE_MOVE_COUNT);
-      }, 3500);
-    }
-    return () => clearTimeout(intervalId);
-  }, [isFlowing, currentSlide]);
+  const onPrevSlide = () => {
+    ref.current?.slidePrev();
+  };
 
   return (
     <>
       <Container>
-        <Slides ref={slideRef} isAnimation={isAnimation}>
-          {hotDrinkList.map((hotDrink: GetHotDrinkResponse, index: number) => {
-            const { drinkId, image, name, manufactureAddress } = hotDrink;
-            return (
-              <Slide
-                key={drinkId}
-                onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)}
-              >
-                <Box>
-                  <DrinkImageWrapper>
-                    <RankginMark>{index + 1}</RankginMark>
-                    <Image alt="전통주" src={image} fill style={{ borderRadius: "10px" }} />
-                  </DrinkImageWrapper>
-                  <DrinkText>
-                    {name}
-                    <AreaName>{manufactureAddress}</AreaName>
-                  </DrinkText>
-                </Box>
-              </Slide>
-            );
-          })}
-        </Slides>
+        <ContentSwiper
+          data={hotDrinkList}
+          handler={ref}
+          slideProps={{
+            width: "292px",
+            lazy: true,
+          }}
+          swiperProps={{
+            slidesPerView: "auto",
+            spaceBetween: 5,
+            loop: true,
+            autoplay: {
+              delay: 2000,
+            },
+            modules: [Autoplay],
+          }}
+          renderItem={({ drinkId, image, name, manufactureAddress }, index) => (
+            <Slide key={drinkId} onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)}>
+              <Box>
+                <DrinkImageWrapper>
+                  <RankginMark>{index + 1}</RankginMark>
+                  <Image alt="전통주" src={image} fill style={{ borderRadius: "10px" }} />
+                </DrinkImageWrapper>
+                <DrinkText>
+                  {name}
+                  <AreaName>{manufactureAddress}</AreaName>
+                </DrinkText>
+              </Box>
+            </Slide>
+          )}
+        />
         <CarouselControlContainer>
           <DivideLine />
           <SlideButtonContainer>
@@ -114,29 +80,10 @@ const Container = styled.div`
   overflow: hidden;
 `;
 
-const Slides = styled.ol<{ isAnimation: boolean }>`
-  display: flex;
-  /* overflow-x: auto;
-  scroll-snap-type: x mandatory; */
-  gap: 8px;
-  transition: transform 0.5s ease-in-out;
-  ${({ isAnimation }) => isAnimation && `transform: translateX(-${MOVE_DISTANCE}px);`}
-
-  /**
-    @Todo 모바일에서는 보이게 하기
-   **/
-  -ms-overflow-style: none /* IE and Edge 스크롤바 없애는 css*/;
-  scrollbar-width: none; /* Firefox 스크롤바 없애는 css */
-  &::-webkit-scrollbar {
-    display: none; /* Chrome , Safari , Opera 스크롤바 없애는 css*/
-  }
-`;
-
 const Slide = styled.li`
   width: 292px;
-  height: 120px;
+  height: 130px;
   padding-top: 20px;
-  /* scroll-snap-align: start; */
   cursor: pointer;
 `;
 

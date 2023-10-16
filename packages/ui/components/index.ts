@@ -7,3 +7,4 @@ export { default as Input } from "./input/Input";
 export { default as FloatComponentTemplate } from "./modal/FloatComponentTemplate";
 export { default as DivideLine } from "./divide/DivideLine";
 export * from "./selectBox";
+export * from "./swiper";
