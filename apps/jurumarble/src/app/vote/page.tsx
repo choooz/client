@@ -124,6 +124,7 @@ function VoteHomePage() {
               description={detail}
               mutateBookMark={mutateBookMark}
               isBookmark={isBookmark}
+              select={select.choice}
             />
             <VoteDescription
               voteType={voteType}
