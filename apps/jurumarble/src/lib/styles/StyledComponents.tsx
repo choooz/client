@@ -2,12 +2,18 @@
 
 import StyledComponentsRegistry from "lib/registory";
 import { PropsWithChildren } from "react";
-import { StyleSheetManager, ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import { jurumarbleTheme } from "./theme";
-import isPropValid from "@emotion/is-prop-valid";
+import { theme } from "@monorepo/ui";
+
 import GlobalStyles from "./globalStyles";
 
 function StyledComponents({ children }: PropsWithChildren) {
+  const mergedTheme = {
+    ...theme,
+    ...jurumarbleTheme,
+  };
+
   return (
     <StyledComponentsRegistry>
       {/*
@@ -19,7 +25,7 @@ function StyledComponents({ children }: PropsWithChildren) {
           return typeof elementToBeRendered === "string" ? isPropValid(propName) : true;
         }}
       > */}
-      <ThemeProvider theme={jurumarbleTheme}>
+      <ThemeProvider theme={mergedTheme}>
         <>
           <GlobalStyles />
           {children}
