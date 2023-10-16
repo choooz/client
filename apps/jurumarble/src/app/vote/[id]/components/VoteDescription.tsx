@@ -6,8 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ExImg1 } from "public/images";
 import React from "react";
-import { SvgArrowDown, SvgIcCheck } from "src/assets/icons/components";
-import SvgIcExpandMore from "src/assets/icons/components/IcExpandMore";
+import { SvgIcCheck } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
 
 type AorB = "A" | "B";
