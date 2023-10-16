@@ -146,7 +146,7 @@ export type ThemeColors = typeof colors;
 export type ThemeTypography = typeof typography;
 export type ThemeMedia = typeof media;
 
-export const jurumarbleTheme: DefaultTheme = {
+export const jurumarbleTheme = {
   colors,
   typography,
   media,
