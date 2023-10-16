@@ -4,10 +4,24 @@ import BottomBar from "components/BottomBar";
 import Header from "components/Header";
 import styled, { css } from "styled-components";
 import Banner from "./main/components/Banner";
-import HotDrinkContainer from "./main/components/HotDrinkContainer";
-import HotDrinkVoteContainer from "./main/components/HotDrinkVoteContainer";
 import SearchInputWrapper from "./main/components/SearchInputWrapper";
 import TodayDrinkRecommendation from "./main/components/TodayDrinkRecommendation";
+import dynamic from "next/dynamic";
+
+const DynamicHotDrinkVoteContainer = dynamic(
+  () => import("./main/components/HotDrinkVoteContainer"),
+);
+
+const DynamicHotDrinkContainer = dynamic(() => import("./main/components/HotDrinkContainer"), {
+  ssr: false,
+  loading: () => (
+    <div
+      style={{
+        height: "200px",
+      }}
+    />
+  ),
+});
 
 function MainPage() {
   return (
@@ -17,11 +31,11 @@ function MainPage() {
       <TopSection>
         <Banner />
         <SearchInputWrapper />
-        <HotDrinkContainer />
+        <DynamicHotDrinkContainer />
       </TopSection>
       <DivideLine />
       <BottomSection>
-        <HotDrinkVoteContainer />
+        <DynamicHotDrinkVoteContainer />
       </BottomSection>
       <BottomBar />
     </>
