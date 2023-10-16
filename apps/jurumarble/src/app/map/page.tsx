@@ -3,6 +3,7 @@
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
 import { KAKAO_MAP_API_KEY } from "lib/constants";
+import dynamic from "next/dynamic";
 import Script from "next/script";
 import React from "react";
 import MapContainer from "./components/MapContainer";
@@ -12,6 +13,9 @@ declare global {
     kakao: any;
   }
 }
+
+const DynamicMapContainer = dynamic(() => import("./components/MapContainer"));
+
 const MapPage = () => {
   return (
     <>
@@ -21,7 +25,7 @@ const MapPage = () => {
         src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_API_KEY}&libraries=services&autoload=false`}
       ></Script>
       <Header />
-      <MapContainer />
+      <DynamicMapContainer />
       <BottomBar />
     </>
   );

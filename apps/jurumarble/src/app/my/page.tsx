@@ -1,15 +1,17 @@
-import BottomBar from "components/BottomBar";
-import Header from "components/Header";
-import UserInfoContainer from "./components/UseInfoContainer";
-import VoteListContainer from "./components/VoteListContainer";
+import dynamic from "next/dynamic";
+
+const DynamicHeader = dynamic(() => import("components/Header"));
+const DynamicUserInfoContainer = dynamic(() => import("./components/UseInfoContainer"));
+const DynamicVoteListContainer = dynamic(() => import("./components/VoteListContainer"));
+const DynamicBottomBar = dynamic(() => import("components/BottomBar"));
 
 function MyPage() {
   return (
     <>
-      <Header />
-      <UserInfoContainer />
-      <VoteListContainer />
-      <BottomBar />
+      <DynamicHeader />
+      <DynamicUserInfoContainer />
+      <DynamicVoteListContainer />
+      <DynamicBottomBar />
     </>
   );
 }

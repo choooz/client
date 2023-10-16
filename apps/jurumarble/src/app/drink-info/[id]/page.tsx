@@ -1,15 +1,16 @@
 "use client";
 
-import BottomBar from "components/BottomBar";
+import dynamic from "next/dynamic";
 import React from "react";
-import DrinkCommentContainer from "./components/DrinkCommentContainer";
-import DrinkInfoContainer from "./components/DrinkInfoContainer";
+
+const DynamicDrinkInfoContainer = dynamic(() => import("./components/DrinkInfoContainer"));
+const DynamicDrinkCommentContainer = dynamic(() => import("./components/DrinkCommentContainer"));
 
 function DrinkInfoPage() {
   return (
     <>
-      <DrinkInfoContainer />
-      <DrinkCommentContainer />
+      <DynamicDrinkInfoContainer />
+      <DynamicDrinkCommentContainer />
     </>
   );
 }
