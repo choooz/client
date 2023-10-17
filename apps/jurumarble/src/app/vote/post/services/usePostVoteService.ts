@@ -49,69 +49,75 @@ export default function usePostVoteService() {
     }));
   };
 
-  const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files === null) {return;}
-
-    if (e.target.files.length === 1) {
-      if (e.target.files[0].size > 10485760) {
-        alert("파일 용량이 10MB를 초과하였습니다.");
+  /**
+   * @TODO onUploadImageA와 onUploadImageB로 분리
+   */
+  const onUploadImage = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files === null) {
         return;
       }
-      if (!!postVoteInfo.imageA) {
-        const formDataB = new FormData();
-        formDataB.append("images", e.target.files[0]);
+
+      if (e.target.files.length === 1) {
+        if (e.target.files[0].size > 2000000) {
+          alert("파일 용량이 2MB를 초과하였습니다.");
+          return;
+        }
+        if (!!postVoteInfo.imageA) {
+          const formDataB = new FormData();
+          formDataB.append("images", e.target.files[0]);
+          try {
+            const dataB = await uploadImageAPI(formDataB);
+            setPostVoteInfo({
+              ...postVoteInfo,
+              imageB: dataB.imageUrl,
+            });
+          } catch (error) {
+            alert(`이미지 업로드에 실패했습니다.${error}`);
+          }
+          return;
+        }
+        const formDataA = new FormData();
+        formDataA.append("images", e.target.files[0]);
         try {
-          const dataB = await uploadImageAPI(formDataB);
+          const dataA = await uploadImageAPI(formDataA);
+
           setPostVoteInfo({
             ...postVoteInfo,
-            imageB: dataB.imageUrl,
+            imageA: dataA.imageUrl,
           });
         } catch (error) {
-          alert(`이미지 업로드에 실패했습니다.${  error}`);
+          alert(`이미지 업로드에 실패했습니다.${error}`);
         }
         return;
       }
-      const formDataA = new FormData();
-      formDataA.append("images", e.target.files[0]);
-      try {
-        const dataA = await uploadImageAPI(formDataA);
 
-        setPostVoteInfo({
-          ...postVoteInfo,
-          imageA: dataA.imageUrl,
-          imageB: "",
-        });
-      } catch (error) {
-        alert(`이미지 업로드에 실패했습니다.${  error}`);
-      }
-      return;
-    }
+      if (e.target.files.length === 2) {
+        if (e.target.files[0].size > 2000000 || e.target.files[1].size > 2000000) {
+          alert("파일 용량이 2MB를 초과하였습니다.");
+          return;
+        }
+        const formDataA = new FormData();
+        const formDataB = new FormData();
+        formDataA.append("images", e.target.files[0]);
+        formDataB.append("images", e.target.files[1]);
+        try {
+          const dataA = await uploadImageAPI(formDataA);
+          const dataB = await uploadImageAPI(formDataB);
 
-    if (e.target.files.length === 2) {
-      if (e.target.files[0].size > 10485760 || e.target.files[1].size > 10485760) {
-        alert("파일 용량이 10MB를 초과하였습니다.");
+          setPostVoteInfo({
+            ...postVoteInfo,
+            imageA: dataA.imageUrl,
+            imageB: dataB.imageUrl,
+          });
+        } catch (error) {
+          alert(`이미지 업로드에 실패했습니다.${error}`);
+        }
         return;
       }
-      const formDataA = new FormData();
-      const formDataB = new FormData();
-      formDataA.append("images", e.target.files[0]);
-      formDataB.append("images", e.target.files[1]);
-      try {
-        const dataA = await uploadImageAPI(formDataA);
-        const dataB = await uploadImageAPI(formDataB);
-
-        setPostVoteInfo({
-          ...postVoteInfo,
-          imageA: dataA.imageUrl,
-          imageB: dataB.imageUrl,
-        });
-      } catch (error) {
-        alert(`이미지 업로드에 실패했습니다.${  error}`);
-      }
-      return;
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    },
+    [postVoteInfo],
+  );
 
   const { mutate: mutateNomalVote } = useMutation(
     (voteInfo: Omit<PostVoteType, "drinkAId" | "drinkBId">) => postNormalVoteAPI(voteInfo),

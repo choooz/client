@@ -5,13 +5,11 @@ import { useMemo } from "react";
 import { useToggle } from "@monorepo/hooks";
 import AorBMark from "components/AorBMark";
 import ImageUploadButton from "components/ImageUploadButton";
-import VoteHeader from "components/VoteHeader";
 import { Button, Input } from "components/index";
 import { media } from "lib/styles";
+import depths from "lib/styles/depths";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { SvgIcX, SvgInfo } from "src/assets/icons/components";
-import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { DrinkInfoType } from "src/types/drink";
 import styled, { css } from "styled-components";
 
@@ -21,8 +19,6 @@ import usePostVoteService from "../services/usePostVoteService";
 
 function PostVoteContainer() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
-  const router = useRouter();
-
   const {
     onChangeVoteText,
     postVoteInfo,
@@ -42,19 +38,13 @@ function PostVoteContainer() {
 
   const { title, detail, titleA, titleB, imageA, imageB } = postVoteInfo;
 
+  /**
+   * @TODO useOutSideClick 적용
+   */
   const [isTooltip, onToggleTooltip] = useToggle(true);
 
   return (
     <Container>
-      <VoteHeader
-        leftButton={
-          <PreviousButton onClick={() => router.back()}>
-            <SvgIcPrevious width={24} height={24} />
-          </PreviousButton>
-        }
-      >
-        등록하기
-      </VoteHeader>
       <FlexBetween>
         <div>
           <GuideText>
@@ -87,13 +77,18 @@ function PostVoteContainer() {
           술 검색하기
         </ButtonStyled>
       </FlexBetween>
-      <label htmlFor="file">
-        <ImageSection>
-          {!imageA && !imageB ? (
+      {!imageA && !imageB ? (
+        <label htmlFor="no-image">
+          <ImageSection>
             <ImageUploadButton width="100%" height="163px" />
-          ) : (
-            <ImageContainer>
-              <ImageWrapper>
+            <ImageUploadInput multiple type="file" id="no-image" onChange={onUploadImage} />
+          </ImageSection>
+        </label>
+      ) : (
+        <ImageSection>
+          <ImageContainer>
+            <ImageWrapper>
+              <label htmlFor="image-a">
                 <Image
                   src={imageA}
                   alt="A이미지"
@@ -104,9 +99,13 @@ function PostVoteContainer() {
                   }}
                 />
                 <AorBMark AorB="A">A</AorBMark>
-              </ImageWrapper>
-              <ImageWrapper>
-                {imageB ? (
+                <ImageUploadButton width="100%" height="100%" />
+                <ImageUploadInput multiple type="file" id="image-a" onChange={onUploadImage} />
+              </label>
+            </ImageWrapper>
+            <ImageWrapper>
+              <label htmlFor="image-b">
+                {imageB && (
                   <Image
                     src={imageB}
                     alt="B이미지"
@@ -116,16 +115,15 @@ function PostVoteContainer() {
                       borderRadius: "10px",
                     }}
                   />
-                ) : (
-                  <ImageUploadButton width="100%" height="100%" />
                 )}
                 <AorBMark AorB="B">B</AorBMark>
-              </ImageWrapper>
-            </ImageContainer>
-          )}
+                <ImageUploadButton width="100%" height="100%" />
+                <ImageUploadInput multiple type="file" id="image-b" onChange={onUploadImage} />
+              </label>
+            </ImageWrapper>
+          </ImageContainer>
         </ImageSection>
-        <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
-      </label>
+      )}
       <VoteOptionText>
         <InputBox>
           <ABInput
@@ -171,12 +169,6 @@ function PostVoteContainer() {
 
 const Container = styled.div`
   padding: 0 20px;
-`;
-
-const PreviousButton = styled(Button)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-  `}
 `;
 
 const FlexBetween = styled.div`
@@ -271,6 +263,7 @@ const InputBox = styled.div`
 
 const Ballon = styled.div`
   position: relative;
+  z-index: ${depths.menu};
 `;
 
 const BalloonText = styled.div`
