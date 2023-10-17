@@ -18,7 +18,6 @@ import {
   YearOfBirthType,
 } from "../constants";
 
-
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;
   onNextStep: () => void;
@@ -144,7 +143,9 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     direction: Direction,
     MBTIKey: "M" | "B" | "T" | "I",
   ): "active" | "inactive" | null => {
-    if (!MBTI[MBTIKey]) {return null;}
+    if (!MBTI[MBTIKey]) {
+      return null;
+    }
     return `${MBTI[MBTIKey] === getMBTI(direction, MBTIKey) ? "" : "in"}active`;
   };
 
@@ -185,50 +186,27 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
 
   const [isWarningModal, onToggleWarningModal] = useToggle();
 
-  const value = useMemo(
-    () => ({
-      activeValue,
-      addUser,
-      buttonDisabled,
-      currentStepIndex,
-      drinkCapacity,
-      gender,
-      isWarningModal,
-      MBTI,
-      onChangeDrinkCapacity,
-      onChangeGender,
-      onChangeMBTI,
-      onChangeYearOfBirth,
-      onDeleteYearOfBirth,
-      onNextStep,
-      onToggleWarningModal,
-      step,
-      stepList,
-      stringfiedMBTI,
-      yearOfBirth,
-    }),
-    [
-      step,
-      onNextStep,
-      stepList,
-      gender,
-      currentStepIndex,
-      drinkCapacity,
-      yearOfBirth,
-      MBTI,
-      stringfiedMBTI,
-      buttonDisabled,
-      onChangeGender,
-      onChangeDrinkCapacity,
-      onChangeYearOfBirth,
-      onDeleteYearOfBirth,
-      onChangeMBTI,
-      activeValue,
-      addUser,
-      isWarningModal,
-      onToggleWarningModal,
-    ],
-  );
+  const value = {
+    activeValue,
+    addUser,
+    buttonDisabled,
+    currentStepIndex,
+    drinkCapacity,
+    gender,
+    isWarningModal,
+    MBTI,
+    onChangeDrinkCapacity,
+    onChangeGender,
+    onChangeMBTI,
+    onChangeYearOfBirth,
+    onDeleteYearOfBirth,
+    onNextStep,
+    onToggleWarningModal,
+    step,
+    stepList,
+    stringfiedMBTI,
+    yearOfBirth,
+  };
 
   return <RegisterContext.Provider value={value}>{children}</RegisterContext.Provider>;
 };

@@ -40,6 +40,7 @@ const MapContainer = () => {
     setTimeout(() => {
       toggleMap();
     }, 600);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { drinksList } = useDrinksMapService({

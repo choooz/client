@@ -117,6 +117,7 @@ export default function useUpdateVoteForm() {
       }
       return;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { mutate: mutateNomalVote } = useMutation(

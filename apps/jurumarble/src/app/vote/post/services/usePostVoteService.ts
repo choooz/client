@@ -110,6 +110,7 @@ export default function usePostVoteService() {
       }
       return;
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { mutate: mutateNomalVote } = useMutation(

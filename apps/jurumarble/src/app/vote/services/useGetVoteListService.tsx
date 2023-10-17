@@ -42,6 +42,7 @@ export default function useInfiniteMainListService({ size, sortBy, keyword }: Pr
 
   useEffect(() => {
     if (nowShowing === mainVoteList.length - SafeRange) {fetchNextPage();}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nowShowing, mainVoteList.length]);
 
   return { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing };

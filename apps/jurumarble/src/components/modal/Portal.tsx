@@ -12,6 +12,7 @@ function Portal({ children, selector }: PortalProps): ReactPortal | null {
 
   useEffect(() => {
     setElement(document.querySelector(selector));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!element) {

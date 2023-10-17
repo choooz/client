@@ -42,6 +42,7 @@ function TestPage() {
     //     router.replace(Path.REGISTER_PAGE);
     //   }
     // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>잠시만 기다려주십시오.</>;

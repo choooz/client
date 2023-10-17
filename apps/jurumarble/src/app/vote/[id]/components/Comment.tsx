@@ -84,6 +84,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
 
   useEffect(() => {
     setCommentForm(content);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [comment]);
   const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle();
 
