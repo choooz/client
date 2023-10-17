@@ -1,5 +1,4 @@
 import { convertLevel } from "lib/utils/formatUserInfo";
-import React from "react";
 import styled from "styled-components";
 
 interface Props {

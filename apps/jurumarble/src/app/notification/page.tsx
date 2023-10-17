@@ -1,13 +1,14 @@
 "use client";
 
-import { Button } from "components/button";
 import VoteHeader from "components/VoteHeader";
+import { Button } from "components/button";
 import { NotificationType } from "lib/apis/notification";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { DrinkImage } from "public/images";
 import { SvgIcPrevious, SvgNotificationCheck } from "src/assets/icons/components";
 import styled, { css, useTheme } from "styled-components";
+
 import useNotificationService from "./services/useNotificationService";
 
 const NOTIFICATION_TYPE: Record<NotificationType, string> = {
@@ -83,7 +84,7 @@ const NotificationList = styled.ul`
   margin-top: 20px;
 `;
 
-const NotificationItem = styled.li<{ isRead: any }>`
+const NotificationItem = styled.li<{ isRead: boolean }>`
   ${({ theme, isRead }) => css`
   background-color: ${isRead && theme.colors.bg_02};
     color: ${isRead ? theme.colors.black_03 : theme.colors.black_02};

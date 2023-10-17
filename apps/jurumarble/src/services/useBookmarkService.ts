@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getBookMarkCheckAPI, postBookmarkAPI } from "lib/apis/bookmark";
 import Path from "lib/Path";
+import { getBookMarkCheckAPI, postBookmarkAPI } from "lib/apis/bookmark";
 import { queryKeys } from "lib/queryKeys";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -43,7 +44,7 @@ export default function useBookmarkService(voteId: PostBookmarkProps) {
       }
     },
 
-    onSettled(_, __, drinkId) {
+    onSettled(_, __) {
       queryClient.invalidateQueries({ queryKey: getBookmarkQueryKey(voteId) });
     },
   });

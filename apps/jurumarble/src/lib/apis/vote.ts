@@ -1,6 +1,7 @@
 import { SERVER_URL } from "lib/constants";
 import { VoteSortType } from "src/types/common";
-import { Content, CommonVoteListResponse } from "src/types/vote";
+import { CommonVoteListResponse, Content } from "src/types/vote";
+
 import { baseApi } from "./http/base";
 import { http } from "./http/http";
 

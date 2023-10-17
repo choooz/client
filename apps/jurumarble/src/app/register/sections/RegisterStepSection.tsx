@@ -1,10 +1,11 @@
 "use client";
 
 import styled from "styled-components";
-import { ContentHeader, Tooltip } from "../components";
+
+import { ContentHeader } from "../components";
+import WarningSmallModal from "../components/WarningModal";
 import { REGISTER_STEPS_CONTENT } from "../constants";
 import { useRegisterContext } from "../contexts";
-import WarningSmallModal from "../components/WarningModal";
 
 export const RegisterStepSection = () => {
   const { step, isWarningModal } = useRegisterContext();
@@ -24,8 +25,4 @@ export const RegisterStepSection = () => {
 
 const Wrapper = styled.div`
   margin: 20px 20px;
-`;
-
-const StyledTooltip = styled(Tooltip)`
-  margin-bottom: 20px;
 `;

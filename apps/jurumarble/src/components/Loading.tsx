@@ -1,12 +1,11 @@
 "use client";
 
-import React from "react";
 import styled from "styled-components";
 
 const Loading = () => {
   return (
     <Box>
-      <div className="loader4"></div>
+      <div className="loader4" />
     </Box>
   );
 };

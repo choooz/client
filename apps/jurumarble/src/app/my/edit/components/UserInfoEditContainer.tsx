@@ -1,13 +1,14 @@
+import { useToggle } from "@monorepo/hooks";
 import { Button } from "components/button";
 import { GENDER } from "lib/constants";
 import useGetUserInfo from "services/useGetUserInfo";
 import styled, { css } from "styled-components";
-import useEditProfileService from "../services/useEditProfileService";
+
 import ImageUpload from "./ImageUpload";
 import SelectDrinkCapacity from "./SelectDrinkCapacity";
 import SelectMBTI from "./SelectMBTI";
 import WithdrawalModal from "./WithdrawalModal";
-import { useToggle } from "@monorepo/hooks";
+import useEditProfileService from "../services/useEditProfileService";
 
 function UserInfoEditContainer() {
   const { userInfo } = useGetUserInfo();
@@ -45,7 +46,7 @@ function UserInfoEditContainer() {
         </GenderAndAgeBox>
       </GenderAndAge>
       <H3>MBTI</H3>
-      <SelectMBTI MBTI={mbti} onChangeMBTI={onChangeMBTI}></SelectMBTI>
+      <SelectMBTI MBTI={mbti} onChangeMBTI={onChangeMBTI} />
       <WarningMessage>MBTI 수정시 2개월간 바꿀 수 없습니다.</WarningMessage>
       <FlexEnd>
         <WithdrawalButton variant="outline" borderRadius="4px" onClick={onToggleWithdrawalModal}>

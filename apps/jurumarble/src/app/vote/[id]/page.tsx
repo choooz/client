@@ -1,14 +1,7 @@
 "use client";
 
-import styled, { css } from "styled-components";
-import VoteWriterBox from "./components/VoteWriterBox";
-import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
-import { useParams } from "next/navigation";
-import useVoteLoadService from "./services/useVoteLoadService";
-import useExecuteVoteService from "./services/useExecuteVoteService";
-import useFilteredStatisticsService from "./services/useFilterStatisticsService";
 import { useMemo, useState } from "react";
-import useBookmarkService from "services/useBookmarkService";
+
 import Loading from "components/Loading";
 import {
   VOTE_AGE_FILTER_LIST,
@@ -16,8 +9,17 @@ import {
   VOTE_GENDER_FILTER_LIST,
   VOTE_MBTI_LIST,
 } from "lib/constants";
-import VoteSmallSelectFilter from "./components/VoteSmallSelectFilter";
 import dynamic from "next/dynamic";
+import { useParams } from "next/navigation";
+import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
+import useBookmarkService from "services/useBookmarkService";
+import styled, { css } from "styled-components";
+
+import VoteSmallSelectFilter from "./components/VoteSmallSelectFilter";
+import VoteWriterBox from "./components/VoteWriterBox";
+import useExecuteVoteService from "./services/useExecuteVoteService";
+import useFilteredStatisticsService from "./services/useFilterStatisticsService";
+import useVoteLoadService from "./services/useVoteLoadService";
 
 const DynamicChipContainer = dynamic(() => import("./components/ChipContainer"));
 const DynamicVoteDescription = dynamic(() => import("./components/VoteDescription"));
@@ -74,14 +76,14 @@ function Detail() {
   } = originalStaticsQuery;
 
   const EmptyImage = useMemo(() => {
-    if (data?.postedUserAlcoholLimit === "LOW") return DrinkCapacityLow;
-    if (data?.postedUserAlcoholLimit === "MEDIUM") return DrinkCapacityMedium;
+    if (data?.postedUserAlcoholLimit === "LOW") {return DrinkCapacityLow;}
+    if (data?.postedUserAlcoholLimit === "MEDIUM") {return DrinkCapacityMedium;}
     return DrinkCapacityHigh;
   }, [data?.postedUserAlcoholLimit]);
 
-  if (isLoading || isStatisticsLoading || isOriginalStatisticsLoading) return <Loading />;
-  if (isError || isStatisticsError || isOriginalStatisticsError) return <div>에러</div>;
-  if (!data || !statistics || !originalStatistics) return <div></div>;
+  if (isLoading || isStatisticsLoading || isOriginalStatisticsLoading) {return <Loading />;}
+  if (isError || isStatisticsError || isOriginalStatisticsError) {return <div>에러</div>;}
+  if (!data || !statistics || !originalStatistics) {return <div />;}
   const {
     detail,
     title,
@@ -110,11 +112,11 @@ function Detail() {
     <Container>
       <VoteWriterBox
         writer={{
+          alchol: postedUserAlcoholLimit,
           nickName: postedUserNickname,
           userAge: postedUserAge,
           userGender: postedUserGender,
           userImage: postedUserImageUrl || EmptyImage,
-          alchol: postedUserAlcoholLimit,
           userMbti: postedUserMbti,
         }}
       />

@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import Path from "lib/Path";
 import { useEffect } from "react";
-import { isLogin } from "lib/utils/auth";
+
+import Path from "lib/Path";
 import { getUserInfoAPI } from "lib/apis/user";
+import { isLogin } from "lib/utils/auth";
+import { usePathname, useRouter } from "next/navigation";
 
 const LOGIN_BLOCK_PATHS = [
   Path.LOGIN_PAGE,

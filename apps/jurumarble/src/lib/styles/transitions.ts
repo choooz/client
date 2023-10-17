@@ -95,15 +95,15 @@ const blink = keyframes`
 `;
 
 const transitions = {
+  blink,
+  delaypopInFromBottom,
   fadeIn,
   fadeOut,
-  popInFromBottom,
-  delaypopInFromBottom,
-  popOutToBottom,
   popIn,
-  slideUp,
+  popInFromBottom,
+  popOutToBottom,
   slideDown,
-  blink,
+  slideUp,
 };
 
 export default transitions;

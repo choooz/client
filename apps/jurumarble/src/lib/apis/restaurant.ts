@@ -1,4 +1,5 @@
 import { SERVER_URL } from "lib/constants";
+
 import { http } from "./http/http";
 
 type CommentType = "votes" | "drinks";

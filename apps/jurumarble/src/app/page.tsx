@@ -1,21 +1,11 @@
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
-import dynamic from "next/dynamic";
 import { getClassNames } from "lib/styles/getClassNames";
-import styles from "./page.module.css";
+import dynamic from "next/dynamic";
+
 import { HydratedDrinkVoteContainer } from "./main/containers/HydratedDrinkVoteContainer";
 import { HydratedHotDrinkContainer } from "./main/containers/HydratedHotDrinkContainer";
-
-const DynamicHotDrinkContainer = dynamic(() => import("./main/components/HotDrinkContainer"), {
-  ssr: false,
-  loading: () => (
-    <div
-      style={{
-        height: "200px",
-      }}
-    />
-  ),
-});
+import styles from "./page.module.css";
 
 const DynamicTodayDrinkRecommendation = dynamic(
   () => import("./main/components/TodayDrinkRecommendation"),

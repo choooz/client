@@ -10,7 +10,9 @@
     "lint": "next lint",
     "gen": "svgr --index-template src/assets/icons/templates/indexTemplate.cjs  --config-file src/assets/icons/config/basic.config.cjs",
     "gen:icon": "yarn gen --out-dir ./src/assets/icons/components ./src/assets/icons",
-    "icon:build": "yarn gen:icon"
+    "icon:build": "yarn gen:icon",
+    "eslint": "eslint -c .eslintrc.js .",
+    "eslint:fix": "yarn eslint --fix"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
@@ -38,10 +40,13 @@
     "@svgr/core": "^8.0.0",
     "@svgr/plugin-jsx": "^8.0.1",
     "@svgr/plugin-prettier": "^8.0.1",
+    "@types/eslint": "^8",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "^18.2.7",
     "@types/styled-components": "^5",
+    "eslint": "^8.51.0",
+    "eslint-config-mogakko": "workspace:*",
     "typescript": "4.9.3",
     "typescript-plugin-css-modules": "^5.0.2"
   }

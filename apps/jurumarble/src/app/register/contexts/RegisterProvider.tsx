@@ -1,20 +1,22 @@
 "use client";
 
+import { createContext, PropsWithChildren, useMemo, useState } from "react";
+
+import { useToggle } from "@monorepo/hooks";
 import { useMutation } from "@tanstack/react-query";
+import Path from "lib/Path";
 import { addUserInfoAPI } from "lib/apis/user";
 import { DrinkCapacityTypes, GenderTypes } from "lib/constants";
-import Path from "lib/Path";
 import { useRouter } from "next/navigation";
-import { createContext, PropsWithChildren, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 import { Direction, MBTIType } from "src/types/register";
-import { useToggle } from "@monorepo/hooks";
+
 import {
   NumberPadTypes,
-  RegisterStepTypes,
   REGISTER_STEPS_CONTENT,
+  RegisterStepTypes,
   YearOfBirthType,
 } from "../constants";
-import { toast } from "react-toastify";
 
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;
@@ -40,30 +42,30 @@ export const RegisterContext = createContext<{
   isWarningModal: boolean;
   onToggleWarningModal: () => void;
 }>({
-  step: "STEP1",
-  onNextStep: () => {},
-  stepList: [],
+  activeValue: () => null,
+  addUser: () => {},
+  buttonDisabled: false,
   currentStepIndex: 0,
-  gender: null,
   drinkCapacity: null,
-  yearOfBirth: "",
+  gender: null,
+  isWarningModal: false,
   MBTI: {
     M: null,
     B: null,
     T: null,
     I: null,
   },
-  stringfiedMBTI: "",
-  buttonDisabled: false,
   onChangeDrinkCapacity: () => {},
   onChangeGender: () => {},
+  onChangeMBTI: () => {},
   onChangeYearOfBirth: () => {},
   onDeleteYearOfBirth: () => {},
-  onChangeMBTI: () => {},
-  activeValue: () => null,
-  addUser: () => {},
-  isWarningModal: false,
+  onNextStep: () => {},
   onToggleWarningModal: () => {},
+  step: "STEP1",
+  stepList: [],
+  stringfiedMBTI: "",
+  yearOfBirth: "",
 });
 
 export const RegisterProvider = ({ children }: PropsWithChildren) => {
@@ -141,7 +143,9 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     direction: Direction,
     MBTIKey: "M" | "B" | "T" | "I",
   ): "active" | "inactive" | null => {
-    if (!MBTI[MBTIKey]) return null;
+    if (!MBTI[MBTIKey]) {
+      return null;
+    }
     return `${MBTI[MBTIKey] === getMBTI(direction, MBTIKey) ? "" : "in"}active`;
   };
 
@@ -182,50 +186,27 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
 
   const [isWarningModal, onToggleWarningModal] = useToggle();
 
-  const value = useMemo(
-    () => ({
-      step,
-      onNextStep,
-      stepList,
-      gender,
-      currentStepIndex,
-      drinkCapacity,
-      yearOfBirth,
-      MBTI,
-      stringfiedMBTI,
-      buttonDisabled,
-      onChangeDrinkCapacity,
-      onChangeGender,
-      onChangeYearOfBirth,
-      onDeleteYearOfBirth,
-      onChangeMBTI,
-      activeValue,
-      addUser,
-      isWarningModal,
-      onToggleWarningModal,
-    }),
-    [
-      step,
-      onNextStep,
-      stepList,
-      gender,
-      currentStepIndex,
-      drinkCapacity,
-      yearOfBirth,
-      MBTI,
-      stringfiedMBTI,
-      buttonDisabled,
-      onChangeGender,
-      onChangeDrinkCapacity,
-      onChangeYearOfBirth,
-      onDeleteYearOfBirth,
-      onChangeMBTI,
-      activeValue,
-      addUser,
-      isWarningModal,
-      onToggleWarningModal,
-    ],
-  );
+  const value = {
+    activeValue,
+    addUser,
+    buttonDisabled,
+    currentStepIndex,
+    drinkCapacity,
+    gender,
+    isWarningModal,
+    MBTI,
+    onChangeDrinkCapacity,
+    onChangeGender,
+    onChangeMBTI,
+    onChangeYearOfBirth,
+    onDeleteYearOfBirth,
+    onNextStep,
+    onToggleWarningModal,
+    step,
+    stepList,
+    stringfiedMBTI,
+    yearOfBirth,
+  };
 
   return <RegisterContext.Provider value={value}>{children}</RegisterContext.Provider>;
 };

@@ -9,7 +9,7 @@ const userStorage = {
     if (typeof window !== "undefined") {
       const user = localStorage.getItem(USER_STORAGE_KEY);
       try {
-        if (!user) return null;
+        if (!user) {return null;}
         const parsedUser = JSON.parse(user) as Token;
         return parsedUser;
       } catch (e) {

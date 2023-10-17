@@ -10,7 +10,7 @@ function ImageUploadButton({ width, height }: Props) {
   const theme = useTheme();
   return (
     <ImageWrapper width={width} height={height}>
-      <SvgIcCamera width={24} height={24} fill={theme.colors.black_01}></SvgIcCamera>
+      <SvgIcCamera width={24} height={24} fill={theme.colors.black_01} />
     </ImageWrapper>
   );
 }

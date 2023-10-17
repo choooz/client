@@ -1,8 +1,8 @@
-import { Button, ModalTemplate } from "components/index";
+import { useToggle } from "@monorepo/hooks";
 import VoteHeader from "components/VoteHeader";
+import { Button, ModalTemplate } from "components/index";
 import { SvgIcX } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
-import { useToggle } from "@monorepo/hooks";
 
 interface Props {
   onToggleWithdrawalModal: () => void;

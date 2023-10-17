@@ -1,14 +1,15 @@
 "use client";
 
-import styled, { css } from "styled-components";
-import useGetMyCreatedVoteListService from "../services/useGetMyCreatedVoteListService";
-import VoteItem from "./VoteItem";
-import VoteCountContainer from "./VoteCountContainer";
-import useGetMyBookmarkedVoteListService from "../services/useGetMyBookmarkedVoteListService";
-import useGetMyParticipatedVoteListService from "../services/useGetMyParticipatedVoteListService";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCreateQueryString } from "hooks/useCreateQueryString";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { TabList } from "src/types/my";
+import styled, { css } from "styled-components";
+
+import VoteCountContainer from "./VoteCountContainer";
+import VoteItem from "./VoteItem";
+import useGetMyBookmarkedVoteListService from "../services/useGetMyBookmarkedVoteListService";
+import useGetMyCreatedVoteListService from "../services/useGetMyCreatedVoteListService";
+import useGetMyParticipatedVoteListService from "../services/useGetMyParticipatedVoteListService";
 
 /**
  * @TODO 타입 수정 필요
@@ -29,7 +30,7 @@ function VoteListContainer() {
 
   const selectedTab = (searchParams.get("selectedTab") as TabList) ?? "created-vote";
   const onClickSelectedTab = (tab: TabList) => {
-    router.replace(pathname + "?" + createQueryString("selectedTab", tab));
+    router.replace(`${pathname  }?${  createQueryString("selectedTab", tab)}`);
   };
 
   const { myVoteList, subscribe } = MY_VOTE_LIST_SERVICE[selectedTab]({
@@ -53,7 +54,7 @@ function VoteListContainer() {
             />
           ))}
         </VoteList>
-        <div ref={subscribe}></div>
+        <div ref={subscribe} />
       </Container>
     </>
   );

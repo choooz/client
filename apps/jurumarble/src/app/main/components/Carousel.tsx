@@ -1,13 +1,14 @@
-import { GetHotDrinkResponse } from "lib/apis/drink";
+import { useRef } from "react";
+
+import { ContentSwiper } from "@monorepo/ui";
 import Path from "lib/Path";
+import { GetHotDrinkResponse } from "lib/apis/drink";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import styled, { css } from "styled-components";
 import { SvgIcPrevious, SvgNext } from "src/assets/icons/components";
-import { ContentSwiper } from "@monorepo/ui";
-import { Autoplay } from "swiper";
-import SwiperCore from "swiper";
-import { useRef } from "react";
+import styled, { css } from "styled-components";
+import SwiperCore, { Autoplay } from "swiper";
+
 
 interface Props {
   hotDrinkList: GetHotDrinkResponse[];

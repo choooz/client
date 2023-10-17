@@ -1,6 +1,8 @@
-import { transitions } from "lib/styles";
 import React from "react";
+
+import { transitions } from "lib/styles";
 import styled from "styled-components";
+
 import Portal from "./Portal";
 
 interface ModalInnerStyled {

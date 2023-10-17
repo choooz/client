@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import { TextareaHTMLAttributes } from "react";
+
 import styled, { css } from "styled-components";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -21,7 +22,7 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   autoFocus?: boolean;
 }
 
-function Textarea({ width, height, variant, ...rest }: TextareaProps) {
+function Textarea({ width, height, ...rest }: TextareaProps) {
   return <TextareaStyled width={width} height={height} {...rest} />;
 }
 

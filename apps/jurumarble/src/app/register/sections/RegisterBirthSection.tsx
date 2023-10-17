@@ -1,5 +1,6 @@
 import { media, transitions } from "lib/styles";
 import styled, { css } from "styled-components";
+
 import { NumberPad, NumberPadTypes } from "../constants";
 import { useRegisterContext } from "../contexts";
 

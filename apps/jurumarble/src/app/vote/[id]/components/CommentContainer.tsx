@@ -1,13 +1,14 @@
+import { useState } from "react";
+
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "lib/queryKeys";
-import Link from "next/link";
-import { useState } from "react";
 import styled from "styled-components";
+
 // import useCommentFilter from "../hooks/useCommentFilter";
-import useCommentServices from "../services/useCommentServices";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import CommentToolBar from "./CommentToolbar";
+import useCommentServices from "../services/useCommentServices";
 
 interface Props {
   postId: number;
@@ -43,8 +44,12 @@ function CommentContainer({ postId }: Props) {
     );
   };
 
-  if (isError) return <div>에러</div>;
-  if (!comments) return <div>데이터 없음</div>;
+  if (isError) {
+    return <div>에러</div>;
+  }
+  if (!comments) {
+    return <div>데이터 없음</div>;
+  }
 
   const commentList = comments.pages.flatMap((page) => page.content);
 
@@ -86,19 +91,19 @@ function CommentContainer({ postId }: Props) {
                 postId={Number(postId)}
                 voteType="votes"
                 comment={{
-                  id,
-                  content,
                   age,
+                  alcoholLimitType,
+                  content,
                   createdDate,
                   gender,
                   hateCount,
+                  id,
+                  imageUrl,
                   likeCount,
                   mbti,
                   nickName,
-                  userId: userId,
                   restaurant,
-                  alcoholLimitType,
-                  imageUrl,
+                  userId: userId,
                 }}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}

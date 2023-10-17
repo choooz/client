@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+
 import { SvgStamp } from "src/assets/icons/components";
 import styled, { css, useTheme } from "styled-components";
+
 import useGetDrinkRecommendationListService from "../services/useGetDrinkRecommendationListService";
 
 const SLIDE_MOVE_COUNT = 1;
@@ -14,7 +16,7 @@ function TodayDrinkRecommendation() {
   const slideRef = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(1);
   const [isAnimation, setIsAnimation] = useState(true);
-  const [isFlowing, setIsFlowing] = useState(true);
+  const [isFlowing, _] = useState(true);
 
   const date = new Date();
   const drinkRecommendationList = useGetDrinkRecommendationListService({
@@ -23,7 +25,9 @@ function TodayDrinkRecommendation() {
   });
 
   useEffect(() => {
-    if (!slideRef.current) return;
+    if (!slideRef.current) {
+      return;
+    }
 
     if (currentSlide === ORIGINAL_IMAGE_LENGTH + 1) {
       setTimeout(() => {

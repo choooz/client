@@ -1,4 +1,5 @@
 import type { SVGProps } from "react";
+
 const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="1em"
