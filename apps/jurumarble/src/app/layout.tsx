@@ -1,4 +1,3 @@
-import StyledLayout from "components/StyledLayout";
 import { pretandard } from "lib/localFont";
 import ReactQueryProvider from "lib/ReactQueryProvider";
 import StyledComponents from "lib/styles/StyledComponents";
@@ -10,6 +9,8 @@ import AuthProcess from "components/AuthProcess";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { PageLayout } from "components/layouts";
+import "lib/styles/global.css";
 
 export const metadata: Metadata = {
   title: "주루마블",
@@ -27,12 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={pretandard.className} suppressHydrationWarning={true}>
         <ReactQueryProvider>
           <StyledComponents>
-            <StyledLayout>
+            <PageLayout>
               <div id="portal" />
               <AuthProcess />
               {children}
               <ToastContainer position="top-center" autoClose={2000} hideProgressBar />
-            </StyledLayout>
+            </PageLayout>
           </StyledComponents>
         </ReactQueryProvider>
       </body>
