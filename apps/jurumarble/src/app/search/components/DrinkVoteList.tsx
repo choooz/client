@@ -1,8 +1,8 @@
-import { Button } from "components/button";
 import { useSearchParams } from "next/navigation";
-import styled, { css } from "styled-components";
-import useVoteDrinkService from "../services/useVoteDrinkService";
+import styled from "styled-components";
+
 import DrinkVoteItem from "./DrinkVoteItem";
+import useVoteDrinkService from "../services/useVoteDrinkService";
 
 interface Props {
   searchText: string;
@@ -32,7 +32,7 @@ function DrinkVoteList({ searchText, sortOption, regionOption }: Props) {
       {voteDrinkList.map((voteDrink, index) => (
         <DrinkVoteItem key={`drinkVoteItem_${index}`} voteDrink={voteDrink} />
       ))}
-      {selectedTab === "drinkVote" && <div ref={subscribe}></div>}
+      {selectedTab === "drinkVote" && <div ref={subscribe} />}
     </Container>
   );
 }

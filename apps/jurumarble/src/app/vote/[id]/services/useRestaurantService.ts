@@ -1,7 +1,7 @@
+import { useInfiniteScroll } from "@monorepo/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getRestaurantAPI } from "lib/apis/restaurant";
 import { queryKeys } from "lib/queryKeys";
-import { useInfiniteScroll } from "@monorepo/hooks";
 
 type GetRestaurantListParams = Exclude<Parameters<typeof getRestaurantAPI>[0], undefined>;
 
@@ -18,7 +18,7 @@ export default function useRestaurantService(params: GetRestaurantListParams) {
     },
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) return undefined;
+        if (last) {return undefined;}
         return {
           page: number + 2,
         };

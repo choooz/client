@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getIsEnjoyedDrinkAPI, postDrinkEnjoyAPI } from "lib/apis/drink";
 import { queryKeys } from "lib/queryKeys";

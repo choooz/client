@@ -1,7 +1,7 @@
 import { convertAge } from "lib/utils/formatUserInfo";
 import Image, { StaticImageData } from "next/image";
-import React from "react";
 import styled, { css } from "styled-components";
+
 import AlcholLevelTag from "./AlcholLevelTag";
 
 interface Props {

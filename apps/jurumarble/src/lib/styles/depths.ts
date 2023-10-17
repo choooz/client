@@ -2,19 +2,19 @@
  * @NOTE z-index
  */
 const depths = {
-  overlay: 100,
-  header: 800,
-  sidebar: 900,
-  editorToolbar: 925,
-  hoverPreview: 950,
-  modalOverlay: 2000,
-  modal: 3000,
-  menu: 4000,
-  toasts: 5000,
-  popover: 9000,
-  titleBarDivider: 10000,
-  loadingIndicatorBar: 20000,
   commandBar: 30000,
+  editorToolbar: 925,
+  header: 800,
+  hoverPreview: 950,
+  loadingIndicatorBar: 20000,
+  menu: 4000,
+  modal: 3000,
+  modalOverlay: 2000,
+  overlay: 100,
+  popover: 9000,
+  sidebar: 900,
+  titleBarDivider: 10000,
+  toasts: 5000,
 };
 
 export default depths;

@@ -1,8 +1,8 @@
 "use client";
 
-import styled, { css } from "styled-components";
 import Image from "next/image";
 import { MainBannerImage } from "public/images";
+import styled, { css } from "styled-components";
 
 function Banner() {
   return (

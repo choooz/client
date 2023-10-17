@@ -1,4 +1,5 @@
 import Path from "lib/Path";
+
 import userStorage from "./userStorage";
 
 export function logout() {
@@ -11,7 +12,7 @@ export function logout() {
 export function isLogin() {
   if (typeof window !== "undefined") {
     const user = userStorage.get();
-    if (!user) return false;
+    if (!user) {return false;}
 
     const { accessToken } = user;
     return !!accessToken;

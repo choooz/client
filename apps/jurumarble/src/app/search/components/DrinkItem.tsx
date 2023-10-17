@@ -1,12 +1,11 @@
+import { RatioFrame } from "@monorepo/ui";
 import Chip from "components/Chip";
-
 import { transitions } from "lib/styles";
 import Image from "next/image";
 import useDrinkStampService from "services/useDrinkStampService";
 import SvgStamp from "src/assets/icons/components/IcStamp";
 import { DrinkInfo } from "src/types/drink";
 import styled, { css, useTheme } from "styled-components";
-import { RatioFrame } from "@monorepo/ui";
 
 interface Props {
   drinkInfo: DrinkInfo;

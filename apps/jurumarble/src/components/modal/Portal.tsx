@@ -1,4 +1,5 @@
-import { ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { ReactNode, ReactPortal, useEffect, useState } from "react";
+
 import ReactDOM from "react-dom";
 
 interface PortalProps {
@@ -11,6 +12,7 @@ function Portal({ children, selector }: PortalProps): ReactPortal | null {
 
   useEffect(() => {
     setElement(document.querySelector(selector));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!element) {

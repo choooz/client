@@ -1,28 +1,23 @@
+import React, { useEffect, useMemo, useState } from "react";
+
 import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
 import NonWriterBox from "app/vote/components/NonWriterBox";
 import { Button } from "components/button";
 import { convertAge, convertGender } from "lib/utils/formatUserInfo";
 import Image from "next/image";
-import { ExImg1 } from "public/images";
-import React, { useEffect, useMemo, useState } from "react";
+import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
 import { toast } from "react-toastify";
 import useGetUserInfo from "services/useGetUserInfo";
 import { SvgIcMapPin } from "src/assets/icons/components";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled, { css } from "styled-components";
-import useCommentDeleteService from "../services/useCommentDeleteService";
-import useCommentReportService from "../services/useCommentReportService";
+
 import AlcholLevelTag from "./AlcholLevelTag";
 import CommentPutForm from "./CommentPutForm";
 import SearchRestaurantModal from "./SearchRestaurantModal";
-import {
-  DrinkCapacityHigh,
-  DrinkCapacityLow,
-  DrinkCapacityMedium,
-  Female,
-  Male,
-} from "public/images";
+import useCommentDeleteService from "../services/useCommentDeleteService";
+import useCommentReportService from "../services/useCommentReportService";
 
 interface Props {
   voteType: "drinks" | "votes";
@@ -89,12 +84,17 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
 
   useEffect(() => {
     setCommentForm(content);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [comment]);
   const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle();
 
   const EmptyImage = useMemo(() => {
-    if (alcoholLimitType === "LOW") return DrinkCapacityLow;
-    if (alcoholLimitType === "MEDIUM") return DrinkCapacityMedium;
+    if (alcoholLimitType === "LOW") {
+      return DrinkCapacityLow;
+    }
+    if (alcoholLimitType === "MEDIUM") {
+      return DrinkCapacityMedium;
+    }
     return DrinkCapacityHigh;
   }, [alcoholLimitType]);
 
@@ -335,15 +335,6 @@ const CommentInfo = styled.div`
   ${({ theme }) => css`
     color: ${theme.colors.black_04};
     ${theme.typography.caption_chip}
-  `}
-`;
-
-const Comma = styled.div`
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  ${({ theme }) => css`
-    color: ${theme.colors.black_05};
   `}
 `;
 

@@ -1,7 +1,7 @@
+import { useInfiniteScroll } from "@monorepo/hooks";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getVoteDrinkList } from "lib/apis/vote";
 import { queryKeys } from "lib/queryKeys";
-import { useInfiniteScroll } from "@monorepo/hooks";
 
 type SearchVoteDrinkServiceProps = Exclude<Parameters<typeof getVoteDrinkList>[0], undefined>;
 
@@ -20,7 +20,7 @@ export default function useVoteDrinkService(params: SearchVoteDrinkServiceProps)
       }),
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) return undefined;
+        if (last) {return undefined;}
         return {
           page: number + 1,
         };

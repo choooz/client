@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { getFilterStatisticsById } from "lib/apis/statistics";
-
 import { reactQueryKeys } from "lib/queryKeys";
 
 export default function useFilteredStatisticsService(

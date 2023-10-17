@@ -44,14 +44,6 @@ const H2 = styled.h2`
   `}
 `;
 
-const H3 = styled.h3`
-  ${({ theme }) => css`
-    ${theme.typography.body_long03}
-    color: ${theme.colors.black_02};
-    margin-top: 8px;
-  `}
-`;
-
 const MainColor = styled.span`
   ${({ theme }) => css`
     color: ${theme.colors.main_01};

@@ -1,9 +1,8 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
-import { AorB, getVotingCheck, postExecuteVote } from "lib/apis/vote";
-
-import { queryKeys, reactQueryKeys } from "lib/queryKeys";
 import { useState } from "react";
+
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AorB, getVotingCheck, postExecuteVote } from "lib/apis/vote";
+import { queryKeys, reactQueryKeys } from "lib/queryKeys";
 
 export default function useExecuteVoteService(voteId: number) {
   const [select, setSelect] = useState<{ choice: AorB | null }>({ choice: null });
@@ -23,7 +22,7 @@ export default function useExecuteVoteService(voteId: number) {
     onSuccess: (data) => {
       if (data.voted) {
         setSelect({ choice: data.userChoice });
-      } else setSelect({ choice: null });
+      } else {setSelect({ choice: null });}
     },
     onError: () => {
       setSelect({ choice: null });

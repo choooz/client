@@ -1,7 +1,8 @@
 "use client";
 
-import { TabList, TAB_LIST } from "src/types/my";
+import { TAB_LIST, TabList } from "src/types/my";
 import styled, { css } from "styled-components";
+
 import useGetTheNumberOfMyVoteService from "../services/useGetCountedVoteService";
 
 interface Props {

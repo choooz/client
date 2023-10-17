@@ -1,7 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteVote } from "lib/apis/vote";
-
 import { reactQueryKeys } from "lib/queryKeys";
 
 export default function useVoteDeleteService(voteId: number) {

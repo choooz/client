@@ -1,9 +1,9 @@
 "use client";
 
+import { FormEvent, forwardRef, MouseEvent } from "react";
+
 import { Button } from "components/button";
 import { Input } from "components/input";
-import { FormEvent, forwardRef, MouseEvent } from "react";
-import { SvgIcX } from "src/assets/icons/components";
 import SvgIcSearch from "src/assets/icons/components/IcSearch";
 import styled, { css, useTheme } from "styled-components";
 
@@ -32,7 +32,7 @@ const SearchInput = forwardRef<HTMLInputElement, Props>(
           onChange={(e) => {
             onChangeSearchText(e.target.value);
           }}
-        ></InputStyled>
+        />
         <SearchButton onClick={eventHandler}>
           <SvgIcSearch width={22} height={22} fill={theme.colors.black_04} />
           {/* <SvgIcX

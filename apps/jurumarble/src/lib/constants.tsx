@@ -6,6 +6,7 @@ import {
   Female,
   Male,
 } from "public/images";
+
 import Path from "./Path";
 
 export const CLIENT_URL = process.env.NEXT_PUBLIC_CLIENT_URL || "";

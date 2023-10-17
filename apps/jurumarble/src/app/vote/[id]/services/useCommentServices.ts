@@ -7,7 +7,6 @@ import {
   postLikeComment,
 } from "lib/apis/comment";
 import { queryKeys, reactQueryKeys } from "lib/queryKeys";
-import React from "react";
 
 export default function useCommentServices(
   voteId: number,
@@ -42,7 +41,9 @@ export default function useCommentServices(
     {
       getNextPageParam: (lastPage, pages) => {
         // @NOTE 백엔드에서 last 작동이 안되어 주석
-        if (lastPage.last) return undefined;
+        if (lastPage.last) {
+          return undefined;
+        }
         return pages.length + 1;
       },
       keepPreviousData: true,
@@ -73,5 +74,5 @@ export default function useCommentServices(
     postComment(commentType, voteId, body),
   );
 
-  return { comments, isLoading, isError, fetchNextPage, mutateLike, mutateHate, mutateComment };
+  return { comments, fetchNextPage, isError, isLoading, mutateComment, mutateHate, mutateLike };
 }

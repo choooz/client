@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { useQueryClient } from "@tanstack/react-query";
 import Comment from "app/vote/[id]/components/Comment";
 import CommentForm from "app/vote/[id]/components/CommentForm";
@@ -5,7 +7,6 @@ import CommentToolBar from "app/vote/[id]/components/CommentToolbar";
 import useCommentServices from "app/vote/[id]/services/useCommentServices";
 import { queryKeys } from "lib/queryKeys";
 import { useParams } from "next/navigation";
-import { useState } from "react";
 import styled from "styled-components";
 
 function DrinkCommentContainer() {
@@ -40,8 +41,8 @@ function DrinkCommentContainer() {
     );
   };
 
-  if (isError) return <div>에러</div>;
-  if (!comments) return <div>데이터 없음</div>;
+  if (isError) {return <div>에러</div>;}
+  if (!comments) {return <div>데이터 없음</div>;}
 
   const commentList = comments.pages.flatMap((page) => page.content);
 
@@ -83,19 +84,19 @@ function DrinkCommentContainer() {
                 postId={Number(postId)}
                 voteType="drinks"
                 comment={{
-                  id,
-                  content,
                   age,
+                  alcoholLimitType,
+                  content,
                   createdDate,
                   gender,
                   hateCount,
+                  id,
+                  imageUrl,
                   likeCount,
                   mbti,
                   nickName,
-                  userId: userId,
                   restaurant,
-                  alcoholLimitType,
-                  imageUrl,
+                  userId: userId,
                 }}
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}

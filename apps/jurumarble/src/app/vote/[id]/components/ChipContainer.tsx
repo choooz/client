@@ -1,21 +1,20 @@
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import { UseMutateFunction } from "@tanstack/react-query";
+import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
+import NonWriterBox from "app/vote/components/NonWriterBox";
 import Chip from "components/Chip";
-import React from "react";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
+import Path from "lib/Path";
+import { AorB } from "lib/apis/vote";
+import { formatDate } from "lib/utils/formatDate";
+import { useRouter } from "next/navigation";
+import useGetUserInfo from "services/useGetUserInfo";
 import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
+import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import SvgIcMenu from "src/assets/icons/components/IcMenu";
 import styled from "styled-components";
-import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
-import useGetUserInfo from "services/useGetUserInfo";
-import { useRouter } from "next/navigation";
-import Path from "lib/Path";
+
 import useVoteDeleteService from "../services/useVoteDeleteService";
-import { formatDate } from "lib/utils/formatDate";
-import NonWriterBox from "app/vote/components/NonWriterBox";
-import { toast } from "react-toastify";
 import useVoteReportService from "../services/useVoteReportService";
-import { AorB } from "lib/apis/vote";
 
 interface Props {
   title: string;

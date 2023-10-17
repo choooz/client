@@ -2,6 +2,7 @@ import { dehydrate } from "@tanstack/query-core";
 import { getHotDrinkVote } from "lib/apis/vote/getHotDrinkVote";
 import getQueryClient from "src/modules/getQueryClient";
 import HydrateOnClient from "src/modules/hydrateOnClient";
+
 import HotDrinkVoteContainer from "../components/HotDrinkVoteContainer";
 import { hotDrinkVoteQueryKey } from "../services/queryKey";
 
