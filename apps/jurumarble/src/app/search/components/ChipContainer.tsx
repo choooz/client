@@ -1,8 +1,7 @@
 import { UseMutateFunction } from "@tanstack/react-query";
 import Chip from "components/Chip";
-import React from "react";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
+import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import styled from "styled-components";
 
 interface Props {
@@ -20,7 +19,7 @@ const ChipContainer = ({ date, title, region, mutateBookMark, isBookmark, votedC
       <TagRow>
         <FlexRow>
           {region && <Chip variant="region">{region}</Chip>}
-          <Chip variant="numberOfParticipants">{votedCount}명이 즐겼어요</Chip>
+          <Chip variant="numberOfParticipants">{votedCount}명이 참여중</Chip>
         </FlexRow>
         <FlexRow>
           {isBookmark ? (

@@ -1,6 +1,7 @@
-import { useToggle, useOutsideClick } from "@monorepo/hooks";
-import { REGION_LIST } from "lib/constants";
 import { useId } from "react";
+
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
+import { REGION_LIST } from "lib/constants";
 import { SvgArrowDown } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
 

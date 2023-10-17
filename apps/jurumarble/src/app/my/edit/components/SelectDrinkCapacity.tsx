@@ -1,9 +1,12 @@
-import { ALCOHOL_LEVEL_LIST } from "lib/constants";
-import styled, { css } from "styled-components";
-import { useToggle, useOutsideClick } from "@monorepo/hooks";
-import { SvgArrowDown } from "src/assets/icons/components";
 import { useId } from "react";
+
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
+import { ALCOHOL_LEVEL_LIST } from "lib/constants";
 import depths from "lib/styles/depths";
+import { SvgArrowDown } from "src/assets/icons/components";
+import styled, { css } from "styled-components";
+
+
 
 interface Props {
   alcoholLimit: string;

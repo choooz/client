@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteComment, putComment } from "lib/apis/comment";
-import { queryKeys, reactQueryKeys } from "lib/queryKeys";
+import { queryKeys } from "lib/queryKeys";
 
 export default function useCommentDeleteService(
   commentType: "votes" | "drinks",

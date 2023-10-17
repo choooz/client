@@ -1,5 +1,5 @@
-import { Button } from "components/button";
 import VoteHeader from "components/VoteHeader";
+import { Button } from "components/button";
 import { useRouter } from "next/navigation";
 import { SvgIcPrevious } from "src/assets/icons/components";
 import styled, { css } from "styled-components";

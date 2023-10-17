@@ -1,14 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { Button } from "components/button";
 import Chip from "components/Chip";
 import Loading from "components/Loading";
 import VoteHeader from "components/VoteHeader";
+import { Button } from "components/button";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
-import React from "react";
 import useDrinkStampService from "services/useDrinkStampService";
 import { SvgHeaderSearch, SvgIcPrevious, SvgStamp } from "src/assets/icons/components";
 import styled, { css, useTheme } from "styled-components";
+
 import useDrinkLoadService from "../services/useDrinkLoadService";
 
 const DrinkInfoContainer = () => {
@@ -23,9 +22,15 @@ const DrinkInfoContainer = () => {
   const { colors } = useTheme();
   const stampColor = isStampedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
-  if (isLoading) return <Loading />;
-  if (isError) return <></>;
-  if (!data) return <></>;
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <></>;
+  }
+  if (!data) {
+    return <></>;
+  }
 
   const {
     name,
@@ -35,7 +40,6 @@ const DrinkInfoContainer = () => {
     rawMaterial,
     alcoholicBeverage,
     capacity,
-    drinkId,
     enjoyCount,
     price,
     type,

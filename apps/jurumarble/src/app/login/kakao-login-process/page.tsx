@@ -1,13 +1,14 @@
 "use client";
 
-import { kakaoLoginAPI } from "lib/apis/auth";
-import { KAKAO_LOGIN_REDIRECT_URL } from "lib/constants";
-import Path from "lib/Path";
-import userStorage from "lib/utils/userStorage";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-function kakaoLoginProcess() {
+import Path from "lib/Path";
+import { kakaoLoginAPI } from "lib/apis/auth";
+import { KAKAO_LOGIN_REDIRECT_URL } from "lib/constants";
+import userStorage from "lib/utils/userStorage";
+import { useRouter, useSearchParams } from "next/navigation";
+
+function KakaoLoginProcess() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -17,6 +18,7 @@ function kakaoLoginProcess() {
     if (code) {
       kakaoLogin();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   const kakaoLogin = async () => {
@@ -36,4 +38,4 @@ function kakaoLoginProcess() {
   return <></>;
 }
 
-export default kakaoLoginProcess;
+export default KakaoLoginProcess;

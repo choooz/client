@@ -1,26 +1,27 @@
 import React, { useCallback, useState } from "react";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import Path from "lib/Path";
 import { uploadImageAPI } from "lib/apis/common";
 import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
-import { PostVoteType } from "src/types/vote";
-import Path from "lib/Path";
-import { DrinkInfoType } from "src/types/drink";
 import { queryKeys } from "lib/queryKeys";
+import { useRouter } from "next/navigation";
+import { DrinkInfoType } from "src/types/drink";
+import { PostVoteType } from "src/types/vote";
 
 export default function usePostVoteService() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const [postVoteInfo, setPostVoteInfo] = useState<PostVoteType>({
-    title: "",
     detail: "",
-    titleA: "",
-    titleB: "",
-    imageA: "",
-    imageB: "",
     drinkAId: 0,
     drinkBId: 0,
+    imageA: "",
+    imageB: "",
+    title: "",
+    titleA: "",
+    titleB: "",
   });
 
   const { title, detail, titleA, titleB, imageA, imageB, drinkAId, drinkBId } = postVoteInfo;
@@ -39,77 +40,84 @@ export default function usePostVoteService() {
      */
     setPostVoteInfo((prev) => ({
       ...prev,
-      titleA: selectedDrinkList[0].name,
-      titleB: selectedDrinkList[1].name,
-      imageA: selectedDrinkList[0].image,
-      imageB: selectedDrinkList[1].image,
       drinkAId: selectedDrinkList[0].id,
       drinkBId: selectedDrinkList[1].id,
+      imageA: selectedDrinkList[0].image,
+      imageB: selectedDrinkList[1].image,
+      titleA: selectedDrinkList[0].name,
+      titleB: selectedDrinkList[1].name,
     }));
   };
 
-  const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files === null) return;
-
-    if (e.target.files.length === 1) {
-      if (e.target.files[0].size > 10485760) {
-        alert("파일 용량이 10MB를 초과하였습니다.");
+  /**
+   * @TODO onUploadImageA와 onUploadImageB로 분리
+   */
+  const onUploadImage = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files === null) {
         return;
       }
-      if (!!postVoteInfo.imageA) {
-        const formDataB = new FormData();
-        formDataB.append("images", e.target.files[0]);
+
+      if (e.target.files.length === 1) {
+        if (e.target.files[0].size > 2000000) {
+          alert("파일 용량이 2MB를 초과하였습니다.");
+          return;
+        }
+        if (!!postVoteInfo.imageA) {
+          const formDataB = new FormData();
+          formDataB.append("images", e.target.files[0]);
+          try {
+            const dataB = await uploadImageAPI(formDataB);
+            setPostVoteInfo({
+              ...postVoteInfo,
+              imageB: dataB.imageUrl,
+            });
+          } catch (error) {
+            alert(`이미지 업로드에 실패했습니다.${error}`);
+          }
+          return;
+        }
+        const formDataA = new FormData();
+        formDataA.append("images", e.target.files[0]);
         try {
-          const dataB = await uploadImageAPI(formDataB);
+          const dataA = await uploadImageAPI(formDataA);
+
           setPostVoteInfo({
             ...postVoteInfo,
-            imageB: dataB.imageUrl,
+            imageA: dataA.imageUrl,
           });
         } catch (error) {
-          alert("이미지 업로드에 실패했습니다." + error);
+          alert(`이미지 업로드에 실패했습니다.${error}`);
         }
         return;
       }
-      const formDataA = new FormData();
-      formDataA.append("images", e.target.files[0]);
-      try {
-        const dataA = await uploadImageAPI(formDataA);
 
-        setPostVoteInfo({
-          ...postVoteInfo,
-          imageA: dataA.imageUrl,
-          imageB: "",
-        });
-      } catch (error) {
-        alert("이미지 업로드에 실패했습니다." + error);
-      }
-      return;
-    }
+      if (e.target.files.length === 2) {
+        if (e.target.files[0].size > 2000000 || e.target.files[1].size > 2000000) {
+          alert("파일 용량이 2MB를 초과하였습니다.");
+          return;
+        }
+        const formDataA = new FormData();
+        const formDataB = new FormData();
+        formDataA.append("images", e.target.files[0]);
+        formDataB.append("images", e.target.files[1]);
+        try {
+          const dataA = await uploadImageAPI(formDataA);
+          const dataB = await uploadImageAPI(formDataB);
 
-    if (e.target.files.length === 2) {
-      if (e.target.files[0].size > 10485760 || e.target.files[1].size > 10485760) {
-        alert("파일 용량이 10MB를 초과하였습니다.");
+          setPostVoteInfo({
+            ...postVoteInfo,
+            imageA: dataA.imageUrl,
+            imageB: dataB.imageUrl,
+          });
+        } catch (error) {
+          alert(`이미지 업로드에 실패했습니다.${error}`);
+        }
         return;
       }
-      const formDataA = new FormData();
-      const formDataB = new FormData();
-      formDataA.append("images", e.target.files[0]);
-      formDataB.append("images", e.target.files[1]);
-      try {
-        const dataA = await uploadImageAPI(formDataA);
-        const dataB = await uploadImageAPI(formDataB);
-
-        setPostVoteInfo({
-          ...postVoteInfo,
-          imageA: dataA.imageUrl,
-          imageB: dataB.imageUrl,
-        });
-      } catch (error) {
-        alert("이미지 업로드에 실패했습니다." + error);
-      }
-      return;
-    }
-  }, []);
+    },
+    [postVoteInfo],
+  );
 
   const { mutate: mutateNomalVote } = useMutation(
     (voteInfo: Omit<PostVoteType, "drinkAId" | "drinkBId">) => postNormalVoteAPI(voteInfo),
@@ -133,7 +141,7 @@ export default function usePostVoteService() {
 
   const onClickPostVoteComplete = () => {
     postVoteInfo.drinkAId === 0
-      ? mutateNomalVote({ title, detail, titleA, titleB, imageA, imageB })
+      ? mutateNomalVote({ detail, imageA, imageB, title, titleA, titleB })
       : mutateDrinkVote({ title, detail, drinkAId, drinkBId });
   };
 

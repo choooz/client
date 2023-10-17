@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getHotDrinkList } from "lib/apis/drink";
-import { queryKeys } from "lib/queryKeys";
 
-const getQueryKey = () => [queryKeys.SEARCH_DRINK_LIST];
+import { hotDrinkListQueryKey } from "./queryKey";
 
 export default function useGetHotDrinkListService() {
-  const { data } = useQuery(getQueryKey(), getHotDrinkList);
+  const { data } = useQuery([hotDrinkListQueryKey], getHotDrinkList);
 
   return { data };
 }

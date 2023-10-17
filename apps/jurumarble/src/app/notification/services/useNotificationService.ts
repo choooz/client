@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getNotificationListAPI, readNotificationAPI } from "lib/apis/notification";
 import { queryKeys } from "lib/queryKeys";

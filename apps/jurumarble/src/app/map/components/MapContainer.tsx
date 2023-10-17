@@ -1,21 +1,20 @@
 "use client";
 
-import { Button } from "components/button";
-import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
-import useDrinksMapService from "../services/useDrinksMapService";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { useEffect, useRef, useState } from "react";
+
 import { useToggle } from "@react-hookz/web";
-import RegionBottomSheet from "./RegionBottomsheet";
-import { ExImg1 } from "public/images";
-import RegionSmallSelect from "./RegionSmallSelect";
-import { DRINK_INFO_SORT_LIST } from "lib/constants";
 import DrinkItem from "app/stamp/components/DrinkItem";
-import { useGeoLocation } from "../hooks/useGeoLocation";
-import SvgIcMyLocationFloating from "src/assets/icons/ic_my_location_floating.svg";
-import SvgIcPin from "src/assets/icons/ic_pin.svg";
-import Image from "next/image";
 import Loading from "components/Loading";
+import { Button } from "components/button";
+import Image from "next/image";
+import { ExImg1 } from "public/images";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
+import SvgIcMyLocationFloating from "src/assets/icons/ic_my_location_floating.svg";
+import styled from "styled-components";
+
+import RegionBottomSheet from "./RegionBottomsheet";
+import { useGeoLocation } from "../hooks/useGeoLocation";
+import useDrinksMapService from "../services/useDrinksMapService";
 
 const MapContainer = () => {
   const [delayRender, setDelayRender] = useState(true);
@@ -26,8 +25,8 @@ const MapContainer = () => {
     }, 600);
   }, []);
 
-  const [onMap, toggleMap] = useToggle();
-  const { error, location, toggleOnLocation, onLocation } = useGeoLocation();
+  const [_, toggleMap] = useToggle();
+  const { location, toggleOnLocation, onLocation } = useGeoLocation();
   const [on, toggle] = useToggle();
   const mapRef = useRef<kakao.maps.Map>(null);
   const [mapXY, setMapXY] = useState({
@@ -41,21 +40,17 @@ const MapContainer = () => {
     setTimeout(() => {
       toggleMap();
     }, 600);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { drinksList } = useDrinksMapService({
-    startX: mapXY.startX,
-    startY: mapXY.startY,
     endX: mapXY.endX,
     endY: mapXY.endY,
     page: 0,
     size: 100,
+    startX: mapXY.startX,
+    startY: mapXY.startY,
   });
-  const [sortBy, setSortBy] = useState("ByPopularity");
-
-  const onChangeDrinkInfoSortOption = (sortOption: string) => {
-    setSortBy(sortOption);
-  };
 
   const [state, setState] = useState({
     // 지도의 초기 위치 서울 시청
@@ -108,7 +103,9 @@ const MapContainer = () => {
     }, 100);
   };
 
-  if (delayRender) return <Loading />;
+  if (delayRender) {
+    return <Loading />;
+  }
 
   return (
     <Container>
@@ -237,12 +234,6 @@ const SettingWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-`;
-
-const FilterBox = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  padding: 16px 20px 32px 20px;
 `;
 
 const DrinkBox = styled.div`

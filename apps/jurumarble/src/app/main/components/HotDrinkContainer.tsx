@@ -1,6 +1,9 @@
+"use client";
+
 import styled, { css } from "styled-components";
-import useGetHotDrinkListService from "../services/useGetHotDrinkListService";
+
 import Carousel from "./Carousel";
+import useGetHotDrinkListService from "../services/useGetHotDrinkListService";
 
 function HotDrinkContainer() {
   const { data: hotDrinkList } = useGetHotDrinkListService();

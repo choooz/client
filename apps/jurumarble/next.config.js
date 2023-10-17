@@ -1,4 +1,8 @@
 console.log("START");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   swcMinify: true,
@@ -27,4 +31,9 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = (_phase) => {
+  const plugins = [withBundleAnalyzer];
+  return plugins.reduce((acc, plugin) => plugin(acc), {
+    ...nextConfig,
+  });
+};

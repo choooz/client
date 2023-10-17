@@ -1,5 +1,3 @@
-import Image from "next/image";
-import React from "react";
 import styled, { css } from "styled-components";
 
 interface Props {
@@ -31,7 +29,6 @@ function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB }: 
           </Share>
         </AnalyzeBar>
       )}
-      
     </>
   );
 }

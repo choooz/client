@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Path from "lib/Path";
 import { uploadImageAPI } from "lib/apis/common";
 import { deleteUserAPI, updateUserInfoAPI } from "lib/apis/my";
-import Path from "lib/Path";
 import { queryKeys } from "lib/queryKeys";
 import { logout } from "lib/utils/auth";
 import { useRouter } from "next/navigation";
@@ -15,7 +16,9 @@ export default function useEditProfileService() {
   const queryClient = useQueryClient();
 
   const onUploadImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files === null) return;
+    if (e.target.files === null) {
+      return;
+    }
     if (e.target.files[0].size > 10485760) {
       alert("파일 용량이 10MB를 초과하였습니다.");
       return;
@@ -26,7 +29,7 @@ export default function useEditProfileService() {
       const data = await uploadImageAPI(formData);
       queryClient.setQueryData(getQueryKey, (prev: any) => ({ ...prev, imageUrl: data.imageUrl }));
     } catch (error) {
-      alert("이미지 업로드에 실패했습니다." + error);
+      alert(`이미지 업로드에 실패했습니다.${error}`);
     }
     return;
   };
@@ -63,11 +66,11 @@ export default function useEditProfileService() {
   });
 
   return {
-    onUploadImage,
-    onChangeNickname,
+    deleteUser,
     onChangeAlcoholCapacity,
     onChangeMBTI,
+    onChangeNickname,
+    onUploadImage,
     updateUserInfo,
-    deleteUser,
   };
 }

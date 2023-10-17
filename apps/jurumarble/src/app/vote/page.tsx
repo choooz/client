@@ -1,24 +1,26 @@
 "use client";
 
+import { useRef } from "react";
+
 import BottomBar from "components/BottomBar";
+import Loading from "components/Loading";
 import { Button } from "components/button";
-import { media } from "lib/styles";
-import { useRouter, useSearchParams } from "next/navigation";
-import SvgIcDetail from "src/assets/icons/components/IcDetail";
-import styled, { css } from "styled-components";
-import useFlipAnimation from "./hooks/useFlipAnimation";
-import ChipContainer from "./[id]/components/ChipContainer";
-import VoteDescription from "./[id]/components/VoteDescription";
 import Path from "lib/Path";
-import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
-import useInfiniteMainListService from "./services/useGetVoteListService";
+import { media } from "lib/styles";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ImgScroll } from "public/images";
 import { toast } from "react-toastify";
 import useBookmarkService from "services/useBookmarkService";
-import Loading from "components/Loading";
-import Image from "next/image";
-import { ImgScroll } from "public/images";
-import { useRef } from "react";
+import SvgIcDetail from "src/assets/icons/components/IcDetail";
+import styled, { css } from "styled-components";
+
+import ChipContainer from "./[id]/components/ChipContainer";
+import VoteDescription from "./[id]/components/VoteDescription";
+import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
 import useFilteredStatisticsService from "./[id]/services/useFilterStatisticsService";
+import useFlipAnimation from "./hooks/useFlipAnimation";
+import useInfiniteMainListService from "./services/useGetVoteListService";
 
 export type Drag = "up" | "down" | null;
 
@@ -80,8 +82,8 @@ function VoteHomePage() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
-  if (isLoading || isStatisticsLoading) return <Loading />;
-  if (isError || isStatisticsError) return <PageInner drag={drag}>에러</PageInner>;
+  if (isLoading || isStatisticsLoading) {return <Loading />;}
+  if (isError || isStatisticsError) {return <PageInner drag={drag}>에러</PageInner>;}
 
   const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
 

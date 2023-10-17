@@ -1,5 +1,5 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInfiniteScroll } from "@monorepo/hooks";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getMyCreatedVoteList } from "lib/apis/my";
 import { queryKeys } from "lib/queryKeys";
 
@@ -19,7 +19,7 @@ export default function useGetMyCreatedVoteListService(params: GetMyCreatededVot
     ({ pageParam }) => getMyCreatedVoteList({ ...params, page: pageParam?.page || 0 }),
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) return undefined;
+        if (last) {return undefined;}
         return {
           page: number + 1,
         };

@@ -1,4 +1,5 @@
 import { useOutsideClick } from "@monorepo/hooks";
+
 import OptionList from "./OptionList";
 import SelectButton from "./SelectButton";
 
@@ -37,7 +38,7 @@ function Select({
           options={options}
           onChangeSelectedOption={onChangeSelectedOption}
           onToggleOpen={onToggleOpen}
-        ></OptionList>
+         />
       ) : null}
     </div>
   );

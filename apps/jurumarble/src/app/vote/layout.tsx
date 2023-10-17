@@ -1,13 +1,14 @@
 "use client";
 
+import { PropsWithChildren } from "react";
+
 import Header from "components/Header";
+import VoteHeader from "components/VoteHeader";
+import { Button } from "components/button";
 import Path from "lib/Path";
 import { usePathname, useRouter } from "next/navigation";
-import { PropsWithChildren } from "react";
-import { Button } from "components/button";
-import VoteHeader from "components/VoteHeader";
-import styled, { css } from "styled-components";
 import { SvgIcPrevious } from "src/assets/icons/components";
+import styled, { css } from "styled-components";
 
 export default function Layout({ children }: PropsWithChildren) {
   const pathname = usePathname();
@@ -25,7 +26,7 @@ export default function Layout({ children }: PropsWithChildren) {
             </PreviousButton>
           }
         >
-          상세페이지
+          {pathname === Path.POST_PAGE ? "투표 등록" : "상세페이지"}
         </VoteHeader>
       )}
       {children}

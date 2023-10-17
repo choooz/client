@@ -1,12 +1,13 @@
 "use client";
 
-import { naverLoginAPI } from "lib/apis/auth";
-import Path from "lib/Path";
-import userStorage from "lib/utils/userStorage";
 import { useEffect } from "react";
+
+import Path from "lib/Path";
+import { naverLoginAPI } from "lib/apis/auth";
+import userStorage from "lib/utils/userStorage";
 import { useRouter, useSearchParams } from "next/navigation";
 
-function naverLoginProcess() {
+function NaverLoginProcess() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -20,6 +21,7 @@ function naverLoginProcess() {
     if (code) {
       naverLogin();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   const naverLogin = async () => {
@@ -34,4 +36,4 @@ function naverLoginProcess() {
   return <></>;
 }
 
-export default naverLoginProcess;
+export default NaverLoginProcess;

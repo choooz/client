@@ -5,7 +5,6 @@ import depths from "lib/styles/depths";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ExImg1 } from "public/images";
-import React from "react";
 import { SvgIcCheck } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
 
@@ -62,19 +61,29 @@ function VoteDescription({
   };
 
   const activeValue = (direction: Direction): ActiveType => {
-    if (!select) return null;
+    if (!select) {
+      return null;
+    }
     return `${select === getAB(direction) ? "" : "in"}active`;
   };
 
   const onClickVote = (chooz: AorB) => {
-    if (!!select) return;
+    if (!!select) {
+      return;
+    }
     onMutateVoting(chooz);
   };
 
   const onRouteDrinkInfo = () => {
-    if (voteType !== "DRINK") return;
-    if (select === "A") router.push(`${Path.DRINK_INFO_PAGE}/${drinkAId}`);
-    if (select === "B") router.push(`${Path.DRINK_INFO_PAGE}/${drinkBId}`);
+    if (voteType !== "DRINK") {
+      return;
+    }
+    if (select === "A") {
+      router.push(`${Path.DRINK_INFO_PAGE}/${drinkAId}`);
+    }
+    if (select === "B") {
+      router.push(`${Path.DRINK_INFO_PAGE}/${drinkBId}`);
+    }
   };
 
   return (
@@ -189,7 +198,9 @@ const variantStyles = {
 };
 
 const typeGuardVariantStyle = (selected: ActiveType) => {
-  if (!selected) return null;
+  if (!selected) {
+    return null;
+  }
   return variantStyles[selected];
 };
 

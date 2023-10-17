@@ -1,7 +1,6 @@
 import { Button, Portal } from "components/index";
 import { REGION_LIST } from "lib/constants";
 import { transitions } from "lib/styles";
-import React from "react";
 import { SvgIcPrev, SvgIcX } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
 
@@ -12,7 +11,9 @@ interface Props {
 }
 
 const RegionBottomSheet = ({ on, onToggleDrinkSearchModal, setChangeMapCenter }: Props) => {
-  if (!on) return null;
+  if (!on) {
+    return null;
+  }
 
   return (
     <Portal selector="#portal">
@@ -32,8 +33,9 @@ const RegionBottomSheet = ({ on, onToggleDrinkSearchModal, setChangeMapCenter }:
             />{" "}
           </SelectBox>
           <List>
-            {REGION_LIST.map(({ label, value, lat, long }) => (
+            {REGION_LIST.map(({ label, lat, long }) => (
               <RegionItem
+                key={label}
                 onClick={() => {
                   setChangeMapCenter(lat, long);
                   onToggleDrinkSearchModal();

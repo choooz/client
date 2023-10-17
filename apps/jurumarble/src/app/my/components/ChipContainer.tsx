@@ -1,8 +1,7 @@
 import { UseMutateFunction } from "@tanstack/react-query";
 import Chip from "components/Chip";
-import React from "react";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
+import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
 import styled from "styled-components";
 
 interface Props {

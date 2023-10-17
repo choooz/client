@@ -1,18 +1,20 @@
 "use client";
 
-import { Button, ModalTemplate } from "components/index";
-import VoteHeader from "components/VoteHeader";
 import { useState } from "react";
-import SvgIcX from "src/assets/icons/components/IcX";
-import styled, { css } from "styled-components";
-import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
-import SelectedDrinkChip from "./SelectedDrinkChip";
+
 import DrinkItem from "app/vote/post/components/DrinkItem";
 import SearchInput from "components/SearchInput";
+import VoteHeader from "components/VoteHeader";
+import { Button, ModalTemplate } from "components/index";
 import useInput from "hooks/useInput";
+import SvgIcX from "src/assets/icons/components/IcX";
 import { DrinkInfoType } from "src/types/drink";
-import useGetDrinkList from "../services/useGetDrinkList";
+import styled, { css } from "styled-components";
+
 import RegionSelect from "./RegionSelect";
+import SelectedDrinkChip from "./SelectedDrinkChip";
+import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
+import useGetDrinkList from "../services/useGetDrinkList";
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
@@ -20,12 +22,14 @@ interface Props {
 }
 
 function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete }: Props) {
+  const { selectedDrinkList, onClickAddDrink, onClickDeleteItem, deleteSelectedDrinkList } =
+    useUpdateSelectedDrinkList();
+
   const [regionOption, setRegionOption] = useState("");
   const onChangeRegionOption = (value: string) => {
+    deleteSelectedDrinkList();
     setRegionOption(value);
   };
-
-  const { selectedDrinkList, onClickAddDrink, onClickDeleteItem } = useUpdateSelectedDrinkList();
 
   const { value: keyword, onChange: onChangeKeyword } = useInput({ useDebounce: true });
 
@@ -50,11 +54,13 @@ function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete
       </VoteHeader>
       <SearchSection>
         <RegionSelect regionOption={regionOption} onChangeRegionOption={onChangeRegionOption} />
-        <SearchInput
-          placeholder="관심있는 술을 검색해보세요."
-          value={keyword}
-          onChange={onChangeKeyword}
-        />
+        {regionOption && (
+          <SearchInput
+            placeholder="관심있는 술을 검색해보세요."
+            value={keyword}
+            onChange={onChangeKeyword}
+          />
+        )}
         <SelectedDrinkChipList>
           {selectedDrinkList.map((drinkInfo) => (
             <SelectedDrinkChip

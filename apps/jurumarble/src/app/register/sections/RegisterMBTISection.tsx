@@ -1,5 +1,6 @@
 import { media, transitions } from "lib/styles";
 import styled, { css } from "styled-components";
+
 import { useRegisterContext } from "../contexts";
 
 type ActiveType = "active" | "inactive" | null;
@@ -165,7 +166,7 @@ const variantStyles = {
 };
 
 const typeGuardVariantStyle = (selected: ActiveType) => {
-  if (!selected) return null;
+  if (!selected) {return null;}
   return variantStyles[selected];
 };
 
