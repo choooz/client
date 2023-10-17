@@ -171,12 +171,6 @@ const Container = styled.div`
   padding: 0 20px;
 `;
 
-const PreviousButton = styled(Button)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-  `}
-`;
-
 const FlexBetween = styled.div`
   display: flex;
   justify-content: space-between;
