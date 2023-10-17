@@ -1,5 +1,6 @@
-import { ThemeColors, ThemeMedia, ThemeTypography } from "./theme";
 import { theme } from "@monorepo/ui";
+
+import { ThemeColors, ThemeMedia, ThemeTypography } from "./theme";
 
 type Theme = typeof theme;
 declare module "styled-components" {

@@ -1,7 +1,8 @@
+import { useEffect, useMemo, useState } from "react";
+
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getVoteListAPI } from "lib/apis/vote";
 import { reactQueryKeys } from "lib/queryKeys";
-import { useEffect, useMemo, useState } from "react";
 import { VoteSortType } from "src/types/common";
 
 interface Props {
@@ -20,7 +21,7 @@ export default function useInfiniteMainListService({ size, sortBy, keyword }: Pr
     ({ pageParam = 0 }) => getVoteListAPI({ page: pageParam, size, sortBy, keyword }),
     {
       getNextPageParam: (lastPage, pages) => {
-        if (lastPage.last) return undefined;
+        if (lastPage.last) {return undefined;}
         return pages.length;
       },
       keepPreviousData: true,
@@ -34,14 +35,14 @@ export default function useInfiniteMainListService({ size, sortBy, keyword }: Pr
   );
 
   const onChangeNowShowing = (index: number) => {
-    if (nowShowing + index < 0) return;
-    if (nowShowing + index > mainVoteList.length - 1) return;
+    if (nowShowing + index < 0) {return;}
+    if (nowShowing + index > mainVoteList.length - 1) {return;}
     setNowShowing((prev) => prev + index);
   };
 
   useEffect(() => {
-    if (nowShowing === mainVoteList.length - SafeRange) fetchNextPage();
+    if (nowShowing === mainVoteList.length - SafeRange) {fetchNextPage();}
   }, [nowShowing, mainVoteList.length]);
 
-  return { data, isLoading, isError, mainVoteList, nowShowing, onChangeNowShowing };
+  return { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing };
 }

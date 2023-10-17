@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
-import userStorage from "lib/utils/userStorage";
 import { logout } from "lib/utils/auth";
+import userStorage from "lib/utils/userStorage";
 import { toast } from "react-toastify";
 
 const axiosInstance = axios.create({
@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
 
       case 401:
         const tokens = userStorage.get();
-        if (!tokens) throw new Error("No tokens found");
+        if (!tokens) {throw new Error("No tokens found");}
 
         alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
 
@@ -62,7 +62,7 @@ axiosInstance.interceptors.request.use((config) => {
   }
 
   const tokens = userStorage.get();
-  if (!tokens) throw new Error("No tokens found");
+  if (!tokens) {throw new Error("No tokens found");}
   const { accessToken } = tokens;
 
   if (accessToken) {

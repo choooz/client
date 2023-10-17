@@ -1,8 +1,7 @@
 import Chip from "components/Chip";
 import { transitions } from "lib/styles";
 import Image from "next/image";
-import { DrinkInfo } from "src/types/drink";
-import { DrinkInfoType } from "src/types/drink";
+import { DrinkInfo , DrinkInfoType } from "src/types/drink";
 import styled, { css } from "styled-components";
 
 interface Props {

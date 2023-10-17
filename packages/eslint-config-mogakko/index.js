@@ -11,7 +11,7 @@ module.exports = {
     ...require("./plugins/import").rules,
     "prefer-template": 1,
     "@typescript-eslint/no-empty-interface": 0,
-    "@typescript-eslint/consistent-type-imports": 1,
+    "@typescript-eslint/consistent-type-imports": 0,
     "no-unused-vars": 0,
     "@typescript-eslint/no-unused-vars": [
       2,

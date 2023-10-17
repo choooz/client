@@ -2,6 +2,7 @@ import { Button, ModalTemplate } from "components/index";
 import { ALCOHOL_LEVEL_LIST, GENDER_LIST } from "lib/constants";
 import { SvgWarningIcon } from "src/assets/icons/components";
 import styled, { css } from "styled-components";
+
 import { useRegisterContext } from "../contexts";
 
 function WarningModal() {

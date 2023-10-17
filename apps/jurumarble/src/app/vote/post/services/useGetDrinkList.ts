@@ -19,7 +19,7 @@ export default function useGetDrinkList(params: SearchDrinkServiceProps) {
       }),
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) return undefined;
+        if (last) {return undefined;}
         return {
           page: number + 1,
         };

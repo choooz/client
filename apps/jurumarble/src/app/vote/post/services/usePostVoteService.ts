@@ -1,26 +1,27 @@
 import React, { useCallback, useState } from "react";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import Path from "lib/Path";
 import { uploadImageAPI } from "lib/apis/common";
 import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
-import { PostVoteType } from "src/types/vote";
-import Path from "lib/Path";
-import { DrinkInfoType } from "src/types/drink";
 import { queryKeys } from "lib/queryKeys";
+import { useRouter } from "next/navigation";
+import { DrinkInfoType } from "src/types/drink";
+import { PostVoteType } from "src/types/vote";
 
 export default function usePostVoteService() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const [postVoteInfo, setPostVoteInfo] = useState<PostVoteType>({
-    title: "",
     detail: "",
-    titleA: "",
-    titleB: "",
-    imageA: "",
-    imageB: "",
     drinkAId: 0,
     drinkBId: 0,
+    imageA: "",
+    imageB: "",
+    title: "",
+    titleA: "",
+    titleB: "",
   });
 
   const { title, detail, titleA, titleB, imageA, imageB, drinkAId, drinkBId } = postVoteInfo;
@@ -39,17 +40,17 @@ export default function usePostVoteService() {
      */
     setPostVoteInfo((prev) => ({
       ...prev,
-      titleA: selectedDrinkList[0].name,
-      titleB: selectedDrinkList[1].name,
-      imageA: selectedDrinkList[0].image,
-      imageB: selectedDrinkList[1].image,
       drinkAId: selectedDrinkList[0].id,
       drinkBId: selectedDrinkList[1].id,
+      imageA: selectedDrinkList[0].image,
+      imageB: selectedDrinkList[1].image,
+      titleA: selectedDrinkList[0].name,
+      titleB: selectedDrinkList[1].name,
     }));
   };
 
   const onUploadImage = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files === null) return;
+    if (e.target.files === null) {return;}
 
     if (e.target.files.length === 1) {
       if (e.target.files[0].size > 10485760) {
@@ -66,7 +67,7 @@ export default function usePostVoteService() {
             imageB: dataB.imageUrl,
           });
         } catch (error) {
-          alert("이미지 업로드에 실패했습니다." + error);
+          alert(`이미지 업로드에 실패했습니다.${  error}`);
         }
         return;
       }
@@ -81,7 +82,7 @@ export default function usePostVoteService() {
           imageB: "",
         });
       } catch (error) {
-        alert("이미지 업로드에 실패했습니다." + error);
+        alert(`이미지 업로드에 실패했습니다.${  error}`);
       }
       return;
     }
@@ -105,7 +106,7 @@ export default function usePostVoteService() {
           imageB: dataB.imageUrl,
         });
       } catch (error) {
-        alert("이미지 업로드에 실패했습니다." + error);
+        alert(`이미지 업로드에 실패했습니다.${  error}`);
       }
       return;
     }
@@ -133,7 +134,7 @@ export default function usePostVoteService() {
 
   const onClickPostVoteComplete = () => {
     postVoteInfo.drinkAId === 0
-      ? mutateNomalVote({ title, detail, titleA, titleB, imageA, imageB })
+      ? mutateNomalVote({ detail, imageA, imageB, title, titleA, titleB })
       : mutateDrinkVote({ title, detail, drinkAId, drinkBId });
   };
 

@@ -1,10 +1,11 @@
 "use client";
 
+import { useRef } from "react";
+
 import SearchInput from "components/SearchInput";
 import useInput from "hooks/useInput";
 import Path from "lib/Path";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
 import styled from "styled-components";
 
 const SearchInputWrapper = () => {

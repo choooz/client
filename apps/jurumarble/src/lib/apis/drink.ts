@@ -2,6 +2,7 @@ import axios from "axios";
 import { DATA_GO_API_KEY } from "lib/constants";
 import { DrinkInfoSortType } from "src/types/common";
 import { DrinkListResponse, DrinkMapResponse } from "src/types/drink";
+
 import { baseApi } from "./http/base";
 import { http } from "./http/http";
 

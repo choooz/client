@@ -1,4 +1,5 @@
 import type { SVGProps } from "react";
+
 const SvgNotiIc = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="1em"

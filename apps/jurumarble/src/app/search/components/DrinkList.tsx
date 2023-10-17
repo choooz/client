@@ -1,9 +1,9 @@
-import { Button } from "components/button";
-import styled, { css } from "styled-components";
 import Path from "lib/Path";
 import { useRouter, useSearchParams } from "next/navigation";
-import DrinkItem from "./DrinkItem";
 import { DrinkInfoSortType } from "src/types/common";
+import styled from "styled-components";
+
+import DrinkItem from "./DrinkItem";
 import useGetDrinkList from "../services/useGetDrinkList";
 
 interface Props {
@@ -25,16 +25,16 @@ function DrinkList({ searchText, sortOption, regionOption }: Props) {
     sortBy: sortOption,
   });
 
-  if (!drinkList) {
-    return <></>;
-  }
-
   const router = useRouter();
   const onClickDrinkItem = (id: number) => {
     router.push(`${Path.DRINK_INFO_PAGE}/${id}`);
   };
 
-  return (
+  if (!drinkList) {
+    return <></>;
+  }
+
+return (
     <Container>
       {drinkList.map((drinkInfo) => (
         <DrinkItem
@@ -43,7 +43,7 @@ function DrinkList({ searchText, sortOption, regionOption }: Props) {
           onClickDrinkItem={() => onClickDrinkItem(drinkInfo.id)}
         />
       ))}
-      {selectedTab === "drinkInfo" && <div ref={subscribe}></div>}
+      {selectedTab === "drinkInfo" && <div ref={subscribe} />}
     </Container>
   );
 }

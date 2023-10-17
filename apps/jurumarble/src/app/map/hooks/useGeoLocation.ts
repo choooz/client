@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
+
 import { useToggle } from "@react-hookz/web";
-import { useState, useEffect } from "react";
 
 interface Location {
   latitude: number;
@@ -33,7 +34,7 @@ export const useGeoLocation = (options = {}) => {
   };
 
   useEffect(() => {
-    if (!onLocation) return;
+    if (!onLocation) {return;}
     const { geolocation } = navigator;
 
     // 사용된 브라우저에서 지리적 위치(Geolocation)가 정의되지 않은 경우 오류로 처리합니다.

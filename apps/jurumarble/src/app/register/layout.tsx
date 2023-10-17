@@ -1,7 +1,9 @@
 "use client";
 
 import { PropsWithChildren } from "react";
+
 import styled from "styled-components";
+
 import { GlobalHeader } from "./components";
 import { RegisterProvider } from "./contexts";
 import { RegisterFooterSection } from "./sections";

@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import MyEnjoiedDrinkInfoSection from "./MyEnjoiedDrinkInfoSection";
 import StampedDrinkList from "./StampedDrinkList";
-import { useState } from "react";
 import useDrinkStampService from "../service/useDrinkStampListService";
 
 function DrinkStampContainer() {
@@ -23,7 +24,7 @@ function DrinkStampContainer() {
         onChangeRegionOption={onChangeRegionOption}
         drinkList={drinkList}
       />
-      <div ref={subscribe}></div>
+      <div ref={subscribe} />
     </>
   );
 }

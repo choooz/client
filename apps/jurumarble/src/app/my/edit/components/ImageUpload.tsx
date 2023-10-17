@@ -23,7 +23,7 @@ function ImageUpload({ imageUrl, onUploadImage }: Props) {
       ) : (
         <CaremaBox>
           <StyledCicle>
-            <SvgIcCamera width={20} height={20} fill={theme.colors.black_03}></SvgIcCamera>
+            <SvgIcCamera width={20} height={20} fill={theme.colors.black_03} />
           </StyledCicle>
         </CaremaBox>
       )}

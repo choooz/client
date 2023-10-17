@@ -1,5 +1,7 @@
-import { getClassNames } from "lib/styles/getClassNames";
 import { PropsWithChildren } from "react";
+
+import { getClassNames } from "lib/styles/getClassNames";
+
 import styles from "./styles.module.css";
 
 const cx = getClassNames(styles);

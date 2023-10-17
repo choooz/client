@@ -1,4 +1,5 @@
 import { CommonVoteListResponse } from "src/types/vote";
+
 import { http } from "./http/http";
 
 interface GetMyVoteListRequest {

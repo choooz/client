@@ -1,7 +1,7 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInfiniteScroll } from "@monorepo/hooks";
-import { reactQueryKeys } from "lib/queryKeys";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getDrinksMap } from "lib/apis/drink";
+import { reactQueryKeys } from "lib/queryKeys";
 
 export default function useDrinksMapService(params: {
   startX: number;
@@ -17,7 +17,7 @@ export default function useDrinksMapService(params: {
     ({ pageParam }) => getDrinksMap({ ...params, page: pageParam?.page || 0 }),
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) return undefined;
+        if (last) {return undefined;}
         return {
           page: number + 1,
         };

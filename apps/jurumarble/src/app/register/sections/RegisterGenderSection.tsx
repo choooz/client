@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { useRegisterContext } from "../contexts";
-import Image from "next/image";
 import { GENDER_LIST } from "lib/constants";
+import Image from "next/image";
+import styled from "styled-components";
+
+import { useRegisterContext } from "../contexts";
 
 export const RegisterGenderSection = () => {
   const { gender, onChangeGender } = useRegisterContext();

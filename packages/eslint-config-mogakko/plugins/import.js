@@ -2,7 +2,6 @@ module.exports = {
   rules: {
     "import/no-empty-named-blocks": 2,
     "import/newline-after-import": [2, { count: 1 }],
-    "import/consistent-type-specifier-style": [2, "prefer-inline"],
     "no-duplicate-imports": 1,
     "sort-imports": [
       1,

@@ -1,20 +1,21 @@
 "use client";
 
+import { useDebouncedCallback } from "@react-hookz/web";
 import BottomBar from "components/BottomBar";
-import { Button } from "components/button";
+import DivideLine from "components/DivideLine";
 import SearchInput from "components/SearchInput";
+import { Button } from "components/button";
+import { useCreateQueryString } from "hooks/useCreateQueryString";
+import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import SvgIcPrev from "src/assets/icons/components/IcPrev";
+import { DrinkInfoSortType, RegionType, VoteSortType } from "src/types/common";
 import styled, { css, DefaultTheme } from "styled-components";
+
 import DrinkList from "./DrinkList";
 import DrinkVoteList from "./DrinkVoteList";
-import SortSelect from "./SortSelect";
 import RegionSmallSelect from "./RegionSmallSelect";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { DrinkInfoSortType, VoteSortType, RegionType } from "src/types/common";
-import { useDebouncedCallback } from "@react-hookz/web";
-import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
-import DivideLine from "components/DivideLine";
-import { useCreateQueryString } from "hooks/useCreateQueryString";
+import SortSelect from "./SortSelect";
 
 const TAB_LIST = [
   { id: "total", name: "통합" },
@@ -45,7 +46,7 @@ function SearchContainer() {
   const searchText = (searchParams.get("searchText") as string) ?? "";
 
   const onChangeSearchText = (keyword: string) => {
-    router.replace(pathname + "?" + createQueryString("searchText", keyword), {
+    router.replace(`${pathname  }?${  createQueryString("searchText", keyword)}`, {
       scroll: true,
     });
   };
@@ -59,22 +60,22 @@ function SearchContainer() {
 
   const selectedTab = searchParams.get("selectedTab") ?? "total";
   const onClickSelectedTab = (tab: TabList) => {
-    router.replace(pathname + "?" + createQueryString("selectedTab", tab));
+    router.replace(`${pathname  }?${  createQueryString("selectedTab", tab)}`);
   };
 
   const drinkInfoSortOption = searchParams.get("drinkInfoSortOption") ?? "ByPopularity";
   const onChangeDrinkInfoSortOption = (value: DrinkInfoSortType) => {
-    router.replace(pathname + "?" + createQueryString("drinkInfoSortOption", value));
+    router.replace(`${pathname  }?${  createQueryString("drinkInfoSortOption", value)}`);
   };
 
   const drinkVoteSortOption = searchParams.get("drinkVoteSortOption") ?? "ByPopularity";
   const onChangeDrinkVoteSortOption = (value: VoteSortType) => {
-    router.replace(pathname + "?" + createQueryString("drinkVoteSortOption", value));
+    router.replace(`${pathname  }?${  createQueryString("drinkVoteSortOption", value)}`);
   };
 
   const regionOption = searchParams.get("regionOption") ?? "";
   const onChangeRegionOption = (value: RegionType) => {
-    router.replace(pathname + "?" + createQueryString("regionOption", value));
+    router.replace(`${pathname  }?${  createQueryString("regionOption", value)}`);
   };
 
   const isSelectedTab = (tabName: TabList) => {

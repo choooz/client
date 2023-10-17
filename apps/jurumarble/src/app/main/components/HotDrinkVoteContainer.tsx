@@ -4,6 +4,7 @@ import Path from "lib/Path";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import styled, { css } from "styled-components";
+
 import { useGetHotDrinkVoteService } from "../services/useGetHotDrinkVoteService";
 
 function HotDrinkVoteContainer() {

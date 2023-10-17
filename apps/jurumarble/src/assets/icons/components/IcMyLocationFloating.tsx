@@ -1,4 +1,5 @@
 import type { SVGProps } from "react";
+
 const SvgIcMyLocationFloating = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width="1em"

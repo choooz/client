@@ -1,11 +1,11 @@
 "use client";
 
-import { getTestUserAPI, getUserInfoAPI } from "lib/apis/user";
+import { useEffect } from "react";
+
 import Path from "lib/Path";
-import { queryKeys } from "lib/queryKeys";
+import { getTestUserAPI, getUserInfoAPI } from "lib/apis/user";
 import userStorage from "lib/utils/userStorage";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 // const getQuery = [queryKeys.LOGIN_INFO];
 
@@ -27,7 +27,9 @@ function TestPage() {
         const userInfo = await getUserInfoAPI();
         if (userInfo.gender && userInfo.yearOfBirth && userInfo.mbti) {
           router.push(Path.MAIN_PAGE);
-        } else router.push(Path.REGISTER_PAGE);
+        } else {
+          router.push(Path.REGISTER_PAGE);
+        }
       } catch (error) {
         alert("에러가 발생하였습니다.");
       }

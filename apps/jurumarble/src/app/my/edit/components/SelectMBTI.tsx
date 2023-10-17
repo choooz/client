@@ -1,8 +1,9 @@
-import styled, { css } from "styled-components";
-import { useToggle, useOutsideClick } from "@monorepo/hooks";
-import { SvgArrowDown } from "src/assets/icons/components";
 import { useId } from "react";
+
+import { useOutsideClick, useToggle } from "@monorepo/hooks";
 import { MBTI_LIST } from "lib/constants";
+import { SvgArrowDown } from "src/assets/icons/components";
+import styled, { css } from "styled-components";
 
 interface Props {
   MBTI: string;

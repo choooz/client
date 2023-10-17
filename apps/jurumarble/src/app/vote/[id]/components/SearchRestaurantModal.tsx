@@ -1,19 +1,20 @@
 "use client";
 
-import { Button, ModalTemplate } from "components/index";
+import { useState } from "react";
 
 import VoteHeader from "components/VoteHeader";
+import { Button, ModalTemplate } from "components/index";
 import useInput from "hooks/useInput";
 import { RestaurantInfo } from "lib/apis/restaurant";
 import { transitions } from "lib/styles";
 import Image from "next/image";
-import { useState } from "react";
 import SvgIcX from "src/assets/icons/components/IcX";
 import styled, { css, DefaultTheme } from "styled-components";
-import useRestaurantImageService from "../services/useRestaurantImageService";
-import useRestaurantService from "../services/useRestaurantService";
+
 import RestaurantItem from "./RestaurantItem";
 import SearchInput from "./SearchInput";
+import useRestaurantImageService from "../services/useRestaurantImageService";
+import useRestaurantService from "../services/useRestaurantService";
 
 interface Props {
   commentId: number;
@@ -36,15 +37,13 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
   });
 
   const { restaurantList, subscribe } = useRestaurantService({
-    commentType: "votes",
-    typeId: postId,
     commentId,
+    commentType: "votes",
     keyword: searchText,
     page: 1,
     region: "ALL",
+    typeId: postId,
   });
-
-  if (!restaurantList) return null;
 
   const [selectedImage, setSelectedImage] = useState("");
   const onClickSelectedImage = (imageUrl: string) => {
@@ -55,8 +54,12 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
     commentType: "votes",
     typeId: postId,
     commentId,
-    contentId: selectedRestaurant?.contentId!,
+    contentId: selectedRestaurant?.contentId ?? "",
   });
+
+  if (!restaurantList) {
+    return null;
+  }
 
   return (
     <ModalTemplate width="375px" height="100%" onToggleModal={onToggleSearchRestaurantModal}>
@@ -167,13 +170,11 @@ const CloseButton = styled(Button)`
 `;
 
 const RestaurantList = styled.ul`
-  ${({ theme }) => css`
-    display: flex;
-    flex-direction: column;
-    margin-top: 8px;
-    overflow: auto;
-    height: 70vh;
-  `}
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  overflow: auto;
+  height: 70vh;
 `;
 
 const FoodImageList = styled.ul`

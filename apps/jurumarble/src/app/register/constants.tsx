@@ -1,6 +1,6 @@
 import {
-  RegisterDrinkCapacitySection,
   RegisterBirthSection,
+  RegisterDrinkCapacitySection,
   RegisterGenderSection,
 } from "./sections";
 import RegisterMBTISection from "./sections/RegisterMBTISection";
