@@ -1,3 +1,5 @@
+"use client";
+
 import SearchInput from "components/SearchInput";
 import useInput from "hooks/useInput";
 import Path from "lib/Path";

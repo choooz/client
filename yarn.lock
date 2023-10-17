@@ -1634,6 +1634,7 @@ __metadata:
     "@svgr/core": ^8.0.0
     "@svgr/plugin-jsx": ^8.0.1
     "@svgr/plugin-prettier": ^8.0.1
+    "@tanstack/query-core": ^4.36.1
     "@tanstack/react-query": ^4.33.0
     "@tanstack/react-query-devtools": ^4.33.0
     "@types/node": 20.5.7
@@ -2309,6 +2310,13 @@ __metadata:
   version: 4.33.0
   resolution: "@tanstack/query-core@npm:4.33.0"
   checksum: fae325f1d79b936435787797c32367331d5b8e9c5ced84852bf2085115e3aafef57a7ae530a6b0af46da4abafb4b0afaef885926b71715a0e6f166d74da61c7f
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:^4.36.1":
+  version: 4.36.1
+  resolution: "@tanstack/query-core@npm:4.36.1"
+  checksum: 47672094da20d89402d9fe03bb7b0462be73a76ff9ca715169738bc600a719d064d106d083a8eedae22a2c22de22f87d5eb5d31ef447aba771d9190f2117ed10
   languageName: node
   linkType: hard
 

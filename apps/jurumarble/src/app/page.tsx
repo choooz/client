@@ -1,13 +1,10 @@
-"use client";
-
 import BottomBar from "components/BottomBar";
 import Header from "components/Header";
-import styled, { css } from "styled-components";
 import dynamic from "next/dynamic";
-
-const DynamicHotDrinkVoteContainer = dynamic(
-  () => import("./main/components/HotDrinkVoteContainer"),
-);
+import { getClassNames } from "lib/styles/getClassNames";
+import styles from "./page.module.css";
+import { HydratedDrinkVoteContainer } from "./main/containers/HydratedDrinkVoteContainer";
+import { HydratedHotDrinkContainer } from "./main/containers/HydratedHotDrinkContainer";
 
 const DynamicHotDrinkContainer = dynamic(() => import("./main/components/HotDrinkContainer"), {
   ssr: false,
@@ -28,41 +25,27 @@ const DynamicSearchInputWrapper = dynamic(() => import("./main/components/Search
 
 const DynamicBanner = dynamic(() => import("./main/components/Banner"));
 
+const cx = getClassNames(styles);
+
 function MainPage() {
   return (
     <>
       <Header />
       <DynamicTodayDrinkRecommendation />
-      <TopSection>
+      <section className={cx("main-top-section")}>
         <DynamicBanner />
         <DynamicSearchInputWrapper />
-        <DynamicHotDrinkContainer />
-      </TopSection>
-      <DivideLine />
-      <BottomSection>
-        <DynamicHotDrinkVoteContainer />
-      </BottomSection>
+        {/* @ts-expect-error Server Component */}
+        <HydratedHotDrinkContainer />
+      </section>
+      <div className={cx("main-divide-line")} />
+      <section className={cx("main-bottom-section")}>
+        {/* @ts-expect-error Server Component */}
+        <HydratedDrinkVoteContainer />
+      </section>
       <BottomBar />
     </>
   );
 }
-
-const TopSection = styled.section`
-  padding: 0 20px;
-`;
-
-const BottomSection = styled.section`
-  padding: 0 20px 96px; // 64(BottomBar height) + 32(margin) = 96
-  margin-top: 8px;
-  overflow: auto;
-`;
-
-const DivideLine = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.bg_01};
-    height: 8px;
-    margin: 40px 0 8px 0;
-  `}
-`;
 
 export default MainPage;

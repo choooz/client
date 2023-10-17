@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { SvgStamp } from "src/assets/icons/components";
 import styled, { css, useTheme } from "styled-components";
