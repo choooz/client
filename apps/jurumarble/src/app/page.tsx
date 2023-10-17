@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { getClassNames } from "lib/styles/getClassNames";
 import styles from "./page.module.css";
 import { HydratedDrinkVoteContainer } from "./main/containers/HydratedDrinkVoteContainer";
+import { HydratedHotDrinkContainer } from "./main/containers/HydratedHotDrinkContainer";
 
 const DynamicHotDrinkContainer = dynamic(() => import("./main/components/HotDrinkContainer"), {
   ssr: false,
@@ -34,7 +35,8 @@ function MainPage() {
       <section className={cx("main-top-section")}>
         <DynamicBanner />
         <DynamicSearchInputWrapper />
-        <DynamicHotDrinkContainer />
+        {/* @ts-expect-error Server Component */}
+        <HydratedHotDrinkContainer />
       </section>
       <div className={cx("main-divide-line")} />
       <section className={cx("main-bottom-section")}>
