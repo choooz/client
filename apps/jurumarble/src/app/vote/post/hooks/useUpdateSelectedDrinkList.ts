@@ -16,5 +16,9 @@ export default function useUpdateSelectedDrinkList() {
     setDrinkList((prev) => prev.filter((selectedDrink) => selectedDrink.id !== clickDrink.id));
   };
 
-  return { selectedDrinkList, onClickAddDrink, onClickDeleteItem };
+  const deleteSelectedDrinkList = () => {
+    setDrinkList([]);
+  };
+
+  return { selectedDrinkList, onClickAddDrink, onClickDeleteItem, deleteSelectedDrinkList };
 }

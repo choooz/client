@@ -22,12 +22,14 @@ interface Props {
 }
 
 function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete }: Props) {
+  const { selectedDrinkList, onClickAddDrink, onClickDeleteItem, deleteSelectedDrinkList } =
+    useUpdateSelectedDrinkList();
+
   const [regionOption, setRegionOption] = useState("");
   const onChangeRegionOption = (value: string) => {
+    deleteSelectedDrinkList();
     setRegionOption(value);
   };
-
-  const { selectedDrinkList, onClickAddDrink, onClickDeleteItem } = useUpdateSelectedDrinkList();
 
   const { value: keyword, onChange: onChangeKeyword } = useInput({ useDebounce: true });
 
@@ -52,11 +54,13 @@ function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete
       </VoteHeader>
       <SearchSection>
         <RegionSelect regionOption={regionOption} onChangeRegionOption={onChangeRegionOption} />
-        <SearchInput
-          placeholder="관심있는 술을 검색해보세요."
-          value={keyword}
-          onChange={onChangeKeyword}
-        />
+        {regionOption && (
+          <SearchInput
+            placeholder="관심있는 술을 검색해보세요."
+            value={keyword}
+            onChange={onChangeKeyword}
+          />
+        )}
         <SelectedDrinkChipList>
           {selectedDrinkList.map((drinkInfo) => (
             <SelectedDrinkChip
