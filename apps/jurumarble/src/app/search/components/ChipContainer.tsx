@@ -19,7 +19,7 @@ const ChipContainer = ({ date, title, region, mutateBookMark, isBookmark, votedC
       <TagRow>
         <FlexRow>
           {region && <Chip variant="region">{region}</Chip>}
-          <Chip variant="numberOfParticipants">{votedCount}명이 즐겼어요</Chip>
+          <Chip variant="numberOfParticipants">{votedCount}명이 참여중</Chip>
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
