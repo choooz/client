@@ -3,14 +3,10 @@
 import styled, { css } from "styled-components";
 import VoteWriterBox from "./components/VoteWriterBox";
 import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
-import VoteDescription from "./components/VoteDescription";
-import ChipContainer from "./components/ChipContainer";
-import CommentContainer from "./components/CommentContainer";
 import { useParams } from "next/navigation";
 import useVoteLoadService from "./services/useVoteLoadService";
 import useExecuteVoteService from "./services/useExecuteVoteService";
 import useFilteredStatisticsService from "./services/useFilterStatisticsService";
-import VoteAnalyzeBar from "./components/VoteAnalyzeBar";
 import { useMemo, useState } from "react";
 import useBookmarkService from "services/useBookmarkService";
 import Loading from "components/Loading";
@@ -21,6 +17,12 @@ import {
   VOTE_MBTI_LIST,
 } from "lib/constants";
 import VoteSmallSelectFilter from "./components/VoteSmallSelectFilter";
+import dynamic from "next/dynamic";
+
+const DynamicChipContainer = dynamic(() => import("./components/ChipContainer"));
+const DynamicVoteDescription = dynamic(() => import("./components/VoteDescription"));
+const DynamicCommentContainer = dynamic(() => import("./components/CommentContainer"));
+const DynamicVoteAnalyzeBar = dynamic(() => import("./components/VoteAnalyzeBar"));
 
 function Detail() {
   const params = useParams();
@@ -117,7 +119,7 @@ function Detail() {
         }}
       />
       <PageInner>
-        <ChipContainer
+        <DynamicChipContainer
           voteId={Number(data.voteId)}
           title={title}
           date={String(createdAt)}
@@ -128,7 +130,7 @@ function Detail() {
           postedUserId={data.postedUserId}
           select={select.choice}
         />
-        <VoteDescription
+        <DynamicVoteDescription
           imageA={imageA}
           imageB={imageB}
           percentageA={originalPercentageA}
@@ -145,7 +147,7 @@ function Detail() {
         />
         {!!select.choice && (
           <>
-            <VoteAnalyzeBar
+            <DynamicVoteAnalyzeBar
               totalCountA={totalCountA}
               totalCountB={totalCountB}
               percentageA={percentageA}
@@ -178,7 +180,7 @@ function Detail() {
           </>
         )}
 
-        <CommentContainer postId={Number(postId)} />
+        <DynamicCommentContainer postId={Number(postId)} />
       </PageInner>
     </Container>
   );

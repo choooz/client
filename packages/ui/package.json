@@ -3,6 +3,7 @@
   "packageManager": "yarn@3.3.0",
   "version": "0.1.0",
   "description": "",
+  "sideEffects": false,
   "main": "index.ts",
   "author": "",
   "license": "ISC",
