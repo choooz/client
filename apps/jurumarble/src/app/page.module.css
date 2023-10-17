@@ -1,0 +1,15 @@
+.main-top-section {
+  padding: 0 20px;
+}
+
+.main-bottom-section {
+  padding: 0 20px 96px;
+  margin-top: 8px;
+  overflow: auto;
+}
+
+.main-divide-line {
+  height: 8px;
+  margin: 40px 0 8px 0;
+  background-color: var(--bg_01);
+}
