@@ -162,6 +162,7 @@ function VoteHomePage() {
           <FirstPageBase className="animate2" drag={drag} />
           <SecondPageBase className="animate3" drag={drag} />
         </Container>
+        <EmptyBox />
       </Background>
       <BottomBar />
     </>
@@ -297,7 +298,7 @@ const MoreButton = styled.button`
   left: 50%;
   right: 50%;
   transform: translate(-50%, -50%);
-  bottom: -40px;
+  bottom: -60px;
   height: 40px;
   width: 94px;
   border-radius: 8px;
@@ -317,5 +318,10 @@ const ScrollImage = styled.div`
   bottom: 60px;
   right: 20px;
   z-index: 1600;
+`;
+
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 174px;
 `;
 export default VoteHomePage;
