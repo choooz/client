@@ -10,6 +10,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { PageLayout } from "components/layouts";
+import "lib/styles/global.css";
 
 export const metadata: Metadata = {
   title: "주루마블",

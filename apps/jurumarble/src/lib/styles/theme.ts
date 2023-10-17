@@ -1,6 +1,3 @@
-// import { DefaultTheme, Colors } from "styled-components";
-import { DefaultTheme } from "styled-components";
-
 const colors = {
   black_01: "#222222",
   black_02: "#373737",
