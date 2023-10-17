@@ -5,14 +5,11 @@ import { useMemo } from "react";
 import { useToggle } from "@monorepo/hooks";
 import AorBMark from "components/AorBMark";
 import ImageUploadButton from "components/ImageUploadButton";
-import VoteHeader from "components/VoteHeader";
 import { Button, Input } from "components/index";
 import { media } from "lib/styles";
 import depths from "lib/styles/depths";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { SvgIcX, SvgInfo } from "src/assets/icons/components";
-import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
 import { DrinkInfoType } from "src/types/drink";
 import styled, { css } from "styled-components";
 
@@ -22,8 +19,6 @@ import usePostVoteService from "../services/usePostVoteService";
 
 function PostVoteContainer() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
-  const router = useRouter();
-
   const {
     onChangeVoteText,
     postVoteInfo,
@@ -50,15 +45,6 @@ function PostVoteContainer() {
 
   return (
     <Container>
-      <VoteHeader
-        leftButton={
-          <PreviousButton onClick={() => router.back()}>
-            <SvgIcPrevious width={24} height={24} />
-          </PreviousButton>
-        }
-      >
-        등록하기
-      </VoteHeader>
       <FlexBetween>
         <div>
           <GuideText>
@@ -91,7 +77,6 @@ function PostVoteContainer() {
           술 검색하기
         </ButtonStyled>
       </FlexBetween>
-
       {!imageA && !imageB ? (
         <label htmlFor="no-image">
           <ImageSection>
