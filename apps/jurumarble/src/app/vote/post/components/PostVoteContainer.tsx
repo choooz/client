@@ -8,6 +8,7 @@ import ImageUploadButton from "components/ImageUploadButton";
 import VoteHeader from "components/VoteHeader";
 import { Button, Input } from "components/index";
 import { media } from "lib/styles";
+import depths from "lib/styles/depths";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { SvgIcX, SvgInfo } from "src/assets/icons/components";
@@ -42,6 +43,9 @@ function PostVoteContainer() {
 
   const { title, detail, titleA, titleB, imageA, imageB } = postVoteInfo;
 
+  /**
+   * @TODO useOutSideClick 적용
+   */
   const [isTooltip, onToggleTooltip] = useToggle(true);
 
   return (
@@ -87,13 +91,19 @@ function PostVoteContainer() {
           술 검색하기
         </ButtonStyled>
       </FlexBetween>
-      <label htmlFor="file">
-        <ImageSection>
-          {!imageA && !imageB ? (
+
+      {!imageA && !imageB ? (
+        <label htmlFor="no-image">
+          <ImageSection>
             <ImageUploadButton width="100%" height="163px" />
-          ) : (
-            <ImageContainer>
-              <ImageWrapper>
+            <ImageUploadInput multiple type="file" id="no-image" onChange={onUploadImage} />
+          </ImageSection>
+        </label>
+      ) : (
+        <ImageSection>
+          <ImageContainer>
+            <ImageWrapper>
+              <label htmlFor="image-a">
                 <Image
                   src={imageA}
                   alt="A이미지"
@@ -104,9 +114,13 @@ function PostVoteContainer() {
                   }}
                 />
                 <AorBMark AorB="A">A</AorBMark>
-              </ImageWrapper>
-              <ImageWrapper>
-                {imageB ? (
+                <ImageUploadButton width="100%" height="100%" />
+                <ImageUploadInput multiple type="file" id="image-a" onChange={onUploadImage} />
+              </label>
+            </ImageWrapper>
+            <ImageWrapper>
+              <label htmlFor="image-b">
+                {imageB && (
                   <Image
                     src={imageB}
                     alt="B이미지"
@@ -116,16 +130,15 @@ function PostVoteContainer() {
                       borderRadius: "10px",
                     }}
                   />
-                ) : (
-                  <ImageUploadButton width="100%" height="100%" />
                 )}
                 <AorBMark AorB="B">B</AorBMark>
-              </ImageWrapper>
-            </ImageContainer>
-          )}
+                <ImageUploadButton width="100%" height="100%" />
+                <ImageUploadInput multiple type="file" id="image-b" onChange={onUploadImage} />
+              </label>
+            </ImageWrapper>
+          </ImageContainer>
         </ImageSection>
-        <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
-      </label>
+      )}
       <VoteOptionText>
         <InputBox>
           <ABInput
@@ -271,6 +284,7 @@ const InputBox = styled.div`
 
 const Ballon = styled.div`
   position: relative;
+  z-index: ${depths.menu};
 `;
 
 const BalloonText = styled.div`
