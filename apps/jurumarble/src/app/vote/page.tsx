@@ -2,11 +2,14 @@
 
 import { useCallback, useEffect, useRef } from 'react';
 
+import { useToggle } from '@monorepo/hooks';
 import BottomBar from 'components/BottomBar';
 import Loading from 'components/Loading';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
 import { Button } from 'components/button';
 import Path from 'lib/Path';
 import { media } from 'lib/styles';
+import { isLogin } from 'lib/utils/auth';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ImgScroll } from 'public/images';
@@ -67,7 +70,7 @@ function VoteHomePage() {
   const { mutate, select } = useExecuteVoteService(voteId);
   const onMutateVoting = useCallback(
     (select: 'A' | 'B') => {
-      mutate(select);
+      isLogin() ? mutate(select) : onToggleReplaceLoginPageModal();
     },
     [mutate],
   );
@@ -85,6 +88,7 @@ function VoteHomePage() {
     '',
     '',
   );
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
 
   const {
     data: statistics,
@@ -135,7 +139,11 @@ function VoteHomePage() {
               variant="primary"
               width="104px"
               height="40px"
-              onClick={() => router.push(Path.POST_PAGE)}
+              onClick={() =>
+                isLogin()
+                  ? router.push(Path.POST_PAGE)
+                  : onToggleReplaceLoginPageModal()
+              }
             >
               작성하기 <BigFont>﹢</BigFont>
             </Button>
@@ -159,6 +167,7 @@ function VoteHomePage() {
               mutateBookMark={mutateBookMark}
               isBookmark={isBookmark}
               select={select.choice}
+              onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
             />
             <VoteDescription
               voteType={voteType}
@@ -188,6 +197,11 @@ function VoteHomePage() {
         <EmptyBox />
       </Background>
       <BottomBar />
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
     </>
   );
 }

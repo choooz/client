@@ -1,6 +1,7 @@
 'use client';
 
 import Path from 'lib/Path';
+import { isLogin } from 'lib/utils/auth';
 import Link from 'next/link';
 import {
   SvgHeaderSearch,
@@ -16,9 +17,11 @@ function Header() {
         <SvgLogo width={110} height={19} />
       </Link>
       <IconContainer>
-        <Link href={Path.NOTIFICATION_PAGE}>
-          <SvgNotification width={24} height={24} />
-        </Link>
+        {isLogin() && (
+          <Link href={Path.NOTIFICATION_PAGE}>
+            <SvgNotification width={24} height={24} />
+          </Link>
+        )}
         <Link href={Path.SEARCH_PAGE}>
           <SvgHeaderSearch width={24} height={24} />
         </Link>

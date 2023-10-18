@@ -2,13 +2,16 @@
 
 import { useMemo, useState } from 'react';
 
+import { useToggle } from '@monorepo/hooks';
 import Loading from 'components/Loading';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
 import {
   VOTE_AGE_FILTER_LIST,
   VOTE_ALCOHOL_FILTER_LIST,
   VOTE_GENDER_FILTER_LIST,
   VOTE_MBTI_LIST,
 } from 'lib/constants';
+import { isLogin } from 'lib/utils/auth';
 import dynamic from 'next/dynamic';
 import { useParams } from 'next/navigation';
 import {
@@ -39,6 +42,7 @@ const DynamicVoteAnalyzeBar = dynamic(
 );
 
 function Detail() {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
   const params = useParams();
 
   const [filter, setFilter] = useState({
@@ -63,7 +67,7 @@ function Detail() {
 
   const { mutate, select } = useExecuteVoteService(Number(data?.voteId));
   const onMutateVoting = (select: 'A' | 'B') => {
-    mutate(select);
+    isLogin() ? mutate(select) : onToggleReplaceLoginPageModal();
   };
   const { voteStatisticsQuery } = useFilteredStatisticsService(
     Number(postId),
@@ -152,6 +156,7 @@ function Detail() {
           isBookmark={isBookmark}
           postedUserId={data.postedUserId}
           select={select.choice}
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
         />
         <DynamicVoteDescription
           imageA={imageA}
@@ -202,9 +207,13 @@ function Detail() {
             </div>
           </>
         )}
-
         <DynamicCommentContainer postId={Number(postId)} />
       </PageInner>
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
     </Container>
   );
 }

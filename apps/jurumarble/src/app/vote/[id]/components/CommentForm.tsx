@@ -1,6 +1,9 @@
 // import { Input } from "@monorepo/ui";
 import React from 'react';
 
+import { useToggle } from '@monorepo/hooks';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { isLogin } from 'lib/utils/auth';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -14,9 +17,11 @@ function CommentForm({
   onChangeCommentForm,
   onSubmitComment,
 }: Props) {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmitComment();
+    isLogin() ? onSubmitComment() : onToggleReplaceLoginPageModal();
   };
 
   return (
@@ -29,6 +34,11 @@ function CommentForm({
         />
         <SubmitButton type="submit">등록</SubmitButton>
       </Form>
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
     </Container>
   );
 }

@@ -1,4 +1,5 @@
 import { transitions } from 'lib/styles';
+import { isLogin } from 'lib/utils/auth';
 import Image from 'next/image';
 import useDrinkStampService from 'services/useDrinkStampService';
 import SvgStamp from 'src/assets/icons/components/IcStamp';
@@ -16,12 +17,14 @@ interface Props {
       };
   onClickReplaceDrinkInfo: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedDrinkList?: string[];
+  onToggleReplaceLoginPageModal: () => void;
 }
 
 function DrinkItem({
   drinkInfo,
   onClickReplaceDrinkInfo,
   selectedDrinkList,
+  onToggleReplaceLoginPageModal,
 }: Props) {
   const { id, name, manufacturer, image } = drinkInfo;
 
@@ -52,7 +55,7 @@ function DrinkItem({
           <StampWrapper
             onClick={(e) => {
               e.stopPropagation();
-              postDrinkEnjoy(id);
+              isLogin() ? postDrinkEnjoy(id) : onToggleReplaceLoginPageModal();
             }}
           >
             <SvgStamp width={24} height={24} fill={stampColor} />

@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Path from 'lib/Path';
 import { getBookMarkCheckAPI, postBookmarkAPI } from 'lib/apis/bookmark';
 import { queryKeys } from 'lib/queryKeys';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 type PostBookmarkProps = Exclude<
@@ -27,8 +25,6 @@ export default function useBookmarkService(voteId: PostBookmarkProps) {
   );
 
   const isBookmark = bookmarkCheck?.bookmarked || false;
-
-  const router = useRouter();
 
   const { mutate: mutateBookMark } = useMutation(
     () => postBookmarkAPI(voteId),
@@ -62,9 +58,6 @@ export default function useBookmarkService(voteId: PostBookmarkProps) {
           getBookmarkQueryKey(voteId),
           context?.previousData,
         );
-        if (confirm('로그인이 필요한 서비스입니다.')) {
-          router.push(Path.LOGIN_PAGE);
-        }
       },
 
       onSettled(_, __) {
