@@ -2,7 +2,7 @@ export const setSessionStorage = (key: string, value: string) =>
   typeof window !== "undefined" ? window.sessionStorage.setItem(key, value) : undefined;
 export const getSessionStorage = (key: string) =>
   typeof window !== "undefined" ? window.sessionStorage.getItem(key) ?? null : null;
-export const clearSessionStorage = (key: string): void =>
+export const removeSessionStorage = (key: string): void =>
   typeof window !== "undefined" ? window.sessionStorage.removeItem(key) : undefined;
 
 interface SessionStorageManagerInterface<T> {
@@ -39,6 +39,6 @@ export class SessionStorageManager<T = string> implements SessionStorageManagerI
   }
 
   remove() {
-    clearSessionStorage(this.storageKey);
+    removeSessionStorage(this.storageKey);
   }
 }

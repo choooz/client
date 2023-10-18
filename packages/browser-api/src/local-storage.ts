@@ -2,7 +2,7 @@ export const setLocalStorage = (key: string, value: string) =>
   typeof window !== "undefined" ? window.localStorage.setItem(key, value) : undefined;
 export const getLocalStorage = (key: string) =>
   typeof window !== "undefined" ? window.localStorage.getItem(key) ?? null : null;
-export const clearLocalStorage = (key: string): void =>
+export const removeLocalStorage = (key: string): void =>
   typeof window !== "undefined" ? window.localStorage.removeItem(key) : undefined;
 
 interface LocalStorageManagerInterface<T> {
@@ -39,6 +39,6 @@ export class LocalStorageManager<T = string> implements LocalStorageManagerInter
   }
 
   remove() {
-    clearLocalStorage(this.storageKey);
+    removeLocalStorage(this.storageKey);
   }
 }
