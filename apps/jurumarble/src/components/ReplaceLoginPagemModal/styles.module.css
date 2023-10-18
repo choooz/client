@@ -1,0 +1,34 @@
+.container {
+  padding: 0 24px;
+}
+
+.button {
+  width: 100%;
+  height: 56px;
+  border-radius: 10px;
+}
+
+.cancel-button {
+  background-color: var(--black_05);
+  color: var(--black_03);
+}
+
+.complete-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main_01);
+  color: var(--white);
+}
+
+.buttons {
+  display: flex;
+  gap: 7px;
+  margin-top: 24px;
+}
+
+.modal-text {
+  text-align: center;
+  margin-top: 40px;
+  color: var(--black_01);
+}
