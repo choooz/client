@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 import BottomBar from 'components/BottomBar';
 import Loading from 'components/Loading';
@@ -86,6 +86,24 @@ function VoteHomePage() {
     isLoading: isStatisticsLoading,
     isError: isStatisticsError,
   } = voteStatisticsQuery;
+
+  useEffect(() => {
+    // 상단 화살표키가 눌렸을 때 다음 페이지로 넘어가는 기능
+    const onKeyPress = (e: KeyboardEvent) => {
+      if (e.key === "ArrowUp") {
+        onChangeNowShowing(-1);
+      } else if (e.key === "ArrowDown") {
+        onChangeNowShowing(1);
+      } else if (e.key === "ArrowLeft") {
+        onMutateVoting("A");
+      } else if (e.key === "ArrowRight") {
+        onMutateVoting("B");
+      }
+    };
+
+    window.addEventListener("keydown", onKeyPress);
+    return () => window.removeEventListener("keydown", onKeyPress);
+  }, [onChangeNowShowing, onMutateVoting]);
 
   if (isLoading || isStatisticsLoading) {
     return <Loading />;
