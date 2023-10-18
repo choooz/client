@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
+    "@mogakko/http-fetch": "workspace:*",
     "@monorepo/hooks": "workspace:*",
     "@monorepo/ui": "workspace:*",
     "@next/bundle-analyzer": "13.3.5-canary.9",
