@@ -111,7 +111,7 @@ function VoteDescription({
               <OverlayPercent>{percentageA}%</OverlayPercent>
               <OverlayCount> {totalCountA}명</OverlayCount>
               {voteType === 'DRINK' && (
-                <OverlayButton>술정보 보기 &nbsp; {'>'}</OverlayButton>
+                <OverlayButton>술 정보 &nbsp; {'>'}</OverlayButton>
               )}
             </div>
             <AorBMark AorB="A">A</AorBMark>
@@ -139,7 +139,7 @@ function VoteDescription({
               <OverlayPercent>{percentageB}%</OverlayPercent>
               <OverlayCount> {totalCountB}명</OverlayCount>
               {voteType === 'DRINK' && (
-                <OverlayButton>술정보 보기&nbsp; {'>'}</OverlayButton>
+                <OverlayButton>술 정보&nbsp; {'>'}</OverlayButton>
               )}
             </div>
             <AorBMark AorB="B">B</AorBMark>
