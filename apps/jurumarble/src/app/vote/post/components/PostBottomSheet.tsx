@@ -1,12 +1,15 @@
-import { Button, Portal } from "components/index";
-import styled, { css } from "styled-components";
+import { Button, Portal } from 'components/index';
+import styled, { css } from 'styled-components';
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
   onChangePostStep: () => void;
 }
 
-function PostBottomSheet({ onToggleDrinkSearchModal, onChangePostStep }: Props) {
+function PostBottomSheet({
+  onToggleDrinkSearchModal,
+  onChangePostStep,
+}: Props) {
   return (
     <Portal selector="#portal">
       <BottomSheet>

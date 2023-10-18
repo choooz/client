@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface ButtonStyledProps {
   /**
    * 버튼 타입
    */
-  variant?: "primary" | "outline";
+  variant?: 'primary' | 'outline';
   /**
    * 버튼 가로 길이
    */
@@ -21,11 +21,20 @@ interface ButtonStyledProps {
   borderRadius?: string;
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonStyledProps {
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    ButtonStyledProps {
   children: React.ReactNode;
 }
 
-function Button({ width, height, variant, borderRadius = "10px", children, ...rest }: ButtonProps) {
+function Button({
+  width,
+  height,
+  variant,
+  borderRadius = '10px',
+  children,
+  ...rest
+}: ButtonProps) {
   return (
     <ButtonStyled
       variant={variant}

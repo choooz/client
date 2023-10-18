@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgArrowDown = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -12,7 +12,7 @@ const SvgArrowDown = (props: SVGProps<SVGSVGElement>) => (
     <mask
       id="mask0_266_619"
       style={{
-        maskType: "alpha",
+        maskType: 'alpha',
       }}
       maskUnits="userSpaceOnUse"
       x={0}
@@ -20,7 +20,12 @@ const SvgArrowDown = (props: SVGProps<SVGSVGElement>) => (
       width={20}
       height={20}
     >
-      <rect width={20} height={20} fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <rect
+        width={20}
+        height={20}
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
     </mask>
     <g mask="url(#mask0_266_619)">
       <path

@@ -1,20 +1,22 @@
-import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import { UseMutateFunction } from "@tanstack/react-query";
-import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
-import NonWriterBox from "app/vote/components/NonWriterBox";
-import Chip from "components/Chip";
-import Path from "lib/Path";
-import { AorB } from "lib/apis/vote";
-import { formatDate } from "lib/utils/formatDate";
-import { useRouter } from "next/navigation";
-import useGetUserInfo from "services/useGetUserInfo";
-import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
-import SvgIcMenu from "src/assets/icons/components/IcMenu";
-import styled from "styled-components";
+import { useOutsideClick, useToggle } from '@monorepo/hooks';
+import { UseMutateFunction } from '@tanstack/react-query';
+import ModifyDeleteButtonBox from 'app/vote/components/MenuBox';
+import NonWriterBox from 'app/vote/components/NonWriterBox';
+import Chip from 'components/Chip';
+import Path from 'lib/Path';
+import { AorB } from 'lib/apis/vote';
+import { isLogin } from 'lib/utils/auth';
+import { formatDate } from 'lib/utils/formatDate';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import useGetUserInfo from 'services/useGetUserInfo';
+import SvgIcBookmark from 'src/assets/icons/components/IcBookmark';
+import SvgIcBookmarkActive from 'src/assets/icons/components/IcBookmarkActive';
+import SvgIcMenu from 'src/assets/icons/components/IcMenu';
+import styled from 'styled-components';
 
-import useVoteDeleteService from "../services/useVoteDeleteService";
-import useVoteReportService from "../services/useVoteReportService";
+import useVoteDeleteService from '../services/useVoteDeleteService';
+import useVoteReportService from '../services/useVoteReportService';
 
 interface Props {
   title: string;
@@ -26,6 +28,7 @@ interface Props {
   postedUserId: number;
   voteId: number;
   select: AorB | null;
+  onToggleReplaceLoginPageModal: () => void;
 }
 
 const ChipContainer = ({
@@ -38,13 +41,17 @@ const ChipContainer = ({
   isBookmark,
   postedUserId,
   select,
+  onToggleReplaceLoginPageModal,
 }: Props) => {
   const { userInfo } = useGetUserInfo();
   const { onDelete } = useVoteDeleteService(voteId);
   const router = useRouter();
   const [toggleMenu, onToggleMenu] = useToggle();
   const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle();
-  const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
+  const { targetEl } = useOutsideClick<HTMLDivElement>(
+    toggleMenu,
+    onToggleMenu,
+  );
   const { targetEl: targetEl2 } = useOutsideClick<HTMLDivElement>(
     toggleNonWriterMenu,
     onToggleNonWriterMenu,
@@ -60,11 +67,23 @@ const ChipContainer = ({
         <FlexRow>
           {isBookmark ? (
             <SVGWrapper>
-              <SvgIcBookmarkActive width={26} height={26} onClick={() => mutateBookMark()} />
+              <SvgIcBookmarkActive
+                width={26}
+                height={26}
+                onClick={() =>
+                  isLogin() ? mutateBookMark() : onToggleReplaceLoginPageModal()
+                }
+              />
             </SVGWrapper>
           ) : (
             <SVGWrapper>
-              <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+              <SvgIcBookmark
+                width={20}
+                height={20}
+                onClick={() =>
+                  isLogin() ? mutateBookMark() : onToggleReplaceLoginPageModal()
+                }
+              />
             </SVGWrapper>
           )}
 
@@ -97,7 +116,7 @@ const ChipContainer = ({
           top="70px"
           right="41px"
           onDelete={() => {
-            if (confirm("정말 삭제하시겠습니까?")) {
+            if (confirm('정말 삭제하시겠습니까?')) {
               onDelete();
             }
           }}
@@ -116,7 +135,13 @@ const ChipContainer = ({
           //   onToggleNonWriterMenu();
           // }}
           onReport={() => {
-            mutate(voteId);
+            mutate(voteId, {
+              onSuccess: () => {
+                toast.success('신고가 접수되었습니다.', {
+                  toastId: 'report',
+                });
+              },
+            });
 
             onToggleNonWriterMenu();
           }}
@@ -157,6 +182,11 @@ const FlexRow = styled.div`
 
 const Description = styled.div`
   padding-bottom: 20px;
+  white-space: pre-wrap;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   ${({ theme }) => theme.typography.body_long03}
   color: ${({ theme }) => theme.colors.black_02};
 `;

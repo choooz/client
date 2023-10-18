@@ -1,32 +1,35 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Path from "lib/Path";
-import { uploadImageAPI } from "lib/apis/common";
-import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
-import { queryKeys } from "lib/queryKeys";
-import { useRouter } from "next/navigation";
-import { DrinkInfoType } from "src/types/drink";
-import { PostVoteType } from "src/types/vote";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Path from 'lib/Path';
+import { uploadImageAPI } from 'lib/apis/common';
+import { postDrinkVoteAPI, postNormalVoteAPI } from 'lib/apis/vote';
+import { queryKeys } from 'lib/queryKeys';
+import { useRouter } from 'next/navigation';
+import { DrinkInfoType } from 'src/types/drink';
+import { PostVoteType } from 'src/types/vote';
 
 export default function usePostVoteService() {
   const router = useRouter();
   const queryClient = useQueryClient();
 
   const [postVoteInfo, setPostVoteInfo] = useState<PostVoteType>({
-    detail: "",
+    detail: '',
     drinkAId: 0,
     drinkBId: 0,
-    imageA: "",
-    imageB: "",
-    title: "",
-    titleA: "",
-    titleB: "",
+    imageA: '',
+    imageB: '',
+    title: '',
+    titleA: '',
+    titleB: '',
   });
 
-  const { title, detail, titleA, titleB, imageA, imageB, drinkAId, drinkBId } = postVoteInfo;
+  const { title, detail, titleA, titleB, imageA, imageB, drinkAId, drinkBId } =
+    postVoteInfo;
 
-  const onChangeVoteText = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onChangeVoteText = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     setPostVoteInfo({
       ...postVoteInfo,
@@ -60,12 +63,12 @@ export default function usePostVoteService() {
 
       if (e.target.files.length === 1) {
         if (e.target.files[0].size > 2000000) {
-          alert("파일 용량이 2MB를 초과하였습니다.");
+          alert('파일 용량이 2MB를 초과하였습니다.');
           return;
         }
         if (!!postVoteInfo.imageA) {
           const formDataB = new FormData();
-          formDataB.append("images", e.target.files[0]);
+          formDataB.append('images', e.target.files[0]);
           try {
             const dataB = await uploadImageAPI(formDataB);
             setPostVoteInfo({
@@ -78,7 +81,7 @@ export default function usePostVoteService() {
           return;
         }
         const formDataA = new FormData();
-        formDataA.append("images", e.target.files[0]);
+        formDataA.append('images', e.target.files[0]);
         try {
           const dataA = await uploadImageAPI(formDataA);
 
@@ -93,14 +96,17 @@ export default function usePostVoteService() {
       }
 
       if (e.target.files.length === 2) {
-        if (e.target.files[0].size > 2000000 || e.target.files[1].size > 2000000) {
-          alert("파일 용량이 2MB를 초과하였습니다.");
+        if (
+          e.target.files[0].size > 2000000 ||
+          e.target.files[1].size > 2000000
+        ) {
+          alert('파일 용량이 2MB를 초과하였습니다.');
           return;
         }
         const formDataA = new FormData();
         const formDataB = new FormData();
-        formDataA.append("images", e.target.files[0]);
-        formDataB.append("images", e.target.files[1]);
+        formDataA.append('images', e.target.files[0]);
+        formDataB.append('images', e.target.files[1]);
         try {
           const dataA = await uploadImageAPI(formDataA);
           const dataB = await uploadImageAPI(formDataB);
@@ -120,7 +126,8 @@ export default function usePostVoteService() {
   );
 
   const { mutate: mutateNomalVote } = useMutation(
-    (voteInfo: Omit<PostVoteType, "drinkAId" | "drinkBId">) => postNormalVoteAPI(voteInfo),
+    (voteInfo: Omit<PostVoteType, 'drinkAId' | 'drinkBId'>) =>
+      postNormalVoteAPI(voteInfo),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
@@ -129,7 +136,7 @@ export default function usePostVoteService() {
     },
   );
   const { mutate: mutateDrinkVote } = useMutation(
-    (voteInfo: Omit<PostVoteType, "titleA" | "titleB" | "imageA" | "imageB">) =>
+    (voteInfo: Omit<PostVoteType, 'titleA' | 'titleB' | 'imageA' | 'imageB'>) =>
       postDrinkVoteAPI(voteInfo),
     {
       onSuccess: () => {

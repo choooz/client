@@ -1,4 +1,4 @@
-import { SERVER_URL } from "lib/env";
+import { httpFetch } from 'src/modules/httpFetch';
 
 export interface GetHotDrinkResponse {
   drinkId: number;
@@ -7,7 +7,11 @@ export interface GetHotDrinkResponse {
   image: string;
 }
 export const getHotDrinkList = async () => {
-  const res = await fetch(`${SERVER_URL}api/drinks/hot`);
+  const res = await httpFetch(`api/drinks/hot`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
   const data = await res.json();
   return data as GetHotDrinkResponse[];
 };

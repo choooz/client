@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgIcMyLocationFloating = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -22,7 +22,7 @@ const SvgIcMyLocationFloating = (props: SVGProps<SVGSVGElement>) => (
       <mask
         id="mask0_872_10822"
         style={{
-          maskType: "alpha",
+          maskType: 'alpha',
         }}
         maskUnits="userSpaceOnUse"
         x={28}
@@ -67,8 +67,15 @@ const SvgIcMyLocationFloating = (props: SVGProps<SVGSVGElement>) => (
         <feOffset dx={4} dy={8} />
         <feGaussianBlur stdDeviation={14} />
         <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0" />
-        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_872_10822" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_872_10822"
+        />
         <feColorMatrix
           in="SourceAlpha"
           type="matrix"
@@ -78,7 +85,10 @@ const SvgIcMyLocationFloating = (props: SVGProps<SVGSVGElement>) => (
         <feOffset dy={4} />
         <feGaussianBlur stdDeviation={6} />
         <feComposite in2="hardAlpha" operator="out" />
-        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0"
+        />
         <feBlend
           mode="normal"
           in2="effect1_dropShadow_872_10822"

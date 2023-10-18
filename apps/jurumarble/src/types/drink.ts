@@ -30,7 +30,7 @@ export interface DrinkInfo {
   enjoyCount: number | null;
 }
 
-export type DrinkInfoType = Pick<DrinkInfo, "id" | "name" | "image">;
+export type DrinkInfoType = Pick<DrinkInfo, 'id' | 'name' | 'image'>;
 
 export interface DrinkMapInfo {
   drinkId: number;

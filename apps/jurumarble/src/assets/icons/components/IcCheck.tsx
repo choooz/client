@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgIcCheck = (props: SVGProps<SVGSVGElement>) => (
   <svg

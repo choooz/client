@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import Path from "lib/Path";
-import { uploadImageAPI } from "lib/apis/common";
-import { deleteUserAPI, updateUserInfoAPI } from "lib/apis/my";
-import { queryKeys } from "lib/queryKeys";
-import { logout } from "lib/utils/auth";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Path from 'lib/Path';
+import { uploadImageAPI } from 'lib/apis/common';
+import { deleteUserAPI, updateUserInfoAPI } from 'lib/apis/my';
+import { queryKeys } from 'lib/queryKeys';
+import { logout } from 'lib/utils/auth';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
-type UpdateUserInfoRequest = Exclude<Parameters<typeof updateUserInfoAPI>[0], undefined>;
+type UpdateUserInfoRequest = Exclude<
+  Parameters<typeof updateUserInfoAPI>[0],
+  undefined
+>;
 
 const getQueryKey = [queryKeys.USER_INFO];
 
@@ -20,14 +23,17 @@ export default function useEditProfileService() {
       return;
     }
     if (e.target.files[0].size > 10485760) {
-      alert("파일 용량이 10MB를 초과하였습니다.");
+      alert('파일 용량이 10MB를 초과하였습니다.');
       return;
     }
     const formData = new FormData();
-    formData.append("images", e.target.files[0]);
+    formData.append('images', e.target.files[0]);
     try {
       const data = await uploadImageAPI(formData);
-      queryClient.setQueryData(getQueryKey, (prev: any) => ({ ...prev, imageUrl: data.imageUrl }));
+      queryClient.setQueryData(getQueryKey, (prev: any) => ({
+        ...prev,
+        imageUrl: data.imageUrl,
+      }));
     } catch (error) {
       alert(`이미지 업로드에 실패했습니다.${error}`);
     }
@@ -35,15 +41,24 @@ export default function useEditProfileService() {
   };
 
   const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    queryClient.setQueryData(getQueryKey, (prev: any) => ({ ...prev, nickname: e.target.value }));
+    queryClient.setQueryData(getQueryKey, (prev: any) => ({
+      ...prev,
+      nickname: e.target.value,
+    }));
   };
 
   const onChangeAlcoholCapacity = (value: string) => {
-    queryClient.setQueryData(getQueryKey, (prev: any) => ({ ...prev, alcoholLimit: value }));
+    queryClient.setQueryData(getQueryKey, (prev: any) => ({
+      ...prev,
+      alcoholLimit: value,
+    }));
   };
 
   const onChangeMBTI = (value: string) => {
-    queryClient.setQueryData(getQueryKey, (prev: any) => ({ ...prev, mbti: value }));
+    queryClient.setQueryData(getQueryKey, (prev: any) => ({
+      ...prev,
+      mbti: value,
+    }));
   };
 
   const router = useRouter();
@@ -57,8 +72,8 @@ export default function useEditProfileService() {
 
   const { mutate: deleteUser } = useMutation(() => deleteUserAPI(), {
     onSuccess: () => {
-      toast("회원 탈퇴가 완료되었습니다.", {
-        toastId: "deleteUser",
+      toast('회원 탈퇴가 완료되었습니다.', {
+        toastId: 'deleteUser',
       });
       router.push(Path.MAIN_PAGE);
       logout();

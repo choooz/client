@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { DrinkImage } from "public/images";
-import styled, { css } from "styled-components";
+import Image from 'next/image';
+import { DrinkImage } from 'public/images';
+import styled, { css } from 'styled-components';
 
 interface Props {
   numberOfStampedDrinks: number;
@@ -20,7 +20,7 @@ function MyEnjoiedDrinkInfoSection({ numberOfStampedDrinks }: Props) {
       <Image
         alt="전통주"
         src={DrinkImage}
-        style={{ width: "53px", height: "53px", borderRadius: "100px" }}
+        style={{ width: '53px', height: '53px', borderRadius: '100px' }}
       />
     </Section>
   );

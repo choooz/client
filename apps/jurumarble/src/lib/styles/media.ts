@@ -1,4 +1,5 @@
-export const mediaQuery = (minWidth: number) => `@media (min-width: ${minWidth}px)`;
+export const mediaQuery = (minWidth: number) =>
+  `@media (min-width: ${minWidth}px)`;
 
 export const mediaSize = {
   large: 1024,

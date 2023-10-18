@@ -1,20 +1,20 @@
-import { TextareaHTMLAttributes } from "react";
+import { TextareaHTMLAttributes } from 'react';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Input 형태
    */
-  variant?: "standard" | "outlined";
+  variant?: 'standard' | 'outlined';
   /**
    * Input 가로 길이
    */
-  width: `${number}px` | `${number}%` | "auto";
+  width: `${number}px` | `${number}%` | 'auto';
   /**
    * Input 가로 길이
    */
-  height: `${number}px` | `${number}%` | "auto";
+  height: `${number}px` | `${number}%` | 'auto';
   /**
    * 포커스 여부
    * 기본 값 : false

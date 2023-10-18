@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   onCopy?: () => void;
@@ -7,7 +7,7 @@ interface Props {
   right?: string;
 }
 
-function NonWriterBox({ onCopy, onReport, top = "0", right = "0px" }: Props) {
+function NonWriterBox({ onCopy, onReport, top = '0', right = '0px' }: Props) {
   return (
     <Container top={top} right={right}>
       {onCopy && (

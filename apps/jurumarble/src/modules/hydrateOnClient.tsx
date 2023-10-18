@@ -1,5 +1,5 @@
-"use client";
+'use client';
 
-import { Hydrate as HydrateOnClient } from "@tanstack/react-query";
+import { Hydrate as HydrateOnClient } from '@tanstack/react-query';
 
 export default HydrateOnClient;

@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -13,7 +13,7 @@ const SvgPrevious = (props: SVGProps<SVGSVGElement>) => (
       <mask
         id="mask0_1910_10702"
         style={{
-          maskType: "alpha",
+          maskType: 'alpha',
         }}
         maskUnits="userSpaceOnUse"
         x={0}

@@ -1,6 +1,6 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { ReadonlyURLSearchParams } from "next/navigation";
+import { ReadonlyURLSearchParams } from 'next/navigation';
 
 export function useCreateQueryString(searchParams: ReadonlyURLSearchParams) {
   const createQueryString = useCallback(

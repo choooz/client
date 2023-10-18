@@ -1,20 +1,26 @@
-import { RatioFrame } from "@monorepo/ui";
-import Chip from "components/Chip";
-import { transitions } from "lib/styles";
-import Image from "next/image";
-import useDrinkStampService from "services/useDrinkStampService";
-import SvgStamp from "src/assets/icons/components/IcStamp";
-import { DrinkInfo } from "src/types/drink";
-import styled, { css, useTheme } from "styled-components";
+import { RatioFrame } from '@monorepo/ui';
+import Chip from 'components/Chip';
+import { transitions } from 'lib/styles';
+import { isLogin } from 'lib/utils/auth';
+import Image from 'next/image';
+import useDrinkStampService from 'services/useDrinkStampService';
+import SvgStamp from 'src/assets/icons/components/IcStamp';
+import { DrinkInfo } from 'src/types/drink';
+import styled, { css, useTheme } from 'styled-components';
 
 interface Props {
   drinkInfo: DrinkInfo;
-
   onClickDrinkItem: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selectedDrinkList?: string[];
+  onToggleReplaceLoginPageModal: () => void;
 }
 
-function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
+function DrinkItem({
+  drinkInfo,
+  onClickDrinkItem,
+  selectedDrinkList,
+  onToggleReplaceLoginPageModal,
+}: Props) {
   const { id, name, manufacturer, image, enjoyCount, region } = drinkInfo;
 
   const { colors } = useTheme();
@@ -24,10 +30,20 @@ function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
   const stampColor = isStampedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
   return (
-    <Container onClick={onClickDrinkItem} name={name} selected={selectedDrinkList?.includes(name)}>
+    <Container
+      onClick={onClickDrinkItem}
+      name={name}
+      selected={selectedDrinkList?.includes(name)}
+    >
       <ImageWrapper>
         <RatioFrame ratio="square">
-          <Image loading="lazy" alt={name} src={image} fill style={{ borderRadius: "10px" }} />
+          <Image
+            loading="lazy"
+            alt={name}
+            src={image}
+            fill
+            style={{ borderRadius: '10px' }}
+          />
         </RatioFrame>
       </ImageWrapper>
       <InfoContainer>
@@ -36,7 +52,7 @@ function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
           <StampWrapper
             onClick={(e) => {
               e.stopPropagation();
-              postDrinkEnjoy(id);
+              isLogin() ? postDrinkEnjoy(id) : onToggleReplaceLoginPageModal();
             }}
           >
             <SvgStamp width={24} height={24} fill={stampColor} />
@@ -54,7 +70,8 @@ function DrinkItem({ drinkInfo, onClickDrinkItem, selectedDrinkList }: Props) {
 
 const Container = styled.button<{ selected: boolean | undefined }>`
   display: flex;
-  box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
+  box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4),
+    0px 8px 20px 0px rgba(235, 235, 235, 0.4);
   height: 120px;
   padding: 16px;
   border-radius: 16px;

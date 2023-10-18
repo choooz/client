@@ -1,2 +1,2 @@
-export * from "./RegisterProvider";
-export * from "./useRegisterContext";
+export * from './RegisterProvider';
+export * from './useRegisterContext';

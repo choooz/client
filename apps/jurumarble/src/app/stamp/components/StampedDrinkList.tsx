@@ -1,29 +1,41 @@
-import Path from "lib/Path";
-import { useRouter } from "next/navigation";
-import { DrinkInfo } from "src/types/drink";
-import styled from "styled-components";
+import Path from 'lib/Path';
+import { useRouter } from 'next/navigation';
+import { DrinkInfo } from 'src/types/drink';
+import styled from 'styled-components';
 
-import DrinkItem from "./DrinkItem";
-import RegionSelect from "./RegionSelect";
+import DrinkItem from './DrinkItem';
+import RegionSelect from './RegionSelect';
 
 interface Props {
   regionOption: string;
   onChangeRegionOption: (value: string) => void;
   drinkList: DrinkInfo[];
+  onToggleReplaceLoginPageModal: () => void;
 }
 
-function StampedDrinkList({ regionOption, onChangeRegionOption, drinkList }: Props) {
+function StampedDrinkList({
+  regionOption,
+  onChangeRegionOption,
+  drinkList,
+  onToggleReplaceLoginPageModal,
+}: Props) {
   const router = useRouter();
 
   return (
     <Container>
-      <RegionSelect regionOption={regionOption} onChangeRegionOption={onChangeRegionOption} />
+      <RegionSelect
+        regionOption={regionOption}
+        onChangeRegionOption={onChangeRegionOption}
+      />
       <DrinkList>
         {drinkList.map((drink) => (
           <DrinkItem
             key={drink.id}
             drinkInfo={drink}
-            onClickReplaceDrinkInfo={() => router.push(`${Path.DRINK_INFO_PAGE}/${drink.id}`)}
+            onClickReplaceDrinkInfo={() =>
+              router.push(`${Path.DRINK_INFO_PAGE}/${drink.id}`)
+            }
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
         ))}
       </DrinkList>

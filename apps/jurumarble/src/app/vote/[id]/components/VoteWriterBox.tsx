@@ -1,8 +1,8 @@
-import { convertAge } from "lib/utils/formatUserInfo";
-import Image, { StaticImageData } from "next/image";
-import styled, { css } from "styled-components";
+import { convertAge } from 'lib/utils/formatUserInfo';
+import Image, { StaticImageData } from 'next/image';
+import styled, { css } from 'styled-components';
 
-import AlcholLevelTag from "./AlcholLevelTag";
+import AlcholLevelTag from './AlcholLevelTag';
 
 interface Props {
   writer: {
@@ -25,14 +25,14 @@ function VoteWriterBox({ writer }: Props) {
         width={48}
         height={48}
         style={{
-          borderRadius: "8px",
+          borderRadius: '8px',
         }}
       />
       <ContentsBox>
         {(userAge || userGender || userAge || alchol || userMbti) && (
           <Flex>
             <TagBox>
-              {userGender === "MALE" ? "남" : "여"}
+              {userGender === 'MALE' ? '남' : '여'}
               {userAge && (
                 <>
                   <DivideTag /> {convertAge(userAge)}

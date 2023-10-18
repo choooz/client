@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { getHotDrinkVote } from "lib/apis/vote/getHotDrinkVote";
+import { useQuery } from '@tanstack/react-query';
+import { getHotDrinkVote } from 'lib/apis/vote/getHotDrinkVote';
 
-import { hotDrinkVoteQueryKey } from "./queryKey";
+import { hotDrinkVoteQueryKey } from './queryKey';
 
 export const useGetHotDrinkVoteService = () => {
   const { data: hotDrinkVote } = useQuery({

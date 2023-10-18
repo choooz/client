@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Loading = () => {
   return (
@@ -34,7 +34,7 @@ const Box = styled.div`
   }
 
   .loader4:before {
-    content: "";
+    content: '';
     position: absolute;
     background-color: ${({ theme }) => theme.colors.main_01};
     top: 0px;
@@ -50,7 +50,7 @@ const Box = styled.div`
   }
 
   .loader4:after {
-    content: "LOADING ...";
+    content: 'LOADING ...';
     color: ${({ theme }) => theme.colors.main_01};
     font-weight: 200;
     font-size: 16px;

@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import { useToggle } from "@monorepo/hooks";
-import AorBMark from "components/AorBMark";
-import ImageUploadButton from "components/ImageUploadButton";
-import { Button, Input } from "components/index";
-import { media } from "lib/styles";
-import depths from "lib/styles/depths";
-import Image from "next/image";
-import { SvgIcX, SvgInfo } from "src/assets/icons/components";
-import { DrinkInfoType } from "src/types/drink";
-import styled, { css } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import AorBMark from 'components/AorBMark';
+import ImageUploadButton from 'components/ImageUploadButton';
+import { Button, Input } from 'components/index';
+import { media } from 'lib/styles';
+import depths from 'lib/styles/depths';
+import Image from 'next/image';
+import { SvgIcX, SvgInfo } from 'src/assets/icons/components';
+import { DrinkInfoType } from 'src/types/drink';
+import styled, { css } from 'styled-components';
 
-import DrinkSearchModal from "./DrinkSearchModal";
-import TitleAndDescriptionSection from "./TitleAndDescriptionSection";
-import usePostVoteService from "../services/usePostVoteService";
+import DrinkSearchModal from './DrinkSearchModal';
+import TitleAndDescriptionSection from './TitleAndDescriptionSection';
+import usePostVoteService from '../services/usePostVoteService';
 
 function PostVoteContainer() {
   const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
@@ -81,7 +81,12 @@ function PostVoteContainer() {
         <label htmlFor="no-image">
           <ImageSection>
             <ImageUploadButton width="100%" height="163px" />
-            <ImageUploadInput multiple type="file" id="no-image" onChange={onUploadImage} />
+            <ImageUploadInput
+              multiple
+              type="file"
+              id="no-image"
+              onChange={onUploadImage}
+            />
           </ImageSection>
         </label>
       ) : (
@@ -94,13 +99,18 @@ function PostVoteContainer() {
                   alt="A이미지"
                   fill
                   style={{
-                    objectFit: "cover",
-                    borderRadius: "10px",
+                    objectFit: 'cover',
+                    borderRadius: '10px',
                   }}
                 />
                 <AorBMark AorB="A">A</AorBMark>
                 <ImageUploadButton width="100%" height="100%" />
-                <ImageUploadInput multiple type="file" id="image-a" onChange={onUploadImage} />
+                <ImageUploadInput
+                  multiple
+                  type="file"
+                  id="image-a"
+                  onChange={onUploadImage}
+                />
               </label>
             </ImageWrapper>
             <ImageWrapper>
@@ -111,14 +121,19 @@ function PostVoteContainer() {
                     alt="B이미지"
                     fill
                     style={{
-                      objectFit: "cover",
-                      borderRadius: "10px",
+                      objectFit: 'cover',
+                      borderRadius: '10px',
                     }}
                   />
                 )}
                 <AorBMark AorB="B">B</AorBMark>
                 <ImageUploadButton width="100%" height="100%" />
-                <ImageUploadInput multiple type="file" id="image-b" onChange={onUploadImage} />
+                <ImageUploadInput
+                  multiple
+                  type="file"
+                  id="image-b"
+                  onChange={onUploadImage}
+                />
               </label>
             </ImageWrapper>
           </ImageContainer>
@@ -243,14 +258,15 @@ const VoteOptionText = styled.div`
   gap: 16px;
 `;
 
-const ABInput = styled(Input)<{ AorB: "A" | "B" }>`
+const ABInput = styled(Input)<{ AorB: 'A' | 'B' }>`
   ${({ theme, AorB }) =>
     css`
       ${theme.typography.body_long03}
       color: ${theme.colors.black_04};
       border-bottom: 1px solid ${theme.colors.line_01};
       :focus {
-        border-bottom: 1px solid ${AorB === "A" ? theme.colors.sub_01 : theme.colors.sub_02};
+        border-bottom: 1px solid
+          ${AorB === 'A' ? theme.colors.sub_01 : theme.colors.sub_02};
       }
     `}
 `;
@@ -283,7 +299,7 @@ const BalloonText = styled.div`
     left: 48px;
 
     ::after {
-      content: "";
+      content: '';
       position: absolute;
       border-top: 8px solid transparent;
       border-bottom: 8px solid ${theme.colors.system_black};

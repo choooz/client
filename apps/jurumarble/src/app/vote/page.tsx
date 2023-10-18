@@ -1,28 +1,31 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from 'react';
 
-import BottomBar from "components/BottomBar";
-import Loading from "components/Loading";
-import { Button } from "components/button";
-import Path from "lib/Path";
-import { media } from "lib/styles";
-import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ImgScroll } from "public/images";
-import { toast } from "react-toastify";
-import useBookmarkService from "services/useBookmarkService";
-import SvgIcDetail from "src/assets/icons/components/IcDetail";
-import styled, { css } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import BottomBar from 'components/BottomBar';
+import Loading from 'components/Loading';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { Button } from 'components/button';
+import Path from 'lib/Path';
+import { media } from 'lib/styles';
+import { isLogin } from 'lib/utils/auth';
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ImgScroll } from 'public/images';
+import { toast } from 'react-toastify';
+import useBookmarkService from 'services/useBookmarkService';
+import SvgIcDetail from 'src/assets/icons/components/IcDetail';
+import styled, { css } from 'styled-components';
 
-import ChipContainer from "./[id]/components/ChipContainer";
-import VoteDescription from "./[id]/components/VoteDescription";
-import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
-import useFilteredStatisticsService from "./[id]/services/useFilterStatisticsService";
-import useFlipAnimation from "./hooks/useFlipAnimation";
-import useInfiniteMainListService from "./services/useGetVoteListService";
+import ChipContainer from './[id]/components/ChipContainer';
+import VoteDescription from './[id]/components/VoteDescription';
+import useExecuteVoteService from './[id]/services/useExecuteVoteService';
+import useFilteredStatisticsService from './[id]/services/useFilterStatisticsService';
+import useFlipAnimation from './hooks/useFlipAnimation';
+import useInfiniteMainListService from './services/useGetVoteListService';
 
-export type Drag = "up" | "down" | null;
+export type Drag = 'up' | 'down' | null;
 
 function VoteHomePage() {
   const searchParams = useSearchParams();
@@ -30,9 +33,9 @@ function VoteHomePage() {
   /**
    * @TODO 여러번 뜨는 현상 지속시 삭제
    */
-  params.get("isSuccess") &&
-    toast.success("정상적으로 투표가 등록되었습니다!.", {
-      toastId: "voteSuccess",
+  params.get('isSuccess') &&
+    toast.success('정상적으로 투표가 등록되었습니다!.', {
+      toastId: 'voteSuccess',
     });
 
   const router = useRouter();
@@ -40,7 +43,7 @@ function VoteHomePage() {
   const { isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({
       size: 10,
-      sortBy: "ByTime",
+      sortBy: 'ByTime',
     });
 
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
@@ -58,23 +61,34 @@ function VoteHomePage() {
     postedUserId,
     createdAt,
     voteType,
+    drinkAId,
+    drinkBId,
   } = mainVoteList[nowShowing] || {};
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
-  const onMutateVoting = (select: "A" | "B") => {
-    mutate(select);
-  };
+  const onMutateVoting = useCallback(
+    (select: 'A' | 'B') => {
+      isLogin() ? mutate(select) : onToggleReplaceLoginPageModal();
+    },
+    [mutate],
+  );
 
   const moreRef = useRef<HTMLButtonElement>(null);
 
   const onScrollBottom = () => {
     // 스크롤을 최하단으로 내린다
-    moreRef.current?.scrollIntoView({ behavior: "smooth" });
+    moreRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const { voteStatisticsQuery } = useFilteredStatisticsService(Number(voteId), "", "", "");
+  const { voteStatisticsQuery } = useFilteredStatisticsService(
+    Number(voteId),
+    '',
+    '',
+    '',
+  );
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
 
   const {
     data: statistics,
@@ -82,8 +96,30 @@ function VoteHomePage() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
-  if (isLoading || isStatisticsLoading) {return <Loading />;}
-  if (isError || isStatisticsError) {return <PageInner drag={drag}>에러</PageInner>;}
+  useEffect(() => {
+    // 상단 화살표키가 눌렸을 때 다음 페이지로 넘어가는 기능
+    const onKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp') {
+        onChangeNowShowing(-1);
+      } else if (e.key === 'ArrowDown') {
+        onChangeNowShowing(1);
+      } else if (e.key === 'ArrowLeft') {
+        onMutateVoting('A');
+      } else if (e.key === 'ArrowRight') {
+        onMutateVoting('B');
+      }
+    };
+
+    window.addEventListener('keydown', onKeyPress);
+    return () => window.removeEventListener('keydown', onKeyPress);
+  }, [onChangeNowShowing, onMutateVoting]);
+
+  if (isLoading || isStatisticsLoading) {
+    return <Loading />;
+  }
+  if (isError || isStatisticsError) {
+    return <PageInner drag={drag}>에러</PageInner>;
+  }
 
   const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
 
@@ -103,7 +139,11 @@ function VoteHomePage() {
               variant="primary"
               width="104px"
               height="40px"
-              onClick={() => router.push(Path.POST_PAGE)}
+              onClick={() =>
+                isLogin()
+                  ? router.push(Path.POST_PAGE)
+                  : onToggleReplaceLoginPageModal()
+              }
             >
               작성하기 <BigFont>﹢</BigFont>
             </Button>
@@ -127,6 +167,7 @@ function VoteHomePage() {
               mutateBookMark={mutateBookMark}
               isBookmark={isBookmark}
               select={select.choice}
+              onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
             />
             <VoteDescription
               voteType={voteType}
@@ -140,18 +181,27 @@ function VoteHomePage() {
               totalCountB={totalCountB}
               select={select.choice}
               onMutateVoting={onMutateVoting}
-              drinkAId={1}
-              drinkBId={1}
+              drinkAId={drinkAId}
+              drinkBId={drinkBId}
             />
-            <MoreButton onClick={() => router.push(`vote/${voteId}`)} ref={moreRef}>
+            <MoreButton
+              onClick={() => router.push(`vote/${voteId}`)}
+              ref={moreRef}
+            >
               더보기 <SvgIcDetail width={16} height={16} />
             </MoreButton>
           </PageInner>
           <FirstPageBase className="animate2" drag={drag} />
           <SecondPageBase className="animate3" drag={drag} />
         </Container>
+        <EmptyBox />
       </Background>
       <BottomBar />
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
     </>
   );
 }
@@ -191,7 +241,7 @@ const PageInner = styled.div<{ drag: Drag }>`
   }
 
   ${({ drag }) =>
-    drag === "up" &&
+    drag === 'up' &&
     css`
       transition: all 0.5s ease-in-out;
       transform-origin: 50% 0;
@@ -200,7 +250,7 @@ const PageInner = styled.div<{ drag: Drag }>`
       opacity: 0;
     `}
   ${({ drag }) =>
-    drag === "down" &&
+    drag === 'down' &&
     css`
       transition: all 0.5s ease-in-out;
       transform: rotateX(90deg) scale(0.9, 1.032);
@@ -234,7 +284,7 @@ const FirstPageBase = styled.div<{ drag: Drag }>`
     height: 620px;
   }
   ${({ drag }) =>
-    drag === "up" &&
+    drag === 'up' &&
     css`
       perspective: 600px;
       transform-origin: 50% 0;
@@ -242,7 +292,7 @@ const FirstPageBase = styled.div<{ drag: Drag }>`
       opacity: 1;
     `}
   ${({ drag }) =>
-    drag === "down" &&
+    drag === 'down' &&
     css`
       opacity: 1;
       transform: scale(1.11, 0.97);
@@ -260,12 +310,12 @@ const SecondPageBase = styled(FirstPageBase)`
     height: 640px;
   }
   ${({ drag }) =>
-    drag === "up" &&
+    drag === 'up' &&
     css`
       opacity: 0.6;
     `}
   ${({ drag }) =>
-    drag === "down" &&
+    drag === 'down' &&
     css`
       opacity: 0.6;
     `}
@@ -285,7 +335,7 @@ const MoreButton = styled.button`
   left: 50%;
   right: 50%;
   transform: translate(-50%, -50%);
-  bottom: -40px;
+  bottom: -60px;
   height: 40px;
   width: 94px;
   border-radius: 8px;
@@ -305,5 +355,10 @@ const ScrollImage = styled.div`
   bottom: 60px;
   right: 20px;
   z-index: 1600;
+`;
+
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 174px;
 `;
 export default VoteHomePage;

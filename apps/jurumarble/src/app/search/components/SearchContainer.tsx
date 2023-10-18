@@ -1,29 +1,31 @@
-"use client";
+'use client';
 
-import { useDebouncedCallback } from "@react-hookz/web";
-import BottomBar from "components/BottomBar";
-import DivideLine from "components/DivideLine";
-import SearchInput from "components/SearchInput";
-import { Button } from "components/button";
-import { useCreateQueryString } from "hooks/useCreateQueryString";
-import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from "lib/constants";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import SvgIcPrev from "src/assets/icons/components/IcPrev";
-import { DrinkInfoSortType, RegionType, VoteSortType } from "src/types/common";
-import styled, { css, DefaultTheme } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import { useDebouncedCallback } from '@react-hookz/web';
+import BottomBar from 'components/BottomBar';
+import DivideLine from 'components/DivideLine';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import SearchInput from 'components/SearchInput';
+import { Button } from 'components/button';
+import { useCreateQueryString } from 'hooks/useCreateQueryString';
+import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from 'lib/constants';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import SvgIcPrev from 'src/assets/icons/components/IcPrev';
+import { DrinkInfoSortType, RegionType, VoteSortType } from 'src/types/common';
+import styled, { css, DefaultTheme } from 'styled-components';
 
-import DrinkList from "./DrinkList";
-import DrinkVoteList from "./DrinkVoteList";
-import RegionSmallSelect from "./RegionSmallSelect";
-import SortSelect from "./SortSelect";
+import DrinkList from './DrinkList';
+import DrinkVoteList from './DrinkVoteList';
+import RegionSmallSelect from './RegionSmallSelect';
+import SortSelect from './SortSelect';
 
 const TAB_LIST = [
-  { id: "total", name: "통합" },
-  { id: "drinkInfo", name: "우리술 정보" },
-  { id: "drinkVote", name: "우리술 투표" },
+  { id: 'total', name: '통합' },
+  { id: 'drinkInfo', name: '우리술 정보' },
+  { id: 'drinkVote', name: '우리술 투표' },
 ] as const;
 
-type TabList = (typeof TAB_LIST)[number]["id"];
+type TabList = (typeof TAB_LIST)[number]['id'];
 
 /**
  * @TODO 아래와 같이 분리하기
@@ -37,16 +39,18 @@ type TabList = (typeof TAB_LIST)[number]["id"];
  */
 
 function SearchContainer() {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const createQueryString = useCreateQueryString(searchParams);
 
-  const searchText = (searchParams.get("searchText") as string) ?? "";
+  const searchText = (searchParams.get('searchText') as string) ?? '';
 
   const onChangeSearchText = (keyword: string) => {
-    router.replace(`${pathname  }?${  createQueryString("searchText", keyword)}`, {
+    router.replace(`${pathname}?${createQueryString('searchText', keyword)}`, {
       scroll: true,
     });
   };
@@ -58,24 +62,30 @@ function SearchContainer() {
     500,
   );
 
-  const selectedTab = searchParams.get("selectedTab") ?? "total";
+  const selectedTab = searchParams.get('selectedTab') ?? 'total';
   const onClickSelectedTab = (tab: TabList) => {
-    router.replace(`${pathname  }?${  createQueryString("selectedTab", tab)}`);
+    router.replace(`${pathname}?${createQueryString('selectedTab', tab)}`);
   };
 
-  const drinkInfoSortOption = searchParams.get("drinkInfoSortOption") ?? "ByPopularity";
+  const drinkInfoSortOption =
+    searchParams.get('drinkInfoSortOption') ?? 'ByPopularity';
   const onChangeDrinkInfoSortOption = (value: DrinkInfoSortType) => {
-    router.replace(`${pathname  }?${  createQueryString("drinkInfoSortOption", value)}`);
+    router.replace(
+      `${pathname}?${createQueryString('drinkInfoSortOption', value)}`,
+    );
   };
 
-  const drinkVoteSortOption = searchParams.get("drinkVoteSortOption") ?? "ByPopularity";
+  const drinkVoteSortOption =
+    searchParams.get('drinkVoteSortOption') ?? 'ByPopularity';
   const onChangeDrinkVoteSortOption = (value: VoteSortType) => {
-    router.replace(`${pathname  }?${  createQueryString("drinkVoteSortOption", value)}`);
+    router.replace(
+      `${pathname}?${createQueryString('drinkVoteSortOption', value)}`,
+    );
   };
 
-  const regionOption = searchParams.get("regionOption") ?? "";
+  const regionOption = searchParams.get('regionOption') ?? '';
   const onChangeRegionOption = (value: RegionType) => {
-    router.replace(`${pathname  }?${  createQueryString("regionOption", value)}`);
+    router.replace(`${pathname}?${createQueryString('regionOption', value)}`);
   };
 
   const isSelectedTab = (tabName: TabList) => {
@@ -94,14 +104,17 @@ function SearchContainer() {
             searchText={searchText}
             sortOption={drinkInfoSortOption}
             regionOption={regionOption}
-            isSelectedTab={isSelectedTab("total")}
+            isSelectedTab={isSelectedTab('total')}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
           <MoreButton
             variant="outline"
             width="100%"
             height="48px"
             value="drinkInfo"
-            onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
+            onClick={(e) =>
+              onClickSelectedTab(e.currentTarget.value as TabList)
+            }
           >
             우리술 정보 더보기
           </MoreButton>
@@ -114,14 +127,17 @@ function SearchContainer() {
             searchText={searchText}
             sortOption={drinkVoteSortOption}
             regionOption={regionOption}
-            isSelectedTab={isSelectedTab("total")}
+            isSelectedTab={isSelectedTab('total')}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
           <MoreButton
             variant="outline"
             width="100%"
             height="48px"
             value="drinkVote"
-            onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
+            onClick={(e) =>
+              onClickSelectedTab(e.currentTarget.value as TabList)
+            }
           >
             우리술 투표 더보기
           </MoreButton>
@@ -147,6 +163,7 @@ function SearchContainer() {
             sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={false}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
         </>
       ),
@@ -171,13 +188,15 @@ function SearchContainer() {
             searchText={searchText}
             sortOption={drinkVoteSortOption}
             regionOption={regionOption}
-            isSelectedTab={isSelectedTab("total")}
+            isSelectedTab={isSelectedTab('total')}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
         </>
       ),
     },
   };
-  const { topSectionItem, bottomSectionItem } = renderItem[selectedTab as TabList];
+  const { topSectionItem, bottomSectionItem } =
+    renderItem[selectedTab as TabList];
 
   return (
     <>
@@ -192,7 +211,9 @@ function SearchContainer() {
               key={`tab_${id}`}
               value={id}
               selected={id === selectedTab}
-              onClick={(e) => onClickSelectedTab(e.currentTarget.value as TabList)}
+              onClick={(e) =>
+                onClickSelectedTab(e.currentTarget.value as TabList)
+              }
             >
               {name}
             </SelectedButton>
@@ -200,8 +221,13 @@ function SearchContainer() {
         </TabBox>
         {topSectionItem}
       </TopSection>
-      {isSelectedTab("total") && <DivideLine />}
+      {isSelectedTab('total') && <DivideLine />}
       <BottomSection>{bottomSectionItem}</BottomSection>
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
       <BottomBar />
     </>
   );
@@ -222,7 +248,10 @@ const TabBox = styled.ul`
   margin-top: 8px;
 `;
 
-const SelectedButton = styled.button<{ theme: DefaultTheme; selected: boolean }>`
+const SelectedButton = styled.button<{
+  theme: DefaultTheme;
+  selected: boolean;
+}>`
   ${({ theme, selected }) =>
     css`
       ${theme.typography.body02};

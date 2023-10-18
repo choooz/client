@@ -1,8 +1,8 @@
-import axios from "axios";
-import { SERVER_URL } from "lib/constants";
-import { logout } from "lib/utils/auth";
-import userStorage from "lib/utils/userStorage";
-import { toast } from "react-toastify";
+import axios from 'axios';
+import { SERVER_URL } from 'lib/constants';
+import { logout } from 'lib/utils/auth';
+import userStorage from 'lib/utils/userStorage';
+import { toast } from 'react-toastify';
 
 const axiosInstance = axios.create({
   baseURL: SERVER_URL,
@@ -36,13 +36,18 @@ axiosInstance.interceptors.response.use(
 
       case 401:
         const tokens = userStorage.get();
-        if (!tokens) {throw new Error("No tokens found");}
+        if (!tokens) {
+          throw new Error('No tokens found');
+        }
 
-        alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
+        alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
 
         logout();
 
         break;
+      case 404:
+        toast.error(error.response.data.message);
+        throw new Error(error.response.data.message);
 
       case 409:
         throw new Error(error.response.data.message);
@@ -51,18 +56,22 @@ axiosInstance.interceptors.response.use(
         throw new Error(error.response.data.message);
 
       default:
-        throw new Error("Unknown Error");
+        throw new Error('Unknown Error');
     }
   },
 );
 
 axiosInstance.interceptors.request.use((config) => {
   if (!config?.headers) {
-    throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
+    throw new Error(
+      `Expected 'config' and 'config.headers' not to be undefined`,
+    );
   }
 
   const tokens = userStorage.get();
-  if (!tokens) {throw new Error("No tokens found");}
+  if (!tokens) {
+    throw new Error('No tokens found');
+  }
   const { accessToken } = tokens;
 
   if (accessToken) {

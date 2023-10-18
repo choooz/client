@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import { getFilterStatisticsById } from "lib/apis/statistics";
-import { reactQueryKeys } from "lib/queryKeys";
+import { useQuery } from '@tanstack/react-query';
+import { getFilterStatisticsById } from 'lib/apis/statistics';
+import { reactQueryKeys } from 'lib/queryKeys';
 
 export default function useFilteredStatisticsService(
   voteId: number,
@@ -10,7 +10,13 @@ export default function useFilteredStatisticsService(
   alcoholLimit?: string,
 ) {
   const voteStatisticsQuery = useQuery(
-    reactQueryKeys.detailFilterdAnalysis(voteId, gender, mbti, age, alcoholLimit),
+    reactQueryKeys.detailFilterdAnalysis(
+      voteId,
+      gender,
+      mbti,
+      age,
+      alcoholLimit,
+    ),
     () => getFilterStatisticsById(voteId, gender, mbti, age, alcoholLimit),
     {
       enabled: !!voteId,

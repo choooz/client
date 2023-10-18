@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Path from "lib/Path";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import styled, { css } from "styled-components";
+import Path from 'lib/Path';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import styled, { css } from 'styled-components';
 
-import { useGetHotDrinkVoteService } from "../services/useGetHotDrinkVoteService";
+import { useGetHotDrinkVoteService } from '../services/useGetHotDrinkVoteService';
 
 function HotDrinkVoteContainer() {
   const router = useRouter();
@@ -25,16 +25,28 @@ function HotDrinkVoteContainer() {
         <Main01Color> 투표</Main01Color>
       </H2>
       <H3>{nowTime}시, 지금 가장 인기있는 우리술 투표에요.</H3>
-      <PopularVoteCard onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}>
+      <PopularVoteCard
+        onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}
+      >
         <VoteImages>
           <DrinkImageBox color="orange">
             <DrinkImageWrapper>
-              <Image alt="A 이미지" src={drinkAImage} fill style={{ borderRadius: "80px" }} />
+              <Image
+                alt="A 이미지"
+                src={drinkAImage}
+                fill
+                style={{ borderRadius: '80px' }}
+              />
             </DrinkImageWrapper>
           </DrinkImageBox>
           <DrinkImageBox color="mint">
             <DrinkImageWrapper>
-              <Image alt="B 이미지" src={drinkBImage} fill style={{ borderRadius: "80px" }} />
+              <Image
+                alt="B 이미지"
+                src={drinkBImage}
+                fill
+                style={{ borderRadius: '80px' }}
+              />
             </DrinkImageWrapper>
           </DrinkImageBox>
         </VoteImages>
@@ -76,7 +88,8 @@ const PopularVoteCard = styled.div`
       overflow: auto;
       border: 1px solid ${theme.colors.bg_02};
       border-radius: 16px;
-      box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.08), 0px 10px 25px 0px rgba(0, 0, 0, 0.06);
+      box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.08),
+        0px 10px 25px 0px rgba(0, 0, 0, 0.06);
       cursor: pointer;
     `}
 `;
@@ -92,7 +105,9 @@ const VoteImages = styled.div`
 const DrinkImageBox = styled.div<{ color: string }>`
   ${({ theme, color }) =>
     css`
-      background-color: ${color === "orange" ? theme.colors.sub_01 : theme.colors.sub_02};
+      background-color: ${color === 'orange'
+        ? theme.colors.sub_01
+        : theme.colors.sub_02};
       display: flex;
       justify-content: center;
       align-items: center;

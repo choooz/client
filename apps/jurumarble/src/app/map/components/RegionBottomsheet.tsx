@@ -1,16 +1,22 @@
-import { Button, Portal } from "components/index";
-import { REGION_LIST } from "lib/constants";
-import { transitions } from "lib/styles";
-import { SvgIcPrev, SvgIcX } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import { Button, Portal } from 'components/index';
+import { REGION_LIST } from 'lib/constants';
+import { transitions } from 'lib/styles';
+import { SvgIcPrev, SvgIcX } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
 interface Props {
   on: boolean;
   onToggleDrinkSearchModal: () => void;
   setChangeMapCenter: (lat: number, lng: number) => void;
+  onChangeNowIn: (nowIn: string) => void;
 }
 
-const RegionBottomSheet = ({ on, onToggleDrinkSearchModal, setChangeMapCenter }: Props) => {
+const RegionBottomSheet = ({
+  on,
+  onToggleDrinkSearchModal,
+  setChangeMapCenter,
+  onChangeNowIn,
+}: Props) => {
   if (!on) {
     return null;
   }
@@ -25,12 +31,12 @@ const RegionBottomSheet = ({ on, onToggleDrinkSearchModal, setChangeMapCenter }:
           </Exit>
 
           <SelectBox>
-            지역을 선택해주세요{" "}
+            지역을 선택해주세요{' '}
             <SvgIcPrev
               style={{
-                transform: "rotate(-90deg)",
+                transform: 'rotate(-90deg)',
               }}
-            />{" "}
+            />{' '}
           </SelectBox>
           <List>
             {REGION_LIST.map(({ label, lat, long }) => (
@@ -39,6 +45,7 @@ const RegionBottomSheet = ({ on, onToggleDrinkSearchModal, setChangeMapCenter }:
                 onClick={() => {
                   setChangeMapCenter(lat, long);
                   onToggleDrinkSearchModal();
+                  onChangeNowIn(label);
                 }}
               >
                 {label}

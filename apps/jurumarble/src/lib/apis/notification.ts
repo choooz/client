@@ -1,6 +1,6 @@
-import { http } from "./http/http";
+import { http } from './http/http';
 
-export type NotificationType = "VOTE" | "COMMENT" | "ADMIN_NOTIFY";
+export type NotificationType = 'VOTE' | 'COMMENT' | 'ADMIN_NOTIFY';
 
 interface Notification {
   id: number;
@@ -14,7 +14,9 @@ interface Notification {
 type GetNotificationListResponse = Notification[];
 
 export const getNotificationListAPI = async () => {
-  const response = await http.get<GetNotificationListResponse>("/api/notifications");
+  const response = await http.get<GetNotificationListResponse>(
+    '/api/notifications',
+  );
   return response.data;
 };
 

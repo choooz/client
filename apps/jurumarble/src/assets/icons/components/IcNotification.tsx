@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgNotification = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -13,7 +13,7 @@ const SvgNotification = (props: SVGProps<SVGSVGElement>) => (
       <mask
         id="mask0_1004_277"
         style={{
-          maskType: "alpha",
+          maskType: 'alpha',
         }}
         maskUnits="userSpaceOnUse"
         x={0}

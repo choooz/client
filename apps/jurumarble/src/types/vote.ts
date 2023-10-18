@@ -1,7 +1,13 @@
-import { postDrinkVoteAPI, postNormalVoteAPI } from "lib/apis/vote";
+import { postDrinkVoteAPI, postNormalVoteAPI } from 'lib/apis/vote';
 
-type PostNormalVoteRequest = Exclude<Parameters<typeof postNormalVoteAPI>[0], undefined>;
-type PostDrinkVoteRequest = Exclude<Parameters<typeof postDrinkVoteAPI>[0], undefined>;
+type PostNormalVoteRequest = Exclude<
+  Parameters<typeof postNormalVoteAPI>[0],
+  undefined
+>;
+type PostDrinkVoteRequest = Exclude<
+  Parameters<typeof postDrinkVoteAPI>[0],
+  undefined
+>;
 export type PostVoteType = PostNormalVoteRequest & PostDrinkVoteRequest;
 
 /**
@@ -24,6 +30,8 @@ export interface Content {
   titleB: string;
   region: string;
   createdAt: Date;
+  drinkAId: number;
+  drinkBId: number;
 }
 
 interface Pageable {

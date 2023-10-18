@@ -1,7 +1,7 @@
-import { GENDER } from "lib/constants";
+import { GENDER } from 'lib/constants';
 
-import { baseApi } from "./http/base";
-import { http } from "./http/http";
+import { baseApi } from './http/base';
+import { http } from './http/http';
 
 type GenderType = keyof typeof GENDER;
 
@@ -17,7 +17,7 @@ export interface GetUserInfoResponse {
 }
 
 export const getUserInfoAPI = async () => {
-  const response = await http.get<GetUserInfoResponse>("api/users");
+  const response = await http.get<GetUserInfoResponse>('api/users');
   return response.data;
 };
 
@@ -29,7 +29,10 @@ interface AddUserInfoRequest {
 }
 
 export const addUserInfoAPI = async (params: AddUserInfoRequest) => {
-  const response = await http.put<AddUserInfoRequest>("api/users/additional-info", params);
+  const response = await http.put<AddUserInfoRequest>(
+    'api/users/additional-info',
+    params,
+  );
   return response.data;
 };
 
@@ -40,6 +43,6 @@ interface GetTestUserResponse {
 }
 
 export const getTestUserAPI = async () => {
-  const response = await baseApi.get<GetTestUserResponse>("api/users/test");
+  const response = await baseApi.get<GetTestUserResponse>('api/users/test');
   return response.data;
 };

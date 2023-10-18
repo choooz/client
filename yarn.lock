@@ -1668,6 +1668,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mogakko/browser-api@workspace:*, @mogakko/browser-api@workspace:packages/browser-api":
+  version: 0.0.0-use.local
+  resolution: "@mogakko/browser-api@workspace:packages/browser-api"
+  dependencies:
+    eslint: ^8.51.0
+    eslint-config-mogakko: "workspace:*"
+    typescript: 4.9.3
+    universal-cookie: ^4.0.4
+  languageName: unknown
+  linkType: soft
+
+"@mogakko/http-fetch@workspace:*, @mogakko/http-fetch@workspace:packages/http-fetch":
+  version: 0.0.0-use.local
+  resolution: "@mogakko/http-fetch@workspace:packages/http-fetch"
+  dependencies:
+    eslint: ^8.51.0
+    eslint-config-mogakko: "workspace:*"
+    typescript: 4.9.3
+  languageName: unknown
+  linkType: soft
+
+"@mogakko/prettier-config@workspace:*, @mogakko/prettier-config@workspace:packages/prettier-config":
+  version: 0.0.0-use.local
+  resolution: "@mogakko/prettier-config@workspace:packages/prettier-config"
+  languageName: unknown
+  linkType: soft
+
 "@monorepo/chooz@workspace:apps/chooz":
   version: 0.0.0-use.local
   resolution: "@monorepo/chooz@workspace:apps/chooz"
@@ -1716,6 +1743,8 @@ __metadata:
   resolution: "@monorepo/jurumarble@workspace:apps/jurumarble"
   dependencies:
     "@emotion/is-prop-valid": ^1.2.1
+    "@mogakko/browser-api": "workspace:*"
+    "@mogakko/http-fetch": "workspace:*"
     "@monorepo/hooks": "workspace:*"
     "@monorepo/ui": "workspace:*"
     "@next/bundle-analyzer": 13.3.5-canary.9
@@ -1736,6 +1765,7 @@ __metadata:
     eslint: ^8.51.0
     eslint-config-mogakko: "workspace:*"
     next: ^13.5.3
+    prettier: ^2.8.1
     react: 18.2.0
     react-dom: 18.2.0
     react-is: ^18.2.0
@@ -2521,6 +2551,13 @@ __metadata:
   version: 0.2.0
   resolution: "@trysound/sax@npm:0.2.0"
   checksum: 11226c39b52b391719a2a92e10183e4260d9651f86edced166da1d95f39a0a1eaa470e44d14ac685ccd6d3df7e2002433782872c0feeb260d61e80f21250e65c
+  languageName: node
+  linkType: hard
+
+"@types/cookie@npm:^0.3.3":
+  version: 0.3.3
+  resolution: "@types/cookie@npm:0.3.3"
+  checksum: 450c930d792a4fd5a93645b4123f02596368f904dbb1fe6fbb5043bce8f6ecf877a08511c6ba11c8e28168f62bc278e68d214f002fab927c9056c0bc69f21370
   languageName: node
   linkType: hard
 
@@ -3653,6 +3690,13 @@ __metadata:
   version: 1.9.0
   resolution: "convert-source-map@npm:1.9.0"
   checksum: dc55a1f28ddd0e9485ef13565f8f756b342f9a46c4ae18b843fe3c30c675d058d6a4823eff86d472f187b176f0adf51ea7b69ea38be34be4a63cbbf91b0593c8
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^0.4.0":
+  version: 0.4.2
+  resolution: "cookie@npm:0.4.2"
+  checksum: a00833c998bedf8e787b4c342defe5fa419abd96b32f4464f718b91022586b8f1bafbddd499288e75c037642493c83083da426c6a9080d309e3bd90fd11baa9b
   languageName: node
   linkType: hard
 
@@ -6201,6 +6245,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "monorepo@workspace:."
   dependencies:
+    "@mogakko/prettier-config": "workspace:*"
     eslint: ^8.51.0
     prettier: ^2.8.1
     styled-components: ^5.3.6
@@ -8214,6 +8259,16 @@ __metadata:
   dependencies:
     imurmurhash: ^0.1.4
   checksum: 0884b58365af59f89739e6f71e3feacb5b1b41f2df2d842d0757933620e6de08eff347d27e9d499b43c40476cbaf7988638d3acb2ffbcb9d35fd035591adfd15
+  languageName: node
+  linkType: hard
+
+"universal-cookie@npm:^4.0.4":
+  version: 4.0.4
+  resolution: "universal-cookie@npm:4.0.4"
+  dependencies:
+    "@types/cookie": ^0.3.3
+    cookie: ^0.4.0
+  checksum: bb2bafa7eb7e213e5448924329572dd1a913be00e23906189be2a0dc889b0eea1750f9c33462fc1c911d89092dbd82f6e220c2d61c4057bb3f69e7665d9d8ddf
   languageName: node
   linkType: hard
 

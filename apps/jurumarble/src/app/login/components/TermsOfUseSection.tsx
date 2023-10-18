@@ -1,5 +1,5 @@
-import { transitions } from "lib/styles";
-import styled, { css } from "styled-components";
+import { transitions } from 'lib/styles';
+import styled, { css } from 'styled-components';
 
 function TermsOfUseSection() {
   return (
@@ -9,7 +9,8 @@ function TermsOfUseSection() {
       <br />
       계속하면 당사의 <ClickText>서비스 약관</ClickText>에 동의하고,
       <br />
-      <ClickText>개인정보 보호정책</ClickText>을(를) 읽어 당사의 데이터 수집, 사용,
+      <ClickText>개인정보 보호정책</ClickText>을(를) 읽어 당사의 데이터 수집,
+      사용,
       <br />
       공유 방법을 확인했음을 인정하는 것입니다.
     </TermsOfUse>

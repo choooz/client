@@ -1,16 +1,26 @@
-import Chip from "components/Chip";
-import Loading from "components/Loading";
-import VoteHeader from "components/VoteHeader";
-import { Button } from "components/button";
-import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-import useDrinkStampService from "services/useDrinkStampService";
-import { SvgHeaderSearch, SvgIcPrevious, SvgStamp } from "src/assets/icons/components";
-import styled, { css, useTheme } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import Chip from 'components/Chip';
+import Loading from 'components/Loading';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import VoteHeader from 'components/VoteHeader';
+import { Button } from 'components/button';
+import Path from 'lib/Path';
+import { isLogin } from 'lib/utils/auth';
+import Image from 'next/image';
+import { useParams, useRouter } from 'next/navigation';
+import useDrinkStampService from 'services/useDrinkStampService';
+import {
+  SvgHeaderSearch,
+  SvgIcPrevious,
+  SvgStamp,
+} from 'src/assets/icons/components';
+import styled, { css, useTheme } from 'styled-components';
 
-import useDrinkLoadService from "../services/useDrinkLoadService";
+import useDrinkLoadService from '../services/useDrinkLoadService';
 
 const DrinkInfoContainer = () => {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
+
   const router = useRouter();
   const params = useParams();
   const { id } = params;
@@ -55,7 +65,7 @@ const DrinkInfoContainer = () => {
             </PreviousButton>
           }
           rightButton={
-            <PreviousButton onClick={() => router.back()}>
+            <PreviousButton onClick={() => router.push(Path.SEARCH_PAGE)}>
               <SvgHeaderSearch width={24} height={24} />
             </PreviousButton>
           }
@@ -71,9 +81,9 @@ const DrinkInfoContainer = () => {
           width={370}
           height={320}
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
           }}
         />
       </ImageWrapper>
@@ -81,14 +91,19 @@ const DrinkInfoContainer = () => {
         <FlexBetweenRow>
           <FlexRow>
             <Chip variant="region">{manufactureAddress.slice(0, 2)}</Chip>
-            <Chip variant="numberOfParticipants">{enjoyCount}명이 즐겼어요</Chip>
+            <Chip variant="numberOfParticipants">
+              {enjoyCount}명이 즐겼어요
+            </Chip>
           </FlexRow>
-          <SvgStamp
-            onClick={() => postDrinkEnjoy(Number(id))}
-            width={24}
-            height={24}
-            fill={stampColor}
-          />
+          <button
+            onClick={() =>
+              isLogin()
+                ? postDrinkEnjoy(Number(id))
+                : onToggleReplaceLoginPageModal()
+            }
+          >
+            <SvgStamp width={24} height={24} fill={stampColor} />
+          </button>
         </FlexBetweenRow>
         <TitleBox>
           <div className="title">{name}</div>
@@ -121,6 +136,11 @@ const DrinkInfoContainer = () => {
             <div className="content">{manufactureAddress}도</div>
           </DescriptionRow>
         </DescriptionBox>
+        {isReplaceLoginPageModal && (
+          <ReplaceLoginPageModal
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+          />
+        )}
       </Container>
     </>
   );

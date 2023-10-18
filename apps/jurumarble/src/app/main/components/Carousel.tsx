@@ -1,14 +1,13 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
-import { ContentSwiper } from "@monorepo/ui";
-import Path from "lib/Path";
-import { GetHotDrinkResponse } from "lib/apis/drink";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { SvgIcPrevious, SvgNext } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
-import SwiperCore, { Autoplay } from "swiper";
-
+import { ContentSwiper } from '@monorepo/ui';
+import Path from 'lib/Path';
+import { GetHotDrinkResponse } from 'lib/apis/drink';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { SvgIcPrevious, SvgNext } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
+import SwiperCore, { Autoplay } from 'swiper';
 
 interface Props {
   hotDrinkList: GetHotDrinkResponse[];
@@ -33,11 +32,11 @@ function Carousel({ hotDrinkList }: Props) {
           data={hotDrinkList}
           handler={ref}
           slideProps={{
-            width: "292px",
+            width: '292px',
             lazy: true,
           }}
           swiperProps={{
-            slidesPerView: "auto",
+            slidesPerView: 'auto',
             spaceBetween: 5,
             loop: true,
             autoplay: {
@@ -46,11 +45,19 @@ function Carousel({ hotDrinkList }: Props) {
             modules: [Autoplay],
           }}
           renderItem={({ drinkId, image, name, manufactureAddress }, index) => (
-            <Slide key={drinkId} onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)}>
+            <Slide
+              key={drinkId}
+              onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)}
+            >
               <Box>
                 <DrinkImageWrapper>
                   <RankginMark>{index + 1}</RankginMark>
-                  <Image alt="전통주" src={image} fill style={{ borderRadius: "10px" }} />
+                  <Image
+                    alt="전통주"
+                    src={image}
+                    fill
+                    style={{ borderRadius: '10px' }}
+                  />
                 </DrinkImageWrapper>
                 <DrinkText>
                   {name}

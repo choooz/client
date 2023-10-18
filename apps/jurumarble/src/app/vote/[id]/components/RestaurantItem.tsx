@@ -1,6 +1,6 @@
-import { RestaurantInfo } from "lib/apis/restaurant";
-import Image from "next/image";
-import styled, { css } from "styled-components";
+import { RestaurantInfo } from 'lib/apis/restaurant';
+import Image from 'next/image';
+import styled, { css } from 'styled-components';
 
 interface Props {
   onClickSelectedRestaurant: (restaurantId: RestaurantInfo) => void;

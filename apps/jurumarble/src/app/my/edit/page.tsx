@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import VoteHeader from "components/VoteHeader";
-import { Button } from "components/button";
-import { useRouter } from "next/navigation";
-import { SvgIcPrevious } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import VoteHeader from 'components/VoteHeader';
+import { Button } from 'components/button';
+import { useRouter } from 'next/navigation';
+import { SvgIcPrevious } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
-import UserInfoEditContainer from "./components/UserInfoEditContainer";
+import UserInfoEditContainer from './components/UserInfoEditContainer';
 
 function ProfileEditPage() {
   const router = useRouter();

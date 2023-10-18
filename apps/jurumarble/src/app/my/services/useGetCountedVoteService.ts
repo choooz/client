@@ -1,6 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
-import { getTheNumberOfMyVoteAPI } from "lib/apis/my";
-import { queryKeys } from "lib/queryKeys";
+import { useQuery } from '@tanstack/react-query';
+import { getTheNumberOfMyVoteAPI } from 'lib/apis/my';
+import { queryKeys } from 'lib/queryKeys';
 
 const getTheNumberOfMyVoteQueryKey = () => [queryKeys.THE_NUMBER_OF_MY_VOTE];
 

@@ -1,8 +1,8 @@
-import { UseMutateFunction } from "@tanstack/react-query";
-import Chip from "components/Chip";
-import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
-import styled from "styled-components";
+import { UseMutateFunction } from '@tanstack/react-query';
+import Chip from 'components/Chip';
+import SvgIcBookmark from 'src/assets/icons/components/IcBookmark';
+import SvgIcBookmarkActive from 'src/assets/icons/components/IcBookmarkActive';
+import styled from 'styled-components';
 
 interface Props {
   title: string;
@@ -13,7 +13,14 @@ interface Props {
   votedCount: number;
 }
 
-const ChipContainer = ({ date, title, region, mutateBookMark, isBookmark, votedCount }: Props) => {
+const ChipContainer = ({
+  date,
+  title,
+  region,
+  mutateBookMark,
+  isBookmark,
+  votedCount,
+}: Props) => {
   return (
     <>
       <TagRow>
@@ -23,9 +30,23 @@ const ChipContainer = ({ date, title, region, mutateBookMark, isBookmark, votedC
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
-            <SvgIcBookmarkActive width={20} height={20} onClick={() => mutateBookMark()} />
+            <SvgIcBookmarkActive
+              width={20}
+              height={20}
+              onClick={(e) => {
+                e.stopPropagation();
+                mutateBookMark();
+              }}
+            />
           ) : (
-            <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+            <SvgIcBookmark
+              width={20}
+              height={20}
+              onClick={(e) => {
+                e.stopPropagation();
+                mutateBookMark();
+              }}
+            />
           )}
         </FlexRow>
       </TagRow>

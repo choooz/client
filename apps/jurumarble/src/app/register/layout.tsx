@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { GlobalHeader } from "./components";
-import { RegisterProvider } from "./contexts";
-import { RegisterFooterSection } from "./sections";
+import { GlobalHeader } from './components';
+import { RegisterProvider } from './contexts';
+import { RegisterFooterSection } from './sections';
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

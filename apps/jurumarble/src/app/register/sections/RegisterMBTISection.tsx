@@ -1,9 +1,9 @@
-import { media, transitions } from "lib/styles";
-import styled, { css } from "styled-components";
+import { media, transitions } from 'lib/styles';
+import styled, { css } from 'styled-components';
 
-import { useRegisterContext } from "../contexts";
+import { useRegisterContext } from '../contexts';
 
-type ActiveType = "active" | "inactive" | null;
+type ActiveType = 'active' | 'inactive' | null;
 
 function RegisterMBTISection() {
   const { onChangeMBTI, activeValue } = useRegisterContext();
@@ -13,7 +13,7 @@ function RegisterMBTISection() {
       <VoteBox>
         <LeftVote
           name="M"
-          selected={activeValue("left", "M")}
+          selected={activeValue('left', 'M')}
           value="E"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -27,7 +27,7 @@ function RegisterMBTISection() {
         </LeftVote>
         <RightVote
           name="M"
-          selected={activeValue("right", "M")}
+          selected={activeValue('right', 'M')}
           value="I"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -43,7 +43,7 @@ function RegisterMBTISection() {
       <VoteBox>
         <LeftVote
           name="B"
-          selected={activeValue("left", "B")}
+          selected={activeValue('left', 'B')}
           value="S"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -57,7 +57,7 @@ function RegisterMBTISection() {
         </LeftVote>
         <RightVote
           name="B"
-          selected={activeValue("right", "B")}
+          selected={activeValue('right', 'B')}
           value="N"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -73,7 +73,7 @@ function RegisterMBTISection() {
       <VoteBox>
         <LeftVote
           name="T"
-          selected={activeValue("left", "T")}
+          selected={activeValue('left', 'T')}
           value="T"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -87,7 +87,7 @@ function RegisterMBTISection() {
         </LeftVote>
         <RightVote
           name="T"
-          selected={activeValue("right", "T")}
+          selected={activeValue('right', 'T')}
           value="F"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -103,7 +103,7 @@ function RegisterMBTISection() {
       <VoteBox>
         <LeftVote
           name="I"
-          selected={activeValue("left", "I")}
+          selected={activeValue('left', 'I')}
           value="J"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -117,7 +117,7 @@ function RegisterMBTISection() {
         </LeftVote>
         <RightVote
           name="I"
-          selected={activeValue("right", "I")}
+          selected={activeValue('right', 'I')}
           value="P"
           onClick={({ currentTarget }) =>
             onChangeMBTI({
@@ -166,7 +166,9 @@ const variantStyles = {
 };
 
 const typeGuardVariantStyle = (selected: ActiveType) => {
-  if (!selected) {return null;}
+  if (!selected) {
+    return null;
+  }
   return variantStyles[selected];
 };
 

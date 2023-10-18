@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
-export type Drag = "up" | "down" | null;
+export type Drag = 'up' | 'down' | null;
 function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
   const [drag, setDrag] = useState<Drag>(null);
   const [startTouchPosition, setStartTouchPosition] = useState({
@@ -18,13 +18,13 @@ function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
     lastTouchEventTimeRef.current = now;
     // 휠을 올리면 up, 내리면 down
     if (e.deltaY < 0) {
-      setDrag("up");
+      setDrag('up');
       setTimeout(() => {
         onChangeNowShowing(-1);
       }, 750);
     }
     if (e.deltaY > 0) {
-      setDrag("down");
+      setDrag('down');
       setTimeout(() => {
         onChangeNowShowing(1);
       }, 750);
@@ -52,13 +52,13 @@ function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
 
     //터치의 시작이 끝보다 위면 up, 아래면 down
     if (e.changedTouches[0].clientY - startTouchPosition.y > 0) {
-      setDrag("up");
+      setDrag('up');
       setTimeout(() => {
         onChangeNowShowing(-1);
       }, 750);
     }
     if (e.changedTouches[0].clientY - startTouchPosition.y < 0) {
-      setDrag("down");
+      setDrag('down');
       setTimeout(() => {
         onChangeNowShowing(1);
       }, 750);

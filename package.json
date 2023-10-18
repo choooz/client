@@ -3,19 +3,20 @@
   "private": true,
   "scripts": {
     "chooz": "yarn workspace @monorepo/chooz",
-    "juma": "yarn workspace @monorepo/jurumarble"
+    "juma": "yarn workspace @monorepo/jurumarble",
+    "juma:dev": "sh scripts/shell/jurumarble.sh",
+    "down": "docker compose -f ./scripts/docker/docker-compose.yaml down"
   },
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "apps/*"
-    ]
-  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "packageManager": "yarn@3.3.0",
   "dependencies": {
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
+    "@mogakko/prettier-config": "workspace:*",
     "eslint": "^8.51.0",
     "prettier": "^2.8.1",
     "typescript": "4.9.3"

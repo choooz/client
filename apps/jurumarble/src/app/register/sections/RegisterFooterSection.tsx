@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { Button } from "../components";
-import { useRegisterContext } from "../contexts";
+import { Button } from '../components';
+import { useRegisterContext } from '../contexts';
 
 export const RegisterFooterSection = () => {
   const { onNextStep, buttonDisabled } = useRegisterContext();

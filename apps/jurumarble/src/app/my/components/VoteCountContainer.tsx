@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { TAB_LIST, TabList } from "src/types/my";
-import styled, { css } from "styled-components";
+import { TAB_LIST, TabList } from 'src/types/my';
+import styled, { css } from 'styled-components';
 
-import useGetTheNumberOfMyVoteService from "../services/useGetCountedVoteService";
+import useGetTheNumberOfMyVoteService from '../services/useGetCountedVoteService';
 
 interface Props {
   selectedTab: string;
@@ -12,11 +12,12 @@ interface Props {
 
 function VoteCountContainer({ selectedTab, onClickSelectedTab }: Props) {
   const theNumberOfMyVote = useGetTheNumberOfMyVoteService();
-  const { writtenVoteCnt, joinedVoteCnt, bookmarkedVoteCnt } = theNumberOfMyVote ?? {
-    writtenVoteCnt: 0,
-    joinedVoteCnt: 0,
-    bookmarkedVoteCnt: 0,
-  };
+  const { writtenVoteCnt, joinedVoteCnt, bookmarkedVoteCnt } =
+    theNumberOfMyVote ?? {
+      writtenVoteCnt: 0,
+      joinedVoteCnt: 0,
+      bookmarkedVoteCnt: 0,
+    };
 
   return (
     <Container>
@@ -28,11 +29,11 @@ function VoteCountContainer({ selectedTab, onClickSelectedTab }: Props) {
             isSelected={id === selectedTab}
           >
             <VoteCount>
-              {id === "created-vote"
+              {id === 'created-vote'
                 ? writtenVoteCnt
-                : id === "paticipated-vote"
+                : id === 'paticipated-vote'
                 ? joinedVoteCnt
-                : id === "bookmarked-vote"
+                : id === 'bookmarked-vote'
                 ? bookmarkedVoteCnt
                 : 0}
             </VoteCount>

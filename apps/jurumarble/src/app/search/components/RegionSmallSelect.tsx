@@ -1,8 +1,8 @@
-import { useToggle } from "@monorepo/hooks";
-import { Select } from "components/selectBox";
-import { REGION_LIST } from "lib/constants";
-import SvgIcExpandMore from "src/assets/icons/components/IcExpandMore";
-import styled, { css } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import { Select } from 'components/selectBox';
+import { REGION_LIST } from 'lib/constants';
+import SvgIcExpandMore from 'src/assets/icons/components/IcExpandMore';
+import styled, { css } from 'styled-components';
 
 interface Props {
   defaultOption: string;
@@ -17,7 +17,10 @@ function RegionSmallSelect({ defaultOption, onChangeSortOption }: Props) {
       <Select
         defaultValue={defaultOption}
         onChangeSelectedOption={onChangeSortOption}
-        options={[{ value: "", label: "지역", lat: 0, long: 0 }, ...REGION_LIST]}
+        options={[
+          { value: '', label: '지역', lat: 0, long: 0 },
+          ...REGION_LIST,
+        ]}
         isOpen={isOpen}
         onToggleOpen={onToggleOpen}
       >
@@ -39,7 +42,7 @@ const SelectStyled = styled.span<{ isOpen: boolean }>`
       padding: 10px 12px;
     }
     svg {
-      ${isOpen && "transform: rotateX( 180deg )"}
+      ${isOpen && 'transform: rotateX( 180deg )'}
     }
   `}
   #select-list {

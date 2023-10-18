@@ -1,16 +1,18 @@
-"use client";
+'use client';
 
-import Path from "lib/Path";
-import Image from "next/image";
-import Link from "next/link";
-import { DrinkImage } from "public/images";
-import useGetUserInfo from "services/useGetUserInfo";
-import styled, { css } from "styled-components";
+import Path from 'lib/Path';
+import Image from 'next/image';
+import Link from 'next/link';
+import { DrinkImage } from 'public/images';
+import useGetUserInfo from 'services/useGetUserInfo';
+import styled, { css } from 'styled-components';
 
 function UserInfoContainer() {
   const { userInfo } = useGetUserInfo();
 
-  if (!userInfo) {return <></>;}
+  if (!userInfo) {
+    return <></>;
+  }
 
   const { gender, nickname, yearOfBirth, mbti, imageUrl } = userInfo;
 
@@ -26,12 +28,12 @@ function UserInfoContainer() {
           src={imageUrl || DrinkImage}
           width={88}
           height={88}
-          style={{ borderRadius: "8px" }}
+          style={{ borderRadius: '8px' }}
         />
       </AddImageButtonWrapper>
       <Profile>
         <UserInfo>
-          {gender === "MALE" ? "남" : "여"}
+          {gender === 'MALE' ? '남' : '여'}
           <Divider />
           {ageRange}대
           <Divider />

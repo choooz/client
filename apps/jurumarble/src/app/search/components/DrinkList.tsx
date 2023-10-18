@@ -1,25 +1,31 @@
-import Path from "lib/Path";
-import { useRouter, useSearchParams } from "next/navigation";
-import { DrinkInfoSortType } from "src/types/common";
-import styled from "styled-components";
+import Path from 'lib/Path';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { DrinkInfoSortType } from 'src/types/common';
+import styled from 'styled-components';
 
-import DrinkItem from "./DrinkItem";
-import useGetDrinkList from "../services/useGetDrinkList";
+import DrinkItem from './DrinkItem';
+import useGetDrinkList from '../services/useGetDrinkList';
 
 interface Props {
   searchText: string;
   sortOption: DrinkInfoSortType;
   regionOption: string;
   isSelectedTab: boolean;
+  onToggleReplaceLoginPageModal: () => void;
 }
 
-function DrinkList({ searchText, sortOption, regionOption }: Props) {
+function DrinkList({
+  searchText,
+  sortOption,
+  regionOption,
+  onToggleReplaceLoginPageModal,
+}: Props) {
   const searchParams = useSearchParams();
-  const selectedTab = searchParams.get("selectedTab");
+  const selectedTab = searchParams.get('selectedTab');
 
   const { drinkList, subscribe } = useGetDrinkList({
     page: 0,
-    size: selectedTab === "drinkInfo" ? 10 : 3,
+    size: selectedTab === 'drinkInfo' ? 10 : 3,
     keyword: searchText,
     region: regionOption,
     sortBy: sortOption,
@@ -34,16 +40,17 @@ function DrinkList({ searchText, sortOption, regionOption }: Props) {
     return <></>;
   }
 
-return (
+  return (
     <Container>
       {drinkList.map((drinkInfo) => (
         <DrinkItem
           key={drinkInfo.id}
           drinkInfo={drinkInfo}
           onClickDrinkItem={() => onClickDrinkItem(drinkInfo.id)}
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
         />
       ))}
-      {selectedTab === "drinkInfo" && <div ref={subscribe} />}
+      {selectedTab === 'drinkInfo' && <div ref={subscribe} />}
     </Container>
   );
 }
