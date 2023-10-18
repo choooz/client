@@ -22,6 +22,11 @@ interface Location {
 
 const MapContainer = () => {
   const [delayRender, setDelayRender] = useState(true);
+  const [nowIn, setNowIn] = useState('');
+
+  const onChangeNowIn = (clickRegion: string) => {
+    setNowIn(clickRegion);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -153,8 +158,17 @@ const MapContainer = () => {
       <TopBox>
         <SettingWrapper>
           <h1 className="title">
-            여행지 근처의
-            <br /> 우리술을 찾아드려요
+            {nowIn === '' ? (
+              <>
+                여행지 근처의
+                <br /> 우리술을 찾아드려요
+              </>
+            ) : (
+              <>
+                <span className="highlight">{nowIn}</span> 근처에 있는
+                <br /> <span className="highlight">우리술</span>이에요.
+              </>
+            )}
           </h1>
 
           <Button variant="primary" height="40px" width="82px" onClick={toggle}>
@@ -162,8 +176,9 @@ const MapContainer = () => {
           </Button>
         </SettingWrapper>
         <div className="description">
-          여행지를 설정하면 <br />
-          여행지의 우리술을 확인할 수 있어요
+          여행지를 설정하면 근처에 있는 우리술을
+          <br />
+          추천받을 수 있어요.
         </div>
       </TopBox>
 
@@ -261,6 +276,7 @@ const MapContainer = () => {
         setChangeMapCenter={setChangeMapCenter}
         onToggleDrinkSearchModal={toggle}
         on={on}
+        onChangeNowIn={onChangeNowIn}
       />
     </Container>
   );
@@ -278,6 +294,9 @@ const TopBox = styled.section`
     text-align: left;
     ${({ theme }) => theme.typography.headline02};
     padding-bottom: 8px;
+    .highlight {
+      color: ${({ theme }) => theme.colors.main_01};
+    }
   }
 
   .description {
