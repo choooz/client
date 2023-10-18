@@ -13,8 +13,12 @@ import SvgIcMyLocationFloating from 'src/assets/icons/ic_my_location_floating.sv
 import styled from 'styled-components';
 
 import RegionBottomSheet from './RegionBottomsheet';
-import { useGeoLocation } from '../hooks/useGeoLocation';
 import useDrinksMapService from '../services/useDrinksMapService';
+
+interface Location {
+  latitude: number;
+  longitude: number;
+}
 
 const MapContainer = () => {
   const [delayRender, setDelayRender] = useState(true);
@@ -26,9 +30,10 @@ const MapContainer = () => {
   }, []);
 
   const [_, toggleMap] = useToggle();
-  const { location, toggleOnLocation, onLocation } = useGeoLocation();
-  const [on, toggle] = useToggle();
+  const [loading, setLoading] = useState(false);
+
   const mapRef = useRef<kakao.maps.Map>(null);
+  const [on, toggle] = useToggle();
   const [mapXY, setMapXY] = useState({
     startX: 33.64225953272826,
     startY: 119.06076029979886,
@@ -60,23 +65,6 @@ const MapContainer = () => {
     level: 13,
   });
 
-  // useEffect(() => {
-  //   const kakaoMapScript = document.createElement("script");
-  //   kakaoMapScript.async = false;
-  //   kakaoMapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=700d399006256f95732f06b19c046ba5&autoload=false`;
-  //   document.head.appendChild(kakaoMapScript);
-
-  //   const onLoadKakaoAPI = () => {
-  //     window.kakao.maps.load(() => {
-  //       var container = document.getElementById("map");
-
-  //       var map = new window.kakao.maps.Map(container);
-  //     });
-  //   };
-
-  //   kakaoMapScript.addEventListener("load", onLoadKakaoAPI);
-  // }, []);
-
   const onIdleMap = () => {
     const map = mapRef.current;
     if (map) {
@@ -93,15 +81,68 @@ const MapContainer = () => {
   };
 
   const setChangeMapCenter = (lat: number, lng: number) => {
+    console.log(lat, lng);
     setState({
       center: { lat, lng },
       isPanto: true,
       level: 11,
     });
     setTimeout(() => {
+      console.log('onIdleMap');
       onIdleMap();
     }, 100);
   };
+
+  const [onLocation, toggleOnLocation] = useToggle(false);
+
+  const toggleLocationLoading = () => {
+    if (!onLocation) {
+      setLoading(true);
+    }
+    toggleOnLocation();
+  };
+
+  // location 정보 저장
+  const [location, setLocation] = useState<Location>({
+    latitude: 0,
+    longitude: 0,
+  });
+  // 에러 메세지 저장
+  const [, setError] = useState('');
+
+  // Geolocation의 `getCurrentPosition` 메소드에 대한 성공 callback 핸들러
+  const handleSuccess = (pos: GeolocationPosition) => {
+    const { latitude, longitude } = pos.coords;
+    setChangeMapCenter(latitude, longitude);
+    setLoading(false);
+    setLocation({
+      latitude,
+      longitude,
+    });
+  };
+
+  console.log(location);
+
+  // Geolocation의 `getCurrentPosition` 메소드에 대한 실패 callback 핸들러
+  const handleError = (error: GeolocationPositionError) => {
+    setError(error.message);
+  };
+
+  useEffect(() => {
+    if (!onLocation) {
+      return;
+    }
+    const { geolocation } = navigator;
+
+    // 사용된 브라우저에서 지리적 위치(Geolocation)가 정의되지 않은 경우 오류로 처리합니다.
+    if (!geolocation) {
+      setError('Geolocation is not supported.');
+      return;
+    }
+
+    // Geolocation API 호출
+    geolocation.getCurrentPosition(handleSuccess, handleError);
+  }, [onLocation]);
 
   if (delayRender) {
     return <Loading />;
@@ -172,7 +213,11 @@ const MapContainer = () => {
               }}
             />
           ))}
-          <MyLocationButton onClick={toggleOnLocation}>
+          <MyLocationButton
+            onClick={() => {
+              toggleLocationLoading();
+            }}
+          >
             <Image
               src={SvgIcMyLocationFloating}
               width={40}
@@ -211,6 +256,7 @@ const MapContainer = () => {
           ),
         )}
       </DrinkBox>
+      {loading && <Loading />}
       <RegionBottomSheet
         setChangeMapCenter={setChangeMapCenter}
         onToggleDrinkSearchModal={toggle}
