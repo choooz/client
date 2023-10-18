@@ -1678,6 +1678,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@mogakko/prettier-config@workspace:*, @mogakko/prettier-config@workspace:packages/prettier-config":
+  version: 0.0.0-use.local
+  resolution: "@mogakko/prettier-config@workspace:packages/prettier-config"
+  languageName: unknown
+  linkType: soft
+
 "@monorepo/chooz@workspace:apps/chooz":
   version: 0.0.0-use.local
   resolution: "@monorepo/chooz@workspace:apps/chooz"
@@ -1747,6 +1753,7 @@ __metadata:
     eslint: ^8.51.0
     eslint-config-mogakko: "workspace:*"
     next: ^13.5.3
+    prettier: ^2.8.1
     react: 18.2.0
     react-dom: 18.2.0
     react-is: ^18.2.0
@@ -6212,6 +6219,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "monorepo@workspace:."
   dependencies:
+    "@mogakko/prettier-config": "workspace:*"
     eslint: ^8.51.0
     prettier: ^2.8.1
     styled-components: ^5.3.6

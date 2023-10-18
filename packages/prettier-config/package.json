@@ -1,0 +1,7 @@
+{
+  "name": "@mogakko/prettier-config",
+  "version": "1.0.0",
+  "description": "prettier config",
+  "main": "index.js",
+  "license": "MIT"
+}
