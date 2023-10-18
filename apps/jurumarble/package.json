@@ -52,7 +52,11 @@
     "eslint": "^8.51.0",
     "eslint-config-mogakko": "workspace:*",
     "prettier": "^2.8.1",
+<<<<<<< HEAD
     "typescript": "5.0.4",
+=======
+    "typescript": "5.2.2",
+>>>>>>> 8ec64c6 (feat: docker compose & docker image setting)
     "typescript-plugin-css-modules": "^5.0.2"
   }
 }
