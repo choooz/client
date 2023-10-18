@@ -1,48 +1,61 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import DrinkItem from "app/vote/post/components/DrinkItem";
-import SearchInput from "components/SearchInput";
-import VoteHeader from "components/VoteHeader";
-import { Button, ModalTemplate } from "components/index";
-import useInput from "hooks/useInput";
-import SvgIcX from "src/assets/icons/components/IcX";
-import { DrinkInfoType } from "src/types/drink";
-import styled, { css } from "styled-components";
+import DrinkItem from 'app/vote/post/components/DrinkItem';
+import SearchInput from 'components/SearchInput';
+import VoteHeader from 'components/VoteHeader';
+import { Button, ModalTemplate } from 'components/index';
+import useInput from 'hooks/useInput';
+import SvgIcX from 'src/assets/icons/components/IcX';
+import { DrinkInfoType } from 'src/types/drink';
+import styled, { css } from 'styled-components';
 
-import RegionSelect from "./RegionSelect";
-import SelectedDrinkChip from "./SelectedDrinkChip";
-import useUpdateSelectedDrinkList from "../hooks/useUpdateSelectedDrinkList";
-import useGetDrinkList from "../services/useGetDrinkList";
+import RegionSelect from './RegionSelect';
+import SelectedDrinkChip from './SelectedDrinkChip';
+import useUpdateSelectedDrinkList from '../hooks/useUpdateSelectedDrinkList';
+import useGetDrinkList from '../services/useGetDrinkList';
 
 interface Props {
   onToggleDrinkSearchModal: () => void;
   onClickSearchDrinkComplete: (selectedDrinkList: DrinkInfoType[]) => void;
 }
 
-function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete }: Props) {
-  const { selectedDrinkList, onClickAddDrink, onClickDeleteItem, deleteSelectedDrinkList } =
-    useUpdateSelectedDrinkList();
+function DrinkSearchModal({
+  onToggleDrinkSearchModal,
+  onClickSearchDrinkComplete,
+}: Props) {
+  const {
+    selectedDrinkList,
+    onClickAddDrink,
+    onClickDeleteItem,
+    deleteSelectedDrinkList,
+  } = useUpdateSelectedDrinkList();
 
-  const [regionOption, setRegionOption] = useState("");
+  const [regionOption, setRegionOption] = useState('');
   const onChangeRegionOption = (value: string) => {
     deleteSelectedDrinkList();
     setRegionOption(value);
   };
 
-  const { value: keyword, onChange: onChangeKeyword } = useInput({ useDebounce: true });
+  const { value: keyword, onChange: onChangeKeyword } = useInput({
+    useDebounce: true,
+  });
 
   const { drinkList } = useGetDrinkList({
     keyword,
     region: regionOption,
     page: 0,
     size: 100,
-    sortBy: "ByPopularity",
+    sortBy: 'ByPopularity',
   });
 
   return (
-    <ModalTemplate width="375px" height="100%" onToggleModal={onToggleDrinkSearchModal}>
+    <ModalTemplate
+      width="375px"
+      height="100%"
+      onToggleModal={onToggleDrinkSearchModal}
+    >
       <VoteHeader
         rightButton={
           <CloseButton onClick={onToggleDrinkSearchModal}>
@@ -53,7 +66,10 @@ function DrinkSearchModal({ onToggleDrinkSearchModal, onClickSearchDrinkComplete
         <TitleStyled>술 검색하기</TitleStyled>
       </VoteHeader>
       <SearchSection>
-        <RegionSelect regionOption={regionOption} onChangeRegionOption={onChangeRegionOption} />
+        <RegionSelect
+          regionOption={regionOption}
+          onChangeRegionOption={onChangeRegionOption}
+        />
         {regionOption && (
           <SearchInput
             placeholder="관심있는 술을 검색해보세요."

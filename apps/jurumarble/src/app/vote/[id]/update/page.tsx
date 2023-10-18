@@ -1,4 +1,4 @@
-import UpdateVoteContainer from "./components/UpdateVoteContainer";
+import UpdateVoteContainer from './components/UpdateVoteContainer';
 
 function UpdatePage() {
   return <UpdateVoteContainer />;

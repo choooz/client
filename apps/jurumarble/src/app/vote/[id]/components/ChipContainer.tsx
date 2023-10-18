@@ -1,20 +1,20 @@
-import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import { UseMutateFunction } from "@tanstack/react-query";
-import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
-import NonWriterBox from "app/vote/components/NonWriterBox";
-import Chip from "components/Chip";
-import Path from "lib/Path";
-import { AorB } from "lib/apis/vote";
-import { formatDate } from "lib/utils/formatDate";
-import { useRouter } from "next/navigation";
-import useGetUserInfo from "services/useGetUserInfo";
-import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
-import SvgIcMenu from "src/assets/icons/components/IcMenu";
-import styled from "styled-components";
+import { useOutsideClick, useToggle } from '@monorepo/hooks';
+import { UseMutateFunction } from '@tanstack/react-query';
+import ModifyDeleteButtonBox from 'app/vote/components/MenuBox';
+import NonWriterBox from 'app/vote/components/NonWriterBox';
+import Chip from 'components/Chip';
+import Path from 'lib/Path';
+import { AorB } from 'lib/apis/vote';
+import { formatDate } from 'lib/utils/formatDate';
+import { useRouter } from 'next/navigation';
+import useGetUserInfo from 'services/useGetUserInfo';
+import SvgIcBookmark from 'src/assets/icons/components/IcBookmark';
+import SvgIcBookmarkActive from 'src/assets/icons/components/IcBookmarkActive';
+import SvgIcMenu from 'src/assets/icons/components/IcMenu';
+import styled from 'styled-components';
 
-import useVoteDeleteService from "../services/useVoteDeleteService";
-import useVoteReportService from "../services/useVoteReportService";
+import useVoteDeleteService from '../services/useVoteDeleteService';
+import useVoteReportService from '../services/useVoteReportService';
 
 interface Props {
   title: string;
@@ -44,7 +44,10 @@ const ChipContainer = ({
   const router = useRouter();
   const [toggleMenu, onToggleMenu] = useToggle();
   const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle();
-  const { targetEl } = useOutsideClick<HTMLDivElement>(toggleMenu, onToggleMenu);
+  const { targetEl } = useOutsideClick<HTMLDivElement>(
+    toggleMenu,
+    onToggleMenu,
+  );
   const { targetEl: targetEl2 } = useOutsideClick<HTMLDivElement>(
     toggleNonWriterMenu,
     onToggleNonWriterMenu,
@@ -60,11 +63,19 @@ const ChipContainer = ({
         <FlexRow>
           {isBookmark ? (
             <SVGWrapper>
-              <SvgIcBookmarkActive width={26} height={26} onClick={() => mutateBookMark()} />
+              <SvgIcBookmarkActive
+                width={26}
+                height={26}
+                onClick={() => mutateBookMark()}
+              />
             </SVGWrapper>
           ) : (
             <SVGWrapper>
-              <SvgIcBookmark width={20} height={20} onClick={() => mutateBookMark()} />
+              <SvgIcBookmark
+                width={20}
+                height={20}
+                onClick={() => mutateBookMark()}
+              />
             </SVGWrapper>
           )}
 
@@ -97,7 +108,7 @@ const ChipContainer = ({
           top="70px"
           right="41px"
           onDelete={() => {
-            if (confirm("정말 삭제하시겠습니까?")) {
+            if (confirm('정말 삭제하시겠습니까?')) {
               onDelete();
             }
           }}

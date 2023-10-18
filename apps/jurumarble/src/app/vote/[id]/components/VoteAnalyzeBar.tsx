@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   percentageA: number;
@@ -7,7 +7,12 @@ interface Props {
   totalCountB: number;
 }
 
-function VoteAnalyzeBar({ percentageA, percentageB, totalCountA, totalCountB }: Props) {
+function VoteAnalyzeBar({
+  percentageA,
+  percentageB,
+  totalCountA,
+  totalCountB,
+}: Props) {
   const isSelectedA = percentageA > percentageB ? true : false;
   return (
     <>

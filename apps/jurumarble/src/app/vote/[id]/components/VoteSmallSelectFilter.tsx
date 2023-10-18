@@ -1,7 +1,7 @@
-import { useToggle } from "@monorepo/hooks";
-import { Select } from "components/selectBox";
-import SvgIcExpandMore from "src/assets/icons/components/IcExpandMore";
-import styled, { css } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import { Select } from 'components/selectBox';
+import SvgIcExpandMore from 'src/assets/icons/components/IcExpandMore';
+import styled, { css } from 'styled-components';
 
 interface Props {
   defaultOption: string;
@@ -9,7 +9,11 @@ interface Props {
   options: { value: string; label: string }[];
 }
 
-function VoteSmallSelectFilter({ defaultOption, onChangeSortOption, options }: Props) {
+function VoteSmallSelectFilter({
+  defaultOption,
+  onChangeSortOption,
+  options,
+}: Props) {
   const [isOpen, onToggleOpen] = useToggle();
 
   return (
@@ -39,7 +43,7 @@ const SelectStyled = styled.span<{ isOpen: boolean }>`
       padding: 10px 12px;
     }
     svg {
-      ${isOpen && "transform: rotateX( 180deg )"}
+      ${isOpen && 'transform: rotateX( 180deg )'}
     }
   `}
   #select-list {

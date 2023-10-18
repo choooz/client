@@ -1,16 +1,16 @@
-import AorBMark from "components/AorBMark";
-import Path from "lib/Path";
-import { media } from "lib/styles";
-import depths from "lib/styles/depths";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { ExImg1 } from "public/images";
-import { SvgIcCheck } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import AorBMark from 'components/AorBMark';
+import Path from 'lib/Path';
+import { media } from 'lib/styles';
+import depths from 'lib/styles/depths';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ExImg1 } from 'public/images';
+import { SvgIcCheck } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
-type AorB = "A" | "B";
-type ActiveType = "active" | "inactive" | null;
-type Direction = "left" | "right";
+type AorB = 'A' | 'B';
+type ActiveType = 'active' | 'inactive' | null;
+type Direction = 'left' | 'right';
 
 // const safeImageA = useMemo(() => {
 //   if (!imageA || imageA === "string") return EmptyAImg;
@@ -21,7 +21,8 @@ type Direction = "left" | "right";
 //   return imageB;
 // }, [imageB]);
 
-const getSafeImage = (image: string) => (image.includes("http") ? image : ExImg1);
+const getSafeImage = (image: string) =>
+  image.includes('http') ? image : ExImg1;
 
 interface Props {
   titleA: string;
@@ -57,14 +58,14 @@ function VoteDescription({
   const router = useRouter();
 
   const getAB = (direction: Direction) => {
-    return direction === "left" ? "A" : "B";
+    return direction === 'left' ? 'A' : 'B';
   };
 
   const activeValue = (direction: Direction): ActiveType => {
     if (!select) {
       return null;
     }
-    return `${select === getAB(direction) ? "" : "in"}active`;
+    return `${select === getAB(direction) ? '' : 'in'}active`;
   };
 
   const onClickVote = (chooz: AorB) => {
@@ -75,13 +76,13 @@ function VoteDescription({
   };
 
   const onRouteDrinkInfo = () => {
-    if (voteType !== "DRINK") {
+    if (voteType !== 'DRINK') {
       return;
     }
-    if (select === "A") {
+    if (select === 'A') {
       router.push(`${Path.DRINK_INFO_PAGE}/${drinkAId}`);
     }
-    if (select === "B") {
+    if (select === 'B') {
       router.push(`${Path.DRINK_INFO_PAGE}/${drinkBId}`);
     }
   };
@@ -89,7 +90,10 @@ function VoteDescription({
   return (
     <Container>
       <ImageWrapper onClick={onRouteDrinkInfo}>
-        <LeftVote selected={activeValue("left")} onClick={() => onClickVote("A")}>
+        <LeftVote
+          selected={activeValue('left')}
+          onClick={() => onClickVote('A')}
+        >
           <VoteImageWrapper>
             <Image
               src={getSafeImage(imageA)}
@@ -97,22 +101,27 @@ function VoteDescription({
               width={160}
               height={160}
               style={{
-                objectFit: "cover",
-                width: "auto",
-                height: "100%",
+                objectFit: 'cover',
+                width: 'auto',
+                height: '100%',
               }}
             />
             <div className="overlay">
               <OverLayTitle>{titleA}</OverLayTitle>
               <OverlayPercent>{percentageA}%</OverlayPercent>
               <OverlayCount> {totalCountA}명</OverlayCount>
-              {voteType === "DRINK" && <OverlayButton>술정보 보기 &nbsp; {">"}</OverlayButton>}
+              {voteType === 'DRINK' && (
+                <OverlayButton>술정보 보기 &nbsp; {'>'}</OverlayButton>
+              )}
             </div>
             <AorBMark AorB="A">A</AorBMark>
           </VoteImageWrapper>
         </LeftVote>
 
-        <RightVote selected={activeValue("right")} onClick={() => onClickVote("B")}>
+        <RightVote
+          selected={activeValue('right')}
+          onClick={() => onClickVote('B')}
+        >
           <VoteImageWrapper>
             <Image
               src={getSafeImage(imageB)}
@@ -120,28 +129,30 @@ function VoteDescription({
               width={160}
               height={160}
               style={{
-                objectFit: "cover",
-                width: "auto",
-                height: "100%",
+                objectFit: 'cover',
+                width: 'auto',
+                height: '100%',
               }}
             />
             <div className="overlay">
               <OverLayTitle>{titleB}</OverLayTitle>
               <OverlayPercent>{percentageB}%</OverlayPercent>
               <OverlayCount> {totalCountB}명</OverlayCount>
-              {voteType === "DRINK" && <OverlayButton>술정보 보기&nbsp; {">"}</OverlayButton>}
+              {voteType === 'DRINK' && (
+                <OverlayButton>술정보 보기&nbsp; {'>'}</OverlayButton>
+              )}
             </div>
             <AorBMark AorB="B">B</AorBMark>
           </VoteImageWrapper>
         </RightVote>
       </ImageWrapper>
       <FlexRow>
-        <SmallTitle isSelect={select === "A"}>
-          {select === "A" && <SvgIcCheck width={20} height={20} />}
+        <SmallTitle isSelect={select === 'A'}>
+          {select === 'A' && <SvgIcCheck width={20} height={20} />}
           {titleA}
         </SmallTitle>
-        <SmallTitle isSelect={select === "B"}>
-          {select === "B" && <SvgIcCheck width={20} height={20} />}
+        <SmallTitle isSelect={select === 'B'}>
+          {select === 'B' && <SvgIcCheck width={20} height={20} />}
           {titleB}
         </SmallTitle>
       </FlexRow>
@@ -231,7 +242,7 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     border: 2px solid #ff4a16;
 
     ${({ selected }) =>
-      selected === "active" &&
+      selected === 'active' &&
       css`
         width: 100%;
         display: flex;

@@ -1,13 +1,18 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { MainBannerImage } from "public/images";
-import styled, { css } from "styled-components";
+import Image from 'next/image';
+import { MainBannerImage } from 'public/images';
+import styled, { css } from 'styled-components';
 
 function Banner() {
   return (
     <Container>
-      <Image alt="배너" src={MainBannerImage} fill style={{ borderRadius: "16px" }} />
+      <Image
+        alt="배너"
+        src={MainBannerImage}
+        fill
+        style={{ borderRadius: '16px' }}
+      />
       <BannerText>
         <MainText>여행의 즐거움을 우리술과 함께 레벨업!</MainText>
         <SubText>

@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getVoteListAPI } from "lib/apis/vote";
-import { reactQueryKeys } from "lib/queryKeys";
-import { VoteSortType } from "src/types/common";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getVoteListAPI } from 'lib/apis/vote';
+import { reactQueryKeys } from 'lib/queryKeys';
+import { VoteSortType } from 'src/types/common';
 
 interface Props {
   size: number;
@@ -13,15 +13,22 @@ interface Props {
 
 const SafeRange = 5;
 
-export default function useInfiniteMainListService({ size, sortBy, keyword }: Props) {
+export default function useInfiniteMainListService({
+  size,
+  sortBy,
+  keyword,
+}: Props) {
   const [nowShowing, setNowShowing] = useState(0);
 
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     reactQueryKeys.mainVoteList(),
-    ({ pageParam = 0 }) => getVoteListAPI({ page: pageParam, size, sortBy, keyword }),
+    ({ pageParam = 0 }) =>
+      getVoteListAPI({ page: pageParam, size, sortBy, keyword }),
     {
       getNextPageParam: (lastPage, pages) => {
-        if (lastPage.last) {return undefined;}
+        if (lastPage.last) {
+          return undefined;
+        }
         return pages.length;
       },
       keepPreviousData: true,
@@ -35,15 +42,28 @@ export default function useInfiniteMainListService({ size, sortBy, keyword }: Pr
   );
 
   const onChangeNowShowing = (index: number) => {
-    if (nowShowing + index < 0) {return;}
-    if (nowShowing + index > mainVoteList.length - 1) {return;}
+    if (nowShowing + index < 0) {
+      return;
+    }
+    if (nowShowing + index > mainVoteList.length - 1) {
+      return;
+    }
     setNowShowing((prev) => prev + index);
   };
 
   useEffect(() => {
-    if (nowShowing === mainVoteList.length - SafeRange) {fetchNextPage();}
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (nowShowing === mainVoteList.length - SafeRange) {
+      fetchNextPage();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nowShowing, mainVoteList.length]);
 
-  return { data, isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing };
+  return {
+    data,
+    isError,
+    isLoading,
+    mainVoteList,
+    nowShowing,
+    onChangeNowShowing,
+  };
 }

@@ -1,7 +1,7 @@
-import { useOutsideClick } from "@monorepo/hooks";
+import { useOutsideClick } from '@monorepo/hooks';
 
-import OptionList from "./OptionList";
-import SelectButton from "./SelectButton";
+import OptionList from './OptionList';
+import SelectButton from './SelectButton';
 
 interface Option {
   value: string;
@@ -38,7 +38,7 @@ function Select({
           options={options}
           onChangeSelectedOption={onChangeSelectedOption}
           onToggleOpen={onToggleOpen}
-         />
+        />
       ) : null}
     </div>
   );

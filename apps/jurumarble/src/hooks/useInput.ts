@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
-import { useDebouncedCallback } from "@react-hookz/web";
+import { useDebouncedCallback } from '@react-hookz/web';
 
 interface UseInputHookType {
   /**
@@ -32,8 +32,10 @@ export default function useInput({
   useDebounce = false,
   debounceTimeout = 150,
 }: UseInputHookType) {
-  const [value, setValue] = useState<InputAcceptType>(initialValue ?? "");
-  const [debouncedValue, setDebouncedValue] = useState<InputAcceptType>(initialValue ?? "");
+  const [value, setValue] = useState<InputAcceptType>(initialValue ?? '');
+  const [debouncedValue, setDebouncedValue] = useState<InputAcceptType>(
+    initialValue ?? '',
+  );
 
   const debouncedChange = useDebouncedCallback(
     (keyword: string) => {

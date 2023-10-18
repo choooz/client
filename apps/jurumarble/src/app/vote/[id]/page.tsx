@@ -1,39 +1,51 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react';
 
-import Loading from "components/Loading";
+import Loading from 'components/Loading';
 import {
   VOTE_AGE_FILTER_LIST,
   VOTE_ALCOHOL_FILTER_LIST,
   VOTE_GENDER_FILTER_LIST,
   VOTE_MBTI_LIST,
-} from "lib/constants";
-import dynamic from "next/dynamic";
-import { useParams } from "next/navigation";
-import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
-import useBookmarkService from "services/useBookmarkService";
-import styled, { css } from "styled-components";
+} from 'lib/constants';
+import dynamic from 'next/dynamic';
+import { useParams } from 'next/navigation';
+import {
+  DrinkCapacityHigh,
+  DrinkCapacityLow,
+  DrinkCapacityMedium,
+} from 'public/images';
+import useBookmarkService from 'services/useBookmarkService';
+import styled, { css } from 'styled-components';
 
-import VoteSmallSelectFilter from "./components/VoteSmallSelectFilter";
-import VoteWriterBox from "./components/VoteWriterBox";
-import useExecuteVoteService from "./services/useExecuteVoteService";
-import useFilteredStatisticsService from "./services/useFilterStatisticsService";
-import useVoteLoadService from "./services/useVoteLoadService";
+import VoteSmallSelectFilter from './components/VoteSmallSelectFilter';
+import VoteWriterBox from './components/VoteWriterBox';
+import useExecuteVoteService from './services/useExecuteVoteService';
+import useFilteredStatisticsService from './services/useFilterStatisticsService';
+import useVoteLoadService from './services/useVoteLoadService';
 
-const DynamicChipContainer = dynamic(() => import("./components/ChipContainer"));
-const DynamicVoteDescription = dynamic(() => import("./components/VoteDescription"));
-const DynamicCommentContainer = dynamic(() => import("./components/CommentContainer"));
-const DynamicVoteAnalyzeBar = dynamic(() => import("./components/VoteAnalyzeBar"));
+const DynamicChipContainer = dynamic(
+  () => import('./components/ChipContainer'),
+);
+const DynamicVoteDescription = dynamic(
+  () => import('./components/VoteDescription'),
+);
+const DynamicCommentContainer = dynamic(
+  () => import('./components/CommentContainer'),
+);
+const DynamicVoteAnalyzeBar = dynamic(
+  () => import('./components/VoteAnalyzeBar'),
+);
 
 function Detail() {
   const params = useParams();
 
   const [filter, setFilter] = useState({
-    age: "",
-    mbti: "",
-    gender: "",
-    alcohol: "",
+    age: '',
+    mbti: '',
+    gender: '',
+    alcohol: '',
   });
 
   const onChangeFilter = (filterKey: string, value: string) => {
@@ -50,7 +62,7 @@ function Detail() {
   const { mutateBookMark, isBookmark } = useBookmarkService(Number(postId));
 
   const { mutate, select } = useExecuteVoteService(Number(data?.voteId));
-  const onMutateVoting = (select: "A" | "B") => {
+  const onMutateVoting = (select: 'A' | 'B') => {
     mutate(select);
   };
   const { voteStatisticsQuery } = useFilteredStatisticsService(
@@ -66,9 +78,8 @@ function Detail() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
-  const { voteStatisticsQuery: originalStaticsQuery } = useFilteredStatisticsService(
-    Number(postId),
-  );
+  const { voteStatisticsQuery: originalStaticsQuery } =
+    useFilteredStatisticsService(Number(postId));
   const {
     data: originalStatistics,
     isLoading: isOriginalStatisticsLoading,
@@ -76,14 +87,24 @@ function Detail() {
   } = originalStaticsQuery;
 
   const EmptyImage = useMemo(() => {
-    if (data?.postedUserAlcoholLimit === "LOW") {return DrinkCapacityLow;}
-    if (data?.postedUserAlcoholLimit === "MEDIUM") {return DrinkCapacityMedium;}
+    if (data?.postedUserAlcoholLimit === 'LOW') {
+      return DrinkCapacityLow;
+    }
+    if (data?.postedUserAlcoholLimit === 'MEDIUM') {
+      return DrinkCapacityMedium;
+    }
     return DrinkCapacityHigh;
   }, [data?.postedUserAlcoholLimit]);
 
-  if (isLoading || isStatisticsLoading || isOriginalStatisticsLoading) {return <Loading />;}
-  if (isError || isStatisticsError || isOriginalStatisticsError) {return <div>에러</div>;}
-  if (!data || !statistics || !originalStatistics) {return <div />;}
+  if (isLoading || isStatisticsLoading || isOriginalStatisticsLoading) {
+    return <Loading />;
+  }
+  if (isError || isStatisticsError || isOriginalStatisticsError) {
+    return <div>에러</div>;
+  }
+  if (!data || !statistics || !originalStatistics) {
+    return <div />;
+  }
   const {
     detail,
     title,
@@ -159,22 +180,22 @@ function Detail() {
               <FilterBox>
                 <VoteSmallSelectFilter
                   defaultOption={filter.gender}
-                  onChangeSortOption={(id) => onChangeFilter("gender", id)}
+                  onChangeSortOption={(id) => onChangeFilter('gender', id)}
                   options={VOTE_GENDER_FILTER_LIST}
                 />
                 <VoteSmallSelectFilter
                   defaultOption={filter.age}
-                  onChangeSortOption={(id) => onChangeFilter("age", id)}
+                  onChangeSortOption={(id) => onChangeFilter('age', id)}
                   options={VOTE_AGE_FILTER_LIST}
                 />
                 <VoteSmallSelectFilter
                   defaultOption={filter.mbti}
-                  onChangeSortOption={(id) => onChangeFilter("mbti", id)}
+                  onChangeSortOption={(id) => onChangeFilter('mbti', id)}
                   options={VOTE_MBTI_LIST}
                 />
                 <VoteSmallSelectFilter
                   defaultOption={filter.alcohol}
-                  onChangeSortOption={(id) => onChangeFilter("alcohol", id)}
+                  onChangeSortOption={(id) => onChangeFilter('alcohol', id)}
                   options={VOTE_ALCOHOL_FILTER_LIST}
                 />
               </FilterBox>

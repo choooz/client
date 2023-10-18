@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react';
 
-import { useToggle } from "@monorepo/hooks";
-import DrinkSearchModal from "app/vote/post/components/DrinkSearchModal";
-import PostBottomSheet from "app/vote/post/components/PostBottomSheet";
-import TitleAndDescriptionSection from "app/vote/post/components/TitleAndDescriptionSection";
-import AorBMark from "components/AorBMark";
-import ImageUploadButton from "components/ImageUploadButton";
-import VoteHeader from "components/VoteHeader";
-import { Button, Input } from "components/index";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import SvgIcPrevious from "src/assets/icons/components/IcPrevious";
-import { DrinkInfoType } from "src/types/drink";
-import styled, { css } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import DrinkSearchModal from 'app/vote/post/components/DrinkSearchModal';
+import PostBottomSheet from 'app/vote/post/components/PostBottomSheet';
+import TitleAndDescriptionSection from 'app/vote/post/components/TitleAndDescriptionSection';
+import AorBMark from 'components/AorBMark';
+import ImageUploadButton from 'components/ImageUploadButton';
+import VoteHeader from 'components/VoteHeader';
+import { Button, Input } from 'components/index';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import SvgIcPrevious from 'src/assets/icons/components/IcPrevious';
+import { DrinkInfoType } from 'src/types/drink';
+import styled, { css } from 'styled-components';
 
-import useUpdateVoteForm from "../hook/useUpdataVoteForm";
+import useUpdateVoteForm from '../hook/useUpdataVoteForm';
 
 const STEP_ONE = 1;
 const STEP_TWO = 2;
@@ -76,8 +76,8 @@ function UpdateVoteContainer() {
                     alt="A이미지"
                     fill
                     style={{
-                      objectFit: "cover",
-                      borderRadius: "10px",
+                      objectFit: 'cover',
+                      borderRadius: '10px',
                     }}
                   />
                 ) : (
@@ -92,8 +92,8 @@ function UpdateVoteContainer() {
                     alt="B이미지"
                     fill
                     style={{
-                      objectFit: "cover",
-                      borderRadius: "10px",
+                      objectFit: 'cover',
+                      borderRadius: '10px',
                     }}
                   />
                 ) : (
@@ -104,7 +104,12 @@ function UpdateVoteContainer() {
             </ImageContainer>
           )}
         </ImageSection>
-        <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
+        <ImageUploadInput
+          multiple
+          type="file"
+          id="file"
+          onChange={onUploadImage}
+        />
       </label>
       <VoteOptionText>
         <InputBox>

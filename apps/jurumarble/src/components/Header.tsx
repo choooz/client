@@ -1,9 +1,13 @@
-"use client";
+'use client';
 
-import Path from "lib/Path";
-import Link from "next/link";
-import { SvgHeaderSearch, SvgLogo, SvgNotification } from "src/assets/icons/components";
-import styled from "styled-components";
+import Path from 'lib/Path';
+import Link from 'next/link';
+import {
+  SvgHeaderSearch,
+  SvgLogo,
+  SvgNotification,
+} from 'src/assets/icons/components';
+import styled from 'styled-components';
 
 function Header() {
   return (

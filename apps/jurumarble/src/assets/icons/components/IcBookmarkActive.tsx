@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const IcBookmarkActive = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -9,7 +9,14 @@ const IcBookmarkActive = (props: SVGProps<SVGSVGElement>) => (
     fill="none"
     {...props}
   >
-    <mask id="mask0_406_18489" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
+    <mask
+      id="mask0_406_18489"
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="20"
+      height="20"
+    >
       <rect width="20" height="20" fill="#D9D9D9" />
     </mask>
     <g mask="url(#mask0_406_18489)">

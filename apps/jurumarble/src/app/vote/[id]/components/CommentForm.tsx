@@ -1,7 +1,7 @@
 // import { Input } from "@monorepo/ui";
-import React from "react";
+import React from 'react';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   commentForm: string;
@@ -9,7 +9,11 @@ interface Props {
   onSubmitComment(): void;
 }
 
-function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Props) {
+function CommentForm({
+  commentForm,
+  onChangeCommentForm,
+  onSubmitComment,
+}: Props) {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmitComment();
@@ -18,7 +22,11 @@ function CommentForm({ commentForm, onChangeCommentForm, onSubmitComment }: Prop
   return (
     <Container>
       <Form onSubmit={onSubmit}>
-        <Input placeholder="댓글을 남겨주세요" value={commentForm} onChange={onChangeCommentForm} />
+        <Input
+          placeholder="댓글을 남겨주세요"
+          value={commentForm}
+          onChange={onChangeCommentForm}
+        />
         <SubmitButton type="submit">등록</SubmitButton>
       </Form>
     </Container>

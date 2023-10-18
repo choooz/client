@@ -1,9 +1,18 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getRestaurantImageAPI, postRestaurantImageAPI } from "lib/apis/restaurant";
-import { queryKeys } from "lib/queryKeys";
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  getRestaurantImageAPI,
+  postRestaurantImageAPI,
+} from 'lib/apis/restaurant';
+import { queryKeys } from 'lib/queryKeys';
 
-type GetRestaurantImageListParams = Exclude<Parameters<typeof getRestaurantImageAPI>[0], undefined>;
-type PostRestaurantImageParams = Exclude<Parameters<typeof postRestaurantImageAPI>[0], undefined>;
+type GetRestaurantImageListParams = Exclude<
+  Parameters<typeof getRestaurantImageAPI>[0],
+  undefined
+>;
+type PostRestaurantImageParams = Exclude<
+  Parameters<typeof postRestaurantImageAPI>[0],
+  undefined
+>;
 
 const getRestaurantImageListQueryKey = (
   getRestaurantImageListParams: GetRestaurantImageListParams,

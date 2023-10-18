@@ -1,4 +1,4 @@
-import PostVoteContainer from "./components/PostVoteContainer";
+import PostVoteContainer from './components/PostVoteContainer';
 
 function PostPage() {
   return <PostVoteContainer />;

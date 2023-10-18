@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface TooltipProps {
   children: ReactNode;

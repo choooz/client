@@ -1,9 +1,9 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   commentCount: number;
-  sortBy: "ByTime" | "ByPopularity";
-  onChangeFilter: (sort: "ByTime" | "ByPopularity") => void;
+  sortBy: 'ByTime' | 'ByPopularity';
+  onChangeFilter: (sort: 'ByTime' | 'ByPopularity') => void;
 }
 
 function CommentToolBar({ commentCount, onChangeFilter, sortBy }: Props) {
@@ -13,11 +13,17 @@ function CommentToolBar({ commentCount, onChangeFilter, sortBy }: Props) {
         댓글 <span className="point">{commentCount}</span>
       </Title>
       <ButtonGroup>
-        <Button onClick={() => onChangeFilter("ByTime")} bold={sortBy === "ByTime"}>
+        <Button
+          onClick={() => onChangeFilter('ByTime')}
+          bold={sortBy === 'ByTime'}
+        >
           최신순
         </Button>
         <Divider />
-        <Button onClick={() => onChangeFilter("ByPopularity")} bold={sortBy === "ByPopularity"}>
+        <Button
+          onClick={() => onChangeFilter('ByPopularity')}
+          bold={sortBy === 'ByPopularity'}
+        >
           인기순
         </Button>
       </ButtonGroup>

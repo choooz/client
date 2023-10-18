@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { createContext, PropsWithChildren, useMemo, useState } from "react";
+import { createContext, PropsWithChildren, useMemo, useState } from 'react';
 
-import { useToggle } from "@monorepo/hooks";
-import { useMutation } from "@tanstack/react-query";
-import Path from "lib/Path";
-import { addUserInfoAPI } from "lib/apis/user";
-import { DrinkCapacityTypes, GenderTypes } from "lib/constants";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { Direction, MBTIType } from "src/types/register";
+import { useToggle } from '@monorepo/hooks';
+import { useMutation } from '@tanstack/react-query';
+import Path from 'lib/Path';
+import { addUserInfoAPI } from 'lib/apis/user';
+import { DrinkCapacityTypes, GenderTypes } from 'lib/constants';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import { Direction, MBTIType } from 'src/types/register';
 
 import {
   NumberPadTypes,
   REGISTER_STEPS_CONTENT,
   RegisterStepTypes,
   YearOfBirthType,
-} from "../constants";
+} from '../constants';
 
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;
@@ -36,8 +36,8 @@ export const RegisterContext = createContext<{
   onChangeMBTI: ({ name, value }: { name: string; value: string }) => void;
   activeValue: (
     direction: Direction,
-    MBTIKey: "M" | "B" | "T" | "I",
-  ) => "active" | "inactive" | null;
+    MBTIKey: 'M' | 'B' | 'T' | 'I',
+  ) => 'active' | 'inactive' | null;
   addUser: () => void;
   isWarningModal: boolean;
   onToggleWarningModal: () => void;
@@ -62,18 +62,20 @@ export const RegisterContext = createContext<{
   onDeleteYearOfBirth: () => {},
   onNextStep: () => {},
   onToggleWarningModal: () => {},
-  step: "STEP1",
+  step: 'STEP1',
   stepList: [],
-  stringfiedMBTI: "",
-  yearOfBirth: "",
+  stringfiedMBTI: '',
+  yearOfBirth: '',
 });
 
 export const RegisterProvider = ({ children }: PropsWithChildren) => {
-  const [step, setStep] = useState<RegisterStepTypes>("STEP1");
+  const [step, setStep] = useState<RegisterStepTypes>('STEP1');
 
-  const [drinkCapacity, setDrinkCapacity] = useState<DrinkCapacityTypes | null>(null);
+  const [drinkCapacity, setDrinkCapacity] = useState<DrinkCapacityTypes | null>(
+    null,
+  );
   const [gender, setGender] = useState<GenderTypes | null>(null);
-  const [yearOfBirth, setYearOfBirth] = useState<YearOfBirthType | null>("");
+  const [yearOfBirth, setYearOfBirth] = useState<YearOfBirthType | null>('');
   const [MBTI, setMBTI] = useState<MBTIType>({
     M: null,
     B: null,
@@ -89,12 +91,12 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
 
   const onNextStep = () => {
     if (Number(yearOfBirth) > 2004) {
-      toast.error("2004년 이후 출생자는 가입이 불가능합니다.");
-      setYearOfBirth("");
+      toast.error('2004년 이후 출생자는 가입이 불가능합니다.');
+      setYearOfBirth('');
       return;
     } else if (999 < Number(yearOfBirth) && Number(yearOfBirth) < 1900) {
-      toast.error("출생년도를 다시 한번 확인해주세요.");
-      setYearOfBirth("");
+      toast.error('출생년도를 다시 한번 확인해주세요.');
+      setYearOfBirth('');
       return;
     }
 
@@ -124,39 +126,42 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     setYearOfBirth((prev) => (prev?.length === 4 ? prev : prev + value));
   };
   const onDeleteYearOfBirth = () => {
-    setYearOfBirth("");
+    setYearOfBirth('');
   };
 
   const onChangeMBTI = ({ name, value }: { name: string; value: string }) => {
     setMBTI((prev) => ({ ...prev, [name]: value }));
   };
 
-  const getMBTI = (direction: Direction, MBTIKey: "M" | "B" | "T" | "I") => {
-    const lookupTable: Record<Direction, Record<"M" | "B" | "T" | "I", string>> = {
-      left: { M: "E", B: "S", T: "T", I: "J" },
-      right: { M: "I", B: "N", T: "F", I: "P" },
+  const getMBTI = (direction: Direction, MBTIKey: 'M' | 'B' | 'T' | 'I') => {
+    const lookupTable: Record<
+      Direction,
+      Record<'M' | 'B' | 'T' | 'I', string>
+    > = {
+      left: { M: 'E', B: 'S', T: 'T', I: 'J' },
+      right: { M: 'I', B: 'N', T: 'F', I: 'P' },
     };
     return lookupTable[direction][MBTIKey];
   };
 
   const activeValue = (
     direction: Direction,
-    MBTIKey: "M" | "B" | "T" | "I",
-  ): "active" | "inactive" | null => {
+    MBTIKey: 'M' | 'B' | 'T' | 'I',
+  ): 'active' | 'inactive' | null => {
     if (!MBTI[MBTIKey]) {
       return null;
     }
-    return `${MBTI[MBTIKey] === getMBTI(direction, MBTIKey) ? "" : "in"}active`;
+    return `${MBTI[MBTIKey] === getMBTI(direction, MBTIKey) ? '' : 'in'}active`;
   };
 
   const buttonDisabled = useMemo(() => {
-    if (step === "STEP1") {
+    if (step === 'STEP1') {
       return drinkCapacity === null;
-    } else if (step === "STEP2") {
+    } else if (step === 'STEP2') {
       return gender === null;
-    } else if (step === "STEP3") {
-      return yearOfBirth === "" || yearOfBirth?.length !== 4;
-    } else if (step === "STEP4") {
+    } else if (step === 'STEP3') {
+      return yearOfBirth === '' || yearOfBirth?.length !== 4;
+    } else if (step === 'STEP4') {
       return Object.values(MBTI).some((value) => value === null);
     }
 
@@ -177,7 +182,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       }),
     {
       onSuccess: () => {
-        toast.success("회원가입이 완료되었습니다.");
+        toast.success('회원가입이 완료되었습니다.');
         router.replace(Path.MAIN_PAGE);
       },
       onError: (error) => alert(error),
@@ -208,5 +213,9 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     yearOfBirth,
   };
 
-  return <RegisterContext.Provider value={value}>{children}</RegisterContext.Provider>;
+  return (
+    <RegisterContext.Provider value={value}>
+      {children}
+    </RegisterContext.Provider>
+  );
 };

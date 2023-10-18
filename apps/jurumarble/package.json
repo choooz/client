@@ -12,7 +12,9 @@
     "gen:icon": "yarn gen --out-dir ./src/assets/icons/components ./src/assets/icons",
     "icon:build": "yarn gen:icon",
     "eslint": "eslint -c .eslintrc.js .",
-    "eslint:fix": "yarn eslint --fix"
+    "eslint:fix": "yarn eslint --fix",
+    "prettier": "prettier --config ../../packages/prettier-config/index.json --ignore-path ../../.prettierignore --check './**/*.{js,ts,tsx,md}'",
+    "prettier:fix": "yarn prettier --write"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",

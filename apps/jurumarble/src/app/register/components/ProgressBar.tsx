@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface ProgressBarProps {
   progress: `${number}%`;
@@ -6,7 +6,11 @@ interface ProgressBarProps {
   total: number;
 }
 
-export const ProgressBar = ({ progress, total, currentIndex }: ProgressBarProps) => {
+export const ProgressBar = ({
+  progress,
+  total,
+  currentIndex,
+}: ProgressBarProps) => {
   return (
     <Wrapper>
       <ProgressWrapper>
@@ -16,7 +20,7 @@ export const ProgressBar = ({ progress, total, currentIndex }: ProgressBarProps)
       <Count>
         <span
           style={{
-            color: "black",
+            color: 'black',
           }}
         >
           {currentIndex}
@@ -45,7 +49,7 @@ const Progress = styled.div<{
 }>`
   position: absolute;
   height: 100%;
-  width: ${({ $progress }) => $progress ?? "0%"};
+  width: ${({ $progress }) => $progress ?? '0%'};
   border-radius: 4px;
   transition: width 0.3s ease-in-out;
   background: linear-gradient(

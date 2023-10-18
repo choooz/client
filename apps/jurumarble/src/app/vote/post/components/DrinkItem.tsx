@@ -1,8 +1,8 @@
-import Chip from "components/Chip";
-import { transitions } from "lib/styles";
-import Image from "next/image";
-import { DrinkInfo , DrinkInfoType } from "src/types/drink";
-import styled, { css } from "styled-components";
+import Chip from 'components/Chip';
+import { transitions } from 'lib/styles';
+import Image from 'next/image';
+import { DrinkInfo, DrinkInfoType } from 'src/types/drink';
+import styled, { css } from 'styled-components';
 
 interface Props {
   drinkInfo: DrinkInfo;
@@ -13,12 +13,17 @@ interface Props {
 function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
   const { name, manufacturer, image } = drinkInfo;
 
-  const isInclude = (selectedDrink: DrinkInfoType) => selectedDrink.id === drinkInfo.id;
+  const isInclude = (selectedDrink: DrinkInfoType) =>
+    selectedDrink.id === drinkInfo.id;
 
   return (
-    <Container onClick={onClickAddDrink} name={name} selected={selectedDrinkList.some(isInclude)}>
+    <Container
+      onClick={onClickAddDrink}
+      name={name}
+      selected={selectedDrinkList.some(isInclude)}
+    >
       <ImageWrapper>
-        <Image alt={name} src={image} fill style={{ borderRadius: "10px" }} />
+        <Image alt={name} src={image} fill style={{ borderRadius: '10px' }} />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
@@ -36,7 +41,8 @@ function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
 
 const Container = styled.button<{ selected: boolean }>`
   display: flex;
-  box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
+  box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4),
+    0px 8px 20px 0px rgba(235, 235, 235, 0.4);
   height: 120px;
   padding: 16px;
   border-radius: 16px;

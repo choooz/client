@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { FormEvent, forwardRef, MouseEvent } from "react";
+import { FormEvent, forwardRef, MouseEvent } from 'react';
 
-import { Button } from "components/button";
-import { Input } from "components/input";
-import SvgIcSearch from "src/assets/icons/components/IcSearch";
-import styled, { css, useTheme } from "styled-components";
+import { Button } from 'components/button';
+import { Input } from 'components/input';
+import SvgIcSearch from 'src/assets/icons/components/IcSearch';
+import styled, { css, useTheme } from 'styled-components';
 
 /**
  * @TODO 리팩토링 필요
@@ -16,7 +16,9 @@ interface Props {
   value: string;
   onChange?: (keyword: string) => void;
   placeholder?: string;
-  eventHandler?: (e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => void;
+  eventHandler?: (
+    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>,
+  ) => void;
 }
 
 const SearchInput = forwardRef<HTMLInputElement, Props>(

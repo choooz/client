@@ -1,17 +1,17 @@
-"use client";
-import React, { forwardRef } from "react";
+'use client';
+import React, { forwardRef } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Input 형태
    */
-  variant?: "standard" | "outlined";
+  variant?: 'standard' | 'outlined';
   /**
    * Input 가로 길이
    */
-  width: `${number}px` | `${number}%` | "auto";
+  width: `${number}px` | `${number}%` | 'auto';
   /**
    * 포커스 여뿌
    * 기본 값 : false

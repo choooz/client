@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { SvgStamp } from "src/assets/icons/components";
-import styled, { css, useTheme } from "styled-components";
+import { SvgStamp } from 'src/assets/icons/components';
+import styled, { css, useTheme } from 'styled-components';
 
-import useGetDrinkRecommendationListService from "../services/useGetDrinkRecommendationListService";
+import useGetDrinkRecommendationListService from '../services/useGetDrinkRecommendationListService';
 
 const SLIDE_MOVE_COUNT = 1;
 const ORIGINAL_IMAGE_LENGTH = 10;
@@ -42,7 +42,9 @@ function TodayDrinkRecommendation() {
         setIsAnimation(true);
       }, 600);
     }
-    slideRef.current.style.transform = `translateY(-${MOVE_DISTANCE * (currentSlide - 1)}px)`;
+    slideRef.current.style.transform = `translateY(-${
+      MOVE_DISTANCE * (currentSlide - 1)
+    }px)`;
   }, [currentSlide]);
 
   useEffect(() => {
@@ -85,7 +87,8 @@ const Slider = styled.div<{ isAnimation: boolean }>`
   height: 18px;
   transition: transform 0.5s ease-in-out;
   gap: 2px;
-  ${({ isAnimation }) => isAnimation && `transform: translateY(-${MOVE_DISTANCE}px);`}
+  ${({ isAnimation }) =>
+    isAnimation && `transform: translateY(-${MOVE_DISTANCE}px);`}
 `;
 
 const H3 = styled.h3`

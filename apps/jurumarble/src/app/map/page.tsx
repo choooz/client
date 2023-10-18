@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import BottomBar from "components/BottomBar";
-import Header from "components/Header";
-import { KAKAO_MAP_API_KEY } from "lib/constants";
-import dynamic from "next/dynamic";
-import Script from "next/script";
+import BottomBar from 'components/BottomBar';
+import Header from 'components/Header';
+import { KAKAO_MAP_API_KEY } from 'lib/constants';
+import dynamic from 'next/dynamic';
+import Script from 'next/script';
 
 declare global {
   interface Window {
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-const DynamicMapContainer = dynamic(() => import("./components/MapContainer"));
+const DynamicMapContainer = dynamic(() => import('./components/MapContainer'));
 
 const MapPage = () => {
   return (

@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgNaverIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -18,7 +18,12 @@ const SvgNaverIcon = (props: SVGProps<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id="clip0_279_9255">
-        <rect width={16} height={16} fill="currentColor" vectorEffect="non-scaling-stroke" />
+        <rect
+          width={16}
+          height={16}
+          fill="currentColor"
+          vectorEffect="non-scaling-stroke"
+        />
       </clipPath>
     </defs>
   </svg>

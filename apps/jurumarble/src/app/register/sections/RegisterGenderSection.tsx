@@ -1,8 +1,8 @@
-import { GENDER_LIST } from "lib/constants";
-import Image from "next/image";
-import styled from "styled-components";
+import { GENDER_LIST } from 'lib/constants';
+import Image from 'next/image';
+import styled from 'styled-components';
 
-import { useRegisterContext } from "../contexts";
+import { useRegisterContext } from '../contexts';
 
 export const RegisterGenderSection = () => {
   const { gender, onChangeGender } = useRegisterContext();
@@ -40,7 +40,7 @@ const Item = styled.div<{
   border-radius: 12px;
   height: 280px;
   background: ${({ theme, $selected }) =>
-    $selected ? "rgba(255, 92, 0, 0.50)" : theme.colors.white};
+    $selected ? 'rgba(255, 92, 0, 0.50)' : theme.colors.white};
 
   cursor: pointer;
   display: flex;

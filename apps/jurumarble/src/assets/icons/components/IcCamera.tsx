@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgIcCamera = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -12,7 +12,7 @@ const SvgIcCamera = (props: SVGProps<SVGSVGElement>) => (
     <mask
       id="mask0_406_18821"
       style={{
-        maskType: "alpha",
+        maskType: 'alpha',
       }}
       maskUnits="userSpaceOnUse"
       x={0}
@@ -20,7 +20,12 @@ const SvgIcCamera = (props: SVGProps<SVGSVGElement>) => (
       width={24}
       height={24}
     >
-      <rect width={24} height={24} fill="current" vectorEffect="non-scaling-stroke" />
+      <rect
+        width={24}
+        height={24}
+        fill="current"
+        vectorEffect="non-scaling-stroke"
+      />
     </mask>
     <g mask="url(#mask0_406_18821)">
       <path

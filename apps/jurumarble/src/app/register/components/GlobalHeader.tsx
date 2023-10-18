@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface GlobalHeaderProps {
   children: ReactNode;
