@@ -1,11 +1,11 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
-  variant: "region" | "numberOfParticipants" | "isVote";
+  variant: 'region' | 'numberOfParticipants' | 'isVote';
   children: React.ReactNode;
 }
 
-type variant = Pick<Props, "variant">;
+type variant = Pick<Props, 'variant'>;
 
 function Chip({ variant, children }: Props) {
   return <Wrapper variant={variant}>{children}</Wrapper>;

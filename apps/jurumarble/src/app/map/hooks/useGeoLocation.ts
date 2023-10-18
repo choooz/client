@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { useToggle } from "@react-hookz/web";
+import { useToggle } from '@react-hookz/web';
 
 interface Location {
   latitude: number;
@@ -16,7 +16,7 @@ export const useGeoLocation = (options = {}) => {
     longitude: 0,
   });
   // 에러 메세지 저장
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   // Geolocation의 `getCurrentPosition` 메소드에 대한 성공 callback 핸들러
   const handleSuccess = (pos: GeolocationPosition) => {
@@ -34,18 +34,20 @@ export const useGeoLocation = (options = {}) => {
   };
 
   useEffect(() => {
-    if (!onLocation) {return;}
+    if (!onLocation) {
+      return;
+    }
     const { geolocation } = navigator;
 
     // 사용된 브라우저에서 지리적 위치(Geolocation)가 정의되지 않은 경우 오류로 처리합니다.
     if (!geolocation) {
-      setError("Geolocation is not supported.");
+      setError('Geolocation is not supported.');
       return;
     }
 
     // Geolocation API 호출
     geolocation.getCurrentPosition(handleSuccess, handleError, options);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options]);
 
   return { location, error, toggleOnLocation, onLocation };

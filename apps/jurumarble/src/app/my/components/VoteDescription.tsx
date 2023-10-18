@@ -1,6 +1,6 @@
-import AorBMark from "components/AorBMark";
-import Image, { StaticImageData } from "next/image";
-import styled, { css } from "styled-components";
+import AorBMark from 'components/AorBMark';
+import Image, { StaticImageData } from 'next/image';
+import styled, { css } from 'styled-components';
 
 interface Props {
   imageA: string | StaticImageData;
@@ -18,8 +18,8 @@ function VoteDescription({ imageA, imageB }: Props) {
               alt="A이미지"
               fill
               style={{
-                objectFit: "cover",
-                borderRadius: "10px",
+                objectFit: 'cover',
+                borderRadius: '10px',
               }}
             />
           ) : (
@@ -34,8 +34,8 @@ function VoteDescription({ imageA, imageB }: Props) {
               alt="B이미지"
               fill
               style={{
-                objectFit: "cover",
-                borderRadius: "10px",
+                objectFit: 'cover',
+                borderRadius: '10px',
               }}
             />
           ) : (

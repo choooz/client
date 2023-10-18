@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ContentHeader } from "../components";
-import WarningSmallModal from "../components/WarningModal";
-import { REGISTER_STEPS_CONTENT } from "../constants";
-import { useRegisterContext } from "../contexts";
+import { ContentHeader } from '../components';
+import WarningSmallModal from '../components/WarningModal';
+import { REGISTER_STEPS_CONTENT } from '../constants';
+import { useRegisterContext } from '../contexts';
 
 export const RegisterStepSection = () => {
   const { step, isWarningModal } = useRegisterContext();

@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
+import { useRef } from 'react';
 
-import BottomBar from "components/BottomBar";
-import Loading from "components/Loading";
-import { Button } from "components/button";
-import Path from "lib/Path";
-import { media } from "lib/styles";
-import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ImgScroll } from "public/images";
-import { toast } from "react-toastify";
-import useBookmarkService from "services/useBookmarkService";
-import SvgIcDetail from "src/assets/icons/components/IcDetail";
-import styled, { css } from "styled-components";
+import BottomBar from 'components/BottomBar';
+import Loading from 'components/Loading';
+import { Button } from 'components/button';
+import Path from 'lib/Path';
+import { media } from 'lib/styles';
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ImgScroll } from 'public/images';
+import { toast } from 'react-toastify';
+import useBookmarkService from 'services/useBookmarkService';
+import SvgIcDetail from 'src/assets/icons/components/IcDetail';
+import styled, { css } from 'styled-components';
 
-import ChipContainer from "./[id]/components/ChipContainer";
-import VoteDescription from "./[id]/components/VoteDescription";
-import useExecuteVoteService from "./[id]/services/useExecuteVoteService";
-import useFilteredStatisticsService from "./[id]/services/useFilterStatisticsService";
-import useFlipAnimation from "./hooks/useFlipAnimation";
-import useInfiniteMainListService from "./services/useGetVoteListService";
+import ChipContainer from './[id]/components/ChipContainer';
+import VoteDescription from './[id]/components/VoteDescription';
+import useExecuteVoteService from './[id]/services/useExecuteVoteService';
+import useFilteredStatisticsService from './[id]/services/useFilterStatisticsService';
+import useFlipAnimation from './hooks/useFlipAnimation';
+import useInfiniteMainListService from './services/useGetVoteListService';
 
-export type Drag = "up" | "down" | null;
+export type Drag = 'up' | 'down' | null;
 
 function VoteHomePage() {
   const searchParams = useSearchParams();
@@ -30,9 +30,9 @@ function VoteHomePage() {
   /**
    * @TODO 여러번 뜨는 현상 지속시 삭제
    */
-  params.get("isSuccess") &&
-    toast.success("정상적으로 투표가 등록되었습니다!.", {
-      toastId: "voteSuccess",
+  params.get('isSuccess') &&
+    toast.success('정상적으로 투표가 등록되었습니다!.', {
+      toastId: 'voteSuccess',
     });
 
   const router = useRouter();
@@ -40,7 +40,7 @@ function VoteHomePage() {
   const { isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({
       size: 10,
-      sortBy: "ByTime",
+      sortBy: 'ByTime',
     });
 
   const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
@@ -63,7 +63,7 @@ function VoteHomePage() {
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
-  const onMutateVoting = (select: "A" | "B") => {
+  const onMutateVoting = (select: 'A' | 'B') => {
     mutate(select);
   };
 
@@ -71,10 +71,15 @@ function VoteHomePage() {
 
   const onScrollBottom = () => {
     // 스크롤을 최하단으로 내린다
-    moreRef.current?.scrollIntoView({ behavior: "smooth" });
+    moreRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const { voteStatisticsQuery } = useFilteredStatisticsService(Number(voteId), "", "", "");
+  const { voteStatisticsQuery } = useFilteredStatisticsService(
+    Number(voteId),
+    '',
+    '',
+    '',
+  );
 
   const {
     data: statistics,
@@ -82,8 +87,12 @@ function VoteHomePage() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
-  if (isLoading || isStatisticsLoading) {return <Loading />;}
-  if (isError || isStatisticsError) {return <PageInner drag={drag}>에러</PageInner>;}
+  if (isLoading || isStatisticsLoading) {
+    return <Loading />;
+  }
+  if (isError || isStatisticsError) {
+    return <PageInner drag={drag}>에러</PageInner>;
+  }
 
   const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
 
@@ -143,7 +152,10 @@ function VoteHomePage() {
               drinkAId={1}
               drinkBId={1}
             />
-            <MoreButton onClick={() => router.push(`vote/${voteId}`)} ref={moreRef}>
+            <MoreButton
+              onClick={() => router.push(`vote/${voteId}`)}
+              ref={moreRef}
+            >
               더보기 <SvgIcDetail width={16} height={16} />
             </MoreButton>
           </PageInner>
@@ -191,7 +203,7 @@ const PageInner = styled.div<{ drag: Drag }>`
   }
 
   ${({ drag }) =>
-    drag === "up" &&
+    drag === 'up' &&
     css`
       transition: all 0.5s ease-in-out;
       transform-origin: 50% 0;
@@ -200,7 +212,7 @@ const PageInner = styled.div<{ drag: Drag }>`
       opacity: 0;
     `}
   ${({ drag }) =>
-    drag === "down" &&
+    drag === 'down' &&
     css`
       transition: all 0.5s ease-in-out;
       transform: rotateX(90deg) scale(0.9, 1.032);
@@ -234,7 +246,7 @@ const FirstPageBase = styled.div<{ drag: Drag }>`
     height: 620px;
   }
   ${({ drag }) =>
-    drag === "up" &&
+    drag === 'up' &&
     css`
       perspective: 600px;
       transform-origin: 50% 0;
@@ -242,7 +254,7 @@ const FirstPageBase = styled.div<{ drag: Drag }>`
       opacity: 1;
     `}
   ${({ drag }) =>
-    drag === "down" &&
+    drag === 'down' &&
     css`
       opacity: 1;
       transform: scale(1.11, 0.97);
@@ -260,12 +272,12 @@ const SecondPageBase = styled(FirstPageBase)`
     height: 640px;
   }
   ${({ drag }) =>
-    drag === "up" &&
+    drag === 'up' &&
     css`
       opacity: 0.6;
     `}
   ${({ drag }) =>
-    drag === "down" &&
+    drag === 'down' &&
     css`
       opacity: 0.6;
     `}

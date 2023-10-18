@@ -1,23 +1,28 @@
-import { CommonVoteListResponse } from "src/types/vote";
+import { CommonVoteListResponse } from 'src/types/vote';
 
-import { http } from "./http/http";
+import { http } from './http/http';
 
 interface GetMyVoteListRequest {
   page: number;
   size: number;
 }
 
-export const getMyParticipatedVoteList = async (params: GetMyVoteListRequest) => {
-  const response = await http.get<CommonVoteListResponse>("api/votes/participated", {
-    params: {
-      ...params,
+export const getMyParticipatedVoteList = async (
+  params: GetMyVoteListRequest,
+) => {
+  const response = await http.get<CommonVoteListResponse>(
+    'api/votes/participated',
+    {
+      params: {
+        ...params,
+      },
     },
-  });
+  );
   return response.data;
 };
 
 export const getMyCreatedVoteList = async (params: GetMyVoteListRequest) => {
-  const response = await http.get<CommonVoteListResponse>("api/votes/my-vote", {
+  const response = await http.get<CommonVoteListResponse>('api/votes/my-vote', {
     params: {
       ...params,
     },
@@ -26,11 +31,14 @@ export const getMyCreatedVoteList = async (params: GetMyVoteListRequest) => {
 };
 
 export const getMyBookmarkedVoteList = async (params: GetMyVoteListRequest) => {
-  const response = await http.get<CommonVoteListResponse>("api/votes/bookmarked", {
-    params: {
-      ...params,
+  const response = await http.get<CommonVoteListResponse>(
+    'api/votes/bookmarked',
+    {
+      params: {
+        ...params,
+      },
     },
-  });
+  );
   return response.data;
 };
 
@@ -41,7 +49,9 @@ interface GetVoteCountResponse {
 }
 
 export const getVoteCount = async () => {
-  const response = await http.get<GetVoteCountResponse>("api/user/mypage/count");
+  const response = await http.get<GetVoteCountResponse>(
+    'api/user/mypage/count',
+  );
   return response.data;
 };
 
@@ -51,13 +61,15 @@ export interface UpdateUserInfoRequest {
   alcoholLimit: string;
   mbti: string;
 }
-export const updateUserInfoAPI = async (updateUserInfoRequest: UpdateUserInfoRequest) => {
-  const response = await http.put("api/users", updateUserInfoRequest);
+export const updateUserInfoAPI = async (
+  updateUserInfoRequest: UpdateUserInfoRequest,
+) => {
+  const response = await http.put('api/users', updateUserInfoRequest);
   return response.data;
 };
 
 export const deleteUserAPI = async () => {
-  const response = await http.delete("api/users");
+  const response = await http.delete('api/users');
   return response.data;
 };
 
@@ -68,6 +80,8 @@ interface GetTheNumberOfMyVote {
 }
 
 export const getTheNumberOfMyVoteAPI = async () => {
-  const response = await http.get<GetTheNumberOfMyVote>("api/votes/myActivities");
+  const response = await http.get<GetTheNumberOfMyVote>(
+    'api/votes/myActivities',
+  );
   return response.data;
 };

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   AorB: string;
@@ -12,7 +12,9 @@ function AorBMark({ AorB, children }: Props) {
 const AorBMarkStyled = styled.div<{ AorB: string }>`
   ${({ theme, AorB }) => css`
     ${theme.typography.caption_chip}
-    background-color: ${AorB === "A" ? theme.colors.sub_01 : theme.colors.sub_02};
+    background-color: ${AorB === 'A'
+      ? theme.colors.sub_01
+      : theme.colors.sub_02};
     color: ${theme.colors.white};
     position: absolute;
     top: 0;

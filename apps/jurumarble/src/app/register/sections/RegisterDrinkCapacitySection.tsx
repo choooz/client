@@ -1,27 +1,33 @@
-import { ALCOHOL_LEVEL_LIST } from "lib/constants";
-import { transitions } from "lib/styles";
-import Image from "next/image";
-import styled, { css } from "styled-components";
+import { ALCOHOL_LEVEL_LIST } from 'lib/constants';
+import { transitions } from 'lib/styles';
+import Image from 'next/image';
+import styled, { css } from 'styled-components';
 
-import { useRegisterContext } from "../contexts";
+import { useRegisterContext } from '../contexts';
 
 export const RegisterDrinkCapacitySection = () => {
   const { onChangeDrinkCapacity, drinkCapacity } = useRegisterContext();
 
   return (
     <Wrapper>
-      {ALCOHOL_LEVEL_LIST.map(({ id, label, description, image, levelChip }) => (
-        <Item key={id} $selected={id === drinkCapacity} onClick={() => onChangeDrinkCapacity(id)}>
-          <Image alt={label} width={56} height={56} src={image} />
-          <Text>
-            <Title>
-              {levelChip()}
-              <Label>{label}</Label>
-            </Title>
-            <Description>{description}</Description>
-          </Text>
-        </Item>
-      ))}
+      {ALCOHOL_LEVEL_LIST.map(
+        ({ id, label, description, image, levelChip }) => (
+          <Item
+            key={id}
+            $selected={id === drinkCapacity}
+            onClick={() => onChangeDrinkCapacity(id)}
+          >
+            <Image alt={label} width={56} height={56} src={image} />
+            <Text>
+              <Title>
+                {levelChip()}
+                <Label>{label}</Label>
+              </Title>
+              <Description>{description}</Description>
+            </Text>
+          </Item>
+        ),
+      )}
     </Wrapper>
   );
 };
@@ -32,7 +38,8 @@ const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.line_01};
   border-radius: 8px;
-  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.04), 2px 2px 20px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 2px 2px 20px 0px rgba(0, 0, 0, 0.04),
+    2px 2px 20px 0px rgba(0, 0, 0, 0.06);
 
   > div + div {
   }

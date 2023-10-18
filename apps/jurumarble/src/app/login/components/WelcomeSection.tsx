@@ -1,8 +1,8 @@
-import { transitions } from "lib/styles";
-import Image from "next/image";
-import { DrinkImage } from "public/images";
-import { SvgLogo } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import { transitions } from 'lib/styles';
+import Image from 'next/image';
+import { DrinkImage } from 'public/images';
+import { SvgLogo } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
 function WelcomeSection() {
   return (

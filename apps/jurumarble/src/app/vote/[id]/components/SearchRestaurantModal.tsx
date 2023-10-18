@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
-import VoteHeader from "components/VoteHeader";
-import { Button, ModalTemplate } from "components/index";
-import useInput from "hooks/useInput";
-import { RestaurantInfo } from "lib/apis/restaurant";
-import { transitions } from "lib/styles";
-import Image from "next/image";
-import SvgIcX from "src/assets/icons/components/IcX";
-import styled, { css, DefaultTheme } from "styled-components";
+import VoteHeader from 'components/VoteHeader';
+import { Button, ModalTemplate } from 'components/index';
+import useInput from 'hooks/useInput';
+import { RestaurantInfo } from 'lib/apis/restaurant';
+import { transitions } from 'lib/styles';
+import Image from 'next/image';
+import SvgIcX from 'src/assets/icons/components/IcX';
+import styled, { css, DefaultTheme } from 'styled-components';
 
-import RestaurantItem from "./RestaurantItem";
-import SearchInput from "./SearchInput";
-import useRestaurantImageService from "../services/useRestaurantImageService";
-import useRestaurantService from "../services/useRestaurantService";
+import RestaurantItem from './RestaurantItem';
+import SearchInput from './SearchInput';
+import useRestaurantImageService from '../services/useRestaurantImageService';
+import useRestaurantService from '../services/useRestaurantService';
 
 interface Props {
   commentId: number;
@@ -22,47 +22,61 @@ interface Props {
   onToggleSearchRestaurantModal: () => void;
 }
 
-function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModal }: Props) {
-  const [selectedRestaurant, setSelectedRestaurant] = useState<RestaurantInfo | null>(null);
+function SearchRestaurantModal({
+  commentId,
+  postId,
+  onToggleSearchRestaurantModal,
+}: Props) {
+  const [selectedRestaurant, setSelectedRestaurant] =
+    useState<RestaurantInfo | null>(null);
   const onClickSelectedRestaurant = (restaurantInfo: RestaurantInfo) => {
     setSelectedRestaurant((prev) =>
       restaurantInfo.contentId === prev?.contentId ? null : restaurantInfo,
     );
   };
 
-  const { debouncedValue: searchText, onChange: onChangeSearchText } = useInput({
-    initialValue: "",
-    useDebounce: true,
-    debounceTimeout: 500,
-  });
+  const { debouncedValue: searchText, onChange: onChangeSearchText } = useInput(
+    {
+      initialValue: '',
+      useDebounce: true,
+      debounceTimeout: 500,
+    },
+  );
 
   const { restaurantList, subscribe } = useRestaurantService({
     commentId,
-    commentType: "votes",
+    commentType: 'votes',
     keyword: searchText,
     page: 1,
-    region: "ALL",
+    region: 'ALL',
     typeId: postId,
   });
 
-  const [selectedImage, setSelectedImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState('');
   const onClickSelectedImage = (imageUrl: string) => {
-    selectedImage === imageUrl ? setSelectedImage("") : setSelectedImage(imageUrl);
+    selectedImage === imageUrl
+      ? setSelectedImage('')
+      : setSelectedImage(imageUrl);
   };
 
-  const { restaurantImageList, postRestaurantImage } = useRestaurantImageService({
-    commentType: "votes",
-    typeId: postId,
-    commentId,
-    contentId: selectedRestaurant?.contentId ?? "",
-  });
+  const { restaurantImageList, postRestaurantImage } =
+    useRestaurantImageService({
+      commentType: 'votes',
+      typeId: postId,
+      commentId,
+      contentId: selectedRestaurant?.contentId ?? '',
+    });
 
   if (!restaurantList) {
     return null;
   }
 
   return (
-    <ModalTemplate width="375px" height="100%" onToggleModal={onToggleSearchRestaurantModal}>
+    <ModalTemplate
+      width="375px"
+      height="100%"
+      onToggleModal={onToggleSearchRestaurantModal}
+    >
       <VoteHeader
         rightButton={
           <CloseButton onClick={onToggleSearchRestaurantModal}>
@@ -70,7 +84,9 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
           </CloseButton>
         }
       >
-        <TitleStyled>{selectedRestaurant ? "음식점 검색" : "이미지 선택"}</TitleStyled>
+        <TitleStyled>
+          {selectedRestaurant ? '음식점 검색' : '이미지 선택'}
+        </TitleStyled>
       </VoteHeader>
       <Container>
         {selectedRestaurant ? (
@@ -85,9 +101,9 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
                 width="107px"
                 height="60px"
                 borderRadius="4px"
-                onClick={() => onClickSelectedImage("nonSelect")}
+                onClick={() => onClickSelectedImage('nonSelect')}
               >
-                <ColorBox selectedImage={selectedImage === "nonSelect"} />
+                <ColorBox selectedImage={selectedImage === 'nonSelect'} />
                 선택 안함
               </NonSelectedButton>
               {restaurantImageList &&
@@ -97,7 +113,9 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
                       name={restaurantImage}
                       onClick={() => onClickSelectedImage(restaurantImage)}
                     >
-                      <ColorBox selectedImage={selectedImage === restaurantImage} />
+                      <ColorBox
+                        selectedImage={selectedImage === restaurantImage}
+                      />
                     </Button>
                     <Image
                       alt="음식 이미지"
@@ -105,7 +123,7 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
                       width={107}
                       height={60}
                       style={{
-                        borderRadius: "4px",
+                        borderRadius: '4px',
                       }}
                     />
                   </FoodItem>
@@ -117,7 +135,7 @@ function SearchRestaurantModal({ commentId, postId, onToggleSearchRestaurantModa
               variant="primary"
               onClick={() => {
                 postRestaurantImage({
-                  commentType: "votes",
+                  commentType: 'votes',
                   typeId: postId,
                   commentId,
                   restaurantName: selectedRestaurant.restaurantName,

@@ -40,6 +40,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/http-fetch"\
       },\
       {\
+        "name": "@mogakko/prettier-config",\
+        "reference": "workspace:packages/prettier-config"\
+      },\
+      {\
         "name": "@monorepo/ui",\
         "reference": "workspace:packages/ui"\
       }\
@@ -49,6 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "fallbackExclusionList": [\
       ["@mogakko/browser-api", ["workspace:packages/browser-api"]],\
       ["@mogakko/http-fetch", ["workspace:packages/http-fetch"]],\
+      ["@mogakko/prettier-config", ["workspace:packages/prettier-config"]],\
       ["@monorepo/chooz", ["workspace:apps/chooz"]],\
       ["@monorepo/hooks", ["virtual:a9e685c95fc9c2c05e15b14465ecc20924383932b7a1aa62172e110ba174ebedc352c8daf5023eb54ef5f0a5595ca6cf8763ef2477e003ebd1850bfb16231d67#workspace:packages/hooks", "workspace:packages/hooks"]],\
       ["@monorepo/jurumarble", ["workspace:apps/jurumarble"]],\
@@ -63,6 +68,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@mogakko/prettier-config", "workspace:packages/prettier-config"],\
             ["eslint", "npm:8.51.0"],\
             ["prettier", "npm:2.8.8"],\
             ["styled-components", "virtual:153feba997cc61a3cf2b119c73f0a46150f4475b2449b54a9c09ded230a7e59552f9ddaa3d6273b9d60d464227c04336d4b04595bea51827334f0e7840915565#npm:5.3.11"],\
@@ -4283,6 +4289,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT"\
         }]\
       ]],\
+      ["@mogakko/prettier-config", [\
+        ["workspace:packages/prettier-config", {\
+          "packageLocation": "./packages/prettier-config/",\
+          "packageDependencies": [\
+            ["@mogakko/prettier-config", "workspace:packages/prettier-config"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@monorepo/chooz", [\
         ["workspace:apps/chooz", {\
           "packageLocation": "./apps/chooz/",\
@@ -4371,6 +4386,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint", "npm:8.51.0"],\
             ["eslint-config-mogakko", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#workspace:packages/eslint-config-mogakko"],\
             ["next", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#npm:13.5.3"],\
+            ["prettier", "npm:2.8.8"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:a9e685c95fc9c2c05e15b14465ecc20924383932b7a1aa62172e110ba174ebedc352c8daf5023eb54ef5f0a5595ca6cf8763ef2477e003ebd1850bfb16231d67#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
@@ -11212,6 +11228,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["monorepo", "workspace:."],\
+            ["@mogakko/prettier-config", "workspace:packages/prettier-config"],\
             ["eslint", "npm:8.51.0"],\
             ["prettier", "npm:2.8.8"],\
             ["styled-components", "virtual:153feba997cc61a3cf2b119c73f0a46150f4475b2449b54a9c09ded230a7e59552f9ddaa3d6273b9d60d464227c04336d4b04595bea51827334f0e7840915565#npm:5.3.11"],\

@@ -1,9 +1,12 @@
-import { useInfiniteScroll } from "@monorepo/hooks";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getEnjoyedDrinkList } from "lib/apis/drink";
-import { queryKeys } from "lib/queryKeys";
+import { useInfiniteScroll } from '@monorepo/hooks';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getEnjoyedDrinkList } from 'lib/apis/drink';
+import { queryKeys } from 'lib/queryKeys';
 
-type DrinkStampListProps = Exclude<Parameters<typeof getEnjoyedDrinkList>[0], undefined>;
+type DrinkStampListProps = Exclude<
+  Parameters<typeof getEnjoyedDrinkList>[0],
+  undefined
+>;
 
 const getDrinkListQueryKey = (params: DrinkStampListProps) => [
   queryKeys.DRINK_STAMP_LIST,
@@ -20,7 +23,9 @@ export default function useDrinkStampListService(params: DrinkStampListProps) {
       }),
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) {return undefined;}
+        if (last) {
+          return undefined;
+        }
         return {
           page: number + 1,
         };

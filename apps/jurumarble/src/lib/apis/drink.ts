@@ -1,10 +1,10 @@
-import axios from "axios";
-import { DATA_GO_API_KEY } from "lib/constants";
-import { DrinkInfoSortType } from "src/types/common";
-import { DrinkListResponse, DrinkMapResponse } from "src/types/drink";
+import axios from 'axios';
+import { DATA_GO_API_KEY } from 'lib/constants';
+import { DrinkInfoSortType } from 'src/types/common';
+import { DrinkListResponse, DrinkMapResponse } from 'src/types/drink';
 
-import { baseApi } from "./http/base";
-import { http } from "./http/http";
+import { baseApi } from './http/base';
+import { http } from './http/http';
 
 export interface GetDrinkListRequest {
   page: number;
@@ -17,7 +17,7 @@ export interface GetDrinkListRequest {
 interface GetDrinkListResponse extends DrinkListResponse {}
 
 export const getDrinkList = async (params: GetDrinkListRequest) => {
-  const response = await baseApi.get<GetDrinkListResponse>("api/drinks", {
+  const response = await baseApi.get<GetDrinkListResponse>('api/drinks', {
     params: {
       ...params,
     },
@@ -32,7 +32,7 @@ export interface GetHotDrinkResponse {
   image: string;
 }
 export const getHotDrinkList = async () => {
-  const response = await baseApi.get<GetHotDrinkResponse[]>("api/drinks/hot");
+  const response = await baseApi.get<GetHotDrinkResponse[]>('api/drinks/hot');
   return response.data;
 };
 
@@ -44,12 +44,17 @@ interface GetEnjoyedDrinkListRequest {
 
 export interface GetEnjoyedDrinkListResponse extends DrinkListResponse {}
 
-export const getEnjoyedDrinkList = async (params: GetEnjoyedDrinkListRequest) => {
-  const response = await http.get<GetEnjoyedDrinkListResponse>("api/drinks/enjoys", {
-    params: {
-      ...params,
+export const getEnjoyedDrinkList = async (
+  params: GetEnjoyedDrinkListRequest,
+) => {
+  const response = await http.get<GetEnjoyedDrinkListResponse>(
+    'api/drinks/enjoys',
+    {
+      params: {
+        ...params,
+      },
     },
-  });
+  );
   return response.data;
 };
 
@@ -58,7 +63,9 @@ export interface GetIsEnjoyedDrinkAPIResponse {
 }
 
 export const getIsEnjoyedDrinkAPI = async (drinkId: number) => {
-  const response = await http.get<GetIsEnjoyedDrinkAPIResponse>(`api/drinks/${drinkId}/enjoy`);
+  const response = await http.get<GetIsEnjoyedDrinkAPIResponse>(
+    `api/drinks/${drinkId}/enjoy`,
+  );
   return response.data;
 };
 
@@ -79,7 +86,7 @@ export interface GetDrinksMapRequest {
 }
 
 export const getDrinksMap = async (params: GetDrinksMapRequest) => {
-  const response = await baseApi.get<DrinkMapResponse>("api/drinks/map", {
+  const response = await baseApi.get<DrinkMapResponse>('api/drinks/map', {
     params: {
       ...params,
     },
@@ -102,14 +109,16 @@ export interface GetDrinkInfoResponse {
 }
 
 export const getDrinkInfo = async (drinkId: number) => {
-  const response = await baseApi.get<GetDrinkInfoResponse>(`api/drinks/${drinkId}`);
+  const response = await baseApi.get<GetDrinkInfoResponse>(
+    `api/drinks/${drinkId}`,
+  );
   return response.data;
 };
 
 interface GetDrinkRecommendationListRequest {
   page: number;
   perPage: number;
-  returnType?: "json" | "xml";
+  returnType?: 'json' | 'xml';
 }
 
 interface GetDrinkRecommendationListResponse {
@@ -129,9 +138,11 @@ interface Data {
   주원료: string;
 }
 
-export const getDrinkRecommendationListAPI = async (params: GetDrinkRecommendationListRequest) => {
+export const getDrinkRecommendationListAPI = async (
+  params: GetDrinkRecommendationListRequest,
+) => {
   const response = await axios.get<GetDrinkRecommendationListResponse>(
-    "https://api.odcloud.kr/api/15048755/v1/uddi:fec53d3a-2bef-4494-b50e-f4e566f403e0",
+    'https://api.odcloud.kr/api/15048755/v1/uddi:fec53d3a-2bef-4494-b50e-f4e566f403e0',
     {
       params: {
         ...params,

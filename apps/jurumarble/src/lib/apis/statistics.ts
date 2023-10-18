@@ -1,4 +1,4 @@
-import { baseApi } from "./http/base";
+import { baseApi } from './http/base';
 
 interface GetVoteStatisticsResponse {
   message: string;

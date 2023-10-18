@@ -1,9 +1,9 @@
-import { useId } from "react";
+import { useId } from 'react';
 
-import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import { REGION_LIST } from "lib/constants";
-import { SvgArrowDown } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import { useOutsideClick, useToggle } from '@monorepo/hooks';
+import { REGION_LIST } from 'lib/constants';
+import { SvgArrowDown } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
 interface Props {
   regionOption: string;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const COPIED_REGION_LIST = [
-  { value: "", label: "지역을 선택해주세요.", lat: 0, long: 0 },
+  { value: '', label: '지역을 선택해주세요.', lat: 0, long: 0 },
   ...REGION_LIST,
 ];
 
@@ -32,7 +32,10 @@ function RegionSelect({ regionOption, onChangeRegionOption }: Props) {
           onClick={onToggleOpen}
         >
           <SelectedText className="selected-label">
-            {COPIED_REGION_LIST.find(({ value }) => value === regionOption)?.label}
+            {
+              COPIED_REGION_LIST.find(({ value }) => value === regionOption)
+                ?.label
+            }
             <span id="indicator">
               <SvgArrowDown width={24} height={24} />
             </span>
@@ -80,7 +83,7 @@ const SelectStyled = styled.div<{ isOpen: boolean }>`
       color: ${theme.colors.black_01};
     }
     svg {
-      ${isOpen && "transform: rotateX( 180deg )"}
+      ${isOpen && 'transform: rotateX( 180deg )'}
     }
   `}
 `;

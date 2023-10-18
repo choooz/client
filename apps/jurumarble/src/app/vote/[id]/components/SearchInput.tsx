@@ -1,15 +1,18 @@
-"use client";
+'use client';
 
-import { FormEvent, forwardRef, MouseEvent } from "react";
+import { FormEvent, forwardRef, MouseEvent } from 'react';
 
-import { Button } from "components/button";
-import { Input } from "components/input";
-import SvgIcSearch from "src/assets/icons/components/IcSearch";
-import styled, { css, useTheme } from "styled-components";
+import { Button } from 'components/button';
+import { Input } from 'components/input';
+import SvgIcSearch from 'src/assets/icons/components/IcSearch';
+import styled, { css, useTheme } from 'styled-components';
 
-interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "width"> {
+interface Props
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'width'> {
   placeholder?: string;
-  eventHandler?: (e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => void;
+  eventHandler?: (
+    e: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>,
+  ) => void;
   onChangeSearchText: (keyword: string) => void;
 }
 

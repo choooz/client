@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { RegisterProgressSection, RegisterStepSection } from "./sections";
+import { RegisterProgressSection, RegisterStepSection } from './sections';
 
 function RegisterPage() {
   return (

@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import Path from "lib/Path";
-import { getUserInfoAPI } from "lib/apis/user";
-import { isLogin } from "lib/utils/auth";
-import { usePathname, useRouter } from "next/navigation";
+import Path from 'lib/Path';
+import { getUserInfoAPI } from 'lib/apis/user';
+import { isLogin } from 'lib/utils/auth';
+import { usePathname, useRouter } from 'next/navigation';
 
 const LOGIN_BLOCK_PATHS = [
   Path.LOGIN_PAGE,
@@ -43,7 +43,7 @@ function AuthProcess() {
           router.push(Path.REGISTER_PAGE);
         }
       } catch (error) {
-        alert("에러가 발생하였습니다.");
+        alert('에러가 발생하였습니다.');
       }
     };
 

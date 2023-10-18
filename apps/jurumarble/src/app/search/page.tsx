@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import SearchContainer from "./components/SearchContainer";
+import SearchContainer from './components/SearchContainer';
 
 function Search() {
   return <SearchContainer />;

@@ -1,26 +1,30 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from 'react';
 
-import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import ModifyDeleteButtonBox from "app/vote/components/MenuBox";
-import NonWriterBox from "app/vote/components/NonWriterBox";
-import { Button } from "components/button";
-import { convertAge, convertGender } from "lib/utils/formatUserInfo";
-import Image from "next/image";
-import { DrinkCapacityHigh, DrinkCapacityLow, DrinkCapacityMedium } from "public/images";
-import { toast } from "react-toastify";
-import useGetUserInfo from "services/useGetUserInfo";
-import { SvgIcMapPin } from "src/assets/icons/components";
-import SvgIcMenu from "src/assets/icons/components/IcMenu";
-import styled, { css } from "styled-components";
+import { useOutsideClick, useToggle } from '@monorepo/hooks';
+import ModifyDeleteButtonBox from 'app/vote/components/MenuBox';
+import NonWriterBox from 'app/vote/components/NonWriterBox';
+import { Button } from 'components/button';
+import { convertAge, convertGender } from 'lib/utils/formatUserInfo';
+import Image from 'next/image';
+import {
+  DrinkCapacityHigh,
+  DrinkCapacityLow,
+  DrinkCapacityMedium,
+} from 'public/images';
+import { toast } from 'react-toastify';
+import useGetUserInfo from 'services/useGetUserInfo';
+import { SvgIcMapPin } from 'src/assets/icons/components';
+import SvgIcMenu from 'src/assets/icons/components/IcMenu';
+import styled, { css } from 'styled-components';
 
-import AlcholLevelTag from "./AlcholLevelTag";
-import CommentPutForm from "./CommentPutForm";
-import SearchRestaurantModal from "./SearchRestaurantModal";
-import useCommentDeleteService from "../services/useCommentDeleteService";
-import useCommentReportService from "../services/useCommentReportService";
+import AlcholLevelTag from './AlcholLevelTag';
+import CommentPutForm from './CommentPutForm';
+import SearchRestaurantModal from './SearchRestaurantModal';
+import useCommentDeleteService from '../services/useCommentDeleteService';
+import useCommentReportService from '../services/useCommentReportService';
 
 interface Props {
-  voteType: "drinks" | "votes";
+  voteType: 'drinks' | 'votes';
   postId: number;
   comment: {
     id: number;
@@ -65,15 +69,22 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
   const [toggleNonWriterMenu, onToggleNonWriterMenu] = useToggle(false);
-  const { targetEl } = useOutsideClick<HTMLButtonElement>(toggleMenu, onToggleMenu);
+  const { targetEl } = useOutsideClick<HTMLButtonElement>(
+    toggleMenu,
+    onToggleMenu,
+  );
   const { targetEl: targetEl2 } = useOutsideClick<HTMLButtonElement>(
     toggleNonWriterMenu,
     onToggleNonWriterMenu,
   );
-  const { onDelete, onPutComment } = useCommentDeleteService(voteType, postId, id);
+  const { onDelete, onPutComment } = useCommentDeleteService(
+    voteType,
+    postId,
+    id,
+  );
 
   const [isModifying, setIsModifying] = useState(false);
-  const [commentForm, setCommentForm] = useState("");
+  const [commentForm, setCommentForm] = useState('');
   const onChangeCommentForm = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentForm(e.target.value);
   };
@@ -84,15 +95,15 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
 
   useEffect(() => {
     setCommentForm(content);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [comment]);
   const [isSearchRestaurantModal, onToggleSearchRestaurantModal] = useToggle();
 
   const EmptyImage = useMemo(() => {
-    if (alcoholLimitType === "LOW") {
+    if (alcoholLimitType === 'LOW') {
       return DrinkCapacityLow;
     }
-    if (alcoholLimitType === "MEDIUM") {
+    if (alcoholLimitType === 'MEDIUM') {
       return DrinkCapacityMedium;
     }
     return DrinkCapacityHigh;
@@ -106,8 +117,8 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
         width={40}
         height={40}
         style={{
-          borderRadius: "8px",
-          marginRight: "10px",
+          borderRadius: '8px',
+          marginRight: '10px',
         }}
       />
       <ContentsBox>
@@ -169,13 +180,13 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
             <Contents>{content}</Contents>
             {restaurant ? (
               <>
-                {restaurant.restaurantImage !== "nonSelect" && (
+                {restaurant.restaurantImage !== 'nonSelect' && (
                   <RestaurantImage>
                     <Image
                       src={restaurant.restaurantImage}
                       alt="음식 이미지"
                       fill
-                      style={{ borderRadius: "4px" }}
+                      style={{ borderRadius: '4px' }}
                       objectFit="cover"
                     />
                   </RestaurantImage>
@@ -185,7 +196,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
                   {restaurant.restaurantName}
                 </RestaurantNameBox>
               </>
-            ) : userInfo?.userId === userId && voteType !== "drinks" ? (
+            ) : userInfo?.userId === userId && voteType !== 'drinks' ? (
               <AddRestaurants>
                 <Button
                   variant="outline"
@@ -199,9 +210,13 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
             ) : null}
             <CommentInfo>
               <div>{createdDate.slice(0, 10)}</div>・
-              <InteractionButton onClick={mutateLike}>❤️ 좋아요 {likeCount ?? 0}</InteractionButton>{" "}
+              <InteractionButton onClick={mutateLike}>
+                ❤️ 좋아요 {likeCount ?? 0}
+              </InteractionButton>{' '}
               ・
-              <InteractionButton onClick={mutateHate}>🖤 싫어요 {hateCount ?? 0}</InteractionButton>{" "}
+              <InteractionButton onClick={mutateHate}>
+                🖤 싫어요 {hateCount ?? 0}
+              </InteractionButton>{' '}
             </CommentInfo>
           </>
         )}
@@ -217,8 +232,8 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
         <NonWriterBox
           onCopy={() => {
             navigator.clipboard.writeText(content);
-            toast("복사되었어요!", {
-              toastId: "copy",
+            toast('복사되었어요!', {
+              toastId: 'copy',
             });
             onToggleNonWriterMenu();
           }}

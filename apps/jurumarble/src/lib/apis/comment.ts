@@ -1,6 +1,6 @@
-import { baseApi } from "./http/base";
-import { http } from "./http/http";
-import { AorB } from "./vote";
+import { baseApi } from './http/base';
+import { http } from './http/http';
+import { AorB } from './vote';
 
 export interface PagingRequest {
   page: number;
@@ -8,9 +8,9 @@ export interface PagingRequest {
 }
 
 export interface GetCommentRequest {
-  sortBy: "ByTime" | "ByPopularity";
+  sortBy: 'ByTime' | 'ByPopularity';
   paging: PagingRequest;
-  commentType: "votes" | "drinks";
+  commentType: 'votes' | 'drinks';
   typeId: number;
 }
 
@@ -52,31 +52,38 @@ export const getCommentById = async ({
   sortBy,
   typeId,
 }: GetCommentRequest) => {
-  const response = await baseApi.get<GetCommentResponse>(`api/${commentType}/${typeId}/comments`, {
-    params: {
-      sortBy,
-      page: paging.page,
-      size: paging.size,
+  const response = await baseApi.get<GetCommentResponse>(
+    `api/${commentType}/${typeId}/comments`,
+    {
+      params: {
+        sortBy,
+        page: paging.page,
+        size: paging.size,
+      },
     },
-  });
+  );
   return response.data;
 };
 
 export const postLikeComment = async (
-  commentType: "votes" | "drinks",
+  commentType: 'votes' | 'drinks',
   typeId: number,
   commentId: number,
 ) => {
-  const response = await http.post(`/api/${commentType}/${typeId}/comments/${commentId}/likers`);
+  const response = await http.post(
+    `/api/${commentType}/${typeId}/comments/${commentId}/likers`,
+  );
   return response.data;
 };
 
 export const postHateComment = async (
-  commentType: "votes" | "drinks",
+  commentType: 'votes' | 'drinks',
   typeId: number,
   commentId: number,
 ) => {
-  const response = await http.post(`/api/${commentType}/${typeId}/comments/${commentId}/haters`);
+  const response = await http.post(
+    `/api/${commentType}/${typeId}/comments/${commentId}/haters`,
+  );
   return response.data;
 };
 
@@ -86,31 +93,39 @@ export interface PostCommentRequest {
 }
 
 export const postComment = async (
-  commentType: "votes" | "drinks",
+  commentType: 'votes' | 'drinks',
   voteId: number,
   body: PostCommentRequest,
 ) => {
-  const response = await http.post(`/api/${commentType}/${voteId}/comments/create`, body);
+  const response = await http.post(
+    `/api/${commentType}/${voteId}/comments/create`,
+    body,
+  );
   return response.data;
 };
 
 export const deleteComment = async (
-  commentType: "votes" | "drinks",
+  commentType: 'votes' | 'drinks',
   typeId: number,
   commentId: number,
 ) => {
-  const response = await http.delete(`/api/${commentType}/${typeId}/comments/${commentId}`);
+  const response = await http.delete(
+    `/api/${commentType}/${typeId}/comments/${commentId}`,
+  );
   return response.data;
 };
 
 export const putComment = async (
-  commentType: "votes" | "drinks",
+  commentType: 'votes' | 'drinks',
   typeId: number,
   commentId: number,
   content: string,
 ) => {
-  const response = await http.put(`/api/${commentType}/${typeId}/comments/${commentId}`, {
-    content,
-  });
+  const response = await http.put(
+    `/api/${commentType}/${typeId}/comments/${commentId}`,
+    {
+      content,
+    },
+  );
   return response.data;
 };

@@ -1,6 +1,6 @@
-import { ReactNode, ReactPortal, useEffect, useState } from "react";
+import { ReactNode, ReactPortal, useEffect, useState } from 'react';
 
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 
 interface PortalProps {
   children: ReactNode;

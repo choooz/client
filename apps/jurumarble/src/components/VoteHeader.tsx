@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   leftButton?: ReactNode;

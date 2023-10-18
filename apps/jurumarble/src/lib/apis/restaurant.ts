@@ -1,8 +1,8 @@
-import { SERVER_URL } from "lib/constants";
+import { SERVER_URL } from 'lib/constants';
 
-import { http } from "./http/http";
+import { http } from './http/http';
 
-type CommentType = "votes" | "drinks";
+type CommentType = 'votes' | 'drinks';
 
 interface GetRestaurantRequest {
   commentType: CommentType;
@@ -96,10 +96,13 @@ export const putRestaurantAPI = async ({
   restaurantName,
   restaurantImage,
 }: PutRestaurantRequest) => {
-  return await http.put(`${SERVER_URL}api/votes/${typeId}/comments/${commentId}/restaurant`, {
-    restaurantName,
-    restaurantImage,
-  });
+  return await http.put(
+    `${SERVER_URL}api/votes/${typeId}/comments/${commentId}/restaurant`,
+    {
+      restaurantName,
+      restaurantImage,
+    },
+  );
 };
 
 interface GetRestaurantImageRequest {

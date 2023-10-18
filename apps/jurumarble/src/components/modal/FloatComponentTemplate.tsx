@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import Portal from "./Portal";
+import Portal from './Portal';
 
 /**
  * @description

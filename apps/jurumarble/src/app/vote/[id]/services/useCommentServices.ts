@@ -1,17 +1,21 @@
-import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 import {
   getCommentById,
   postComment,
   PostCommentRequest,
   postHateComment,
   postLikeComment,
-} from "lib/apis/comment";
-import { queryKeys, reactQueryKeys } from "lib/queryKeys";
+} from 'lib/apis/comment';
+import { queryKeys, reactQueryKeys } from 'lib/queryKeys';
 
 export default function useCommentServices(
   voteId: number,
-  sortBy: "ByTime" | "ByPopularity",
-  commentType: "votes" | "drinks",
+  sortBy: 'ByTime' | 'ByPopularity',
+  commentType: 'votes' | 'drinks',
   paging?: {
     page: number;
     size: number;
@@ -74,5 +78,13 @@ export default function useCommentServices(
     postComment(commentType, voteId, body),
   );
 
-  return { comments, fetchNextPage, isError, isLoading, mutateComment, mutateHate, mutateLike };
+  return {
+    comments,
+    fetchNextPage,
+    isError,
+    isLoading,
+    mutateComment,
+    mutateHate,
+    mutateLike,
+  };
 }

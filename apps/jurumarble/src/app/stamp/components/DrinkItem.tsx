@@ -1,9 +1,9 @@
-import { transitions } from "lib/styles";
-import Image from "next/image";
-import useDrinkStampService from "services/useDrinkStampService";
-import SvgStamp from "src/assets/icons/components/IcStamp";
-import { DrinkInfo } from "src/types/drink";
-import styled, { css, useTheme } from "styled-components";
+import { transitions } from 'lib/styles';
+import Image from 'next/image';
+import useDrinkStampService from 'services/useDrinkStampService';
+import SvgStamp from 'src/assets/icons/components/IcStamp';
+import { DrinkInfo } from 'src/types/drink';
+import styled, { css, useTheme } from 'styled-components';
 
 interface Props {
   drinkInfo:
@@ -18,7 +18,11 @@ interface Props {
   selectedDrinkList?: string[];
 }
 
-function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Props) {
+function DrinkItem({
+  drinkInfo,
+  onClickReplaceDrinkInfo,
+  selectedDrinkList,
+}: Props) {
   const { id, name, manufacturer, image } = drinkInfo;
 
   const { colors } = useTheme();
@@ -34,7 +38,13 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
       selected={selectedDrinkList?.includes(name)}
     >
       <ImageWrapper>
-        <Image alt={name} src={image} width={88} height={88} style={{ borderRadius: "10px" }} />
+        <Image
+          alt={name}
+          src={image}
+          width={88}
+          height={88}
+          style={{ borderRadius: '10px' }}
+        />
       </ImageWrapper>
       <InfoContainer>
         <NameStampContainer>
@@ -56,7 +66,8 @@ function DrinkItem({ drinkInfo, onClickReplaceDrinkInfo, selectedDrinkList }: Pr
 
 const Container = styled.button<{ selected: boolean | undefined }>`
   display: flex;
-  box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
+  box-shadow: 0px 2px 8px 0px rgba(235, 235, 235, 0.4),
+    0px 8px 20px 0px rgba(235, 235, 235, 0.4);
   height: 120px;
   padding: 16px;
   border-radius: 16px;

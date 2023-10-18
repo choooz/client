@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
-import Option from "./Option";
+import Option from './Option';
 
 interface Option {
   value: string;

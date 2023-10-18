@@ -1,4 +1,4 @@
-import { httpFetch } from "src/modules/httpFetch";
+import { httpFetch } from 'src/modules/httpFetch';
 
 export interface GetHotDrinkResponse {
   drinkId: number;

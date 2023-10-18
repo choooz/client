@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { SvgIcCamera } from "src/assets/icons/components";
-import styled, { css, useTheme } from "styled-components";
+import Image from 'next/image';
+import { SvgIcCamera } from 'src/assets/icons/components';
+import styled, { css, useTheme } from 'styled-components';
 
 interface Props {
   imageUrl: string;
@@ -18,7 +18,7 @@ function ImageUpload({ imageUrl, onUploadImage }: Props) {
           src={imageUrl}
           width={88}
           height={88}
-          style={{ borderRadius: "8px" }}
+          style={{ borderRadius: '8px' }}
         />
       ) : (
         <CaremaBox>
@@ -27,7 +27,12 @@ function ImageUpload({ imageUrl, onUploadImage }: Props) {
           </StyledCicle>
         </CaremaBox>
       )}
-      <ImageUploadInput multiple type="file" id="file" onChange={onUploadImage} />
+      <ImageUploadInput
+        multiple
+        type="file"
+        id="file"
+        onChange={onUploadImage}
+      />
     </Label>
   );
 }

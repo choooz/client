@@ -1,4 +1,4 @@
 module.exports = {
-  extends: ["mogakko/next"],
+  extends: ['mogakko/next'],
   root: true,
 };

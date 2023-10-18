@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -420,7 +420,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M3.9375 68H0V72H3.9375V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M3.9375 68H0V72H3.9375V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M7.875 68H3.9375V72H7.875V68Z"
         fill="currentColor"
@@ -1071,7 +1075,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 64H59.0625V68H63V64Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M63 64H59.0625V68H63V64Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M27.5625 52H23.625V56H27.5625V52Z"
         fill="currentColor"
@@ -1177,7 +1185,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M3.9375 68H0V72H3.9375V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M3.9375 68H0V72H3.9375V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M11.8125 72H7.875V76H11.8125V72Z"
         fill="currentColor"
@@ -1188,7 +1200,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M3.9375 68H0V72H3.9375V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M3.9375 68H0V72H3.9375V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M7.875 68H3.9375V72H7.875V68Z"
         fill="currentColor"
@@ -1439,8 +1455,16 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M3.9375 72H0V76H3.9375V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 76H0V80H3.9375V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M3.9375 72H0V76H3.9375V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 76H0V80H3.9375V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M7.875 76H3.9375V80H7.875V76Z"
         fill="currentColor"
@@ -1471,7 +1495,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M3.9375 76H0V80H3.9375V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M3.9375 76H0V80H3.9375V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M15.75 76H11.8125V80H15.75V76Z"
         fill="currentColor"
@@ -1502,10 +1530,26 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M59.0625 76H55.125V80H59.0625V76Z"
         fill="currentColor"
@@ -1571,14 +1615,33 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
       <path
-        d="M59.0625 68H55.125V72H59.0625V68Z"
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
@@ -1587,16 +1650,61 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 64H59.0625V68H63V64Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 68H59.0625V72H63V68Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M59.0625 68H55.125V72H59.0625V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 64H59.0625V68H63V64Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 68H59.0625V72H63V68Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M55.125 72H51.1875V76H55.125V72Z"
         fill="currentColor"
@@ -1607,10 +1715,13 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
       <path
-        d="M59.0625 76H55.125V80H59.0625V76Z"
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
@@ -1619,14 +1730,31 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M59.0625 76H55.125V80H59.0625V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M55.125 76H51.1875V80H55.125V76Z"
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 72H59.0625V76H63V72Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M63 72H59.0625V76H63V72Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M55.125 80H51.1875V84H55.125V80Z"
         fill="currentColor"
@@ -1637,8 +1765,16 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M63 76H59.0625V80H63V76Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M63 76H59.0625V80H63V76Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M31.5 52H27.5625V56H31.5V52Z"
         fill="currentColor"
@@ -1779,7 +1915,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M15.75 4H11.8125V8H15.75V4Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M15.75 4H11.8125V8H15.75V4Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M19.6875 16H15.75V20H19.6875V16Z"
         fill="currentColor"
@@ -1845,7 +1985,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M31.5 4H27.5625V8H31.5V4Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M31.5 4H27.5625V8H31.5V4Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M43.3125 4H39.375V8H43.3125V4Z"
         fill="currentColor"
@@ -1866,7 +2010,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M31.5 0H27.5625V4H31.5V0Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M31.5 0H27.5625V4H31.5V0Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M35.4375 16H31.5V20H35.4375V16Z"
         fill="currentColor"
@@ -1902,14 +2050,46 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M3.9375 16H0V20H3.9375V16Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 20H0V24H3.9375V20Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 20H0V24H3.9375V20Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 24H0V28H3.9375V24Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 28H0V32H3.9375V28Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 32H0V36H3.9375V32Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 36H0V40H3.9375V36Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
-      <path d="M3.9375 36H0V40H3.9375V36Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M3.9375 16H0V20H3.9375V16Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 20H0V24H3.9375V20Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 20H0V24H3.9375V20Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 24H0V28H3.9375V24Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 28H0V32H3.9375V28Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 32H0V36H3.9375V32Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 36H0V40H3.9375V36Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
+      <path
+        d="M3.9375 36H0V40H3.9375V36Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M7.875 40H3.9375V44H7.875V40Z"
         fill="currentColor"
@@ -1950,7 +2130,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M47.25 4H43.3125V8H47.25V4Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M47.25 4H43.3125V8H47.25V4Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M47.25 12H43.3125V16H47.25V12Z"
         fill="currentColor"
@@ -2001,7 +2185,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M31.5 8H27.5625V12H31.5V8Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M31.5 8H27.5625V12H31.5V8Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M43.3125 8H39.375V12H43.3125V8Z"
         fill="currentColor"
@@ -2047,7 +2235,11 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
         fill="currentColor"
         vectorEffect="non-scaling-stroke"
       />
-      <path d="M15.75 0H11.8125V4H15.75V0Z" fill="currentColor" vectorEffect="non-scaling-stroke" />
+      <path
+        d="M15.75 0H11.8125V4H15.75V0Z"
+        fill="currentColor"
+        vectorEffect="non-scaling-stroke"
+      />
       <path
         d="M11.8125 4H7.875V8H11.8125V4Z"
         fill="currentColor"
@@ -2061,7 +2253,12 @@ const SvgManAvatar = (props: SVGProps<SVGSVGElement>) => (
     </g>
     <defs>
       <clipPath id="clip0_0_387">
-        <rect width={63} height={100} fill="currentColor" vectorEffect="non-scaling-stroke" />
+        <rect
+          width={63}
+          height={100}
+          fill="currentColor"
+          vectorEffect="non-scaling-stroke"
+        />
       </clipPath>
     </defs>
   </svg>

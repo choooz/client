@@ -1,5 +1,5 @@
-import Image, { StaticImageData } from "next/image";
-import styled from "styled-components";
+import Image, { StaticImageData } from 'next/image';
+import styled from 'styled-components';
 
 interface Props {
   imageA: string | StaticImageData;

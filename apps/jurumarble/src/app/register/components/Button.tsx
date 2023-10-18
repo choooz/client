@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
@@ -11,9 +11,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export const Button = ({ className, fullWidth, children, disabled, ...rest }: ButtonProps) => {
+export const Button = ({
+  className,
+  fullWidth,
+  children,
+  disabled,
+  ...rest
+}: ButtonProps) => {
   return (
-    <StyledButton className={className} disabled={disabled} $fullWidth={fullWidth} {...rest}>
+    <StyledButton
+      className={className}
+      disabled={disabled}
+      $fullWidth={fullWidth}
+      {...rest}
+    >
       {children}
     </StyledButton>
   );
