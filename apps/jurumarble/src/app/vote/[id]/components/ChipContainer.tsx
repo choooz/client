@@ -7,6 +7,7 @@ import Path from 'lib/Path';
 import { AorB } from 'lib/apis/vote';
 import { formatDate } from 'lib/utils/formatDate';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 import useGetUserInfo from 'services/useGetUserInfo';
 import SvgIcBookmark from 'src/assets/icons/components/IcBookmark';
 import SvgIcBookmarkActive from 'src/assets/icons/components/IcBookmarkActive';
@@ -127,7 +128,13 @@ const ChipContainer = ({
           //   onToggleNonWriterMenu();
           // }}
           onReport={() => {
-            mutate(voteId);
+            mutate(voteId, {
+              onSuccess: () => {
+                toast.success('신고가 접수되었습니다.', {
+                  toastId: 'report',
+                });
+              },
+            });
 
             onToggleNonWriterMenu();
           }}
