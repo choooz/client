@@ -1668,6 +1668,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mogakko/http-fetch@workspace:*, @mogakko/http-fetch@workspace:packages/http-fetch":
+  version: 0.0.0-use.local
+  resolution: "@mogakko/http-fetch@workspace:packages/http-fetch"
+  dependencies:
+    eslint: ^8.51.0
+    eslint-config-mogakko: "workspace:*"
+    typescript: 4.9.3
+  languageName: unknown
+  linkType: soft
+
 "@monorepo/chooz@workspace:apps/chooz":
   version: 0.0.0-use.local
   resolution: "@monorepo/chooz@workspace:apps/chooz"
@@ -1716,6 +1726,7 @@ __metadata:
   resolution: "@monorepo/jurumarble@workspace:apps/jurumarble"
   dependencies:
     "@emotion/is-prop-valid": ^1.2.1
+    "@mogakko/http-fetch": "workspace:*"
     "@monorepo/hooks": "workspace:*"
     "@monorepo/ui": "workspace:*"
     "@next/bundle-analyzer": 13.3.5-canary.9
