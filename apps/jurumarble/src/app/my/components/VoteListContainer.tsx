@@ -67,7 +67,7 @@ function VoteListContainer() {
 const Container = styled.section`
   ${({ theme }) => css`
     background-color: ${theme.colors.bg_02};
-    padding: 24px 20px;
+    padding: 24px 20px 80px 20px;
   `};
 `;
 
