@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import BottomBar from 'components/BottomBar';
 import Loading from 'components/Loading';
@@ -65,9 +65,12 @@ function VoteHomePage() {
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
-  const onMutateVoting = (select: 'A' | 'B') => {
-    mutate(select);
-  };
+  const onMutateVoting = useCallback(
+    (select: 'A' | 'B') => {
+      mutate(select);
+    },
+    [mutate],
+  );
 
   const moreRef = useRef<HTMLButtonElement>(null);
 

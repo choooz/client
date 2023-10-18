@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getVoteListAPI } from 'lib/apis/vote';
 import { reactQueryKeys } from 'lib/queryKeys';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { toast } from 'react-toastify';
 import { VoteSortType } from 'src/types/common';
 
 interface Props {
@@ -61,6 +62,9 @@ export default function useInfiniteMainListService({
 
   const onChangeNowShowing = (index: number) => {
     if (nowShowing + index < 0) {
+      toast.warning('가장 최근 투표예요', {
+        toastId: 'voteError',
+      });
       return;
     }
     if (nowShowing + index > mainVoteList.length - 1) {
