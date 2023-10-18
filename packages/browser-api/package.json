@@ -1,0 +1,18 @@
+{
+  "name": "@mogakko/browser-api",
+  "version": "0.1.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "eslint": "eslint -c .eslintrc.js  --ignore-path  ../../.eslintignore --ext .js,.jsx,.ts,.tsx . --cache",
+    "eslint:fix": "yarn eslint --fix"
+  },
+  "dependencies": {
+    "universal-cookie": "^4.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-mogakko": "workspace:*",
+    "typescript": "4.9.3"
+  }
+}

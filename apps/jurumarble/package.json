@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
+    "@mogakko/browser-api": "workspace:*",
     "@mogakko/http-fetch": "workspace:*",
     "@monorepo/hooks": "workspace:*",
     "@monorepo/ui": "workspace:*",
