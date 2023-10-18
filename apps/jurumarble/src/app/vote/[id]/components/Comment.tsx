@@ -238,7 +238,13 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
             onToggleNonWriterMenu();
           }}
           onReport={() => {
-            mutate(id);
+            mutate(id, {
+              onSuccess: () => {
+                toast.success('신고가 접수되었습니다.', {
+                  toastId: 'report',
+                });
+              },
+            });
             onToggleNonWriterMenu();
           }}
           right="20px"

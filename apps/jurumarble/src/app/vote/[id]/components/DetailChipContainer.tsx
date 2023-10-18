@@ -176,10 +176,6 @@ const FlexRow = styled.div`
 const Description = styled.div`
   padding-bottom: 20px;
   white-space: pre-wrap;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
   ${({ theme }) => theme.typography.body_long03}
   color: ${({ theme }) => theme.colors.black_02};
 `;

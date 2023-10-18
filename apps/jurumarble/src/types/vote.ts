@@ -30,6 +30,8 @@ export interface Content {
   titleB: string;
   region: string;
   createdAt: Date;
+  drinkAId: number;
+  drinkBId: number;
 }
 
 interface Pageable {

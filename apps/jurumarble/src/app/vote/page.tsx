@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import BottomBar from 'components/BottomBar';
 import Loading from 'components/Loading';
@@ -58,14 +58,19 @@ function VoteHomePage() {
     postedUserId,
     createdAt,
     voteType,
+    drinkAId,
+    drinkBId,
   } = mainVoteList[nowShowing] || {};
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const { mutate, select } = useExecuteVoteService(voteId);
-  const onMutateVoting = (select: 'A' | 'B') => {
-    mutate(select);
-  };
+  const onMutateVoting = useCallback(
+    (select: 'A' | 'B') => {
+      mutate(select);
+    },
+    [mutate],
+  );
 
   const moreRef = useRef<HTMLButtonElement>(null);
 
@@ -86,6 +91,24 @@ function VoteHomePage() {
     isLoading: isStatisticsLoading,
     isError: isStatisticsError,
   } = voteStatisticsQuery;
+
+  useEffect(() => {
+    // 상단 화살표키가 눌렸을 때 다음 페이지로 넘어가는 기능
+    const onKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowUp') {
+        onChangeNowShowing(-1);
+      } else if (e.key === 'ArrowDown') {
+        onChangeNowShowing(1);
+      } else if (e.key === 'ArrowLeft') {
+        onMutateVoting('A');
+      } else if (e.key === 'ArrowRight') {
+        onMutateVoting('B');
+      }
+    };
+
+    window.addEventListener('keydown', onKeyPress);
+    return () => window.removeEventListener('keydown', onKeyPress);
+  }, [onChangeNowShowing, onMutateVoting]);
 
   if (isLoading || isStatisticsLoading) {
     return <Loading />;
@@ -149,8 +172,8 @@ function VoteHomePage() {
               totalCountB={totalCountB}
               select={select.choice}
               onMutateVoting={onMutateVoting}
-              drinkAId={1}
-              drinkBId={1}
+              drinkAId={drinkAId}
+              drinkBId={drinkBId}
             />
             <MoreButton
               onClick={() => router.push(`vote/${voteId}`)}
@@ -162,6 +185,7 @@ function VoteHomePage() {
           <FirstPageBase className="animate2" drag={drag} />
           <SecondPageBase className="animate3" drag={drag} />
         </Container>
+        <EmptyBox />
       </Background>
       <BottomBar />
     </>
@@ -297,7 +321,7 @@ const MoreButton = styled.button`
   left: 50%;
   right: 50%;
   transform: translate(-50%, -50%);
-  bottom: -40px;
+  bottom: -60px;
   height: 40px;
   width: 94px;
   border-radius: 8px;
@@ -317,5 +341,10 @@ const ScrollImage = styled.div`
   bottom: 60px;
   right: 20px;
   z-index: 1600;
+`;
+
+const EmptyBox = styled.div`
+  width: 100%;
+  height: 174px;
 `;
 export default VoteHomePage;

@@ -8,12 +8,14 @@ interface Props {
   on: boolean;
   onToggleDrinkSearchModal: () => void;
   setChangeMapCenter: (lat: number, lng: number) => void;
+  onChangeNowIn: (nowIn: string) => void;
 }
 
 const RegionBottomSheet = ({
   on,
   onToggleDrinkSearchModal,
   setChangeMapCenter,
+  onChangeNowIn,
 }: Props) => {
   if (!on) {
     return null;
@@ -43,6 +45,7 @@ const RegionBottomSheet = ({
                 onClick={() => {
                   setChangeMapCenter(lat, long);
                   onToggleDrinkSearchModal();
+                  onChangeNowIn(label);
                 }}
               >
                 {label}

@@ -26,7 +26,7 @@ import useFilteredStatisticsService from './services/useFilterStatisticsService'
 import useVoteLoadService from './services/useVoteLoadService';
 
 const DynamicChipContainer = dynamic(
-  () => import('./components/ChipContainer'),
+  () => import('./components/DetailChipContainer'),
 );
 const DynamicVoteDescription = dynamic(
   () => import('./components/VoteDescription'),

@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getVoteListAPI } from 'lib/apis/vote';
 import { reactQueryKeys } from 'lib/queryKeys';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { toast } from 'react-toastify';
 import { VoteSortType } from 'src/types/common';
 
 interface Props {
@@ -18,7 +20,10 @@ export default function useInfiniteMainListService({
   sortBy,
   keyword,
 }: Props) {
-  const [nowShowing, setNowShowing] = useState(0);
+  const searchParams = useSearchParams();
+  const voteId = searchParams.get('voteId');
+  const { push } = useRouter();
+  const pathname = usePathname();
 
   const { data, isLoading, isError, fetchNextPage } = useInfiniteQuery(
     reactQueryKeys.mainVoteList(),
@@ -32,9 +37,23 @@ export default function useInfiniteMainListService({
         return pages.length;
       },
       keepPreviousData: true,
-      cacheTime: 1000 * 60 * 5,
+      cacheTime: Infinity,
+      staleTime: Infinity,
     },
   );
+
+  const datas = data?.pages.flatMap((page) => page.content) ?? [];
+
+  const getByIndex = (voteId: number) => {
+    if (!datas.length) {
+      return 0;
+    }
+    return datas?.findIndex((data) => data.voteId === voteId) > -1
+      ? datas?.findIndex((data) => data.voteId === voteId)
+      : 0;
+  };
+
+  const nowShowing = getByIndex(Number(voteId));
 
   const mainVoteList = useMemo(
     () => (data ? data.pages.flatMap((page) => page.content) : []),
@@ -43,12 +62,15 @@ export default function useInfiniteMainListService({
 
   const onChangeNowShowing = (index: number) => {
     if (nowShowing + index < 0) {
+      toast.warning('가장 최근 투표예요', {
+        toastId: 'voteError',
+      });
       return;
     }
     if (nowShowing + index > mainVoteList.length - 1) {
       return;
     }
-    setNowShowing((prev) => prev + index);
+    push(`${pathname}?voteId=${mainVoteList[nowShowing + index].voteId}`);
   };
 
   useEffect(() => {
