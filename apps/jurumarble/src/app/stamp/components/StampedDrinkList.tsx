@@ -10,12 +10,14 @@ interface Props {
   regionOption: string;
   onChangeRegionOption: (value: string) => void;
   drinkList: DrinkInfo[];
+  onToggleReplaceLoginPageModal: () => void;
 }
 
 function StampedDrinkList({
   regionOption,
   onChangeRegionOption,
   drinkList,
+  onToggleReplaceLoginPageModal,
 }: Props) {
   const router = useRouter();
 
@@ -33,6 +35,7 @@ function StampedDrinkList({
             onClickReplaceDrinkInfo={() =>
               router.push(`${Path.DRINK_INFO_PAGE}/${drink.id}`)
             }
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
         ))}
       </DrinkList>

@@ -5,6 +5,7 @@ import NonWriterBox from 'app/vote/components/NonWriterBox';
 import Chip from 'components/Chip';
 import Path from 'lib/Path';
 import { AorB } from 'lib/apis/vote';
+import { isLogin } from 'lib/utils/auth';
 import { formatDate } from 'lib/utils/formatDate';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
@@ -27,6 +28,7 @@ interface Props {
   postedUserId: number;
   voteId: number;
   select: AorB | null;
+  onToggleReplaceLoginPageModal: () => void;
 }
 
 const ChipContainer = ({
@@ -39,6 +41,7 @@ const ChipContainer = ({
   isBookmark,
   postedUserId,
   select,
+  onToggleReplaceLoginPageModal,
 }: Props) => {
   const { userInfo } = useGetUserInfo();
   const { onDelete } = useVoteDeleteService(voteId);
@@ -67,7 +70,9 @@ const ChipContainer = ({
               <SvgIcBookmarkActive
                 width={26}
                 height={26}
-                onClick={() => mutateBookMark()}
+                onClick={() =>
+                  isLogin() ? mutateBookMark() : onToggleReplaceLoginPageModal()
+                }
               />
             </SVGWrapper>
           ) : (
@@ -75,7 +80,9 @@ const ChipContainer = ({
               <SvgIcBookmark
                 width={20}
                 height={20}
-                onClick={() => mutateBookMark()}
+                onClick={() =>
+                  isLogin() ? mutateBookMark() : onToggleReplaceLoginPageModal()
+                }
               />
             </SVGWrapper>
           )}
