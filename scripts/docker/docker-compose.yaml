@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  jurumarble:
+    container_name: jurumarble
+    build:
+      context: .
+      dockerfile: ../../apps/jurumarble/Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ../..:/usr/src/app
+      - /usr/src/app/.next
+      - /usr/src/app/node_modules
+    command: sh -c "yarn workspace @monorepo/jurumarble dev"
