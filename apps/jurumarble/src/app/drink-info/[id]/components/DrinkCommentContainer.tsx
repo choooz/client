@@ -1,28 +1,34 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useQueryClient } from "@tanstack/react-query";
-import Comment from "app/vote/[id]/components/Comment";
-import CommentForm from "app/vote/[id]/components/CommentForm";
-import CommentToolBar from "app/vote/[id]/components/CommentToolbar";
-import useCommentServices from "app/vote/[id]/services/useCommentServices";
-import { queryKeys } from "lib/queryKeys";
-import { useParams } from "next/navigation";
-import styled from "styled-components";
+import { useQueryClient } from '@tanstack/react-query';
+import Comment from 'app/vote/[id]/components/Comment';
+import CommentForm from 'app/vote/[id]/components/CommentForm';
+import CommentToolBar from 'app/vote/[id]/components/CommentToolbar';
+import useCommentServices from 'app/vote/[id]/services/useCommentServices';
+import { queryKeys } from 'lib/queryKeys';
+import { useParams } from 'next/navigation';
+import styled from 'styled-components';
 
 function DrinkCommentContainer() {
   const params = useParams();
   const postId = params.id;
   const queryClient = useQueryClient();
-  const [sortBy, setSortBy] = useState<"ByTime" | "ByPopularity">("ByTime");
-  const onChangeFilter = (sort: "ByTime" | "ByPopularity") => {
+  const [sortBy, setSortBy] = useState<'ByTime' | 'ByPopularity'>('ByTime');
+  const onChangeFilter = (sort: 'ByTime' | 'ByPopularity') => {
     setSortBy(sort);
   };
 
   // const { commentFilter, onChangeCommentFilter } = useCommentFilter();
-  const { comments, isError, isLoading, mutateHate, mutateLike, mutateComment } =
-    useCommentServices(Number(postId), sortBy, "drinks");
+  const {
+    comments,
+    isError,
+    isLoading,
+    mutateHate,
+    mutateLike,
+    mutateComment,
+  } = useCommentServices(Number(postId), sortBy, 'drinks');
 
-  const [commentForm, setCommentForm] = useState("");
+  const [commentForm, setCommentForm] = useState('');
   const onChangeCommentForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentForm(e.target.value);
   };
@@ -35,14 +41,18 @@ function DrinkCommentContainer() {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
-          setCommentForm("");
+          setCommentForm('');
         },
       },
     );
   };
 
-  if (isError) {return <div>에러</div>;}
-  if (!comments) {return <div>데이터 없음</div>;}
+  if (isError) {
+    return <div>에러</div>;
+  }
+  if (!comments) {
+    return <div>데이터 없음</div>;
+  }
 
   const commentList = comments.pages.flatMap((page) => page.content);
 

@@ -1,6 +1,6 @@
-import { Button } from "components/button";
-import { transitions } from "lib/styles";
-import styled, { css } from "styled-components";
+import { Button } from 'components/button';
+import { transitions } from 'lib/styles';
+import styled, { css } from 'styled-components';
 
 interface Props {
   title: string;

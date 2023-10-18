@@ -1,5 +1,5 @@
-import { convertLevel } from "lib/utils/formatUserInfo";
-import styled from "styled-components";
+import { convertLevel } from 'lib/utils/formatUserInfo';
+import styled from 'styled-components';
 
 interface Props {
   alchol: string;
@@ -17,19 +17,19 @@ const Tag = styled.div<{ alchol: string }>`
 
   ${({ alchol }) => {
     switch (alchol) {
-      case "LOW":
+      case 'LOW':
         return `
         border: 1px solid #ebaf3c;
         background: rgba(255, 207, 83, 0.5);
         color: #ff8f0c;
         `;
-      case "MEDIUM":
+      case 'MEDIUM':
         return `
         border: 1px solid #04B014;
         background: rgba(100, 176, 4, 0.50);
         color: #00830C;
         `;
-      case "HIGH":
+      case 'HIGH':
         return `
         border: 1px solid var(--System_Red, #BC0F04);
         background: rgba(255, 88, 88, 0.50);

@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 const SvgIcMyLocation = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -10,9 +10,19 @@ const SvgIcMyLocation = (props: SVGProps<SVGSVGElement>) => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     {...props}
   >
-    <rect width={512} height={512} fill="currentColor" vectorEffect="non-scaling-stroke" />
+    <rect
+      width={512}
+      height={512}
+      fill="currentColor"
+      vectorEffect="non-scaling-stroke"
+    />
     <defs>
-      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
+      <pattern
+        id="pattern0"
+        patternContentUnits="objectBoundingBox"
+        width={1}
+        height={1}
+      >
         <use xlinkHref="#image0_19_107" transform="scale(0.00195312)" />
       </pattern>
       <image

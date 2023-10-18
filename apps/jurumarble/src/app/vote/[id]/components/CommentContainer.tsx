@@ -1,14 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "lib/queryKeys";
-import styled from "styled-components";
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from 'lib/queryKeys';
+import styled from 'styled-components';
 
 // import useCommentFilter from "../hooks/useCommentFilter";
-import Comment from "./Comment";
-import CommentForm from "./CommentForm";
-import CommentToolBar from "./CommentToolbar";
-import useCommentServices from "../services/useCommentServices";
+import Comment from './Comment';
+import CommentForm from './CommentForm';
+import CommentToolBar from './CommentToolbar';
+import useCommentServices from '../services/useCommentServices';
 
 interface Props {
   postId: number;
@@ -16,16 +16,22 @@ interface Props {
 
 function CommentContainer({ postId }: Props) {
   const queryClient = useQueryClient();
-  const [sortBy, setSortBy] = useState<"ByTime" | "ByPopularity">("ByTime");
-  const onChangeFilter = (sort: "ByTime" | "ByPopularity") => {
+  const [sortBy, setSortBy] = useState<'ByTime' | 'ByPopularity'>('ByTime');
+  const onChangeFilter = (sort: 'ByTime' | 'ByPopularity') => {
     setSortBy(sort);
   };
 
   // const { commentFilter, onChangeCommentFilter } = useCommentFilter();
-  const { comments, isError, isLoading, mutateHate, mutateLike, mutateComment } =
-    useCommentServices(postId, sortBy, "votes");
+  const {
+    comments,
+    isError,
+    isLoading,
+    mutateHate,
+    mutateLike,
+    mutateComment,
+  } = useCommentServices(postId, sortBy, 'votes');
 
-  const [commentForm, setCommentForm] = useState("");
+  const [commentForm, setCommentForm] = useState('');
   const onChangeCommentForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentForm(e.target.value);
   };
@@ -38,7 +44,7 @@ function CommentContainer({ postId }: Props) {
       {
         onSuccess: () => {
           queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
-          setCommentForm("");
+          setCommentForm('');
         },
       },
     );

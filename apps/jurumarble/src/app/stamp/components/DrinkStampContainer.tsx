@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import MyEnjoiedDrinkInfoSection from "./MyEnjoiedDrinkInfoSection";
-import StampedDrinkList from "./StampedDrinkList";
-import useDrinkStampService from "../service/useDrinkStampListService";
+import MyEnjoiedDrinkInfoSection from './MyEnjoiedDrinkInfoSection';
+import StampedDrinkList from './StampedDrinkList';
+import useDrinkStampService from '../service/useDrinkStampListService';
 
 function DrinkStampContainer() {
-  const [regionOption, setRegionOption] = useState("");
+  const [regionOption, setRegionOption] = useState('');
   const onChangeRegionOption = (value: string) => {
     setRegionOption(value);
   };
@@ -18,7 +18,9 @@ function DrinkStampContainer() {
 
   return (
     <>
-      <MyEnjoiedDrinkInfoSection numberOfStampedDrinks={numberOfStampedDrinks} />
+      <MyEnjoiedDrinkInfoSection
+        numberOfStampedDrinks={numberOfStampedDrinks}
+      />
       <StampedDrinkList
         regionOption={regionOption}
         onChangeRegionOption={onChangeRegionOption}

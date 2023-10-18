@@ -1,25 +1,29 @@
-"use client";
+'use client';
 
-import VoteHeader from "components/VoteHeader";
-import { Button } from "components/button";
-import { NotificationType } from "lib/apis/notification";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { DrinkImage } from "public/images";
-import { SvgIcPrevious, SvgNotificationCheck } from "src/assets/icons/components";
-import styled, { css, useTheme } from "styled-components";
+import VoteHeader from 'components/VoteHeader';
+import { Button } from 'components/button';
+import { NotificationType } from 'lib/apis/notification';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { DrinkImage } from 'public/images';
+import {
+  SvgIcPrevious,
+  SvgNotificationCheck,
+} from 'src/assets/icons/components';
+import styled, { css, useTheme } from 'styled-components';
 
-import useNotificationService from "./services/useNotificationService";
+import useNotificationService from './services/useNotificationService';
 
 const NOTIFICATION_TYPE: Record<NotificationType, string> = {
-  VOTE: "투표에 10명 이상이 참여했어요.",
-  COMMENT: "투표에 댓글이 달렸어요.",
-  ADMIN_NOTIFY: "관리자 알림",
+  VOTE: '투표에 10명 이상이 참여했어요.',
+  COMMENT: '투표에 댓글이 달렸어요.',
+  ADMIN_NOTIFY: '관리자 알림',
 };
 
 function NotificationPage() {
   const router = useRouter();
-  const { notificationList, isLoading, readNotification } = useNotificationService();
+  const { notificationList, isLoading, readNotification } =
+    useNotificationService();
   const { colors } = useTheme();
 
   return (
@@ -40,13 +44,17 @@ function NotificationPage() {
         <></>
       ) : !notificationList ? (
         <EmptyNotification>
-          <Image alt="" src={DrinkImage} style={{ borderRadius: "100px" }} />
+          <Image alt="" src={DrinkImage} style={{ borderRadius: '100px' }} />
           받은 알림이 없어요.
         </EmptyNotification>
       ) : (
         <NotificationList>
           {notificationList.map(({ content, createdAt, id, type, isRead }) => (
-            <NotificationItem key={id} isRead={isRead} onClick={() => readNotification(id)}>
+            <NotificationItem
+              key={id}
+              isRead={isRead}
+              onClick={() => readNotification(id)}
+            >
               <SvgNotificationCheck
                 width={32}
                 height={32}

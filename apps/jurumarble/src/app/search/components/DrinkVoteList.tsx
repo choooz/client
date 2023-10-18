@@ -1,8 +1,8 @@
-import { useSearchParams } from "next/navigation";
-import styled from "styled-components";
+import { useSearchParams } from 'next/navigation';
+import styled from 'styled-components';
 
-import DrinkVoteItem from "./DrinkVoteItem";
-import useVoteDrinkService from "../services/useVoteDrinkService";
+import DrinkVoteItem from './DrinkVoteItem';
+import useVoteDrinkService from '../services/useVoteDrinkService';
 
 interface Props {
   searchText: string;
@@ -13,7 +13,7 @@ interface Props {
 
 function DrinkVoteList({ searchText, sortOption, regionOption }: Props) {
   const searchParams = useSearchParams();
-  const selectedTab = searchParams.get("selectedTab");
+  const selectedTab = searchParams.get('selectedTab');
 
   const { voteDrinkList, subscribe } = useVoteDrinkService({
     page: 0,
@@ -32,7 +32,7 @@ function DrinkVoteList({ searchText, sortOption, regionOption }: Props) {
       {voteDrinkList.map((voteDrink, index) => (
         <DrinkVoteItem key={`drinkVoteItem_${index}`} voteDrink={voteDrink} />
       ))}
-      {selectedTab === "drinkVote" && <div ref={subscribe} />}
+      {selectedTab === 'drinkVote' && <div ref={subscribe} />}
     </Container>
   );
 }

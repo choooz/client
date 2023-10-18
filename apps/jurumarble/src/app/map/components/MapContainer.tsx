@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import { useToggle } from "@react-hookz/web";
-import DrinkItem from "app/stamp/components/DrinkItem";
-import Loading from "components/Loading";
-import { Button } from "components/button";
-import Image from "next/image";
-import { ExImg1 } from "public/images";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
-import SvgIcMyLocationFloating from "src/assets/icons/ic_my_location_floating.svg";
-import styled from "styled-components";
+import { useToggle } from '@react-hookz/web';
+import DrinkItem from 'app/stamp/components/DrinkItem';
+import Loading from 'components/Loading';
+import { Button } from 'components/button';
+import Image from 'next/image';
+import { ExImg1 } from 'public/images';
+import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import SvgIcMyLocationFloating from 'src/assets/icons/ic_my_location_floating.svg';
+import styled from 'styled-components';
 
-import RegionBottomSheet from "./RegionBottomsheet";
-import { useGeoLocation } from "../hooks/useGeoLocation";
-import useDrinksMapService from "../services/useDrinksMapService";
+import RegionBottomSheet from './RegionBottomsheet';
+import { useGeoLocation } from '../hooks/useGeoLocation';
+import useDrinksMapService from '../services/useDrinksMapService';
 
 const MapContainer = () => {
   const [delayRender, setDelayRender] = useState(true);
@@ -40,7 +40,7 @@ const MapContainer = () => {
     setTimeout(() => {
       toggleMap();
     }, 600);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { drinksList } = useDrinksMapService({
@@ -126,11 +126,11 @@ const MapContainer = () => {
         </div>
       </TopBox>
 
-      <div style={{ position: "relative", height: "375px" }}>
+      <div style={{ position: 'relative', height: '375px' }}>
         <Map // 지도를 표시할 Container
           id="map"
           onLoadStart={() => {
-            window.dispatchEvent(new Event("resize"));
+            window.dispatchEvent(new Event('resize'));
           }}
           onLoad={() => {
             mapRef.current?.getNode();
@@ -139,8 +139,8 @@ const MapContainer = () => {
           isPanto={state.isPanto}
           style={{
             // 지도의 크기
-            width: "100%",
-            height: "375px",
+            width: '100%',
+            height: '375px',
           }}
           ref={mapRef}
           level={state.level} // 지도의 확대 레벨
@@ -154,7 +154,7 @@ const MapContainer = () => {
                 lng: location.longitude,
               }}
               image={{
-                src: "https://elasticbeanstalk-ap-northeast-2-319210348301.s3.ap-northeast-2.amazonaws.com/static/f0bc29bd-c5a8-46ad-9012-e5401f0a1636pin.svg",
+                src: 'https://elasticbeanstalk-ap-northeast-2-319210348301.s3.ap-northeast-2.amazonaws.com/static/f0bc29bd-c5a8-46ad-9012-e5401f0a1636pin.svg',
                 size: {
                   width: 29,
                   height: 42,
@@ -173,7 +173,12 @@ const MapContainer = () => {
             />
           ))}
           <MyLocationButton onClick={toggleOnLocation}>
-            <Image src={SvgIcMyLocationFloating} width={40} height={40} alt="내위치 켜기" />
+            <Image
+              src={SvgIcMyLocationFloating}
+              width={40}
+              height={40}
+              alt="내위치 켜기"
+            />
           </MyLocationButton>
         </Map>
       </div>
@@ -185,21 +190,26 @@ const MapContainer = () => {
         />
       </FilterBox> */}
       <DrinkBox>
-        {drinksList.map(({ drinkId, name, latitude, longitude, image, manufacturer }, index) => (
-          <DrinkItem
-            key={`${drinkId}-${index}`}
-            drinkInfo={{
-              id: drinkId,
-              name: name,
-              manufacturer: manufacturer,
-              image: image || (ExImg1 as unknown as string),
-            }}
-            onClickReplaceDrinkInfo={() => {
-              setChangeMapCenter(latitude, longitude);
-            }}
-            selectedDrinkList={[]}
-          />
-        ))}
+        {drinksList.map(
+          (
+            { drinkId, name, latitude, longitude, image, manufacturer },
+            index,
+          ) => (
+            <DrinkItem
+              key={`${drinkId}-${index}`}
+              drinkInfo={{
+                id: drinkId,
+                name: name,
+                manufacturer: manufacturer,
+                image: image || (ExImg1 as unknown as string),
+              }}
+              onClickReplaceDrinkInfo={() => {
+                setChangeMapCenter(latitude, longitude);
+              }}
+              selectedDrinkList={[]}
+            />
+          ),
+        )}
       </DrinkBox>
       <RegionBottomSheet
         setChangeMapCenter={setChangeMapCenter}
@@ -252,7 +262,8 @@ const MyLocationButton = styled.div`
   height: 40px;
   background-color: white;
   border-radius: 50%;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4), 0px 8px 20px 0px rgba(235, 235, 235, 0.4);
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4),
+    0px 8px 20px 0px rgba(235, 235, 235, 0.4);
 `;
 
 export default MapContainer;

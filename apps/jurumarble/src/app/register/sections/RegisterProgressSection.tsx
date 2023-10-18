@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { ProgressBar } from "../components";
-import { useRegisterContext } from "../contexts";
+import { ProgressBar } from '../components';
+import { useRegisterContext } from '../contexts';
 
 export const RegisterProgressSection = () => {
   const { stepList, currentStepIndex } = useRegisterContext();

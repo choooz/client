@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { transitions } from "lib/styles";
-import styled from "styled-components";
+import { transitions } from 'lib/styles';
+import styled from 'styled-components';
 
-import Portal from "./Portal";
+import Portal from './Portal';
 
 interface ModalInnerStyled {
   width: `${number}px` | `${number}%`;
@@ -15,11 +15,21 @@ interface ModalTemplateProps extends ModalInnerStyled {
   onToggleModal: () => void;
 }
 
-function ModalTemplate({ width, height, children, onToggleModal, ...rest }: ModalTemplateProps) {
+function ModalTemplate({
+  width,
+  height,
+  children,
+  onToggleModal,
+  ...rest
+}: ModalTemplateProps) {
   return (
     <Portal selector="#portal">
       <ModalTemplateBlock onMouseDown={onToggleModal} {...rest}>
-        <ModalInner width={width} height={height} onMouseDown={(e) => e.stopPropagation()}>
+        <ModalInner
+          width={width}
+          height={height}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
           {children}
         </ModalInner>
         <ModalBackground />

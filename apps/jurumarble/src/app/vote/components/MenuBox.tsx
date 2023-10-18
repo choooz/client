@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 interface Props {
   onModify?: () => void;
@@ -7,7 +7,12 @@ interface Props {
   right?: string;
 }
 
-function ModifyDeleteButtonBox({ onModify, onDelete, top = "0", right = "0px" }: Props) {
+function ModifyDeleteButtonBox({
+  onModify,
+  onDelete,
+  top = '0',
+  right = '0px',
+}: Props) {
   return (
     <Container top={top} right={right}>
       <MenuText className="modify" onClick={onModify}>

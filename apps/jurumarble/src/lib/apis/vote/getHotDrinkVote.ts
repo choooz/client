@@ -1,4 +1,4 @@
-import { httpFetch } from "src/modules/httpFetch";
+import { httpFetch } from 'src/modules/httpFetch';
 
 interface GetHotDrinkVoteResponse {
   voteId: number;

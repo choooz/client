@@ -1,8 +1,8 @@
-import { UseMutateFunction } from "@tanstack/react-query";
-import Chip from "components/Chip";
-import SvgIcBookmark from "src/assets/icons/components/IcBookmark";
-import SvgIcBookmarkActive from "src/assets/icons/components/IcBookmarkActive";
-import styled from "styled-components";
+import { UseMutateFunction } from '@tanstack/react-query';
+import Chip from 'components/Chip';
+import SvgIcBookmark from 'src/assets/icons/components/IcBookmark';
+import SvgIcBookmarkActive from 'src/assets/icons/components/IcBookmarkActive';
+import styled from 'styled-components';
 
 interface Props {
   title: string;
@@ -12,7 +12,13 @@ interface Props {
   isBookmark: boolean;
 }
 
-const ChipContainer = ({ date, title, region, mutateBookMark, isBookmark }: Props) => {
+const ChipContainer = ({
+  date,
+  title,
+  region,
+  mutateBookMark,
+  isBookmark,
+}: Props) => {
   return (
     <>
       <TagRow>

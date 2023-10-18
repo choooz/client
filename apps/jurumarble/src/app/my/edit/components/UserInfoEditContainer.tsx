@@ -1,18 +1,19 @@
-import { useToggle } from "@monorepo/hooks";
-import { Button } from "components/button";
-import { GENDER } from "lib/constants";
-import useGetUserInfo from "services/useGetUserInfo";
-import styled, { css } from "styled-components";
+import { useToggle } from '@monorepo/hooks';
+import { Button } from 'components/button';
+import { GENDER } from 'lib/constants';
+import useGetUserInfo from 'services/useGetUserInfo';
+import styled, { css } from 'styled-components';
 
-import ImageUpload from "./ImageUpload";
-import SelectDrinkCapacity from "./SelectDrinkCapacity";
-import SelectMBTI from "./SelectMBTI";
-import WithdrawalModal from "./WithdrawalModal";
-import useEditProfileService from "../services/useEditProfileService";
+import ImageUpload from './ImageUpload';
+import SelectDrinkCapacity from './SelectDrinkCapacity';
+import SelectMBTI from './SelectMBTI';
+import WithdrawalModal from './WithdrawalModal';
+import useEditProfileService from '../services/useEditProfileService';
 
 function UserInfoEditContainer() {
   const { userInfo } = useGetUserInfo();
-  const { gender, yearOfBirth, alcoholLimit, imageUrl, mbti, nickname } = userInfo!;
+  const { gender, yearOfBirth, alcoholLimit, imageUrl, mbti, nickname } =
+    userInfo!;
 
   const {
     onUploadImage,
@@ -38,7 +39,11 @@ function UserInfoEditContainer() {
       <GenderAndAge>
         <GenderAndAgeBox>
           <H3>성별</H3>
-          <Input placeholder={gender === GENDER.MALE ? "남성" : "여성"} width="100%" disabled />
+          <Input
+            placeholder={gender === GENDER.MALE ? '남성' : '여성'}
+            width="100%"
+            disabled
+          />
         </GenderAndAgeBox>
         <GenderAndAgeBox>
           <H3>출생년도</H3>
@@ -49,7 +54,11 @@ function UserInfoEditContainer() {
       <SelectMBTI MBTI={mbti} onChangeMBTI={onChangeMBTI} />
       <WarningMessage>MBTI 수정시 2개월간 바꿀 수 없습니다.</WarningMessage>
       <FlexEnd>
-        <WithdrawalButton variant="outline" borderRadius="4px" onClick={onToggleWithdrawalModal}>
+        <WithdrawalButton
+          variant="outline"
+          borderRadius="4px"
+          onClick={onToggleWithdrawalModal}
+        >
           회원탈퇴
         </WithdrawalButton>
       </FlexEnd>

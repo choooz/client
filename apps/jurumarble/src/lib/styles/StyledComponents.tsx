@@ -1,14 +1,13 @@
-"use client";
+'use client';
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren } from 'react';
 
-import { theme } from "@monorepo/ui";
-import StyledComponentsRegistry from "lib/registory";
-import { ThemeProvider } from "styled-components";
+import { theme } from '@monorepo/ui';
+import StyledComponentsRegistry from 'lib/registory';
+import { ThemeProvider } from 'styled-components';
 
-import GlobalStyles from "./globalStyles";
-import { jurumarbleTheme } from "./theme";
-
+import GlobalStyles from './globalStyles';
+import { jurumarbleTheme } from './theme';
 
 function StyledComponents({ children }: PropsWithChildren) {
   const mergedTheme = {

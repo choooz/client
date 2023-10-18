@@ -3,11 +3,15 @@ import {
   KAKAO_LOGIN_REDIRECT_URL,
   NAVER_CLIENT_ID,
   NAVER_LOGIN_REDIRECT_URL,
-} from "lib/constants";
-import { transitions } from "lib/styles";
-import Link from "next/link";
-import { SvgIcThunder, SvgKakaoIcon, SvgNaverIcon } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+} from 'lib/constants';
+import { transitions } from 'lib/styles';
+import Link from 'next/link';
+import {
+  SvgIcThunder,
+  SvgKakaoIcon,
+  SvgNaverIcon,
+} from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
 const socialLoginLink = {
   KAKAO: `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_LOGIN_REDIRECT_URL}&response_type=code`,
@@ -58,7 +62,7 @@ const BalloonText = styled.div`
     animation: ${transitions.delaypopInFromBottom} 1.2s ease-in-out;
 
     ::after {
-      content: "";
+      content: '';
       position: absolute;
       top: 100%;
       left: 47%;

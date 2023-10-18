@@ -1,9 +1,9 @@
-import { SERVER_URL } from "lib/constants";
-import { VoteSortType } from "src/types/common";
-import { CommonVoteListResponse, Content } from "src/types/vote";
+import { SERVER_URL } from 'lib/constants';
+import { VoteSortType } from 'src/types/common';
+import { CommonVoteListResponse, Content } from 'src/types/vote';
 
-import { baseApi } from "./http/base";
-import { http } from "./http/http";
+import { baseApi } from './http/base';
+import { http } from './http/http';
 
 export interface GetVoteListRequest {
   keyword?: string;
@@ -24,8 +24,13 @@ interface GetVoteListResponse {
   empty: boolean;
 }
 
-export const getVoteListAPI = async ({ page, size, sortBy, keyword }: GetVoteListRequest) => {
-  const response = await baseApi.get<GetVoteListResponse>("api/votes", {
+export const getVoteListAPI = async ({
+  page,
+  size,
+  sortBy,
+  keyword,
+}: GetVoteListRequest) => {
+  const response = await baseApi.get<GetVoteListResponse>('api/votes', {
     params: {
       page,
       size,
@@ -52,8 +57,8 @@ export interface GetVoteByIdResponse {
   titleB: string;
   region: string;
   postedUserAge: string | null;
-  postedUserAlcoholLimit: "HIGH" | "MEDIUM" | "LOW" | null;
-  postedUserGender: "" | "";
+  postedUserAlcoholLimit: 'HIGH' | 'MEDIUM' | 'LOW' | null;
+  postedUserGender: '' | '';
   postedUserId: number;
   postedUserImageUrl: null;
   postedUserMbti: string | null;
@@ -63,7 +68,9 @@ export interface GetVoteByIdResponse {
 }
 
 export const getVoteByVoteIdAPI = async (voteId: number) => {
-  const response = await baseApi.get<GetVoteByIdResponse>(`api/votes/${voteId}`);
+  const response = await baseApi.get<GetVoteByIdResponse>(
+    `api/votes/${voteId}`,
+  );
   return response.data;
 };
 
@@ -80,9 +87,12 @@ interface ModifyVoteRequest {
   titleB: string;
 }
 
-export const modifyVoteAPI = async (newVoteInfo: ModifyVoteRequest, voteId: number) => {
+export const modifyVoteAPI = async (
+  newVoteInfo: ModifyVoteRequest,
+  voteId: number,
+) => {
   const response = await fetch(`${SERVER_URL}api/votes/${voteId}`, {
-    method: "PUT",
+    method: 'PUT',
     body: JSON.stringify({
       newVoteInfo,
     }),
@@ -101,7 +111,7 @@ export interface PostNormalVoteRequest {
 }
 
 export const postNormalVoteAPI = async (voteInfo: PostNormalVoteRequest) => {
-  const response = await http.post("api/votes/normal", voteInfo);
+  const response = await http.post('api/votes/normal', voteInfo);
   return response.data;
 };
 // export const postNormalVoteAPI = async (voteInfo: PostNormalVoteRequest) => {
@@ -123,7 +133,7 @@ export interface PostDrinkVoteRequest {
 }
 
 export const postDrinkVoteAPI = async (voteInfo: PostDrinkVoteRequest) => {
-  const response = await http.post("api/votes/drink", voteInfo);
+  const response = await http.post('api/votes/drink', voteInfo);
   return response.data;
 };
 
@@ -140,27 +150,35 @@ export interface GetVotetDrinkListResponse {
 }
 
 export const getVoteDrinkList = async (params: GetVoteDrinkListRequest) => {
-  const response = await baseApi.get<GetVotetDrinkListResponse>("api/votes/drinks", {
-    params: {
-      ...params,
+  const response = await baseApi.get<GetVotetDrinkListResponse>(
+    'api/votes/drinks',
+    {
+      params: {
+        ...params,
+      },
     },
-  });
+  );
   return response.data.voteSlice;
 };
 
-export const postExecuteVote = async (voteId: number, body: { choice: "A" | "B" | null }) => {
+export const postExecuteVote = async (
+  voteId: number,
+  body: { choice: 'A' | 'B' | null },
+) => {
   const response = await http.post(`api/votes/${voteId}/vote`, body);
   return response.data;
 };
 
-export type AorB = "A" | "B";
+export type AorB = 'A' | 'B';
 interface GetVotingCheckResponse {
   userChoice: AorB | null;
   voted: boolean;
 }
 
 export const getVotingCheck = async (voteId: number) => {
-  const response = await http.get<GetVotingCheckResponse>(`api/votes/${voteId}/voted`);
+  const response = await http.get<GetVotingCheckResponse>(
+    `api/votes/${voteId}/voted`,
+  );
   return response.data;
 };
 

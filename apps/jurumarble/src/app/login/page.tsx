@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import LoginPageHeader from "./components/LoginPageHeader";
-import LoginSection from "./components/LoginSection";
-import WelcomeSection from "./components/WelcomeSection";
+import LoginPageHeader from './components/LoginPageHeader';
+import LoginSection from './components/LoginSection';
+import WelcomeSection from './components/WelcomeSection';
 
 function LoginPage() {
   return (

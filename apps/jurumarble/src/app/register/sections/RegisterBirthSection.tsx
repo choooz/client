@@ -1,20 +1,30 @@
-import { media, transitions } from "lib/styles";
-import styled, { css } from "styled-components";
+import { media, transitions } from 'lib/styles';
+import styled, { css } from 'styled-components';
 
-import { NumberPad, NumberPadTypes } from "../constants";
-import { useRegisterContext } from "../contexts";
+import { NumberPad, NumberPadTypes } from '../constants';
+import { useRegisterContext } from '../contexts';
 
 export const RegisterBirthSection = () => {
-  const { yearOfBirth, onChangeYearOfBirth, onDeleteYearOfBirth } = useRegisterContext();
+  const { yearOfBirth, onChangeYearOfBirth, onDeleteYearOfBirth } =
+    useRegisterContext();
 
   return (
     <Container>
       <InputBox>
-        <Input type="text" inputMode="none" placeholder="0" value={yearOfBirth ?? ""} /> 년도
+        <Input
+          type="text"
+          inputMode="none"
+          placeholder="0"
+          value={yearOfBirth ?? ''}
+        />{' '}
+        년도
       </InputBox>
       <NumberBox>
         {NumberPad.map((number: NumberPadTypes) => (
-          <NumberButton key={number} onClick={() => onChangeYearOfBirth(number)}>
+          <NumberButton
+            key={number}
+            onClick={() => onChangeYearOfBirth(number)}
+          >
             {number}
           </NumberButton>
         ))}

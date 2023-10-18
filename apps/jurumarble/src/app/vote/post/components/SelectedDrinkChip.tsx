@@ -1,5 +1,5 @@
-import SvgIcX from "src/assets/icons/components/IcX";
-import styled, { css } from "styled-components";
+import SvgIcX from 'src/assets/icons/components/IcX';
+import styled, { css } from 'styled-components';
 
 interface Props {
   children: React.ReactNode;

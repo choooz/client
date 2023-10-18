@@ -1,13 +1,19 @@
-import { Button, ModalTemplate } from "components/index";
-import { ALCOHOL_LEVEL_LIST, GENDER_LIST } from "lib/constants";
-import { SvgWarningIcon } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import { Button, ModalTemplate } from 'components/index';
+import { ALCOHOL_LEVEL_LIST, GENDER_LIST } from 'lib/constants';
+import { SvgWarningIcon } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
-import { useRegisterContext } from "../contexts";
+import { useRegisterContext } from '../contexts';
 
 function WarningModal() {
-  const { drinkCapacity, gender, stringfiedMBTI, yearOfBirth, addUser, onToggleWarningModal } =
-    useRegisterContext();
+  const {
+    drinkCapacity,
+    gender,
+    stringfiedMBTI,
+    yearOfBirth,
+    addUser,
+    onToggleWarningModal,
+  } = useRegisterContext();
 
   const drinkCapacityLevel =
     drinkCapacity === ALCOHOL_LEVEL_LIST[0].id
@@ -17,7 +23,11 @@ function WarningModal() {
       : 2;
 
   return (
-    <ModalTemplate width="335px" height="510px" onToggleModal={onToggleWarningModal}>
+    <ModalTemplate
+      width="335px"
+      height="510px"
+      onToggleModal={onToggleWarningModal}
+    >
       <Container>
         <SvgWarningIcon width="56px" height="56px" />
         <GuideText>선택하신 항목을 확인해주세요.</GuideText>
@@ -43,7 +53,8 @@ function WarningModal() {
           </ListItem>
         </UserInfoList>
         <WarningText>
-          ※ 성별과 출생년도는 추후 변경할 수 없으며, MBTI는 설정 후 2개월마다 수정 가능합니다.
+          ※ 성별과 출생년도는 추후 변경할 수 없으며, MBTI는 설정 후 2개월마다
+          수정 가능합니다.
         </WarningText>
         <ButtonContainer>
           <CancelButton
@@ -54,7 +65,12 @@ function WarningModal() {
           >
             취소
           </CancelButton>
-          <CompleteButton width="100%" height="56px" border-radius="10px" onClick={addUser}>
+          <CompleteButton
+            width="100%"
+            height="56px"
+            border-radius="10px"
+            onClick={addUser}
+          >
             확인
           </CompleteButton>
         </ButtonContainer>

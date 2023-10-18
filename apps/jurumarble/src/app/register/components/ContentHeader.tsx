@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 interface ContentHeaderProps {
   title: string;
@@ -8,7 +8,11 @@ interface ContentHeaderProps {
   className?: string;
 }
 
-export const ContentHeader = ({ title, subTitle, className }: ContentHeaderProps) => {
+export const ContentHeader = ({
+  title,
+  subTitle,
+  className,
+}: ContentHeaderProps) => {
   return (
     <Wrapper className={className}>
       <Title>{title}</Title>

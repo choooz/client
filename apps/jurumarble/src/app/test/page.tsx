@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-import Path from "lib/Path";
-import { getTestUserAPI, getUserInfoAPI } from "lib/apis/user";
-import userStorage from "lib/utils/userStorage";
-import { useRouter } from "next/navigation";
+import Path from 'lib/Path';
+import { getTestUserAPI, getUserInfoAPI } from 'lib/apis/user';
+import userStorage from 'lib/utils/userStorage';
+import { useRouter } from 'next/navigation';
 
 // const getQuery = [queryKeys.LOGIN_INFO];
 
@@ -31,7 +31,7 @@ function TestPage() {
           router.push(Path.REGISTER_PAGE);
         }
       } catch (error) {
-        alert("에러가 발생하였습니다.");
+        alert('에러가 발생하였습니다.');
       }
     };
     testUserLogin();
@@ -42,7 +42,7 @@ function TestPage() {
     //     router.replace(Path.REGISTER_PAGE);
     //   }
     // }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <>잠시만 기다려주십시오.</>;

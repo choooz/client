@@ -1,37 +1,37 @@
-"use client";
+'use client';
 
-import Path from "lib/Path";
-import { usePathname, useRouter } from "next/navigation";
-import SvgIcCheck from "src/assets/icons/components/IcCheck";
-import SvgIcHome from "src/assets/icons/components/IcHome";
-import SvgIcMapPin from "src/assets/icons/components/IcMapPin";
-import SvgIcMark from "src/assets/icons/components/IcMark";
-import SvgIcUser from "src/assets/icons/components/IcUser";
-import styled from "styled-components";
+import Path from 'lib/Path';
+import { usePathname, useRouter } from 'next/navigation';
+import SvgIcCheck from 'src/assets/icons/components/IcCheck';
+import SvgIcHome from 'src/assets/icons/components/IcHome';
+import SvgIcMapPin from 'src/assets/icons/components/IcMapPin';
+import SvgIcMark from 'src/assets/icons/components/IcMark';
+import SvgIcUser from 'src/assets/icons/components/IcUser';
+import styled from 'styled-components';
 
 const NAVIGATION_LIST = [
   {
-    name: "홈",
+    name: '홈',
     path: Path.MAIN_PAGE,
     icon: <SvgIcHome width={24} height={24} />,
   },
   {
-    name: "술도장",
+    name: '술도장',
     path: Path.STAMP_PAGE,
     icon: <SvgIcMark width={24} height={24} />,
   },
   {
-    name: "투표",
+    name: '투표',
     path: Path.VOTE_HOME,
     icon: <SvgIcCheck width={24} height={24} />,
   },
   {
-    name: "술지도",
+    name: '술지도',
     path: Path.DRINK_MAP_PAGE,
     icon: <SvgIcMapPin width={24} height={24} />,
   },
   {
-    name: "마이",
+    name: '마이',
     path: Path.MY_PAGE,
     icon: <SvgIcUser width={24} height={24} />,
   },
@@ -47,7 +47,11 @@ function BottomBar() {
         <Inner>
           {NAVIGATION_LIST.map(({ icon, name, path }) => {
             return (
-              <BarItem key={name} isActive={pathName === path} onClick={() => router.push(path)}>
+              <BarItem
+                key={name}
+                isActive={pathName === path}
+                onClick={() => router.push(path)}
+              >
                 {icon}
                 <span>{name}</span>
               </BarItem>
@@ -84,7 +88,8 @@ const BarItem = styled.div<{ isActive: boolean }>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${({ isActive, theme }) => (isActive ? theme.colors.black_01 : theme.colors.black_05)};
+  color: ${({ isActive, theme }) =>
+    isActive ? theme.colors.black_01 : theme.colors.black_05};
   cursor: pointer;
 `;
 

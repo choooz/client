@@ -1,27 +1,29 @@
-import { useInfiniteScroll } from "@monorepo/hooks";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getMyParticipatedVoteList } from "lib/apis/my";
-import { queryKeys } from "lib/queryKeys";
+import { useInfiniteScroll } from '@monorepo/hooks';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { getMyParticipatedVoteList } from 'lib/apis/my';
+import { queryKeys } from 'lib/queryKeys';
 
 type GetMyParticipatedVoteListServiceProps = Exclude<
   Parameters<typeof getMyParticipatedVoteList>[0],
   undefined
 >;
 
-const getMyParticipateVotedQueryKey = (params: GetMyParticipatedVoteListServiceProps) => [
-  queryKeys.MY_PARTICIPATED_VOTE,
-  params,
-];
+const getMyParticipateVotedQueryKey = (
+  params: GetMyParticipatedVoteListServiceProps,
+) => [queryKeys.MY_PARTICIPATED_VOTE, params];
 
 export default function useGetMyParticipatedVoteListService(
   params: GetMyParticipatedVoteListServiceProps,
 ) {
   const { data, fetchNextPage } = useInfiniteQuery(
     getMyParticipateVotedQueryKey(params),
-    ({ pageParam }) => getMyParticipatedVoteList({ ...params, page: pageParam?.page || 0 }),
+    ({ pageParam }) =>
+      getMyParticipatedVoteList({ ...params, page: pageParam?.page || 0 }),
     {
       getNextPageParam: ({ last, number }) => {
-        if (last) {return undefined;}
+        if (last) {
+          return undefined;
+        }
         return {
           page: number + 1,
         };

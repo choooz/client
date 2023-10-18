@@ -1,9 +1,9 @@
-import SvgIcCamera from "src/assets/icons/components/IcCamera";
-import styled, { css, useTheme } from "styled-components";
+import SvgIcCamera from 'src/assets/icons/components/IcCamera';
+import styled, { css, useTheme } from 'styled-components';
 
 interface Props {
-  width: `${number}px` | `${number}%` | "auto";
-  height: `${number}px` | `${number}%` | "auto";
+  width: `${number}px` | `${number}%` | 'auto';
+  height: `${number}px` | `${number}%` | 'auto';
 }
 
 function ImageUploadButton({ width, height }: Props) {

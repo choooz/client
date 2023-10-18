@@ -1,9 +1,9 @@
-import { useId } from "react";
+import { useId } from 'react';
 
-import { useOutsideClick, useToggle } from "@monorepo/hooks";
-import { MBTI_LIST } from "lib/constants";
-import { SvgArrowDown } from "src/assets/icons/components";
-import styled, { css } from "styled-components";
+import { useOutsideClick, useToggle } from '@monorepo/hooks';
+import { MBTI_LIST } from 'lib/constants';
+import { SvgArrowDown } from 'src/assets/icons/components';
+import styled, { css } from 'styled-components';
 
 interface Props {
   MBTI: string;
@@ -73,7 +73,7 @@ const SelectStyled = styled.div<{ isOpen: boolean }>`
       color: ${theme.colors.black_01};
     }
     svg {
-      ${isOpen && "transform: rotateX( 180deg )"}
+      ${isOpen && 'transform: rotateX( 180deg )'}
     }
   `}
 `;
@@ -95,7 +95,8 @@ const Ul = styled.ul`
   margin: 32px 0;
   background: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.line_01};
-  box-shadow: 4px 8px 28px 0px rgba(0, 0, 0, 0.08), 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 4px 8px 28px 0px rgba(0, 0, 0, 0.08),
+    0px 4px 12px 0px rgba(0, 0, 0, 0.16);
   position: absolute;
   bottom: 24px;
   width: 100%;
