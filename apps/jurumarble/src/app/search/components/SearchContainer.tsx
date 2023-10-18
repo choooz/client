@@ -1,8 +1,10 @@
 'use client';
 
+import { useToggle } from '@monorepo/hooks';
 import { useDebouncedCallback } from '@react-hookz/web';
 import BottomBar from 'components/BottomBar';
 import DivideLine from 'components/DivideLine';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
 import SearchInput from 'components/SearchInput';
 import { Button } from 'components/button';
 import { useCreateQueryString } from 'hooks/useCreateQueryString';
@@ -37,6 +39,8 @@ type TabList = (typeof TAB_LIST)[number]['id'];
  */
 
 function SearchContainer() {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -101,6 +105,7 @@ function SearchContainer() {
             sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab('total')}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
           <MoreButton
             variant="outline"
@@ -123,6 +128,7 @@ function SearchContainer() {
             sortOption={drinkVoteSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab('total')}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
           <MoreButton
             variant="outline"
@@ -157,6 +163,7 @@ function SearchContainer() {
             sortOption={drinkInfoSortOption}
             regionOption={regionOption}
             isSelectedTab={false}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
         </>
       ),
@@ -182,6 +189,7 @@ function SearchContainer() {
             sortOption={drinkVoteSortOption}
             regionOption={regionOption}
             isSelectedTab={isSelectedTab('total')}
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
           />
         </>
       ),
@@ -215,6 +223,11 @@ function SearchContainer() {
       </TopSection>
       {isSelectedTab('total') && <DivideLine />}
       <BottomSection>{bottomSectionItem}</BottomSection>
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
       <BottomBar />
     </>
   );

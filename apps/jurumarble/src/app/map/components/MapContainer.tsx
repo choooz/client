@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useToggle } from '@react-hookz/web';
 import DrinkItem from 'app/stamp/components/DrinkItem';
 import Loading from 'components/Loading';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
 import { Button } from 'components/button';
 import Image from 'next/image';
 import { ExImg1 } from 'public/images';
@@ -21,6 +22,8 @@ interface Location {
 }
 
 const MapContainer = () => {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
+
   const [delayRender, setDelayRender] = useState(true);
   const [nowIn, setNowIn] = useState('');
 
@@ -267,6 +270,7 @@ const MapContainer = () => {
                 setChangeMapCenter(latitude, longitude);
               }}
               selectedDrinkList={[]}
+              onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
             />
           ),
         )}
@@ -278,6 +282,11 @@ const MapContainer = () => {
         on={on}
         onChangeNowIn={onChangeNowIn}
       />
+      {isReplaceLoginPageModal && (
+        <ReplaceLoginPageModal
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+        />
+      )}
     </Container>
   );
 };

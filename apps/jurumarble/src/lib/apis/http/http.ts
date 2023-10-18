@@ -45,6 +45,9 @@ axiosInstance.interceptors.response.use(
         logout();
 
         break;
+      case 404:
+        toast.error(error.response.data.message);
+        throw new Error(error.response.data.message);
 
       case 409:
         throw new Error(error.response.data.message);

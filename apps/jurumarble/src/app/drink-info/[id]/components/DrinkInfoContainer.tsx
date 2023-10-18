@@ -1,7 +1,11 @@
+import { useToggle } from '@monorepo/hooks';
 import Chip from 'components/Chip';
 import Loading from 'components/Loading';
+import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
 import VoteHeader from 'components/VoteHeader';
 import { Button } from 'components/button';
+import Path from 'lib/Path';
+import { isLogin } from 'lib/utils/auth';
 import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import useDrinkStampService from 'services/useDrinkStampService';
@@ -15,6 +19,8 @@ import styled, { css, useTheme } from 'styled-components';
 import useDrinkLoadService from '../services/useDrinkLoadService';
 
 const DrinkInfoContainer = () => {
+  const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
+
   const router = useRouter();
   const params = useParams();
   const { id } = params;
@@ -59,7 +65,7 @@ const DrinkInfoContainer = () => {
             </PreviousButton>
           }
           rightButton={
-            <PreviousButton onClick={() => router.back()}>
+            <PreviousButton onClick={() => router.push(Path.SEARCH_PAGE)}>
               <SvgHeaderSearch width={24} height={24} />
             </PreviousButton>
           }
@@ -89,12 +95,15 @@ const DrinkInfoContainer = () => {
               {enjoyCount}명이 즐겼어요
             </Chip>
           </FlexRow>
-          <SvgStamp
-            onClick={() => postDrinkEnjoy(Number(id))}
-            width={24}
-            height={24}
-            fill={stampColor}
-          />
+          <button
+            onClick={() =>
+              isLogin()
+                ? postDrinkEnjoy(Number(id))
+                : onToggleReplaceLoginPageModal()
+            }
+          >
+            <SvgStamp width={24} height={24} fill={stampColor} />
+          </button>
         </FlexBetweenRow>
         <TitleBox>
           <div className="title">{name}</div>
@@ -127,6 +136,11 @@ const DrinkInfoContainer = () => {
             <div className="content">{manufactureAddress}도</div>
           </DescriptionRow>
         </DescriptionBox>
+        {isReplaceLoginPageModal && (
+          <ReplaceLoginPageModal
+            onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
+          />
+        )}
       </Container>
     </>
   );

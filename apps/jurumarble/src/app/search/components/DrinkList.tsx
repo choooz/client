@@ -11,9 +11,15 @@ interface Props {
   sortOption: DrinkInfoSortType;
   regionOption: string;
   isSelectedTab: boolean;
+  onToggleReplaceLoginPageModal: () => void;
 }
 
-function DrinkList({ searchText, sortOption, regionOption }: Props) {
+function DrinkList({
+  searchText,
+  sortOption,
+  regionOption,
+  onToggleReplaceLoginPageModal,
+}: Props) {
   const searchParams = useSearchParams();
   const selectedTab = searchParams.get('selectedTab');
 
@@ -41,6 +47,7 @@ function DrinkList({ searchText, sortOption, regionOption }: Props) {
           key={drinkInfo.id}
           drinkInfo={drinkInfo}
           onClickDrinkItem={() => onClickDrinkItem(drinkInfo.id)}
+          onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
         />
       ))}
       {selectedTab === 'drinkInfo' && <div ref={subscribe} />}

@@ -1,4 +1,5 @@
 import Path from 'lib/Path';
+import { isLogin } from 'lib/utils/auth';
 import { useRouter } from 'next/navigation';
 import useBookmarkService from 'services/useBookmarkService';
 import { Content } from 'src/types/vote';
@@ -9,12 +10,13 @@ import VoteDescription from './VoteDescription';
 
 interface Props {
   voteDrink: Content;
+  onToggleReplaceLoginPageModal: () => void;
 }
 /**
  *
  * @Todo 타입 더 깔끔하게 정의 필요
  */
-function DrinkVoteItem({ voteDrink }: Props) {
+function DrinkVoteItem({ voteDrink, onToggleReplaceLoginPageModal }: Props) {
   const { voteId, region, title, imageA, imageB, votedCount } = voteDrink;
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
@@ -30,7 +32,9 @@ function DrinkVoteItem({ voteDrink }: Props) {
         title={title}
         date="20.08.22"
         region={region}
-        mutateBookMark={mutateBookMark}
+        mutateBookMark={() => {
+          isLogin() ? mutateBookMark() : onToggleReplaceLoginPageModal();
+        }}
         isBookmark={isBookmark}
         votedCount={votedCount}
       />

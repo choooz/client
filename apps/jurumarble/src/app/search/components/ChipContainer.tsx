@@ -33,13 +33,19 @@ const ChipContainer = ({
             <SvgIcBookmarkActive
               width={20}
               height={20}
-              onClick={() => mutateBookMark()}
+              onClick={(e) => {
+                e.stopPropagation();
+                mutateBookMark();
+              }}
             />
           ) : (
             <SvgIcBookmark
               width={20}
               height={20}
-              onClick={() => mutateBookMark()}
+              onClick={(e) => {
+                e.stopPropagation();
+                mutateBookMark();
+              }}
             />
           )}
         </FlexRow>
