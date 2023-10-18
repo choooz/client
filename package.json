@@ -3,7 +3,11 @@
   "private": true,
   "scripts": {
     "chooz": "yarn workspace @monorepo/chooz",
-    "juma": "yarn workspace @monorepo/jurumarble"
+    "juma": "yarn workspace @monorepo/jurumarble",
+    "eslint": "yarn workspaces foreach -pi run eslint",
+    "eslint:fix": "yarn workspaces foreach -pi run eslint:fix --cache",
+    "prettier": "yarn workspaces foreach -pi run prettier",
+    "prettier:fix": "yarn workspaces foreach -pi run prettier:fix --cache"
   },
   "workspaces": {
     "packages": [
