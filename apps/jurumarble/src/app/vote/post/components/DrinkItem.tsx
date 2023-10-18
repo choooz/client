@@ -11,7 +11,7 @@ interface Props {
 }
 
 function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
-  const { name, manufacturer, image } = drinkInfo;
+  const { name, manufacturer, image, region, enjoyCount } = drinkInfo;
 
   const isInclude = (selectedDrink: DrinkInfoType) =>
     selectedDrink.id === drinkInfo.id;
@@ -31,8 +31,8 @@ function DrinkItem({ drinkInfo, onClickAddDrink, selectedDrinkList }: Props) {
         </NameStampContainer>
         <ManufacturerName>{manufacturer}</ManufacturerName>
         <ChipContainer>
-          <Chip variant="region">서울</Chip>
-          <Chip variant="numberOfParticipants">213명이 즐겼어요</Chip>
+          <Chip variant="region">{region}</Chip>
+          <Chip variant="numberOfParticipants">{enjoyCount}명이 즐겼어요</Chip>
         </ChipContainer>
       </InfoContainer>
     </Container>
