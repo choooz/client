@@ -9,3 +9,4 @@ export { default as DrinkCapacityLow } from './DrinkCapacityLow.png';
 export { default as DrinkCapacityMedium } from './DrinkCapacityMedium.png';
 export { default as DrinkCapacityHigh } from './DrinkCapacityHigh.png';
 export { default as ImgScroll } from './ImgScroll.png';
+export { default as restaurantImg } from './restaurantImg.png';
