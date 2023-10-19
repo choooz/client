@@ -47,16 +47,28 @@ function VoteListContainer() {
       />
       <Container>
         <VoteList>
-          {myVoteList.map(({ voteId, region, title, imageA, imageB }) => (
-            <VoteItem
-              key={voteId}
-              voteId={voteId}
-              region={region}
-              title={title}
-              imageA={imageA}
-              imageB={imageB}
-            />
-          ))}
+          {myVoteList.map(
+            ({
+              voteId,
+              region,
+              title,
+              imageA,
+              imageB,
+              votedCount,
+              createdAt,
+            }) => (
+              <VoteItem
+                key={voteId}
+                voteId={voteId}
+                region={region}
+                title={title}
+                imageA={imageA}
+                imageB={imageB}
+                votedCount={votedCount}
+                createdAt={createdAt}
+              />
+            ),
+          )}
         </VoteList>
         <div ref={subscribe} />
       </Container>

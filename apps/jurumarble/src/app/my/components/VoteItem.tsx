@@ -7,9 +7,26 @@ import styled, { css } from 'styled-components';
 import ChipContainer from './ChipContainer';
 import VoteDescription from './VoteDescription';
 
-type Props = Pick<Content, 'voteId' | 'region' | 'title' | 'imageA' | 'imageB'>;
+type Props = Pick<
+  Content,
+  | 'voteId'
+  | 'region'
+  | 'title'
+  | 'imageA'
+  | 'imageB'
+  | 'votedCount'
+  | 'createdAt'
+>;
 
-function VoteItem({ voteId, region, title, imageA, imageB }: Props) {
+function VoteItem({
+  voteId,
+  region,
+  title,
+  imageA,
+  imageB,
+  votedCount,
+  createdAt,
+}: Props) {
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
   const router = useRouter();
@@ -25,6 +42,8 @@ function VoteItem({ voteId, region, title, imageA, imageB }: Props) {
         region={region}
         mutateBookMark={mutateBookMark}
         isBookmark={isBookmark}
+        votedCount={votedCount}
+        createdAt={createdAt}
       />
       <VoteDescription imageA={imageA} imageB={imageB} />
     </Container>

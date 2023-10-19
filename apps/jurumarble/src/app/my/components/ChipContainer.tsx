@@ -1,5 +1,6 @@
 import { UseMutateFunction } from '@tanstack/react-query';
 import Chip from 'components/Chip';
+import { formatDate } from 'lib/utils/formatDate';
 import SvgIcBookmark from 'src/assets/icons/components/IcBookmark';
 import SvgIcBookmarkActive from 'src/assets/icons/components/IcBookmarkActive';
 import styled from 'styled-components';
@@ -10,21 +11,24 @@ interface Props {
   region: string;
   mutateBookMark: UseMutateFunction;
   isBookmark: boolean;
+  votedCount: number;
+  createdAt: string;
 }
 
 const ChipContainer = ({
-  date,
   title,
   region,
   mutateBookMark,
   isBookmark,
+  votedCount,
+  createdAt,
 }: Props) => {
   return (
     <>
       <TagRow>
         <FlexRow>
           {region && <Chip variant="region">{region}</Chip>}
-          <Chip variant="numberOfParticipants">122명이 즐겼어요</Chip>
+          <Chip variant="numberOfParticipants">{votedCount}명이 참여중</Chip>
         </FlexRow>
         <FlexRow>
           {isBookmark ? (
@@ -48,11 +52,8 @@ const ChipContainer = ({
           )}
         </FlexRow>
       </TagRow>
-      <TitleRow>
-        {title}
-        {/* <DateText>{date.slice(0, 10)}</DateText> */}
-      </TitleRow>
-      <DateText>{date}</DateText>
+      <TitleRow>{title}</TitleRow>
+      <DateText>{formatDate(createdAt)}</DateText>
     </>
   );
 };
