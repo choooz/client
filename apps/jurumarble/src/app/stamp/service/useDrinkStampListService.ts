@@ -22,7 +22,8 @@ export default function useDrinkStampListService(params: DrinkStampListProps) {
         page: pageParam?.page || params.page,
       }),
     {
-      getNextPageParam: ({ last, number }) => {
+      getNextPageParam: ({ drinkData }) => {
+        const { last, number } = drinkData;
         if (last) {
           return undefined;
         }
@@ -34,11 +35,11 @@ export default function useDrinkStampListService(params: DrinkStampListProps) {
     },
   );
 
-  const numberOfStampedDrinks = data?.pages[0].numberOfElements ?? 0;
+  const enjoyedDrinkCount = data?.pages[0].enjoyedDrinkCount ?? 0;
 
-  const drinkList = data?.pages.flatMap((page) => page.content) ?? [];
+  const drinkList = data?.pages.flatMap((page) => page.drinkData.content) ?? [];
 
   const [subscribe] = useInfiniteScroll(fetchNextPage);
 
-  return { drinkList, fetchNextPage, subscribe, numberOfStampedDrinks };
+  return { drinkList, fetchNextPage, subscribe, enjoyedDrinkCount };
 }

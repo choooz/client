@@ -42,7 +42,12 @@ interface GetEnjoyedDrinkListRequest {
   region?: string;
 }
 
-export interface GetEnjoyedDrinkListResponse extends DrinkListResponse {}
+interface DrinkData extends DrinkListResponse {}
+
+interface GetEnjoyedDrinkListResponse {
+  drinkData: DrinkData;
+  enjoyedDrinkCount: number;
+}
 
 export const getEnjoyedDrinkList = async (
   params: GetEnjoyedDrinkListRequest,

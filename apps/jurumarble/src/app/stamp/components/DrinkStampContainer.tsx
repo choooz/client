@@ -15,7 +15,7 @@ function DrinkStampContainer() {
     setRegionOption(value);
   };
 
-  const { drinkList, subscribe, numberOfStampedDrinks } = useDrinkStampService({
+  const { drinkList, subscribe, enjoyedDrinkCount } = useDrinkStampService({
     page: 0,
     size: 10,
     region: regionOption,
@@ -23,9 +23,7 @@ function DrinkStampContainer() {
 
   return (
     <>
-      <MyEnjoiedDrinkInfoSection
-        numberOfStampedDrinks={numberOfStampedDrinks}
-      />
+      <MyEnjoiedDrinkInfoSection enjoyedDrinkCount={enjoyedDrinkCount} />
       <StampedDrinkList
         regionOption={regionOption}
         onChangeRegionOption={onChangeRegionOption}

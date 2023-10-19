@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Path from 'lib/Path';
 import { modifyDrinkVoteAPI, modifyNormalVoteAPI } from 'lib/apis/vote';
-import { queryKeys } from 'lib/queryKeys';
+import { queryKeys, reactQueryKeys } from 'lib/queryKeys';
 import { useParams, useRouter } from 'next/navigation';
 import { DrinkInfoType } from 'src/types/drink';
 import { PostVoteType } from 'src/types/vote';
@@ -27,7 +27,8 @@ export default function useUpdateVoteForm() {
   const queryClient = useQueryClient();
 
   const params = useParams();
-  const { data } = useVoteLoadService(Number(params.id));
+  const voteId = Number(params.id);
+  const { data } = useVoteLoadService(voteId);
 
   const [postVoteInfo, setPostVoteInfo] = useState<PostVoteType>({
     detail: '',
@@ -89,6 +90,7 @@ export default function useUpdateVoteForm() {
       onSuccess: () => {
         queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
         queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
+        queryClient.invalidateQueries(reactQueryKeys.voteDetail(voteId));
         router.push(Path.VOTE_HOME);
       },
     },
@@ -111,14 +113,14 @@ export default function useUpdateVoteForm() {
           title,
           titleA,
           titleB,
-          voteId: Number(params.id),
+          voteId: voteId,
         })
       : mutateDrinkVote({
           title,
           detail,
           drinkAId,
           drinkBId,
-          voteId: Number(params.id),
+          voteId: voteId,
         });
   };
 
