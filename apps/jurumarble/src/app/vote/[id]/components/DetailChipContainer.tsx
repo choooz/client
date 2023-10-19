@@ -4,7 +4,6 @@ import ModifyDeleteButtonBox from 'app/vote/components/MenuBox';
 import NonWriterBox from 'app/vote/components/NonWriterBox';
 import Chip from 'components/Chip';
 import Path from 'lib/Path';
-import { AorB } from 'lib/apis/vote';
 import { isLogin } from 'lib/utils/auth';
 import { formatDate } from 'lib/utils/formatDate';
 import { useRouter } from 'next/navigation';
@@ -27,8 +26,8 @@ interface Props {
   isBookmark: boolean;
   postedUserId: number;
   voteId: number;
-  select: AorB | null;
   onToggleReplaceLoginPageModal: () => void;
+  votedCount: number;
 }
 
 const ChipContainer = ({
@@ -40,7 +39,7 @@ const ChipContainer = ({
   mutateBookMark,
   isBookmark,
   postedUserId,
-  select,
+  votedCount,
   onToggleReplaceLoginPageModal,
 }: Props) => {
   const { userInfo } = useGetUserInfo();
@@ -62,7 +61,7 @@ const ChipContainer = ({
       <TagRow>
         <FlexRow>
           {region && <Chip variant="region">{region}</Chip>}
-          {select && <Chip variant="isVote">참여중</Chip>}
+          <Chip variant="isVote">{votedCount}명이 참여중</Chip>
         </FlexRow>
         <FlexRow>
           {isBookmark ? (

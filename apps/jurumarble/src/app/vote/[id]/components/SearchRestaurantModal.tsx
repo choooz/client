@@ -6,6 +6,7 @@ import VoteHeader from 'components/VoteHeader';
 import { Button, ModalTemplate } from 'components/index';
 import useInput from 'hooks/useInput';
 import { RestaurantInfo } from 'lib/apis/restaurant';
+import { REGION_LIST } from 'lib/constants';
 import { transitions } from 'lib/styles';
 import Image from 'next/image';
 import SvgIcX from 'src/assets/icons/components/IcX';
@@ -19,12 +20,14 @@ import useRestaurantService from '../services/useRestaurantService';
 interface Props {
   commentId: number;
   postId: number;
+  region: string;
   onToggleSearchRestaurantModal: () => void;
 }
 
 function SearchRestaurantModal({
   commentId,
   postId,
+  region,
   onToggleSearchRestaurantModal,
 }: Props) {
   const [selectedRestaurant, setSelectedRestaurant] =
@@ -43,12 +46,13 @@ function SearchRestaurantModal({
     },
   );
 
+  const regionValue = REGION_LIST.find((item) => item.label === region)?.value;
   const { restaurantList, subscribe } = useRestaurantService({
     commentId,
     commentType: 'votes',
     keyword: searchText,
     page: 1,
-    region: 'ALL',
+    region: regionValue,
     typeId: postId,
   });
 

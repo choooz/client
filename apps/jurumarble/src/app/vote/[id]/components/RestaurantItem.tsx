@@ -1,5 +1,6 @@
 import { RestaurantInfo } from 'lib/apis/restaurant';
 import Image from 'next/image';
+import { restaurantImg } from 'public/images';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -11,7 +12,16 @@ function RestaurantItem({ restaurantInfo, onClickSelectedRestaurant }: Props) {
   const { restaurantName, treatMenu, restaurantImage } = restaurantInfo;
   return (
     <Container onClick={() => onClickSelectedRestaurant(restaurantInfo)}>
-      <Image alt="음식점 이미지" src={restaurantImage} width={49} height={49} />
+      {restaurantImage ? (
+        <Image
+          alt="음식점 이미지"
+          src={restaurantImage}
+          width={49}
+          height={49}
+        />
+      ) : (
+        <Image alt="음식점 이미지" src={restaurantImg} width={49} height={49} />
+      )}
       <TextContainer>
         <Name>{restaurantName}</Name>
         <Menu>

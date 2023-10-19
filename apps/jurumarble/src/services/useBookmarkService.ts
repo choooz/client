@@ -13,6 +13,11 @@ const getBookmarkQueryKey = (params: PostBookmarkProps) => [
   params,
 ];
 
+const getTheNumberOfMyVoteQueryKey = [queryKeys.THE_NUMBER_OF_MY_VOTE];
+const getMyCreatedVoteQueryKey = [queryKeys.MY_CREATED_VOTE];
+const getMyBookmarkedVoteQueryKey = [queryKeys.MY_BOOKMARKED_VOTE];
+const getMyParticipateVotedQueryKey = [queryKeys.MY_PARTICIPATED_VOTE];
+
 export default function useBookmarkService(voteId: PostBookmarkProps) {
   const queryClient = useQueryClient();
 
@@ -52,6 +57,10 @@ export default function useBookmarkService(voteId: PostBookmarkProps) {
             toastId: 'bookmark',
           },
         );
+        queryClient.invalidateQueries(getTheNumberOfMyVoteQueryKey);
+        queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
+        queryClient.invalidateQueries(getMyBookmarkedVoteQueryKey);
+        queryClient.invalidateQueries(getMyParticipateVotedQueryKey);
       },
       onError(err, drinkId, context) {
         queryClient.setQueryData(

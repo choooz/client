@@ -63,7 +63,6 @@ const SearchInput = forwardRef<HTMLInputElement, Props>(
 
 const Search = styled.form`
   display: flex;
-  margin-top: 8px;
   width: 100%;
 `;
 

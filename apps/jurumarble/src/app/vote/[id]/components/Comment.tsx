@@ -26,6 +26,7 @@ import useCommentReportService from '../services/useCommentReportService';
 interface Props {
   voteType: 'drinks' | 'votes';
   postId: number;
+  region: string;
   comment: {
     id: number;
     content: string;
@@ -48,7 +49,14 @@ interface Props {
   mutateHate?(): void;
 }
 
-function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
+function Comment({
+  comment,
+  mutateLike,
+  mutateHate,
+  voteType,
+  postId,
+  region,
+}: Props) {
   const { userInfo } = useGetUserInfo();
   const { mutate } = useCommentReportService();
   const {
@@ -254,6 +262,7 @@ function Comment({ comment, mutateLike, mutateHate, voteType, postId }: Props) {
         <SearchRestaurantModal
           commentId={id}
           postId={postId}
+          region={region}
           onToggleSearchRestaurantModal={onToggleSearchRestaurantModal}
         />
       )}

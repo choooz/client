@@ -7,6 +7,29 @@ export const httpFetch = createHttpFetch({
   baseUrl: SERVER_URL,
 });
 
+export const commonHttpFetch = createHttpFetch({
+  baseUrl: SERVER_URL,
+  interceptors: {
+    request: async (args) => {
+      const tokens = userStorage.get();
+      if (tokens) {
+        const { accessToken } = tokens;
+        if (accessToken) {
+          args[1] = {
+            ...args[1],
+            headers: {
+              ...args[1]?.headers,
+              Authorization: `Bearer ${accessToken}`,
+            },
+          };
+        }
+      }
+
+      return args;
+    },
+  },
+});
+
 export const authHttpFetch = createHttpFetch({
   baseUrl: SERVER_URL,
   interceptors: {

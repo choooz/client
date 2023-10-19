@@ -1,16 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getIsEnjoyedDrinkAPI, postDrinkEnjoyAPI } from 'lib/apis/drink';
+import {
+  getDrinkInfo,
+  getIsEnjoyedDrinkAPI,
+  postDrinkEnjoyAPI,
+} from 'lib/apis/drink';
 import { queryKeys } from 'lib/queryKeys';
 
 type PostDrinkStampProps = Exclude<
   Parameters<typeof postDrinkEnjoyAPI>[0],
   undefined
 >;
+type GetDrinkInfoProps = Exclude<Parameters<typeof getDrinkInfo>[0], undefined>;
+
 const getDrinkStampQueryKey = (params: PostDrinkStampProps) => [
   queryKeys.DRINK_STAMP,
   params,
 ];
+
+const getDrinkInfoQueryKey = (params: GetDrinkInfoProps) => [
+  queryKeys.DRINK_INFO,
+  params,
+];
+
+const getDrinkStampListQueryKey = [queryKeys.DRINK_STAMP_LIST];
+
+const getDrinkListQueryKey = [queryKeys.SEARCH_DRINK_LIST];
 
 export default function useDrinkStampService(drinkId: PostDrinkStampProps) {
   const { data: isStampedDrink } = useQuery(
@@ -32,6 +47,11 @@ export default function useDrinkStampService(drinkId: PostDrinkStampProps) {
           drinkId,
         ]);
         return { previousData };
+      },
+      onSuccess() {
+        queryClient.invalidateQueries(getDrinkListQueryKey);
+        queryClient.invalidateQueries(getDrinkInfoQueryKey(drinkId));
+        queryClient.invalidateQueries(getDrinkStampListQueryKey);
       },
       onError(err, drinkId, context) {
         queryClient.setQueryData(

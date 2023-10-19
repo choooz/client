@@ -123,6 +123,9 @@ const CloseButton = styled(Button)`
 const SearchSection = styled.section`
   padding: 24px 20px;
   box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 const ResultSection = styled.section`
