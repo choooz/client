@@ -1,171 +1,111 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { useToggle } from '@monorepo/hooks';
-import DrinkSearchModal from 'app/vote/post/components/DrinkSearchModal';
-import PostBottomSheet from 'app/vote/post/components/PostBottomSheet';
+import { media } from '@monorepo/ui/styles/media';
 import TitleAndDescriptionSection from 'app/vote/post/components/TitleAndDescriptionSection';
 import AorBMark from 'components/AorBMark';
-import ImageUploadButton from 'components/ImageUploadButton';
-import VoteHeader from 'components/VoteHeader';
-import { Button, Input } from 'components/index';
+import { Input } from 'components/index';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import SvgIcPrevious from 'src/assets/icons/components/IcPrevious';
-import { DrinkInfoType } from 'src/types/drink';
+import { DrinkImage } from 'public/images';
 import styled, { css } from 'styled-components';
 
 import useUpdateVoteForm from '../hook/useUpdataVoteForm';
 
-const STEP_ONE = 1;
-const STEP_TWO = 2;
-
 function UpdateVoteContainer() {
-  const [isDrinkSearchModal, onToggleDrinkSearchModal] = useToggle();
-  const router = useRouter();
-
-  const [postStep, setPostStep] = useState<number>(STEP_ONE);
-  const onChangePostStep = () => {
-    setPostStep((prev) => prev + 1);
-  };
-
-  const {
-    onChangeVoteText,
-    postVoteInfo,
-    onUploadImage,
-    onClickPostVoteComplete,
-    updatePostVoteInfo,
-  } = useUpdateVoteForm();
+  const { onChangeVoteText, postVoteInfo, onClickPostVoteComplete } =
+    useUpdateVoteForm();
 
   const isCompleted = useMemo(() => {
     return !postVoteInfo.titleA || !postVoteInfo.titleB;
   }, [postVoteInfo]);
 
-  const onClickSearchDrinkComplete = (selectedDrinkList: DrinkInfoType[]) => {
-    onToggleDrinkSearchModal();
-    updatePostVoteInfo(selectedDrinkList);
-    onChangePostStep();
-  };
-
   const { title, detail, titleA, titleB, imageA, imageB } = postVoteInfo;
 
   return (
     <Container>
-      <VoteHeader
-        leftButton={
-          <PreviousButton onClick={() => router.back()}>
-            <SvgIcPrevious width={24} height={24} />
-          </PreviousButton>
-        }
-      >
-        수정하기
-      </VoteHeader>
-      <GuideText>고민되는 술을 선택해주세요</GuideText>
-      <SubText>안내문구 안내문구 영역입니다. 안내문구 영역</SubText>
-      <label htmlFor="file">
-        <ImageSection>
-          {!imageA && !imageB ? (
-            <ImageUploadButton width="100%" height="163px" />
-          ) : (
-            <ImageContainer>
-              <ImageWrapper>
-                {imageA ? (
-                  <Image
-                    src={imageA}
-                    alt="A이미지"
-                    fill
-                    style={{
-                      objectFit: 'cover',
-                      borderRadius: '10px',
-                    }}
-                  />
-                ) : (
-                  <ImageBox />
-                )}
-                <AorBMark AorB="A">A</AorBMark>
-              </ImageWrapper>
-              <ImageWrapper>
-                {imageB ? (
-                  <Image
-                    src={imageB}
-                    alt="B이미지"
-                    fill
-                    style={{
-                      objectFit: 'cover',
-                      borderRadius: '10px',
-                    }}
-                  />
-                ) : (
-                  <ImageBox />
-                )}
-                <AorBMark AorB="B">B</AorBMark>
-              </ImageWrapper>
-            </ImageContainer>
-          )}
-        </ImageSection>
-        <ImageUploadInput
-          multiple
-          type="file"
-          id="file"
-          onChange={onUploadImage}
-        />
-      </label>
+      <FlexBetween>
+        <div>
+          <GuideText>
+            수정하실 제목과 <Br /> 내용을 등록해주세요.
+          </GuideText>
+          <SubText>등록된 후보는 수정할 수 없어요.</SubText>
+        </div>
+      </FlexBetween>
+      <ImageSection>
+        <ImageContainer>
+          <ImageWrapper>
+            <Image
+              src={imageA || DrinkImage}
+              alt="A이미지"
+              fill
+              style={{
+                objectFit: 'cover',
+                borderRadius: '10px',
+              }}
+            />
+            <AorBMark AorB="A">A</AorBMark>
+          </ImageWrapper>
+          <ImageWrapper>
+            <Image
+              src={imageB || DrinkImage}
+              alt="B이미지"
+              fill
+              style={{
+                objectFit: 'cover',
+                borderRadius: '10px',
+              }}
+            />
+            <AorBMark AorB="B">B</AorBMark>
+          </ImageWrapper>
+        </ImageContainer>
+      </ImageSection>
       <VoteOptionText>
         <InputBox>
           <ABInput
             width="100%"
-            placeholder="선택지 A 입력"
+            placeholder="후보 A 입력"
             name="titleA"
             maxLength={22}
             value={titleA}
             onChange={onChangeVoteText}
+            AorB="A"
+            disabled
           />
         </InputBox>
         <InputBox>
           <ABInput
             width="100%"
-            placeholder="선택지 B 입력"
+            placeholder="후보 B 입력"
             name="titleB"
             maxLength={22}
             value={titleB}
             onChange={onChangeVoteText}
+            AorB="B"
+            disabled
           />
         </InputBox>
       </VoteOptionText>
-      {postStep === STEP_TWO && (
-        <TitleAndDescriptionSection
-          title={title}
-          detail={detail}
-          onChangeVoteText={onChangeVoteText}
-          isCompleted={isCompleted}
-          onClickPostVoteComplete={onClickPostVoteComplete}
-        />
-      )}
-      {postStep === STEP_ONE && (
-        <PostBottomSheet
-          onToggleDrinkSearchModal={onToggleDrinkSearchModal}
-          onChangePostStep={onChangePostStep}
-        />
-      )}
-      {isDrinkSearchModal && (
-        <DrinkSearchModal
-          onToggleDrinkSearchModal={onToggleDrinkSearchModal}
-          onClickSearchDrinkComplete={onClickSearchDrinkComplete}
-        />
-      )}
+      <TitleAndDescriptionSection
+        title={title}
+        detail={detail}
+        onChangeVoteText={onChangeVoteText}
+        isCompleted={isCompleted}
+        onClickPostVoteComplete={onClickPostVoteComplete}
+      />
     </Container>
   );
 }
 
 const Container = styled.div`
-  padding: 0 20px;
+  padding: 0 20px 20px 20px;
 `;
 
-const PreviousButton = styled(Button)`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-  `}
+const FlexBetween = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
 `;
 
 const GuideText = styled.div`
@@ -173,8 +113,13 @@ const GuideText = styled.div`
     css`
       ${theme.typography.body01}
       color: ${theme.colors.black_02};
-      margin-top: 24px;
     `}
+`;
+
+const Br = styled.br`
+  ${media.medium} {
+    display: none;
+  }
 `;
 
 const SubText = styled.div`
@@ -182,12 +127,11 @@ const SubText = styled.div`
     css`
       ${theme.typography.body03}
       color: ${theme.colors.black_03};
-      margin-top: 8px;
+      margin-top: 11px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     `}
-`;
-
-const ImageUploadInput = styled.input`
-  display: none;
 `;
 
 const ImageSection = styled.section`
@@ -210,14 +154,6 @@ const ImageWrapper = styled.div`
   `}
 `;
 
-const ImageBox = styled.div`
-  ${({ theme }) => css`
-    background-color: ${theme.colors.black_05};
-    border-radius: 10px;
-    height: 100%;
-  `}
-`;
-
 const VoteOptionText = styled.div`
   margin-top: 12px;
   display: flex;
@@ -226,12 +162,16 @@ const VoteOptionText = styled.div`
   gap: 16px;
 `;
 
-const ABInput = styled(Input)`
-  ${({ theme }) =>
+const ABInput = styled(Input)<{ AorB: 'A' | 'B' }>`
+  ${({ theme, AorB }) =>
     css`
       ${theme.typography.body_long03}
       color: ${theme.colors.black_04};
       border-bottom: 1px solid ${theme.colors.line_01};
+      :focus {
+        border-bottom: 1px solid
+          ${AorB === 'A' ? theme.colors.sub_01 : theme.colors.sub_02};
+      }
     `}
 `;
 
