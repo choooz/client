@@ -208,7 +208,7 @@ function Detail() {
             </div>
           </>
         )}
-        <DynamicCommentContainer postId={Number(postId)} />
+        <DynamicCommentContainer postId={Number(postId)} region={region} />
       </PageInner>
       {isReplaceLoginPageModal && (
         <ReplaceLoginPageModal

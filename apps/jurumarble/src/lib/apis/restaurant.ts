@@ -9,7 +9,10 @@ interface GetRestaurantRequest {
   typeId: number;
   commentId: number;
   keyword: string;
-  region: string;
+  /**
+   * @TODO 이거 타입 괜찮나?
+   */
+  region?: string;
   page: number;
 }
 
