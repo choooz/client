@@ -10,7 +10,7 @@ import { Button } from 'components/button';
 import { useCreateQueryString } from 'hooks/useCreateQueryString';
 import { DRINK_INFO_SORT_LIST, DRINK_VOTE_SORT_LIST } from 'lib/constants';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import SvgIcPrev from 'src/assets/icons/components/IcPrev';
+import { SvgIcPrevious } from 'src/assets/icons/components';
 import { DrinkInfoSortType, RegionType, VoteSortType } from 'src/types/common';
 import styled, { css, DefaultTheme } from 'styled-components';
 
@@ -202,8 +202,14 @@ function SearchContainer() {
     <>
       <TopSection>
         <SearchBox>
-          <SvgIcPrev width={24} height={24} />
-          <SearchInput value={searchText} onChange={debouncedChange} />
+          <button>
+            <SvgIcPrevious width={24} height={24} />
+          </button>
+          <SearchInput
+            placeholder="관심있는 우리술을 찾아보세요."
+            value={searchText}
+            onChange={debouncedChange}
+          />
         </SearchBox>
         <TabBox>
           {TAB_LIST.map(({ id, name }) => (
@@ -241,6 +247,7 @@ const SearchBox = styled.div`
   display: flex;
   align-items: center;
   gap: 14px;
+  margin-top: 8px;
 `;
 
 const TabBox = styled.ul`
