@@ -124,6 +124,7 @@ function Detail() {
     postedUserNickname,
     postedUserAlcoholLimit,
     createdAt,
+    votedCount,
   } = data;
 
   const { percentageA, percentageB, totalCountA, totalCountB } = statistics;
@@ -155,7 +156,7 @@ function Detail() {
           mutateBookMark={mutateBookMark}
           isBookmark={isBookmark}
           postedUserId={data.postedUserId}
-          select={select.choice}
+          votedCount={votedCount}
           onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
         />
         <DynamicVoteDescription

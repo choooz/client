@@ -63,6 +63,7 @@ function VoteHomePage() {
     voteType,
     drinkAId,
     drinkBId,
+    votedCount,
   } = mainVoteList[nowShowing] || {};
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
@@ -166,7 +167,7 @@ function VoteHomePage() {
               description={detail}
               mutateBookMark={mutateBookMark}
               isBookmark={isBookmark}
-              select={select.choice}
+              votedCount={votedCount}
               onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
             />
             <VoteDescription
