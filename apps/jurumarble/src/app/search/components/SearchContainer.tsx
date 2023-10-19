@@ -202,7 +202,7 @@ function SearchContainer() {
     <>
       <TopSection>
         <SearchBox>
-          <button>
+          <button onClick={() => router.back()}>
             <SvgIcPrevious width={24} height={24} />
           </button>
           <SearchInput
