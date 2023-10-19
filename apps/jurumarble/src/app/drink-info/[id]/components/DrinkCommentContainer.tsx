@@ -111,6 +111,7 @@ function DrinkCommentContainer() {
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}
+                region=""
               />
             ),
           )}
