@@ -1,4 +1,4 @@
-import { authHttpFetch, commonHttpFetch } from 'src/modules/httpFetch';
+import { commonHttpFetch } from 'src/modules/httpFetch';
 import { VoteSortType } from 'src/types/common';
 import { CommonVoteListResponse, Content } from 'src/types/vote';
 
@@ -104,18 +104,28 @@ interface ModifyNormalVoteRequest {
 }
 
 export const modifyNormalVoteAPI = async (params: ModifyNormalVoteRequest) => {
-  const response = await authHttpFetch(`api/votes/${params.voteId}/normal`, {
-    method: 'PUT',
-    body: JSON.stringify({
-      title: params.title,
-      detail: params.detail,
-      titleA: params.titleA,
-      titleB: params.titleB,
-    }),
+  const response = await http.put(`api/votes/${params.voteId}/normal`, {
+    title: params.title,
+    detail: params.detail,
+    titleA: params.titleA,
+    titleB: params.titleB,
   });
-  const res = await response.json();
-  return res.data;
+
+  return response.data;
 };
+// export const modifyNormalVoteAPI = async (params: ModifyNormalVoteRequest) => {
+//   const response = await authHttpFetch(`api/votes/${params.voteId}/normal`, {
+//     method: 'PUT',
+//     body: JSON.stringify({
+//       title: params.title,
+//       detail: params.detail,
+//       titleA: params.titleA,
+//       titleB: params.titleB,
+//     }),
+//   });
+//   const res = await response.json();
+//   return res.data;
+// };
 
 interface ModifyDrinkVoteRequest {
   title: string;
@@ -126,18 +136,28 @@ interface ModifyDrinkVoteRequest {
 }
 
 export const modifyDrinkVoteAPI = async (params: ModifyDrinkVoteRequest) => {
-  const response = await authHttpFetch(`api/votes/${params.voteId}/drink`, {
-    method: 'PUT',
-    body: JSON.stringify({
-      title: params.title,
-      detail: params.detail,
-      drinkAId: params.drinkAId,
-      drinkBId: params.drinkBId,
-    }),
+  const response = await http.put(`api/votes/${params.voteId}/drink`, {
+    title: params.title,
+    detail: params.detail,
+    drinkAId: params.drinkAId,
+    drinkBId: params.drinkBId,
   });
-  const res = await response.json();
-  return res.data;
+
+  return response.data;
 };
+// export const modifyDrinkVoteAPI = async (params: ModifyDrinkVoteRequest) => {
+//   const response = await authHttpFetch(`api/votes/${params.voteId}/drink`, {
+//     method: 'PUT',
+//     body: JSON.stringify({
+//       title: params.title,
+//       detail: params.detail,
+//       drinkAId: params.drinkAId,
+//       drinkBId: params.drinkBId,
+//     }),
+//   });
+//   const res = await response.json();
+//   return res.data;
+// };
 
 export interface PostNormalVoteRequest {
   title: string;
