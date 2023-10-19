@@ -2,6 +2,7 @@
 
 import VoteHeader from 'components/VoteHeader';
 import { Button } from 'components/button';
+import Path from 'lib/Path';
 import { NotificationType } from 'lib/apis/notification';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -49,24 +50,29 @@ function NotificationPage() {
         </EmptyNotification>
       ) : (
         <NotificationList>
-          {notificationList.map(({ content, createdAt, id, type, isRead }) => (
-            <NotificationItem
-              key={id}
-              isRead={isRead}
-              onClick={() => readNotification(id)}
-            >
-              <SvgNotificationCheck
-                width={32}
-                height={32}
-                fill={isRead ? colors.black_04 : colors.main_01}
-              />
-              <ContentBox>
-                <Content>{content}</Content>
-                <TypeMessage>{NOTIFICATION_TYPE[type]}</TypeMessage>
-                <CreatedAt>{createdAt}</CreatedAt>
-              </ContentBox>
-            </NotificationItem>
-          ))}
+          {notificationList.map(
+            ({ content, createdAt, id, type, isRead, url }) => (
+              <NotificationItem
+                key={id}
+                isRead={isRead}
+                onClick={() => {
+                  router.push(`${Path.VOTE_DETAIL_PAGE}/${url}`);
+                  readNotification(id);
+                }}
+              >
+                <SvgNotificationCheck
+                  width={32}
+                  height={32}
+                  fill={isRead ? colors.black_04 : colors.main_01}
+                />
+                <ContentBox>
+                  <Content>{content}</Content>
+                  <TypeMessage>{NOTIFICATION_TYPE[type]}</TypeMessage>
+                  <CreatedAt>{createdAt}</CreatedAt>
+                </ContentBox>
+              </NotificationItem>
+            ),
+          )}
         </NotificationList>
       )}
     </>
@@ -100,6 +106,7 @@ const NotificationItem = styled.li<{ isRead: boolean }>`
     display: flex;
     align-items: center;
     padding: 16px 20px;
+    cursor: pointer;
   `}
 `;
 
