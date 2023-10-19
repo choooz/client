@@ -3,9 +3,9 @@ export const queryKeys = {
   DETAIL_COMMENT_LIST: 'commentByVoteId' as const,
   DETAIL_FILTERED_ANALYSIS: 'filteredAnalysisByVoteId' as const,
   DETAIL_VOTE_COUNT: 'voteCountByVoteId' as const,
+  DRINK_INFO: 'drinkInfo' as const,
   DRINK_STAMP: 'drinkStamp' as const,
   DRINK_STAMP_LIST: 'drinkStampList' as const,
-  DRINKS_INFO: 'drinksInfo' as const,
   DRINKS_MAP: 'drinksMap' as const,
   HOT_DRINK_LIST: 'hotDrinkList' as const,
   HOT_DRINK_VOTE: 'hotDrinkVote' as const,
@@ -59,7 +59,6 @@ export const reactQueryKeys = {
       alcoholLimit,
     ] as const,
   detailVoteCount: (id: number) => [queryKeys.DETAIL_VOTE_COUNT, id] as const,
-  drinksInfo: (id: number) => [queryKeys.DRINKS_INFO, id] as const,
   drinksMap: (
     startX: number,
     startY: number,

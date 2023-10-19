@@ -26,7 +26,11 @@ export default function Layout({ children }: PropsWithChildren) {
             </PreviousButton>
           }
         >
-          {pathname === Path.POST_PAGE ? '투표 등록' : '상세페이지'}
+          {pathname === Path.POST_PAGE
+            ? '투표 등록'
+            : pathname.includes('update')
+            ? '투표 수정'
+            : '상세페이지'}
         </VoteHeader>
       )}
       {children}

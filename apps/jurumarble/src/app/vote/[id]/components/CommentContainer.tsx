@@ -12,9 +12,10 @@ import useCommentServices from '../services/useCommentServices';
 
 interface Props {
   postId: number;
+  region: string;
 }
 
-function CommentContainer({ postId }: Props) {
+function CommentContainer({ postId, region }: Props) {
   const queryClient = useQueryClient();
   const [sortBy, setSortBy] = useState<'ByTime' | 'ByPopularity'>('ByTime');
   const onChangeFilter = (sort: 'ByTime' | 'ByPopularity') => {
@@ -114,6 +115,7 @@ function CommentContainer({ postId }: Props) {
                 mutateLike={() => mutateLike(id)}
                 mutateHate={() => mutateHate(id)}
                 key={`comment_id_${index}`}
+                region={region}
               />
             ),
           )}

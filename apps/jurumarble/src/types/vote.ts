@@ -29,7 +29,7 @@ export interface Content {
   titleA: string;
   titleB: string;
   region: string;
-  createdAt: Date;
+  createdAt: string;
   drinkAId: number;
   drinkBId: number;
 }

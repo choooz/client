@@ -5,6 +5,7 @@ import {
   readNotificationAPI,
 } from 'lib/apis/notification';
 import { queryKeys } from 'lib/queryKeys';
+import { formatDate } from 'lib/utils/formatDate';
 
 type ReadNotificationProps = Exclude<
   Parameters<typeof readNotificationAPI>[0],
@@ -19,15 +20,10 @@ export default function useNotificationService() {
     getNotificationListAPI,
     {
       select: (data) =>
-        data.map((notification) => {
-          const createdAtDate = new Date(notification.createdAt);
-          return {
-            ...notification,
-            createdAt: `${createdAtDate.getFullYear() - 2000}. ${
-              createdAtDate.getMonth() + 1
-            }. ${createdAtDate.getDate()}`,
-          };
-        }),
+        data.map((notification) => ({
+          ...notification,
+          createdAt: formatDate(notification.createdAt),
+        })),
     },
   );
 
