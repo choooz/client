@@ -1,10 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { getDrinkInfo } from 'lib/apis/drink';
-import { reactQueryKeys } from 'lib/queryKeys';
+import { queryKeys } from 'lib/queryKeys';
 
-export default function useDrinkLoadService(id: number) {
+type GetDrinkInfoProps = Exclude<Parameters<typeof getDrinkInfo>[0], undefined>;
+
+const getQueryKey = (params: GetDrinkInfoProps) => [
+  queryKeys.DRINK_INFO,
+  params,
+];
+
+export default function useDrinkLoadService(id: GetDrinkInfoProps) {
   const { data, isLoading, isError } = useQuery(
-    reactQueryKeys.drinksInfo(id),
+    getQueryKey(id),
     () => getDrinkInfo(id),
     {
       enabled: !!id,

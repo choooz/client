@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { DrinkInfoType } from 'src/types/drink';
 import { PostVoteType } from 'src/types/vote';
 
+const getMyCreatedVoteQueryKey = [queryKeys.MY_CREATED_VOTE];
+
 export default function usePostVoteService() {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -131,6 +133,7 @@ export default function usePostVoteService() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
+        queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
         router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
       },
     },
@@ -141,6 +144,7 @@ export default function usePostVoteService() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
+        queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
         router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
       },
     },
