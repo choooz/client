@@ -38,7 +38,7 @@ function VoteHomePage() {
       return;
     }
     onToggleOnboarding();
-    localStorage.setItem('visited_home', 'true');
+    localStorage.setItem('visited_vote', 'true');
   }, []);
 
   const searchParams = useSearchParams();
