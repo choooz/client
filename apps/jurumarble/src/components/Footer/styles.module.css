@@ -1,0 +1,29 @@
+.footer {
+  width: 100%;
+  height: 142px;
+  margin-bottom: 60px;
+  background-color: var(--line_02);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.link-list {
+  margin-top: 32px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.black-03 {
+  color: var(--black_03);
+}
+
+.black-04 {
+  color: var(--black_04);
+}
