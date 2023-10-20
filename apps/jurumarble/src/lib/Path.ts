@@ -2,8 +2,10 @@
 // 라고 copilot이 말함
 
 const Path = {
+  AGREEMENT_PAGE: '/agreement',
   DRINK_INFO_PAGE: '/drink-info',
   DRINK_MAP_PAGE: '/map',
+  HELP_PAGE: '/help',
   KAKAO_LOGIN_PROCESS: '/login/kakao-login-process',
   // no Logged In
   LOGIN_PAGE: '/login',
@@ -13,6 +15,7 @@ const Path = {
   MY_PAGE: '/my',
   NAVER_LOGIN_PROCESS: '/login/naver-login-process',
   NOTIFICATION_PAGE: '/notification',
+  ONBOARDING_PAGE: '/onboarding',
   POST_PAGE: '/vote/post',
   PROFILE_EDIT: '/my/edit',
 

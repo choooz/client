@@ -10,6 +10,7 @@ import { Button } from 'components/button';
 import Path from 'lib/Path';
 import { media } from 'lib/styles';
 import { isLogin } from 'lib/utils/auth';
+import userStorage from 'lib/utils/userStorage';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ImgScroll } from 'public/images';
@@ -22,12 +23,24 @@ import ChipContainer from './[id]/components/ChipContainer';
 import VoteDescription from './[id]/components/VoteDescription';
 import useExecuteVoteService from './[id]/services/useExecuteVoteService';
 import useFilteredStatisticsService from './[id]/services/useFilterStatisticsService';
+import OnboardingBottomsheet from './components/OnboardingBottomsheet';
 import useFlipAnimation from './hooks/useFlipAnimation';
 import useInfiniteMainListService from './services/useGetVoteListService';
 
 export type Drag = 'up' | 'down' | null;
 
 function VoteHomePage() {
+  const router = useRouter();
+  const [isOnboarding, onToggleOnboarding] = useToggle();
+
+  useEffect(() => {
+    if (!userStorage.get() || !!localStorage.getItem('visited_vote')) {
+      return;
+    }
+    onToggleOnboarding();
+    localStorage.setItem('visited_vote', 'true');
+  }, []);
+
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   /**
@@ -37,8 +50,6 @@ function VoteHomePage() {
     toast.success('정상적으로 투표가 등록되었습니다!.', {
       toastId: 'voteSuccess',
     });
-
-  const router = useRouter();
 
   const { isError, isLoading, mainVoteList, nowShowing, onChangeNowShowing } =
     useInfiniteMainListService({
@@ -202,6 +213,9 @@ function VoteHomePage() {
         <ReplaceLoginPageModal
           onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
         />
+      )}
+      {isOnboarding && (
+        <OnboardingBottomsheet onToggleOnboarding={onToggleOnboarding} />
       )}
     </>
   );

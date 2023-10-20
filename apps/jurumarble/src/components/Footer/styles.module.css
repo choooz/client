@@ -10,6 +10,14 @@
 
 .link-list {
   margin-top: 32px;
+  display: flex;
+}
+
+.divider {
+  width: 1px;
+  height: 9px;
+  background-color: var(--black_05);
+  margin: auto 8px;
 }
 
 .mt-16 {

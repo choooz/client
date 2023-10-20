@@ -1,3 +1,4 @@
+import Path from 'lib/Path';
 import { getClassNames } from 'lib/styles/getClassNames';
 import Link from 'next/link';
 import { SvgLogo } from 'src/assets/icons/components';
@@ -9,18 +10,18 @@ const cx = getClassNames(styles);
 const LINK_LIST = [
   {
     label: '주루마블 소개',
-    href: '/about',
+    href: Path.ONBOARDING_PAGE,
   },
   {
     label: '이용약관',
-    href: '/agreement',
+    href: Path.AGREEMENT_PAGE,
   },
   {
     label: '개인정보처리방침',
     href: '/',
   },
   {
-    label: '신고가이드',
+    label: '고객센터',
     href: '/how-to-report',
   },
 ];
@@ -30,13 +31,16 @@ function Footer() {
     <footer className={cx('footer')}>
       <div className={cx('link-list')}>
         {LINK_LIST.map(({ label, href }) => (
-          <Link
-            key={label}
-            href={href}
-            className={cx('caption_chip', 'black-03')}
-          >
-            {label}
-          </Link>
+          <>
+            <Link
+              key={label}
+              href={href}
+              className={cx('caption_chip', 'black-03')}
+            >
+              {label}
+            </Link>
+            {label !== '고객센터' && <div className={cx('divider')} />}
+          </>
         ))}
       </div>
       <SvgLogo width={76} height={14} className={cx('mt-16')} />

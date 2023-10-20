@@ -1,0 +1,12 @@
+.header {
+  color: var(--black_01);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+}
+
+.empty-space {
+  width: 24px;
+  height: 24px;
+}
