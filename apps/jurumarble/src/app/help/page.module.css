@@ -1,0 +1,19 @@
+.container {
+  background-color: var(--bg_02);
+  padding: 20px 20px 60px 20px;
+}
+
+.mt-6 {
+  margin-top: 6px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  margin-top: 18px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}

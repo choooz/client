@@ -5,7 +5,7 @@ const Path = {
   AGREEMENT_PAGE: '/agreement',
   DRINK_INFO_PAGE: '/drink-info',
   DRINK_MAP_PAGE: '/map',
-  HOW_TO_REPORT_PAGE: '/how-to-report',
+  HELP_PAGE: '/help',
   KAKAO_LOGIN_PROCESS: '/login/kakao-login-process',
   // no Logged In
   LOGIN_PAGE: '/login',

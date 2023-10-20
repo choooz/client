@@ -19,3 +19,4 @@ export { default as MobileOnboarding1 } from './VoteOnboardM01.png';
 export { default as MobileOnboarding2 } from './VoteOnboardM02.png';
 export { default as MobileOnboarding3 } from './VoteOnboardM03.png';
 export { default as MobileOnboarding4 } from './VoteOnboardM04.png';
+export { default as howToReportImage } from './howToReportImage.png';
