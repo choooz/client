@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useToggle } from '@monorepo/hooks';
 import BottomBar from 'components/BottomBar';
@@ -57,8 +57,13 @@ function VoteHomePage() {
       sortBy: 'ByTime',
     });
 
-  const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
-    useFlipAnimation(onChangeNowShowing);
+  const {
+    onActFlip,
+    drag,
+    onTouchStartPosition,
+    onTouchMoveActFlip,
+    onActDragAnimation,
+  } = useFlipAnimation(onChangeNowShowing);
 
   const {
     title,
@@ -108,23 +113,31 @@ function VoteHomePage() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
+  const [enlargement, setEnlargement] = useState<'A' | 'B' | undefined>(
+    undefined,
+  );
+
   useEffect(() => {
     // 상단 화살표키가 눌렸을 때 다음 페이지로 넘어가는 기능
     const onKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'ArrowUp') {
-        onChangeNowShowing(-1);
+        onActDragAnimation('up');
       } else if (e.key === 'ArrowDown') {
-        onChangeNowShowing(1);
+        onActDragAnimation('down');
       } else if (e.key === 'ArrowLeft') {
-        onMutateVoting('A');
+        setEnlargement('A');
       } else if (e.key === 'ArrowRight') {
-        onMutateVoting('B');
+        setEnlargement('B');
+      }
+      // 스페이스바 키 눌렀을 때 투표 기능
+      else if (e.key === ' ' || e.key === 'Spacebar') {
+        onMutateVoting(enlargement === 'A' ? 'B' : 'A');
       }
     };
 
     window.addEventListener('keydown', onKeyPress);
     return () => window.removeEventListener('keydown', onKeyPress);
-  }, [onChangeNowShowing, onMutateVoting]);
+  }, [enlargement, onChangeNowShowing, onMutateVoting]);
 
   if (isLoading || isStatisticsLoading) {
     return <Loading />;
@@ -195,6 +208,7 @@ function VoteHomePage() {
               onMutateVoting={onMutateVoting}
               drinkAId={drinkAId}
               drinkBId={drinkBId}
+              enlargement={enlargement}
             />
             <MoreButton
               onClick={() => router.push(`vote/${voteId}`)}
