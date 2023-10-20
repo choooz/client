@@ -22,7 +22,7 @@ const LINK_LIST = [
   },
   {
     label: '고객센터',
-    href: '/how-to-report',
+    href: Path.HELP_PAGE,
   },
 ];
 
