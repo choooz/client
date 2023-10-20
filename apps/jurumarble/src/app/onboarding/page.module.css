@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   /* background-color: var(--bg_01); */
   padding-bottom: 96px;
 }
@@ -14,7 +15,7 @@
 
 .img-wrapper {
   max-width: 720px;
-  margin: 0 auto;
+  margin: 0 auto 64px auto;
   background-color: var(--white);
 }
 
@@ -23,6 +24,11 @@
   bottom: 0;
   padding: 20px;
   width: 100%;
-  max-width: 480px;
+  max-width: 720px;
   background-color: var(--white);
+}
+
+.close-button {
+  margin-right: 20px;
+  display: flex;
 }
