@@ -40,10 +40,10 @@ export default function useEditProfileService() {
     return;
   };
 
-  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeNickname = (value: string) => {
     queryClient.setQueryData(getQueryKey, (prev: any) => ({
       ...prev,
-      nickname: e.target.value,
+      nickname: value,
     }));
   };
 
