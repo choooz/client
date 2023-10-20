@@ -57,15 +57,11 @@ function UserInfoEditContainer() {
       <H3>MBTI</H3>
       <SelectMBTI MBTI={mbti} onChangeMBTI={onChangeMBTI} />
       <WarningMessage>MBTI 수정시 2개월간 바꿀 수 없습니다.</WarningMessage>
-      <FlexEnd>
-        <WithdrawalButton
-          variant="outline"
-          borderRadius="4px"
-          onClick={onToggleWithdrawalModal}
-        >
-          회원탈퇴
-        </WithdrawalButton>
-      </FlexEnd>
+
+      <WithdrawalButton onClick={onToggleWithdrawalModal}>
+        회원탈퇴
+      </WithdrawalButton>
+
       <CompleteButton
         variant="primary"
         width="100%"
@@ -129,23 +125,18 @@ const GenderAndAgeBox = styled.div`
 
 const WarningMessage = styled.div`
   ${({ theme }) => css`
-    ${theme.typography.body03}
+    ${theme.typography.caption_chip}
     color: ${theme.colors.system_red};
     margin-top: 8px;
   `};
 `;
 
-const FlexEnd = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const WithdrawalButton = styled(Button)`
+const WithdrawalButton = styled.button`
   ${({ theme }) => css`
     ${theme.typography.caption_chip}
+    color: ${theme.colors.black_04};
+    text-decoration-line: underline;
     margin-top: 20px;
-    width: 58px;
-    height: 24px;
   `};
 `;
 
