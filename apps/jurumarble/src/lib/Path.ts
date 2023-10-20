@@ -13,6 +13,7 @@ const Path = {
   MY_PAGE: '/my',
   NAVER_LOGIN_PROCESS: '/login/naver-login-process',
   NOTIFICATION_PAGE: '/notification',
+  ONBOARDING_PAGE: '/onboarding',
   POST_PAGE: '/vote/post',
   PROFILE_EDIT: '/my/edit',
 

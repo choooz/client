@@ -1,0 +1,28 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* background-color: var(--bg_01); */
+  padding-bottom: 96px;
+}
+
+.container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.img-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: var(--white);
+}
+
+.bottom-wrapper {
+  position: fixed;
+  bottom: 0;
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--white);
+}
