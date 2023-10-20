@@ -30,7 +30,11 @@ function UserInfoEditContainer() {
     <Container>
       <ImageUpload imageUrl={imageUrl} onUploadImage={onUploadImage} />
       <H3>닉네임</H3>
-      <Input width="100%" value={nickname} onChange={onChangeNickname} />
+      <Input
+        width="100%"
+        defaultValue={nickname}
+        onChange={(e) => onChangeNickname(e.target.value)}
+      />
       <H3>주량</H3>
       <SelectDrinkCapacity
         alcoholLimit={alcoholLimit}
