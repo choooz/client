@@ -16,6 +16,7 @@ const DynamicSearchInputWrapper = dynamic(
 );
 
 const DynamicBanner = dynamic(() => import('./main/components/Banner'));
+const DynamicFooter = dynamic(() => import('components/Footer/Footer'));
 
 const cx = getClassNames(styles);
 
@@ -35,6 +36,7 @@ function MainPage() {
         {/* @ts-expect-error Server Component */}
         <HydratedDrinkVoteContainer />
       </section>
+      <DynamicFooter />
       <BottomBar />
     </>
   );
