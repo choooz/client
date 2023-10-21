@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { ImgScroll } from 'public/images';
 import { toast } from 'react-toastify';
 import useBookmarkService from 'services/useBookmarkService';
+import { SvgInfo } from 'src/assets/icons/components';
 import SvgIcDetail from 'src/assets/icons/components/IcDetail';
 import styled, { css } from 'styled-components';
 
@@ -158,6 +159,9 @@ function VoteHomePage() {
           <AskVoteText>
             여행에서 즐길 우리술은
             <br /> 우리술 투표로 해결해요
+            <button onClick={onToggleOnboarding}>
+              <SvgInfo width={24} height={24} fill="#676767" />
+            </button>
           </AskVoteText>
           <div>
             <Button
@@ -357,6 +361,16 @@ const BigFont = styled.span`
 const AskVoteText = styled.div`
   ${({ theme }) => theme.typography.headline02}
   line-height: 130%;
+  display: flex;
+  align-items: flex-end;
+  button {
+    margin-left: 8px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 4px;
+    height: 29px;
+  }
 `;
 
 const MoreButton = styled.button`
