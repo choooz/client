@@ -19,7 +19,7 @@ function VoteAnalyzeBar({
       {totalCountA + totalCountB === 0 ? (
         <AnalyzeBar>
           <Share selected share={100}>
-            아직 투표가 없습니다.
+            아직 해당하는 투표가 없습니다.
           </Share>
         </AnalyzeBar>
       ) : (

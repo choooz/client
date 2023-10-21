@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useToggle } from '@monorepo/hooks';
 import BottomBar from 'components/BottomBar';
@@ -16,6 +16,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { ImgScroll } from 'public/images';
 import { toast } from 'react-toastify';
 import useBookmarkService from 'services/useBookmarkService';
+import { SvgInfo } from 'src/assets/icons/components';
 import SvgIcDetail from 'src/assets/icons/components/IcDetail';
 import styled, { css } from 'styled-components';
 
@@ -57,8 +58,13 @@ function VoteHomePage() {
       sortBy: 'ByTime',
     });
 
-  const { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip } =
-    useFlipAnimation(onChangeNowShowing);
+  const {
+    onActFlip,
+    drag,
+    onTouchStartPosition,
+    onTouchMoveActFlip,
+    onActDragAnimation,
+  } = useFlipAnimation(onChangeNowShowing);
 
   const {
     title,
@@ -108,23 +114,31 @@ function VoteHomePage() {
     isError: isStatisticsError,
   } = voteStatisticsQuery;
 
+  const [enlargement, setEnlargement] = useState<'A' | 'B' | undefined>(
+    undefined,
+  );
+
   useEffect(() => {
     // 상단 화살표키가 눌렸을 때 다음 페이지로 넘어가는 기능
     const onKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'ArrowUp') {
-        onChangeNowShowing(-1);
+        onActDragAnimation('up');
       } else if (e.key === 'ArrowDown') {
-        onChangeNowShowing(1);
+        onActDragAnimation('down');
       } else if (e.key === 'ArrowLeft') {
-        onMutateVoting('A');
+        setEnlargement('A');
       } else if (e.key === 'ArrowRight') {
-        onMutateVoting('B');
+        setEnlargement('B');
+      }
+      // 스페이스바 키 눌렀을 때 투표 기능
+      else if (e.key === ' ' || e.key === 'Spacebar') {
+        onMutateVoting(enlargement === 'A' ? 'B' : 'A');
       }
     };
 
     window.addEventListener('keydown', onKeyPress);
     return () => window.removeEventListener('keydown', onKeyPress);
-  }, [onChangeNowShowing, onMutateVoting]);
+  }, [enlargement, onChangeNowShowing, onMutateVoting]);
 
   if (isLoading || isStatisticsLoading) {
     return <Loading />;
@@ -145,6 +159,9 @@ function VoteHomePage() {
           <AskVoteText>
             여행에서 즐길 우리술은
             <br /> 우리술 투표로 해결해요
+            <button onClick={onToggleOnboarding}>
+              <SvgInfo width={24} height={24} fill="#676767" />
+            </button>
           </AskVoteText>
           <div>
             <Button
@@ -195,6 +212,7 @@ function VoteHomePage() {
               onMutateVoting={onMutateVoting}
               drinkAId={drinkAId}
               drinkBId={drinkBId}
+              enlargement={enlargement}
             />
             <MoreButton
               onClick={() => router.push(`vote/${voteId}`)}
@@ -343,6 +361,16 @@ const BigFont = styled.span`
 const AskVoteText = styled.div`
   ${({ theme }) => theme.typography.headline02}
   line-height: 130%;
+  display: flex;
+  align-items: flex-end;
+  button {
+    margin-left: 8px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding-top: 4px;
+    height: 29px;
+  }
 `;
 
 const MoreButton = styled.button`
