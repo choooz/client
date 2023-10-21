@@ -69,7 +69,31 @@ function useFlipAnimation(onChangeNowShowing: (index: number) => void) {
     }, 850);
   };
 
-  return { onActFlip, drag, onTouchStartPosition, onTouchMoveActFlip };
+  const onActDragAnimation = (drag: Drag) => {
+    if (drag === 'up') {
+      setDrag('up');
+      setTimeout(() => {
+        onChangeNowShowing(-1);
+      }, 750);
+    }
+    if (drag === 'down') {
+      setDrag('down');
+      setTimeout(() => {
+        onChangeNowShowing(1);
+      }, 750);
+    }
+    setTimeout(() => {
+      setDrag(null);
+    }, 850);
+  };
+
+  return {
+    onActFlip,
+    drag,
+    onTouchStartPosition,
+    onTouchMoveActFlip,
+    onActDragAnimation,
+  };
 }
 
 export default useFlipAnimation;

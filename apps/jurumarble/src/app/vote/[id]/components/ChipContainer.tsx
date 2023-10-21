@@ -180,7 +180,7 @@ const FlexRow = styled.div`
 `;
 
 const Description = styled.div`
-  padding-bottom: 20px;
+  margin-bottom: 20px;
   white-space: pre-wrap;
   overflow: hidden;
   display: -webkit-box;

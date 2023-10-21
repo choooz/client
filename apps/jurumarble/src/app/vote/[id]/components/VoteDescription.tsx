@@ -38,6 +38,7 @@ interface Props {
   voteType: string;
   drinkAId: number;
   drinkBId: number;
+  enlargement?: AorB;
 }
 
 function VoteDescription({
@@ -54,6 +55,7 @@ function VoteDescription({
   voteType,
   drinkAId,
   drinkBId,
+  enlargement,
 }: Props) {
   const router = useRouter();
 
@@ -93,6 +95,7 @@ function VoteDescription({
         <LeftVote
           selected={activeValue('left')}
           onClick={() => onClickVote('A')}
+          enlargement={enlargement === 'A'}
         >
           <VoteImageWrapper>
             <Image
@@ -121,6 +124,7 @@ function VoteDescription({
         <RightVote
           selected={activeValue('right')}
           onClick={() => onClickVote('B')}
+          enlargement={enlargement === 'B'}
         >
           <VoteImageWrapper>
             <Image
@@ -215,19 +219,18 @@ const typeGuardVariantStyle = (selected: ActiveType) => {
   return variantStyles[selected];
 };
 
-const LeftVote = styled.div<{ selected: ActiveType }>`
+const LeftVote = styled.div<{ selected: ActiveType; enlargement: boolean }>`
   position: relative;
   width: 50%;
-  aspect-ratio: 1;
-  max-height: 300px;
+  min-width: 10%;
   display: flex;
   transition: all 0.3s ease-in-out;
   justify-content: center;
+
   .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    /* visibility: hidden; */
     height: 100%;
     width: 100%;
     display: none;
@@ -240,7 +243,6 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
     background: rgba(250, 94, 45, 0.7);
     border-radius: 10px;
     border: 2px solid #ff4a16;
-
     ${({ selected }) =>
       selected === 'active' &&
       css`
@@ -248,7 +250,22 @@ const LeftVote = styled.div<{ selected: ActiveType }>`
         display: flex;
       `};
   }
+
+  ${({ enlargement, selected }) =>
+    enlargement &&
+    !selected &&
+    css`
+      width: 90%;
+    `}
   ${({ selected }) => typeGuardVariantStyle(selected)}
+    &:hover {
+    ${({ selected, enlargement }) =>
+      !selected &&
+      !enlargement &&
+      css`
+        width: 99%;
+      `}
+  }
 `;
 
 const RightVote = styled(LeftVote)`
@@ -299,7 +316,7 @@ const VoteImageWrapper = styled.div`
   border-radius: 10px;
 
   ${media.medium} {
-    height: 340px;
+    height: 250px;
   }
 `;
 

@@ -25,7 +25,7 @@ function WarningModal() {
   return (
     <ModalTemplate
       width="335px"
-      height="510px"
+      height="512px"
       onToggleModal={onToggleWarningModal}
     >
       <Container>
@@ -149,7 +149,7 @@ const ButtonContainer = styled.div`
     ${theme.typography.body01}
     display: flex;
     gap: 8px;
-    margin-top: 40px;
+    margin-top: 24px;
     width: 100%;
   `};
 `;

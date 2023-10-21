@@ -91,6 +91,7 @@ function CommentContainer({ postId, region }: Props) {
                 restaurant,
                 alcoholLimitType,
                 imageUrl,
+                choice,
               },
               index,
             ) => (
@@ -100,6 +101,7 @@ function CommentContainer({ postId, region }: Props) {
                 comment={{
                   age,
                   alcoholLimitType,
+                  choice,
                   content,
                   createdDate,
                   gender,
