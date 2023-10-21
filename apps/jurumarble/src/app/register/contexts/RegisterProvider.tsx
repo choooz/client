@@ -183,7 +183,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     {
       onSuccess: () => {
         toast.success('회원가입이 완료되었습니다.');
-        router.replace(Path.MAIN_PAGE);
+        router.replace(Path.ONBOARDING_PAGE);
       },
       onError: (error) => alert(error),
     },
