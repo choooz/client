@@ -94,7 +94,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
       toast.error('2004년 이후 출생자는 가입이 불가능합니다.');
       setYearOfBirth('');
       return;
-    } else if (999 < Number(yearOfBirth) && Number(yearOfBirth) < 1900) {
+    } else if (yearOfBirth !== '' && Number(yearOfBirth) < 1900) {
       toast.error('출생년도를 다시 한번 확인해주세요.');
       setYearOfBirth('');
       return;
