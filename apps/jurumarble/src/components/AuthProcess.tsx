@@ -67,6 +67,18 @@ function AuthProcess() {
     }
   }, [pathname, router]);
 
+  /**
+   * 온보딩 페이지로 이동 로직
+   * @TODO 분리 필요
+   */
+  useEffect(() => {
+    if (!isLogin() || !!localStorage.getItem('visited_home')) {
+      return;
+    }
+    router.push(Path.ONBOARDING_PAGE);
+    localStorage.setItem('visited_home', 'false');
+  }, [router]);
+
   return <></>;
 }
 
