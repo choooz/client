@@ -26,8 +26,10 @@ const Wrapper = styled.div``;
 const Title = styled.h2`
   margin-bottom: 8px;
   ${({ theme }) => theme.typography.headline02}
+  color : ${({ theme }) => theme.colors.black_01};
 `;
 
 const SubTitle = styled.h3`
   ${({ theme }) => theme.typography.subhead02}
+  color : ${({ theme }) => theme.colors.black_03};
 `;
