@@ -44,6 +44,7 @@ interface Props {
       restaurantName: string;
       restaurantImage: string;
     };
+    choice?: string;
   };
   mutateLike?(): void;
   mutateHate?(): void;
@@ -73,6 +74,7 @@ function Comment({
     restaurant,
     alcoholLimitType,
     imageUrl,
+    choice,
   } = comment;
 
   const [toggleMenu, onToggleMenu] = useToggle(false);
@@ -133,16 +135,16 @@ function Comment({
         {(age || gender || mbti) && (
           <FlexBetween>
             <div className="flex">
-              <TagBox isMine={userInfo?.userId === userId}>
+              <TagBox choice={choice}>
                 {gender && convertGender(gender)}
                 {age && (
                   <>
-                    <DivideTag /> {convertAge(age)}
+                    <DivideTag choice={choice} /> {convertAge(age)}
                   </>
                 )}
                 {mbti && (
                   <>
-                    <DivideTag /> {mbti}
+                    <DivideTag choice={choice} /> {mbti}
                   </>
                 )}
               </TagBox>
@@ -325,27 +327,35 @@ const RestaurantNameBox = styled.div`
   `}
 `;
 
-const TagBox = styled.div<{ isMine: boolean }>`
+const TagBox = styled.div<{ choice: 'A' | 'B' | string | undefined }>`
   display: flex;
   align-items: center;
   width: auto;
   border-radius: 4px;
   padding: 6px 8px;
-  ${({ theme, isMine }) => css`
-    background-color: ${isMine ? theme.colors.sub_01 : theme.colors.sub_02};
-    color: ${theme.colors.white};
+  ${({ theme, choice }) => css`
+    color: ${choice === 'A' || choice === 'B'
+      ? theme.colors.white
+      : theme.colors.black_03};
+    background-color: ${choice === 'A'
+      ? theme.colors.sub_01
+      : choice === 'B'
+      ? theme.colors.sub_02
+      : theme.colors.bg_01};
     ${theme.typography.caption_chip}
   `};
   line-height: unset;
 `;
 
-const DivideTag = styled.div`
+const DivideTag = styled.div<{ choice: string | undefined }>`
   width: 2px;
   height: 12px;
   margin: 0 4px;
-  ${({ theme }) => css`
-    background-color: ${theme.colors.white};
-  `}
+  ${({ theme, choice }) => css`
+    background-color: ${choice !== undefined
+      ? theme.colors.white
+      : theme.colors.black_04};
+  `};
 `;
 
 const NickName = styled.div`
