@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from 'components/button';
+import Path from 'lib/Path';
 import { getClassNames } from 'lib/styles/getClassNames';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +16,7 @@ const BottomButton = () => {
         width="100%"
         height="56px"
         variant="primary"
-        onClick={() => router.push('/')}
+        onClick={() => router.push(Path.MAIN_PAGE)}
       >
         시작하기
       </Button>

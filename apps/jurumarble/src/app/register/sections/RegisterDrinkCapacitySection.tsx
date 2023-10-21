@@ -62,6 +62,10 @@ const Item = styled.div<{
         background: rgba(255, 92, 0, 0.2);
         border: 1px solid ${theme.colors.main_01};
         border-radius: 8px;
+        color: ${theme.colors.black_01};
+        p {
+          color: ${theme.colors.black_01};
+        }
       }
     `}
   &:hover {
@@ -80,7 +84,7 @@ const Title = styled.div`
 
 const Label = styled.p`
   margin-left: 6px;
-  ${({ theme }) => theme.typography.body02}; // TODO: body 04  생기면  수정
+  ${({ theme }) => theme.typography.body04}; // TODO: body 04  생기면  수정
   color: ${({ theme }) => theme.colors.black_02};
   font-weight: bold;
 `;

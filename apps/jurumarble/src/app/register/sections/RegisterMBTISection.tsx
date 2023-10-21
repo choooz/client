@@ -157,11 +157,16 @@ const variantStyles = {
     background: rgba(255, 92, 0, 0.2);
     font-size: 16px;
     font-weight: 700;
-    color: ${({ theme }) => theme.colors.black_02};
+    div {
+      color: ${({ theme }) => theme.colors.black_01};
+    }
   `,
   inactive: css`
     width: 23%;
     opacity: 0.5;
+    div {
+      color: ${({ theme }) => theme.colors.black_01};
+    }
   `,
 };
 
@@ -201,6 +206,7 @@ const MbtiType = styled.div`
 
 const MbtiText = styled.div`
   ${({ theme }) => theme.typography.caption_chip}
+  color: ${({ theme }) => theme.colors.black_03};
 `;
 
 export default RegisterMBTISection;
