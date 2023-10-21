@@ -3,9 +3,9 @@ import {
   DrinkCapacityHigh,
   DrinkCapacityLow,
   DrinkCapacityMedium,
-  Female,
-  Male,
 } from 'public/images';
+import SvgFemale from 'src/assets/icons/components/female';
+import SvgMale from 'src/assets/icons/components/male';
 
 import Path from './Path';
 
@@ -133,12 +133,12 @@ export const GENDER_LIST = [
   {
     id: 'MALE',
     label: '남성',
-    src: Male,
+    image: SvgMale,
   },
   {
     id: 'FEMALE',
     label: '여성',
-    src: Female,
+    image: SvgFemale,
   },
 ] as const;
 
