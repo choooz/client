@@ -132,7 +132,7 @@ export default function usePostVoteService() {
       postNormalVoteAPI(voteInfo),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
+        queryClient.invalidateQueries([queryKeys.MAIN_VOTE_LIST]);
         queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
         router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
       },
@@ -143,7 +143,7 @@ export default function usePostVoteService() {
       postDrinkVoteAPI(voteInfo),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
+        queryClient.invalidateQueries([queryKeys.MAIN_VOTE_LIST]);
         queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
         router.push(`${Path.VOTE_HOME}/?isSuccess=true`);
       },
