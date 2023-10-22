@@ -4,13 +4,14 @@ import { Portal } from 'components/index';
 import { transitions } from 'lib/styles';
 import Image, { StaticImageData } from 'next/image';
 import {
-  DesktopOnboarding1,
-  DesktopOnboarding2,
-  DesktopOnboarding3,
-  DesktopOnboarding4,
-  MobileOnboarding1,
-  MobileOnboarding2,
-  MobileOnboarding3,
+  desktopDetailOnboarding,
+  desktopEnlargeOnboarding,
+  desktopMoveOnboarding,
+  desktopSelectOnboarding,
+  mobileDetailOnboarding,
+  mobileEnlargeOnboarding,
+  mobileMoveOnboarding,
+  mobileSelectOnboarding,
 } from 'public/images';
 import { SvgIcX } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
@@ -48,26 +49,26 @@ const CARD_LIST = [
   {
     title: '후보를 확대해서 보기',
     description: '마우스를 후보에 올리거나 좌우 방향키를 이용하세요.',
-    imgSrc: DesktopOnboarding1,
-    mobileImgSrc: MobileOnboarding1,
+    imgSrc: desktopEnlargeOnboarding,
+    mobileImgSrc: mobileEnlargeOnboarding,
   },
   {
     title: '투표 후보를 선택하기',
     description: '원하는 후보를 클릭하세요.',
-    imgSrc: DesktopOnboarding2,
-    mobileImgSrc: MobileOnboarding2,
+    imgSrc: desktopSelectOnboarding,
+    mobileImgSrc: mobileSelectOnboarding,
   },
   {
     title: '자세한 내용을 확인하기',
     description: '스크롤을 하거나 상하 방향키를 이용하세요.',
-    imgSrc: DesktopOnboarding3,
-    mobileImgSrc: MobileOnboarding3,
+    imgSrc: desktopMoveOnboarding,
+    mobileImgSrc: mobileMoveOnboarding,
   },
   {
     title: '자세히 보기',
     description: '더보기 버튼을 클릭해주세요.',
-    imgSrc: DesktopOnboarding4,
-    mobileImgSrc: MobileOnboarding1,
+    imgSrc: desktopDetailOnboarding,
+    mobileImgSrc: mobileDetailOnboarding,
   },
 ];
 
