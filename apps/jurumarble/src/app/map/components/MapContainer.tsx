@@ -7,9 +7,12 @@ import DrinkItem from 'app/stamp/components/DrinkItem';
 import Loading from 'components/Loading';
 import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
 import { Button } from 'components/button';
+import Path from 'lib/Path';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { ExImg1 } from 'public/images';
-import { Map, MapMarker } from 'react-kakao-maps-sdk';
+import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
+import { SvgIcPrev } from 'src/assets/icons/components';
 import SvgIcMyLocationFloating from 'src/assets/icons/ic_my_location_floating.svg';
 import styled from 'styled-components';
 
@@ -20,8 +23,10 @@ interface Location {
   latitude: number;
   longitude: number;
 }
+// DrinkMapInfo에 isOpen:boolean 이 합쳐져 있는 타입
 
 const MapContainer = () => {
+  const router = useRouter();
   const [isReplaceLoginPageModal, onToggleReplaceLoginPageModal] = useToggle();
 
   const [delayRender, setDelayRender] = useState(true);
@@ -56,7 +61,7 @@ const MapContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { drinksList } = useDrinksMapService({
+  const { drinkMarkerList, onClickDrinkMarker } = useDrinksMapService({
     endX: mapXY.endX,
     endY: mapXY.endY,
     page: 0,
@@ -221,8 +226,10 @@ const MapContainer = () => {
               }}
             />
           )}
-          {drinksList.map(({ latitude, longitude, drinkId }, index) => (
+          {drinkMarkerList.map(({ latitude, longitude, drinkId }, index) => (
             <MapMarker // 마커를 생성합니다
+              clickable={true}
+              onClick={() => onClickDrinkMarker(drinkId)}
               key={`${drinkId}-${latitude}-${longitude}-${index}`}
               position={{
                 // 마커가 표시될 위치입니다
@@ -231,6 +238,31 @@ const MapContainer = () => {
               }}
             />
           ))}
+          {drinkMarkerList.map(
+            ({ drinkId, isOpen, latitude, longitude, name }, index) => (
+              <CustomOverlayMap
+                key={`overlay-${drinkId}-${latitude}-${longitude}-${index}`}
+                position={{
+                  lat: latitude,
+                  lng: longitude,
+                }}
+              >
+                {isOpen && (
+                  <DrinkInfoPin>
+                    <PinText>{name}</PinText>
+                    <DrinkLink
+                      onClick={() =>
+                        router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)
+                      }
+                    >
+                      <SvgIcPrev transform="rotate(180)" />
+                    </DrinkLink>
+                  </DrinkInfoPin>
+                )}
+              </CustomOverlayMap>
+            ),
+          )}
+
           <MyLocationButton
             onClick={() => {
               toggleLocationLoading();
@@ -253,7 +285,7 @@ const MapContainer = () => {
         />
       </FilterBox> */}
       <DrinkBox>
-        {drinksList.map(
+        {drinkMarkerList.map(
           (
             { drinkId, name, latitude, longitude, image, manufacturer },
             index,
@@ -338,6 +370,44 @@ const MyLocationButton = styled.div`
   border-radius: 50%;
   box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4),
     0px 8px 20px 0px rgba(235, 235, 235, 0.4);
+`;
+
+const DrinkInfoPin = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 46px;
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background-color: white;
+
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.4);
+`;
+
+const PinText = styled.div`
+  ${({ theme }) => theme.typography.caption_chip};
+  text-align: center;
+  flex: 1;
+`;
+
+const DrinkLink = styled.div`
+  cursor: pointer;
+  ${({ theme }) => theme.typography.caption_chip};
+  background-color: ${({ theme }) => theme.colors.main_01};
+  color: ${({ theme }) => theme.colors.white};
+  height: 100%;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-size: 18px;
 `;
 
 export default MapContainer;
