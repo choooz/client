@@ -88,7 +88,7 @@ export default function useUpdateVoteForm() {
     (voteInfo: modifyDrinkVoteProps) => modifyDrinkVoteAPI(voteInfo),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
+        queryClient.invalidateQueries([queryKeys.MAIN_VOTE_LIST]);
         queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
         queryClient.invalidateQueries(reactQueryKeys.voteDetail(voteId));
         router.push(Path.VOTE_HOME);
@@ -99,7 +99,7 @@ export default function useUpdateVoteForm() {
     (voteInfo: modifyNormalVoteProps) => modifyNormalVoteAPI(voteInfo),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries([queryKeys.VOTE_LIST]);
+        queryClient.invalidateQueries([queryKeys.MAIN_VOTE_LIST]);
         queryClient.invalidateQueries(getMyCreatedVoteQueryKey);
         router.push(Path.VOTE_HOME);
       },

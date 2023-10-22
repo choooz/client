@@ -29,6 +29,7 @@ export default function useGetMyBookmarkedVoteListService(
         };
       },
       keepPreviousData: true,
+      staleTime: 0,
     },
   );
 

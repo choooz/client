@@ -19,7 +19,7 @@ const SearchInputWrapper = () => {
   return (
     <Wrapper>
       <SearchInput
-        placeholder="관심있는 우리술을 검색해보세요."
+        placeholder="관심있는 우리술을 찾아보세요."
         value={searchText}
         eventHandler={() => {
           router.push(`${Path.SEARCH_PAGE}?searchText=${ref.current?.value}`);

@@ -10,7 +10,7 @@ interface GetHotDrinkVoteResponse {
 export const getHotDrinkVote = async () => {
   const res = await httpFetch(`api/votes/drinks/hot`, {
     next: {
-      revalidate: 60 * 60, // 1시간
+      revalidate: 30 * 60, // 30분
     },
   });
   const data = await res.json();
