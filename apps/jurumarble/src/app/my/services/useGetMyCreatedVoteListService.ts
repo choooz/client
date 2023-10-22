@@ -29,6 +29,7 @@ export default function useGetMyCreatedVoteListService(
         };
       },
       keepPreviousData: true,
+      staleTime: 0,
     },
   );
 

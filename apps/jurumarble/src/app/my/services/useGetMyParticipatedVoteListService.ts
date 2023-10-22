@@ -29,6 +29,7 @@ export default function useGetMyParticipatedVoteListService(
         };
       },
       keepPreviousData: true,
+      staleTime: 0,
     },
   );
 

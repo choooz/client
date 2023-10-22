@@ -8,6 +8,9 @@ export default function useGetTheNumberOfMyVoteService() {
   const { data: theNumberOfMyVote } = useQuery(
     getTheNumberOfMyVoteQueryKey(),
     getTheNumberOfMyVoteAPI,
+    {
+      staleTime: 0,
+    },
   );
 
   return theNumberOfMyVote;
