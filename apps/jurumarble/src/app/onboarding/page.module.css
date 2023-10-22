@@ -15,7 +15,7 @@
 
 .img-wrapper {
   max-width: 720px;
-  margin: 0 auto 64px auto;
+  margin: 0 auto;
   background-color: var(--white);
 }
 
