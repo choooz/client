@@ -18,7 +18,7 @@ const LINK_LIST = [
   },
   {
     label: '개인정보처리방침',
-    href: '/',
+    href: Path.POLICY_PAGE,
   },
   {
     label: '고객센터',

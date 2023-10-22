@@ -1,14 +1,14 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import Path from 'lib/Path';
 import { deleteVote } from 'lib/apis/vote';
-import { reactQueryKeys } from 'lib/queryKeys';
+import { useRouter } from 'next/navigation';
 
 export default function useVoteDeleteService(voteId: number) {
-  const queryClient = useQueryClient();
+  const router = useRouter();
   const { mutate } = useMutation(() => deleteVote(voteId), {
     onSuccess: () => {
       alert('투표가 삭제되었습니다.');
-      queryClient.invalidateQueries([reactQueryKeys.voteList]);
-      window.location.href = 'vote';
+      router.push(Path.VOTE_HOME);
     },
   });
   return {

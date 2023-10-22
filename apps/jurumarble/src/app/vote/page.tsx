@@ -360,7 +360,6 @@ const BigFont = styled.span`
 
 const AskVoteText = styled.div`
   ${({ theme }) => theme.typography.headline02}
-  line-height: 130%;
   display: flex;
   align-items: flex-end;
   button {

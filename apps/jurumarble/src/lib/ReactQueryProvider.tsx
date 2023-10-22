@@ -12,12 +12,8 @@ export default function ReactQueryProvider({ children }: PropsWithChildren) {
         defaultOptions: {
           queries: {
             cacheTime: 1000 * 60 * 60 * 24,
-            refetchInterval: false,
             refetchIntervalInBackground: false,
-            refetchOnMount: false,
-            refetchOnReconnect: false,
-            refetchOnWindowFocus: false,
-            staleTime: 1000 * 60 * 60 * 24,
+            staleTime: 1000 * 60 * 60, // 1시간
           },
         },
       }),

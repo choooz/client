@@ -1,6 +1,5 @@
 'use client';
 
-import { Footer } from 'components/Footer';
 import { SideButtonHeader } from 'components/SideButtonHeader';
 import { getClassNames } from 'lib/styles/getClassNames';
 import Image from 'next/image';
@@ -36,7 +35,6 @@ const OnboardingPage = () => {
       <div className={cx('img-wrapper')}>
         <Image src={Onboarding} width={375} height={2112} alt="온보딩" />
       </div>
-      <Footer />
       <BottomButton />
     </div>
   );

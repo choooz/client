@@ -137,6 +137,7 @@ function SearchRestaurantModal({
               width="335px"
               height="56px"
               variant="primary"
+              disabled={!selectedImage}
               onClick={() => {
                 postRestaurantImage({
                   commentType: 'votes',

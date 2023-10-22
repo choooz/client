@@ -303,6 +303,7 @@ const Contents = styled.div`
   display: flex;
   align-items: center;
   ${({ theme }) => css`
+    ${theme.typography.body_long03}
     color: ${theme.colors.black_02};
   `}
 `;

@@ -37,8 +37,8 @@ export default function useInfiniteMainListService({
         return pages.length;
       },
       keepPreviousData: true,
-      cacheTime: Infinity,
-      staleTime: Infinity,
+      staleTime: 0,
+      cacheTime: 0,
     },
   );
 

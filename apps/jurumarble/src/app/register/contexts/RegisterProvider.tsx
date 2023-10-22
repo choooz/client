@@ -21,6 +21,7 @@ import {
 export const RegisterContext = createContext<{
   step: RegisterStepTypes;
   onNextStep: () => void;
+  onPrevStep: () => void;
   stepList: RegisterStepTypes[];
   currentStepIndex: number;
   drinkCapacity: DrinkCapacityTypes | null;
@@ -61,6 +62,7 @@ export const RegisterContext = createContext<{
   onChangeYearOfBirth: () => {},
   onDeleteYearOfBirth: () => {},
   onNextStep: () => {},
+  onPrevStep: () => {},
   onToggleWarningModal: () => {},
   step: 'STEP1',
   stepList: [],
@@ -103,6 +105,10 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     currentStepIndex < stepList.length
       ? setStep(stepList[currentStepIndex])
       : onToggleWarningModal();
+  };
+
+  const onPrevStep = () => {
+    currentStepIndex > 1 && setStep(stepList[currentStepIndex - 2]);
   };
 
   const onChangeDrinkCapacity = (id: DrinkCapacityTypes) => {
@@ -206,6 +212,7 @@ export const RegisterProvider = ({ children }: PropsWithChildren) => {
     onChangeYearOfBirth,
     onDeleteYearOfBirth,
     onNextStep,
+    onPrevStep,
     onToggleWarningModal,
     step,
     stepList,

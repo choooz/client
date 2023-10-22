@@ -9,7 +9,7 @@ export interface GetHotDrinkResponse {
 export const getHotDrinkList = async () => {
   const res = await httpFetch(`api/drinks/hot`, {
     next: {
-      revalidate: 60 * 60,
+      revalidate: 30 * 60, // 30분
     },
   });
   const data = await res.json();
