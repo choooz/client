@@ -16,6 +16,7 @@ const Path = {
   NAVER_LOGIN_PROCESS: '/login/naver-login-process',
   NOTIFICATION_PAGE: '/notification',
   ONBOARDING_PAGE: '/onboarding',
+  POLICY_PAGE: '/policy',
   POST_PAGE: '/vote/post',
   PROFILE_EDIT: '/my/edit',
 
