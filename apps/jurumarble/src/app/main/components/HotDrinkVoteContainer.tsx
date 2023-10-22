@@ -22,9 +22,9 @@ function HotDrinkVoteContainer() {
     <>
       <H2>
         우리술
-        <Main01Color> 투표</Main01Color>
+        <Main01Color> 인기 투표</Main01Color>
       </H2>
-      <H3>{nowTime}시, 지금 가장 인기있는 우리술 투표에요.</H3>
+      <H3>{nowTime}시, 지금 가장 인기있는 우리술 투표예요.</H3>
       <PopularVoteCard
         onClick={() => router.push(`${Path.VOTE_DETAIL_PAGE}/${voteId}`)}
       >

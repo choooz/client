@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 
 import styled from 'styled-components';
 
-import { GlobalHeader } from './components';
+import RegisterHeader from './components/RegisterHeader';
 import { RegisterProvider } from './contexts';
 import { RegisterFooterSection } from './sections';
 
@@ -12,7 +12,7 @@ export default function Layout({ children }: PropsWithChildren) {
   return (
     <RegisterProvider>
       <StyledLayout>
-        <GlobalHeader>회원가입</GlobalHeader>
+        <RegisterHeader />
         {children}
         <RegisterFooterSection />
       </StyledLayout>
