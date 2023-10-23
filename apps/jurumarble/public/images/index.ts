@@ -1,6 +1,3 @@
-export { default as EmptyAImg } from './AImg.png';
-export { default as ExImg1 } from './exe1.png';
-export { default as ExImg2 } from './exe2.png';
 export { default as DrinkImage } from './DrinkImage.png';
 export { default as mainBanner } from './mainBanner.png';
 export { default as DrinkCapacityLow } from './DrinkCapacityLow.png';
@@ -19,3 +16,5 @@ export { default as mobileSelectOnboarding } from './mobileSelectOnboarding.png'
 export { default as mobileMoveOnboarding } from './mobileMoveOnboarding.png';
 export { default as mobileDetailOnboarding } from './mobileDetailOnboarding.png';
 export { default as drinkStamp } from './drinkStamp.png';
+export { default as noSearchResult } from './noSearchResult.png';
+export { default as drinkWhiteImage } from './drinkWhiteImage.png';

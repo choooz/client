@@ -51,7 +51,7 @@ function DrinkCommentContainer() {
     return <div>에러</div>;
   }
   if (!comments) {
-    return <div>데이터 없음</div>;
+    return <></>;
   }
 
   const commentList = comments.pages.flatMap((page) => page.content);

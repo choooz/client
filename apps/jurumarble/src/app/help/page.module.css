@@ -1,17 +1,23 @@
 .container {
   background-color: var(--bg_02);
-  padding: 20px 20px 60px 20px;
+  padding-top: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.mt-6 {
-  margin-top: 6px;
+.text-align-center {
+  text-align: center;
 }
 
 .image-wrapper {
   position: relative;
-  width: 100%;
-  aspect-ratio: 1;
   margin-top: 18px;
+}
+
+.mt-6 {
+  margin-top: 6px;
 }
 
 .mt-40 {
