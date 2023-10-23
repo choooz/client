@@ -4,7 +4,7 @@ import { media } from 'lib/styles';
 import depths from 'lib/styles/depths';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ExImg1 } from 'public/images';
+import { drinkWhiteImage } from 'public/images';
 import { SvgIcCheck } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
 
@@ -22,7 +22,7 @@ type Direction = 'left' | 'right';
 // }, [imageB]);
 
 const getSafeImage = (image: string) =>
-  image.includes('http') ? image : ExImg1;
+  image.includes('http') ? image : drinkWhiteImage;
 
 interface Props {
   titleA: string;
