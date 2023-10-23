@@ -48,7 +48,7 @@ function VoteHomePage() {
    * @TODO 여러번 뜨는 현상 지속시 삭제
    */
   params.get('isSuccess') &&
-    toast.success('정상적으로 투표가 등록되었습니다!.', {
+    toast.success('정상적으로 투표가 등록되었습니다.', {
       toastId: 'voteSuccess',
     });
 
