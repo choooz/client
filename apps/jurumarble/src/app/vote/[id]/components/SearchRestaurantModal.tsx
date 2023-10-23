@@ -89,7 +89,7 @@ function SearchRestaurantModal({
         }
       >
         <TitleStyled>
-          {selectedRestaurant ? '음식점 검색' : '이미지 선택'}
+          {selectedRestaurant ? '이미지 선택' : '음식점 검색'}
         </TitleStyled>
       </VoteHeader>
       <Container>
@@ -197,7 +197,7 @@ const RestaurantList = styled.ul`
   flex-direction: column;
   margin-top: 8px;
   overflow: auto;
-  height: 70vh;
+  height: 80vh;
 `;
 
 const FoodImageList = styled.ul`

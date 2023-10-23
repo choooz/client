@@ -10,7 +10,7 @@ import { Button } from 'components/button';
 import Path from 'lib/Path';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ExImg1 } from 'public/images';
+import { drinkWhiteImage } from 'public/images';
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk';
 import { SvgIcPrev } from 'src/assets/icons/components';
 import SvgIcMyLocationFloating from 'src/assets/icons/ic_my_location_floating.svg';
@@ -296,7 +296,7 @@ const MapContainer = () => {
                 id: drinkId,
                 name: name,
                 manufacturer: manufacturer,
-                image: image || (ExImg1 as unknown as string),
+                image: image || (drinkWhiteImage as unknown as string),
               }}
               onClickReplaceDrinkInfo={() => {
                 setChangeMapCenter(latitude, longitude);

@@ -169,7 +169,7 @@ const FlexRow = styled.div`
 `;
 
 const FlexBetweenRow = styled.div`
-  padding: 20px 0 32px 0;
+  padding: 20px 0;
   display: flex;
   gap: 8px;
   justify-content: space-between;
