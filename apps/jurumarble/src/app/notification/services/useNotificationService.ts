@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import {
   getNotificationListAPI,
   readNotificationAPI,
@@ -24,32 +24,13 @@ export default function useNotificationService() {
           ...notification,
           createdAt: formatDate(notification.createdAt),
         })),
+      staleTime: 0,
     },
   );
-
-  const queryClient = useQueryClient();
 
   const { mutate: readNotification } = useMutation(
     (notificationId: ReadNotificationProps) =>
       readNotificationAPI(notificationId),
-    {
-      async onMutate(notificationId) {
-        await queryClient.cancelQueries(getQueryKey);
-        const previousData = queryClient.getQueryData(getQueryKey);
-        queryClient.setQueryData(getQueryKey, (old: any) => [
-          old,
-          notificationId,
-        ]);
-        return { previousData };
-      },
-      onError(err, notificationId, context) {
-        queryClient.setQueryData(getQueryKey, context?.previousData);
-      },
-
-      onSettled() {
-        queryClient.invalidateQueries({ queryKey: getQueryKey });
-      },
-    },
   );
 
   return { notificationList, isLoading, readNotification };
