@@ -2,7 +2,6 @@
 
 import VoteHeader from 'components/VoteHeader';
 import { Button } from 'components/button';
-import Path from 'lib/Path';
 import { NotificationType } from 'lib/apis/notification';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -85,7 +84,7 @@ function NotificationPage() {
                 key={id}
                 isRead={isRead}
                 onClick={() => {
-                  router.push(`${Path.VOTE_DETAIL_PAGE}/${url}`);
+                  router.push(url);
                   readNotification(id);
                 }}
               >
