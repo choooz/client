@@ -1,6 +1,5 @@
 'use client';
 
-import { media } from '@monorepo/ui/styles/media';
 import VoteHeader from 'components/VoteHeader';
 import { Button } from 'components/button';
 import Path from 'lib/Path';
