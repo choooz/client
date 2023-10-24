@@ -1,5 +1,6 @@
 'use client';
 
+import { media } from '@monorepo/ui/styles/media';
 import VoteHeader from 'components/VoteHeader';
 import { Button } from 'components/button';
 import Path from 'lib/Path';
@@ -10,25 +11,48 @@ import { DrinkImage } from 'public/images';
 import {
   SvgIcPrevious,
   SvgNotificationCheck,
+  SvgReadAdminNotification,
+  SvgUnreadAdminNotification,
 } from 'src/assets/icons/components';
 import styled, { css, useTheme } from 'styled-components';
 
 import useNotificationService from './services/useNotificationService';
 
-const NOTIFICATION_TYPE: Record<NotificationType, string> = {
-  VOTE: '투표에 10명 이상이 참여했어요.',
-  COMMENT: '투표에 댓글이 달렸어요.',
-  ADMIN_NOTIFY: '관리자 알림',
-};
-
 function NotificationPage() {
+  const { colors } = useTheme();
+  const NOTIFICATION_TYPE_ICON: Record<
+    NotificationType,
+    { true: JSX.Element; false: JSX.Element }
+  > = {
+    VOTE: {
+      true: (
+        <SvgNotificationCheck width={32} height={32} fill={colors.black_04} />
+      ),
+      false: (
+        <SvgNotificationCheck width={32} height={32} fill={colors.main_01} />
+      ),
+    },
+
+    COMMENT: {
+      true: (
+        <SvgNotificationCheck width={32} height={32} fill={colors.black_04} />
+      ),
+      false: (
+        <SvgNotificationCheck width={32} height={32} fill={colors.main_01} />
+      ),
+    },
+    ADMIN_NOTIFY: {
+      true: <SvgReadAdminNotification />,
+      false: <SvgUnreadAdminNotification />,
+    },
+  };
+
   const router = useRouter();
   const { notificationList, isLoading, readNotification } =
     useNotificationService();
-  const { colors } = useTheme();
 
   return (
-    <>
+    <div>
       <VoteHeader
         leftButton={
           <PreviousButton onClick={() => router.back()}>
@@ -43,15 +67,21 @@ function NotificationPage() {
          * @TODO 로딩 컴포넌트 추가
          */
         <></>
-      ) : !notificationList ? (
+      ) : notificationList?.length === 0 ? (
         <EmptyNotification>
-          <Image alt="" src={DrinkImage} style={{ borderRadius: '100px' }} />
+          <Image
+            alt=""
+            src={DrinkImage}
+            width={146}
+            height={146}
+            style={{ borderRadius: '200px' }}
+          />
           받은 알림이 없어요.
         </EmptyNotification>
       ) : (
         <NotificationList>
-          {notificationList.map(
-            ({ content, createdAt, id, type, isRead, url }) => (
+          {notificationList?.map(
+            ({ content, title, createdAt, id, type, isRead, url }) => (
               <NotificationItem
                 key={id}
                 isRead={isRead}
@@ -60,14 +90,10 @@ function NotificationPage() {
                   readNotification(id);
                 }}
               >
-                <SvgNotificationCheck
-                  width={32}
-                  height={32}
-                  fill={isRead ? colors.black_04 : colors.main_01}
-                />
+                {NOTIFICATION_TYPE_ICON[type][isRead ? 'true' : 'false']}
                 <ContentBox>
-                  <Content>{content}</Content>
-                  <TypeMessage>{NOTIFICATION_TYPE[type]}</TypeMessage>
+                  <Content>{title}</Content>
+                  <TypeMessage>{content}</TypeMessage>
                   <CreatedAt>{createdAt}</CreatedAt>
                 </ContentBox>
               </NotificationItem>
@@ -75,7 +101,7 @@ function NotificationPage() {
           )}
         </NotificationList>
       )}
-    </>
+    </div>
   );
 }
 
@@ -83,14 +109,15 @@ const EmptyNotification = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 22px;
-  margin-top: 16%;
+  gap: 24px;
+  margin-top: 120px;
 `;
 
 const PreviousButton = styled(Button)`
   ${({ theme }) => css`
     background-color: ${theme.colors.white};
-    margin-left: 20px;
+    position: relative;
+    left: 20px;
   `}
 `;
 
@@ -120,6 +147,12 @@ const ContentBox = styled.div`
 const Content = styled.div`
   ${({ theme }) => css`
     ${theme.typography.body04};
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    max-width: 627px;
+    width: 76vw;
   `}
 `;
 

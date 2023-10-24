@@ -6,6 +6,7 @@ interface Notification {
   id: number;
   url: string;
   content: string;
+  title: string;
   type: NotificationType;
   isRead: boolean;
   createdAt: string;
@@ -15,7 +16,7 @@ type GetNotificationListResponse = Notification[];
 
 export const getNotificationListAPI = async () => {
   const response = await http.get<GetNotificationListResponse>(
-    '/api/notifications',
+    '/api/notifications/v2',
   );
   return response.data;
 };

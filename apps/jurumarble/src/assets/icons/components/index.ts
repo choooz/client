@@ -27,3 +27,5 @@ export { default as SvgWarningIcon } from './IcWarningIcon';
 export { default as SvgNotificationCheck } from './IcNotificationCheck';
 export { default as SvgInfo } from './IcInfo';
 export { default as SvgNext } from './IcNext';
+export { default as SvgReadAdminNotification } from './IcReadAdminNotification';
+export { default as SvgUnreadAdminNotification } from './IcUnreadAdminNotification';
