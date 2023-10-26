@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteComment, putComment } from 'lib/apis/comment';
 import { queryKeys } from 'lib/queryKeys';
+import { toast } from 'react-toastify';
 
 export default function useCommentDeleteService(
   commentType: 'votes' | 'drinks',
@@ -12,7 +13,7 @@ export default function useCommentDeleteService(
     () => deleteComment(commentType, typeId, commentId),
     {
       onSuccess: () => {
-        alert('댓글이 삭제되었습니다.');
+        toast.success('댓글이 삭제되었습니다.');
         queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
       },
     },
@@ -22,7 +23,7 @@ export default function useCommentDeleteService(
     (comment: string) => putComment(commentType, typeId, commentId, comment),
     {
       onSuccess: () => {
-        alert('댓글이 수정되었습니다.');
+        toast.success('댓글이 수정되었습니다.');
         queryClient.invalidateQueries([queryKeys.DETAIL_COMMENT_LIST]);
       },
     },
