@@ -5,7 +5,7 @@ import depths from 'lib/styles/depths';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { drinkWhiteImage } from 'public/images';
-import { SvgIcCheck } from 'src/assets/icons/components';
+import { SvgIcCheck, SvgIcPrev } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
 
 type AorB = 'A' | 'B';
@@ -114,7 +114,10 @@ function VoteDescription({
               <OverlayPercent>{percentageA}%</OverlayPercent>
               <OverlayCount> {totalCountA}명</OverlayCount>
               {voteType === 'DRINK' && (
-                <OverlayButton>술 정보 &nbsp; {'>'}</OverlayButton>
+                <OverlayButton>
+                  술 정보 &nbsp;
+                  <SvgIcPrev transform="rotate(180)" height={10} width={12} />
+                </OverlayButton>
               )}
             </div>
             <AorBMark AorB="A">A</AorBMark>
@@ -143,7 +146,10 @@ function VoteDescription({
               <OverlayPercent>{percentageB}%</OverlayPercent>
               <OverlayCount> {totalCountB}명</OverlayCount>
               {voteType === 'DRINK' && (
-                <OverlayButton>술 정보&nbsp; {'>'}</OverlayButton>
+                <OverlayButton>
+                  술 정보&nbsp;
+                  <SvgIcPrev transform="rotate(180)" height={10} width={12} />
+                </OverlayButton>
               )}
             </div>
             <AorBMark AorB="B">B</AorBMark>
@@ -298,6 +304,7 @@ const OverlayButton = styled.button`
       background-color: ${theme.colors.main_01};
     `}
   display: flex;
+  align-items: center;
   border-radius: 4px;
   margin-top: 8px;
   padding: 6px 8px;
