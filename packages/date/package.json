@@ -1,0 +1,15 @@
+{
+  "name": "@mogakko/date",
+  "version": "0.1.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "eslint": "eslint -c .eslintrc.js  --ignore-path  ../../.eslintignore --ext .js,.jsx,.ts,.tsx . --cache",
+    "eslint:fix": "yarn eslint --fix"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "eslint-config-mogakko": "workspace:*",
+    "typescript": "4.9.3"
+  }
+}
