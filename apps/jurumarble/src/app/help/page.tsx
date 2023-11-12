@@ -5,7 +5,7 @@ import { getClassNames } from 'lib/styles/getClassNames';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { howToReportImage } from 'public/images';
-import { SvgIcX } from 'src/assets/icons/components';
+import { SvgIcClose } from 'src/assets/icons/components';
 
 import styles from './page.module.css';
 
@@ -21,12 +21,11 @@ function HelpPage() {
       <SideButtonHeader
         rightButton={
           <button
-            className={cx('close-button')}
             onClick={() => {
               router.back();
             }}
           >
-            <SvgIcX width={24} height={24} />
+            <SvgIcClose width={24} height={24} />
           </button>
         }
       >

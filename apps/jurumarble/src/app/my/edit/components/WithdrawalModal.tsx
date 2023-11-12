@@ -1,7 +1,7 @@
 import { useToggle } from '@monorepo/hooks';
 import VoteHeader from 'components/VoteHeader';
 import { Button, ModalTemplate } from 'components/index';
-import { SvgIcX } from 'src/assets/icons/components';
+import { SvgIcClose } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -20,7 +20,7 @@ function WithdrawalModal({ onToggleWithdrawalModal, deleteUser }: Props) {
       <VoteHeader
         rightButton={
           <CloseButton onClick={onToggleWithdrawalModal}>
-            <SvgIcX width={24} height={24} />
+            <SvgIcClose width={24} height={24} />
           </CloseButton>
         }
       >

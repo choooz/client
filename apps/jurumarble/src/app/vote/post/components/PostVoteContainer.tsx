@@ -9,7 +9,7 @@ import { Button, Input } from 'components/index';
 import { media } from 'lib/styles';
 import depths from 'lib/styles/depths';
 import Image from 'next/image';
-import { SvgIcX, SvgInfo } from 'src/assets/icons/components';
+import { SvgIcClose, SvgInfo } from 'src/assets/icons/components';
 import { DrinkInfoType } from 'src/types/drink';
 import styled, { css } from 'styled-components';
 
@@ -62,7 +62,7 @@ function PostVoteContainer() {
                 술 검색하기 버튼을 클릭하면 <br />
                 우리술을 편하게 등록할 수 있어요.
                 <button onClick={onToggleTooltip}>
-                  <SvgIcX width={16} height={16} />
+                  <SvgIcClose width={16} height={16} />
                 </button>
               </BalloonText>
             </Ballon>

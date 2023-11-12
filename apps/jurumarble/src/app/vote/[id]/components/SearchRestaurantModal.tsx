@@ -9,7 +9,7 @@ import { RestaurantInfo } from 'lib/apis/restaurant';
 import { REGION_LIST } from 'lib/constants';
 import { transitions } from 'lib/styles';
 import Image from 'next/image';
-import SvgIcX from 'src/assets/icons/components/IcX';
+import { SvgIcClose } from 'src/assets/icons/components';
 import styled, { css, DefaultTheme } from 'styled-components';
 
 import RestaurantItem from './RestaurantItem';
@@ -84,7 +84,7 @@ function SearchRestaurantModal({
       <VoteHeader
         rightButton={
           <CloseButton onClick={onToggleSearchRestaurantModal}>
-            <SvgIcX width={24} height={24} />
+            <SvgIcClose width={24} height={24} />
           </CloseButton>
         }
       >

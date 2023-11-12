@@ -38,7 +38,7 @@ const SearchInput = forwardRef<HTMLInputElement, Props>(
         />
         <SearchButton onClick={eventHandler}>
           <SvgIcSearch width={22} height={22} fill={theme.colors.black_04} />
-          {/* <SvgIcX
+          {/* <SvgIcClose
             width={18}
             height={18}
             color="#CCCCCC"
