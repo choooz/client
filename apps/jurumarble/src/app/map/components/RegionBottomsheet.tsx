@@ -1,7 +1,7 @@
 import { Button, Portal } from 'components/index';
 import { REGION_LIST } from 'lib/constants';
 import { transitions } from 'lib/styles';
-import { SvgIcPrev, SvgIcX } from 'src/assets/icons/components';
+import { SvgIcClose, SvgIcPrev } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -27,7 +27,7 @@ const RegionBottomSheet = ({
         <Inner>
           <Title>지역 설정</Title>
           <Exit>
-            <SvgIcX />
+            <SvgIcClose />
           </Exit>
 
           <SelectBox>

@@ -27,8 +27,3 @@
   max-width: 720px;
   background-color: var(--white);
 }
-
-.close-button {
-  margin-right: 20px;
-  display: flex;
-}

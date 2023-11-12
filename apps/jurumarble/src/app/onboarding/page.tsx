@@ -5,7 +5,7 @@ import { getClassNames } from 'lib/styles/getClassNames';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Onboarding } from 'public/images';
-import { SvgIcX } from 'src/assets/icons/components';
+import { SvgIcClose } from 'src/assets/icons/components';
 
 import BottomButton from './components/BottomButton';
 import styles from './page.module.css';
@@ -23,12 +23,11 @@ const OnboardingPage = () => {
       <SideButtonHeader
         rightButton={
           <button
-            className={cx('close-button')}
             onClick={() => {
               router.back();
             }}
           >
-            <SvgIcX width={24} height={24} />
+            <SvgIcClose width={24} height={24} />
           </button>
         }
       />
