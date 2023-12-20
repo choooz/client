@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/6261b550-0591-40d7-ae93-5abbbbe989e1">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/9529c335-88f9-4c70-8c41-0f056fa92187">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/25391e3c-732f-4877-82bb-1d44a75bd22c">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/45f6abd0-184b-441a-a7d2-390559ac02c5">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/3e01874f-9014-47f0-b65a-97003562c19f">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/1743c0d1-9a50-4b5c-976a-87df7f76253e">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/6e92e16d-1826-4ccf-a239-95e544184ea8">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/8af5b95b-ed98-4325-b751-4a2307f39f92">
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/df1b0a46-56d1-4a24-a81b-2ba0092d6982">
+<img width="1316" alt="image" src="https://github.com/choooz/client/assets/57664427/7b4ba198-1378-4c87-b6fc-50727bf4e17e">
+<img width="1314" alt="image" src="https://github.com/choooz/client/assets/57664427/5545a110-b70a-4d11-8935-b07637643868">
+<img width="1256" alt="image" src="https://github.com/choooz/client/assets/57664427/8359fd7d-6942-476f-a171-005b9d653071">
+<img width="1255" alt="image" src="https://github.com/choooz/client/assets/57664427/af4656a9-7afe-453e-a4da-9ca522a51127">
+<img width="1255" alt="image" src="https://github.com/choooz/client/assets/57664427/73fb9351-1c40-48a3-b5c0-694d7654ac3a">
+<img width="1254" alt="image" src="https://github.com/choooz/client/assets/57664427/6369688c-459b-41bb-8d55-c1ee0a876be4">
+<img width="1240" alt="image" src="https://github.com/choooz/client/assets/57664427/5f387840-fb9c-4da8-90fe-400584c1fee2">
+<img width="1170" alt="image" src="https://github.com/choooz/client/assets/57664427/6212bc7e-cb1f-4e4c-bfd1-40ed7ecfe49e">
+<img width="1416" alt="image" src="https://github.com/choooz/client/assets/57664427/ba32190e-a7f4-41b7-a0ce-0c1df21fdf02">
+<img width="1394" alt="image" src="https://github.com/choooz/client/assets/57664427/cf220e28-5d59-4c26-9f5f-dc0705c7fb04">

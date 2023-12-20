@@ -1,34 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/0fd4a240-f868-4118-b63b-2eac8212ea9c">
 
-## Getting Started
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/fa468901-9cfe-45e9-968c-e103320a94e6">
 
-First, run the development server:
+<img width="1680" alt="image" src="https://github.com/choooz/client/assets/57664427/42d88d68-2bef-4fc1-a7d4-a00d6d33ddcc">
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<img width="1663" alt="image" src="https://github.com/choooz/client/assets/57664427/2b24a9c4-b350-44d6-b23d-bcf130acc77a">
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![회원가입](https://github.com/choooz/client/assets/57664427/e638d516-e8ee-42cc-8677-27cc294b30c8)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![투표 등록](https://github.com/choooz/client/assets/57664427/6208c5c1-f63b-4121-b754-22b2ac304f98)
+![통계](https://github.com/choooz/client/assets/57664427/9734f859-60f3-4cac-a7f5-89a6d15dbe64)
+![검색](https://github.com/choooz/client/assets/57664427/188c85e4-f360-4de8-8ba6-0571c5de2569)
+![유저 정보](https://github.com/choooz/client/assets/57664427/ebf6b0f6-45d9-404b-b654-5c4c8d57b10c)
+<img width="1648" alt="image" src="https://github.com/choooz/client/assets/57664427/8beea0b9-148b-4573-a8d8-a09a349e5a9a">
+<img width="1679" alt="image" src="https://github.com/choooz/client/assets/57664427/441f5cee-67bc-4525-9178-9ad95c352d57">
