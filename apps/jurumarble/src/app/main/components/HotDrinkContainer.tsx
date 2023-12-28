@@ -1,17 +1,18 @@
 'use client';
 
+import { getIsomorphicDate } from '@mogakko/date';
 import styled, { css } from 'styled-components';
 
 import Carousel from './Carousel';
 import useGetHotDrinkListService from '../services/useGetHotDrinkListService';
+
+const nowTime = getIsomorphicDate().getHours();
 
 function HotDrinkContainer() {
   const { data: hotDrinkList } = useGetHotDrinkListService();
   if (!hotDrinkList) {
     return null;
   }
-
-  const nowTime = new Date().getHours();
 
   return (
     <>

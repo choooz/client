@@ -28,6 +28,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:packages/browser-api"\
       },\
       {\
+        "name": "@mogakko/date",\
+        "reference": "workspace:packages/date"\
+      },\
+      {\
         "name": "eslint-config-mogakko",\
         "reference": "workspace:packages/eslint-config-mogakko"\
       },\
@@ -52,6 +56,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["@mogakko/browser-api", ["workspace:packages/browser-api"]],\
+      ["@mogakko/date", ["workspace:packages/date"]],\
       ["@mogakko/http-fetch", ["workspace:packages/http-fetch"]],\
       ["@mogakko/prettier-config", ["workspace:packages/prettier-config"]],\
       ["@monorepo/chooz", ["workspace:apps/chooz"]],\
@@ -4277,6 +4282,18 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "SOFT"\
         }]\
       ]],\
+      ["@mogakko/date", [\
+        ["workspace:packages/date", {\
+          "packageLocation": "./packages/date/",\
+          "packageDependencies": [\
+            ["@mogakko/date", "workspace:packages/date"],\
+            ["eslint", "npm:8.51.0"],\
+            ["eslint-config-mogakko", "virtual:d5d96e77964400fc4762308f8b56a1eb5ff206383418a2fcee04c20f08ffa650ba95923737bcbe8ba72eafd60eb6e8fd7627ea8d76fd8bc62bc6c89e4b46b027#workspace:packages/eslint-config-mogakko"],\
+            ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
       ["@mogakko/http-fetch", [\
         ["workspace:packages/http-fetch", {\
           "packageLocation": "./packages/http-fetch/",\
@@ -4365,6 +4382,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@monorepo/jurumarble", "workspace:apps/jurumarble"],\
             ["@emotion/is-prop-valid", "npm:1.2.1"],\
             ["@mogakko/browser-api", "workspace:packages/browser-api"],\
+            ["@mogakko/date", "workspace:packages/date"],\
             ["@mogakko/http-fetch", "workspace:packages/http-fetch"],\
             ["@monorepo/hooks", "virtual:a9e685c95fc9c2c05e15b14465ecc20924383932b7a1aa62172e110ba174ebedc352c8daf5023eb54ef5f0a5595ca6cf8763ef2477e003ebd1850bfb16231d67#workspace:packages/hooks"],\
             ["@monorepo/ui", "virtual:8ec4233c825b2c709f2ff549456a05fb98060d621f5df14748cda36fdb51190eccc2e438466f7464c85557cdad97eb73aa6580e78bca957a1149bfc58c6ddf34#workspace:packages/ui"],\

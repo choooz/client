@@ -1,11 +1,14 @@
 'use client';
 
+import { getIsomorphicDate } from '@mogakko/date';
 import Path from 'lib/Path';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled, { css } from 'styled-components';
 
 import { useGetHotDrinkVoteService } from '../services/useGetHotDrinkVoteService';
+
+const nowTime = getIsomorphicDate().getHours();
 
 function HotDrinkVoteContainer() {
   const router = useRouter();
@@ -15,8 +18,6 @@ function HotDrinkVoteContainer() {
     return null;
   }
   const { voteId, voteTitle, drinkAImage, drinkBImage } = hotDrinkVote;
-
-  const nowTime = new Date().getHours();
 
   return (
     <>

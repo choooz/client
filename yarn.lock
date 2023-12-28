@@ -1679,6 +1679,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@mogakko/date@workspace:*, @mogakko/date@workspace:packages/date":
+  version: 0.0.0-use.local
+  resolution: "@mogakko/date@workspace:packages/date"
+  dependencies:
+    eslint: ^8.51.0
+    eslint-config-mogakko: "workspace:*"
+    typescript: 4.9.3
+  languageName: unknown
+  linkType: soft
+
 "@mogakko/http-fetch@workspace:*, @mogakko/http-fetch@workspace:packages/http-fetch":
   version: 0.0.0-use.local
   resolution: "@mogakko/http-fetch@workspace:packages/http-fetch"
@@ -1744,6 +1754,7 @@ __metadata:
   dependencies:
     "@emotion/is-prop-valid": ^1.2.1
     "@mogakko/browser-api": "workspace:*"
+    "@mogakko/date": "workspace:*"
     "@mogakko/http-fetch": "workspace:*"
     "@monorepo/hooks": "workspace:*"
     "@monorepo/ui": "workspace:*"
