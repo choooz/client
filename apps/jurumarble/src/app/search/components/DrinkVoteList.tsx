@@ -23,7 +23,7 @@ function DrinkVoteList({
 
   const { voteDrinkList, subscribe } = useVoteDrinkService({
     page: 0,
-    size: 3,
+    size: 10,
     keyword: searchText,
     region: regionOption,
     sortBy: sortOption,
