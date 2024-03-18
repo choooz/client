@@ -11,7 +11,6 @@ interface Props {
   isSelectedTab: boolean;
   onToggleReplaceLoginPageModal: () => void;
 }
-
 function DrinkVoteList({
   searchText,
   sortOption,
@@ -28,11 +27,9 @@ function DrinkVoteList({
     region: regionOption,
     sortBy: sortOption,
   });
-
   if (!voteDrinkList) {
     return <></>;
   }
-
   return (
     <Container>
       {voteDrinkList.map((voteDrink, index) => (
@@ -46,12 +43,10 @@ function DrinkVoteList({
     </Container>
   );
 }
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 24px;
   gap: 8px;
 `;
-
 export default DrinkVoteList;

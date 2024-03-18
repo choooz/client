@@ -7,7 +7,7 @@ import SearchInput from 'components/SearchInput';
 import VoteHeader from 'components/VoteHeader';
 import { Button, ModalTemplate } from 'components/index';
 import useInput from 'hooks/useInput';
-import SvgIcX from 'src/assets/icons/components/IcX';
+import { SvgIcClose } from 'src/assets/icons/components';
 import { DrinkInfoType } from 'src/types/drink';
 import styled, { css } from 'styled-components';
 
@@ -59,7 +59,7 @@ function DrinkSearchModal({
       <VoteHeader
         rightButton={
           <CloseButton onClick={onToggleDrinkSearchModal}>
-            <SvgIcX width={24} height={24} />
+            <SvgIcClose width={24} height={24} />
           </CloseButton>
         }
       >

@@ -1,4 +1,4 @@
-import SvgIcX from 'src/assets/icons/components/IcX';
+import { SvgIcClose } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -11,7 +11,7 @@ function SelectedDrinkChip({ children, onClickDeleteItem }: Props) {
     <SelectedChip>
       <SelectedName>{children}</SelectedName>
       <SelectCancelButton onClick={onClickDeleteItem}>
-        <SvgIcX width={12} height={12} />
+        <SvgIcClose width={12} height={12} />
       </SelectCancelButton>
     </SelectedChip>
   );

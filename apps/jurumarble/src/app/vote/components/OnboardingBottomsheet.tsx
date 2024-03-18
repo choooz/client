@@ -13,7 +13,7 @@ import {
   mobileMoveOnboarding,
   mobileSelectOnboarding,
 } from 'public/images';
-import { SvgIcX } from 'src/assets/icons/components';
+import { SvgIcClose } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
 
 interface CardProps {
@@ -97,7 +97,7 @@ const OnboardingBottomsheet = ({ onToggleOnboarding }: Props) => {
       <BottomSheet>
         <Inner>
           <Exit onClick={onToggleOnboarding}>
-            <SvgIcX />
+            <SvgIcClose width={24} height={24} />
           </Exit>
           <Title>투표를 좀 더 재밌게 참여해 볼까요?</Title>
           <Description>

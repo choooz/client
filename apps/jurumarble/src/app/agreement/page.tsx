@@ -3,7 +3,7 @@
 import { SideButtonHeader } from 'components/SideButtonHeader';
 import { getClassNames } from 'lib/styles/getClassNames';
 import { useRouter } from 'next/navigation';
-import { SvgIcX } from 'src/assets/icons/components';
+import { SvgIcClose } from 'src/assets/icons/components';
 
 import styles from './page.module.css';
 
@@ -19,12 +19,11 @@ function AgreementPage() {
       <SideButtonHeader
         rightButton={
           <button
-            className={cx('close-button')}
             onClick={() => {
               router.back();
             }}
           >
-            <SvgIcX width={24} height={24} />
+            <SvgIcClose width={24} height={24} />
           </button>
         }
       >
