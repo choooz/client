@@ -1,6 +1,7 @@
 'use client';
 
 import Path from 'lib/Path';
+import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled, { css } from 'styled-components';
@@ -18,6 +19,9 @@ function HotDrinkVoteContainer() {
 
   const nowTime = new Date().getHours();
 
+  const imageAUrl = classifyImageUrl(drinkAImage);
+  const imageBUrl = classifyImageUrl(drinkBImage);
+
   return (
     <>
       <H2>
@@ -33,7 +37,7 @@ function HotDrinkVoteContainer() {
             <DrinkImageWrapper>
               <Image
                 alt="A 이미지"
-                src={drinkAImage}
+                src={imageAUrl}
                 fill
                 style={{ borderRadius: '80px' }}
               />
@@ -43,7 +47,7 @@ function HotDrinkVoteContainer() {
             <DrinkImageWrapper>
               <Image
                 alt="B 이미지"
-                src={drinkBImage}
+                src={imageBUrl}
                 fill
                 style={{ borderRadius: '80px' }}
               />

@@ -1,5 +1,6 @@
 import { transitions } from 'lib/styles';
 import { isLogin } from 'lib/utils/auth';
+import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
 import Image from 'next/image';
 import useDrinkStampService from 'services/useDrinkStampService';
 import SvgStamp from 'src/assets/icons/components/IcStamp';
@@ -28,6 +29,8 @@ function DrinkItem({
 }: Props) {
   const { id, name, manufacturer, image } = drinkInfo;
 
+  const imageUrl = classifyImageUrl(image);
+
   const { colors } = useTheme();
 
   const { isStampedDrink, postDrinkEnjoy } = useDrinkStampService(id);
@@ -43,7 +46,7 @@ function DrinkItem({
       <ImageWrapper>
         <Image
           alt={name}
-          src={image}
+          src={imageUrl}
           width={88}
           height={88}
           style={{ borderRadius: '10px' }}

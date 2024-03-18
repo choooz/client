@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { ContentSwiper } from '@monorepo/ui';
 import Path from 'lib/Path';
 import { GetHotDrinkResponse } from 'lib/apis/drink';
+import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SvgIcPrevious, SvgNext } from 'src/assets/icons/components';
@@ -44,28 +45,33 @@ function Carousel({ hotDrinkList }: Props) {
             },
             modules: [Autoplay],
           }}
-          renderItem={({ drinkId, image, name, manufactureAddress }, index) => (
-            <Slide
-              key={drinkId}
-              onClick={() => router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)}
-            >
-              <Box>
-                <DrinkImageWrapper>
-                  <RankginMark>{index + 1}</RankginMark>
-                  <Image
-                    alt="전통주"
-                    src={image}
-                    fill
-                    style={{ borderRadius: '10px' }}
-                  />
-                </DrinkImageWrapper>
-                <DrinkText>
-                  {name}
-                  <AreaName>{manufactureAddress}</AreaName>
-                </DrinkText>
-              </Box>
-            </Slide>
-          )}
+          renderItem={({ drinkId, image, name, manufactureAddress }, index) => {
+            const imageUrl = classifyImageUrl(image);
+            return (
+              <Slide
+                key={drinkId}
+                onClick={() =>
+                  router.push(`${Path.DRINK_INFO_PAGE}/${drinkId}`)
+                }
+              >
+                <Box>
+                  <DrinkImageWrapper>
+                    <RankginMark>{index + 1}</RankginMark>
+                    <Image
+                      alt="전통주"
+                      src={imageUrl}
+                      fill
+                      style={{ borderRadius: '10px' }}
+                    />
+                  </DrinkImageWrapper>
+                  <DrinkText>
+                    {name}
+                    <AreaName>{manufactureAddress}</AreaName>
+                  </DrinkText>
+                </Box>
+              </Slide>
+            );
+          }}
         />
         <CarouselControlContainer>
           <DivideLine />

@@ -1,5 +1,6 @@
 import Path from 'lib/Path';
 import { isLogin } from 'lib/utils/auth';
+import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
 import { useRouter } from 'next/navigation';
 import useBookmarkService from 'services/useBookmarkService';
 import { Content } from 'src/types/vote';
@@ -18,6 +19,9 @@ interface Props {
  */
 function DrinkVoteItem({ voteDrink, onToggleReplaceLoginPageModal }: Props) {
   const { voteId, region, title, imageA, imageB, votedCount } = voteDrink;
+
+  const imageAUrl = classifyImageUrl(imageA);
+  const imageBUrl = classifyImageUrl(imageB);
 
   const { isBookmark, mutateBookMark } = useBookmarkService(voteId);
 
@@ -38,7 +42,7 @@ function DrinkVoteItem({ voteDrink, onToggleReplaceLoginPageModal }: Props) {
         isBookmark={isBookmark}
         votedCount={votedCount}
       />
-      <VoteDescription imageA={imageA} imageB={imageB} />
+      <VoteDescription imageA={imageAUrl} imageB={imageBUrl} />
     </Container>
   );
 }
