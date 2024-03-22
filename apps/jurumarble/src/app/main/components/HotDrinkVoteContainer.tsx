@@ -1,8 +1,7 @@
 'use client';
 
+import DrinkImageWrapper from 'components/DrinkImageWrapper';
 import Path from 'lib/Path';
-import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styled, { css } from 'styled-components';
 
@@ -19,9 +18,6 @@ function HotDrinkVoteContainer() {
 
   const nowTime = new Date().getHours();
 
-  const imageAUrl = classifyImageUrl(drinkAImage);
-  const imageBUrl = classifyImageUrl(drinkBImage);
-
   return (
     <>
       <H2>
@@ -34,24 +30,24 @@ function HotDrinkVoteContainer() {
       >
         <VoteImages>
           <DrinkImageBox color="orange">
-            <DrinkImageWrapper>
-              <Image
-                alt="A 이미지"
-                src={imageAUrl}
+            <ImageWrapper>
+              <DrinkImageWrapper
+                alt="A이미지"
+                src={drinkAImage}
                 fill
                 style={{ borderRadius: '80px' }}
               />
-            </DrinkImageWrapper>
+            </ImageWrapper>
           </DrinkImageBox>
           <DrinkImageBox color="mint">
-            <DrinkImageWrapper>
-              <Image
-                alt="B 이미지"
-                src={imageBUrl}
+            <ImageWrapper>
+              <DrinkImageWrapper
+                alt="B이미지"
+                src={drinkBImage}
                 fill
                 style={{ borderRadius: '80px' }}
               />
-            </DrinkImageWrapper>
+            </ImageWrapper>
           </DrinkImageBox>
         </VoteImages>
         <VoteTitleWrapper>
@@ -120,7 +116,7 @@ const DrinkImageBox = styled.div<{ color: string }>`
     `}
 `;
 
-const DrinkImageWrapper = styled.div`
+const ImageWrapper = styled.div`
   width: 80px;
   height: 80px;
   position: relative;
