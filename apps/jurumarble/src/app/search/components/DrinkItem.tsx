@@ -1,9 +1,8 @@
 import { RatioFrame } from '@monorepo/ui';
 import Chip from 'components/Chip';
+import DrinkImageWrapper from 'components/DrinkImageWrapper';
 import { transitions } from 'lib/styles';
 import { isLogin } from 'lib/utils/auth';
-import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
-import Image from 'next/image';
 import useDrinkStampService from 'services/useDrinkStampService';
 import SvgStamp from 'src/assets/icons/components/IcStamp';
 import { DrinkInfo } from 'src/types/drink';
@@ -30,8 +29,6 @@ function DrinkItem({
 
   const stampColor = isStampedDrink?.enjoyed ? colors.main_01 : colors.black_05;
 
-  const imageUrl = classifyImageUrl(image);
-
   return (
     <Container
       onClick={onClickDrinkItem}
@@ -40,10 +37,10 @@ function DrinkItem({
     >
       <ImageWrapper>
         <RatioFrame ratio="square">
-          <Image
+          <DrinkImageWrapper
             loading="lazy"
             alt={name}
-            src={imageUrl}
+            src={image}
             fill
             style={{ borderRadius: '10px' }}
           />

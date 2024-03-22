@@ -1,9 +1,10 @@
-import Image, { StaticImageData } from 'next/image';
+import DrinkImageWrapper from 'components/DrinkImageWrapper';
+import { StaticImageData } from 'next/image';
 import styled from 'styled-components';
 
 interface Props {
-  imageA: string | StaticImageData;
-  imageB: string | StaticImageData;
+  imageA: string;
+  imageB: string;
 }
 
 function VoteDescription({ imageA, imageB }: Props) {
@@ -11,10 +12,10 @@ function VoteDescription({ imageA, imageB }: Props) {
     <Container>
       <ImageWrapper>
         <LeftVote>
-          <Image src={imageA} alt="A 이미지" fill />
+          <DrinkImageWrapper src={imageA} alt="A 이미지" fill />
         </LeftVote>
         <RightVote>
-          <Image src={imageB} alt="B 이미지" fill />
+          <DrinkImageWrapper src={imageB} alt="B 이미지" fill />
         </RightVote>
       </ImageWrapper>
     </Container>

@@ -1,5 +1,6 @@
 import AorBMark from 'components/AorBMark';
-import Image, { StaticImageData } from 'next/image';
+import DrinkImageWrapper from 'components/DrinkImageWrapper';
+import { StaticImageData } from 'next/image';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -13,7 +14,7 @@ function VoteDescription({ imageA, imageB }: Props) {
       <ImageContainer>
         <ImageWrapper>
           {imageA ? (
-            <Image
+            <DrinkImageWrapper
               src={imageA}
               alt="A이미지"
               fill
@@ -29,7 +30,7 @@ function VoteDescription({ imageA, imageB }: Props) {
         </ImageWrapper>
         <ImageWrapper>
           {imageB ? (
-            <Image
+            <DrinkImageWrapper
               src={imageB}
               alt="B이미지"
               fill
