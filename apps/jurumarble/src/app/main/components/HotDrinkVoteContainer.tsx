@@ -32,6 +32,7 @@ function HotDrinkVoteContainer() {
           <DrinkImageBox color="orange">
             <ImageWrapper>
               <DrinkImageWrapper
+                alt="A이미지"
                 src={drinkAImage}
                 fill
                 style={{ borderRadius: '80px' }}
@@ -41,6 +42,7 @@ function HotDrinkVoteContainer() {
           <DrinkImageBox color="mint">
             <ImageWrapper>
               <DrinkImageWrapper
+                alt="B이미지"
                 src={drinkBImage}
                 fill
                 style={{ borderRadius: '80px' }}
