@@ -56,6 +56,7 @@ function Carousel({ hotDrinkList }: Props) {
                   <DrinkImageContainer>
                     <RankginMark>{index + 1}</RankginMark>
                     <DrinkImageWrapper
+                      alt={name}
                       src={image}
                       fill
                       style={{ borderRadius: '10px' }}

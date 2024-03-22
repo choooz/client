@@ -1,5 +1,4 @@
 import DrinkImageWrapper from 'components/DrinkImageWrapper';
-import { StaticImageData } from 'next/image';
 import styled from 'styled-components';
 
 interface Props {
