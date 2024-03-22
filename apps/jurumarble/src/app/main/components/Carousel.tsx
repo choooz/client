@@ -1,10 +1,9 @@
 import { useRef } from 'react';
 
 import { ContentSwiper } from '@monorepo/ui';
+import DrinkImageWrapper from 'components/DrinkImageWrapper';
 import Path from 'lib/Path';
 import { GetHotDrinkResponse } from 'lib/apis/drink';
-import { classifyImageUrl } from 'lib/utils/classifyImageUrl';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SvgIcPrevious, SvgNext } from 'src/assets/icons/components';
 import styled, { css } from 'styled-components';
@@ -46,7 +45,6 @@ function Carousel({ hotDrinkList }: Props) {
             modules: [Autoplay],
           }}
           renderItem={({ drinkId, image, name, manufactureAddress }, index) => {
-            const imageUrl = classifyImageUrl(image);
             return (
               <Slide
                 key={drinkId}
@@ -55,15 +53,14 @@ function Carousel({ hotDrinkList }: Props) {
                 }
               >
                 <Box>
-                  <DrinkImageWrapper>
+                  <DrinkImageContainer>
                     <RankginMark>{index + 1}</RankginMark>
-                    <Image
-                      alt="전통주"
-                      src={imageUrl}
+                    <DrinkImageWrapper
+                      src={image}
                       fill
                       style={{ borderRadius: '10px' }}
                     />
-                  </DrinkImageWrapper>
+                  </DrinkImageContainer>
                   <DrinkText>
                     {name}
                     <AreaName>{manufactureAddress}</AreaName>
@@ -113,7 +110,7 @@ const Box = styled.div`
     `}
 `;
 
-const DrinkImageWrapper = styled.div`
+const DrinkImageContainer = styled.div`
   width: 100px;
   height: 100px;
   position: relative;
