@@ -54,7 +54,7 @@ function Carousel({ hotDrinkList }: Props) {
               >
                 <Box>
                   <DrinkImageContainer>
-                    <RankginMark>{index + 1}</RankginMark>
+                    <RankingMark>{index + 1}</RankingMark>
                     <DrinkImageWrapper
                       alt={name}
                       src={image}
@@ -119,7 +119,7 @@ const DrinkImageContainer = styled.div`
   left: 20px;
 `;
 
-const RankginMark = styled.div`
+const RankingMark = styled.div`
   ${({ theme }) =>
     css`
       background-color: ${theme.colors.main_01};
