@@ -1,9 +1,14 @@
 'use client';
 
-import SearchContainer from './components/SearchContainer';
+import { SearchContainer } from './components';
+import { SearchProvider } from './context';
 
-function Search() {
-  return <SearchContainer />;
+function SearchPage() {
+  return (
+    <SearchProvider>
+      <SearchContainer />
+    </SearchProvider>
+  );
 }
 
-export default Search;
+export default SearchPage;
