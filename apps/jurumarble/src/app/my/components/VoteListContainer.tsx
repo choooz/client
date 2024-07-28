@@ -2,11 +2,11 @@
 
 import { useCreateQueryString } from 'hooks/useCreateQueryString';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { TabList } from 'src/types/my';
 import styled, { css } from 'styled-components';
 
 import VoteCountContainer from './VoteCountContainer';
 import VoteItem from './VoteItem';
+import { TabList } from '../constants';
 import useGetMyBookmarkedVoteListService from '../services/useGetMyBookmarkedVoteListService';
 import useGetMyCreatedVoteListService from '../services/useGetMyCreatedVoteListService';
 import useGetMyParticipatedVoteListService from '../services/useGetMyParticipatedVoteListService';
@@ -18,7 +18,7 @@ import useGetMyParticipatedVoteListService from '../services/useGetMyParticipate
 const MY_VOTE_LIST_SERVICE = {
   'created-vote': useGetMyCreatedVoteListService,
   'bookmarked-vote': useGetMyBookmarkedVoteListService,
-  'paticipated-vote': useGetMyParticipatedVoteListService,
+  'participated-vote': useGetMyParticipatedVoteListService,
 };
 
 function VoteListContainer() {

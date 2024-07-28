@@ -15,18 +15,18 @@ export type TabList = (typeof TAB_LIST)[number]['id'];
 
 export const renderItem: Record<
   TabList,
-  { topSectionItem: JSX.Element; bottomSectionItem: JSX.Element }
+  { topSectionItem: () => JSX.Element; bottomSectionItem: () => JSX.Element }
 > = {
   total: {
-    topSectionItem: <TotalTopSectionItem />,
-    bottomSectionItem: <TotalBottomSectionItem />,
+    topSectionItem: () => <TotalTopSectionItem />,
+    bottomSectionItem: () => <TotalBottomSectionItem />,
   },
   drinkInfo: {
-    topSectionItem: <DrinkInfoTopSectionItem />,
-    bottomSectionItem: <></>,
+    topSectionItem: () => <DrinkInfoTopSectionItem />,
+    bottomSectionItem: () => <></>,
   },
   drinkVote: {
-    topSectionItem: <></>,
-    bottomSectionItem: <DrinkVoteBottomSectionItem />,
+    topSectionItem: () => <></>,
+    bottomSectionItem: () => <DrinkVoteBottomSectionItem />,
   },
 };
