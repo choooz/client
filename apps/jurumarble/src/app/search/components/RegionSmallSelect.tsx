@@ -4,19 +4,19 @@ import { REGION_LIST } from 'lib/constants';
 import SvgIcExpandMore from 'src/assets/icons/components/IcExpandMore';
 import styled, { css } from 'styled-components';
 
-interface Props {
-  defaultOption: string;
-  onChangeSortOption: (id: string) => void;
-}
+import { useSearchChangeContext, useSearchValueContext } from '../context';
 
-function RegionSmallSelect({ defaultOption, onChangeSortOption }: Props) {
+function RegionSmallSelect() {
   const [isOpen, onToggleOpen] = useToggle();
+
+  const { regionOption } = useSearchValueContext();
+  const { onChangeRegionOption } = useSearchChangeContext();
 
   return (
     <SelectStyled isOpen={isOpen}>
       <Select
-        defaultValue={defaultOption}
-        onChangeSelectedOption={onChangeSortOption}
+        defaultValue={regionOption}
+        onChangeSelectedOption={onChangeRegionOption}
         options={[
           { value: '', label: '지역', lat: 0, long: 0 },
           ...REGION_LIST,

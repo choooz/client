@@ -16,42 +16,47 @@ import { TabList } from '../constants';
 import useGetDrinkList from '../services/useGetDrinkList';
 import useVoteDrinkService from '../services/useVoteDrinkService';
 
-export const SearchContext = createContext<{
+export const SearchValueContext = createContext<{
   isReplaceLoginPageModal: boolean;
-  onToggleReplaceLoginPageModal: () => void;
   searchText: string;
-  debouncedChange: (keyword: string) => void;
   selectedTab: TabList;
-  onClickSelectedTab: (tab: TabList) => void;
   drinkInfoSortOption: DrinkInfoSortType;
-  onChangeDrinkInfoSortOption: (value: DrinkInfoSortType) => void;
   drinkVoteSortOption: VoteSortType;
-  onChangeDrinkVoteSortOption: (value: VoteSortType) => void;
   regionOption: RegionType;
-  onChangeRegionOption: (value: RegionType) => void;
   isSelectedTab: (tabName: TabList) => boolean;
   drinkList: DrinkInfo[];
-  drinkSubscribe: (node: HTMLElement | null) => void;
   voteDrinkList: Content[];
+}>({
+  drinkInfoSortOption: 'ByPopularity',
+  drinkList: [],
+  drinkVoteSortOption: 'ByPopularity',
+
+  isReplaceLoginPageModal: false,
+  isSelectedTab: () => false,
+  regionOption: '',
+  searchText: '',
+  selectedTab: 'total',
+  voteDrinkList: [],
+});
+
+export const SearchChangeContext = createContext<{
+  onToggleReplaceLoginPageModal: () => void;
+  debouncedChange: (keyword: string) => void;
+  onClickSelectedTab: (tab: TabList) => void;
+  onChangeDrinkInfoSortOption: (value: DrinkInfoSortType) => void;
+  onChangeDrinkVoteSortOption: (value: VoteSortType) => void;
+  onChangeRegionOption: (value: RegionType) => void;
+  drinkSubscribe: (node: HTMLElement | null) => void;
   drinkVoteSubscribe: (node: HTMLElement | null) => void;
 }>({
   debouncedChange: () => {},
-  drinkInfoSortOption: 'ByPopularity',
-  drinkList: [],
   drinkSubscribe: () => {},
-  drinkVoteSortOption: 'ByPopularity',
   drinkVoteSubscribe: () => {},
-  isReplaceLoginPageModal: false,
-  isSelectedTab: () => false,
   onChangeDrinkInfoSortOption: () => {},
   onChangeDrinkVoteSortOption: () => {},
   onChangeRegionOption: () => {},
   onClickSelectedTab: () => {},
   onToggleReplaceLoginPageModal: () => {},
-  regionOption: '',
-  searchText: '',
-  selectedTab: 'total',
-  voteDrinkList: [],
 });
 
 export const SearchProvider = ({ children }: PropsWithChildren) => {
@@ -125,27 +130,34 @@ export const SearchProvider = ({ children }: PropsWithChildren) => {
     sortBy: drinkVoteSortOption,
   });
 
-  const value = {
-    debouncedChange,
+  const SearchValue = {
     drinkInfoSortOption,
     drinkList,
-    drinkSubscribe,
     drinkVoteSortOption,
-    drinkVoteSubscribe,
     isReplaceLoginPageModal,
     isSelectedTab,
-    onChangeDrinkInfoSortOption,
-    onChangeDrinkVoteSortOption,
-    onChangeRegionOption,
-    onClickSelectedTab,
-    onToggleReplaceLoginPageModal,
     regionOption,
     searchText,
     selectedTab,
     voteDrinkList,
   };
 
+  const SearchChangeValue = {
+    debouncedChange,
+    drinkSubscribe,
+    drinkVoteSubscribe,
+    onChangeDrinkInfoSortOption,
+    onChangeDrinkVoteSortOption,
+    onChangeRegionOption,
+    onClickSelectedTab,
+    onToggleReplaceLoginPageModal,
+  };
+
   return (
-    <SearchContext.Provider value={value}>{children}</SearchContext.Provider>
+    <SearchChangeContext.Provider value={SearchChangeValue}>
+      <SearchValueContext.Provider value={SearchValue}>
+        {children}
+      </SearchValueContext.Provider>
+    </SearchChangeContext.Provider>
   );
 };

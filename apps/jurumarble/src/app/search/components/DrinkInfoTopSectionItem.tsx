@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import DrinkInfoList from './DrinkInfoList';
 import RegionSmallSelect from './RegionSmallSelect';
 import SortSelect from './SortSelect';
-import { useSearchContext } from '../context';
+import { useSearchChangeContext, useSearchValueContext } from '../context';
 
 function DrinkInfoTopSectionItem() {
-  const { drinkInfoSortOption, onChangeDrinkInfoSortOption } =
-    useSearchContext();
+  const { drinkInfoSortOption } = useSearchValueContext();
+  const { onChangeDrinkInfoSortOption } = useSearchChangeContext();
+
   return (
     <>
       <SelectContainer>
