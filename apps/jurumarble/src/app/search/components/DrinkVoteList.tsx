@@ -1,35 +1,17 @@
-import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 
 import DrinkVoteItem from './DrinkVoteItem';
-import useVoteDrinkService from '../services/useVoteDrinkService';
+import { useSearchChangeContext, useSearchValueContext } from '../context';
 
-interface Props {
-  searchText: string;
-  sortOption: string;
-  regionOption: string;
-  isSelectedTab: boolean;
-  onToggleReplaceLoginPageModal: () => void;
-}
-function DrinkVoteList({
-  searchText,
-  sortOption,
-  regionOption,
-  onToggleReplaceLoginPageModal,
-}: Props) {
-  const searchParams = useSearchParams();
-  const selectedTab = searchParams.get('selectedTab');
+function DrinkVoteList() {
+  const { voteDrinkList, selectedTab } = useSearchValueContext();
+  const { onToggleReplaceLoginPageModal, drinkVoteSubscribe } =
+    useSearchChangeContext();
 
-  const { voteDrinkList, subscribe } = useVoteDrinkService({
-    page: 0,
-    size: 3,
-    keyword: searchText,
-    region: regionOption,
-    sortBy: sortOption,
-  });
   if (!voteDrinkList) {
     return <></>;
   }
+
   return (
     <Container>
       {voteDrinkList.map((voteDrink, index) => (
@@ -39,7 +21,7 @@ function DrinkVoteList({
           onToggleReplaceLoginPageModal={onToggleReplaceLoginPageModal}
         />
       ))}
-      {selectedTab === 'drinkVote' && <div ref={subscribe} />}
+      {selectedTab === 'drinkVote' && <div ref={drinkVoteSubscribe} />}
     </Container>
   );
 }

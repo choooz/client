@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import { useToggle } from '@monorepo/hooks';
 import Loading from 'components/Loading';
-import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from 'components/ReplaceLoginPageModal';
 import {
   VOTE_AGE_FILTER_LIST,
   VOTE_ALCOHOL_FILTER_LIST,

@@ -11,7 +11,7 @@ import SvgIcMark from 'src/assets/icons/components/IcMark';
 import SvgIcUser from 'src/assets/icons/components/IcUser';
 import styled from 'styled-components';
 
-import ReplaceLoginPageModal from './ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from './ReplaceLoginPageModal';
 
 type PathType = '/' | '/stamp' | '/vote' | '/map' | '/my';
 

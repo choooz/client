@@ -1,8 +1,8 @@
 'use client';
 
-import { TAB_LIST, TabList } from 'src/types/my';
 import styled, { css } from 'styled-components';
 
+import { TAB_LIST, TabList } from '../constants';
 import useGetTheNumberOfMyVoteService from '../services/useGetCountedVoteService';
 
 interface Props {
@@ -31,7 +31,7 @@ function VoteCountContainer({ selectedTab, onClickSelectedTab }: Props) {
             <VoteCount>
               {id === 'created-vote'
                 ? writtenVoteCnt
-                : id === 'paticipated-vote'
+                : id === 'participated-vote'
                 ? joinedVoteCnt
                 : id === 'bookmarked-vote'
                 ? bookmarkedVoteCnt
