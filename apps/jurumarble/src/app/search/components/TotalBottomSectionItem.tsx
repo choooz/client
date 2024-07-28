@@ -2,10 +2,11 @@ import { Button } from 'components/button';
 import styled, { css } from 'styled-components';
 
 import DrinkVoteList from './DrinkVoteList';
-import { useSearchContext } from '../context';
+import { TabList } from '../constants';
+import { useSearchChangeContext } from '../context';
 
 function TotalBottomSectionItem() {
-  const { onClickSelectedTab } = useSearchContext();
+  const { onClickSelectedTab } = useSearchChangeContext();
   return (
     <>
       <H2>우리술 투표</H2>

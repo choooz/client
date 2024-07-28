@@ -23,3 +23,23 @@ export function useCreateQueryString(searchParams: ReadonlyURLSearchParams) {
   );
   return createQueryString;
 }
+
+// export function createQueryString(
+//   name: string,
+//   value: string,
+//   searchParams: ReadonlyURLSearchParams,
+// ) {
+//   const params = new URLSearchParams(searchParams.toString());
+//   /**
+//        * @NOTE 추후 필요시 사용
+//       for (const [key, value] of Object.entries(params)) {
+//         if (value === null) {
+//           params.delete(key)
+//         } else {
+//           params.set(key, String(value))
+//         }
+//       }
+//       */
+//   params.set(name, value);
+//   return params.toString();
+// }

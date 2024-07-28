@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components';
 
 import DrinkInfoList from './DrinkInfoList';
 import { TabList } from '../constants';
-import { useSearchContext } from '../context';
+import { useSearchChangeContext } from '../context';
 
 function TotalTopSectionItem() {
-  const { onClickSelectedTab } = useSearchContext();
+  const { onClickSelectedTab } = useSearchChangeContext();
   return (
     <>
       <H2>우리술 정보</H2>
