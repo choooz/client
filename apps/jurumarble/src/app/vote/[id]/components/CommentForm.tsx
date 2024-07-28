@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { useToggle } from '@monorepo/hooks';
-import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from 'components/ReplaceLoginPageModal';
 import { isLogin } from 'lib/utils/auth';
 import styled, { css } from 'styled-components';
 

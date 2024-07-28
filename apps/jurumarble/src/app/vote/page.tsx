@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useToggle } from '@monorepo/hooks';
 import BottomBar from 'components/BottomBar';
 import Loading from 'components/Loading';
-import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from 'components/ReplaceLoginPageModal';
 import { Button } from 'components/button';
 import Path from 'lib/Path';
 import { media } from 'lib/styles';

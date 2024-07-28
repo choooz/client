@@ -8,3 +8,5 @@ export { default as DivideLine } from './divide/DivideLine';
 export { default as ImageUploadButton } from './ImageUploadButton';
 export { default as LevelChip } from './LevelChip';
 export * from './layouts';
+export { default as BottomBar } from './BottomBar';
+export * from './ReplaceLoginPageModal';
