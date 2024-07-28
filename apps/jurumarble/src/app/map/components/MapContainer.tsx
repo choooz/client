@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useToggle } from '@react-hookz/web';
 import DrinkItem from 'app/stamp/components/DrinkItem';
 import Loading from 'components/Loading';
-import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from 'components/ReplaceLoginPageModal';
 import { Button } from 'components/button';
 import Path from 'lib/Path';
 import Image from 'next/image';

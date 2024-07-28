@@ -1,7 +1,7 @@
 import { useToggle } from '@monorepo/hooks';
 import Chip from 'components/Chip';
 import Loading from 'components/Loading';
-import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from 'components/ReplaceLoginPageModal';
 import VoteHeader from 'components/VoteHeader';
 import { Button } from 'components/button';
 import Path from 'lib/Path';
