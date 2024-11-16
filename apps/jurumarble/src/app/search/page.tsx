@@ -1,9 +1,21 @@
 'use client';
+/**
+ * @TODO tsconfig에서 paths 수정
+ */
+import BottomBar from 'components/BottomBar';
 
-import SearchContainer from './components/SearchContainer';
+import { SearchContainer } from './components';
+import { SearchProvider } from './context';
 
-function Search() {
-  return <SearchContainer />;
+function SearchPage() {
+  return (
+    <>
+      <SearchProvider>
+        <SearchContainer />
+      </SearchProvider>
+      <BottomBar />
+    </>
+  );
 }
 
-export default Search;
+export default SearchPage;

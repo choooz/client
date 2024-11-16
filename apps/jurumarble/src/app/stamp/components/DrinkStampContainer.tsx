@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useToggle } from '@monorepo/hooks';
-import ReplaceLoginPageModal from 'components/ReplaceLoginPagemModal/ReplaceLoginPageModal';
+import { ReplaceLoginPageModal } from 'components/ReplaceLoginPageModal';
 
 import MyEnjoiedDrinkInfoSection from './MyEnjoiedDrinkInfoSection';
 import StampedDrinkList from './StampedDrinkList';
